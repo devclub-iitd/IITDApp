@@ -21,6 +21,10 @@ An application to provide various services related to IIT Delhi
 * Article submission link
 * Profile creation ??
 * Redirect to sources from where data scraped
+* Opening animation like uber
+* Text Animation IITD Bold and App in italic animation
+* Text animation like Uber Eats
+* Inbuilt Bazaar??
 
 ## Technologies proposed to be used :-
 
