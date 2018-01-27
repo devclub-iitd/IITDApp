@@ -3,4 +3,10 @@
     <string name="one">One</string>
     <string name="three">Three</string>
     <string name="two">Two</string>
+    <string name="title_activity_main_menu">MainMenuActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
