@@ -7,15 +7,24 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.TextView;
 
-public class OneFragment extends Fragment{
+import java.util.ArrayList;
 
-    public OneFragment() {
+public class BlogFragment extends Fragment{
+
+    private RecyclerView blogPostList;
+    private BlogAdapter blogAdapter;
+    private LinearLayoutManager mLayoutManager;
+
+    public BlogFragment() {
         // Required empty public constructor
     }
 
@@ -31,13 +40,20 @@ public class OneFragment extends Fragment{
 
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_one, container, false);
+        return inflater.inflate(R.layout.fragment_blog, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        TextView textView = (TextView) getView().findViewById(R.id.oneText);
-        textView.setMovementMethod(new ScrollingMovementMethod());
+
+        blogAdapter=new BlogAdapter(new ArrayList<BlogItem>(10));
+
+        mLayoutManager = new LinearLayoutManager(getContext());
+
+        blogPostList = getView().findViewById(R.id.blogList);
+
+        blogPostList.setLayoutManager(mLayoutManager);
+        blogPostList.setAdapter(blogAdapter);
 
         super.onViewCreated(view, savedInstanceState);
     }
