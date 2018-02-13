@@ -1,29 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView
+
+<android.support.v4.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:isScrollContainer="false"
+    android:id="@+id/swiperefresh"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="fill_vertical"
-    android:clipToPadding="false"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-
-        <!--<TextView-->
-            <!--android:id="@+id/oneText"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerInParent="true"-->
-            <!--android:scrollIndicators="right"-->
-            <!--android:scrollbars="vertical"-->
-            <!--android:text="@string/one"-->
-            <!--android:textSize="40dp"-->
-            <!--android:textStyle="bold" />-->
-
-    <android.support.v7.widget.RecyclerView
-        android:nestedScrollingEnabled="false"
-        android:id="@+id/blogList"
+    android:layout_height="match_parent">
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:isScrollContainer="false"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</android.support.v4.widget.NestedScrollView>
+        android:layout_height="match_parent"
+        android:layout_gravity="fill_vertical"
+        android:clipToPadding="false">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/blogList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+    </android.support.v4.widget.NestedScrollView>
+</android.support.v4.widget.SwipeRefreshLayout>

@@ -25,6 +25,7 @@ An application to provide various services related to IIT Delhi
 * Text Animation IITD Bold and App in italic animation
 * Text animation like Uber Eats
 * Inbuilt Bazaar??
+* https://mzgreen.github.io/2015/06/23/How-to-hideshow-Toolbar-when-list-is-scrolling
 
 ## Technologies proposed to be used :-
 
