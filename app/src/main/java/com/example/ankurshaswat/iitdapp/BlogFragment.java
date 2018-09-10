@@ -3,6 +3,7 @@ package com.example.ankurshaswat.iitdapp;
 /**
  * Created by ankurshaswat on 23/1/18.
  */
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -56,9 +57,15 @@ public class BlogFragment extends Fragment{
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
+        swipeRefreshLayout = getView().findViewById(R.id.swiperefresh);
+        swipeRefreshLayout.setOnRefreshListener(onRefreshListener);
+
+        swipeRefreshLayout.setRefreshing(true);
+
         // Read from the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("users");
+        DatabaseReference myRef = database.getReference("blogs");
+
         myRef.addListenerForSingleValueEvent(postListener);
 
         blogAdapter = new BlogAdapter(blogItems);
@@ -69,26 +76,6 @@ public class BlogFragment extends Fragment{
 
         blogPostList.setLayoutManager(mLayoutManager);
         blogPostList.setAdapter(blogAdapter);
-
-        blogPostList.addOnItemTouchListener(new RecyclerView.OnItemTouchListener() {
-            @Override
-            public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e) {
-                return false;
-            }
-
-            @Override
-            public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-
-            }
-
-            @Override
-            public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-
-            }
-        });
-
-        swipeRefreshLayout = getView().findViewById(R.id.swiperefresh);
-        swipeRefreshLayout.setOnRefreshListener(onRefreshListener);
 
         super.onViewCreated(view, savedInstanceState);
     }
@@ -105,16 +92,8 @@ public class BlogFragment extends Fragment{
     ValueEventListener postListener = new ValueEventListener() {
         @Override
         public void onDataChange(DataSnapshot dataSnapshot) {
-            blogItems.clear();
-            swipeRefreshLayout.setRefreshing(false);
-            for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
-
-                BlogPost blogPost= postSnapshot.getValue(BlogPost.class);
-                blogItems.add(blogPost);
-                Log.d(TAG, "onDataChange: blogpost fetched"+blogPost.getTitle());
-            }
-            blogAdapter.notifyDataSetChanged();
-
+            Log.d(TAG, "onDataChange: Got snapshot");
+            new RenderBlogs(dataSnapshot).execute();
             // This method is called once with the initial value and again
             // whenever data at this location is updated.
         }
@@ -127,5 +106,31 @@ public class BlogFragment extends Fragment{
 
         }
     };
+
+    private class RenderBlogs extends AsyncTask<String, Void, String> {
+
+        private DataSnapshot dataSnapshot;
+
+        RenderBlogs(DataSnapshot dataSnapshot) {
+            this.dataSnapshot = dataSnapshot;
+        }
+        @Override
+        protected String doInBackground(String... params) {
+            Log.d(TAG, "doInBackground: Do in background called");
+            blogItems.clear();
+            for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                BlogPost blogPost= postSnapshot.getValue(BlogPost.class);
+                blogItems.add(blogPost);
+                Log.d(TAG, "onDataChange: blogpost fetched"+blogPost.getTitle());
+            }
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            blogAdapter.notifyDataSetChanged();
+            swipeRefreshLayout.setRefreshing(false);
+        }
+    }
 
 }
