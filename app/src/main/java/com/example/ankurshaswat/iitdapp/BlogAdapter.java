@@ -45,6 +45,16 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
         holder.blogPost = blogItems.get(position);
         Ion.with(holder.mImageView)
                 .load(blogItems.get(position).getImage());
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View v, int position) {
+                Intent intent = new Intent(v.getContext(), BlogDetailActivity.class);
+                intent.putExtra("body", blogItems.get(position).getBody());
+                intent.putExtra("title",blogItems.get(position).getTitle());
+                Log.d(TAG, "onClick: launching intent");
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -57,22 +67,26 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
     // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         // each data item is just a string in this case
+        private ItemClickListener itemClickListener;
+
         TextView mTextView;
         ImageView mImageView;
         BlogPost blogPost;
 
         ViewHolder(View v) {
             super(v);
+            v.setOnClickListener(this);
             mTextView = v.findViewById(R.id.blogText);
             mImageView = v.findViewById(R.id.blogImage);
         }
 
+        public void setItemClickListener(ItemClickListener itemClickListener){
+            this.itemClickListener = itemClickListener;
+        }
+
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent(v.getContext(), BlogDetailActivity.class);
-            intent.putExtra("body", blogPost.getBody());
-            Log.d(TAG, "onClick: launching intent");
-            v.getContext().startActivity(intent);
+            itemClickListener.onClick(v,getAdapterPosition());
         }
     }
 }
