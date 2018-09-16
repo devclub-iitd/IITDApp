@@ -22,6 +22,10 @@
             android:name=".BlogDetailActivity"
             android:label="@string/title_activity_blog_detail"
             android:theme="@style/MyMaterialTheme"></activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

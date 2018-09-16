@@ -27,6 +27,9 @@ public class BlogDetailActivity extends AppCompatActivity {
         });
 
         String bodyText = getIntent().getStringExtra("body");
+        String titleText = getIntent().getStringExtra("title");
+
+        setTitle(titleText);
 
         TextView body = findViewById(R.id.blogBody);
         body.setText(bodyText);
