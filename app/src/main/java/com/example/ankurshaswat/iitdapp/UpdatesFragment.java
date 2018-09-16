@@ -69,8 +69,8 @@ public class UpdatesFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new BlogFragment(), "BLOG");
-        adapter.addFragment(new NewsFragment(), "NEWS");
-        adapter.addFragment(new AlertFragment(), "ALERTS");
+        adapter.addFragment(new NoticeFragment(), "NOTICE");
+        adapter.addFragment(new EventsFragment(), "EVENTS");
         viewPager.setAdapter(adapter);
     }
 
