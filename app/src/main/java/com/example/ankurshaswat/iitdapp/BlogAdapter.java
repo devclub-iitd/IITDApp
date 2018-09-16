@@ -51,7 +51,8 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
                 Intent intent = new Intent(v.getContext(), BlogDetailActivity.class);
                 intent.putExtra("body", blogItems.get(position).getBody());
                 intent.putExtra("title",blogItems.get(position).getTitle());
-                Log.d(TAG, "onClick: launching intent");
+                intent.putExtra("image",blogItems.get(position).getImage());
+//                Log.d(TAG, "onClick: launching intent");
                 v.getContext().startActivity(intent);
             }
         });

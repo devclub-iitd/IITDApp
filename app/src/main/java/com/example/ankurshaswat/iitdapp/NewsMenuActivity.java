@@ -1,5 +1,6 @@
 package com.example.ankurshaswat.iitdapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -18,6 +19,9 @@ import android.view.View;
 public class NewsMenuActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
+    int openStateID = R.id.nav_updates;
+    UpdatesFragment updatesFragment;
+    ScheduleFragment scheduleFragment;
 //    private TabLayout tabLayout;
 
 
@@ -34,7 +38,8 @@ public class NewsMenuActivity extends AppCompatActivity
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.fragSpace, new UpdatesFragment());
+        updatesFragment = new UpdatesFragment();
+        ft.replace(R.id.fragSpace, updatesFragment);
         ft.commit();
 
 
@@ -54,7 +59,7 @@ public class NewsMenuActivity extends AppCompatActivity
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setCheckedItem(R.id.nav_camera);
+        navigationView.setCheckedItem(R.id.nav_updates);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
@@ -96,21 +101,39 @@ public class NewsMenuActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if(id == openStateID) {
+            return true;
+        }
 
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+        if (id == R.id.nav_updates) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragSpace, updatesFragment);
+            ft.commit();
 
-        } else if (id == R.id.nav_slideshow) {
+            openStateID = id;
+        } else if (id == R.id.nav_schedule) {
+            if(scheduleFragment == null) {
+                scheduleFragment = new ScheduleFragment();
+            }
 
-        } else if (id == R.id.nav_manage) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragSpace, scheduleFragment);
+            ft.commit();
+
+            openStateID = id;
 
         } else if (id == R.id.nav_share) {
-
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT,
+                    "Hey check out my app at: https://play.google.com/store/apps/details?id=com.google.android.apps.plus");
+            sendIntent.setType("text/plain");
+            startActivity(sendIntent);
         }
-//        else if (id == R.id.nav_send) {
-
-//        }
+        else if (id == R.id.nav_about) {
+            Intent aboutIntent = new Intent(this,AboutActivity.class);
+            startActivity(aboutIntent);
+        }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

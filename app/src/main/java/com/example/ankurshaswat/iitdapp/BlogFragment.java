@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.ankurshaswat.iitdapp.DisplayClasses.BlogPost;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -51,9 +52,7 @@ public class BlogFragment extends Fragment {
     SwipeRefreshLayout.OnRefreshListener onRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference myRef = database.getReference("blogs");
-            myRef.addListenerForSingleValueEvent(postListener);
+        MyFirebaseApp.getInstance().getBlogs(postListener);
         }
     };
 
@@ -80,10 +79,7 @@ public class BlogFragment extends Fragment {
 
         swipeRefreshLayout.setRefreshing(true);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("blogs");
-
-        myRef.addListenerForSingleValueEvent(postListener);
+        MyFirebaseApp.getInstance().getBlogs(postListener);
 
         blogAdapter = new BlogAdapter(blogItems);
 
@@ -100,6 +96,7 @@ public class BlogFragment extends Fragment {
     private static class RenderBlog extends AsyncTask<String, Void, String> {
 
         private DataSnapshot dataSnapshot;
+        ArrayList<BlogPost> tempBlogItems;
 
         RenderBlog(DataSnapshot dataSnapshot) {
             this.dataSnapshot = dataSnapshot;
@@ -107,11 +104,16 @@ public class BlogFragment extends Fragment {
 
         @Override
         protected String doInBackground(String... params) {
-            blogItems.clear();
+
+            tempBlogItems = new ArrayList<>();
+
             for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                 BlogPost blogPost = postSnapshot.getValue(BlogPost.class);
-                blogItems.add(blogPost);
+                tempBlogItems.add(blogPost);
             }
+
+            blogItems.clear();
+            blogItems.addAll(tempBlogItems);
             return "Executed";
         }
 

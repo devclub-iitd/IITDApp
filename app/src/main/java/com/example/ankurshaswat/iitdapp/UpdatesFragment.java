@@ -58,6 +58,14 @@ public class UpdatesFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        tabLayout.setVisibility(View.VISIBLE);
+
+    }
+
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getChildFragmentManager());
         adapter.addFragment(new BlogFragment(), "BLOG");

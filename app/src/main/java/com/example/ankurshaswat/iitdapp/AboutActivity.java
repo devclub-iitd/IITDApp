@@ -6,21 +6,17 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.koushikdutta.ion.Ion;
-
-public class BlogDetailActivity extends AppCompatActivity {
+public class AboutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_blog_detail);
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        setContentView(R.layout.activity_about);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -28,19 +24,6 @@ public class BlogDetailActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
-        String bodyText = getIntent().getStringExtra("body");
-        String titleText = getIntent().getStringExtra("title");
-        String imageURL = getIntent().getStringExtra("image");
-
-        ImageView imageView = findViewById(R.id.blogImage);
-        Ion.with(imageView)
-                .load(imageURL);
-
-        setTitle(titleText);
-
-        TextView body = findViewById(R.id.blogBody);
-        body.setText(bodyText);
     }
 
 }
