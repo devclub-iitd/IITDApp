@@ -5,18 +5,17 @@ import com.google.firebase.database.IgnoreExtraProperties;
 @IgnoreExtraProperties
 public class BlogPost {
 
-    public String title;
-    public String time;
-    public String image;
-    private String uid;
     private String author;
-    private String website;
     private String body;
-    private String postURL;
     private String category;
+    public String image;
+    private String postURL;
+    public String time;
+    public String title;
+    private String uid;
+    private String website;
 
     public BlogPost() {
-        // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
 
     public String getTitle() {
@@ -55,4 +54,39 @@ public class BlogPost {
         return category;
     }
 
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public void setPostURL(String postURL) {
+        this.postURL = postURL;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
 }

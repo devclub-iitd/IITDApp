@@ -1,6 +1,7 @@
 package com.example.ankurshaswat.iitdapp;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,8 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.ankurshaswat.iitdapp.DisplayClasses.BlogPost;
-import com.example.ankurshaswat.iitdapp.Holders.BlogPostHolder;
+import com.example.ankurshaswat.iitdapp.DisplayClasses.Notice;
+import com.example.ankurshaswat.iitdapp.Holders.NoticeHolder;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
@@ -25,9 +26,9 @@ import java.util.Objects;
  * Created by ankurshaswat on 23/1/18.
  */
 
-public class BlogFragment extends Fragment {
-
-    public BlogFragment() {
+public class NoticeFragment extends Fragment {
+    public NoticeFragment() {
+        // Required empty public constructor
     }
 
     @Override
@@ -38,7 +39,8 @@ public class BlogFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_blog, container, false);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_notice, container, false);
     }
 
     @Override
@@ -46,48 +48,45 @@ public class BlogFragment extends Fragment {
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
 
-        RecyclerView blogPostList = Objects.requireNonNull(getView()).findViewById(R.id.blogList);
+        RecyclerView noticeList = Objects.requireNonNull(getView()).findViewById(R.id.noticeList);
 
-        blogPostList.setLayoutManager(mLayoutManager);
-        blogPostList.setAdapter(blogAdapter);
+        noticeList.setLayoutManager(mLayoutManager);
+        noticeList.setAdapter(noticeAdapter);
 
         super.onViewCreated(view, savedInstanceState);
     }
 
     Query query = FirebaseDatabase.getInstance()
             .getReference()
-            .child("blogs")
+            .child("notices")
             .limitToLast(50);
 
-    FirebaseRecyclerOptions<BlogPost> options =
-            new FirebaseRecyclerOptions.Builder<BlogPost>()
-                    .setQuery(query, BlogPost.class)
+    FirebaseRecyclerOptions<Notice> options =
+            new FirebaseRecyclerOptions.Builder<Notice>()
+                    .setQuery(query, Notice.class)
                     .build();
 
-    FirebaseRecyclerAdapter blogAdapter = new FirebaseRecyclerAdapter<BlogPost, BlogPostHolder>(options) {
+    FirebaseRecyclerAdapter noticeAdapter = new FirebaseRecyclerAdapter<Notice, NoticeHolder>(options) {
         @Override
-        public BlogPostHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public NoticeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.template_blog, parent, false);
+                    .inflate(R.layout.template_notice, parent, false);
 
-            return new BlogPostHolder(view);
+            return new NoticeHolder(view);
         }
 
         @Override
-        protected void onBindViewHolder(@NonNull BlogPostHolder holder, int position, @NonNull BlogPost model) {
+        protected void onBindViewHolder(@NonNull NoticeHolder holder, int position, @NonNull Notice model) {
 
             holder.mTextView.setText(model.getTitle());
-            Ion.with(holder.mImageView)
-                    .load(model.getImage());
 
             holder.setItemClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View v, int position) {
-                    Intent intent = new Intent(v.getContext(), BlogDetailActivity.class);
-                    intent.putExtra("body", ((BlogPost)blogAdapter.getItem(position)).getBody());
-                    intent.putExtra("title",((BlogPost)blogAdapter.getItem(position)).getTitle());
-                    intent.putExtra("image",((BlogPost)blogAdapter.getItem(position)).getImage());
-                    v.getContext().startActivity(intent);
+                    String url = ((Notice)noticeAdapter.getItem(position)).getLink();
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
                 }
             });
         }
@@ -96,12 +95,12 @@ public class BlogFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        blogAdapter.startListening();
+        noticeAdapter.startListening();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        blogAdapter.stopListening();
+        noticeAdapter.stopListening();
     }
 }
