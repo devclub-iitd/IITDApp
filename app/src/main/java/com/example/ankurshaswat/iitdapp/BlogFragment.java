@@ -45,6 +45,7 @@ public class BlogFragment extends Fragment {
         @Override
         protected void onBindViewHolder(@NonNull BlogPostHolder holder, int position, @NonNull BlogPost model) {
             holder.mTextView.setText(model.getTitle());
+            holder.authorTextView.setText(model.getAuthor());
 
             GlideApp.with(Objects.requireNonNull(getContext())).load(model.getImage()).into(holder.mImageView);
             holder.setItemClickListener(new ItemClickListener() {
@@ -54,6 +55,7 @@ public class BlogFragment extends Fragment {
                     intent.putExtra("body", ((BlogPost) blogAdapter.getItem(position)).getBody());
                     intent.putExtra("title", ((BlogPost) blogAdapter.getItem(position)).getTitle());
                     intent.putExtra("image", ((BlogPost) blogAdapter.getItem(position)).getImage());
+                    intent.putExtra("author", ((BlogPost) blogAdapter.getItem(position)).getAuthor());
                     v.getContext().startActivity(intent);
                 }
             });

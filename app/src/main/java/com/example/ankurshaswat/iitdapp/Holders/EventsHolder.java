@@ -14,6 +14,9 @@ public class EventsHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.noticeText)
     public TextView mTextView;
 
+    @BindView(R.id.dateText)
+    public TextView dateTextView;
+
     public EventsHolder(View v) {
         super(v);
         ButterKnife.bind(this, v);

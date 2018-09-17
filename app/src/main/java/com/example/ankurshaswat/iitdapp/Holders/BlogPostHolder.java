@@ -18,6 +18,9 @@ public class BlogPostHolder extends RecyclerView.ViewHolder implements View.OnCl
     public TextView mTextView;
     @BindView(R.id.blogImage)
     public ImageView mImageView;
+    @BindView(R.id.blogAuthor)
+    public TextView authorTextView;
+
     private ItemClickListener itemClickListener;
 
     public BlogPostHolder(View v) {

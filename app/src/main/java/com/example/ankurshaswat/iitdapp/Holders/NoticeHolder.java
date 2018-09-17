@@ -15,6 +15,10 @@ public class NoticeHolder extends RecyclerView.ViewHolder implements View.OnClic
 
     @BindView(R.id.noticeText)
     public TextView mTextView;
+
+    @BindView(R.id.dateText)
+    public TextView dateTextView;
+
     private ItemClickListener itemClickListener;
 
     public NoticeHolder(View v) {

@@ -37,6 +37,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.authorTextView.setText(blogItems.get(position).getAuthor());
         holder.mTextView.setText(blogItems.get(position).getTitle());
         holder.blogPost = blogItems.get(position);
         GlideApp.with(holder.mTextView.getContext()).load(blogItems.get(position).getImage()).into(holder.mImageView);
@@ -47,6 +48,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
                 intent.putExtra("body", blogItems.get(position).getBody());
                 intent.putExtra("title", blogItems.get(position).getTitle());
                 intent.putExtra("image", blogItems.get(position).getImage());
+                intent.putExtra("author", blogItems.get(position).getAuthor());
                 v.getContext().startActivity(intent);
             }
         });
@@ -62,6 +64,9 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
         TextView mTextView;
         @BindView(R.id.blogImage)
         ImageView mImageView;
+        @BindView(R.id.blogAuthor)
+        TextView authorTextView;
+
         BlogPost blogPost;
         private ItemClickListener itemClickListener;
 
