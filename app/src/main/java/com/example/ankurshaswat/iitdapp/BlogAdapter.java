@@ -3,7 +3,6 @@ package com.example.ankurshaswat.iitdapp;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,8 @@ import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
 
-import static android.support.constraint.Constraints.TAG;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * Created by ankurshaswat on 11/2/18.
@@ -31,11 +31,8 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public BlogAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent,
-                                                     int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.template_blog, parent, false);
-
+    public BlogAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.template_blog, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -43,16 +40,14 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.mTextView.setText(blogItems.get(position).getTitle());
         holder.blogPost = blogItems.get(position);
-        Ion.with(holder.mImageView)
-                .load(blogItems.get(position).getImage());
+        Ion.with(holder.mImageView).load(blogItems.get(position).getImage());
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View v, int position) {
                 Intent intent = new Intent(v.getContext(), BlogDetailActivity.class);
                 intent.putExtra("body", blogItems.get(position).getBody());
-                intent.putExtra("title",blogItems.get(position).getTitle());
-                intent.putExtra("image",blogItems.get(position).getImage());
-//                Log.d(TAG, "onClick: launching intent");
+                intent.putExtra("title", blogItems.get(position).getTitle());
+                intent.putExtra("image", blogItems.get(position).getImage());
                 v.getContext().startActivity(intent);
             }
         });
@@ -63,31 +58,27 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
         return blogItems.size();
     }
 
-    // Provide a reference to the views for each data item
-    // Complex data items may need more than one view per item, and
-    // you provide access to all the views for a data item in a view holder
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        // each data item is just a string in this case
-        private ItemClickListener itemClickListener;
-
+        @BindView(R.id.blogText)
         TextView mTextView;
+        @BindView(R.id.blogImage)
         ImageView mImageView;
         BlogPost blogPost;
+        private ItemClickListener itemClickListener;
 
         ViewHolder(View v) {
             super(v);
+            ButterKnife.bind(this, v);
             v.setOnClickListener(this);
-            mTextView = v.findViewById(R.id.blogText);
-            mImageView = v.findViewById(R.id.blogImage);
         }
 
-        public void setItemClickListener(ItemClickListener itemClickListener){
+        void setItemClickListener(ItemClickListener itemClickListener) {
             this.itemClickListener = itemClickListener;
         }
 
         @Override
         public void onClick(View v) {
-            itemClickListener.onClick(v,getAdapterPosition());
+            itemClickListener.onClick(v, getAdapterPosition());
         }
     }
 }

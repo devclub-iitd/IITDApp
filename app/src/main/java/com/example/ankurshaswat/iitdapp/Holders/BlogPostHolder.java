@@ -5,31 +5,33 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.ankurshaswat.iitdapp.DisplayClasses.BlogPost;
 import com.example.ankurshaswat.iitdapp.ItemClickListener;
 import com.example.ankurshaswat.iitdapp.R;
-import com.koushikdutta.ion.Ion;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class BlogPostHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-    // each data item is just a string in this case
-    private ItemClickListener itemClickListener;
+
+    @BindView(R.id.blogText)
     public TextView mTextView;
+    @BindView(R.id.blogImage)
     public ImageView mImageView;
+    private ItemClickListener itemClickListener;
 
     public BlogPostHolder(View v) {
         super(v);
+        ButterKnife.bind(this, v);
         v.setOnClickListener(this);
-        mTextView = v.findViewById(R.id.blogText);
-        mImageView = v.findViewById(R.id.blogImage);
     }
 
-    public void setItemClickListener(ItemClickListener itemClickListener){
+    public void setItemClickListener(ItemClickListener itemClickListener) {
         this.itemClickListener = itemClickListener;
     }
 
     @Override
     public void onClick(View v) {
-        itemClickListener.onClick(v,getAdapterPosition());
+        itemClickListener.onClick(v, getAdapterPosition());
     }
 }

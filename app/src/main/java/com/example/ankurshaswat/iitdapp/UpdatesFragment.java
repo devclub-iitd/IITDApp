@@ -16,17 +16,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public class UpdatesFragment extends Fragment {
 
-    private TabLayout tabLayout;
-    private int[] tabIcons = {
-            R.drawable.ic_alarm_on_white_18dp,
-            R.drawable.ic_swap_calls_black_24dp,
-            R.drawable.ic_alarm_on_white_18dp
-    };
+    @BindView(R.id.viewpager)
+    ViewPager viewPager;
+    TabLayout tabLayout;
+
+    private int[] tabIcons = {R.drawable.ic_alarm_on_white_18dp, R.drawable.ic_swap_calls_black_24dp, R.drawable.ic_alarm_on_white_18dp};
+    private Unbinder unbinder;
 
     public UpdatesFragment() {
-        // Required empty public constructor
     }
 
     private void setupTabIcons() {
@@ -36,34 +39,26 @@ public class UpdatesFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        return inflater.inflate(R.layout.fragment_updates, container, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_updates, container, false);
+        unbinder = ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-
-
-        ViewPager viewPager = view.findViewById(R.id.viewpager);
         setupViewPager(viewPager);
-
-        tabLayout = Objects.requireNonNull(getActivity()).findViewById(R.id.tabs);
+        viewPager.setOffscreenPageLimit(3);
+        tabLayout = getActivity().findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
-
         setupTabIcons();
-
-//        tabLayout.setVisibility(View.GONE);
         super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-
         tabLayout.setVisibility(View.VISIBLE);
-
     }
 
     private void setupViewPager(ViewPager viewPager) {
@@ -72,6 +67,12 @@ public class UpdatesFragment extends Fragment {
         adapter.addFragment(new NoticeFragment(), "NOTICE");
         adapter.addFragment(new EventsFragment(), "EVENTS");
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unbinder.unbind();
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {

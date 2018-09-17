@@ -6,7 +6,6 @@ public class Notice {
     public String title;
 
     public Notice() {
-        // Default constructor required for calls to DataSnapshot.getValue(Post.class)
     }
 
     public String getDate() {
