@@ -8,10 +8,13 @@ import com.example.ankurshaswat.iitdapp.DisplayClasses.Events;
 import com.example.ankurshaswat.iitdapp.ItemClickListener;
 import com.example.ankurshaswat.iitdapp.R;
 
+import org.w3c.dom.Text;
+
 public class EventsHolder extends RecyclerView.ViewHolder {
     // each data item is just a string in this case
 //    private ItemClickListener itemClickListener;
     public TextView mTextView;
+
 
     Events events;
 

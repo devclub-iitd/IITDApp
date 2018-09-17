@@ -79,6 +79,7 @@ public class NoticeFragment extends Fragment {
         protected void onBindViewHolder(@NonNull NoticeHolder holder, int position, @NonNull Notice model) {
 
             holder.mTextView.setText(model.getTitle());
+            holder.dateTextView.setText(model.getDate());
 
             holder.setItemClickListener(new ItemClickListener() {
                 @Override

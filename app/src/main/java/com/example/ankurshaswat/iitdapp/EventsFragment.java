@@ -73,7 +73,7 @@ public class EventsFragment extends Fragment {
         @Override
         public EventsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.template_notice, parent, false);
+                    .inflate(R.layout.template_event, parent, false);
 
             return new EventsHolder(view);
         }
@@ -81,7 +81,7 @@ public class EventsFragment extends Fragment {
         @Override
         protected void onBindViewHolder(@NonNull EventsHolder holder, int position, @NonNull Events model) {
 
-            String display = model.getDate() + " - " + model.getTitle();
+            String display = model.getDate()+": "+model.getTitle();
             holder.mTextView.setText(display);
 
 //            holder.setItemClickListener(new ItemClickListener() {

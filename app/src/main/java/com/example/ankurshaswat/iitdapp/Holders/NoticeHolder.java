@@ -14,12 +14,14 @@ public class NoticeHolder extends RecyclerView.ViewHolder implements View.OnClic
     // each data item is just a string in this case
     private ItemClickListener itemClickListener;
     public TextView mTextView;
+    public TextView dateTextView;
     Notice notice;
 
     public NoticeHolder(View v) {
         super(v);
         v.setOnClickListener(this);
         mTextView = v.findViewById(R.id.noticeText);
+        dateTextView = v.findViewById(R.id.dateText);
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener){
