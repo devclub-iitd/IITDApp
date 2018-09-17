@@ -16,12 +16,14 @@ public class BlogPostHolder extends RecyclerView.ViewHolder implements View.OnCl
     private ItemClickListener itemClickListener;
     public TextView mTextView;
     public ImageView mImageView;
+    public TextView authorTextView;
 
     public BlogPostHolder(View v) {
         super(v);
         v.setOnClickListener(this);
         mTextView = v.findViewById(R.id.blogText);
         mImageView = v.findViewById(R.id.blogImage);
+        authorTextView = v.findViewById(R.id.blogAuthor);
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener){

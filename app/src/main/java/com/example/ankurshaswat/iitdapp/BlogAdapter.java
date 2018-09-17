@@ -41,6 +41,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.authorTextView.setText(blogItems.get(position).getAuthor());
         holder.mTextView.setText(blogItems.get(position).getTitle());
         holder.blogPost = blogItems.get(position);
         Ion.with(holder.mImageView)
@@ -52,6 +53,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
                 intent.putExtra("body", blogItems.get(position).getBody());
                 intent.putExtra("title",blogItems.get(position).getTitle());
                 intent.putExtra("image",blogItems.get(position).getImage());
+                intent.putExtra("author",blogItems.get(position).getAuthor());
 //                Log.d(TAG, "onClick: launching intent");
                 v.getContext().startActivity(intent);
             }
@@ -73,12 +75,14 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
         TextView mTextView;
         ImageView mImageView;
         BlogPost blogPost;
+        TextView authorTextView;
 
         ViewHolder(View v) {
             super(v);
             v.setOnClickListener(this);
             mTextView = v.findViewById(R.id.blogText);
             mImageView = v.findViewById(R.id.blogImage);
+            authorTextView = v.findViewById(R.id.blogAuthor);
         }
 
         public void setItemClickListener(ItemClickListener itemClickListener){
