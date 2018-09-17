@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.ankurshaswat.iitdapp.DisplayClasses.BlogPost;
-import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
 
@@ -40,7 +39,7 @@ public class BlogAdapter extends RecyclerView.Adapter<BlogAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.mTextView.setText(blogItems.get(position).getTitle());
         holder.blogPost = blogItems.get(position);
-        Ion.with(holder.mImageView).load(blogItems.get(position).getImage());
+        GlideApp.with(holder.mTextView.getContext()).load(blogItems.get(position).getImage()).into(holder.mImageView);
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View v, int position) {

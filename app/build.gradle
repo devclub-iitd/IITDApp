@@ -35,15 +35,13 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:16.0.2'
     implementation 'com.firebaseui:firebase-ui-database:4.2.0'
 
-    // Image Loading Library
-    implementation 'com.koushikdutta.ion:ion:2.2.1'
-
     // Annotation Processor
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
 
-
-
+    // Image Loading Library
+    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

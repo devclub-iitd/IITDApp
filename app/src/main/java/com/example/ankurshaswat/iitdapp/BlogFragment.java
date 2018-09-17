@@ -17,7 +17,8 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
-import com.koushikdutta.ion.Ion;
+
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,8 +45,8 @@ public class BlogFragment extends Fragment {
         @Override
         protected void onBindViewHolder(@NonNull BlogPostHolder holder, int position, @NonNull BlogPost model) {
             holder.mTextView.setText(model.getTitle());
-            Ion.with(holder.mImageView).load(model.getImage());
 
+            GlideApp.with(Objects.requireNonNull(getContext())).load(model.getImage()).into(holder.mImageView);
             holder.setItemClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View v, int position) {

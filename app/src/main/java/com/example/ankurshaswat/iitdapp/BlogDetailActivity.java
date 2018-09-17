@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.koushikdutta.ion.Ion;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -37,7 +35,7 @@ public class BlogDetailActivity extends AppCompatActivity {
         String titleText = getIntent().getStringExtra("title");
         String imageURL = getIntent().getStringExtra("image");
 
-        Ion.with(imageView).load(imageURL);
+        GlideApp.with(getApplicationContext()).load(imageURL).into(imageView);
 
         setTitle(titleText);
 
