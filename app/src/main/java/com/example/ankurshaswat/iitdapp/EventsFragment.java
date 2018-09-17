@@ -41,8 +41,8 @@ public class EventsFragment extends Fragment {
 
         @Override
         protected void onBindViewHolder(@NonNull EventsHolder holder, int position, @NonNull Events model) {
-            String display = model.getDate() + " - " + model.getTitle();
-            holder.mTextView.setText(display);
+            holder.dateTextView.setText(model.getDate());
+            holder.mTextView.setText(model.getTitle());
         }
     };
 
