@@ -1,5 +1,6 @@
 package com.example.ankurshaswat.iitdapp;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.example.ankurshaswat.iitdapp.DisplayClasses.Notice;
 import com.example.ankurshaswat.iitdapp.Holders.NoticeHolder;
@@ -44,7 +46,16 @@ public class NoticeFragment extends Fragment {
         @Override
         protected void onBindViewHolder(@NonNull NoticeHolder holder, int position, @NonNull Notice model) {
             holder.mTextView.setText(model.getTitle());
-            holder.dateTextView.setText(model.getDate());
+            if(position>=1) {
+                if (model.getDate().equalsIgnoreCase(((Notice) noticeAdapter.getItem(position - 1)).getDate())) {
+                    holder.dateTextView.setHeight(0);
+                } else {
+                    holder.dateTextView.setText(model.getDate());
+                }
+            }
+            else {
+                holder.dateTextView.setText(model.getDate());
+            }
             holder.setItemClickListener(new ItemClickListener() {
                 @Override
                 public void onClick(View v, int position) {
