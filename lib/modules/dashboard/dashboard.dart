@@ -25,7 +25,7 @@ class _DashboardState extends State<Dashboard> {
       appBar: CustomAppBar(
         title: Text('User Dashboard'),
       ),
-      drawer: AppDrawer(),
+      drawer: AppDrawer(tag: 'User Dashboard',),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
