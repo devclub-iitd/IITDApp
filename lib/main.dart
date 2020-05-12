@@ -5,20 +5,14 @@ import 'package:flutter/material.dart';
 import './routes/Routes.dart';
 
 void main() {
-
-  runApp(
-      MaterialApp(
-        title: 'IITD APP',
-        theme: ThemeData(
-            primarySwatch: Colors.indigo
-        ),
-        home: Dashboard(),
-        routes:  {
-          Routes.dashboard: (context) => Dashboard(),
-          Routes.attendance: (context) => Attendance(),
-          Routes.explore: (context) => Explore(),
-
-        },
-      )
-  );
+  runApp(MaterialApp(
+    title: 'IITD APP',
+    theme: ThemeData(primarySwatch: Colors.indigo),
+    home: Dashboard(),
+    routes: {
+      Routes.dashboard: (context) => Dashboard(),
+      Routes.attendance: (context) => Attendance(),
+      Routes.explore: (context) => Explore(),
+    },
+  ));
 }
