@@ -26,24 +26,35 @@ class HostelListCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               SizedBox(
-                height: 150,
-                child: Image.asset(data['image']),
+                height: 80,
+                width: 100,
+                child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.indigo,
+                      borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage(data['image'])
+                      )
+                    ),
+//                  child: Image.asset(data['image']),
+                ),
               ),
               Expanded(
                 child: Container(
-                  height: 150,
-                  padding: EdgeInsets.symmetric(horizontal: 5, vertical: 24),
+                  height: 80,
+                  padding: EdgeInsets.symmetric(horizontal: 15),
 //                color: Colors.blue,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
+
                     children: <Widget>[
-                      Text(data['name'],
-                          style: TextStyle(color: Colors.white, fontSize: 27)),
+                      Text(data['name']+' Hostel',
+                          style: TextStyle(fontSize: 21)),
                       Text(
                         data['tagline'],
                         style: TextStyle(
-                            color: Colors.white,
                             fontWeight: FontWeight.w300,
                             fontSize: 18),
                       )
