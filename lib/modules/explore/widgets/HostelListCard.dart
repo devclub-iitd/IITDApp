@@ -7,9 +7,9 @@ class HostelListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cardColors = [Colors.red,Colors.green,Colors.blue];
+    var cardColors = [Colors.red, Colors.green, Colors.blue];
     return Card(
-      color: cardColors[data['idx']%3],
+      color: cardColors[data['idx'] % 3],
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(15.0),
       ),
@@ -29,14 +29,11 @@ class HostelListCard extends StatelessWidget {
                 height: 80,
                 width: 100,
                 child: Container(
-                    decoration: BoxDecoration(
+                  decoration: BoxDecoration(
                       color: Colors.indigo,
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
                       image: DecorationImage(
-                        fit: BoxFit.fill,
-                        image: AssetImage(data['image'])
-                      )
-                    ),
+                          fit: BoxFit.fill, image: AssetImage(data['image']))),
 //                  child: Image.asset(data['image']),
                 ),
               ),
@@ -48,15 +45,13 @@ class HostelListCard extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
-
                     children: <Widget>[
-                      Text(data['name']+' Hostel',
+                      Text(data['name'] + ' Hostel',
                           style: TextStyle(fontSize: 21)),
                       Text(
                         data['tagline'],
                         style: TextStyle(
-                            fontWeight: FontWeight.w300,
-                            fontSize: 18),
+                            fontWeight: FontWeight.w300, fontSize: 18),
                       )
                     ],
                   ),

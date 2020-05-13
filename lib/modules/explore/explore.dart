@@ -1,4 +1,5 @@
 import 'package:IITDAPP/modules/explore/screens/ClubsListView.dart';
+import 'package:IITDAPP/modules/explore/screens/HangoutsListView.dart';
 import 'package:IITDAPP/modules/explore/screens/HostelsListView.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
@@ -53,7 +54,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
           children: [
             ClubsListView(),
             HostelsListView(),
-            ClubsListView(),
+            HangoutsListView(),
           ],
         )
     );
