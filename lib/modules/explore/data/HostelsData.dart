@@ -1,5 +1,17 @@
-List<Map> HostelsList = [
-  {'name': 'Udaigiri','tagline': 'Eagles','image': 'assets/images/iitd_building.jpg'},
-  {'name': 'Jwalamukhi','tagline': 'IC','image': 'assets/images/iitd_building.jpg'},
-  {'name': 'Girnar','tagline': 'GC','image': 'assets/images/iitd_building.jpg'}
+List<Map> hostelsList = [
+  {
+    'name': 'Udaigiri',
+    'tagline': 'Eagles',
+    'image': 'assets/images/udai_pic.jpeg'
+  },
+  {
+    'name': 'Jwalamukhi',
+    'tagline': 'IC',
+    'image': 'assets/images/udaigiri_logo.jpg'
+  },
+  {
+    'name': 'Satpura',
+    'tagline': 'Samurai',
+    'image': 'assets/images/udai_pic.jpeg'
+  }
 ];

@@ -17,12 +17,23 @@ class _ClubListCardState extends State<ClubListCard> {
   Widget build(BuildContext context) {
     return Container(
       child: ListTile(
-        leading: CircleAvatar(
-          backgroundImage: NetworkImage(
-              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg'),
+        leading: ClipOval(
+          child: Image.asset('assets/images/devCLogo.png'),
         ),
-        title: Text(widget.data['name']),
-        subtitle: Text(widget.data['motto']),
+//        leading: Container(
+//            width: 300,
+//            height: 300,
+//            decoration: BoxDecoration(
+//                shape: BoxShape.circle,
+//                image: DecorationImage(
+//                    fit: BoxFit.cover,
+//                    image: NetworkImage(
+//                        'https://www.woolha.com/media/2019/06/buneary.jpg')
+//                )
+//            )
+//        ),
+        title: Text(widget.data['name'],style: TextStyle(fontSize: 20)),
+        subtitle: Text(widget.data['motto'],style: TextStyle(fontSize: 16)),
       ),
     );
   }

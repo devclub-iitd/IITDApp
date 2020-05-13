@@ -1,4 +1,5 @@
 import 'package:IITDAPP/modules/explore/screens/ClubsListView.dart';
+import 'package:IITDAPP/modules/explore/screens/HostelsListView.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
           controller: _controller,
           children: [
             ClubsListView(),
-            ClubsListView(),
+            HostelsListView(),
             ClubsListView(),
           ],
         )

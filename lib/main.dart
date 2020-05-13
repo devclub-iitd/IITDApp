@@ -12,7 +12,7 @@ void main() {
         theme: ThemeData(
             primarySwatch: Colors.indigo
         ),
-        home: Dashboard(),
+        home: Explore(),
         routes:  {
           Routes.dashboard: (context) => Dashboard(),
           Routes.attendance: (context) => Attendance(),
