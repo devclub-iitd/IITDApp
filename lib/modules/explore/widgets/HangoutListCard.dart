@@ -14,8 +14,8 @@ class HangoutListCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(
-            height: 80,
-            width: 100,
+            height: 90,
+            width: 110,
             child: Container(
               decoration: BoxDecoration(
                   color: Colors.indigo,
@@ -26,7 +26,7 @@ class HangoutListCard extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              height: 80,
+              height: 90,
 //              color: Colors.blue,
               padding: EdgeInsets.only(left: 8, top: 5),
               child: Column(
@@ -53,10 +53,23 @@ class HangoutListCard extends StatelessWidget {
                   Expanded(
                     child: Container(
 //                      color: Colors.red,
-                      child: Align(
-                        alignment: Alignment.bottomLeft,
-                        child: Text(data['comment'],style: TextStyle(color: Colors.lightBlue),),
-                      ),
+//                      child: Align(
+//                        alignment: Alignment.bottomLeft,
+//                        child: Text(data['comment'],style: TextStyle(color: Colors.lightBlue),),
+//                      ),
+                    child: Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Row(
+                      children: <Widget>[
+                    Text(data['comment'],style: TextStyle(color: Colors.lightBlue)),
+                        Spacer(),
+                        IconButton(
+                          onPressed: () {  },
+                          icon: Icon(Icons.location_on),
+                        ),
+                      ],
+                    ),
+                    ),
                     ),
                   ),
                 ],
