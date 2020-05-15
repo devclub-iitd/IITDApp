@@ -18,5 +18,6 @@ class Attendance extends StatelessWidget {
       drawer: AppDrawer(),
       body: AttendanceList(entryNumber),
     );
+
   }
 }

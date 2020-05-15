@@ -9,6 +9,7 @@ class AppColors {
   static const Color APP_BAR_START = Colors.indigo;
   static const Color APP_BAR_END = Colors.cyan;
 
+
   //Attendance
   static const Color CARD_LIGHT = Colors.cyan;
   static const Color CARD_DARK = Color(0xFF1A237E);
@@ -19,4 +20,5 @@ class AppColors {
   static const Color CALENDAR_BACKGROUND = Color(0xFF1487B1);
   static const Color COURSE_CARD = Color.fromRGBO(90, 0, 150, 100);
   static const Color CALENDAR_BUTTON_COLOR = Color(0xFF1A237E);
+
 }

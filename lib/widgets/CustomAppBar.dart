@@ -9,6 +9,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final Widget bottom;
   final Widget title;
   final bool withMenu;
+
   final double height;
 
   @override
@@ -32,10 +33,13 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
               },
             )
           : null,
+
       bottom: bottom,
     ));
   }
 
   @override
-  Size get preferredSize => Size.fromHeight((height ?? 1) * kToolbarHeight);
+
+  Size get preferredSize =>
+      Size.fromHeight((height ?? 1) * kToolbarHeight);
 }
