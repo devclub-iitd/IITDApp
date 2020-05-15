@@ -48,7 +48,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBar,
-      drawer: AppDrawer(),
+      drawer: AppDrawer(tag: 'Explore',),
        body:  TabBarView(
           controller: _controller,
           children: [

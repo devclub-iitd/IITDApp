@@ -2,11 +2,12 @@ import 'package:IITDAPP/routes/Routes.dart';
 import 'package:flutter/material.dart';
 
 class AppDrawer extends StatelessWidget {
-  AppDrawer({Key key}) : super(key: key);
-
+  AppDrawer({Key key, this.tag}) : super(key: key);
+  String tag;
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      elevation: 100,
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
@@ -18,21 +19,27 @@ class AppDrawer extends StatelessWidget {
                     fit: BoxFit.cover)),
           ),
           _createDrawerItem(
-              icon: Icons.contacts,
-              text: 'User Dashboard',
-              onTap: () =>
-                  Navigator.pushReplacementNamed(context, Routes.dashboard)),
+            selected: tag == 'User Dashboard',
+            icon: Icons.contacts,
+            text: 'User Dashboard',
+            context: context,
+            routeName: Routes.dashboard,
+          ),
           Divider(),
           ListTile(
             title: Text('Around'),
             onTap: () {},
           ),
           _createDrawerItem(
+              selected: tag == 'Events',
               icon: Icons.event,
               text: 'Events',
-              onTap: () =>
-                  Navigator.pushReplacementNamed(context, Routes.dashboard)),
-          _createDrawerItem(icon: Icons.calendar_today, text: 'Calendar'),
+              context: context,
+          ),
+          _createDrawerItem(
+              selected: tag == 'Calendar',
+              icon: Icons.calendar_today,
+              text: 'Calendar'),
           Divider(),
           ListTile(
             title: Text(
@@ -41,40 +48,62 @@ class AppDrawer extends StatelessWidget {
             onTap: () {},
           ),
           _createDrawerItem(
+            selected: tag == 'Attendance',
+            icon: Icons.stars,
+            text: 'Attendance',
+            context: context,
+            routeName: Routes.attendance,
+          ),
+          _createDrawerItem(
+              selected: tag == 'Quick Links',
               icon: Icons.stars,
-              text: 'Attendance',
-              onTap: () =>
-                  Navigator.pushReplacementNamed(context, Routes.attendance)),
-          _createDrawerItem(icon: Icons.stars, text: 'Quick Links'),
+              text: 'Quick Links'),
           Divider(),
           ListTile(
             title: Text('Discover'),
             onTap: () {},
           ),
           _createDrawerItem(
-              icon: Icons.explore,
-              text: 'Explore',
-              onTap: () =>
-                  Navigator.pushReplacementNamed(context, Routes.explore)),
-          _createDrawerItem(icon: Icons.map, text: 'Campus Map'),
+            selected: tag == 'Explore',
+            icon: Icons.explore,
+            text: 'Explore',
+            context: context,
+            routeName: Routes.explore,
+          ),
+          _createDrawerItem(
+              selected: tag == 'Campus Map',
+              icon: Icons.map,
+              text: 'Campus Map'),
         ],
       ),
     );
   }
 
   Widget _createDrawerItem(
-      {IconData icon, String text, GestureTapCallback onTap}) {
-    return ListTile(
-      title: Row(
-        children: <Widget>[
-          Icon(icon),
-          Padding(
-            padding: EdgeInsets.only(left: 18.0),
-            child: Text(text),
-          )
-        ],
-      ),
-      onTap: onTap,
+      {IconData icon,
+      String text,
+      GestureTapCallback onTap,
+      bool selected,
+      BuildContext context,
+      String routeName}) {
+    return Ink(
+      color: selected ? Color.fromARGB(30, 1, 87, 155) : Colors.transparent,
+      child: ListTile(
+          selected: selected,
+          title: Row(
+            children: <Widget>[
+              Icon(icon),
+              Padding(
+                padding: EdgeInsets.only(left: 18.0),
+                child: Text(text),
+              )
+            ],
+          ),
+          onTap: () => {
+                Navigator.pop(context),
+                if (!selected)
+                  Navigator.pushReplacementNamed(context, routeName),
+              }),
     );
   }
 }
