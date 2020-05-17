@@ -17,9 +17,14 @@ class _HangoutsListViewState extends State<HangoutsListView> {
 
   @override
   Widget build(BuildContext context) {
+    var lis = List(hangoutsList.length);
+    for (var i=0;i<hangoutsList.length;i++){
+      var temp = hangoutsList[i];
+      temp['idx'] = i;
+      lis[i] = HangoutListCard(data: temp,);
+    }
     return CustomAnimatedListView(
-        Item: HangoutListCard(),
-        list: hangoutsList
+        list: lis
     );
   }
 }

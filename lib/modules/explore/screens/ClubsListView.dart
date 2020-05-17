@@ -17,9 +17,14 @@ class _ClubsListViewState extends State<ClubsListView> {
 
   @override
   Widget build(BuildContext context) {
+    var lis = List(clubsList.length);
+    for (var i=0;i<clubsList.length;i++){
+      var temp = clubsList[i];
+      temp['idx'] = i;
+      lis[i] = ClubListCard(data: temp,);
+    }
     return CustomAnimatedListView(
-      Item: ClubListCard(),
-      list: clubsList
+      list: lis
     );
   }
 }

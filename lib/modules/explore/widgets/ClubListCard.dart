@@ -1,3 +1,4 @@
+import 'package:IITDAPP/modules/explore/widgets/AboutScreen.dart';
 import 'package:flutter/material.dart';
 
 
@@ -20,20 +21,14 @@ class _ClubListCardState extends State<ClubListCard> {
         leading: ClipOval(
           child: Image.asset('assets/images/devCLogo.png'),
         ),
-//        leading: Container(
-//            width: 300,
-//            height: 300,
-//            decoration: BoxDecoration(
-//                shape: BoxShape.circle,
-//                image: DecorationImage(
-//                    fit: BoxFit.cover,
-//                    image: NetworkImage(
-//                        'https://www.woolha.com/media/2019/06/buneary.jpg')
-//                )
-//            )
-//        ),
         title: Text(widget.data['name'],style: TextStyle(fontSize: 20)),
         subtitle: Text(widget.data['motto'],style: TextStyle(fontSize: 16)),
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AboutScreen(name: widget.data['name'],)),
+          );
+        },
       ),
     );
   }

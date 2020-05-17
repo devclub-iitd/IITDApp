@@ -1,9 +1,6 @@
-import 'package:IITDAPP/modules/attendance/attendance.dart';
 import 'package:IITDAPP/modules/dashboard/dashboard.dart';
-import 'package:IITDAPP/modules/explore/explore.dart';
 import 'package:IITDAPP/routes/router.dart';
 import 'package:flutter/material.dart';
-import './routes/Routes.dart';
 
 void main() {
 
@@ -13,7 +10,7 @@ void main() {
         theme: ThemeData(
             primarySwatch: Colors.indigo
         ),
-        home: Explore(),
+        home: Dashboard(),
         onGenerateRoute: Router.generateRoute,
 //        routes:  {
 //          Routes.dashboard: (context) => Dashboard(),

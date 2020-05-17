@@ -1,3 +1,5 @@
+import 'package:IITDAPP/modules/explore/data/HostelsData.dart';
+import 'package:IITDAPP/modules/explore/widgets/AboutScreen.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -15,7 +17,10 @@ class HostelListCard extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          print("Hoew are ' u");
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AboutScreen(name: data['name'],obj: hostelDetails,)),
+          );
         },
         splashColor: Colors.white.withAlpha(100),
         splashFactory: InkSplash.splashFactory,
