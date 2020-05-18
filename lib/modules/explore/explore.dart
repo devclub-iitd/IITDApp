@@ -33,7 +33,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
         indicatorColor: Colors.white70,
         controller: _controller,
         tabs: [
-          Tab(text: 'CLUBS & BOARDS'),
+          Tab(text: 'CLUBS &\n BOARDS'),
           Tab(text: 'HOSTELS'),
           Tab(text: 'HANGOUT'),
         ],

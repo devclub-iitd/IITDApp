@@ -1,7 +1,6 @@
 import 'package:IITDAPP/modules/explore/data/ClubsData.dart';
 import 'package:IITDAPP/utility/UrlHandler.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
-import 'package:IITDAPP/widgets/Drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
@@ -22,8 +21,8 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
         appBar: CustomAppBar(
           title: Text(name),
+          withMenu: false,
         ),
-        drawer: AppDrawer(tag: 'Explore'),
         floatingActionButton: !hideFabs?SpeedDialSection():null,
         body: LayoutBuilder(builder:
             (BuildContext context, BoxConstraints viewportConstraints) {
@@ -54,7 +53,7 @@ class AboutScreen extends StatelessWidget {
                           Text(
                             'ABOUT',
                             style: GoogleFonts.arvo(
-                                fontWeight: FontWeight.bold, fontSize: 36),
+                                fontWeight: FontWeight.bold, fontSize: 36,),
                           ),
                           CustomTextDec(),
                           Padding(

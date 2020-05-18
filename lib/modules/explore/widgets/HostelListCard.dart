@@ -9,12 +9,12 @@ class HostelListCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var cardColors = [Colors.red, Colors.green, Colors.blue];
-    return Card(
-      color: cardColors[data['idx'] % 3],
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15.0),
-      ),
+    // var cardColors = [Colors.red, Colors.green, Colors.blue];
+    return Container(
+     // color: cardColors[data['idx'] % 3],
+//      shape: RoundedRectangleBorder(
+//        borderRadius: BorderRadius.circular(15.0),
+//      ),
       child: InkWell(
         onTap: () {
           Navigator.push(
