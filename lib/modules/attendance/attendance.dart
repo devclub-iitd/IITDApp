@@ -15,7 +15,7 @@ class Attendance extends StatelessWidget {
         title: Text('Attendance'),
       ),
       backgroundColor: AppColors.PRIMARY_COLOR_DARK,
-      drawer: AppDrawer(),
+      drawer: AppDrawer(tag: 'Attendance',),
       body: AttendanceList(entryNumber),
     );
 
