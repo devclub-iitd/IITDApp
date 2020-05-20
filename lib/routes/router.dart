@@ -1,11 +1,11 @@
 import 'package:IITDAPP/modules/attendance/attendance.dart';
 import 'package:IITDAPP/modules/dashboard/dashboard.dart';
 import 'package:IITDAPP/modules/explore/explore.dart';
+import 'package:IITDAPP/modules/quickLinks/quickLinks.dart';
 import 'package:IITDAPP/routes/Routes.dart';
 import 'package:flutter/material.dart';
 
 class Router {
-
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case Routes.dashboard:
@@ -14,12 +14,14 @@ class Router {
         return _createRoute(Attendance());
       case Routes.explore:
         return _createRoute(Explore());
+      case Routes.quickLinks:
+        return _createRoute(QuickLinks());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
-              body: Center(
-                  child: Text('No route defined for ${settings.name}')),
-            ));
+                  body: Center(
+                      child: Text('No route defined for ${settings.name}')),
+                ));
     }
   }
 
@@ -34,7 +36,7 @@ class Router {
 //        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
         return FadeTransition(
 //          position: animation.drive(tween),
-          opacity: animation,//animation.drive(tween),
+          opacity: animation, //animation.drive(tween),
           child: child,
         );
       },

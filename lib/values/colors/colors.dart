@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 /// App Colors Class - Resource class for storing app level color constants
@@ -20,5 +21,11 @@ class AppColors {
   static const Color CALENDAR_BACKGROUND = Color(0xFF1487B1);
   static const Color COURSE_CARD = Color.fromRGBO(90, 0, 150, 100);
   static const Color CALENDAR_BUTTON_COLOR = Color(0xFF1A237E);
+//  static const Color LinksSectionStart = Color.fromARGB(255, 255, 168, 0);
+//  static const Color LinksSectionEnd = Color.fromARGB(255, 255, 111, 0);
+//  static const Color LinksSectionEnd = Color.fromARGB(255,203, 53, 107);
+//  static const Color LinksSectionStart = Color.fromARGB(255, 192, 60, 90);
+  static const Color LinksSectionEnd = Color.fromARGB(220,86, 204, 242);
+  static const Color LinksSectionStart = Color.fromARGB(220, 67, 166, 239);
 
 }
