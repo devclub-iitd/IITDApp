@@ -32,10 +32,10 @@ class AppDrawer extends StatelessWidget {
             onTap: () {},
           ),
           _createDrawerItem(
-              selected: tag == 'Events',
-              icon: Icons.event,
-              text: 'Events',
-              context: context,
+            selected: tag == 'Events',
+            icon: Icons.event,
+            text: 'Events',
+            context: context,
           ),
           _createDrawerItem(
               selected: tag == 'Calendar',
@@ -58,7 +58,9 @@ class AppDrawer extends StatelessWidget {
           _createDrawerItem(
               selected: tag == 'Quick Links',
               icon: Icons.stars,
-              text: 'Quick Links'),
+              text: 'Quick Links',
+              context: context,
+              routeName: Routes.quickLinks),
           Divider(),
           ListTile(
             title: Text('Discover'),

@@ -26,7 +26,7 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
     _controller = TabController(length: 3, vsync: this);
 
     appBar = CustomAppBar(
-      title: Text('EXPLORE'),
+      title: Text('Explore'),
       height: 2,
 //      actions: <Widget>[ProfileIcon()],
       bottom: TabBar(

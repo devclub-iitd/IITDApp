@@ -31,6 +31,7 @@ dependencies:
   pedantic: ^1.8.0
   http: ^0.12.1
   flutter_calendar_carousel: ^1.4.12
+  expandable: ^4.1.4
   flutter:
     sdk: flutter
 
