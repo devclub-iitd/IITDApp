@@ -26,15 +26,15 @@ class _CustomSwiperState extends State<CustomSwiper> {
   void initState() {
     compEvents = widget.events;
     currDate = widget.currDate;
-    dates.add(DateTime.now());
+    dates.add(widget.currDate);
     events.add(getEventsInRange(widget.events.appointments, dates[0]));
-    dates.add(DateTime.now().add(Duration(days: 1)));
+    dates.add(widget.currDate.add(Duration(days: 1)));
     events.add(getEventsInRange(widget.events.appointments, dates[1]));
-    dates.add(DateTime.now().add(Duration(days: 2)));
+    dates.add(widget.currDate.add(Duration(days: 2)));
     events.add(getEventsInRange(widget.events.appointments, dates[2]));
-    dates.add(DateTime.now().subtract(Duration(days: 2)));
+    dates.add(widget.currDate.subtract(Duration(days: 2)));
     events.add(getEventsInRange(widget.events.appointments, dates[3]));
-    dates.add(DateTime.now().subtract(Duration(days: 1)));
+    dates.add(widget.currDate.subtract(Duration(days: 1)));
     events.add(getEventsInRange(widget.events.appointments, dates[4]));
 
     super.initState();
@@ -91,9 +91,24 @@ class _CustomCardState extends State<CustomCard> {
           heroTag: null,
           onPressed: () async {},
           backgroundColor: Colors.green,
-          child: Icon(
-            Icons.add,
-            size: 25,
+          child: IconButton(
+            onPressed: () {
+              _selectedColor = -65535;
+              _startDate = widget.currDate;
+              _endDate = _startDate.add(Duration(hours: 1));
+              _startTime =
+                  TimeOfDay(hour: _startDate.hour, minute: _startDate.minute);
+              _endTime = TimeOfDay(hour: _endDate.hour, minute: _endDate.minute);
+              Navigator.push<Widget>(
+                context,
+                MaterialPageRoute(
+                    builder: (BuildContext context) => AppointmentEditor()),
+              );
+            },
+            icon: Icon(
+              Icons.add,
+              size: 25,
+            ),
           ),
         ),
         body: Container(
@@ -153,68 +168,92 @@ class EventListItem extends StatelessWidget {
     var timings = DateFormat('hh:mm').format(data.from) +
         ' - ' +
         DateFormat('hh:mm').format(data.to);
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Container(
-                    width: 12,
-                  ),
-                  Container(
-                    height: 10,
-                    width: 10,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(5)),
-                        color: data.background),
-                  ),
-                  Container(
-                    width: 8,
-                  ),
-                  Text(
-                    data.eventName,
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w400),
-                  )
-                ],
-              ),
-              Container(
-                height: 4,
-              ),
-              Row(
-                children: <Widget>[
-                  Container(
-                    width: 30,
-                  ),
-                  Text(
-                    timings,
-                    style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 13,
-                        fontWeight: FontWeight.w300),
-                  )
-                ],
-              )
-            ],
-          ),
-          Spacer(),
-          data.calendarId==starredCalendarId?Padding(
-            padding: const EdgeInsets.only(right: 12.0),
-            child: Icon(Icons.star,color: Colors.yellow,size: 28,),
-          ):Container(),
+    return InkWell(
+      onTap: () {
+        _startDate = data.from;
+        _endDate = data.to;
+        _startTime = TimeOfDay(hour: data.from.hour,minute: data.from.minute);
+        _endTime = TimeOfDay(hour: data.to.hour,minute: data.to.minute);
+        _isAllDay = data.isAllDay;
+        _selectedColor = data.background.value;
+        _selectedColorIndex = 0;
+        _selectedTimeZoneIndex = 0;
+        _subject = data.eventName;
+        _notes = data.description;
+        _selectedAppointment = data;
+        Navigator.push<Widget>(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => AppointmentEditor()),
+        );
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Row(
+                  children: <Widget>[
+                    Container(
+                      width: 12,
+                    ),
+                    Container(
+                      height: 10,
+                      width: 10,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          color: data.background),
+                    ),
+                    Container(
+                      width: 8,
+                    ),
+                    Text(
+                      data.eventName,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400),
+                    )
+                  ],
+                ),
+                Container(
+                  height: 4,
+                ),
+                Row(
+                  children: <Widget>[
+                    Container(
+                      width: 30,
+                    ),
+                    Text(
+                      timings,
+                      style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w300),
+                    )
+                  ],
+                )
+              ],
+            ),
+            Spacer(),
+            data.reminder!=null?Padding(
+              padding: const EdgeInsets.only(right: 12.0),
+              child: Icon(Icons.notifications,color: Colors.white,size: 28,),
+            ):Container(),
+            data.calendarId==starredCalendarId?Padding(
+              padding: const EdgeInsets.only(right: 12.0),
+              child: Icon(Icons.star,color: Colors.yellow,size: 28,),
+            ):Container(),
 //          IconButton(
 //              icon: Icon(
 //            Icons.edit,
 //            color: Colors.white70,
 //          ))
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -7,10 +7,13 @@ import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
 import 'package:device_calendar/device_calendar.dart';
 import 'package:expandable/expandable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:IITDAPP/modules/calendar/data/Constants.dart';
+// import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:intl/intl.dart';
@@ -27,6 +30,7 @@ part './widgets/CustomModal.dart';
 List<Color> _colorCollection;
 List<String> _colorNames;
 int _selectedColorIndex = 0;
+int _selectedColor = -65535;
 // ignore: unused_element
 int _selectedTimeZoneIndex = 0;
 List<String> _timeZoneCollection;
@@ -103,12 +107,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
   void changeExempted(var res) {
     setState(() {
       exempted = res;
+      _events = filterEvents(calendarModel, res);
     });
   }
 
   @override
   void initState() {
-    // loadLicences();
     agendaAppointments = <Appointment>[];
     showPopUp = false;
     exempted = {};
@@ -116,15 +120,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
     viewType = CalendarView.month;
     appointments = null;//getMeetingDetails();
     _calendarController = CalendarController();
-    _calendarController.addPropertyChangedListener((String prop) {
-      print('hi');
-      print(prop);
-    });
     _calendarController.selectedDate = DateTime.now();
     lastSelectedDate = _calendarController.displayDate;
     _events = DataSource(appointments);
     _selectedAppointment = null;
     _selectedColorIndex = 0;
+    _selectedColor = -65535;
     _selectedTimeZoneIndex = 0;
     _subject = '';
     _notes = '';
@@ -132,7 +133,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
     _retrieveCalendars();
   }
 
-  void _retrieveCalendars() async {
+
+   Future _retrieveCalendars() async {
     try {
       var permissionsGranted = await _deviceCalendarPlugin.hasPermissions();
       if (permissionsGranted.isSuccess && !permissionsGranted.data) {
@@ -147,10 +149,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
       final calendarsResult = await _deviceCalendarPlugin.retrieveCalendars();
       setState(() {
         _calendars = calendarsResult?.data;
+        print('recieved data');
+        print(calendarsResult?.data);
         _writableCalendars.asMap().forEach((idx,data) {
           Future _retrieveCalendarEvents(bool last) async {
-            final startDate = DateTime.now().add(Duration(days: -365));
-            final endDate = DateTime.now().add(Duration(days: 365));
+            final startDate = DateTime.now().add(Duration(days: -180));
+            final endDate = DateTime.now().add(Duration(days: 180));
             var calendarEventsResult =
             await _deviceCalendarPlugin.retrieveEvents(
                 data.id,
@@ -163,12 +167,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 color: data.color,
                 events: calendarEventsResult));
             if(last){
+              print('last also executed');
               checkForCalIds(calendarModel);
               print('Events shud be displayed now');
               _events = filterEvents(calendarModel,exempted);
             }
           }
-
           _retrieveCalendarEvents(idx==_writableCalendars.length-1);
         });
         print('hello');
@@ -176,10 +180,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
     } on PlatformException catch (e) {
       print(e);
     }
+    print('exiting retrieve calendars');
   }
 
   @override
   Widget build(BuildContext context) {
+
+
+
     void onCalendarTapped(CalendarTapDetails calendarTapDetails) {
       if(showPopUp){
         setState(() {
@@ -219,6 +227,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         lastSelectedDate = _calendarController.selectedDate;
         _selectedAppointment = null;
         _isAllDay = false;
+        _selectedColor= -65535;
         _selectedColorIndex = 0;
         _selectedTimeZoneIndex = 0;
         _subject = '';
@@ -232,8 +241,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
             _startDate = meetingDetails.from;
             _endDate = meetingDetails.to;
             _isAllDay = meetingDetails.isAllDay;
-            _selectedColorIndex =
-                _colorCollection.indexOf(meetingDetails.background);
+            _selectedColor = meetingDetails.background.value;
+            // _selectedColorIndex = _colorCollection.indexOf(meetingDetails.background);
             _selectedTimeZoneIndex = meetingDetails.startTimeZone == ''
                 ? 0
                 : _timeZoneCollection.indexOf(meetingDetails.startTimeZone);
@@ -271,6 +280,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       _endTime = TimeOfDay(hour: _endDate.hour, minute: _endDate.minute);
       _selectedAppointment = null;
       _isAllDay = false;
+      _selectedColor = -65535;
       _selectedColorIndex = 0;
       _selectedTimeZoneIndex = 0;
       _subject = '';
@@ -314,7 +324,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       viewType,
                       showAgenda,
                       calendarModel,
-                      changeExempted),
+                      changeExempted,
+                  exempted),
                 );
               },
               child: Icon(Icons.graphic_eq),
@@ -332,11 +343,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 child: SfCalendar(
                   initialSelectedDate: _calendarController.displayDate,
                   controller: _calendarController,
-                  headerHeight: 50,
+                  headerHeight: 60,
                   headerStyle: CalendarHeaderStyle(
                       textAlign: TextAlign.center,
-                      textStyle: TextStyle(
-                          fontSize: 24, color: Colors.black, letterSpacing: 2)),
+                      textStyle: GoogleFonts.chelseaMarket(
+                          fontSize: 32, color: Colors.red,fontWeight: FontWeight.w500, letterSpacing: 1)),
                   view: viewType,
                   onViewChanged: (ViewChangedDetails details) {
                     lastSelectedDate = _calendarController.selectedDate;

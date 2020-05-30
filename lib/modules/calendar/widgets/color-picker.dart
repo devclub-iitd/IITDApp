@@ -28,6 +28,7 @@ class _ColorPickerState extends State<_ColorPicker> {
                 onTap: () {
                   setState(() {
                     _selectedColorIndex = index;
+                    _selectedColor = colorCollection[index].value;
                   });
 
                   // ignore: always_specify_types

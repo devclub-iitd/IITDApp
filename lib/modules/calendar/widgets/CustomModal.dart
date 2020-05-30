@@ -2,12 +2,14 @@ part of event_calendar;
 
 // ignore: must_be_immutable
 class CustomModal extends StatefulWidget {
-  CustomModal(this.func, this.viewType, this.agenda,this.calendarModel,this.changeExemption);
+  CustomModal(this.func, this.viewType, this.agenda, this.calendarModel,
+      this.changeExemption, this.exemptionList);
   var func;
   var changeExemption;
   var viewType;
   var agenda;
   var calendarModel;
+  var exemptionList;
   @override
   _CustomModalState createState() => _CustomModalState();
 }
@@ -18,23 +20,30 @@ class _CustomModalState extends State<CustomModal> {
   var agenda;
   var calDict;
   var exempted;
+  var expandedPanelsList;
 
   List<Map<String, Object>> initializeCalendars(var cal) {
     var res = <String, List>{};
+    var expanList = <String, bool>{};
     var exempt = <String, bool>{};
     cal.forEach((data) {
-      if (res[data.accountName] == null) res[data.accountName] = [];
+      if (res[data.accountName] == null) {
+        res[data.accountName] = [];
+        expanList[data.accountName] = false;
+      }
       res[data.accountName].add(data);
       exempt[data.name] = false;
     });
-    return [res, exempt];
+    return [res, exempt, expanList];
   }
 
   @override
   void initState() {
     var temp = initializeCalendars(widget.calendarModel);
     calDict = temp[0];
-    exempted = temp[1];
+    exempted =
+        widget.exemptionList.length == 0 ? temp[1] : widget.exemptionList;
+    expandedPanelsList = temp[2];
     _viewType = widget.viewType;
     if (widget.viewType == CalendarView.month && widget.agenda) {
       _viewType = 0;
@@ -42,7 +51,7 @@ class _CustomModalState extends State<CustomModal> {
     super.initState();
   }
 
-  void changeExempted(var key,bool value){
+  void changeExempted(var key, bool value) {
     setState(() {
       exempted[key] = !value;
       widget.changeExemption(exempted);
@@ -95,7 +104,7 @@ class _CustomModalState extends State<CustomModal> {
             ),
             Padding(
               padding:
-              const EdgeInsets.symmetric(vertical: 24.0, horizontal: 24),
+                  const EdgeInsets.symmetric(vertical: 24.0, horizontal: 24),
               child: Row(
                 children: <Widget>[
                   Text(
@@ -122,6 +131,11 @@ class _CustomModalState extends State<CustomModal> {
                 ],
               ),
             ),
+            Padding(
+              padding: EdgeInsets.only(left: 10),
+              child:  Text('Filter',style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w600),),
+
+            ),
             Expanded(
               flex: 1,
               child: SingleChildScrollView(
@@ -134,94 +148,99 @@ class _CustomModalState extends State<CustomModal> {
 //                          ? 'readOnlyCalendar${widget._readOnlyCalendars.indexWhere((c) => c.id == widget._calendars[index].id)}'
 //                          : 'writableCalendar${widget._writableCalendars.indexWhere((c) => c.id == widget._calendars[index].id)}'),
                           child: ExpandableNotifier(
-                            controller:
-                            ExpandableController(initialExpanded: false),
-                            child: Padding(
-                              padding: const EdgeInsets.all(15),
-                              child: Container(
-                                child: Column(
-                                  children: <Widget>[
-                                    ExpandablePanel(
-                                      theme: const ExpandableThemeData(
-                                        headerAlignment:
+                        controller: ExpandableController(
+                            initialExpanded: expandedPanelsList[e.key]),
+                        child: Padding(
+                          padding: const EdgeInsets.all(15),
+                          child: Container(
+                            child: Column(
+                              children: <Widget>[
+                                ExpandablePanel(
+                                  theme: const ExpandableThemeData(
+                                    headerAlignment:
                                         ExpandablePanelHeaderAlignment.center,
-                                        tapBodyToExpand: true,
-                                        tapBodyToCollapse: false,
-                                        hasIcon: false,
-                                      ),
-                                      header: Builder(builder: (context) {
-                                        // var exp = ExpandableController.of(context);
-                                        return Container(
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(10.0),
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  child: Text(e.key,
-                                                      style: TextStyle(
-                                                          fontSize: 16,
-                                                          color: Colors.white)),
-                                                ),
-                                                Spacer(),
-                                                ExpandableIcon(
-                                                  theme: const ExpandableThemeData(
-                                                    expandIcon: Icons.arrow_right,
-                                                    collapseIcon:
-                                                    Icons.arrow_drop_down,
-                                                    iconColor: Colors.white,
-                                                    iconSize: 28.0,
-                                                    iconRotationAngle: math.pi / 2,
-                                                    iconPadding:
-                                                    EdgeInsets.only(right: 5),
-                                                    hasIcon: false,
-                                                  ),
-                                                ),
-                                              ],
+                                    tapBodyToExpand: true,
+                                    tapBodyToCollapse: false,
+                                    hasIcon: false,
+                                  ),
+                                  header: Builder(builder: (context) {
+                                    return Container(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              child: Text(e.key,
+                                                  style: TextStyle(
+                                                      fontSize: 15,
+                                                      color: Colors.white)),
                                             ),
-                                          ),
-                                        );
-                                      }),
-                                      expanded: Padding(
-                                        padding: const EdgeInsets.only(left: 20.0),
-                                        child: Column(
-                                          children: <Widget>[
-                                            for (var data in e.value)
-                                              Row(
-                                                children: <Widget>[
-                                                  Container(
-                                                    height: 20,
-                                                    width: 20,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(10)),
-                                                        color: Color(data.color)),
-                                                  ),
-                                                  Padding(
-                                                    padding: const EdgeInsets.only(
-                                                        left: 12.0),
-                                                    child: Text(data.name,style:TextStyle(color: Colors.white)),
-                                                  ),
-                                                  Spacer(),
-                                                  Checkbox(
-                                                    value: !exempted[data.name],
-                                                    onChanged: (bool value) {
-                                                      changeExempted(data.name,value);
-                                                    },
-                                                    checkColor: Colors.white,
-                                                    activeColor: Color(data.color),
-                                                  )
-                                                ],
+                                            Spacer(),
+                                            ExpandableIcon(
+                                              theme: const ExpandableThemeData(
+                                                expandIcon: Icons.arrow_right,
+                                                collapseIcon:
+                                                    Icons.arrow_downward,
+                                                iconColor: Colors.white,
+                                                iconSize: 28.0,
+                                                iconRotationAngle: math.pi / 2,
+                                                iconPadding:
+                                                    EdgeInsets.only(right: 5),
+                                                hasIcon: false,
                                               ),
+                                            ),
                                           ],
                                         ),
                                       ),
+                                    );
+                                  }),
+                                  expanded: Padding(
+                                    padding: const EdgeInsets.only(left: 20.0),
+                                    child: Column(
+                                      children: <Widget>[
+                                        for (var data in e.value)
+                                          Row(
+                                            children: <Widget>[
+                                              Container(
+                                                height: 20,
+                                                width: 20,
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.all(
+                                                            Radius.circular(
+                                                                10)),
+                                                    color: Color(data.color)),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 12.0),
+                                                child: Text(data.name,
+                                                    style: TextStyle(
+                                                        color: Colors.white)),
+                                              ),
+                                              Spacer(),
+                                              Checkbox(
+                                                value: !exempted[data.name],
+                                                onChanged: (bool value) {
+                                                  expandedPanelsList[e.key] =
+                                                      true;
+                                                  changeExempted(
+                                                      data.name, value);
+                                                },
+                                                checkColor: Colors.white,
+                                                activeColor: Color(data.color),
+                                              )
+                                            ],
+                                          ),
+                                      ],
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
-                          )),
+                          ),
+                        ),
+                      )),
                   ],
                 ),
               ),

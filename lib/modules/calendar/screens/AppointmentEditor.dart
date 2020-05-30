@@ -9,7 +9,6 @@ class AppointmentEditorState extends State<AppointmentEditor> {
   var reminder;
   var recurrence;
 
-
   @override
   void initState() {
     super.initState();
@@ -226,10 +225,11 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                     ])),
             ListTile(
               contentPadding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
-              leading:
-                  Icon(Icons.lens, color: colorCollection[_selectedColorIndex]),
+              leading: Icon(Icons.lens, color: Color(_selectedColor)),
               title: Text(
-                colorNames[_selectedColorIndex],
+                colorCollection[_selectedColorIndex] == Color(_selectedColor)
+                    ? colorNames[_selectedColorIndex]
+                    : '',
               ),
               onTap: () {
                 showDialog<Widget>(
@@ -258,7 +258,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                   showDialog(
                     context: context,
                     builder: (BuildContext context) => ReminderPicker(),
-                  );
+                  ).then((dynamic value) => setState(() {}));
                 },
                 onChanged: (String value) {
                   _reminder = value;
@@ -336,8 +336,14 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                 Icons.repeat,
                 color: Colors.black87,
               ),
-              title: Text('Repeat',style: TextStyle(fontSize: 18),),
-              subtitle: Text(_recurrence,style: TextStyle(color: Colors.green),),
+              title: Text(
+                'Repeat',
+                style: TextStyle(fontSize: 18),
+              ),
+              subtitle: Text(
+                _recurrence,
+                style: TextStyle(color: Colors.green),
+              ),
             ),
             ListTile(
               contentPadding: const EdgeInsets.all(5),
@@ -377,7 +383,8 @@ class AppointmentEditorState extends State<AppointmentEditor> {
         home: Scaffold(
             appBar: AppBar(
               title: Text(getTile()),
-              backgroundColor: colorCollection[_selectedColorIndex],
+              backgroundColor:
+                  Color(_selectedColor), //colorCollection[_selectedColorIndex],
               leading: IconButton(
                 icon: const Icon(
                   Icons.close,
@@ -402,28 +409,39 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                         _events.notifyListeners(CalendarDataSourceAction.remove,
                             <Meeting>[]..add(_selectedAppointment));
                       }
-                      var event = Event(userEventsCalendarId, start: _startDate, end: _endDate);
-                      event.title = _subject=='' ? '(No title)' : _subject;
+                      var event = Event(
+                          _selectedAppointment == null
+                              ? userEventsCalendarId
+                              : _selectedAppointment.calendarId,
+                          start: _startDate,
+                          end: _endDate);
+                      if(_selectedAppointment!=null){
+                        event.eventId = _selectedAppointment.eventId;
+                      }
+                      event.title = _subject == '' ? '(No title)' : _subject;
                       event.description = _notes;
                       event.location = _location;
                       event.attendees = getAttendeeList(_attendee);
                       event.reminders = getReminderList(_reminder);
                       event.allDay = _isAllDay;
-                      event = addRecurrenceRule(_recurrence,event);
-                      var createEventResult =
-                          await DeviceCalendarPlugin().createOrUpdateEvent(event);
+                      event = addRecurrenceRule(_recurrence, event);
+                      var createEventResult = await DeviceCalendarPlugin()
+                          .createOrUpdateEvent(event);
                       if (createEventResult.isSuccess) {
                         meetings.add(Meeting(
                           from: _startDate,
                           to: _endDate,
-                          background: colorCollection[_selectedColorIndex],
+                          background: Color(
+                              _selectedColor), //colorCollection[_selectedColorIndex],
                           startTimeZone: '',
                           endTimeZone: '',
                           location: _location,
                           attendee: event.attendees,
                           recurrence: event.recurrenceRule,
                           reminder: event.reminders,
-                          calendarId: userEventsCalendarId,    /************change this************/
+                          calendarId: _selectedAppointment == null
+                              ? userEventsCalendarId
+                              : _selectedAppointment.calendarId,
                           description: _notes,
                           isAllDay: _isAllDay,
                           eventName: _subject == '' ? '(No title)' : _subject,
@@ -438,7 +456,6 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                         print('error occured');
                       }
                       Navigator.pop(context);
-
                     })
               ],
             ),
@@ -453,18 +470,17 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                 : FloatingActionButton(
                     onPressed: () async {
                       if (_selectedAppointment != null) {
-                        var res = await DeviceCalendarPlugin().deleteEvent(_selectedAppointment.calendarId
-                            , _selectedAppointment.eventId);
-                        if(res.isSuccess) {
-                          _events.appointments.removeAt(
-                              _events.appointments.indexOf(
-                                  _selectedAppointment));
+                        var res = await DeviceCalendarPlugin().deleteEvent(
+                            _selectedAppointment.calendarId,
+                            _selectedAppointment.eventId);
+                        if (res.isSuccess) {
+                          _events.appointments.removeAt(_events.appointments
+                              .indexOf(_selectedAppointment));
                           _events.notifyListeners(
                               CalendarDataSourceAction.remove,
                               <Meeting>[]..add(_selectedAppointment));
                           _selectedAppointment = null;
-                        }
-                        else{
+                        } else {
                           print('Error:- Could not delete event');
                         }
                         Navigator.pop(context);
@@ -481,18 +497,19 @@ class AppointmentEditorState extends State<AppointmentEditor> {
   }
 }
 
-Event addRecurrenceRule(var rule,Event event){   //verify this function
-  if(rule==recurrenceOptions[0]) {
+Event addRecurrenceRule(var rule, Event event) {
+  //verify this function
+  if (rule == recurrenceOptions[0]) {
     return event;
   }
   RecurrenceFrequency temp;
-  if(rule==recurrenceOptions[1]) {
+  if (rule == recurrenceOptions[1]) {
     temp = RecurrenceFrequency.Daily;
-  } else if(rule==recurrenceOptions[2]) {
+  } else if (rule == recurrenceOptions[2]) {
     temp = RecurrenceFrequency.Weekly;
-  } else if(rule==recurrenceOptions[3]) {
+  } else if (rule == recurrenceOptions[3]) {
     temp = RecurrenceFrequency.Monthly;
-  } else if(rule==recurrenceOptions[4]) {
+  } else if (rule == recurrenceOptions[4]) {
     temp = RecurrenceFrequency.Yearly;
   }
   var rRule = RecurrenceRule(temp);
@@ -511,21 +528,21 @@ List<Attendee> getAttendeeList(var str) {
   return res;
 }
 
-List<Reminder> getReminderList(String rem){
+List<Reminder> getReminderList(String rem) {
   var lis = <Reminder>[];
-  if(rem == '') {
+  if (rem == '') {
     return lis;
   }
-  var t = int.parse(rem.substring(0,rem.indexOf(' ')));
-  var unit = rem.substring(rem.indexOf(' ')+1);
-  if(unit=='Minutes') {
+  var t = int.parse(rem.substring(0, rem.indexOf(' ')));
+  var unit = rem.substring(rem.indexOf(' ') + 1);
+  if (unit == 'Minutes') {
     lis.add(Reminder(minutes: t));
-  } else if(unit=='Hours') {
-    lis.add(Reminder(minutes: t*60));
-  } else if(unit=='Days') {
-    lis.add(Reminder(minutes: t*60*24));
-  } else if(unit=='Weeks') {
-    lis.add(Reminder(minutes: t*60*24*7));
+  } else if (unit == 'Hours') {
+    lis.add(Reminder(minutes: t * 60));
+  } else if (unit == 'Days') {
+    lis.add(Reminder(minutes: t * 60 * 24));
+  } else if (unit == 'Weeks') {
+    lis.add(Reminder(minutes: t * 60 * 24 * 7));
   }
   return lis;
 }
@@ -554,7 +571,7 @@ class _ReminderPickerState extends State<ReminderPicker> {
       });
     }
 
-    void setReminder(var value){
+    void setReminder(var value) {
       setState(() {
         _reminder = value;
       });
@@ -568,79 +585,72 @@ class _ReminderPickerState extends State<ReminderPicker> {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 16.0),
-            child: TextField(
-              controller: TextEditingController(text: time),
-              onChanged: (String value) {
-                time = value;
-              },
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              style: TextStyle(
-                  fontSize: 18, color: Colors.black87, fontWeight: FontWeight.w400),
-              decoration: InputDecoration(
-                hintText: 'Time',
+              Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child: TextField(
+                  controller: TextEditingController(text: time),
+                  onChanged: (String value) {
+                    time = value;
+                  },
+                  keyboardType: TextInputType.multiline,
+                  maxLines: null,
+                  style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black87,
+                      fontWeight: FontWeight.w400),
+                  decoration: InputDecoration(
+                    hintText: 'Time',
+                  ),
+                ),
               ),
-            ),
-          ),
-          Row(children: [
-            Radio(
-              value: 0,
-              groupValue: type,
-              onChanged: handleValueChange,
-            ),
-            Text(reminderUnits[0], style: TextStyle(fontSize: 16)),
-          ]),
-          Row(children: [
-            Radio(
-              value: 1,
-              groupValue: type,
-              onChanged: handleValueChange,
-            ),
-            Text(reminderUnits[1], style: TextStyle(fontSize: 16)),
-          ]),
-          Row(children: [
-            Radio(
-              value: 2,
-              groupValue: type,
-              onChanged: handleValueChange,
-            ),
-            Text(reminderUnits[2], style: TextStyle(fontSize: 16)),
-          ]),
-          Row(children: [
-            Radio(
-              value: 3,
-              groupValue: type,
-              onChanged: handleValueChange,
-            ),
-            Text(reminderUnits[3], style: TextStyle(fontSize: 16)),
-          ]),
-          Container(height: 20),
-          Row(
-            children: <Widget>[
-              Spacer(),
-              FlatButton(
-                child: Text('CANCEL'),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
+              RadioWithText(
+                type: type,
+                idx: 0,
+                func: handleValueChange,
+                textArray: reminderUnits,
               ),
-              FlatButton(
-                child: Text('SAVE'),
-                onPressed: () {
-                  setReminder(time + ' '+reminderUnits[type]);
-                  Navigator.pop(context);
-                },
+              RadioWithText(
+                type: type,
+                idx: 1,
+                func: handleValueChange,
+                textArray: reminderUnits,
               ),
-            ],
-          )
-        ]),
+              RadioWithText(
+                type: type,
+                idx: 2,
+                func: handleValueChange,
+                textArray: reminderUnits,
+              ),
+              RadioWithText(
+                type: type,
+                idx: 3,
+                func: handleValueChange,
+                textArray: reminderUnits,
+              ),
+              Container(height: 20),
+              Row(
+                children: <Widget>[
+                  Spacer(),
+                  FlatButton(
+                    child: Text('CANCEL'),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                  FlatButton(
+                    child: Text('SAVE'),
+                    onPressed: () {
+                      setReminder(time + ' ' + reminderUnits[type]);
+                      Navigator.pop(context);
+                    },
+                  ),
+                ],
+              )
+            ]),
       ),
     );
   }
 }
-
 
 class RecurrenceDialog extends StatefulWidget {
   @override
@@ -657,73 +667,73 @@ class _RecurrenceDialogState extends State<RecurrenceDialog> {
       });
     }
 
-    void setRecurrence(var value){
+    void setRecurrence(var value) {
       setState(() {
         _recurrence = value;
       });
     }
+
     return Dialog(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          RadioWithText(
-            type: type,
-            idx: 0,
-            func: handleValueChange,
-            textArray: recurrenceOptions,
-          ),
-          RadioWithText(
-            type: type,
-            idx: 1,
-            func: handleValueChange,
-            textArray: recurrenceOptions,
-          ),
-          RadioWithText(
-            type: type,
-            idx: 2,
-            func: handleValueChange,
-            textArray: recurrenceOptions,
-          ),RadioWithText(
-            type: type,
-            idx: 3,
-            func: handleValueChange,
-            textArray: recurrenceOptions,
-          ),
-          RadioWithText(
-            type: type,
-            idx: 4,
-            func: handleValueChange,
-            textArray: recurrenceOptions,
-          ),
-          SizedBox(height: 20),
-          Row(
-            children: <Widget>[
-              Spacer(),
-              FlatButton(
-                child: Text('CANCEL'),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              FlatButton(
-                child: Text('SAVE'),
-                onPressed: () {
-                  setRecurrence(recurrenceOptions[type]);
-                  Navigator.pop(context);
-                },
-              ),
-            ],
-          )
-        ],
-      )
-    );
+        child: Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        RadioWithText(
+          type: type,
+          idx: 0,
+          func: handleValueChange,
+          textArray: recurrenceOptions,
+        ),
+        RadioWithText(
+          type: type,
+          idx: 1,
+          func: handleValueChange,
+          textArray: recurrenceOptions,
+        ),
+        RadioWithText(
+          type: type,
+          idx: 2,
+          func: handleValueChange,
+          textArray: recurrenceOptions,
+        ),
+        RadioWithText(
+          type: type,
+          idx: 3,
+          func: handleValueChange,
+          textArray: recurrenceOptions,
+        ),
+        RadioWithText(
+          type: type,
+          idx: 4,
+          func: handleValueChange,
+          textArray: recurrenceOptions,
+        ),
+        SizedBox(height: 20),
+        Row(
+          children: <Widget>[
+            Spacer(),
+            FlatButton(
+              child: Text('CANCEL'),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            FlatButton(
+              child: Text('SAVE'),
+              onPressed: () {
+                setRecurrence(recurrenceOptions[type]);
+                Navigator.pop(context);
+              },
+            ),
+          ],
+        )
+      ],
+    ));
   }
 }
 
-
 // ignore: must_be_immutable
 class RadioWithText extends StatelessWidget {
-  RadioWithText({this.type,this.idx,this.func,this.textArray});
+  RadioWithText({this.type, this.idx, this.func, this.textArray});
   var type;
   var idx;
   var func;
@@ -734,7 +744,7 @@ class RadioWithText extends StatelessWidget {
       onTap: () {
         func(idx);
       },
-      child: Row(mainAxisSize: MainAxisSize.max,children: [
+      child: Row(mainAxisSize: MainAxisSize.max, children: [
         Radio(
           value: idx,
           groupValue: type,
@@ -745,4 +755,3 @@ class RadioWithText extends StatelessWidget {
     );
   }
 }
-
