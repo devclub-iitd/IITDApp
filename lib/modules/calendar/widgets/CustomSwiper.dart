@@ -98,7 +98,8 @@ class _CustomCardState extends State<CustomCard> {
               _endDate = _startDate.add(Duration(hours: 1));
               _startTime =
                   TimeOfDay(hour: _startDate.hour, minute: _startDate.minute);
-              _endTime = TimeOfDay(hour: _endDate.hour, minute: _endDate.minute);
+              _endTime =
+                  TimeOfDay(hour: _endDate.hour, minute: _endDate.minute);
               Navigator.push<Widget>(
                 context,
                 MaterialPageRoute(
@@ -114,8 +115,10 @@ class _CustomCardState extends State<CustomCard> {
         body: Container(
           height: height, // change this
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(height / 20)),
-              color: Color.fromARGB(255, 37, 37, 37)),
+            borderRadius: BorderRadius.all(Radius.circular(height / 20)),
+            color: Color.fromARGB(255, 255, 255, 255),
+            //color: Color.fromARGB(255, 37, 37, 37)
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -124,14 +127,14 @@ class _CustomCardState extends State<CustomCard> {
                 '${widget.currDate.day}',
                 style: TextStyle(
                     fontSize: 36,
-                    color: Colors.white,
+                    color: Colors.black,
                     fontWeight: FontWeight.w600),
               ),
               Text(
                 DateFormat('EEEE').format(widget.currDate), // prints Tuesday
                 style: TextStyle(
                     fontSize: 18,
-                    color: Colors.white,
+                    color: Colors.black,
                     fontWeight: FontWeight.w300),
               ),
               Container(height: 8),
@@ -141,18 +144,18 @@ class _CustomCardState extends State<CustomCard> {
               SingleChildScrollView(
                   child: widget.data.length == 0
                       ? Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Text(
-                      'No events on this date',
-                      style:
-                      TextStyle(fontSize: 14, color: Colors.white60),
-                    ),
-                  )
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            'No events on this date',
+                            style:
+                                TextStyle(fontSize: 15, color: Colors.black),
+                          ),
+                        )
                       : Column(
-                    children: <Widget>[
-                      for (var data in widget.data) EventListItem(data)
-                    ],
-                  ))
+                          children: <Widget>[
+                            for (var data in widget.data) EventListItem(data)
+                          ],
+                        ))
             ],
           ),
         ));
@@ -172,8 +175,8 @@ class EventListItem extends StatelessWidget {
       onTap: () {
         _startDate = data.from;
         _endDate = data.to;
-        _startTime = TimeOfDay(hour: data.from.hour,minute: data.from.minute);
-        _endTime = TimeOfDay(hour: data.to.hour,minute: data.to.minute);
+        _startTime = TimeOfDay(hour: data.from.hour, minute: data.from.minute);
+        _endTime = TimeOfDay(hour: data.to.hour, minute: data.to.minute);
         _isAllDay = data.isAllDay;
         _selectedColor = data.background.value;
         _selectedColorIndex = 0;
@@ -213,7 +216,7 @@ class EventListItem extends StatelessWidget {
                     Text(
                       data.eventName,
                       style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.w400),
                     )
@@ -230,8 +233,8 @@ class EventListItem extends StatelessWidget {
                     Text(
                       timings,
                       style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 13,
+                          color: Colors.black54,
+                          fontSize: 14,
                           fontWeight: FontWeight.w300),
                     )
                   ],
@@ -239,14 +242,26 @@ class EventListItem extends StatelessWidget {
               ],
             ),
             Spacer(),
-            data.reminder!=null?Padding(
-              padding: const EdgeInsets.only(right: 12.0),
-              child: Icon(Icons.notifications,color: Colors.white,size: 28,),
-            ):Container(),
-            data.calendarId==starredCalendarId?Padding(
-              padding: const EdgeInsets.only(right: 12.0),
-              child: Icon(Icons.star,color: Colors.yellow,size: 28,),
-            ):Container(),
+            data.reminder != null
+                ? Padding(
+                    padding: const EdgeInsets.only(right: 12.0),
+                    child: Icon(
+                      Icons.notifications,
+                      color: Colors.black,
+                      size: 28,
+                    ),
+                  )
+                : Container(),
+            data.calendarId == starredCalendarId
+                ? Padding(
+                    padding: const EdgeInsets.only(right: 12.0),
+                    child: Icon(
+                      Icons.star,
+                      color: Colors.yellow,
+                      size: 28,
+                    ),
+                  )
+                : Container(),
 //          IconButton(
 //              icon: Icon(
 //            Icons.edit,

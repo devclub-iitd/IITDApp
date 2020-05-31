@@ -81,7 +81,7 @@ class _CustomModalState extends State<CustomModal> {
       return DropdownMenuItem(
         child: Text(
           text,
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.black),
         ),
         value: value,
       );
@@ -91,14 +91,15 @@ class _CustomModalState extends State<CustomModal> {
       child: Container(
         height: 500,
         padding: EdgeInsets.all(8),
-        color: Color.fromARGB(255, 35, 39, 51),
+        color: Color.fromARGB(255, 240, 240, 240),
+        // color: Color.fromARGB(255, 35, 39, 51),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
               'Settings',
               style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 23,
                   fontWeight: FontWeight.bold),
             ),
@@ -109,13 +110,14 @@ class _CustomModalState extends State<CustomModal> {
                 children: <Widget>[
                   Text(
                     'Calendar View',
-                    style: TextStyle(color: Colors.white, fontSize: 21),
+                    style: TextStyle(color: Colors.black, fontSize: 21),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: DropdownButton(
                       value: _viewType,
-                      dropdownColor: Color.fromARGB(255, 35, 39, 51),
+                      dropdownColor: Color.fromARGB(255, 230, 230, 230),
+                      // dropdownColor: Color.fromARGB(255, 35, 39, 51),
                       items: <DropdownMenuItem<dynamic>>[
                         for (MapEntry e in dropdownLis.entries)
                           CustomDropDownItem(e.key, e.value)
@@ -133,7 +135,7 @@ class _CustomModalState extends State<CustomModal> {
             ),
             Padding(
               padding: EdgeInsets.only(left: 10),
-              child:  Text('Filter',style: TextStyle(color: Colors.white,fontSize: 18,fontWeight: FontWeight.w600),),
+              child:  Text('Filter',style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.w600),),
 
             ),
             Expanded(
@@ -173,7 +175,7 @@ class _CustomModalState extends State<CustomModal> {
                                               child: Text(e.key,
                                                   style: TextStyle(
                                                       fontSize: 15,
-                                                      color: Colors.white)),
+                                                      color: Colors.black)),
                                             ),
                                             Spacer(),
                                             ExpandableIcon(
@@ -181,7 +183,7 @@ class _CustomModalState extends State<CustomModal> {
                                                 expandIcon: Icons.arrow_right,
                                                 collapseIcon:
                                                     Icons.arrow_downward,
-                                                iconColor: Colors.white,
+                                                iconColor: Colors.black,
                                                 iconSize: 28.0,
                                                 iconRotationAngle: math.pi / 2,
                                                 iconPadding:
@@ -216,7 +218,7 @@ class _CustomModalState extends State<CustomModal> {
                                                     left: 12.0),
                                                 child: Text(data.name,
                                                     style: TextStyle(
-                                                        color: Colors.white)),
+                                                        color: Colors.black)),
                                               ),
                                               Spacer(),
                                               Checkbox(

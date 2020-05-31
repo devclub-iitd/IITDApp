@@ -13,7 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:IITDAPP/modules/calendar/data/Constants.dart';
 // import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:intl/intl.dart';
@@ -346,7 +346,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   headerHeight: 60,
                   headerStyle: CalendarHeaderStyle(
                       textAlign: TextAlign.center,
-                      textStyle: GoogleFonts.chelseaMarket(
+                      textStyle: TextStyle(
                           fontSize: 32, color: Colors.red,fontWeight: FontWeight.w500, letterSpacing: 1)),
                   view: viewType,
                   onViewChanged: (ViewChangedDetails details) {
