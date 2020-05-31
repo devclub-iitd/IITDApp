@@ -20,7 +20,7 @@ class ToggleGrid extends StatelessWidget {
     var mc = Provider.of<MapConditions>(context, listen: false);
     var typeIndex = mc.typeIndex;
     var selected = mc.typesVisible;
-    print(selected);
+    // print(selected);
     var counter = 0;
     return SizedBox(
       height: 150,

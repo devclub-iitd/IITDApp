@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
-  CustomAppBar({Key key, this.title, this.bottom, this.height,this.actions,this.withMenu})
+  CustomAppBar({Key key, this.title, this.bottom, this.height,this.actions,this.withMenu = true})
       : super(key: key);
   final Widget bottom;
   final Widget title;
@@ -38,5 +38,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight((height ?? 1) * kToolbarHeight);
+
+  Size get preferredSize =>
+      Size.fromHeight((height ?? 1) * kToolbarHeight);
 }

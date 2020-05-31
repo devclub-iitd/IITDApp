@@ -39,7 +39,7 @@ class MapConditions with ChangeNotifier {
   }
 
   List<Marker> fetchData() {
-    print('fetching');
+    print('fetching markers');
     var id = 0;
     markers = [
       Marker(
