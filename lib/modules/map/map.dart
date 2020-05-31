@@ -8,14 +8,16 @@ import 'package:IITDAPP/modules/map/widgets/base/mapHome.dart';
 
 class Map extends StatelessWidget {
   static const String routeName = '/map';
+  final mc = MapConditions();
+
 
   @override
   Widget build(BuildContext context) {
     print('built map');
     return MultiProvider(providers: [
-      ChangeNotifierProvider<MapConditions>(create: (_) => MapConditions()),
+      ChangeNotifierProvider<MapConditions>.value(value: mc),
       ChangeNotifierProvider<MapOffset>(
-        create: (_) => MapOffset(),
+        create: (_) => MapOffset(mc),
       ),
       ChangeNotifierProvider<SlidePanelPosition>(
         create: (_) => SlidePanelPosition(),

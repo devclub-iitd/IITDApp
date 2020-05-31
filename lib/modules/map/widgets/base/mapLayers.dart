@@ -60,11 +60,14 @@ class _MapLayersState extends State<MapLayers> with TickerProviderStateMixin {
       Positioned(
           top: 10, right: 10, child: FilterButton(controller: _controller)),
       Consumer<SlidePanelPosition>(
-        builder: (_, spp, child) => Positioned(
-          bottom: spp.position + 10,
-          right: 10,
-          child: child,
-        ),
+        builder: (_, spp, child) {
+          print('position changed');
+          return Positioned(
+            bottom: spp.position + 10,
+            right: 10,
+            child: child,
+          );
+        },
         child: LocationButton(mc: mc, mo: mo),
       ),
       Positioned(

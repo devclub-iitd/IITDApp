@@ -5,18 +5,17 @@ enum MinScaleLevel { HIGH, MID, LOW }
 
 class Marker extends StatelessWidget {
   final Location location;
-  Color bgcolor;
-  Offset onScreenOffset;
   final int id;
   final double size;
   final MinScaleLevel minScale;
-  bool play = false;
+  final List<Color> bgcolor;
   Marker(
       {@required this.location,
       @required this.id,
       @required this.size,
-      this.minScale}) {
-    bgcolor = getbgcolor(location.type);
+      this.minScale,
+      @required this.bgcolor}) {
+    bgcolor.add(getbgcolor(location.type));
   }
 
   @override

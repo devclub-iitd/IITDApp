@@ -47,8 +47,8 @@ class _MarkerIconState extends State<MarkerIcon> with TickerProviderStateMixin {
     if (!_controller.isAnimating) {
       _controller.value = 1;
     }
-    if (widget.m.play) {
-      widget.m.play = false;
+    if (mc.play[widget.m.id]) {
+      mc.play[widget.m.id] = false;
       if (!_controller.isAnimating) {
         _controller.reset();
       }
@@ -59,7 +59,7 @@ class _MarkerIconState extends State<MarkerIcon> with TickerProviderStateMixin {
         ? SelectedMarker(animation: _animation)
         : Container(
             decoration: BoxDecoration(
-              color: widget.m.bgcolor,
+              color: mc.bgcolor[widget.m.id],
               shape: BoxShape.circle,
             ),
             child: IconButton(

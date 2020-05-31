@@ -36,8 +36,8 @@ class MarkerLayer extends StatelessWidget {
         final label = MarkerLabel(y: y, label: m.location.name);
 
         return Positioned(
-          left: m.onScreenOffset.dx + x,
-          top: m.onScreenOffset.dy + y,
+          left: mc.onScreenOffset[m.id].dx + x,
+          top: mc.onScreenOffset[m.id].dy + y,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -60,8 +60,8 @@ class MarkerLayer extends StatelessWidget {
         globalPosition: mc.currentLocationCoordinates,
         tweenOffset: tweenOffset,
       );
-      mc.currentLocationMarker =
-          CurrentLocationMarker(onScreenOffset: mc.currentLocationOffset);
+      mc.onScreenOffset.last = mc.currentLocationOffset;
+      mc.currentLocationMarker = CurrentLocationMarker();
       map.add(mc.currentLocationMarker);
     }
 

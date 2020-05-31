@@ -21,17 +21,27 @@ class _SlideUpSheetState extends State<SlideUpSheet>
   PanelController pc = PanelController();
   var canvasHeight;
 
+  void changeHeight() {
+    var spp =Provider.of<SlidePanelPosition>(context, listen: false);
+    if(_animationController.value<0.02){
+      return;
+    }
+      var h = canvasHeight * 0.15 * _animationController.value;
+      
+    if(spp.position == h){
+      return;
+    }
+      //TODO check rebuild call during build
+      if (pc.isAttached && !pc.isPanelAnimating) {
+          // print('position called');
+        spp.setPosition(h);
+      }
+    }
+
   @override
   void initState() {
     _animationController = AnimationController(
         vsync: this, duration: Duration(milliseconds: 400), value: 0);
-    _animationController.addListener(() {
-      var h = canvasHeight * 0.15 * _animationController.value;
-      //TODO check rebuild call during build
-      if (pc.isAttached && !pc.isPanelAnimating) {
-        Provider.of<SlidePanelPosition>(context, listen: false).setPosition(h);
-      }
-    });
     _animationController.addStatusListener((status) {
       print(status);
     });
@@ -50,6 +60,8 @@ class _SlideUpSheetState extends State<SlideUpSheet>
 
   @override
   Widget build(BuildContext context) {
+    _animationController.removeListener(changeHeight);
+    _animationController.addListener(changeHeight);
     var mc = Provider.of<MapConditions>(context, listen: true);
     var resetScroll = false;
     if (mc.selectedMarker != -1 && !mc.currentLocationVisible && !mc.toggled) {

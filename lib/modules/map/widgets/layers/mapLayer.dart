@@ -218,7 +218,7 @@ class _MapLayerState extends State<MapLayer> {
     var mo = Provider.of<MapOffset>(bc, listen: false);
     var mc = Provider.of<MapConditions>(bc, listen: false);
     var visibleMarkers = mc.markers.where((m) {
-      m.onScreenOffset = mo.getOffset(
+      mc.onScreenOffset[m.id] = mo.getOffset(
           //positions updated every frame as of now
           globalPosition: m.location.location,
           tweenOffset: mo.verifyOffset(tweenOffset));
@@ -229,10 +229,10 @@ class _MapLayerState extends State<MapLayer> {
       if (m.location.type != null && !mc.isVisible(m.location.type)) {
         return false;
       }
-      return (m.onScreenOffset.dx <= mo.canvasSize.width &&
-          m.onScreenOffset.dx >= 0 &&
-          m.onScreenOffset.dy <= mo.canvasSize.height &&
-          m.onScreenOffset.dy >= 0);
+      return (mc.onScreenOffset[m.id].dx <= mo.canvasSize.width &&
+          mc.onScreenOffset[m.id].dx >= 0 &&
+          mc.onScreenOffset[m.id].dy <= mo.canvasSize.height &&
+          mc.onScreenOffset[m.id].dy >= 0);
     });
     return MarkerLayer(
       visibleMarkers: visibleMarkers,

@@ -1,9 +1,14 @@
+import 'package:IITDAPP/modules/map/data/mapCondition.dart';
+import 'package:IITDAPP/modules/map/widgets/marker/currentLocationMarker.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
 
 import 'package:IITDAPP/modules/map/widgets/marker/marker.dart';
 
 class MapOffset extends ChangeNotifier {
+  MapOffset(this.mc);
+
+  final MapConditions mc;
   Offset
       tweenPreviousOffset; // offset to store beginning of animation tween when panned
   Offset offset; // offset is where the top left corner of the image is drawn
@@ -16,19 +21,25 @@ class MapOffset extends ChangeNotifier {
   LatLng SE;
 
   void moveTo(m) {
+    int id;
+    if (m.runtimeType == CurrentLocationMarker) {
+      id = mc.markers.length;
+    } else {
+      id = m.id;
+    }
     if (Marker.zoomLevel(m.minScale) > scale) {
-      m.onScreenOffset =
-          (m.onScreenOffset) / scale * Marker.zoomLevel(m.minScale);
+      mc.onScreenOffset[id] =
+          (mc.onScreenOffset[id]) / scale * Marker.zoomLevel(m.minScale);
       offset = offset / scale * Marker.zoomLevel(m.minScale);
       scale = Marker.zoomLevel(m.minScale);
     }
-    var o = -m.onScreenOffset +
+    var o = -mc.onScreenOffset[id] +
         offset +
         Offset(canvasSize.width / 2, canvasSize.height / 2);
     animationCurve = Curves.linear;
     panDuration = 500;
-    if (!m.play) {
-      m.play = true;
+    if (!mc.play[id]) {
+      mc.play[id] = true;
     }
     changeOffsets(o);
   }

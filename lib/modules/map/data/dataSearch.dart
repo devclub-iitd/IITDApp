@@ -42,6 +42,7 @@ class DataSearch extends SearchDelegate<String> {
         .map((m) => SearchOption(
               m: m,
               query: query,
+              bgcolor: conditions.bgcolor[m.id],
               onTap: () {
                 close(context, null);
                 conditions.markerSelected(m.id);
@@ -66,14 +67,19 @@ class SearchOption extends StatelessWidget {
   final Marker m;
   final Function onTap;
   final String query;
-  SearchOption({@required this.m, @required this.onTap, @required this.query});
+  final bgcolor;
+  SearchOption(
+      {@required this.m,
+      @required this.onTap,
+      @required this.query,
+      @required this.bgcolor});
 
   @override
   Widget build(BuildContext context) {
     if (query == '') {
       return ListTile(
         leading: Container(
-          color: m.bgcolor,
+          color: bgcolor,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: m,
@@ -106,7 +112,7 @@ class SearchOption extends StatelessWidget {
     }
     return ListTile(
       leading: Container(
-        color: m.bgcolor,
+        color: bgcolor,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: m,

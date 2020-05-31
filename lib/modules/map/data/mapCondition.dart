@@ -12,6 +12,9 @@ class MapConditions with ChangeNotifier {
   }
   int selectedMarker = -1;
   List<Marker> markers;
+  List<Offset> onScreenOffset;
+  List<bool> play;
+  List<Color> bgcolor = [];
 
   List typeIndex;
   List<bool> typesVisible; //types of markers visible
@@ -43,6 +46,7 @@ class MapConditions with ChangeNotifier {
     var id = 0;
     markers = [
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'BioTech Lawns',
@@ -58,6 +62,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.MID,
       ),
       Marker(
+          bgcolor: bgcolor,
           id: id++,
           location: Location(
             name: 'Main Building',
@@ -69,6 +74,7 @@ class MapConditions with ChangeNotifier {
           ),
           size: 48),
       Marker(
+          bgcolor: bgcolor,
           id: id++,
           location: Location(
             name: 'Lecture Hall Complex',
@@ -81,6 +87,7 @@ class MapConditions with ChangeNotifier {
           ),
           size: 48),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Block 6',
@@ -95,6 +102,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.HIGH,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Block 5',
@@ -109,6 +117,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.HIGH,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Block 4',
@@ -123,6 +132,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.HIGH,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Block 3',
@@ -137,6 +147,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.HIGH,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Block 2',
@@ -151,6 +162,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.HIGH,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Block 1',
@@ -165,6 +177,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.HIGH,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Central Workshop',
@@ -179,6 +192,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.LOW,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Football Ground',
@@ -193,6 +207,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.LOW,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Hockey Ground',
@@ -207,6 +222,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.LOW,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Cricket Ground',
@@ -221,6 +237,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.LOW,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Cafetaria',
@@ -235,6 +252,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.HIGH,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Shivalik Hostel',
@@ -250,6 +268,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.MID,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Zanskar Hostel',
@@ -265,6 +284,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.MID,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Vindhyanchal Hostel',
@@ -280,6 +300,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.MID,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Kumaon Hostel',
@@ -295,6 +316,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.MID,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Aravalli Hostel',
@@ -310,6 +332,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.MID,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'NesCafe',
@@ -325,6 +348,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.HIGH,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Shiru Cafe',
@@ -340,6 +364,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.HIGH,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'State Bank of India',
@@ -355,6 +380,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.MID,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'IIT Hospital',
@@ -370,6 +396,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.MID,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Student Activities Center',
@@ -384,6 +411,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.MID,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Swimming Pool',
@@ -398,6 +426,7 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.MID,
       ),
       Marker(
+        bgcolor: bgcolor,
         id: id++,
         location: Location(
           name: 'Masala Mix',
@@ -412,6 +441,8 @@ class MapConditions with ChangeNotifier {
         minScale: MinScaleLevel.MID,
       ),
     ];
+    onScreenOffset = List.filled(markers.length + 1, null);
+    play = List.filled(markers.length + 1, false);
     return markers;
   }
 

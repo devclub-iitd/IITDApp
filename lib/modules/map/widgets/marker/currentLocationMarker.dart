@@ -7,11 +7,9 @@ import 'package:IITDAPP/modules/map/data/mapCondition.dart';
 import 'package:IITDAPP/modules/map/widgets/marker/marker.dart';
 
 class CurrentLocationMarker extends StatefulWidget {
-  var onScreenOffset;
-  bool play = false;
   final MinScaleLevel minScale = null;
 
-  CurrentLocationMarker({this.onScreenOffset});
+  CurrentLocationMarker();
 
   @override
   _CurrentLocationMarkerState createState() => _CurrentLocationMarkerState();
@@ -41,7 +39,7 @@ class _CurrentLocationMarkerState extends State<CurrentLocationMarker>
   @override
   Widget build(BuildContext context) {
     mc = Provider.of<MapConditions>(context);
-    widget.onScreenOffset = mc.currentLocationOffset;
+    mc.onScreenOffset.last = mc.currentLocationOffset;
     if (!_controller.isAnimating) {
       _controller.value = 1;
     }
@@ -55,8 +53,8 @@ class _CurrentLocationMarkerState extends State<CurrentLocationMarker>
     }
 
     return Positioned(
-      left: widget.onScreenOffset.dx - SelectedMarker.selectedIconSize / 2,
-      top: widget.onScreenOffset.dy - SelectedMarker.selectedIconSize * 3 / 4,
+      left: mc.onScreenOffset.last.dx - SelectedMarker.selectedIconSize / 2,
+      top: mc.onScreenOffset.last.dy - SelectedMarker.selectedIconSize * 3 / 4,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
