@@ -1,0 +1,1 @@
+Get license file for syncfusion calendar from Pranjal.
