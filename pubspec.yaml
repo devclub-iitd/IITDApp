@@ -38,6 +38,16 @@ dependencies:
   flutter_svg: ^0.17.4
   url_launcher: ^5.4.7
   expandable: ^4.1.4
+  syncfusion_flutter_calendar: ^18.1.53-beta
+  modal_bottom_sheet: ^0.1.5
+  flutter_swiper: ^1.1.6
+  device_calendar: ^3.1.0    # comment this and uncomment either of below 2 url lines if only want to add for one platform
+# device_calendar:
+#    git:
+#      url: https://github.com/Pranjal2041/device_calendar.git   #  for android use only one of 3 options
+#      url: https://github.com/thiszhong/device_calendar.git   # for ios
+  global_configuration: ^1.5.0
+  flutter_spinkit: "^4.1.2"
   flutter:
     sdk: flutter
 
@@ -57,6 +67,7 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/
+    - assets/cfg/
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

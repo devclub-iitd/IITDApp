@@ -40,7 +40,9 @@ class AppDrawer extends StatelessWidget {
           _createDrawerItem(
               selected: tag == 'Calendar',
               icon: Icons.calendar_today,
-              text: 'Calendar'),
+              text: 'Calendar',
+              context: context,
+              routeName: Routes.calendar,),
           Divider(),
           ListTile(
             title: Text(
