@@ -4,10 +4,12 @@ import 'package:IITDAPP/modules/attendance/widgets/headings/attendanceListHeader
 import 'package:IITDAPP/modules/attendance/data/attendanceModel.dart';
 import 'package:IITDAPP/modules/attendance/widgets/cards/courseCard.dart';
 import 'package:IITDAPP/values/colors/colors.dart';
+import 'package:IITDAPP/modules/news/widgets/shimmers/sizedShimmer.dart';
 
 class AttendanceList extends StatefulWidget {
   final entryNumber;
-  const AttendanceList(this.entryNumber,{
+  const AttendanceList(
+    this.entryNumber, {
     Key key,
   }) : super(key: key);
 
@@ -19,18 +21,41 @@ class _AttendanceListState extends State<AttendanceList> {
   @override
   Widget build(BuildContext context) {
     // print('built AttendanceList');
+    final loadingShimmer = SizedShimmer(
+      baseColor: Colors.purple[900],
+      highlightColor: Colors.purple[700],
+      height: 80,
+    );
     var _result = AttendanceModel.getAttendanceData(widget.entryNumber);
     return FutureBuilder(
       builder: (context, AsyncSnapshot<List<AttendanceModel>> snapshot) {
         switch (snapshot.connectionState) {
           case ConnectionState.active:
           case ConnectionState.waiting:
-            return Center(
-              child: CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(
-                    AppColors.PRIMARY_COLOR_LIGHT),
-                backgroundColor: AppColors.PRIMARY_COLOR_DARK,
-              ),
+            return Padding(
+              padding: const EdgeInsets.all(5.0),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AttendanceListHeader('Poor'),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5.0, bottom: 5),
+                      child: loadingShimmer,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5.0, bottom: 5),
+                      child: loadingShimmer,
+                    ),
+                    AttendanceListHeader('Regular'),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5.0, bottom: 5),
+                      child: loadingShimmer,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5.0, bottom: 5),
+                      child: loadingShimmer,
+                    ),
+                  ]),
             );
           case ConnectionState.done:
             if (snapshot.hasError) {
@@ -70,7 +95,8 @@ class _AttendanceListState extends State<AttendanceList> {
               color: AppColors.COURSE_CARD,
               onRefresh: () {
                 print('refresh called');
-                return _result = AttendanceModel.getAttendanceData(widget.entryNumber);
+                return _result =
+                    AttendanceModel.getAttendanceData(widget.entryNumber);
               },
               child: ListView(
                 children: children,

@@ -40,7 +40,9 @@ class AppDrawer extends StatelessWidget {
           _createDrawerItem(
               selected: tag == 'Calendar',
               icon: Icons.calendar_today,
-              text: 'Calendar'),
+              text: 'Calendar',
+              context: context,
+              routeName: Routes.calendar,),
           Divider(),
           ListTile(
             title: Text(
@@ -79,6 +81,12 @@ class AppDrawer extends StatelessWidget {
               text: 'Campus Map',
             context: context,
             routeName: Routes.map,),
+          _createDrawerItem(
+              selected: tag == 'News',
+              icon: Icons.fiber_new,
+              text: 'News',
+            context: context,
+            routeName: Routes.news,),
         ],
       ),
     );
