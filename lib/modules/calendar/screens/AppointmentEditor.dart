@@ -518,12 +518,14 @@ Event addRecurrenceRule(var rule, Event event) {
   return event;
 }
 
+
+
 List<Attendee> getAttendeeList(var str) {
   var ls = LineSplitter();
   var lines = ls.convert(str);
   var res = List<Attendee>(); // ignore: prefer_collection_literals
   for (var i = 0; i < lines.length; i++) {
-    res.add(Attendee(name: lines[i]));
+    res.add(Attendee(emailAddress: lines[i]));
   }
   return res;
 }
@@ -558,8 +560,20 @@ class _ReminderPickerState extends State<ReminderPicker> {
 
   @override
   void initState() {
-    type = 0;
-    time = '10';
+
+    if(_reminder==''){
+      type = 0;
+      time = '10';
+    }
+    else{
+      time = _reminder.substring(0, _reminder.indexOf(' '));
+      var unit = _reminder.substring(_reminder.indexOf(' ') + 1);
+      for (var i = 0;i<reminderUnits.length;i++){
+        if(unit==reminderUnits[i]) {
+          type = i;
+        }
+      }
+    }
     super.initState();
   }
 
@@ -659,6 +673,24 @@ class RecurrenceDialog extends StatefulWidget {
 
 class _RecurrenceDialogState extends State<RecurrenceDialog> {
   var type;
+
+  @override
+  void initState() {
+
+    if(_recurrence==''){
+      type = 0;
+    }
+    else{
+      for (var i = 0;i<recurrenceOptions.length;i++){
+        if(_recurrence==reminderUnits[i]) {
+          type = i;
+        }
+      }
+    }
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     void handleValueChange(var value) {

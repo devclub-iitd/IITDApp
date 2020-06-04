@@ -250,6 +250,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 ? ''
                 : meetingDetails.eventName;
             _notes = meetingDetails.description;
+            _location = meetingDetails.location;
+            _reminder = getReminderString(meetingDetails.reminder);
+            _attendee = getAttendeeString(meetingDetails.attendee);
+            _recurrence = getRecurrenceString(meetingDetails.recurrence);
             _selectedAppointment = meetingDetails;
           } else {
             // ignore: omit_local_variable_types

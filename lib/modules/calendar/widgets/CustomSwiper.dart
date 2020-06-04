@@ -183,7 +183,11 @@ class EventListItem extends StatelessWidget {
         _selectedTimeZoneIndex = 0;
         _subject = data.eventName;
         _notes = data.description;
+        _location = data.location;
+        _reminder = getReminderString(data.reminder);
+        _attendee = getAttendeeString(data.attendee);
         _selectedAppointment = data;
+        _recurrence = getRecurrenceString(data.recurrence);
         Navigator.push<Widget>(
           context,
           MaterialPageRoute(
