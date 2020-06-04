@@ -1,6 +1,7 @@
 import 'package:IITDAPP/modules/attendance/attendance.dart';
 import 'package:IITDAPP/modules/calendar/calendar.dart';
 import 'package:IITDAPP/modules/dashboard/dashboard.dart';
+import 'package:IITDAPP/modules/events/EventsScreen.dart';
 import 'package:IITDAPP/modules/explore/explore.dart';
 import 'package:IITDAPP/modules/quickLinks/quickLinks.dart';
 import 'package:IITDAPP/routes/Routes.dart';
@@ -19,6 +20,8 @@ class Router {
         return _createRoute(QuickLinks());
       case Routes.calendar:
         return _createRoute(CalendarScreen());
+      case Routes.events:
+        return _createRoute(EventsScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

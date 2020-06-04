@@ -35,6 +35,7 @@ dependencies:
   syncfusion_flutter_calendar: ^18.1.53-beta
   modal_bottom_sheet: ^0.1.5
   flutter_swiper: ^1.1.6
+  localstorage: ^3.0.2+5
   device_calendar: ^3.1.0    # comment this and uncomment either of below 2 url lines if only want to add for one platform
 # device_calendar:
 #    git:
@@ -42,6 +43,11 @@ dependencies:
 #      url: https://github.com/thiszhong/device_calendar.git   # for ios
   global_configuration: ^1.5.0
   flutter_spinkit: "^4.1.2"
+  flutter_secure_storage: ^3.3.3
+  firebase_messaging: ^6.0.16
+  validators: ^2.0.0+1
+  auto_size_text: ^2.0.1
+  datetime_picker_formfield: ^1.0.0
   flutter:
     sdk: flutter
 

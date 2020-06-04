@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "440543785404",
+    "firebase_url": "https://iitd-connect-app.firebaseio.com",
+    "project_id": "iitd-connect-app",
+    "storage_bucket": "iitd-connect-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440543785404:android:727979231fa08b6d73bbb9",
+        "android_client_info": {
+          "package_name": "com.example.IITDAPP"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "440543785404-mmucshmv8an29r0d4tbifvi18e78beug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZBT0m7MsHjoWVXijhKotkfZHIzSP0pNM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440543785404-mmucshmv8an29r0d4tbifvi18e78beug.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "440543785404-e98qeqqm8u1cl8hq9fp6oaqk85f5rdmt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tryst20User"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440543785404:android:ca38aabedfc6110f73bbb9",
+        "android_client_info": {
+          "package_name": "com.tryst.tryst_20_user"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "440543785404-mmucshmv8an29r0d4tbifvi18e78beug.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZBT0m7MsHjoWVXijhKotkfZHIzSP0pNM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440543785404-mmucshmv8an29r0d4tbifvi18e78beug.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "440543785404-e98qeqqm8u1cl8hq9fp6oaqk85f5rdmt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.tryst20User"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

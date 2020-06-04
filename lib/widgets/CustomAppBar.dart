@@ -4,10 +4,11 @@ import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   CustomAppBar(
-      {Key key, this.title, this.bottom, this.height, this.withMenu = true})
+      {Key key, this.title, this.bottom, this.height,this.actions, this.withMenu = true})
       : super(key: key);
   final Widget bottom;
   final Widget title;
+  final List<Widget> actions;
   final bool withMenu;
 
   final double height;
@@ -17,6 +18,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     return (GradientAppBar(
       title: title,
       elevation: 10,
+      actions: actions,
       backgroundColorStart: AppColors.APP_BAR_START,
       backgroundColorEnd: AppColors.APP_BAR_END,
       leading: withMenu

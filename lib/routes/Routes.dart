@@ -1,6 +1,7 @@
 import 'package:IITDAPP/modules/attendance/attendance.dart';
 import 'package:IITDAPP/modules/calendar/calendar.dart';
 import 'package:IITDAPP/modules/dashboard/dashboard.dart';
+import 'package:IITDAPP/modules/events/EventsScreen.dart';
 import 'package:IITDAPP/modules/explore/explore.dart';
 import 'package:IITDAPP/modules/quickLinks/quickLinks.dart';
 
@@ -11,5 +12,6 @@ class Routes {
   static const String explore = Explore.routeName;
   static const String quickLinks = QuickLinks.routeName;
   static const String calendar = CalendarScreen.routeName;
+  static const String events = EventsScreen.routeName;
 
 }

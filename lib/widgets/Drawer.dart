@@ -36,6 +36,7 @@ class AppDrawer extends StatelessWidget {
             icon: Icons.event,
             text: 'Events',
             context: context,
+            routeName: Routes.events,
           ),
           _createDrawerItem(
               selected: tag == 'Calendar',
