@@ -11,7 +11,9 @@ class ProfileIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: Icon(Icons.person),
-      onPressed: () {showAlert(context, onlogout);}
+      onPressed: () {
+        showAlert(context, onlogout);
+      }
     );
   }
 }

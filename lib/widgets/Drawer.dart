@@ -1,4 +1,5 @@
 import 'package:IITDAPP/routes/Routes.dart';
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -32,18 +33,19 @@ class AppDrawer extends StatelessWidget {
             onTap: () {},
           ),
           _createDrawerItem(
-            selected: tag == 'Events',
-            icon: Icons.event,
-            text: 'Events',
-            context: context,
-            routeName: Routes.events,
-          ),
+              selected: tag == 'Events',
+              icon: Icons.event,
+              text: 'Events',
+              context: context,
+              routeName: Routes.events,
+              loginRequired: true),
           _createDrawerItem(
               selected: tag == 'Calendar',
               icon: Icons.calendar_today,
               text: 'Calendar',
               context: context,
-              routeName: Routes.calendar,),
+              routeName: Routes.calendar,
+              loginRequired: true),
           Divider(),
           ListTile(
             title: Text(
@@ -91,7 +93,8 @@ class AppDrawer extends StatelessWidget {
       GestureTapCallback onTap,
       bool selected,
       BuildContext context,
-      String routeName}) {
+      String routeName,
+      bool loginRequired = false}) {
     return Ink(
       color: selected ? Color.fromARGB(30, 1, 87, 155) : Colors.transparent,
       child: ListTile(
@@ -106,9 +109,18 @@ class AppDrawer extends StatelessWidget {
             ],
           ),
           onTap: () => {
-                Navigator.pop(context),
-                if (!selected)
-                  Navigator.pushReplacementNamed(context, routeName),
+                if (currentUser == null && loginRequired)
+                  {
+                    Navigator.pop(context),
+                    if (!selected)
+                      Navigator.pushReplacementNamed(context, Routes.reqLogin,arguments: text),
+                  }
+                else
+                  {
+                    Navigator.pop(context),
+                    if (!selected)
+                      Navigator.pushReplacementNamed(context, routeName),
+                  }
               }),
     );
   }

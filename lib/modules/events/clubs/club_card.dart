@@ -1,3 +1,4 @@
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:http/http.dart' as http;
@@ -29,7 +30,7 @@ class ClubCardState extends State<ClubCard> {
   @override
   void initState() {
     super.initState();
-    print("initState ${widget.club.clubName}");
+    print('initState ${widget.club.clubName}');
     onPress = onButtonPress;
     _club = widget.club;
     refresh = widget._onAddPress;
@@ -37,12 +38,12 @@ class ClubCardState extends State<ClubCard> {
   }
 
   Future onButtonPress() async {
-    print("Subbing to Club ${_club.clubName}");
+    print('Subbing to Club ${_club.clubName}');
     color = Colors.grey;
     onPress = () {};
     setState(() {});
-    final response = await http.post("$url/api/body/${_club.id}/subscribe",
-        headers: {"authorization": "Bearer $token"});
+    final response = await http.post('$url/api/body/${_club.id}/subscribe',
+        headers: {'authorization': 'Bearer $token'});
     print(response.statusCode);
     if (response.statusCode == 200) {
       _club.isSubbed = !_club.isSubbed;
@@ -67,7 +68,7 @@ class ClubCardState extends State<ClubCard> {
 
   @override
   Widget build(BuildContext context) {
-    print("Club Card received:::");
+    print('Club Card received:::');
     print(_club.clubName);
     Icon _icon;
     String _toolTip;

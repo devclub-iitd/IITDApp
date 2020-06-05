@@ -1,3 +1,4 @@
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
@@ -47,12 +48,12 @@ class ResponseIconsState extends State<ResponseIcons> {
   @override
   void initState() {
     super.initState();
-    state = "pending";
+    state = 'pending';
   }
 
   Future<Null> reqeustResponse(String ans) async {
-    final response = await http.post("$url/api",
-        headers: {"authorization": "Bearer $token"}, body: {"response": ans});
+    final response = await http.post('$url/api',
+        headers: {'authorization': "Bearer $token"}, body: {'response': ans});
 
     if (response.statusCode == 200) {
     } else {}
@@ -64,11 +65,11 @@ class ResponseIconsState extends State<ResponseIcons> {
       children: <Widget>[
         IconButton(
             onPressed: () {
-              state = "accepted";
+              state = 'accepted';
               setState(() {});
               // reqeustResponse(state);
             },
-            icon: (state == "accepted")
+            icon: (state == 'accepted')
                 ? Icon(
                     Icons.check_circle,
                     color: Colors.green,
@@ -76,11 +77,11 @@ class ResponseIconsState extends State<ResponseIcons> {
                 : Icon(Icons.check_circle_outline)),
         IconButton(
             onPressed: () {
-              state = "rejected";
+              state = 'rejected';
               setState(() {});
               // reqeustResponse(state);
             },
-            icon: (state == "rejected")
+            icon: (state == 'rejected')
                 ? Icon(
                     Icons.cancel,
                     color: Colors.red,

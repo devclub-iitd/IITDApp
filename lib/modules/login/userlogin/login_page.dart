@@ -1,37 +1,37 @@
+import 'package:IITDAPP/modules/login/user_class.dart';
+import 'package:IITDAPP/modules/login/userlogin/signup_page.dart';
+import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/widgets/error_alert.dart';
+import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:IITDAPP/modules/events/user_class.dart';
-import 'package:IITDAPP/modules/events/userlogin/signup_page.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:validators/validators.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-import '../loading.dart';
-import '../globals.dart';
-import '../error_alert.dart';
 
 Future login(BuildContext context, String _email, String _password,
     Function onlogin, {bool pop = true}) async {
-  print("loggin in");
+  print('loggin in');
   final response = await http
-      .post('$url/api/login', body: {"email": _email, "password": _password});
-  print("response code ${response.statusCode}");
+      .post('$url/api/login', body: {'email': _email, 'password': _password});
+  print('response code ${response.statusCode}');
   if (response.statusCode == 200) {
     Map<String, dynamic> parsedJson = json.decode(response.body);
-    if (parsedJson.containsKey("errors")) {
-      print("Code 200 but has errors");
+    if (parsedJson.containsKey('errors')) {
+      print('Code 200 but has errors');
       if(pop) Navigator.pop(context);
       scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text('Wrong email id or password. Try Again'),
       ));
       return;
     }
-    if (parsedJson['message'] == "Login Successful") {
-      final storage = new FlutterSecureStorage();
+    if (parsedJson['message'] == 'Login Successful') {
+      final storage = FlutterSecureStorage();
       token = parsedJson['data']['token'];
       final response = await http
-          .get("$url/api/user/me", headers: {'authorization': 'Bearer $token'});
+          .get('$url/api/user/me', headers: {'authorization': 'Bearer $token'});
       if (response.statusCode == 200) {
         var parsedJson = json.decode(response.body);
         currentUser = User.fromJson(parsedJson['data']);
@@ -45,15 +45,13 @@ Future login(BuildContext context, String _email, String _password,
       } else {
         print('Could not get user info.');
         if(pop) Navigator.pop(context);
-        showErrorAlert(
-            context, "Login Failed", 'Something went wrong. Please Try Again');
+        showErrorAlert(context, 'Login Failed', 'Something went wrong. Please Try Again');
       }
     }
   } else if (response.statusCode == 400) {
-    print("wrong email/pass");
+    print('wrong email/pass');
     if(pop) Navigator.pop(context);
-    showErrorAlert(
-        context, 'Login Failed', "Wrong email id or password. Try Again");
+    showErrorAlert(context, 'Login Failed', 'Wrong email id or password. Try Again');
   } else {}
 }
 
@@ -181,7 +179,7 @@ class LoginPageState extends State<LoginPage> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: FlatButton(
-                      child: Text("LOGIN"),
+                      child: Text('LOGIN'),
                       color: Colors.indigo[400],
                       onPressed: () async {
                         if (_key.currentState.validate()) {
@@ -205,7 +203,7 @@ class LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         Text(
-                          " OR ",
+                          ' OR ',
                           style: TextStyle(wordSpacing: 10),
                         ),
                         Expanded(
@@ -220,7 +218,7 @@ class LoginPageState extends State<LoginPage> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: FlatButton(
-                      child: Text("SIGN UP"),
+                      child: Text('SIGN UP'),
                       color: Colors.blueAccent,
                       onPressed: () {
                         Navigator.push(
@@ -230,7 +228,26 @@ class LoginPageState extends State<LoginPage> {
                                     SignUpPage(widget.onlogin)));
                       },
                     ),
-                  )
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 24.0),
+                    child: InkWell(
+                      onTap: () {
+                        guest = true;
+                        widget.onlogin();
+//                          Navigator.push(
+//                              context,
+//                              MaterialPageRoute(
+//                                  builder: (context) =>
+//                                      SignUpPage(widget.onlogin)));
+                      },
+                      child: Text(
+                        'Continue as Guest',
+                        style: TextStyle(fontSize: 18,color: Colors.white70,),
+
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

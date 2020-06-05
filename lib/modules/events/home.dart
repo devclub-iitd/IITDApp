@@ -1,3 +1,5 @@
+import 'package:IITDAPP/modules/login/userlogin/profile_icon.dart';
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,10 +11,11 @@ import 'package:IITDAPP/modules/events/globals.dart';
 import './events/events_tab.dart';
 import './clubs/clubs_tab.dart';
 import './manage/manage_tab.dart';
-import 'userlogin/profile_icon.dart';
 
 class HomeScreen extends StatefulWidget {
   final Function onlogout;
+  static const String routeName = '/events';
+
 
   HomeScreen({this.onlogout});
 

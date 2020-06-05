@@ -1,3 +1,4 @@
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -8,19 +9,19 @@ import './updates_class.dart';
 import './update.dart';
 
 Future<List<Update>> getUpdates(String eventid) async {
-  final response = await http.get("$url/api/events/$eventid",
-      headers: {"authorization": "Bearer $token"});
+  final response = await http.get('$url/api/events/$eventid',
+      headers: {'authorization': 'Bearer $token'});
 
   if (response.statusCode == 200) {
     var parsedJson = json.decode(response.body);
     List<Update> updateList = List<Update>();
-    for (int i = 0; i < parsedJson["event"]["updates"].length; i++) {
-      Update update = Update.fromJson(parsedJson["event"]["updates"][i]);
+    for (var i = 0; i < parsedJson['event']['updates'].length; i++) {
+      var update = Update.fromJson(parsedJson['event']['updates'][i]);
       updateList.add(update);
     }
     return updateList;
   } else {
-    throw Exception("Failed");
+    throw Exception('Failed');
   }
 }
 
@@ -72,27 +73,28 @@ class EventUpdatesListState extends State<EventUpdatesList> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 List<Update> upd = snapshot.data;
-                if (upd.isEmpty)
+                if (upd.isEmpty) {
                   return Container(
                     margin: EdgeInsets.all(25),
                     child: Center(
                       child: Text(
-                        "No Updates",
+                        'No Updates',
                         style: TextStyle(
                           color: Colors.white70,
                         ),
                       ),
                     ),
                   );
-                else
+                } else {
                   return Column(
                     children:
                         upd.map((element) => EventUpdate(element, ValueKey(element.id))).toList(),
                   );
+                }
               } else if (snapshot.hasError) {
                 return Center(
                   child: Text(
-                    "Some Error Occured",
+                    'Some Error Occured',
                     style: TextStyle(color: Colors.white70),
                   ),
                 );

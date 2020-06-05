@@ -1,4 +1,5 @@
 import 'package:IITDAPP/modules/dashboard/dashboard.dart';
+import 'package:IITDAPP/modules/login/LoginScreen.dart';
 import 'package:IITDAPP/routes/router.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ void main() async {
             cardColor: Colors.indigo,
             accentColor: Colors.lightBlueAccent
         ),
-        home: Dashboard(),
+        home: LoginScreen(),
         onGenerateRoute: Router.generateRoute,
 //        routes:  {
 //          Routes.dashboard: (context) => Dashboard(),

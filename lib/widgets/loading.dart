@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Future showLoading(BuildContext context, {String message = "Please Wait"}) {
+Future showLoading(BuildContext context, {String message = 'Please Wait'}) {
   return showDialog(
     context: context,
     barrierDismissible: false,

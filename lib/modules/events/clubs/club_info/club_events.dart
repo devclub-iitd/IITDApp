@@ -32,12 +32,12 @@ class ClubEvents extends StatelessWidget {
               margin: EdgeInsets.symmetric(vertical: 10),
               color: Colors.blue,
             ),
-            (_clubEvents.length == 0)
+            (_clubEvents.isEmpty)
                 ? Center(
                     child: Container(
                       margin: EdgeInsets.only(top: 20),
                       child: Text(
-                        "No Events",
+                        'No Events',
                         textAlign: TextAlign.center,
                         style: TextStyle(color: Colors.white70),
                       ),

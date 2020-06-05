@@ -1,12 +1,13 @@
+import 'package:IITDAPP/modules/login/user_class.dart';
+import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/widgets/error_alert.dart';
+import 'package:IITDAPP/widgets/loading.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
-import 'package:IITDAPP/modules/events/error_alert.dart';
 
 import 'package:IITDAPP/modules/events/globals.dart';
-import 'package:IITDAPP/modules/events/loading.dart';
-import 'package:IITDAPP/modules/events/user_class.dart';
 
 class AdminCard extends StatelessWidget {
   final Admin admin;
@@ -67,32 +68,32 @@ class ResponseIconsState extends State<ResponseIcons> {
   void initState() {
     super.initState();
     admin = widget.admin;
-    state = "pending";
+    state = 'pending';
   }
 
   Future<Null> deleteAdmin() async {
-    final response = await http.post("$url/api/users/removeAdmin", headers: {
-      "authorization": "Bearer $token"
+    final response = await http.post('$url/api/users/removeAdmin', headers: {
+      'authorization': 'Bearer $token'
     }, body: {
-      "clubId": currentUser.superAdminOf[0].id,
-      "userEmail": admin.email,
+      'clubId': currentUser.superAdminOf[0].id,
+      'userEmail': admin.email,
     });
     print(response.statusCode);
     print(response.body);
     if (response.statusCode == 200) {
       Navigator.pop(context);
       setState(() {
-        state = "deleted";
+        state = 'deleted';
       });
     } else {
       Navigator.pop(context);
-      showErrorAlert(context, "Failed", "Some error occcured. Please try again.");
+      showErrorAlert(context, 'Failed', 'Some error occcured. Please try again.');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return (state == "pending")
+    return (state == 'pending')
         ? PopupMenuButton<String>(
             icon: Icon(
               Icons.more_vert,
@@ -109,7 +110,7 @@ class ResponseIconsState extends State<ResponseIcons> {
         : Container(
             child: Center(
               child: Text(
-                "removed",
+                'removed',
                 style: TextStyle(
                   color: Colors.white70,
                 ),

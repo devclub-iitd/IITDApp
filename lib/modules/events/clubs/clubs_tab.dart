@@ -1,3 +1,4 @@
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
@@ -50,7 +51,7 @@ List<List<Club>> handleGetClubsSuccess(var parsedJson) {
   subbedClubs.clear();
   otherClubs.clear();
   for (var i = 0; i < parsedJson['bodies'].length; i++) {
-    Club club = Club.fromJson(parsedJson['bodies'][i]);
+    var club = Club.fromJson(parsedJson['bodies'][i]);
     allClubs.add(club);
     if (club.isSubbed) {
       subbedClubs.add(club);

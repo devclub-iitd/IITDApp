@@ -1,28 +1,29 @@
+import 'package:IITDAPP/modules/login/user_class.dart';
+import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/widgets/error_alert.dart';
+import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:IITDAPP/modules/events/error_alert.dart';
-import 'package:IITDAPP/modules/events/loading.dart';
 import 'package:IITDAPP/modules/events/manage/admins_screen/admins_list.dart';
 
 import 'package:IITDAPP/modules/events/globals.dart';
-import 'package:IITDAPP/modules/events/user_class.dart';
 
 Future<List<Admin>> getAdmins() async {
-  print("Getting Admins");
-  final response = await http.post("$url/api/users/getAdmins",
-      headers: {"authorization": "Bearer $token"},
-      body: {"clubId": currentUser.superAdminOf[0].id});
+  print('Getting Admins');
+  final response = await http.post('$url/api/users/getAdmins',
+      headers: {'authorization': 'Bearer $token'},
+      body: {'clubId': currentUser.superAdminOf[0].id});
   print(response.statusCode);
   if (response.statusCode == 200) {
-    print("afdv");
+    print('afdv');
     var parsedJson = json.decode(response.body);
-    List<Admin> admins = List<Admin>();
-    for (int i = 0; i < parsedJson["data"]["admins"].length; i++) {
-      Admin r = Admin.fromJson(parsedJson["data"]["admins"][i]);
-      print("qwerty");
+    var admins = List<Admin>();
+    for (var i = 0; i < parsedJson['data']['admins'].length; i++) {
+      var r = Admin.fromJson(parsedJson['data']['admins'][i]);
+      print('qwerty');
       admins.add(r);
     }
     admins.sort((a, b) {
@@ -32,7 +33,7 @@ Future<List<Admin>> getAdmins() async {
     });
     return admins;
   } else {
-    throw Exception("Could not get admins");
+    throw Exception('Could not get admins');
   }
 }
 
@@ -84,7 +85,7 @@ class AdminScreenState extends State<AdminScreen> {
                 return Container(
                     padding: EdgeInsets.all(50),
                     child: Center(
-                      child: Text("Some Error Occured"),
+                      child: Text('Some Error Occured'),
                     ));
               }
 
@@ -127,10 +128,10 @@ class AddDialogState extends State<AddDialog> {
   List<DropdownMenuItem<String>> clubList = [];
 
   Future<Null> addAdmin() async {
-    print("Adding Admin");
-    final response = await http.post("$url/api/users/addAdmin",
-        headers: {"authorization": "Bearer $token"},
-        body: {"userEmail": email, "clubId": currentUser.superAdminOf[0].id});
+    print('Adding Admin');
+    final response = await http.post('$url/api/users/addAdmin',
+        headers: {'authorization': 'Bearer $token'},
+        body: {'userEmail': email, 'clubId': currentUser.superAdminOf[0].id});
     print(response.statusCode);
     print(response.body);
     if (response.statusCode == 200) {
@@ -139,8 +140,8 @@ class AddDialogState extends State<AddDialog> {
       widget.refresh();
     } else {
       Navigator.pop(context);
-      showErrorAlert(context, "Failed",
-          "Some error occured. Check user email and try again");
+      showErrorAlert(context, 'Failed',
+          'Some error occured. Check user email and try again');
     }
   }
 
@@ -178,12 +179,13 @@ class AddDialogState extends State<AddDialog> {
                       email = text;
                     },
                     validator: (text) {
-                      if (text.isEmpty)
+                      if (text.isEmpty) {
                         return 'Required';
-                      else if (text == currentUser.email)
+                      } else if (text == currentUser.email) {
                         return 'You already have Admin access';
-                      else
+                      } else {
                         return null;
+                      }
                     },
                   ),
                 ],

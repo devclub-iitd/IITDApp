@@ -1,8 +1,9 @@
+import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/widgets/error_alert.dart';
+import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:IITDAPP/modules/events/error_alert.dart';
 import 'package:IITDAPP/modules/events/globals.dart';
-import 'package:IITDAPP/modules/events/loading.dart';
 import 'package:intl/intl.dart';
 import 'package:validators/validators.dart';
 import 'package:http/http.dart' as http;
@@ -12,9 +13,9 @@ import '../events/event_class.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 Future<bool> deleteEvent(BuildContext context, String id) async {
-  print("Deleting Event");
-  final response = await http.delete("$url/api/events/$id",
-      headers: {"authorization": "Bearer $token"});
+  print('Deleting Event');
+  final response = await http.delete('$url/api/events/$id',
+      headers: {'authorization': 'Bearer $token'});
   print(response.statusCode);
   if (response.statusCode == 200) {
     return true;
@@ -22,7 +23,7 @@ Future<bool> deleteEvent(BuildContext context, String id) async {
     Navigator.pop(context);
     Navigator.pop(context);
     showErrorAlert(
-        context, "Could not delete", "Something went wrong. Please try again.");
+        context, 'Could not delete', 'Something went wrong. Please try again.');
     return false;
   }
 }
@@ -85,10 +86,10 @@ class _EditEventFormState extends State<EditEventForm> {
   }
 
   Future editEvent() async {
-    print("Editing event");
+    print('Editing event');
     // print(_event.toMapForUpdate());
-    final response = await http.put("$url/api/events/${_event.eventid}",
-        headers: {"authorization": "Bearer $token"},
+    final response = await http.put('$url/api/events/${_event.eventid}',
+        headers: {'authorization': 'Bearer $token'},
         body: _event.toMapForUpdate());
     print(response.statusCode);
     // print(response.body);
@@ -97,7 +98,7 @@ class _EditEventFormState extends State<EditEventForm> {
     } else {
       Navigator.pop(context);
       showErrorAlert(
-          context, "Failed", "Something went wrong. Please try again");
+          context, 'Failed', 'Something went wrong. Please try again');
     }
   }
 
@@ -125,10 +126,11 @@ class _EditEventFormState extends State<EditEventForm> {
                 _eventName = text;
               },
               validator: (text) {
-                if (text.isEmpty)
+                if (text.isEmpty) {
                   return 'Required';
-                else
+                } else {
                   return null;
+                }
               },
             ),
             TextFormField(
@@ -142,10 +144,11 @@ class _EditEventFormState extends State<EditEventForm> {
                 _venue = text;
               },
               validator: (text) {
-                if (text.isEmpty)
+                if (text.isEmpty) {
                   return 'Required';
-                else
+                } else {
                   return null;
+                }
               },
             ),
             DateTimeField(
@@ -250,10 +253,11 @@ class _EditEventFormState extends State<EditEventForm> {
               },
               style: TextStyle(color: Colors.white),
               validator: (text) {
-                if (text.isEmpty)
+                if (text.isEmpty) {
                   return 'Required';
-                else
+                } else {
                   return null;
+                }
               },
             ),
             TextFormField(
@@ -393,11 +397,12 @@ void _showDeleteAlert(BuildContext context, Event _event) {
           FlatButton(
             onPressed: () async {
               // Navigator.pop(context);
-              showLoading(context, message: "Deleting Event");
-              bool b = await deleteEvent(context, _event.eventid);
-              if (b)
+              showLoading(context, message: 'Deleting Event');
+              var b = await deleteEvent(context, _event.eventid);
+              if (b) {
                 Navigator.popUntil(
                     context, ModalRoute.withName(Navigator.defaultRouteName));
+              }
             },
             child: Text(
               'YES',

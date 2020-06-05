@@ -9,10 +9,10 @@ class Request {
 
   factory Request.fromJson(Map<String,dynamic> json) {
     return Request(
-      name: json["name"],
-      requestId: json["id"],
-      clubName: json["club"],
-      email: json["email"],
+      name: json['name'],
+      requestId: json['id'],
+      clubName: json['club'],
+      email: json['email'],
     );
   }
 }

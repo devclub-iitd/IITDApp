@@ -1,3 +1,4 @@
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'dart:convert';
@@ -11,14 +12,14 @@ import './event_about.dart';
 import './event_updates_list.dart';
 
 Future<Event> getEvent(String eventid) async {
-  final response = await http.get("$url/api/events/$eventid",
-      headers: {"authorization": "Bearer $token"});
+  final response = await http.get('$url/api/events/$eventid',
+      headers: {'authorization': 'Bearer $token'});
   if (response.statusCode == 200) {
     var parsedJson = json.decode(response.body);
-    Event event = Event.fromJson(parsedJson["event"]);
+    var event = Event.fromJson(parsedJson['event']);
     return event;
   } else {
-    throw Exception("Failed to load Event");
+    throw Exception('Failed to load Event');
   }
 }
 
@@ -67,7 +68,7 @@ class EventInfoState extends State<EventInfo> {
             );
           } else if (snapshot.hasError) {
             return Center(
-              child: Text("Some Error Occured"),
+              child: Text('Some Error Occured'),
             );
           }
 

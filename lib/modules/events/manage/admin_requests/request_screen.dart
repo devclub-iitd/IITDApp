@@ -1,3 +1,4 @@
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'dart:async';
@@ -10,18 +11,18 @@ import 'package:IITDAPP/modules/events/globals.dart';
 
 Future<List<Request>> getRequests() async {
   final response =
-      await http.get("$url/api/", headers: {"authorization": "Bearer $token"});
+      await http.get('$url/api/', headers: {'authorization': 'Bearer $token'});
 
   if (response.statusCode == 200) {
     var parsedJson = json.decode(response.body);
-    List<Request> requests = List<Request>();
-    for (int i = 0; i < parsedJson[""].length; i++) {
-      Request r = Request.fromJson(parsedJson[""][i]);
+    var requests = List<Request>();
+    for (var i = 0; i < parsedJson[''].length; i++) {
+      var r = Request.fromJson(parsedJson[''][i]);
       requests.add(r);
     }
     return requests;
   } else {
-    throw Exception("Could not get requests");
+    throw Exception('Could not get requests');
   }
 }
 
@@ -44,7 +45,7 @@ class RequestScreen extends StatelessWidget {
             return RequestList(snapshot.data);
           } else if (snapshot.hasError) {
             return Center(
-              child: Text("Some Error Occured"),
+              child: Text('Some Error Occured'),
             );
           }
 

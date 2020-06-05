@@ -1,3 +1,4 @@
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -19,7 +20,7 @@ Widget loadingIcon() {
 Widget errorMessage() {
   return Center(
     child: Text(
-      "Some Error Occured",
+      'Some Error Occured',
       style: TextStyle(color: Colors.white70),
     ),
   );
@@ -89,7 +90,7 @@ class EventsTabState extends State<EventsTab> {
     }
     print(parsedJson['data']['events'].length);
     for (var i = 0; i < parsedJson['data']['events'].length; i++) {
-      Event ev = Event.fromJson(parsedJson["data"]['events'][i]);
+      var ev = Event.fromJson(parsedJson['data']['events'][i]);
       eventsList.add(ev);
     }
     return sortEvents();

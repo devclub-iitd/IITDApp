@@ -1,3 +1,6 @@
+import 'package:IITDAPP/modules/login/LoginScreen.dart';
+import 'package:IITDAPP/modules/login/userlogin/profile_icon.dart';
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:IITDAPP/values/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
@@ -18,9 +21,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     return (GradientAppBar(
       title: title,
       elevation: 10,
-      actions: actions,
       backgroundColorStart: AppColors.APP_BAR_START,
       backgroundColorEnd: AppColors.APP_BAR_END,
+      actions: <Widget>[ProfileIcon(logoutFunc)],
       leading: withMenu
           ? Builder(
               builder: (BuildContext context) {

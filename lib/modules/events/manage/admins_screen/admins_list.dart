@@ -1,7 +1,7 @@
+import 'package:IITDAPP/modules/login/user_class.dart';
 import 'package:flutter/material.dart';
 import 'package:IITDAPP/modules/events/manage/admins_screen/admin_card.dart';
 
-import 'package:IITDAPP/modules/events/user_class.dart';
 
 class AdminList extends StatefulWidget {
   final List<Admin> admins;
@@ -30,7 +30,7 @@ class AdminListState extends State<AdminList> {
         child: Container(
           margin: EdgeInsets.only(top: 20),
           child: Text(
-            "No Admins apart from this account",
+            'No Admins apart from this account',
             textAlign: TextAlign.center,
             style: TextStyle(color: Colors.white70),
           ),

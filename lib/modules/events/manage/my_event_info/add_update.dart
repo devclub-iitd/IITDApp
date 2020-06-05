@@ -1,6 +1,7 @@
+import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:IITDAPP/modules/events/error_alert.dart';
 import 'package:IITDAPP/modules/events/events/event_info/updates_class.dart';
 import 'package:IITDAPP/modules/events/globals.dart';
 
@@ -36,21 +37,21 @@ class _AddUpdateState extends State<AddUpdate> {
     enabled = false;
     hint = "Adding Update. Please Wait...";
     setState(() {});
-    final response = await http.post("$url/api/events/$eventid/addUpdate",
-        headers: {"authorization": "Bearer $token"}, body: update.toMap());
+    final response = await http.post('$url/api/events/$eventid/addUpdate',
+        headers: {'authorization': 'Bearer $token'}, body: update.toMap());
     enabled = true;
-    hint = "Add an update...";
+    hint = 'Add an update...';
     setState(() {});
     print(response.statusCode);
     if(response.statusCode == 200){
     _onSubmit();}
     else {
-      showErrorAlert(context, "Could not add", "Something went wrong. Please try again");
+      showErrorAlert(context, 'Could not add', 'Something went wrong. Please try again');
     }
     return null;
   }
 
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   String _message;
 
   @override

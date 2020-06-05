@@ -3,7 +3,7 @@ import 'package:IITDAPP/modules/events/clubs/club_class.dart';
 class Event {
   String eventName;
   Club eventBody;
-  String venue = "LHC";
+  String venue = 'LHC';
   DateTime startsAt;
   DateTime endsAt;
   String about;
@@ -19,58 +19,58 @@ class Event {
     this.eventBody,
     this.venue,
     this.about,
-    DateTime start = null,
-    DateTime end = null,
+    DateTime start,
+    DateTime end,
     this.bodyid,
     this.eventid,
     this.isStarred = false,
     this.isBodySub = false,
-    this.imageLink = "",
+    this.imageLink = '',
     // this.updates
   }) {
-      this.startsAt = (start == null)? DateTime.now():start;
-      this.endsAt = (end == null)? this.startsAt.add(Duration(days: 1)):end;
+      startsAt = (start == null)? DateTime.now():start;
+      endsAt = (end == null)? startsAt.add(Duration(days: 1)):end;
   }
 
   factory Event.fromJson(Map<String,dynamic> json) {
     // DateTime startDate = DateTime.parse(json["startDate"]).add(Duration(days: 2));
-    DateTime startDate = DateTime.parse(json["startDate"]);
-    DateTime endDate = (json.containsKey("endDate")) ? DateTime.parse(json["endDate"]) : startDate.add(Duration(hours: 1));
+    var startDate = DateTime.parse(json['startDate']);
+    var endDate = (json.containsKey('endDate')) ? DateTime.parse(json['endDate']) : startDate.add(Duration(hours: 1));
     return Event(
-      eventName: json["name"], //
-      eventBody: Club.fromJson(json["body"]), //
-      imageLink: json.containsKey("image") ? json["image"] : "",
+      eventName: json['name'], //
+      eventBody: Club.fromJson(json['body']), //
+      imageLink: json.containsKey('image') ? json['image'] : '',
       start: startDate, //
       end: endDate,
       // updates: json["updates"],
-      about: json["about"], //
-      venue: json["venue"], //
-      isStarred: json["stared"], //
-      eventid: json["id"], //
-      isBodySub: json["body"]["isSub"] //
+      about: json['about'], //
+      venue: json['venue'], //
+      isStarred: json['stared'], //
+      eventid: json['id'], //
+      isBodySub: json['body']['isSub'] //
     );
   }
 
   Map toMap() {
-    var map = new Map<String, dynamic>();
-    map["name"] = eventName;
-    map["about"] = about;
-    map["startDate"] = startsAt.toIso8601String() + "Z";
-    map["endDate"] = endsAt.toIso8601String() + "Z";
-    map["venue"] = venue;
-    map["body"] = eventBody.id;
-    map["imageLink"] = imageLink;
+    var map = <String, dynamic>{};
+    map['name'] = eventName;
+    map['about'] = about;
+    map['startDate'] = startsAt.toIso8601String() + 'Z';
+    map['endDate'] = endsAt.toIso8601String() + 'Z';
+    map['venue'] = venue;
+    map['body'] = eventBody.id;
+    map['imageLink'] = imageLink;
     return map;
   }
 
   Map toMapForUpdate() {
-    var map = new Map<String, dynamic>();
-    map["name"] = eventName;
-    map["about"] = about;
-    map["startDate"] = startsAt.toIso8601String();
-    map["endDate"] = endsAt.toIso8601String();
-    map["venue"] = venue;
-    map["imageLink"] = imageLink;
+    var map = <String, dynamic>{};
+    map['name'] = eventName;
+    map['about'] = about;
+    map['startDate'] = startsAt.toIso8601String();
+    map['endDate'] = endsAt.toIso8601String();
+    map['venue'] = venue;
+    map['imageLink'] = imageLink;
     return map;
   }
 }

@@ -1,7 +1,7 @@
+import 'package:IITDAPP/widgets/cancel_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
-import '../cancel_alert.dart';
 import './add_event_form.dart';
 // import '../events/event_class.dart';
 

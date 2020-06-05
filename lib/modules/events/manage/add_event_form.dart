@@ -1,3 +1,7 @@
+import 'package:IITDAPP/modules/login/user_class.dart';
+import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/widgets/cancel_alert.dart';
+import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/rendering.dart';
@@ -8,10 +12,7 @@ import 'dart:convert';
 import 'dart:async';
 
 import 'package:IITDAPP/modules/events/globals.dart';
-import 'package:IITDAPP/modules/events/loading.dart';
-import '../cancel_alert.dart';
 import '../events/event_class.dart';
-import 'package:IITDAPP/modules/events/user_class.dart';
 
 Future<Event> addEventRequest(Event event, BuildContext context) async {
   print(event.toMap());

@@ -1,3 +1,4 @@
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:http/http.dart' as http;
@@ -72,11 +73,11 @@ class _SubButtonState extends State<SubButton> {
   }
 
   Future onButtonPress() async {
-    print("Subbing to Club");
+    print('Subbing to Club');
     _enabled = false;
     setState(() {});
-    final response = await http.post("$url/api/body/${_club.id}/subscribe",
-        headers: {"authorization": "Bearer $token"});
+    final response = await http.post('$url/api/body/${_club.id}/subscribe',
+        headers: {'authorization': 'Bearer $token'});
     print(response.statusCode);
     if (response.statusCode == 200) {
       _club.isSubbed = !_club.isSubbed;

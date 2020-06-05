@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'events/event_class.dart';
 import 'clubs/club_class.dart';
-import 'user_class.dart';
 
-User currentUser;
 
 List<Event> eventsList;
 
@@ -12,7 +10,6 @@ List<List<Event>> todayEvents = List<List<Event>>.generate(3, (i) => []);
 List<List<Event>> tomorrowEvents = List<List<Event>>.generate(3, (i) => []);
 List<List<Event>> upcomingEvents = List<List<Event>>.generate(3, (i) => []);
 
-final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
 List<Club> subbedClubs = List<Club>();
 List<Club> otherClubs = List<Club>();
@@ -92,10 +89,7 @@ Future<List<List<List<Event>>>> sortEvents() async {
   return [todayEvents, tomorrowEvents, upcomingEvents];
 }
 
-String url = 'http://192.168.43.251:5000';
-String title = 'IITD Connect';
-String token;
-bool connectedToInternet = true;
+
 
 // void refreshLists(Event event) {
 //   bool isToday = (DateTime.now().difference(event.startsAt).inDays >= 0 &&

@@ -20,8 +20,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:intl/intl.dart';
 import 'dart:math' as math;
 import 'package:http/http.dart' as http;
-import 'package:IITDAPP/modules/events/globals.dart';
-import 'package:localstorage/localstorage.dart';
+import 'package:IITDAPP/values/colors/Constants.dart';
 
 part './screens/AppointmentEditor.dart';
 part './data/MeetingClass.dart';

@@ -1,8 +1,8 @@
+import 'package:IITDAPP/modules/login/userlogin/signup_form.dart';
+import 'package:IITDAPP/widgets/cancel_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
-import 'package:IITDAPP/modules/events/userlogin/signup_form.dart';
 
-import '../cancel_alert.dart';
 
 
 class SignUpPage extends StatelessWidget {

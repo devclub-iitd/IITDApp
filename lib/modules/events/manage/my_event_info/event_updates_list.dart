@@ -1,3 +1,4 @@
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -32,20 +33,20 @@ class _EventUpdateList extends State<EventUpdatesList> {
 
   Future<List<Update>> getUpdates(String eventid) async {
     print("getting updates");
-    final response = await http.get("$url/api/events/$eventid",
-        headers: {"authorization": "Bearer $token"});
+    final response = await http.get('$url/api/events/$eventid',
+        headers: {'authorization': 'Bearer $token'});
 
     if (response.statusCode == 200) {
       var parsedJson = json.decode(response.body);
-      List<Update> updateList = List<Update>();
-      for (int i = 0; i < parsedJson["event"]["updates"].length; i++) {
-        Update update = Update.fromJson(parsedJson["event"]["updates"][i]);
+      var updateList = List<Update>();
+      for (var i = 0; i < parsedJson['event']['updates'].length; i++) {
+        var update = Update.fromJson(parsedJson['event']['updates'][i]);
         updateList.add(update);
       }
       // _updates = updateList;
       return updateList;
     } else {
-      throw Exception("Failed");
+      throw Exception('Failed');
     }
   }
 
@@ -105,7 +106,7 @@ class _EventUpdateList extends State<EventUpdatesList> {
               } else if (snapshot.hasError) {
                 return Center(
                   child: Text(
-                    "Some Error Occured",
+                    'Some Error Occured',
                     style: TextStyle(color: Colors.white70),
                   ),
                 );

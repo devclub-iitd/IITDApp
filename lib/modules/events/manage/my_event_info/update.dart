@@ -1,6 +1,8 @@
+import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/widgets/error_alert.dart';
+import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:IITDAPP/modules/events/error_alert.dart';
-import 'package:IITDAPP/modules/events/loading.dart';
+
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 
@@ -87,9 +89,9 @@ class EventUpdate extends StatelessWidget {
     final client = http.Client();
     try {
       var rq = http.Request(
-          "DELETE", Uri.parse("$url/api/events/$eventid/removeUpdate"))
-        ..headers["authorization"] = "Bearer $token";
-      rq.bodyFields = {"updateId": _update.id};
+          'DELETE', Uri.parse('$url/api/events/$eventid/removeUpdate'))
+        ..headers['authorization'] = 'Bearer $token';
+      rq.bodyFields = {'updateId': _update.id};
       response = await client.send(rq).then(http.Response.fromStream);
     } finally {
       client.close();
@@ -102,8 +104,8 @@ class EventUpdate extends StatelessWidget {
     } else {
       Navigator.pop(context);
       Navigator.pop(context);
-      showErrorAlert(context, "Could not delete",
-          "Something went wrong. Please try again.");
+      showErrorAlert(context, 'Could not delete',
+          'Something went wrong. Please try again.');
     }
   }
 

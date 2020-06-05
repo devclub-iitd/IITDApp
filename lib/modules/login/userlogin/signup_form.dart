@@ -1,7 +1,10 @@
+import 'package:IITDAPP/modules/login/userlogin/login_page.dart';
+import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/widgets/cancel_alert.dart';
+import 'package:IITDAPP/widgets/error_alert.dart';
+import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:IITDAPP/modules/events/error_alert.dart';
-import 'package:IITDAPP/modules/events/userlogin/login_page.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:validators/validators.dart';
 import 'package:http/http.dart' as http;
@@ -9,8 +12,6 @@ import 'dart:convert';
 import 'dart:async';
 
 import 'package:IITDAPP/modules/events/globals.dart';
-import 'package:IITDAPP/modules/events/loading.dart';
-import '../cancel_alert.dart';
 
 class SignUpForm extends StatefulWidget {
   final Function onlogin;
@@ -39,7 +40,7 @@ class _SignUpFormState extends State<SignUpForm> {
     if (response.body == 'Username or Email Is Already In Use') {
       Navigator.pop(context);
       showErrorAlert(context, 'Email already registered',
-          "This email is already registered. Use another email.");
+          'This email is already registered. Use another email.');
       return;
     }
     if (response.statusCode == 200) {

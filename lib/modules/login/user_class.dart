@@ -1,4 +1,4 @@
-import './clubs/club_class.dart';
+import 'package:IITDAPP/modules/events/clubs/club_class.dart';
 
 class User {
   String name;

@@ -9,9 +9,9 @@ class Admin {
 
   factory Admin.fromJson(Map<String,dynamic> json) {
     return Admin(
-      name: json["name"],
-      clubName: json["club"],
-      email: json["email"],
+      name: json['name'],
+      clubName: json['club'],
+      email: json['email'],
     );
   }
 }

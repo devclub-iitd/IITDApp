@@ -13,7 +13,7 @@ class ClubsScreen extends StatefulWidget {
 
 class ClubsScreenState extends State<ClubsScreen> {
   refresh() {
-    print("refreshing club list");
+    print('refreshing club list');
     // if (widget.l == 0)
     //   clubs = subbedClubs;
     // else if (widget.l == 1) clubs = otherClubs;
@@ -24,9 +24,9 @@ class ClubsScreenState extends State<ClubsScreen> {
     otherClubs.sort((a, b) {
       return a.clubName.toLowerCase().compareTo(b.clubName.toLowerCase());
     });
-    print("Subbed Clubs:");
+    print('Subbed Clubs:');
     subbedClubs.forEach((f) => print(f.clubName));
-    print("Other Clubs:");
+    print('Other Clubs:');
     otherClubs.forEach((f) => print(f.clubName));
     setState(() {});
   }
@@ -56,7 +56,7 @@ class ClubsScreenState extends State<ClubsScreen> {
   List<ClubCard> makeClubCardList(List<Club> clubs) {
     print('makeClubCardList received:::');
     clubs.forEach((f) => print(f.clubName));
-    List<ClubCard> toReturn = List<ClubCard>();
+    var toReturn = List<ClubCard>();
     for (var i = 0; i < clubs.length; i++) {
       toReturn.add(ClubCard(clubs[i], refresh, ValueKey(clubs[i].id)));
       print('adding + ${clubs[i].clubName}');

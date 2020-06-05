@@ -1,3 +1,4 @@
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -82,7 +83,7 @@ class StarButtonState extends State<StarButton> {
         Scaffold.of(context).showSnackBar(SnackBar(
             duration: Duration(seconds: 1),
             content: Text(
-                (_event.isStarred) ? "Event Starred" : "Event Unstarred")));
+                (_event.isStarred) ? 'Event Starred' : 'Event Unstarred')));
         
       }
     } else {
@@ -106,8 +107,8 @@ class StarButtonState extends State<StarButton> {
         Scaffold.of(context).showSnackBar(SnackBar(
             duration: Duration(seconds: 1),
             content: Text(
-                (_event.isStarred) ? "Could not unstar event" : "Could not star event")));
-      throw Exception("Failed to star event");
+                (_event.isStarred) ? 'Could not unstar event' : 'Could not star event')));
+      throw Exception('Failed to star event');
     }
   }
 

@@ -1,8 +1,9 @@
+import 'package:IITDAPP/modules/login/user_class.dart';
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:IITDAPP/modules/events/globals.dart';
-import 'package:IITDAPP/modules/events/user_class.dart';
 import 'dart:async';
 import 'dart:convert';
 

@@ -1,3 +1,4 @@
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:http/http.dart' as http;
@@ -13,16 +14,16 @@ import '../../events/event_class.dart';
 
 Future<List<Event>> getClubEvents(String id) async {
   final response = await http
-      .get("$url/api/events/?body=$id", headers: {
-    "authorization":
-        "Bearer $token"
+      .get('$url/api/events/?body=$id', headers: {
+    'authorization':
+        'Bearer $token'
   });
   if (response.statusCode == 200) {
     var parsedJson = json.decode(response.body);
-    List<Event> events = List<Event>();
-    if (parsedJson["message"] != "Events Found") return events;
-    for (int i = 0; i < parsedJson["data"]["events"].length; i++) {
-      Event ev = Event.fromJson(parsedJson["data"]["events"][i]);
+    var events = <Event>[];
+    if (parsedJson['message'] != 'Events Found') return events;
+    for (var i = 0; i < parsedJson['data']['events'].length; i++) {
+      var ev = Event.fromJson(parsedJson['data']['events'][i]);
       events.add(ev);
     }
     events.sort((a, b) {
@@ -86,7 +87,7 @@ class ClubInfoState extends State<ClubInfo> {
               } else if (snapshot.hasError) {
                 return Center(
                   child: Text(
-                    "Could not get events",
+                    'Could not get events',
                     style: TextStyle(color: Colors.white70),
                   ),
                 );
