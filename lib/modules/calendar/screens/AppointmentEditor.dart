@@ -425,9 +425,21 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                       event.reminders = getReminderList(_reminder);
                       event.allDay = _isAllDay;
                       event = addRecurrenceRule(_recurrence, event);
+                      var res = await postReminder(event, !(_selectedAppointment==null));
+                      if(res=='error'){
+                        print('server error occured');
+                        return;
+                      }
+                      if(res=='timeout') {
+                        connectedToInternet = false;
+                      }
                       var createEventResult = await DeviceCalendarPlugin()
                           .createOrUpdateEvent(event);
                       if (createEventResult.isSuccess) {
+                        var prefs = await SharedPreferences.getInstance();
+                        if(res!='' || res!='timeout') {
+                          await prefs.setString('ser '+res,'loc '+createEventResult.data);
+                        }
                         meetings.add(Meeting(
                           from: _startDate,
                           to: _endDate,
@@ -470,6 +482,14 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                 : FloatingActionButton(
                     onPressed: () async {
                       if (_selectedAppointment != null) {
+                        var succ = await deleteReminderFromServer(_selectedAppointment.eventId);
+                        if(succ==-1){
+                          print('unable to connect to server');
+                        }
+                        else if (succ==0){
+                          print('Error occured');
+                          return;
+                        }
                         var res = await DeviceCalendarPlugin().deleteEvent(
                             _selectedAppointment.calendarId,
                             _selectedAppointment.eventId);

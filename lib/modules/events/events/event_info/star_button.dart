@@ -49,15 +49,15 @@ class StarButtonState extends State<StarButton> {
   }
 
   Future<Null> starEvent(String eventid) async {
-    print("Starring Event");
+    print('Starring Event');
     final response = await http.post(
-      "$url/api/events/$eventid/star",
-      headers: {"authorization": "Bearer $token"},
+      '$url/api/events/$eventid/star',
+      headers: {'authorization': 'Bearer $token'},
     );
     print(response.statusCode);
     if (response.statusCode == 200) {
       var parsedJson = json.decode(response.body);
-      if (parsedJson["message"] == "Successfully Starred") {
+      if (parsedJson['message'] == 'Successfully Starred') {
         _event.isStarred = !_event.isStarred;
         if (_event.isStarred) {
           _icon = Icon(

@@ -78,6 +78,9 @@ String getRecurrenceString(RecurrenceRule rRule){
 
 String getAttendeeString(List<Attendee> lis){
   var res = '';
+  if(lis==null) {
+    return res;
+  }
   lis.forEach((element) {
     res += element.emailAddress+'\n';
   });
@@ -86,7 +89,7 @@ String getAttendeeString(List<Attendee> lis){
 
 String getReminderString(List<Reminder> rem){
   var res = 0;
-  if(rem.isEmpty)
+  if(rem==null || rem.isEmpty)
     {
       return '';
     }

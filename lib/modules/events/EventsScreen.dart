@@ -93,6 +93,7 @@ class EventsScreenState extends State<EventsScreen>
         await storage.write(key: 'token', value: token);
       } else {
         showErrorAlert(context, 'Session Expired', "Please Login Again");
+        return;
       }
       print('already logged in');
       signedIn = true;
@@ -181,7 +182,7 @@ class EventsScreenState extends State<EventsScreen>
                   );
                 },
               )
-            : (false) //(signedIn == true)
+            : (signedIn == true)
                 ? HomeScreen(onlogout: onlogout)
                 : LoginPage(onlogin: onlogin));
   }

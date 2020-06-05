@@ -15,9 +15,13 @@ import 'package:IITDAPP/modules/calendar/data/Constants.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:intl/intl.dart';
 import 'dart:math' as math;
+import 'package:http/http.dart' as http;
+import 'package:IITDAPP/modules/events/globals.dart';
+import 'package:localstorage/localstorage.dart';
 
 part './screens/AppointmentEditor.dart';
 part './data/MeetingClass.dart';
@@ -26,6 +30,7 @@ part './utility/CalendarHandler.dart';
 part './utility/CommunFunctions.dart';
 part './widgets/CustomSwiper.dart';
 part './widgets/CustomModal.dart';
+part './serverConnection/RequestsHandler.dart';
 
 List<Color> _colorCollection;
 List<String> _colorNames;
@@ -166,6 +171,12 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 accountName: data.accountName,
                 color: data.color,
                 events: calendarEventsResult));
+            if(data.name=='User Events'){
+              getAllEvents(calendarEventsResult,1);
+            }
+            if(data.name=='IITD Connect') {
+              getAllEvents(calendarEventsResult,0);
+            }
             if(last){
               print('last also executed');
               checkForCalIds(calendarModel);
