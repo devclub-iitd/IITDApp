@@ -17,6 +17,15 @@ void main() async {
     print('secrets.json file is required');
   }
 
+  WidgetsFlutterBinding.ensureInitialized();
+  try {
+    await GlobalConfiguration().loadFromAsset('secrets');
+    SyncfusionLicense.registerLicense(
+        GlobalConfiguration().getString('calendar_api_key'));
+  }catch(e){
+    print('secrets.json file is required');
+  }
+
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(
