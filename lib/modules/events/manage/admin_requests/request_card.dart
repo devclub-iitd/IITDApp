@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
 
-import 'package:IITDAPP/modules/events/globals.dart';
 import 'request_class.dart';
 
 class RequestCard extends StatelessWidget {
@@ -24,7 +23,7 @@ class RequestCard extends StatelessWidget {
             children: <Widget>[
               Text(request.name),
               Text(request.email),
-              Text("for"),
+              Text('for'),
               Text(request.clubName),
             ],
           ),
@@ -53,7 +52,7 @@ class ResponseIconsState extends State<ResponseIcons> {
 
   Future<Null> reqeustResponse(String ans) async {
     final response = await http.post('$url/api',
-        headers: {'authorization': "Bearer $token"}, body: {'response': ans});
+        headers: {'authorization': 'Bearer $token'}, body: {'response': ans});
 
     if (response.statusCode == 200) {
     } else {}

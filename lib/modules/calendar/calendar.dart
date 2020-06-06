@@ -5,19 +5,20 @@ import 'dart:math';
 import 'package:IITDAPP/modules/calendar/data/CalendarModel.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
-import 'package:IITDAPP/widgets/loading.dart';
 import 'package:device_calendar/device_calendar.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:IITDAPP/modules/calendar/data/Constants.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 // import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:localstorage/localstorage.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:pedantic/pedantic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:intl/intl.dart';
@@ -69,6 +70,7 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScreenState extends State<CalendarScreen> {
+
   DeviceCalendarPlugin _deviceCalendarPlugin;
   List<CalendarModel> calendarModel = [];
   List<Calendar> _calendars;
@@ -118,6 +120,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   @override
   void initState() {
+
     agendaAppointments = <Appointment>[];
     showPopUp = false;
     exempted = {};
@@ -388,8 +391,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           dayFormat: 'EEE',
                           monthCellStyle: MonthCellStyle(
                             textStyle:
-                                TextStyle(fontSize: 16, color: Colors.black),
-                            todayTextStyle: TextStyle(fontSize: 16),
+                                TextStyle(fontSize: 17),
+                            todayTextStyle: TextStyle(fontSize: 17),
                           ),
                         ),
                         selectionDecoration: BoxDecoration(

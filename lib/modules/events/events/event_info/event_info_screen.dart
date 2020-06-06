@@ -4,7 +4,6 @@ import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'dart:convert';
 import 'dart:async';
 import 'package:http/http.dart' as http;
-import 'package:IITDAPP/modules/events/globals.dart';
 
 import '../event_class.dart';
 import './event_info_card.dart';

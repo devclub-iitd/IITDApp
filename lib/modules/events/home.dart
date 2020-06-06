@@ -5,8 +5,6 @@ import 'package:IITDAPP/widgets/Drawer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
-import 'package:IITDAPP/modules/events/globals.dart';
 
 import './events/events_tab.dart';
 import './clubs/clubs_tab.dart';

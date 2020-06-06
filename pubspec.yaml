@@ -50,6 +50,7 @@ dependencies:
   datetime_picker_formfield: ^1.0.0
   date_format: ^1.0.8
   shared_preferences: ^0.5.7+3
+  flutter_local_notifications: ^1.4.4+1
   flutter:
     sdk: flutter
 

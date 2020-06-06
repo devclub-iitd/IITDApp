@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 import 'events/event_class.dart';
 import 'clubs/club_class.dart';
@@ -11,15 +10,18 @@ List<List<Event>> tomorrowEvents = List<List<Event>>.generate(3, (i) => []);
 List<List<Event>> upcomingEvents = List<List<Event>>.generate(3, (i) => []);
 
 
+// ignore: prefer_collection_literals
 List<Club> subbedClubs = List<Club>();
+// ignore: prefer_collection_literals
 List<Club> otherClubs = List<Club>();
+// ignore: prefer_collection_literals
 List<Club> allClubs = List<Club>();
 
 Future<List<List<List<Event>>>> sortEvents() async {
   todayEvents = List<List<Event>>.generate(3, (i) => []);
   tomorrowEvents = List<List<Event>>.generate(3, (i) => []);
   upcomingEvents = List<List<Event>>.generate(3, (i) => []);
-  for (int i = 0; i < eventsList.length; i++) {
+  for (var i = 0; i < eventsList.length; i++) {
     var ev = eventsList[i];
     var isToday = ((DateTime.now().isAfter(ev.startsAt) &&
             DateTime.now().isBefore(ev.endsAt)) ||

@@ -1,11 +1,12 @@
+import 'package:IITDAPP/routes/Routes.dart';
 import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:async';
-
-import 'package:IITDAPP/modules/events/globals.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:pedantic/pedantic.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../LoginScreen.dart';
 
@@ -42,6 +43,13 @@ Future logout() async {
   await storage.delete(key: 'email');
   await storage.delete(key: 'password');
   await storage.delete(key: 'token');
+  var ls = LocalStorage('iitapp');
+  await ls.clear();
+}
+
+void deleteSharedPrefs() async {
+  var prefs = await SharedPreferences.getInstance();
+  await prefs.clear();
 }
 
 void showAlert(BuildContext context, Function onlogout) {
@@ -51,6 +59,15 @@ void showAlert(BuildContext context, Function onlogout) {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Colors.indigo[600],
+          titlePadding: EdgeInsets.only(
+            top: 20,
+          ),
+          contentPadding: EdgeInsets.only(top: 5, bottom: 20),
+          title: Text(
+            'Guest User',
+            style: TextStyle(color: Colors.white, fontSize: 30),
+            textAlign: TextAlign.center,
+          ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
@@ -109,11 +126,12 @@ void showAlert(BuildContext context, Function onlogout) {
               FlatButton(
                 onPressed: () async {
                   // getToken();
+                  print('oh yeah');
                   Navigator.pop(context);
-                  showLoading(context, message: 'Signing Out');
+                  unawaited(showLoading(context, message: 'Signing Out'));
                   await logout();
                   Navigator.pop(context);
-                  onlogout();
+                  await Navigator.pushReplacementNamed(context, Routes.loginPage);
                 },
                 color: Colors.indigo[400],
                 child: Text(

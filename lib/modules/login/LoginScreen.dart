@@ -7,6 +7,7 @@ import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import 'package:localstorage/localstorage.dart';
 
@@ -15,7 +16,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'userlogin/login_page.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 
 
 class LoginScreen extends StatefulWidget {
@@ -33,6 +34,9 @@ class LoginScreenState extends State<LoginScreen>
 //  FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   bool signedIn;
   bool start;
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+
+
 
   void onlogin() {
     print('logged in');
@@ -97,7 +101,7 @@ class LoginScreenState extends State<LoginScreen>
         token = parsedJson['data']['token'];
         await storage.write(key: 'token', value: token);
       } else {
-        showErrorAlert(context, 'Session Expired', "Please Login Again");
+        await showErrorAlert(context, 'Session Expired', 'Please Login Again');
         return;
       }
       print('already logged in');
@@ -116,8 +120,8 @@ class LoginScreenState extends State<LoginScreen>
   @override
   void initState() {
     super.initState();
+
     print('startup');
-    var abcd =  DateFormat('yyyy-MM-ddTHH:mm:ss').format(DateTime.now())+'.000Z';
     loginFunc = onlogin;
     logoutFunc = onlogout;
     start = true;
@@ -179,4 +183,8 @@ class LoginScreenState extends State<LoginScreen>
             ? Dashboard()
             : LoginPage(onlogin: onlogin));
   }
+
+
+
+
 }

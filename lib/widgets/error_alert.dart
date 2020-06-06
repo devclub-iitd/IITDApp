@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Future<bool> showErrorAlert(BuildContext context, String title, String message, {String command = "OK"}) {
+Future<bool> showErrorAlert(BuildContext context, String title, String message, {String command = 'OK'}) {
   return showDialog(
         context: context,
         builder: (BuildContext context) {

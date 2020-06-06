@@ -90,7 +90,7 @@ class _CustomCardState extends State<CustomCard> {
         floatingActionButton: FloatingActionButton(
           heroTag: null,
           onPressed: () async {},
-          backgroundColor: Colors.green,
+          backgroundColor: Colors.greenAccent,
           child: IconButton(
             onPressed: () {
               _selectedColor = -65535;
@@ -116,8 +116,8 @@ class _CustomCardState extends State<CustomCard> {
           height: height, // change this
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(height / 20)),
-            color: Color.fromARGB(255, 255, 255, 255),
-            //color: Color.fromARGB(255, 37, 37, 37)
+            // color: Color.fromARGB(255, 255, 255, 255),
+            color: Color.fromARGB(255, 37, 37, 37)
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -127,14 +127,12 @@ class _CustomCardState extends State<CustomCard> {
                 '${widget.currDate.day}',
                 style: TextStyle(
                     fontSize: 36,
-                    color: Colors.black,
                     fontWeight: FontWeight.w600),
               ),
               Text(
                 DateFormat('EEEE').format(widget.currDate), // prints Tuesday
                 style: TextStyle(
                     fontSize: 18,
-                    color: Colors.black,
                     fontWeight: FontWeight.w300),
               ),
               Container(height: 8),
@@ -148,7 +146,7 @@ class _CustomCardState extends State<CustomCard> {
                           child: Text(
                             'No events on this date',
                             style:
-                                TextStyle(fontSize: 15, color: Colors.black),
+                                TextStyle(fontSize: 15,),
                           ),
                         )
                       : Column(
@@ -220,7 +218,6 @@ class EventListItem extends StatelessWidget {
                     Text(
                       data.eventName,
                       style: TextStyle(
-                          color: Colors.black,
                           fontSize: 16,
                           fontWeight: FontWeight.w400),
                     )
@@ -237,7 +234,7 @@ class EventListItem extends StatelessWidget {
                     Text(
                       timings,
                       style: TextStyle(
-                          color: Colors.black54,
+                          color: Colors.white70,
                           fontSize: 14,
                           fontWeight: FontWeight.w300),
                     )
@@ -251,7 +248,6 @@ class EventListItem extends StatelessWidget {
                     padding: const EdgeInsets.only(right: 12.0),
                     child: Icon(
                       Icons.notifications,
-                      color: Colors.black,
                       size: 28,
                     ),
                   )

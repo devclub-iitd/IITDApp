@@ -3,7 +3,6 @@ import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:IITDAPP/modules/events/globals.dart';
 import 'dart:async';
 import 'dart:convert';
 
@@ -28,20 +27,21 @@ class _ManageTabState extends State<ManageTab> {
   void _refresh() => setState(() {});
 
   Future<List<Event>> getClubEvents(String id) async {
-    print("getting club events");
+    print('getting club events');
     print(id);
-    final response = await http.get("$url/api/events/?body=$id",
-        headers: {"authorization": "Bearer $token"});
+    final response = await http.get('$url/api/events/?body=$id',
+        headers: {'authorization': 'Bearer $token'});
     print(response.statusCode);
     // print(response.body);
     if (response.statusCode == 200) {
       var parsedJson = json.decode(response.body);
-      List<Event> tevents = List<Event>();
-      if (parsedJson["message"] != "Events Found") {
+      // ignore: prefer_collection_literals
+      var tevents = List<Event>();
+      if (parsedJson['message'] != 'Events Found') {
         return tevents;
       } else {
-        for (int i = 0; i < parsedJson["data"]["events"].length; i++) {
-          Event ev = Event.fromJson(parsedJson["data"]["events"][i]);
+        for (var i = 0; i < parsedJson['data']['events'].length; i++) {
+          var ev = Event.fromJson(parsedJson['data']['events'][i]);
           if (ev.endsAt.isAfter(DateTime.now())) tevents.add(ev);
         }
         tevents.sort((a, b) {
@@ -58,7 +58,7 @@ class _ManageTabState extends State<ManageTab> {
 
   void makeList() {
     clubList = [];
-    for (int i = 0; i < currentUser.adminof.length; i++) {
+    for (var i = 0; i < currentUser.adminof.length; i++) {
       clubList.add(
         DropdownMenuItem(
           value: currentUser.adminof[i],
@@ -87,11 +87,12 @@ class _ManageTabState extends State<ManageTab> {
           style: TextStyle(color: Colors.white),
         ),
       );
-    } else
+    } else {
       return Container(
         height: 0,
         width: 0,
       );
+    }
   }
 
   @override
@@ -158,7 +159,7 @@ class _ManageTabState extends State<ManageTab> {
             value: club,
             items: clubList,
             decoration: InputDecoration(
-              labelText: "Select Club",
+              labelText: 'Select Club',
               contentPadding:
                   EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               filled: true,
@@ -198,7 +199,7 @@ class _ManageTabState extends State<ManageTab> {
                 child: Container(
                   padding: EdgeInsets.all(20),
                   child: Text(
-                    "Some Error Occured",
+                    'Some Error Occured',
                     style: TextStyle(color: Colors.white70),
                   ),
                 ),

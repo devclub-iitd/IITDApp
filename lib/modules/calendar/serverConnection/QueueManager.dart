@@ -13,12 +13,14 @@ class QueueManager {
     return jsLis!=null?jsLis['data']:[];
   }
 
+  // ignore: always_declare_return_types
   static addToList(var item) async {
     var lis = await getList();
     lis.add(item);
     await storeList(lis);
   }
 
+  // ignore: always_declare_return_types
   static executeList(var lis) async {
     lis.forEach((data) async {
       var succ = false;

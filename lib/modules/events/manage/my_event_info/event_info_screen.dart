@@ -8,17 +8,16 @@ import '../../events/event_class.dart';
 import './event_info_card.dart';
 import '../../events/event_info/event_about.dart';
 import './event_updates_list.dart';
-import 'package:IITDAPP/modules/events/globals.dart';
 
 Future<Event> getEvent(String eventid) async {
   final response = await http.get('$url/api/events/$eventid',
       headers: {'authorization': 'Bearer $token'});
   if (response.statusCode == 200) {
     var parsedJson = json.decode(response.body);
-    Event event = Event.fromJson(parsedJson["event"]);
+    var event = Event.fromJson(parsedJson['event']);
     return event;
   } else {
-    throw Exception("Failed to load Event");
+    throw Exception('Failed to load Event');
   }
 }
 
@@ -79,7 +78,7 @@ class _EventInfoState extends State<EventInfo> {
             );
           } else if (snapshot.hasError) {
             return Center(
-              child: Text("Some Error Occured"),
+              child: Text('Some Error Occured'),
             );
           }
 

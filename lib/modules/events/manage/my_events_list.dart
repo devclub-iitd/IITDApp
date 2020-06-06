@@ -11,11 +11,11 @@ class MyEventsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (_events.length == 0) {
+    if (_events.isEmpty) {
       return Container(
         padding: EdgeInsets.all(30),
         child: Text(
-          "No events",
+          'No events',
           textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.white70,

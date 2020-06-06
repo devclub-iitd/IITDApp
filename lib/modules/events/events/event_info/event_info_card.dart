@@ -15,7 +15,7 @@ class EventInfoCard extends StatelessWidget {
   EventInfoCard(this._event, this._refreshLists, {this.showButton = true});
   @override
   Widget build(BuildContext context) {
-    List<Widget> actionRow = List<Widget>();
+    var actionRow = <Widget>[];
     actionRow.add(IconButton(
       onPressed: () {},
       icon: Icon(Icons.calendar_today),
@@ -26,7 +26,7 @@ class EventInfoCard extends StatelessWidget {
     actionRow.add(
       StarButton(_event, _refreshLists),
     );
-    if (showButton)
+    if (showButton) {
       actionRow.add(FlatButton(
         onPressed: () {
           Navigator.push(
@@ -38,6 +38,7 @@ class EventInfoCard extends StatelessWidget {
         color: Colors.indigo[400],
         textColor: Colors.white,
       ));
+    }
     return ConstrainedBox(
       constraints: BoxConstraints(maxWidth: 500),
       child: Container(

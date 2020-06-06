@@ -43,7 +43,7 @@ class EventsTabState extends State<EventsTab> {
   @override
   void initState() {
     super.initState();
-    this._controller = widget._controller;
+    _controller = widget._controller;
   }
 
   Future<List<List<List<Event>>>> getEvents() async {
@@ -84,6 +84,7 @@ class EventsTabState extends State<EventsTab> {
     todayEvents = List<List<Event>>.generate(3, (i) => []);
     tomorrowEvents = List<List<Event>>.generate(3, (i) => []);
     upcomingEvents = List<List<Event>>.generate(3, (i) => []);
+    // ignore: prefer_collection_literals
     eventsList = List<Event>();
     if (parsedJson['message'] != 'Events Found') {
       return [todayEvents, tomorrowEvents, upcomingEvents];

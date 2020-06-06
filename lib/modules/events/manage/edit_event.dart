@@ -3,8 +3,8 @@ import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:IITDAPP/modules/events/globals.dart';
 import 'package:intl/intl.dart';
+import 'package:pedantic/pedantic.dart';
 import 'package:validators/validators.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -22,7 +22,7 @@ Future<bool> deleteEvent(BuildContext context, String id) async {
   } else {
     Navigator.pop(context);
     Navigator.pop(context);
-    showErrorAlert(
+    await showErrorAlert(
         context, 'Could not delete', 'Something went wrong. Please try again.');
     return false;
   }
@@ -97,7 +97,7 @@ class _EditEventFormState extends State<EditEventForm> {
       Navigator.pop(context);
     } else {
       Navigator.pop(context);
-      showErrorAlert(
+      await showErrorAlert(
           context, 'Failed', 'Something went wrong. Please try again');
     }
   }
@@ -179,7 +179,7 @@ class _EditEventFormState extends State<EditEventForm> {
                 helperText: '',
                 alignLabelWithHint: true,
                 labelText: 'Starts At',
-                hasFloatingPlaceholder: true,
+                floatingLabelBehavior: FloatingLabelBehavior.auto,
               ),
               style: TextStyle(color: Colors.white),
               onSaved: (dt) {
@@ -222,7 +222,7 @@ class _EditEventFormState extends State<EditEventForm> {
                 helperText: '',
                 alignLabelWithHint: true,
                 labelText: 'Ends At',
-                hasFloatingPlaceholder: true,
+                floatingLabelBehavior: FloatingLabelBehavior.auto,
               ),
               style: TextStyle(color: Colors.white),
               onSaved: (dt) {
@@ -314,7 +314,7 @@ class _EditEventFormState extends State<EditEventForm> {
                       _event.startsAt = _startsAt;
                       _event.endsAt = _endsAt;
                       _event.imageLink = _imageLink;
-                      showLoading(context);
+                      unawaited(showLoading(context));
                       await editEvent();
                       Navigator.pop(context);
                     }
@@ -397,7 +397,7 @@ void _showDeleteAlert(BuildContext context, Event _event) {
           FlatButton(
             onPressed: () async {
               // Navigator.pop(context);
-              showLoading(context, message: 'Deleting Event');
+              unawaited(showLoading(context, message: 'Deleting Event'));
               var b = await deleteEvent(context, _event.eventid);
               if (b) {
                 Navigator.popUntil(

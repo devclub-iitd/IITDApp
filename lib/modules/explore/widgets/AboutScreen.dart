@@ -90,18 +90,24 @@ class SpeedDialSection extends StatelessWidget {
               child: Center(
                 child: FaIcon(FontAwesomeIcons.facebook),
               ),
-              label: 'Visit FB Page'),
+              label: 'Visit FB Page',
+            labelStyle: TextStyle(color: Colors.black)
+          ),
           SpeedDialChild(
               child: Center(
                 child: FaIcon(FontAwesomeIcons.instagram),
               ),
-              label: 'View Insta page'),
+              label: 'View Insta page',
+              labelStyle: TextStyle(color: Colors.black)
+          ),
           SpeedDialChild(
               child: Center(
                 child: Transform.scale(scale: 0.5,
-                  child: SvgPicture.asset('assets/images/visit_web.svg',color: Colors.white,),),
+                  child: SvgPicture.asset('assets/images/visit_web.svg',color: Colors.black,),),
               ),
-              label: 'Visit Website'),
+              label: 'Visit Website',
+              labelStyle: TextStyle(color: Colors.black)
+          ),
         ],
       ),
     );
@@ -141,7 +147,7 @@ class LinksSection extends StatelessWidget {
               },
               child: Center(
                 child: Transform.scale(scale: 0.5,
-                  child: SvgPicture.asset('assets/images/visit_web.svg',color: Colors.white,),),
+                  child: SvgPicture.asset('assets/images/visit_web.svg',color: Colors.black,),),
               ),
             )
           ],
@@ -174,7 +180,7 @@ class MemberCard extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(10),
       height: 120,
-      color: Colors.blue,
+      color: Colors.blueAccent,
       child: Row(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -194,7 +200,7 @@ class MemberCard extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 8.0, top: 4),
                       child: Text(
                         data.name,
-                        style: TextStyle(color: Colors.black, fontSize: 19),
+                        style: TextStyle(color: Colors.white, fontSize: 19),
                       ),
                     ),
                   ],
@@ -208,7 +214,7 @@ class MemberCard extends StatelessWidget {
                       child: Text(
                         data.post,
                         style: GoogleFonts.literata(
-                            color: Colors.deepOrange,
+                            color: Colors.redAccent,
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
@@ -354,10 +360,10 @@ class EventCard extends StatelessWidget {
     print(data);
     return Container(
       decoration: BoxDecoration(
-        color: Colors.lightBlueAccent,
+        color: Colors.blueAccent,
         boxShadow: [
           BoxShadow(
-              color: Colors.indigo,
+              color: Colors.blueAccent,
               blurRadius: 1.0, // soften the shadow
               spreadRadius: 1.0, //extend the shadow
               offset: Offset.fromDirection(90, 1))
@@ -369,12 +375,12 @@ class EventCard extends StatelessWidget {
         ),
         title: Text(
           data.title,
-          style: TextStyle(color: Colors.black, fontSize: 18),
+          style: TextStyle(color: Colors.white, fontSize: 18),
         ),
         subtitle: Text(
           data.note,
           style:
-              TextStyle(color: Color.fromARGB(255, 56, 73, 88), fontSize: 14),
+              TextStyle(color: Color.fromARGB(255, 240 , 240, 240), fontSize: 15),
         ),
       ),
     );

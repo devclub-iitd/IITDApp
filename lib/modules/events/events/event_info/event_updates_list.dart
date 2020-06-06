@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:IITDAPP/modules/events/globals.dart';
 import './updates_class.dart';
 import './update.dart';
 
@@ -14,7 +13,8 @@ Future<List<Update>> getUpdates(String eventid) async {
 
   if (response.statusCode == 200) {
     var parsedJson = json.decode(response.body);
-    List<Update> updateList = List<Update>();
+    // ignore: prefer_collection_literals
+    var updateList = List<Update>();
     for (var i = 0; i < parsedJson['event']['updates'].length; i++) {
       var update = Update.fromJson(parsedJson['event']['updates'][i]);
       updateList.add(update);

@@ -23,7 +23,7 @@ class EventsList extends StatelessWidget {
         margin: EdgeInsets.all(25),
         child: Center(
           child: Text(
-            "No Events",
+            'No Events',
             style: TextStyle(
               color: Colors.white70,
             ),

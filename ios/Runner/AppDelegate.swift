@@ -8,6 +8,13 @@ import Flutter
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
+    if(![[NSUserDefaults standardUserDefaults]objectForKey:@"Notification"]){
+            [[UIApplication sharedApplication] cancelAllLocalNotifications];
+            [[NSUserDefaults standardUserDefaults]setBool:YES forKey:@"Notification"];
+        }
+    if(@available(iOS 10.0, *)) {
+            [UNUserNotificationCenter currentNotificationCenter].delegate = (id<UNUserNotificationCenterDelegate>) self;
+    }
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }

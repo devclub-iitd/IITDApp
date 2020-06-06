@@ -11,8 +11,6 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 
-import 'package:IITDAPP/modules/events/globals.dart';
-
 class SignUpForm extends StatefulWidget {
   final Function onlogin;
 
@@ -39,7 +37,7 @@ class _SignUpFormState extends State<SignUpForm> {
     print(response.statusCode);
     if (response.body == 'Username or Email Is Already In Use') {
       Navigator.pop(context);
-      showErrorAlert(context, 'Email already registered',
+      await showErrorAlert(context, 'Email already registered',
           'This email is already registered. Use another email.');
       return;
     }
@@ -51,20 +49,20 @@ class _SignUpFormState extends State<SignUpForm> {
         await showErrorAlert(
             context, 'Success', 'SignUp successful. Press continue to login.',
             command: 'CONTINUE');
-        showLoading(context);
+        unawaited(showLoading(context));
         await login(context, emailId, password, widget.onlogin);
         Navigator.pop(context);
       } else {
         Navigator.pop(context);
         print('code 200 but error');
-        showErrorAlert(context, 'Sign Up Failed',
-            "Please check your details and try again.");
+        await showErrorAlert(context, 'Sign Up Failed',
+            'Please check your details and try again.');
       }
     } else {
       Navigator.pop(context);
       print('error');
       print(response.body);
-      showErrorAlert(context, 'Sign Up Failed',
+      await showErrorAlert(context, 'Sign Up Failed',
           'Please check your details and try again.');
     }
   }
@@ -168,7 +166,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   onPressed: () async {
                     _key.currentState.save();
                     if (_key.currentState.validate()) {
-                      showLoading(context);
+                      unawaited(showLoading(context));
                       await makeUser();
                     }
                   },

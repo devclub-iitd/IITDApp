@@ -6,7 +6,6 @@ import 'dart:convert';
 import '../../events/event_info/updates_class.dart';
 import './update.dart';
 import './add_update.dart';
-import 'package:IITDAPP/modules/events/globals.dart';
 
 class EventUpdatesList extends StatefulWidget {
   final String eventid;
@@ -32,12 +31,13 @@ class _EventUpdateList extends State<EventUpdatesList> {
   }
 
   Future<List<Update>> getUpdates(String eventid) async {
-    print("getting updates");
+    print('getting updates');
     final response = await http.get('$url/api/events/$eventid',
         headers: {'authorization': 'Bearer $token'});
 
     if (response.statusCode == 200) {
       var parsedJson = json.decode(response.body);
+      // ignore: prefer_collection_literals
       var updateList = List<Update>();
       for (var i = 0; i < parsedJson['event']['updates'].length; i++) {
         var update = Update.fromJson(parsedJson['event']['updates'][i]);
@@ -84,25 +84,26 @@ class _EventUpdateList extends State<EventUpdatesList> {
               if (snapshot.hasData &&
                   snapshot.connectionState == ConnectionState.done) {
                 List<Update> upd = snapshot.data;
-                if (upd.isEmpty)
+                if (upd.isEmpty) {
                   return Container(
                     margin: EdgeInsets.all(25),
                     child: Center(
                       child: Text(
-                        "No Updates",
+                        'No Updates',
                         style: TextStyle(
                           color: Colors.white70,
                         ),
                       ),
                     ),
                   );
-                else
+                } else {
                   return Column(
                     children: upd
                         .map((element) => EventUpdate(
                             element, _reload, id, ValueKey(element.id)))
                         .toList(),
                   );
+                }
               } else if (snapshot.hasError) {
                 return Center(
                   child: Text(

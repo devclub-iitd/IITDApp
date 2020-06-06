@@ -56,6 +56,7 @@ class ClubsScreenState extends State<ClubsScreen> {
   List<ClubCard> makeClubCardList(List<Club> clubs) {
     print('makeClubCardList received:::');
     clubs.forEach((f) => print(f.clubName));
+    // ignore: prefer_collection_literals
     var toReturn = List<ClubCard>();
     for (var i = 0; i < clubs.length; i++) {
       toReturn.add(ClubCard(clubs[i], refresh, ValueKey(clubs[i].id)));

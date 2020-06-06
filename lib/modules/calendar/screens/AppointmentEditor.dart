@@ -8,10 +8,113 @@ class AppointmentEditor extends StatefulWidget {
 class AppointmentEditorState extends State<AppointmentEditor> {
   var reminder;
   var recurrence;
+  bool permissionGranted;
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   @override
   void initState() {
     super.initState();
+    permissionGranted = true;
+    var initializationSettingsAndroid =
+        AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initializationSettingsIOS = IOSInitializationSettings(
+      requestSoundPermission: false,
+      requestBadgePermission: false,
+      requestAlertPermission: false,
+    );
+    var initializationSettings = InitializationSettings(
+        initializationSettingsAndroid, initializationSettingsIOS);
+    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: onSelectNotification);
+    requestPermission();
+  }
+
+  Future requestPermission() async {
+    var result = await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            IOSFlutterLocalNotificationsPlugin>()
+        ?.requestPermissions(
+          alert: true,
+          badge: true,
+          sound: true,
+        );
+    setState(() {
+      permissionGranted = result;
+    });
+  }
+
+  String generatePayload(Event ev) {
+    var res = '';
+    res += ev.title +
+        '%&' +
+        ev.description +
+        '%&' +
+        DateFormat('yyyy-MM-dd  HH:mm:ss').format(ev.start) +
+        ' - ' +
+        DateFormat('HH:mm:ss').format(ev.end);
+    return res;
+  }
+
+  Future onSelectNotification(String payload) async {
+    var firstIdx = payload.indexOf('%&');
+    var title = payload.substring(0, firstIdx);
+    payload = payload.substring(firstIdx + 2);
+    var secondIdx = payload.indexOf('%&');
+    var description = payload.substring(0, secondIdx);
+    var time = payload.substring(secondIdx + 2);
+    await showDialog(
+      context: context,
+      builder: (_) {
+        return AlertDialog(
+            backgroundColor: Color.fromARGB(255, 37, 37, 37),
+            title: Text(title),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  description,
+                  style: TextStyle(fontSize: 16),
+                ),
+                Container(height: 10),
+                Text(
+                  'Timings:-',
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                ),
+                Text(
+                  time,
+                  style: TextStyle(fontSize: 14),
+                )
+              ],
+            ),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ]);
+      },
+    );
+  }
+
+  Future _showNotificationWithDefaultSound(
+      {String title,
+      String description,
+      int id,
+      String payload,
+      DateTime time}) async {
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+        'IITDAPP', 'IITD APP', 'IITD APP Calendar Events',
+        importance: Importance.Max, priority: Priority.High);
+    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    var platformChannelSpecifics = NotificationDetails(
+        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.schedule(
+        id, title, description, time, platformChannelSpecifics,
+        payload: payload, androidAllowWhileIdle: true);
   }
 
   Widget _getAppointmentEditor(BuildContext context) {
@@ -415,7 +518,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                               : _selectedAppointment.calendarId,
                           start: _startDate,
                           end: _endDate);
-                      if(_selectedAppointment!=null){
+                      if (_selectedAppointment != null) {
                         event.eventId = _selectedAppointment.eventId;
                       }
                       event.title = _subject == '' ? '(No title)' : _subject;
@@ -425,20 +528,43 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                       event.reminders = getReminderList(_reminder);
                       event.allDay = _isAllDay;
                       event = addRecurrenceRule(_recurrence, event);
-                      var res = await postReminder(event, !(_selectedAppointment==null));
-                      if(res=='error'){
+                      var res = await postReminder(
+                          event, !(_selectedAppointment == null));
+                      if (res == 'error') {
                         print('server error occured');
                         return;
                       }
-                      if(res=='timeout') {
+                      if (res == 'timeout') {
                         connectedToInternet = false;
                       }
                       var createEventResult = await DeviceCalendarPlugin()
                           .createOrUpdateEvent(event);
+                      var prefs = await SharedPreferences.getInstance();
                       if (createEventResult.isSuccess) {
-                        var prefs = await SharedPreferences.getInstance();
-                        if(res!='' || res!='timeout') {
-                          await prefs.setString('ser '+res,'loc '+createEventResult.data);
+                        if (res != '' || res != 'timeout') {
+                          await prefs.setString(
+                              'ser ' + res, 'loc ' + createEventResult.data);
+                        }
+                        if (_selectedAppointment != null) {
+                          var id = await prefs
+                              .getInt('rem' + createEventResult.data);
+                          if (id != null && id != 0) {
+                            await flutterLocalNotificationsPlugin.cancel(id);
+                          }
+                          await prefs.setInt('rem' + createEventResult.data, 0);
+                        }
+                        if (event.reminders.isNotEmpty) {
+                          var rnd = Random().nextInt(1000000000) + 1;
+                          await prefs.setInt(
+                              'rem' + createEventResult.data, rnd);
+                          var rem = event.start.subtract(
+                              Duration(minutes: event.reminders[0].minutes));
+                          await _showNotificationWithDefaultSound(
+                              title: event.title,
+                              id: rnd,
+                              description: 'Starts in ' + _reminder,
+                              time: rem,
+                              payload: generatePayload(event));
                         }
                         meetings.add(Meeting(
                           from: _startDate,
@@ -482,11 +608,11 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                 : FloatingActionButton(
                     onPressed: () async {
                       if (_selectedAppointment != null) {
-                        var succ = await deleteReminderFromServer(_selectedAppointment.eventId);
-                        if(succ==-1){
+                        var succ = await deleteReminderFromServer(
+                            _selectedAppointment.eventId);
+                        if (succ == -1) {
                           print('unable to connect to server');
-                        }
-                        else if (succ==0){
+                        } else if (succ == 0) {
                           print('Error occured');
                           return;
                         }
@@ -494,6 +620,14 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                             _selectedAppointment.calendarId,
                             _selectedAppointment.eventId);
                         if (res.isSuccess) {
+                          var prefs = await SharedPreferences.getInstance();
+                          var id = await prefs
+                              .getInt('rem' + _selectedAppointment.eventId);
+                          if (id != null && id != 0) {
+                            await flutterLocalNotificationsPlugin.cancel(id);
+                          }
+                          await prefs.setInt(
+                              'rem' + _selectedAppointment.eventId, 0);
                           _events.appointments.removeAt(_events.appointments
                               .indexOf(_selectedAppointment));
                           _events.notifyListeners(
@@ -538,8 +672,6 @@ Event addRecurrenceRule(var rule, Event event) {
   return event;
 }
 
-
-
 List<Attendee> getAttendeeList(var str) {
   var ls = LineSplitter();
   var lines = ls.convert(str);
@@ -580,16 +712,14 @@ class _ReminderPickerState extends State<ReminderPicker> {
 
   @override
   void initState() {
-
-    if(_reminder==''){
+    if (_reminder == '') {
       type = 0;
       time = '10';
-    }
-    else{
+    } else {
       time = _reminder.substring(0, _reminder.indexOf(' '));
       var unit = _reminder.substring(_reminder.indexOf(' ') + 1);
-      for (var i = 0;i<reminderUnits.length;i++){
-        if(unit==reminderUnits[i]) {
+      for (var i = 0; i < reminderUnits.length; i++) {
+        if (unit == reminderUnits[i]) {
           type = i;
         }
       }
@@ -630,7 +760,7 @@ class _ReminderPickerState extends State<ReminderPicker> {
                   maxLines: null,
                   style: TextStyle(
                       fontSize: 18,
-                      color: Colors.black87,
+                      color: Colors.white,
                       fontWeight: FontWeight.w400),
                   decoration: InputDecoration(
                     hintText: 'Time',
@@ -696,20 +826,17 @@ class _RecurrenceDialogState extends State<RecurrenceDialog> {
 
   @override
   void initState() {
-
-    if(_recurrence==''){
+    if (_recurrence == '') {
       type = 0;
-    }
-    else{
-      for (var i = 0;i<recurrenceOptions.length;i++){
-        if(_recurrence==reminderUnits[i]) {
+    } else {
+      for (var i = 0; i < recurrenceOptions.length; i++) {
+        if (_recurrence == recurrenceOptions[i]) {
           type = i;
         }
       }
     }
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {

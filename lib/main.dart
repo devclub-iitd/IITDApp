@@ -1,4 +1,4 @@
-import 'package:IITDAPP/modules/dashboard/dashboard.dart';
+//import 'package:IITDAPP/modules/dashboard/dashboard.dart';
 import 'package:IITDAPP/modules/login/LoginScreen.dart';
 import 'package:IITDAPP/routes/router.dart';
 import 'package:global_configuration/global_configuration.dart';
@@ -15,6 +15,7 @@ void main() async {
   }catch(e){
     print('secrets.json file is required');
   }
+
 
   runApp(
       MaterialApp(
@@ -37,4 +38,7 @@ void main() async {
 //        },
       )
   );
+
 }
+
+

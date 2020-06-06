@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
+import 'package:pedantic/pedantic.dart';
 
 import '../../events/event_info/updates_class.dart';
-import 'package:IITDAPP/modules/events/globals.dart';
 
 class EventUpdate extends StatelessWidget {
   final Update _update;
@@ -82,8 +82,8 @@ class EventUpdate extends StatelessWidget {
   }
 
   Future deleteUpdate(BuildContext context) async {
-    print("Deleting update");
-    showLoading(context, message: "Deleting Update");
+    print('Deleting update');
+    unawaited(showLoading(context, message: 'Deleting Update'));
     // final response = await http.delete("$url/api/events/$eventid/removeUpdate", headers: {"authorization":"Bearer $token"}, body: {"updateId" : _update.id});
     var response;
     final client = http.Client();
@@ -104,7 +104,7 @@ class EventUpdate extends StatelessWidget {
     } else {
       Navigator.pop(context);
       Navigator.pop(context);
-      showErrorAlert(context, 'Could not delete',
+      await showErrorAlert(context, 'Could not delete',
           'Something went wrong. Please try again.');
     }
   }

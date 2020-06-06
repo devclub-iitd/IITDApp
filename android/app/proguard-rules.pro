@@ -9,3 +9,4 @@
 # You might not be using firebase
 # -keep class com.google.firebase.** { *; }
 -keep class com.builttoroam.devicecalendar.** { *; }
+-keep class com.dexterous.** { *; }

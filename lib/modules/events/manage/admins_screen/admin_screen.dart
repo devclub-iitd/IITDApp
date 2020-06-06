@@ -8,8 +8,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:IITDAPP/modules/events/manage/admins_screen/admins_list.dart';
+import 'package:pedantic/pedantic.dart';
 
-import 'package:IITDAPP/modules/events/globals.dart';
 
 Future<List<Admin>> getAdmins() async {
   print('Getting Admins');
@@ -20,6 +20,7 @@ Future<List<Admin>> getAdmins() async {
   if (response.statusCode == 200) {
     print('afdv');
     var parsedJson = json.decode(response.body);
+    // ignore: prefer_collection_literals
     var admins = List<Admin>();
     for (var i = 0; i < parsedJson['data']['admins'].length; i++) {
       var r = Admin.fromJson(parsedJson['data']['admins'][i]);
@@ -140,7 +141,7 @@ class AddDialogState extends State<AddDialog> {
       widget.refresh();
     } else {
       Navigator.pop(context);
-      showErrorAlert(context, 'Failed',
+      await showErrorAlert(context, 'Failed',
           'Some error occured. Check user email and try again');
     }
   }
@@ -207,7 +208,7 @@ class AddDialogState extends State<AddDialog> {
             onPressed: () async {
               if (_key.currentState.validate()) {
                 _key.currentState.save();
-                showLoading(context);
+                unawaited(showLoading(context));
                 await addAdmin();
               }
             },

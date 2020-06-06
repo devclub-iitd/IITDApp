@@ -6,12 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
+import 'package:pedantic/pedantic.dart';
 import 'package:validators/validators.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:async';
 
-import 'package:IITDAPP/modules/events/globals.dart';
 import '../events/event_class.dart';
 
 Future<Event> addEventRequest(Event event, BuildContext context) async {
@@ -66,7 +66,7 @@ class _EventFormState extends State<EventForm> {
 
   void makeList() {
     clubList = [];
-    for (int i = 0; i < currentUser.adminof.length; i++) {
+    for (var i = 0; i < currentUser.adminof.length; i++) {
       clubList.add(
         DropdownMenuItem<UClub>(
           value: currentUser.adminof[i],
@@ -175,7 +175,7 @@ class _EventFormState extends State<EventForm> {
               decoration: InputDecoration(
                   alignLabelWithHint: true,
                   labelText: 'Starts At',
-                  hasFloatingPlaceholder: true,
+                  floatingLabelBehavior: FloatingLabelBehavior.auto,
                   helperText: ''),
               style: TextStyle(color: Colors.white),
               onChanged: (dt) {
@@ -185,10 +185,11 @@ class _EventFormState extends State<EventForm> {
                 _startsAt = dt;
               },
               validator: (dt) {
-                if (dt == null)
+                if (dt == null) {
                   return 'Required';
-                else
+                } else {
                   return null;
+                }
               },
             ),
             DateTimeField(
@@ -216,7 +217,7 @@ class _EventFormState extends State<EventForm> {
               decoration: InputDecoration(
                   alignLabelWithHint: true,
                   labelText: 'Ends At',
-                  hasFloatingPlaceholder: true,
+                  floatingLabelBehavior: FloatingLabelBehavior.auto,
                   helperText: ''),
               style: TextStyle(color: Colors.white),
               onChanged: (dt) {
@@ -226,10 +227,11 @@ class _EventFormState extends State<EventForm> {
                 _endsAt = dt;
               },
               validator: (dt) {
-                if (dt == null)
+                if (dt == null) {
                   return 'Required';
-                else
+                } else {
                   return null;
+                }
               },
             ),
             TextFormField(
@@ -244,10 +246,11 @@ class _EventFormState extends State<EventForm> {
               },
               style: TextStyle(color: Colors.white),
               validator: (text) {
-                if (text.isEmpty)
+                if (text.isEmpty) {
                   return 'Required';
-                else
+                } else {
                   return null;
+                }
               },
             ),
             TextFormField(
@@ -302,7 +305,7 @@ class _EventFormState extends State<EventForm> {
                       //   duration: Duration(minutes: 5),
                       //   content: Text("Adding Event"),
                       // ));
-                      showLoading(context);
+                      unawaited(showLoading(context));
                       await addEventRequest(ev, context);
                       // Navigator.popUntil(context,
                       //     ModalRoute.withName(Navigator.defaultRouteName));

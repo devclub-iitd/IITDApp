@@ -26,10 +26,12 @@ class User {
     var iA = (json['adminOf'].length + json['superAdminOf'].length > 0) ? true : false;
     var iSA = (json['superAdminOf'].length > 0) ? true:false;
     // bool iSA = false;
+    // ignore: prefer_collection_literals
     var adminof = List<UClub>();
     for (var i = 0; i < json['adminOf'].length; i++) {
       adminof.add(UClub.fromJson(json['adminOf'][i]));
     }
+    // ignore: prefer_collection_literals
     var superadminof = List<UClub>();
     for (var i = 0; i<json['superAdminOf'].length; i++){
       adminof.add(UClub.fromJson(json['superAdminOf'][i]));
@@ -49,7 +51,9 @@ class User {
 
 // User currentUser = User('DummyUser', true, [], true, []);
 class UClub extends Club {
+  // ignore: annotate_overrides
   String clubName;
+  // ignore: annotate_overrides
   String id;
 
   UClub({this.clubName, this.id});
@@ -63,8 +67,11 @@ class UClub extends Club {
 }
 
 class Admin extends User {
+  // ignore: annotate_overrides
   String name;
+  // ignore: annotate_overrides
   String email;
+  // ignore: annotate_overrides
   String id;
 
   Admin({this.name, this.email, this.id});

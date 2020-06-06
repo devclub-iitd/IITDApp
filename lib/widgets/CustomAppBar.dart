@@ -1,4 +1,3 @@
-import 'package:IITDAPP/modules/login/LoginScreen.dart';
 import 'package:IITDAPP/modules/login/userlogin/profile_icon.dart';
 import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:IITDAPP/values/colors/colors.dart';

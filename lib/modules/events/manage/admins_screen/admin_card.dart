@@ -6,8 +6,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'package:http/http.dart' as http;
-
-import 'package:IITDAPP/modules/events/globals.dart';
+import 'package:pedantic/pedantic.dart';
 
 class AdminCard extends StatelessWidget {
   final Admin admin;
@@ -87,7 +86,7 @@ class ResponseIconsState extends State<ResponseIcons> {
       });
     } else {
       Navigator.pop(context);
-      showErrorAlert(context, 'Failed', 'Some error occcured. Please try again.');
+      await showErrorAlert(context, 'Failed', 'Some error occcured. Please try again.');
     }
   }
 
@@ -146,7 +145,7 @@ class ResponseIconsState extends State<ResponseIcons> {
             FlatButton(
               onPressed: () async {
                 Navigator.pop(context);
-                showLoading(context);
+                unawaited(showLoading(context));
                 await deleteAdmin();
               },
               child: Text(

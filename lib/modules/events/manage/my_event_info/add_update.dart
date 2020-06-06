@@ -3,7 +3,7 @@ import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:IITDAPP/modules/events/events/event_info/updates_class.dart';
-import 'package:IITDAPP/modules/events/globals.dart';
+import 'package:pedantic/pedantic.dart';
 
 class AddUpdate extends StatefulWidget {
   final Function _onSubmit;
@@ -26,16 +26,16 @@ class _AddUpdateState extends State<AddUpdate> {
   @override
   void initState() {
     super.initState();
-    hint = "Add an update...";
+    hint = 'Add an update...';
     enabled = true;
     eventid = widget.eventid;
     _onSubmit = widget._onSubmit;
   }
 
   Future<Null> addUpdateRequest(String eventid, Update update) async {
-    print("adding event");
+    print('adding event');
     enabled = false;
-    hint = "Adding Update. Please Wait...";
+    hint = 'Adding Update. Please Wait...';
     setState(() {});
     final response = await http.post('$url/api/events/$eventid/addUpdate',
         headers: {'authorization': 'Bearer $token'}, body: update.toMap());
@@ -46,7 +46,7 @@ class _AddUpdateState extends State<AddUpdate> {
     if(response.statusCode == 200){
     _onSubmit();}
     else {
-      showErrorAlert(context, 'Could not add', 'Something went wrong. Please try again');
+      await showErrorAlert(context, 'Could not add', 'Something went wrong. Please try again');
     }
     return null;
   }
@@ -99,11 +99,11 @@ class _AddUpdateState extends State<AddUpdate> {
               if (_message == null || _message.isEmpty) {
                 return null;
               }
-              Update upd = Update(
+              var upd = Update(
                 message: _message,
-                title: "TITLE",
+                title: 'TITLE',
               );
-              addUpdateRequest(eventid, upd);
+              unawaited(addUpdateRequest(eventid, upd));
               _controller.clear();
               _message = '';
               FocusScope.of(context).requestFocus(FocusNode());

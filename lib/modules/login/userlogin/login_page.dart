@@ -5,6 +5,7 @@ import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:pedantic/pedantic.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:validators/validators.dart';
@@ -45,13 +46,13 @@ Future login(BuildContext context, String _email, String _password,
       } else {
         print('Could not get user info.');
         if(pop) Navigator.pop(context);
-        showErrorAlert(context, 'Login Failed', 'Something went wrong. Please Try Again');
+        await showErrorAlert(context, 'Login Failed', 'Something went wrong. Please Try Again');
       }
     }
-  } else if (response.statusCode == 400) {
+  } else if (response.statusCode == 500 || response.statusCode==400) {
     print('wrong email/pass');
     if(pop) Navigator.pop(context);
-    showErrorAlert(context, 'Login Failed', 'Wrong email id or password. Try Again');
+    await showErrorAlert(context, 'Login Failed', 'Wrong email id or password. Try Again');
   } else {}
 }
 
@@ -184,7 +185,7 @@ class LoginPageState extends State<LoginPage> {
                       onPressed: () async {
                         if (_key.currentState.validate()) {
                           _key.currentState.save();
-                          showLoading(context);
+                          unawaited(showLoading(context));
                           await login(
                               context, _email, _password, widget.onlogin);
                           // widget.onlogin();

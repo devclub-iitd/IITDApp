@@ -7,7 +7,6 @@ import 'package:http/http.dart' as http;
 import 'package:IITDAPP/modules/events/manage/admin_requests/requests_list.dart';
 
 import 'request_class.dart';
-import 'package:IITDAPP/modules/events/globals.dart';
 
 Future<List<Request>> getRequests() async {
   final response =
@@ -15,6 +14,7 @@ Future<List<Request>> getRequests() async {
 
   if (response.statusCode == 200) {
     var parsedJson = json.decode(response.body);
+    // ignore: prefer_collection_literals
     var requests = List<Request>();
     for (var i = 0; i < parsedJson[''].length; i++) {
       var r = Request.fromJson(parsedJson[''][i]);

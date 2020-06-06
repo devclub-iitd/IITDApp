@@ -25,13 +25,13 @@ class EventsPageState extends State<EventsPage> {
     super.initState();
     _title = widget._title;
     switch (_title) {
-      case "TODAY":
+      case 'TODAY':
         _events = todayEvents;
         break;
-      case "TOMORROW":
+      case 'TOMORROW':
         _events = tomorrowEvents;
         break;
-      case "UPCOMING":
+      case 'UPCOMING':
         _events = upcomingEvents;
         break;
       default:
@@ -42,13 +42,13 @@ class EventsPageState extends State<EventsPage> {
     setState(
       () {
         switch (_title) {
-          case "TODAY":
+          case 'TODAY':
             _events = todayEvents;
             break;
-          case "TOMORROW":
+          case 'TOMORROW':
             _events = tomorrowEvents;
             break;
-          case "UPCOMING":
+          case 'UPCOMING':
             _events = upcomingEvents;
             break;
           default:

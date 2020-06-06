@@ -46,7 +46,7 @@ Future<void> getEventsFromResponse(var rems,var controlEvents,var type) async {
     var item = await prefs.getString('ser '+data['_id']);
     item = item!=null?item.substring(4):item;
     if(item==null){
-      getEventObject(data,'',type);
+      unawaited(getEventObject(data,'',type));
     }
     else{
       controlEvents.data.forEach((data2){

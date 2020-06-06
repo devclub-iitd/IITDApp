@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
+import 'package:pedantic/pedantic.dart';
 import 'package:IITDAPP/modules/events/globals.dart';
 import '../event_class.dart';
 
@@ -83,7 +83,7 @@ class StarButtonState extends State<StarButton> {
           _toolTip = 'Star';
         }
         // refreshLists(_event);
-        sortEvents();
+        unawaited(sortEvents());
         _reorderList();
         onpress = () {
           onStarPress();

@@ -25,7 +25,7 @@ class AdminListState extends State<AdminList> {
 
   @override
   Widget build(BuildContext context) {
-    if (admins.length == 0) {
+    if (admins.isEmpty) {
       return Center(
         child: Container(
           margin: EdgeInsets.only(top: 20),
