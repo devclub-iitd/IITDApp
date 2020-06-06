@@ -25,6 +25,13 @@ class NewsModel<T extends NewsType> {
     return Future.delayed(Duration(seconds: 1));
   }
 
+  Future<void> report(List<String> report) {
+    print(report);
+    print('reported ${title}');
+    return Future.delayed(Duration(seconds: 1));
+  }
+
+
   Future<void> delete() {
     print('deleted ${title}');
     return Future.delayed(Duration(seconds: 1));

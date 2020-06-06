@@ -106,7 +106,7 @@ class NewsPage extends StatelessWidget {
                           ),
                           onPressed: () => showDialog(
                             context: context,
-                            child: ReportDialog(),
+                            child: ReportDialog(item: item,),
                           ),
                         )
                       ],

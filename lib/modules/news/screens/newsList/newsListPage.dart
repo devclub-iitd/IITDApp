@@ -111,8 +111,10 @@ class _NewsListState<K extends NewsType> extends State<NewsList<K>> {
               );
             }
             return ChangeNotifierProvider(
-              create: (_) =>
-                  PageCarouselIndex(width, news.pages, news.pageAfterRefresh),
+              create: (_) {
+                  var par = news.pageAfterRefresh;
+                  news.pageAfterRefresh = 0;
+                  return PageCarouselIndex(width, news.pages, par);},
               child: Stack(
                 children: <Widget>[
                   child,

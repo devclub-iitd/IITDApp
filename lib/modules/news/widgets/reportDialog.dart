@@ -1,9 +1,12 @@
+import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:flutter/material.dart';
 
 class ReportDialog extends StatefulWidget {
   const ReportDialog({
-    Key key,
+    Key key, this.item,
   }) : super(key: key);
+
+  final NewsModel item;
 
   @override
   _ReportDialogState createState() => _ReportDialogState();
@@ -66,8 +69,8 @@ class _ReportDialogState extends State<ReportDialog> {
                 padding: EdgeInsets.all(8),
                 child: FlatButton(
                     onPressed: () {
-                      print(_options.where(
-                          (element) => _selected[_options.indexOf(element)]));
+                      widget.item.report(_options.where(
+                          (element) => _selected[_options.indexOf(element)]).toList());
                       Navigator.of(context).pop();
                     },
                     child: Text('Report')),
