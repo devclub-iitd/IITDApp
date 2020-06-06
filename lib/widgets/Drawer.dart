@@ -45,7 +45,7 @@ class AppDrawer extends StatelessWidget {
               text: 'Calendar',
               context: context,
               routeName: Routes.calendar,
-              loginRequired: true),
+              loginRequired: false),
           Divider(),
           ListTile(
             title: Text(

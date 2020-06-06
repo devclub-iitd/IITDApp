@@ -1,14 +1,17 @@
 
 part of event_calendar;
 
-void getAllEvents(var controlEvents,int type) async {
+void getAllEvents(var controlEvents,int type,DateTime startTime,DateTime endTime) async {
   var queryParameters = {
-    'startTime': '2020-08-07T08:00:00.000Z',
-    'endTime':'2020-08-07T08:00:30.000Z'
+    'startTime': DateFormat('yyyy-MM-ddTHH:mm:ss').format(startTime)+'.000Z',
+    'endTime':  DateFormat('yyyy-MM-ddTHH:mm:ss').format(endTime)+'.000Z'
   };
   var response = await http.post('$url/api/calendar/all/',
     headers: {'authorization': 'Bearer $token'},
       body: queryParameters);
+  if(response.statusCode!=200) {
+    return;
+  }
   await getEventsFromResponse(jsonDecode(response.body)['data'][type==0?'staredEvents':'reminders'],controlEvents,type);
 }
 
@@ -24,6 +27,7 @@ Future<int> deleteReminderFromServer(var eventId) async {
           onTimeout: () async {
             success = -1;
             connectedToInternet = false;
+            QueueManager.addToList({'func': 'deleteReminderFromServer','eventId': eventId});
             return null;
         });
       if(res.statusCode!=200) {
@@ -157,12 +161,12 @@ Future<String> getServerId(var eventId) async {
   return ans;
 }
 
-Future<String> postReminder(Event ev,bool patch) async{
-  var body = {
-    'title': ev.title,
-    'startTime': '2020-06-07T08:00:20.000Z',
-    'endTime': '2020-06-07T10:00:20.000Z'
-    /**** Uncomment this *****/
+Future<String> postReminder(Event ev,bool patch,{var body}) async{
+  body ??= {
+      'title': ev.title,
+      'startTime': DateFormat('yyyy-MM-ddTHH:mm:ss').format(ev.start) + '.000Z',
+      'endTime': DateFormat('yyyy-MM-ddTHH:mm:ss').format(ev.end) + '.000Z'
+      /**** Uncomment this *****/
 //    ,
 //    'description': ev.description,
 //    'reminders': getReminderString(ev.reminders),
@@ -170,7 +174,7 @@ Future<String> postReminder(Event ev,bool patch) async{
 //    'attendees': getAttendeeString(ev.attendees),
 //    'location': ev.location,
 //    'url': ev.url,
-  };
+    };
   var response;
   var flagTimeout = false;
   if(patch){  // this will not work until backend is fixed
@@ -192,6 +196,8 @@ Future<String> postReminder(Event ev,bool patch) async{
     });
   }
   if(flagTimeout) {
+    connectedToInternet = false;
+    QueueManager.addToList({'func': 'postReminder','event': body,'patch': patch});
     return 'timeout';
   }
   if(response.statusCode!=200){

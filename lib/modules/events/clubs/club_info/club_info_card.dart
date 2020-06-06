@@ -75,9 +75,20 @@ class _SubButtonState extends State<SubButton> {
   Future onButtonPress() async {
     print('Subbing to Club');
     _enabled = false;
+    var timeOutFlag = false;
     setState(() {});
     final response = await http.post('$url/api/body/${_club.id}/subscribe',
-        headers: {'authorization': 'Bearer $token'});
+        headers: {
+          'authorization': 'Bearer $token'
+        }).timeout(Duration(seconds: 5), onTimeout: () {
+      timeOutFlag = true;
+      return null;
+    });
+    if (timeOutFlag) {
+      Scaffold.of(context)
+          .showSnackBar(SnackBar(content: Text('Cannot Connect to Server!')));
+      return;
+    }
     print(response.statusCode);
     if (response.statusCode == 200) {
       _club.isSubbed = !_club.isSubbed;

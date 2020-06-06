@@ -51,10 +51,19 @@ class StarButtonState extends State<StarButton> {
 
   Future<Null> starEvent(String eventid) async {
     print('Starring Event');
+    var timeOutFlag = false;
     final response = await http.post(
       '$url/api/events/$eventid/star',
       headers: {'authorization': 'Bearer $token'},
-    );
+    ).timeout(Duration(seconds: 5),
+    onTimeout: () {
+      timeOutFlag = true;
+      return null;
+    });
+    if(timeOutFlag){
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text('Cannot connect to server'),));
+      return;
+    }
     print(response.statusCode);
     if (response.statusCode == 200) {
       var parsedJson = json.decode(response.body);

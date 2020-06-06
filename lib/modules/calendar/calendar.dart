@@ -5,14 +5,17 @@ import 'dart:math';
 import 'package:IITDAPP/modules/calendar/data/CalendarModel.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
+import 'package:IITDAPP/widgets/loading.dart';
 import 'package:device_calendar/device_calendar.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:IITDAPP/modules/calendar/data/Constants.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 // import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:localstorage/localstorage.dart';
 //import 'package:google_fonts/google_fonts.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -30,6 +33,7 @@ part './utility/CommunFunctions.dart';
 part './widgets/CustomSwiper.dart';
 part './widgets/CustomModal.dart';
 part './serverConnection/RequestsHandler.dart';
+part './serverConnection/QueueManager.dart';
 
 List<Color> _colorCollection;
 List<String> _colorNames;
@@ -57,10 +61,7 @@ String IITDCalendarId = '';
 String starredCalendarId = '';
 String userEventsCalendarId = '';
 
-
-
 class CalendarScreen extends StatefulWidget {
-
   static const String routeName = '/calendar';
 
   @override
@@ -86,13 +87,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
   bool showAgenda;
   var lastSelectedDate;
   var exempted;
+  var _tasks;
   bool showPopUp;
   List<Appointment> agendaAppointments;
 
   CalendarController _calendarController;
 
-  void loadLicences() async {
-  }
+  void loadLicences() async {}
 
   // ignore: always_declare_return_types
   changeViewType(var view) {
@@ -122,7 +123,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     exempted = {};
     showAgenda = true;
     viewType = CalendarView.month;
-    appointments = null;//getMeetingDetails();
+    appointments = null; //getMeetingDetails();
     _calendarController = CalendarController();
     _calendarController.selectedDate = DateTime.now();
     lastSelectedDate = _calendarController.displayDate;
@@ -133,12 +134,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
     _selectedTimeZoneIndex = 0;
     _subject = '';
     _notes = '';
+    _tasks = _retrieveCalendars();
     super.initState();
-    _retrieveCalendars();
   }
 
-
-   Future _retrieveCalendars() async {
+  Future _retrieveCalendars() async {
     try {
       var permissionsGranted = await _deviceCalendarPlugin.hasPermissions();
       if (permissionsGranted.isSuccess && !permissionsGranted.data) {
@@ -149,41 +149,43 @@ class _CalendarScreenState extends State<CalendarScreen> {
       }
 
       print('Calendars will be retrieved now');
+      QueueManager.executeList(await QueueManager.getList());
 
       final calendarsResult = await _deviceCalendarPlugin.retrieveCalendars();
       setState(() {
         _calendars = calendarsResult?.data;
         print('recieved data');
         print(calendarsResult?.data);
-        _writableCalendars.asMap().forEach((idx,data) {
+        _writableCalendars.asMap().forEach((idx, data) {
           Future _retrieveCalendarEvents(bool last) async {
             final startDate = DateTime.now().add(Duration(days: -180));
             final endDate = DateTime.now().add(Duration(days: 180));
             var calendarEventsResult =
-            await _deviceCalendarPlugin.retrieveEvents(
-                data.id,
-                RetrieveEventsParams(
-                    startDate: startDate, endDate: endDate));
+                await _deviceCalendarPlugin.retrieveEvents(
+                    data.id,
+                    RetrieveEventsParams(
+                        startDate: startDate, endDate: endDate));
             calendarModel.add(CalendarModel(
                 id: data.id,
                 name: data.name,
                 accountName: data.accountName,
                 color: data.color,
                 events: calendarEventsResult));
-            if(data.name=='User Events'){
-              getAllEvents(calendarEventsResult,1);
+            if (data.name == 'User Events') {
+              getAllEvents(calendarEventsResult, 1, startDate, endDate);
             }
-            if(data.name=='IITD Connect') {
-              getAllEvents(calendarEventsResult,0);
+            if (data.name == 'IITD Connect') {
+              getAllEvents(calendarEventsResult, 0, startDate, endDate);
             }
-            if(last){
+            if (last) {
               print('last also executed');
               checkForCalIds(calendarModel);
               print('Events shud be displayed now');
-              _events = filterEvents(calendarModel,exempted);
+              _events = filterEvents(calendarModel, exempted);
             }
           }
-          _retrieveCalendarEvents(idx==_writableCalendars.length-1);
+
+          _retrieveCalendarEvents(idx == _writableCalendars.length - 1);
         });
         print('hello');
       });
@@ -195,11 +197,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
-
     void onCalendarTapped(CalendarTapDetails calendarTapDetails) {
-      if(showPopUp){
+      if (showPopUp) {
         setState(() {
           showPopUp = false;
         });
@@ -225,7 +224,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
         }
       }
 
-      if(viewType == CalendarView.month && !showAgenda && calendarTapDetails.appointments.isNotEmpty){
+      if (viewType == CalendarView.month &&
+          !showAgenda &&
+          calendarTapDetails.appointments.isNotEmpty) {
         setState(() {
           showPopUp = true;
           lastSelectedDate = _calendarController.selectedDate;
@@ -237,7 +238,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         lastSelectedDate = _calendarController.selectedDate;
         _selectedAppointment = null;
         _isAllDay = false;
-        _selectedColor= -65535;
+        _selectedColor = -65535;
         _selectedColorIndex = 0;
         _selectedTimeZoneIndex = 0;
         _subject = '';
@@ -339,7 +340,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                       showAgenda,
                       calendarModel,
                       changeExempted,
-                  exempted),
+                      exempted),
                 );
               },
               child: Icon(Icons.graphic_eq),
@@ -347,58 +348,79 @@ class _CalendarScreenState extends State<CalendarScreen> {
           ),
         ],
       ),
-      body: Stack(children: [
-        Opacity(
-          opacity: showPopUp?0.2:1,
-          child: Column(
-            children: <Widget>[
-              Expanded(
-                flex: 3,
-                child: SfCalendar(
-                  initialSelectedDate: _calendarController.displayDate,
-                  controller: _calendarController,
-                  headerHeight: 60,
-                  headerStyle: CalendarHeaderStyle(
-                      textAlign: TextAlign.center,
-                      textStyle: TextStyle(
-                          fontSize: 32, color: Colors.red,fontWeight: FontWeight.w500, letterSpacing: 1)),
-                  view: viewType,
-                  onViewChanged: (ViewChangedDetails details) {
-                    lastSelectedDate = _calendarController.selectedDate;
-                  },
-                  onTap: onCalendarTapped,
-                  firstDayOfWeek: 1,
-                  dataSource: _events, //DataSource(getMeetingDetails()),
-                  monthViewSettings: MonthViewSettings(
-                    showAgenda: showAgenda,
-                    appointmentDisplayMode: showAgenda?MonthAppointmentDisplayMode.indicator:MonthAppointmentDisplayMode.appointment,
-                    dayFormat: 'EEE',
-                    monthCellStyle: MonthCellStyle(
-                      textStyle: TextStyle(fontSize: 16, color: Colors.black),
-                      todayTextStyle: TextStyle(fontSize: 16),
+      body: FutureBuilder(
+        future: _tasks,
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error occured'));
+          }
+          else if(snapshot.connectionState==ConnectionState.done){
+            return Stack(children: [
+              Opacity(
+                opacity: showPopUp ? 0.2 : 1,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 3,
+                      child: SfCalendar(
+                        initialSelectedDate: _calendarController.displayDate,
+                        controller: _calendarController,
+                        headerHeight: 60,
+                        headerStyle: CalendarHeaderStyle(
+                            textAlign: TextAlign.center,
+                            textStyle: TextStyle(
+                                fontSize: 32,
+                                color: Colors.red,
+                                fontWeight: FontWeight.w500,
+                                letterSpacing: 1)),
+                        view: viewType,
+                        onViewChanged: (ViewChangedDetails details) {
+                          lastSelectedDate = _calendarController.selectedDate;
+                        },
+                        onTap: onCalendarTapped,
+                        firstDayOfWeek: 1,
+                        dataSource: _events, //DataSource(getMeetingDetails()),
+                        monthViewSettings: MonthViewSettings(
+                          showAgenda: showAgenda,
+                          appointmentDisplayMode: showAgenda
+                              ? MonthAppointmentDisplayMode.indicator
+                              : MonthAppointmentDisplayMode.appointment,
+                          dayFormat: 'EEE',
+                          monthCellStyle: MonthCellStyle(
+                            textStyle:
+                                TextStyle(fontSize: 16, color: Colors.black),
+                            todayTextStyle: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                        selectionDecoration: BoxDecoration(
+                          color: Colors.transparent,
+                          border: Border.all(color: Colors.blue, width: 2),
+                          borderRadius:
+                              const BorderRadius.all(Radius.circular(6)),
+                          shape: BoxShape.rectangle,
+                        ),
+                        todayHighlightColor: Colors.blue,
+                      ),
                     ),
-                  ),
-                  selectionDecoration: BoxDecoration(
-                    color: Colors.transparent,
-                    border: Border.all(color: Colors.blue, width: 2),
-                    borderRadius: const BorderRadius.all(Radius.circular(6)),
-                    shape: BoxShape.rectangle,
-                  ),
-                  todayHighlightColor: Colors.blue,
+                  ],
                 ),
               ),
-            ],
-          ),
-        ),
-        !showPopUp?Container():Center(
-          child: Container(
-            color: Colors.transparent,
-            height: 500,
-            child: Center(
-                child: CustomSwiper(_calendarController.selectedDate, _events)),
-          ),
-        ),
-      ]),
+              !showPopUp
+                  ? Container()
+                  : Center(
+                      child: Container(
+                        color: Colors.transparent,
+                        height: 500,
+                        child: Center(
+                            child: CustomSwiper(
+                                _calendarController.selectedDate, _events)),
+                      ),
+                    ),
+            ]);
+          }
+          return SpinKitWave(color: Colors.white, type: SpinKitWaveType.end);
+        },
+      ),
     );
   }
 }

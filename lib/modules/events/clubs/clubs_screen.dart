@@ -12,7 +12,7 @@ class ClubsScreen extends StatefulWidget {
 }
 
 class ClubsScreenState extends State<ClubsScreen> {
-  refresh() {
+  void refresh() {
     print('refreshing club list');
     // if (widget.l == 0)
     //   clubs = subbedClubs;
