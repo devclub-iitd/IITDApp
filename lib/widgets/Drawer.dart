@@ -45,7 +45,7 @@ class AppDrawer extends StatelessWidget {
               text: 'Calendar',
               context: context,
               routeName: Routes.calendar,
-              loginRequired: false),
+              loginRequired: true),
           Divider(),
           ListTile(
             title: Text(
@@ -79,9 +79,12 @@ class AppDrawer extends StatelessWidget {
             routeName: Routes.explore,
           ),
           _createDrawerItem(
-              selected: tag == 'Campus Map',
-              icon: Icons.map,
-              text: 'Campus Map'),
+            selected: tag == 'Campus Map',
+            icon: Icons.map,
+            text: 'Campus Map',
+            context: context,
+            routeName: Routes.map,
+          ),
         ],
       ),
     );
@@ -113,7 +116,8 @@ class AppDrawer extends StatelessWidget {
                   {
                     Navigator.pop(context),
                     if (!selected)
-                      Navigator.pushReplacementNamed(context, Routes.reqLogin,arguments: text),
+                      Navigator.pushReplacementNamed(context, Routes.reqLogin,
+                          arguments: text),
                   }
                 else
                   {

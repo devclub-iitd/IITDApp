@@ -6,6 +6,7 @@ import 'package:IITDAPP/modules/explore/explore.dart';
 import 'package:IITDAPP/modules/login/LoginScreen.dart';
 import 'package:IITDAPP/modules/login/RequestLoginScreen.dart';
 import 'package:IITDAPP/modules/quickLinks/quickLinks.dart';
+import 'package:IITDAPP/modules/map/map.dart';
 import 'package:IITDAPP/routes/Routes.dart';
 import 'package:flutter/material.dart';
 
@@ -18,6 +19,8 @@ class Router {
         return _createRoute(Attendance());
       case Routes.explore:
         return _createRoute(Explore());
+      case Routes.map:
+        return _createRoute(Map());
       case Routes.quickLinks:
         return _createRoute(QuickLinks());
       case Routes.calendar:

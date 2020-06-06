@@ -18,6 +18,5 @@ class Attendance extends StatelessWidget {
       drawer: AppDrawer(tag: 'Attendance',),
       body: AttendanceList(entryNumber),
     );
-
   }
 }
