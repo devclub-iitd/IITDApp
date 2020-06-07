@@ -27,12 +27,13 @@ class SectionHeading extends StatelessWidget {
                 color: AppColors.SECTION_HEADING_COLOR),
           ),
           RaisedButton(
-            child: Text('More', style: TextStyle(color: AppColors.RAISED_BUTTON_COLOR)),
-            highlightColor: AppColors.RAISED_BUTTON_COLOR,
+            color: AppColors.RAISED_BUTTON_COLOR,
+            child: Text('More', style: TextStyle(color: AppColors.RAISED_BUTTON_TEXT_COLOR)),
+            highlightColor: AppColors.RAISED_BUTTON_TEXT_COLOR,
             onPressed: onTap,
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18.0),
-                side: BorderSide(color: AppColors.RAISED_BUTTON_COLOR)),
+                side: BorderSide(color: AppColors.RAISED_BUTTON_TEXT_COLOR)),
           )
         ],
       ),

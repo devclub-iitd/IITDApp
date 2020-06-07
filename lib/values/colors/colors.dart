@@ -45,6 +45,7 @@ class AppColors {
   static const Color SLIDE_UP_SHEET_BUTTON_COLOR = Color(0xFF8C9EFF);
 
   //News
-  static const RAISED_BUTTON_COLOR = Color(0xFF1976D2);
-  static const SECTION_HEADING_COLOR = Color(0xFF0D47A1);
+  static const RAISED_BUTTON_TEXT_COLOR = Colors.cyan;
+  static const RAISED_BUTTON_COLOR = Color(0xFF006064);
+  static const SECTION_HEADING_COLOR = Color(0xFF00838F);
 }

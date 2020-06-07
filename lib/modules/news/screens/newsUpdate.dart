@@ -230,7 +230,7 @@ class TickButton extends StatelessWidget {
                             listen: false)
                         .refresh();
                     }).then((value) => 
-            Navigator.pop(context));
+            Navigator.of(context).popUntil((route) => route.isFirst));
             } else if (widget.title == 'Update') {
           Scaffold.of(context).showSnackBar(SnackBar(content: Text('Uploading, Please Wait'),duration: Duration(seconds:2),));
               widget.nm.update().then((value) {

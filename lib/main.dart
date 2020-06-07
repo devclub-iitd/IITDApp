@@ -40,7 +40,15 @@ void main() async {
     ],
     child: MaterialApp(
       title: 'IITD APP',
-      theme: ThemeData(primarySwatch: Colors.indigo),
+      theme: ThemeData(
+            primarySwatch: Colors.indigo,
+            hintColor: Colors.white54,
+//            scaffoldBackgroundColor: Colors.indigo[900],
+//            canvasColor: Colors.indigo[700],
+              brightness: Brightness.dark,
+//            cardColor: Colors.indigo,
+//            accentColor: Colors.lightBlueAccent
+        ),
       home: Dashboard(),
       onGenerateRoute: Router.generateRoute,
 //        routes:  {

@@ -23,8 +23,8 @@ class Indicators extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: _current == index
-                ? Color.fromRGBO(0, 0, 0, 0.9)
-                : Color.fromRGBO(0, 0, 0, 0.4),
+                ? Color.fromRGBO(255, 255, 255, 0.9)
+                : Color.fromRGBO(255, 255, 255, 0.4),
           ),
         );
       }).toList(),

@@ -22,9 +22,9 @@ class _AttendanceListState extends State<AttendanceList> {
   Widget build(BuildContext context) {
     // print('built AttendanceList');
     final loadingShimmer = SizedShimmer(
-      baseColor: Colors.purple[900],
-      highlightColor: Colors.purple[700],
-      height: 80,
+      baseColor: AppColors.COURSE_CARD.withAlpha(100),
+      highlightColor: AppColors.COURSE_CARD.withAlpha(200),
+      height: 75,
     );
     var _result = AttendanceModel.getAttendanceData(widget.entryNumber);
     return FutureBuilder(

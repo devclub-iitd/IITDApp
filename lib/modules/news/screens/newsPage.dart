@@ -55,12 +55,12 @@ class NewsPage extends StatelessWidget {
                     NewsSource(
                       sourceName: item.sourceName,
                       size: 15,
-                      color: Colors.black87,
+                      color: Colors.white70,
                     ),
                     NewsDate(
                       createdAt: item.createdAt,
                       size: 15,
-                      color: Colors.black87,
+                      color: Colors.white70,
                     ),
                   ],
                 ),
@@ -70,7 +70,7 @@ class NewsPage extends StatelessWidget {
                 child: NewsTitle(
                   title: item.title,
                   size: 20,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
               Padding(
@@ -81,7 +81,7 @@ class NewsPage extends StatelessWidget {
                     NewsAuthor(
                       author: item.author,
                       size: 15,
-                      color: Colors.black87,
+                      color: Colors.white70,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -91,18 +91,18 @@ class NewsPage extends StatelessWidget {
                           child: NewsClicks(
                             clicks: item.clicks,
                             size: 15,
-                            color: Colors.black87,
+                            color: Colors.white70,
                           ),
                         ),
                         Container(
                           height: 25,
                           width: 2,
-                          color: Colors.black54,
+                          color: Colors.white54,
                         ),
                         IconButton(
                           icon: Icon(
                             Icons.report,
-                            color: Colors.black,
+                            color: Colors.white,
                           ),
                           onPressed: () => showDialog(
                             context: context,

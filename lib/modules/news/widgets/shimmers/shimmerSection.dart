@@ -7,8 +7,8 @@ class ShimmerSection extends StatelessWidget {
     return Container(
         height: 200,
         child: Shimmer.fromColors(
-          baseColor: Colors.grey[300],
-          highlightColor: Colors.grey[100],
+          baseColor: Colors.grey[800],
+          highlightColor: Colors.grey[700],
           enabled: true,
           child: Column(
               mainAxisSize: MainAxisSize.min,

@@ -13,8 +13,8 @@ class ShimmerList extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: Shimmer.fromColors(
-        baseColor: Colors.grey[300],
-        highlightColor: Colors.grey[100],
+          baseColor: Colors.grey[800],
+          highlightColor: Colors.grey[700],
         enabled: true,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,

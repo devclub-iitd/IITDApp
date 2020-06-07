@@ -26,7 +26,7 @@ class RecentWidget extends StatelessWidget {
       child: Container(
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
-          color: Colors.grey[300],
+          color: Colors.grey[800],
           borderRadius: BorderRadius.circular(5),
         ),
         width: width - 16,
@@ -59,7 +59,7 @@ class RecentWidget extends StatelessWidget {
                     top: 0,
                     child: NewsSource(
                       sourceName: item.sourceName,
-                      color: Colors.black54,
+                      color: Colors.white54,
                       size: 12.0,
                     ),
                   ),
@@ -68,27 +68,27 @@ class RecentWidget extends StatelessWidget {
                       top: 0,
                       child: NewsDate(
                         createdAt: item.createdAt,
-                        color: Colors.black54,
+                        color: Colors.white54,
                         size: 12.0,
                       )),
                   Positioned(
                     left: 0,
                     bottom: 0,
                     child: NewsAuthor(
-                        author: item.author, size: 12, color: Colors.black54),
+                        author: item.author, size: 12, color: Colors.white54),
                   ),
                   Positioned(
                     right: 0,
                     bottom: 0,
                     child: NewsClicks(
-                        clicks: item.clicks, size: 12, color: Colors.black54),
+                        clicks: item.clicks, size: 12, color: Colors.white54),
                   ),
                   Align(
                     alignment: Alignment.center,
                     child: NewsTitle(
                       title: item.title,
                       size: 15,
-                      color: Colors.black,
+                      color: Colors.white,
                     ),
                   )
                 ],
