@@ -7,6 +7,11 @@ class DataSearch extends SearchDelegate<String> {
   final MapConditions conditions;
   final MapOffset offsets;
 
+  @override
+  ThemeData appBarTheme(BuildContext context) {
+    return ThemeData.dark();
+  }
+
   DataSearch({this.conditions, this.offsets});
 
   @override

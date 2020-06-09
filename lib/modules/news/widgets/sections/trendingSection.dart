@@ -1,0 +1,87 @@
+import 'dart:math';
+
+import 'package:IITDAPP/modules/news/data/carouselIndex.dart';
+import 'package:IITDAPP/modules/news/data/newsData.dart';
+import 'package:IITDAPP/modules/news/screens/newsList/newsListPage.dart';
+import 'package:IITDAPP/modules/news/widgets/cards/trendingNewsWidget.dart';
+import 'package:IITDAPP/modules/news/widgets/indicators.dart';
+import 'package:IITDAPP/modules/news/widgets/sectionHeading.dart';
+import 'package:IITDAPP/modules/news/widgets/shimmers/sizedShimmer.dart';
+import 'package:IITDAPP/routes/Transitions.dart';
+import 'package:IITDAPP/utility/apiResponse.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+class TrendingSection extends StatelessWidget {
+  TrendingSection({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
+    print('built trending');
+    final news = Provider.of<NewsProvider<TrendingNews>>(context);
+    if (news.displayedData.status == Status.ERROR) {
+      return Column(
+        children: <Widget>[
+          SectionHeading(
+            text: 'Trending',
+            onTap: () {
+              Navigator.of(context).push(FadeRoute(
+                  page: NewsList<TrendingNews>(
+                title: 'Trending',
+              )));
+            },
+          ),
+          SizedBox(
+            width: width,
+            height: width * 2 / 3,
+            child: Center(child: Text(news.displayedData.message)),
+          ),
+        ],
+      );
+    }
+    var indicator, carousel;
+    if (news.displayedData.status == Status.LOADING) {
+      carousel = Container(
+          margin: EdgeInsets.all(5),
+          child: SizedShimmer(width: width, height: width * 2 / 3 - 10));
+      indicator = Container(
+          margin: EdgeInsets.all(5),
+          child: SizedShimmer(width: width / 4, height: 15));
+    }
+    if (news.displayedData.status == Status.COMPLETED) {
+      indicator = Indicators(
+        length: news.itemsPerPage,
+      );
+      carousel = CarouselSlider.builder(
+          itemCount: min(news.itemsPerPage, news.maxNewsItems),
+          itemBuilder: (_, index) => TrendingWidget(
+              width: width, item: news.displayedData.data[index]),
+          options: CarouselOptions(
+              autoPlay: true,
+              height: width * 2 / 3,
+              viewportFraction: 1,
+              onPageChanged: (index, r) {
+                Provider.of<CarouselIndex>(context, listen: false)
+                    .setCurrent(index);
+              }));
+    }
+    return Column(children: [
+      SectionHeading(
+        text: 'Trending',
+        onTap: () {
+          Navigator.of(context).push(FadeRoute(
+              page: NewsList<TrendingNews>(
+            title: 'Trending',
+          )));
+        },
+      ),
+      carousel,
+      indicator,
+      Divider(height: 1, thickness: 1)
+    ]);
+  }
+}

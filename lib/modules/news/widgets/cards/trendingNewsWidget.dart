@@ -1,0 +1,62 @@
+import 'package:flutter/material.dart';
+
+import 'package:IITDAPP/modules/news/screens/newsPage.dart';
+import 'package:IITDAPP/modules/news/data/newsData.dart';
+import 'imageOverlay/newsImage.dart';
+import 'imageOverlay/overlayTitle.dart';
+import 'imageOverlay/overlayHeading.dart';
+
+class TrendingWidget extends StatelessWidget {
+  const TrendingWidget({
+    Key key,
+    @required this.width,
+    this.item,
+  }) : super(key: key);
+
+  final double width;
+  final NewsModel item;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () => Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => NewsPage(
+            item: item,
+            imageTag: 't${item.imgUrl}${item.author}${item.clicks}',
+          ),
+        ),
+      ),
+      child: Container(
+        margin: EdgeInsets.all(5.0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.all(Radius.circular(5.0)),
+          child: Stack(
+            children: <Widget>[
+              Hero(
+                  tag: 't${item.imgUrl}${item.author}${item.clicks}',
+                  child: NewsImage(
+                    url: item.imgUrl,
+                    height: width * 2 / 3,
+                  )),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Overlaytitle(item: item),
+              ),
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: OverlayHeading(item: item),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

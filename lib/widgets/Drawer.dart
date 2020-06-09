@@ -81,6 +81,12 @@ class AppDrawer extends StatelessWidget {
               text: 'Campus Map',
             context: context,
             routeName: Routes.map,),
+          _createDrawerItem(
+              selected: tag == 'News',
+              icon: Icons.fiber_new,
+              text: 'News',
+            context: context,
+            routeName: Routes.news,),
         ],
       ),
     );
