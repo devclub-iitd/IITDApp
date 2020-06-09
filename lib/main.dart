@@ -1,8 +1,9 @@
-//import 'package:IITDAPP/modules/dashboard/dashboard.dart';
-import 'package:IITDAPP/modules/login/LoginScreen.dart';
+import 'package:IITDAPP/modules/dashboard/dashboard.dart';
+import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/routes/router.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_core/core.dart';
 
 void main() async {
@@ -16,11 +17,21 @@ void main() async {
     print('secrets.json file is required');
   }
 
-
-  runApp(
-      MaterialApp(
-        title: 'IITD APP',
-        theme: ThemeData(
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider(
+        create: (_) => NewsProvider<TrendingNews>(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => NewsProvider<RecentNews>(),
+      ),
+      ChangeNotifierProvider(
+        create: (_) => NewsProvider<OldNews>(),
+      ),
+    ],
+    child: MaterialApp(
+      title: 'IITD APP',
+      theme: ThemeData(
             primarySwatch: Colors.indigo,
             hintColor: Colors.white54,
 //            scaffoldBackgroundColor: Colors.indigo[900],
@@ -29,16 +40,13 @@ void main() async {
 //            cardColor: Colors.indigo,
 //            accentColor: Colors.lightBlueAccent
         ),
-        home: LoginScreen(),
-        onGenerateRoute: Router.generateRoute,
+      home: Dashboard(),
+      onGenerateRoute: Router.generateRoute,
 //        routes:  {
 //          Routes.dashboard: (context) => Dashboard(),
 //          Routes.attendance: (context) => Attendance(),
 //          Routes.explore: (context) => Explore(),
 //        },
-      )
-  );
-
+    ),
+  ));
 }
-
-

@@ -1,4 +1,3 @@
-import 'package:IITDAPP/modules/login/userlogin/profile_icon.dart';
 import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
@@ -37,7 +36,6 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _controller = TabController(length: 3, vsync: this);
     appBar = CustomAppBar(
       title: Text('$title'),
-      actions: <Widget>[ProfileIcon(widget.onlogout)],
       height: 2,
       bottom: TabBar(
         indicatorColor: Colors.white70,
@@ -119,7 +117,6 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               if (index == 1) {
                 appBar = CustomAppBar(
                   title: Text('$title'),
-                  actions: <Widget>[ProfileIcon(widget.onlogout)],
                   height: 2,
                   bottom: TabBar(
                     indicatorColor: Colors.white70,
@@ -134,7 +131,6 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               } else {
                 appBar = CustomAppBar(
                   title: Text('$title'),
-                  actions: <Widget>[ProfileIcon(widget.onlogout)],
                 );
               }
             });

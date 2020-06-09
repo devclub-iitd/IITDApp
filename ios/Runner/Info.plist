@@ -24,6 +24,8 @@
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Location in use</string>
 	<key>NSCalendarsUsageDescription</key>
     <string>INSERT_REASON_HERE</string>
 	<key>UIMainStoryboardFile</key>
