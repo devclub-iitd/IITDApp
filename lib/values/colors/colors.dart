@@ -41,16 +41,16 @@ class AppColors {
   static const Color MAP_BACKGROUND_COLOR = Color.fromRGBO(40, 50, 40, 50);
   static const Color CURRENT_LOCATION_LABEL_COLOR = Colors.indigo;
   static const Color CURRENT_LOCATION_COLOR = Colors.indigo;
-  static const Color FLOATING_BUTTON_BG = Colors.indigo;
-  static const Color FLOATING_BUTTON_FG = Colors.white;
-  static const Color FLOATING_BUTTON_SELECTED_BG = Colors.white;
-  static const Color FLOATING_BUTTON_SELECTED_FG = Colors.indigo;
-  static const Color SLIDE_UP_SHEET_COLOR = Color(0xFF5C6BC0);
+  static const Color FLOATING_BUTTON_BG = Colors.black;
+  static const Color FLOATING_BUTTON_FG = Colors.cyanAccent;
+  static const Color FLOATING_BUTTON_SELECTED_BG = Colors.cyanAccent;
+  static const Color FLOATING_BUTTON_SELECTED_FG = Colors.black;
+  static const Color SLIDE_UP_SHEET_COLOR = Colors.black;
   static const Color SLIDE_UP_SHEET_TEXT_COLOR = Colors.white54;
-  static const Color SLIDE_UP_SHEET_BUTTON_COLOR = Color(0xFF8C9EFF);
+  static const Color SLIDE_UP_SHEET_BUTTON_COLOR = Colors.cyanAccent;
 
   //News
-  static const RAISED_BUTTON_TEXT_COLOR = Colors.cyan;
-  static const RAISED_BUTTON_COLOR = Color(0xFF006064);
-  static const SECTION_HEADING_COLOR = Color(0xFF00838F);
+  static const RAISED_BUTTON_TEXT_COLOR = Color(0xFF0d47A1);
+  static const RAISED_BUTTON_COLOR = Colors.lightBlue;
+  static const SECTION_HEADING_COLOR = Colors.white70;
 }

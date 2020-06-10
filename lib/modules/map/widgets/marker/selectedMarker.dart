@@ -17,6 +17,7 @@ class SelectedMarker extends StatelessWidget {
       alignment: Alignment.bottomCenter,
       child: Icon(
         Icons.location_on,
+        color: Colors.black,
         size: selectedIconSize,
       ),
     );

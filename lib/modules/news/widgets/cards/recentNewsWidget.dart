@@ -6,6 +6,7 @@ import 'package:IITDAPP/modules/news/widgets/cards/imageOverlay/text/newsAuthor.
 import 'package:IITDAPP/modules/news/widgets/cards/imageOverlay/text/newsDate.dart';
 import 'package:IITDAPP/modules/news/widgets/cards/imageOverlay/text/newsTitle.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
+import 'package:provider/provider.dart';
 import 'imageOverlay/text/newsClicks.dart';
 import 'imageOverlay/text/newsSource.dart';
 
@@ -39,7 +40,7 @@ class RecentWidget extends StatelessWidget {
               child: SizedBox(
                 width: (width - 16) * 0.45,
                 child: Hero(
-                  tag: 'r${item.imgUrl}${item.author}${item.clicks}',
+                  tag: 'r${item.id}',
                   child: NewsImage(
                     url: item.imgUrl,
                     width: (width - 16) * 0.45,
@@ -85,23 +86,33 @@ class RecentWidget extends StatelessWidget {
                   ),
                   Align(
                     alignment: Alignment.center,
-                    child: NewsTitle(
-                      title: item.title,
-                      size: 15,
-                      color: Colors.white,
-                    ),
+                    child: Consumer<NewsHistoryProvider>(
+              builder: (_, nhp, c) => FutureBuilder(
+                  future: nhp.getViewed(item.id),
+                  builder: (_, AsyncSnapshot<bool> snapshot) =>
+                      (!snapshot.hasData || !snapshot.data)
+                          ? NewsTitle(
+                              maxLines: 2,
+                              title: item.title, size: 14, color: Colors.white)
+                          : NewsTitle(
+                              maxLines: 2,
+                              title: item.title,
+                              size: 14,
+                              color: Colors.white54)),
+            ),
                   )
                 ],
               ),
             )
           ]),
           onTap: () {
+            Provider.of<NewsHistoryProvider>(context,listen: false).setViewed(item.id);
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (_) => NewsPage(
                   item: item,
-                  imageTag: 'r${item.imgUrl}${item.author}${item.clicks}',
+                  imageTag: 'r${item.id}',
                 ),
               ),
             );

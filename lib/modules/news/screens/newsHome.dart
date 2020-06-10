@@ -1,7 +1,7 @@
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:IITDAPP/globals.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/news/widgets/sections/recentsSection.dart';
 import 'package:IITDAPP/modules/news/widgets/sections/trendingSection.dart';

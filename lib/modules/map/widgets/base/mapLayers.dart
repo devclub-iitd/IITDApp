@@ -1,4 +1,7 @@
+import 'package:IITDAPP/modules/dashboard/widgets/errorWidget.dart';
 import 'package:IITDAPP/modules/map/data/slidePanelPosition.dart';
+import 'package:IITDAPP/modules/map/widgets/customSearchBar.dart';
+import 'package:IITDAPP/modules/map/widgets/marker/marker.dart';
 import 'package:IITDAPP/values/colors/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
@@ -45,37 +48,52 @@ class _MapLayersState extends State<MapLayers> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     print('built layers');
-    return Stack(children: [
-      Container(
-        color: AppColors.MAP_BACKGROUND_COLOR,
-        alignment: Alignment.center,
-        height: MediaQuery.of(context).size.height,
-        child: MapLayer(
-          MapImage,
-          NW: NW,
-          SE: SE,
-          markers: mc.fetchData(),
-        ),
-      ),
-      Positioned(
-          top: 10, right: 10, child: FilterButton(controller: _controller)),
-      Consumer<SlidePanelPosition>(
-        builder: (_, spp, child) {
-          print('position changed');
-          return Positioned(
-            bottom: spp.position + 10,
-            right: 10,
-            child: child,
-          );
-        },
-        child: LocationButton(mc: mc, mo: mo),
-      ),
-      Positioned(
-          top: 20,
-          right: 80,
-          child: ToggleGrid(scaleAnimation: _scaleAnimation)),
-      SlideUpSheet()
-    ]);
+    return FutureBuilder(
+        future: mc.fetchData(),
+        builder: (_, AsyncSnapshot<List<Marker>> markers) {
+          if (markers.hasError) {
+            return ErrorDisplay(refresh: mc.fetchData, error: markers.error);
+          }
+          if (markers.hasData) {
+            return Stack(children: [
+              Container(
+                color: AppColors.MAP_BACKGROUND_COLOR,
+                alignment: Alignment.center,
+                height: MediaQuery.of(context).size.height,
+                child: MapLayer(
+                  MapImage,
+                  NW: NW,
+                  SE: SE,
+                  markers: markers.data,
+                ),
+              ),
+              Positioned(
+                  top: 87,
+                  right: 10,
+                  child: FilterButton(controller: _controller)),
+              Consumer<SlidePanelPosition>(
+                builder: (_, spp, child) {
+                  print('position changed');
+                  return Positioned(
+                    bottom: spp.position + 10,
+                    right: 10,
+                    child: child,
+                  );
+                },
+                child: LocationButton(mc: mc, mo: mo),
+              ),
+              Positioned(
+                  top: 97,
+                  right: 80,
+                  child: ToggleGrid(scaleAnimation: _scaleAnimation)),
+              SlideUpSheet(),
+              SearchBar(duration: Duration(milliseconds: 5)),
+            ]);
+          }
+          else{
+            return Center(child: CircularProgressIndicator());
+          }
+        });
   }
 }
 

@@ -60,6 +60,7 @@ class _SlideUpSheetState extends State<SlideUpSheet>
 
   @override
   Widget build(BuildContext context) {
+    print('built toggle grid');
     _animationController.removeListener(changeHeight);
     _animationController.addListener(changeHeight);
     var mc = Provider.of<MapConditions>(context, listen: true);

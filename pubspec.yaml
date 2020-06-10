@@ -34,6 +34,7 @@ dependencies:
   google_fonts: ^1.1.0
   font_awesome_flutter: ^8.8.1
   flutter_speed_dial: ^1.2.1
+  back_button_interceptor: ^4.2.4
   flutter_svg: ^0.17.4
   url_launcher: ^5.4.7
   expandable: ^4.1.4
@@ -45,6 +46,7 @@ dependencies:
   modal_bottom_sheet: ^0.1.5
   flutter_swiper: ^1.1.6
   localstorage: ^3.0.2+5
+  timeago: ^2.0.26
   device_calendar: ^3.1.0    # comment this and uncomment either of below 2 url lines if only want to add for one platform
 # device_calendar:
 #    git:

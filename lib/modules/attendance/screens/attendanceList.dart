@@ -1,10 +1,12 @@
+import 'package:IITDAPP/modules/attendance/data/attendanceProvider.dart';
+import 'package:IITDAPP/utility/apiResponse.dart';
 import 'package:flutter/material.dart';
 
 import 'package:IITDAPP/modules/attendance/widgets/headings/attendanceListHeader.dart';
-import 'package:IITDAPP/modules/attendance/data/attendanceModel.dart';
 import 'package:IITDAPP/modules/attendance/widgets/cards/courseCard.dart';
 import 'package:IITDAPP/values/colors/colors.dart';
 import 'package:IITDAPP/modules/news/widgets/shimmers/sizedShimmer.dart';
+import 'package:provider/provider.dart';
 
 class AttendanceList extends StatefulWidget {
   final entryNumber;
@@ -20,18 +22,18 @@ class AttendanceList extends StatefulWidget {
 class _AttendanceListState extends State<AttendanceList> {
   @override
   Widget build(BuildContext context) {
+    Provider.of<AttendanceProvider>(context, listen: false)
+        .setEntryNumber(widget.entryNumber);
     // print('built AttendanceList');
     final loadingShimmer = SizedShimmer(
       baseColor: AppColors.COURSE_CARD.withAlpha(100),
       highlightColor: AppColors.COURSE_CARD.withAlpha(200),
       height: 75,
     );
-    var _result = AttendanceModel.getAttendanceData(widget.entryNumber);
-    return FutureBuilder(
-      builder: (context, AsyncSnapshot<List<AttendanceModel>> snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.active:
-          case ConnectionState.waiting:
+    return Stack(
+      children: <Widget>[
+        Consumer<AttendanceProvider>(builder: (_, ap, c) {
+          if (ap.data.status == Status.LOADING) {
             return Padding(
               padding: const EdgeInsets.all(5.0),
               child: Column(
@@ -57,31 +59,31 @@ class _AttendanceListState extends State<AttendanceList> {
                     ),
                   ]),
             );
-          case ConnectionState.done:
-            if (snapshot.hasError) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Text(
-                    'Error: ${snapshot.error}',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(color: AppColors.PRIMARY_COLOR_LIGHT),
-                  ),
-                  FlatButton(
-                    onPressed: () {
-                      setState(() {});
-                    },
-                    child: Text('REFRESH'),
-                    textColor: AppColors.PRIMARY_COLOR_DARK,
-                    color: AppColors.PRIMARY_COLOR,
-                  )
-                ],
-              );
-            }
+          } else if (ap.data.status == Status.ERROR) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  'Error: ${ap.data.message}',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(color: AppColors.PRIMARY_COLOR_LIGHT),
+                ),
+                FlatButton(
+                  onPressed: () {
+                    ap.fetchData();
+                  },
+                  child: Text('REFRESH'),
+                  textColor: AppColors.PRIMARY_COLOR_DARK,
+                  color: AppColors.PRIMARY_COLOR,
+                )
+              ],
+            );
+          } else {
             var children = <Widget>[];
-            var regular = snapshot.data.where((f) =>
+            var regular = ap.data.data.where((f) =>
                 (f.daysPresent) / (f.daysAbsent + f.daysPresent) >= 0.75);
-            var poor = snapshot.data.where(
+            var poor = ap.data.data.where(
                 (f) => (f.daysPresent) / (f.daysAbsent + f.daysPresent) < 0.75);
             if (poor.isNotEmpty) {
               children.add(AttendanceListHeader('Poor'));
@@ -94,19 +96,30 @@ class _AttendanceListState extends State<AttendanceList> {
             return RefreshIndicator(
               color: AppColors.COURSE_CARD,
               onRefresh: () {
-                print('refresh called');
-                return _result =
-                    AttendanceModel.getAttendanceData(widget.entryNumber);
+                return ap.fetchData();
               },
               child: ListView(
                 children: children,
               ),
             );
-          default:
-            return null; // success - build whatever UI elements you need
-        }
-      },
-      future: _result,
+          }
+        }),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Container(
+            width: double.infinity,
+            color: Colors.blueGrey.withOpacity(0.3),
+            padding: EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                Text('Disclaimer : This information may be inaccurate.',
+                    style: TextStyle(color: Colors.white30,)),
+              ],
+            ),
+          ),
+        )
+      ],
     );
   }
 }
