@@ -52,3 +52,57 @@ List getEventsInRange(var events, var date) {
   });
   return lis;
 }
+
+String getRecurrenceString(RecurrenceRule rRule){
+  if(rRule==null) {
+    return recurrenceOptions[0];
+  }
+  var res = '';
+  switch(rRule.recurrenceFrequency){
+    case RecurrenceFrequency.Daily:
+      res = recurrenceOptions[1];
+      break;
+    case RecurrenceFrequency.Weekly:
+      res = recurrenceOptions[2];
+      break;
+    case RecurrenceFrequency.Monthly:
+      res = recurrenceOptions[2];
+      break;
+    case RecurrenceFrequency.Yearly:
+      res = recurrenceOptions[3];
+      break;
+  }
+  return res;
+
+}
+
+String getAttendeeString(List<Attendee> lis){
+  var res = '';
+  if(lis==null) {
+    return res;
+  }
+  lis.forEach((element) {
+    res += element.emailAddress+'\n';
+  });
+  return res;
+}
+
+String getReminderString(List<Reminder> rem){
+  var res = 0;
+  if(rem==null || rem.isEmpty)
+    {
+      return '';
+    }
+  res = rem[0].minutes;
+  if(res%(60*24*7)==0) {
+    return (res/(60*24*7)).toString()+' Weeks';
+  }
+  if(res%(60*24)==0) {
+    return (res/(60*24)).toString()+' Days';
+  }
+  if(res%(60)==0) {
+    return (res/(60)).toString()+' Hours';
+  }
+  return (res).toString()+' Minutes';
+
+}

@@ -71,13 +71,13 @@ class HangoutListCard extends StatelessWidget {
                         alignment: Alignment.bottomLeft,
                         child: Row(
                         children: <Widget>[
-                      Text(data['comment'],style: TextStyle(color: Colors.lightBlue)),
+                      Text(data['comment'],style: TextStyle(color: Colors.lightBlueAccent)),
                           Spacer(),
                           IconButton(
                             onPressed: () {
                               UrlHandler.launchInBrowser(hangoutsDetails[data['name']]['loc']);
                             },
-                            icon: Icon(Icons.location_on),
+                            icon: Icon(Icons.location_on,color: Color.fromARGB(255, 240, 240, 240),),
                           ),
                         ],
                       ),
@@ -110,7 +110,7 @@ class RatingBox extends StatelessWidget {
       child: Center(
           child: Text(
         rating.toString(),
-        style: TextStyle(fontSize: 10, color: Colors.white),
+        style: TextStyle(fontSize: 12, color: Colors.white),
       )),
     );
   }

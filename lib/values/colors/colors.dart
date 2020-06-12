@@ -26,6 +26,11 @@ class AppColors {
 //  static const Color LinksSectionStart = Color.fromARGB(255, 192, 60, 90);
   static const Color LinksSectionEnd = Color.fromARGB(220,86, 204, 242);
   static const Color LinksSectionStart = Color.fromARGB(220, 67, 166, 239);
+  static const Color hintColor = Colors.white54;
+  static Color canvasColor = Colors.indigo[700]; //Colors.indigo[700];
+  static const Color cardColor = Colors.indigo;
+  static const Color accentColor = Colors.lightBlueAccent;
+
 
   //Map
   static const Color DEFAULT_LABEL_COLOR = Colors.black;
