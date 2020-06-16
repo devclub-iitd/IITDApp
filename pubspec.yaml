@@ -60,6 +60,8 @@ dependencies:
   date_format: ^1.0.8
   shared_preferences: ^0.5.7+3
   flutter_local_notifications: ^1.4.4+1
+  settings_ui: ^0.3.0
+  flare_flutter: ^2.0.3
   flutter:
     sdk: flutter
 
@@ -80,6 +82,7 @@ flutter:
   assets:
     - assets/images/
     - assets/cfg/
+    - assets/flare/
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

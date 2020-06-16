@@ -8,6 +8,7 @@ import 'package:IITDAPP/modules/login/RequestLoginScreen.dart';
 import 'package:IITDAPP/modules/map/map.dart';
 import 'package:IITDAPP/modules/news/news.dart';
 import 'package:IITDAPP/modules/quickLinks/quickLinks.dart';
+import 'package:IITDAPP/modules/settings/SettingsScreen.dart';
 
 
 class Routes {
@@ -21,5 +22,6 @@ class Routes {
   static const String events = HomeScreen.routeName;
   static const String reqLogin = RequestLoginScreen.routeName;
   static const String loginPage = LoginScreen.routeName;
+  static const String settingsPage = SettingsScreen.routeName;
 
 }
