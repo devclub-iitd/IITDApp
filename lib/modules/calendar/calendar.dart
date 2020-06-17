@@ -3,6 +3,7 @@ library event_calendar;
 import 'dart:convert';
 import 'dart:math';
 import 'package:IITDAPP/modules/calendar/data/CalendarModel.dart';
+import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
 import 'package:device_calendar/device_calendar.dart';
@@ -91,6 +92,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   var exempted;
   var _tasks;
   bool showPopUp;
+  var excludeOtherCalendars;
   List<Appointment> agendaAppointments;
 
   CalendarController _calendarController;
@@ -120,12 +122,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   @override
   void initState() {
-
+    excludeOtherCalendars = false;
     agendaAppointments = <Appointment>[];
     showPopUp = false;
     exempted = {};
-    showAgenda = true;
-    viewType = CalendarView.month;
+    getAppSettings();
+//    showAgenda = true;
+//    viewType = CalendarView.month;
     appointments = null; //getMeetingDetails();
     _calendarController = CalendarController();
     _calendarController.selectedDate = DateTime.now();
@@ -139,6 +142,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
     _notes = '';
     _tasks = _retrieveCalendars();
     super.initState();
+  }
+
+  // ignore: always_declare_return_types
+  getAppSettings() async {
+    excludeOtherCalendars = !(await SettingsHandler.getSettingValue('showOtherCalendars'));
+    var res = await SettingsHandler.getSettingValue('defaultCalendarView');
+    changeViewType(viewOptions[res]);
   }
 
   Future _retrieveCalendars() async {
@@ -160,6 +170,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
         print('recieved data');
         print(calendarsResult?.data);
         _writableCalendars.asMap().forEach((idx, data) {
+          if(excludeOtherCalendars){
+            if(!(data.name=='User Events' || data.name=='IITD Connect' || data.name=='Academic Calendar')) {
+              return;
+            }
+          }
           Future _retrieveCalendarEvents(bool last) async {
             final startDate = DateTime.now().add(Duration(days: -180));
             final endDate = DateTime.now().add(Duration(days: 180));

@@ -1,5 +1,4 @@
 import 'package:IITDAPP/modules/login/userlogin/profile_dialog.dart';
-import 'package:IITDAPP/modules/login/userlogin/profile_icon.dart';
 import 'package:IITDAPP/modules/settings/SettingsScreen.dart';
 import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:IITDAPP/values/colors/colors.dart';

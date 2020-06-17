@@ -1,5 +1,4 @@
 import 'package:IITDAPP/modules/settings/data/SettingsData.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsHandler {

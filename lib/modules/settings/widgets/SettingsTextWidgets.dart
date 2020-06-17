@@ -27,7 +27,7 @@ class _SettingsDropdownTileState extends State<SettingsDropdownTile> {
     super.initState();
   }
 
-  getValue() async {
+  Future<void> getValue() async {
     if(widget.SPkey==null) {
       return;
     }
@@ -60,7 +60,7 @@ class _SettingsDropdownTileState extends State<SettingsDropdownTile> {
     return Row(
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
-        widget.leading??Container(),
+        widget.leading??Container(width: 16,),
         Text(widget.text),
         Spacer(),
         DropdownButton(
@@ -74,6 +74,7 @@ class _SettingsDropdownTileState extends State<SettingsDropdownTile> {
               SettingsHandler.setSettingValue(widget.SPkey, getKeyFromValue(value));
             }
             this.value = getKeyFromValue(value);
+            setState(() {});
             if(widget.onChange!=null) {
               widget.onChange(value);
             }
@@ -108,7 +109,7 @@ class _SettingsSwitchTileState extends State<SettingsSwitchTile> {
     super.initState();
   }
 
-  getValues() async{
+  Future<void> getValues() async{
     if(widget.SPkey==null) {
       return;
     }
@@ -125,7 +126,7 @@ class _SettingsSwitchTileState extends State<SettingsSwitchTile> {
       children: <Widget>[
         widget.leading??Container(),
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(widget.text),
         ),
         Spacer(),
@@ -192,10 +193,12 @@ class SettingsText extends StatelessWidget {
 
 // ignore: must_be_immutable
 class SettingsTextButton extends StatelessWidget {
-  SettingsTextButton({this.text, this.onTap, this.subtitle});
+  SettingsTextButton({this.text, this.onTap, this.subtitle,this.showArrow = true});
   var subtitle;
   var text;
   var onTap;
+  var showArrow;
+
   @override
   Widget build(BuildContext context) {
     print(subtitle);
@@ -211,7 +214,7 @@ class SettingsTextButton extends StatelessWidget {
         child: ListTile(
           title: Text(text),
           subtitle: subtitle != null ? Text(subtitle) : null,
-          trailing: Icon(Icons.keyboard_arrow_right),
+          trailing: showArrow?Icon(Icons.keyboard_arrow_right):null,
         ),
       ),
     );
@@ -222,9 +225,9 @@ class SettingsSliderRow extends StatefulWidget {
   final title;
   final trailing;
   final defaultValue;
-  final double sliderHeight;
-  final int min;
-  final int max;
+  final sliderHeight;
+  final min;
+  final max;
   final fullWidth;
   final divisions;
   final isRectangular;
@@ -234,9 +237,9 @@ class SettingsSliderRow extends StatefulWidget {
   SettingsSliderRow({this.trailing,
     this.title,
     this.defaultValue = 0.0,
-    this.sliderHeight = 48,
-    this.max = 10,
-    this.min = 0,
+    this.sliderHeight = 48.0,
+    this.max = 10.0,
+    this.min = 0.0,
     this.divisions,
     this.isRectangular = false,
     this.getTexValue,
@@ -266,7 +269,7 @@ class _SettingsSliderRowState extends State<SettingsSliderRow> {
             ListTile(
               trailing: widget.trailing,
               title: Padding(
-                padding: const EdgeInsets.only(top: 6, bottom: 8),
+                padding: EdgeInsets.only(top: 6, bottom: 8),
                 child: Text(
                   widget.title,
                   style: TextStyle(fontSize: 18),
@@ -285,7 +288,7 @@ class _SettingsSliderRowState extends State<SettingsSliderRow> {
                 defaultValue: widget.defaultValue,
                 valueChangeCallback: widget.valueChangeCallback,
                 getTexValue: widget.getTexValue,
-                SPkey: widget.key
+                SPkey: widget.SPkey
               ),
             ),
           ],
@@ -293,4 +296,57 @@ class _SettingsSliderRowState extends State<SettingsSliderRow> {
       ),
     );
   }
+}
+
+class SettingsAlertDialogButton extends StatelessWidget {
+
+  SettingsAlertDialogButton({this.text,this.subtitle,this.onTap,this.alertTitle,this.alertDesc,this.acceptButton='Accept',this.cancelButton='Cancel',this.showArrow=true});
+  final text;
+  final subtitle;
+  final onTap;
+  final alertTitle;
+  final alertDesc;
+  final acceptButton;
+  final cancelButton;
+  final showArrow;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        child: SettingsTextButton(showArrow: showArrow,text:text,subtitle: subtitle,onTap: () async {
+          final action = await SettingsAlertDialog(context, title: alertTitle,desc: alertDesc,acceptButton: acceptButton,cancelButton: cancelButton);
+          onTap(action==ConfirmAction.Accept);
+        },)
+    );
+  }
+}
+
+
+enum ConfirmAction { Cancel, Accept}
+Future<ConfirmAction> SettingsAlertDialog(BuildContext context,{@required var title,@required var desc,
+var acceptButton='Accept',var cancelButton='Cancel'}) async {
+  return showDialog<ConfirmAction>(
+    context: context,
+    barrierDismissible: false, // user must tap button for close dialog!
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(title),
+        content: Text(desc),
+        actions: <Widget>[
+          FlatButton(
+            child: Text(cancelButton),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Cancel);
+            },
+          ),
+          FlatButton(
+            child: Text(acceptButton),
+            onPressed: () {
+              Navigator.of(context).pop(ConfirmAction.Accept);
+            },
+          )
+        ],
+      );
+    },
+  );
 }

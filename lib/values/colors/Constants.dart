@@ -18,14 +18,27 @@ final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 var logoutFunc;
 var loginFunc;
 bool guest = false;
+var defaultScreen = 'Dashboard';
 
-var mainScreens = {
-  'Dashboard': Dashboard,
-  'Events': HomeScreen,
-  'Calendar': CalendarScreen,
-  'News': News,
-  'Attendance': Attendance,
-  'Quick Links': QuickLinks,
-  'Explore': Explore,
-  'Map': Map
-};
+
+Widget getScreenFromTag(var tag){
+  switch(tag){
+    case 'Dashboard':
+      return Dashboard();
+    case 'Events':
+      return HomeScreen();
+    case 'Calendar':
+      return CalendarScreen();
+    case 'News':
+      return News();
+    case 'Attendance':
+      return Attendance();
+    case 'Quick Links':
+      return QuickLinks();
+    case 'Explore':
+      return Explore();
+    case 'Map':
+      return Map();
+  }
+  return null;
+}

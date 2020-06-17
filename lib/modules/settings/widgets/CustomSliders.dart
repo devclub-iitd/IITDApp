@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 
 class CustomSliderThumbCircle extends SliderComponentShape {
   final double thumbRadius;
-  final int min;
-  final int max;
+  final min;
+  final max;
   final getTextValue;
 
   const CustomSliderThumbCircle(
       {@required this.thumbRadius,
-      this.min = 0,
-      this.max = 10,
+      this.min = 0.0,
+      this.max = 10.0,
       this.getTextValue});
 
   @override
@@ -44,7 +44,7 @@ class CustomSliderThumbCircle extends SliderComponentShape {
         fontWeight: FontWeight.w700,
         color: sliderTheme.thumbColor,
       ),
-      text: getTextValue != null ? getTextValue(value) : getValue(value),
+      text: getTextValue != null ? getTextValue((max-min)*value+min) : getValue(value),
     );
 
     var tp = TextPainter(
@@ -60,7 +60,7 @@ class CustomSliderThumbCircle extends SliderComponentShape {
   }
 
   String getValue(double value) {
-    return ((max * value).round()).toString();
+    return (((max-min) * value + min).round()).toString();
   }
 }
 
@@ -115,7 +115,7 @@ class CustomSliderThumbRect extends SliderComponentShape {
             fontWeight: FontWeight.w700,
             color: sliderTheme.thumbColor,
             height: 0.9),
-        text: getTextValue != null ? getTextValue(value) : getValue(value));
+        text: getTextValue != null ? getTextValue((max-min)*value+min) : getValue(value));
     var tp = TextPainter(
         text: span,
         textAlign: TextAlign.left,
@@ -134,9 +134,9 @@ class CustomSliderThumbRect extends SliderComponentShape {
 }
 
 class CustomSliders extends StatefulWidget {
-  final double sliderHeight;
-  final int min;
-  final int max;
+  final sliderHeight;
+  final min;
+  final max;
   final fullWidth;
   final defaultValue;
   final divisions;
@@ -145,10 +145,10 @@ class CustomSliders extends StatefulWidget {
   final valueChangeCallback;
   final SPkey;
   CustomSliders(
-      {this.sliderHeight = 48,
-      this.max = 10,
-      this.min = 0,
-      this.defaultValue = 0.0,
+      {this.sliderHeight = 48.0,
+      this.max = 10.0,
+      this.min = 0.0,
+      this.defaultValue = 10.0,
       this.divisions,
       this.isRectangular = false,
       this.getTexValue,
@@ -161,7 +161,7 @@ class CustomSliders extends StatefulWidget {
 }
 
 class _CustomSlidersState extends State<CustomSliders> {
-  double _value;
+  var _value;
 
   @override
   void initState() {
@@ -248,13 +248,15 @@ class _CustomSlidersState extends State<CustomSliders> {
                     inactiveTickMarkColor: Colors.white.withOpacity(.7),
                   ),
                   child: Slider(
+                      min: widget.min,
+                      max: widget.max,
                       value: _value,
                       divisions: widget.divisions,
                       onChanged: (value) {
                         setState(() {
                           _value = value;
                         });
-                        widget.key!=null?SettingsHandler.setSettingValue(widget.SPkey, value):null;
+                        widget.SPkey!=null?SettingsHandler.setSettingValue(widget.SPkey, value):null;
                         widget.valueChangeCallback != null
                             ? widget.valueChangeCallback(value)
                             : null;

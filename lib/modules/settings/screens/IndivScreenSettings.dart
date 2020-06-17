@@ -1,11 +1,12 @@
 import 'package:IITDAPP/modules/settings/data/SettingsData.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 import 'package:IITDAPP/modules/settings/widgets/SettingsTextWidgets.dart';
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:flutter/material.dart';
 
 class IndivScreenSettings extends StatefulWidget {
   IndivScreenSettings(this.tag);
-  var tag;
+  final tag;
   @override
   _IndivScreenSettingsState createState() => _IndivScreenSettingsState();
 }
@@ -44,7 +45,14 @@ class _IndivScreenSettingsState extends State<IndivScreenSettings> {
           children: <Widget>[
             SettingsTextButton(
               text: 'Set as default Screen',
-              subtitle: 'Currently ${currentDefault} is set default'
+              subtitle: 'Currently ${currentDefault} is set as default',
+              showArrow: false,
+              onTap: () async {
+                await SettingsHandler.setSettingValue(commonKeys[0], widget.tag);
+                currentDefault = widget.tag;
+                defaultScreen = widget.tag;
+                setState(() { });
+              },
             ),
             for (var e in indivScreenSettingsData[widget.tag])
               getItem(e)

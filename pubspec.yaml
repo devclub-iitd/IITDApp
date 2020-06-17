@@ -45,7 +45,7 @@ dependencies:
   modal_bottom_sheet: ^0.1.5
   flutter_swiper: ^1.1.6
   localstorage: ^3.0.2+5
-  device_calendar: ^3.1.0    # comment this and uncomment either of below 2 url lines if only want to add for one platform
+  device_calendar: ^3.2.0-dev.11602    # comment this and uncomment either of below 2 url lines if only want to add for one platform
 # device_calendar:
 #    git:
 #      url: https://github.com/Pranjal2041/device_calendar.git   #  for android use only one of 3 options

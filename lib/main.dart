@@ -1,11 +1,14 @@
 import 'package:IITDAPP/ThemeModel.dart';
-import 'package:IITDAPP/modules/dashboard/dashboard.dart';
+import 'package:IITDAPP/modules/login/LoginScreen.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
-import 'package:IITDAPP/modules/settings/SettingsScreen.dart';
+import 'package:IITDAPP/modules/settings/data/SettingsData.dart';
+import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 import 'package:IITDAPP/routes/router.dart';
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:IITDAPP/values/colors/colors.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:flutter/material.dart';
+import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_core/core.dart';
 
@@ -19,6 +22,8 @@ void main() async {
   } catch (e) {
     print('secrets.json file is required');
   }
+
+  unawaited(initialisePreferences());
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
@@ -52,8 +57,14 @@ class MyApp extends StatelessWidget {
 ////            cardColor: Colors.indigo,
 ////            accentColor: Colors.lightBlueAccent
 //      ),
-      home: Dashboard(),
+      home: LoginScreen(),
       onGenerateRoute: Router.generateRoute,
     );
   }
+}
+
+// ignore: always_declare_return_types
+initialisePreferences() async{
+  var res = await SettingsHandler.getSettingValue(commonKeys[0]);
+  defaultScreen = res;
 }
