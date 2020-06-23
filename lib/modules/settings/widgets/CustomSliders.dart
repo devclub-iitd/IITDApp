@@ -30,7 +30,9 @@ class CustomSliderThumbCircle extends SliderComponentShape {
     SliderThemeData sliderTheme,
     TextDirection textDirection,
     double value,
-  }) {
+    double textScaleFactor,
+    Size sizeWithOverflow
+      }) {
     // ignore: omit_local_variable_types
     final Canvas canvas = context.canvas;
 
@@ -95,6 +97,8 @@ class CustomSliderThumbRect extends SliderComponentShape {
     SliderThemeData sliderTheme,
     TextDirection textDirection,
     double value,
+    double textScaleFactor,
+    Size sizeWithOverflow
   }) {
     // ignore: omit_local_variable_types
     final Canvas canvas = context.canvas;
