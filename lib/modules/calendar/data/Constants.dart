@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 var colorCollection = <Color>[
   Color(0xFFD20100),
@@ -39,3 +40,14 @@ var recurrenceOptions = <String>[
   'Monthly',
   'Annually'
 ];
+
+var viewOptions = {
+  'Day': CalendarView.day,
+  'Week': CalendarView.week,
+  'Work Week': CalendarView.workWeek,
+  'Agenda View': 0,
+  'Month': CalendarView.month,
+  'Timeline Day': CalendarView.timelineDay,
+  'Timeline Week': CalendarView.timelineWeek,
+  'Timeline WorkWeek': CalendarView.timelineWorkWeek
+};

@@ -1,4 +1,5 @@
-import 'package:IITDAPP/modules/login/userlogin/profile_icon.dart';
+import 'package:IITDAPP/modules/login/userlogin/profile_dialog.dart';
+import 'package:IITDAPP/modules/settings/SettingsScreen.dart';
 import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:IITDAPP/values/colors/colors.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    var actionsArray = <Widget>[ProfileIcon(logoutFunc)];
+    var actionsArray = <Widget>[PopupMenu()];
     if (actions != null) {
       actions.add(actionsArray[0]);
       actionsArray = actions;
@@ -52,4 +53,57 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Size get preferredSize => Size.fromHeight((height ?? 1) * kToolbarHeight);
+}
+
+// ignore: must_be_immutable
+class PopupMenu extends StatelessWidget {
+  var menuArray = [
+    PopupMenuItem<String>(
+      value: 'Settings',
+      child: Row(
+        children: <Widget>[
+          Icon(Icons.settings),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text('Settings'),
+          )
+        ],
+      ),
+    ),
+    PopupMenuItem<String>(
+      value: 'User Profile',
+      child: Row(
+        children: <Widget>[
+          Icon(Icons.person),
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: Text('User Profile'),
+          ),
+        ],
+      ),
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    // ignore: always_declare_return_types
+    handleClick(value) {
+      switch (value) {
+        case 'User Profile':
+          showAlert(context, loginFunc);
+          break;
+        case 'Settings':
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => SettingsScreen()));
+          break;
+      }
+    }
+
+    return PopupMenuButton<String>(
+      onSelected: handleClick,
+      itemBuilder: (BuildContext context) {
+        return menuArray;
+      },
+    );
+  }
 }

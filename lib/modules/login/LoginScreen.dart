@@ -180,7 +180,7 @@ class LoginScreenState extends State<LoginScreen>
           },
         )
             : (signedIn == true)
-            ? Dashboard()
+            ? getScreenFromTag(defaultScreen)
             : LoginPage(onlogin: onlogin));
   }
 

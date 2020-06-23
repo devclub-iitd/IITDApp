@@ -8,6 +8,7 @@ import 'package:IITDAPP/modules/login/RequestLoginScreen.dart';
 import 'package:IITDAPP/modules/news/news.dart';
 import 'package:IITDAPP/modules/quickLinks/quickLinks.dart';
 import 'package:IITDAPP/modules/map/map.dart';
+import 'package:IITDAPP/modules/settings/SettingsScreen.dart';
 import 'package:IITDAPP/routes/Routes.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +35,8 @@ class Router {
         return _createRoute(RequestLoginScreen(settings.arguments));
       case Routes.loginPage:
         return _createRoute(LoginScreen());
+      case Routes.settingsPage:
+        return _createRoute(SettingsScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
