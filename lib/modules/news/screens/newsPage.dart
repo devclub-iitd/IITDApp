@@ -63,12 +63,12 @@ class NewsPage extends StatelessWidget {
                         NewsSource(
                           sourceName: syncItem.sourceName,
                           size: 15,
-                          color: Colors.white70,
+                          color: Theme.of(context).textTheme.headline1.color.withOpacity(0.70),
                         ),
                         NewsDate(
                           createdAt: syncItem.createdAt,
                           size: 15,
-                          color: Colors.white70,
+                          color: Theme.of(context).textTheme.headline1.color.withOpacity(0.70),
                         ),
                       ],
                     ),
@@ -78,7 +78,7 @@ class NewsPage extends StatelessWidget {
                     child: NewsTitle(
                       title: syncItem.title,
                       size: 20,
-                      color: Colors.white,
+                      color: Theme.of(context).textTheme.headline1.color,
                     ),
                   ),
                   Padding(
@@ -90,14 +90,14 @@ class NewsPage extends StatelessWidget {
                         NewsAuthor(
                           author: syncItem.author,
                           size: 15,
-                          color: Colors.white70,
+                          color: Theme.of(context).textTheme.headline1.color.withOpacity(0.70),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(right: 8.0),
                           child: NewsClicks(
                             clicks: syncItem.clicks,
                             size: 15,
-                            color: Colors.white70,
+                            color: Theme.of(context).textTheme.headline1.color.withOpacity(0.70),
                           ),
                         ),
                       ],
@@ -132,8 +132,8 @@ class NewsPage extends StatelessWidget {
                                 color: (syncItem.details.status ==
                                             Status.COMPLETED &&
                                         syncItem.reports.isNotEmpty)
-                                    ? Colors.white
-                                    : Colors.white38,
+                                    ? Theme.of(context).textTheme.headline1.color
+                                    : Theme.of(context).textTheme.headline1.color.withOpacity(0.38),
                               )),
                           onPressed: () {
                             if (syncItem.details.status == Status.COMPLETED) {
@@ -146,7 +146,7 @@ class NewsPage extends StatelessWidget {
                           child: Text(
                             'Report This Article',
                             style:
-                                TextStyle(color: Colors.white54, fontSize: 15),
+                                TextStyle(color: Theme.of(context).textTheme.headline1.color.withOpacity(0.54), fontSize: 15),
                           ),
                           onPressed: () =>
                               Navigator.of(context).push(MaterialPageRoute(
@@ -161,7 +161,7 @@ class NewsPage extends StatelessWidget {
                       color: Colors.blueGrey.withOpacity(0.1),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text('Article Revisions : ${syncItem.version}',style: TextStyle(color:Colors.white54,fontSize: 12),),
+                        child: Text('Article Revisions : ${syncItem.version}',style: TextStyle(color:Theme.of(context).textTheme.headline1.color.withOpacity(0.54),fontSize: 12),),
                       ),
                     ),
                 ]),

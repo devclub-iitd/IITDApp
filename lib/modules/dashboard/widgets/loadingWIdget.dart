@@ -10,8 +10,8 @@ class LoadingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      baseColor: Colors.blueGrey.withOpacity(0.1),
-      highlightColor: Colors.blueGrey.withOpacity(0.5),
+      baseColor: Colors.grey.withOpacity(0.4),
+      highlightColor: Colors.grey.withOpacity(0.6),
       enabled: true,
       child: Column(
         children: List.generate(

@@ -18,7 +18,7 @@ class ErrorDisplay extends StatelessWidget {
         Text(
           'Error: ${error}',
           textAlign: TextAlign.center,
-          style: TextStyle(color: AppColors.PRIMARY_COLOR_LIGHT),
+          style: TextStyle(color: Theme.of(context).textTheme.headline1.color),
         ),
         FlatButton(
           onPressed: () {

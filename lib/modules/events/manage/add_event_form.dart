@@ -14,7 +14,7 @@ import 'dart:async';
 
 import '../events/event_class.dart';
 
-Future<Event> addEventRequest(Event event, BuildContext context) async {
+Future<void> addEventRequest(Event event, BuildContext context) async {
   print(event.toMap());
   final response = await http.post('$url/api/events',
       headers: {'authorization': 'Bearer $token'}, body: event.toMap());
@@ -33,7 +33,6 @@ Future<Event> addEventRequest(Event event, BuildContext context) async {
         content: Text('Cannot add event. Try Again'),
       ));
     }
-    return Event.fromJson(parsedJson);
   } else {
     Navigator.pop(context);
     Scaffold.of(context).showSnackBar(SnackBar(

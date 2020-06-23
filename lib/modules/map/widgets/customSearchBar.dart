@@ -8,76 +8,10 @@ import 'package:IITDAPP/modules/map/data/mapOffsets.dart';
 import 'package:IITDAPP/modules/map/widgets/marker/marker.dart';
 import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:IITDAPP/values/colors/colors.dart';
+import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
-
-// void main() => runApp(MyApp());
-
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       title: 'Flutter Demo',
-//       debugShowCheckedModeBanner: false,
-//       theme: ThemeData(
-//         primarySwatch: Colors.blue,
-//       ),
-//       home: MyHomePage(title: 'Flutter Demo Home Page', suggestions: [
-//         'advice',
-//         'selection',
-//         'callous',
-//         'terrible',
-//         'bow',
-//         'well-to-do',
-//         'inhale',
-//         'walk',
-//         'open',
-//         'tiger',
-//         'fabulous',
-//         'fly',
-//         'owe',
-//         'hysterical',
-//         'sob',
-//         'receive',
-//         'umbrella',
-//         'quicksand',
-//         'melted',
-//         'way',
-//         'tree',
-//         'wellmade',
-//         'ultra',
-//         'conquer',
-//         'stale',
-//         'simplistic',
-//         'chase',
-//         'memory',
-//         'rail',
-//         'shape',
-//         'physical',
-//         'pacify',
-//         'carry',
-//         'toes',
-//         'tendency',
-//         'imitatead',
-//         'just',
-//         'mentredo',
-//         'scarce',
-//         'spicy',
-//         'nursed',
-//         'rop',
-//         'partner',
-//         'afternoon',
-//         'super',
-//         'surpass',
-//         'flat',
-//         'toes',
-//         'quick',
-//         'fruit'
-//       ]),
-//     );
-//   }
-// }
 
 class SearchBar extends StatefulWidget {
   const SearchBar({
@@ -169,6 +103,7 @@ class _SearchBarState extends State<SearchBar> with TickerProviderStateMixin {
                               child: GestureDetector(
                                   child: AnimatedIcon(
                                       icon: AnimatedIcons.menu_arrow,
+                                      color: Colors.white60,
                                       progress: _controller),
                                   onTap: () {
                                     if (!expanded) {
@@ -206,7 +141,7 @@ class _SearchBarState extends State<SearchBar> with TickerProviderStateMixin {
                                 onTap: toggleExpansion,
                               ),
                             ),
-                            GestureDetector(child:expanded?Icon(Icons.cancel):Icon(Icons.account_circle, color: Colors.cyan),onTap: ()=>(!expanded)?showAlert(context, logoutFunc):setState(()=>resetSearch()),)
+                            GestureDetector(child:expanded?Icon(Icons.cancel):Transform.scale(scale:1.8,child: FittedBox(child: PopupMenu())),onTap: ()=>(!expanded)?showAlert(context, logoutFunc):setState(()=>resetSearch()),)
                           ])),
                       AnimatedContainer(
                         margin: expanded

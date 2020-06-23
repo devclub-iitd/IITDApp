@@ -24,7 +24,7 @@ class SectionHeading extends StatelessWidget {
             style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 25,
-                color: AppColors.SECTION_HEADING_COLOR),
+                color: Theme.of(context).textTheme.headline1.color.withOpacity(0.54),),
           ),
           RaisedButton(
             color: AppColors.RAISED_BUTTON_COLOR,

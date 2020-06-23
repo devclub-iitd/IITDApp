@@ -41,11 +41,12 @@ class NewsHome extends StatelessWidget {
       ),
       body: RefreshIndicator(
         onRefresh: () {
-          return Provider.of<NewsProvider<TrendingNews>>(context, listen: false)
-              .refresh()
-              .then((value) =>
-                  Provider.of<NewsProvider<RecentNews>>(context, listen: false)
-                      .refresh());
+          return Future.wait([
+            Provider.of<NewsProvider<TrendingNews>>(context, listen: false)
+                .refresh(),
+            Provider.of<NewsProvider<RecentNews>>(context, listen: false)
+                .refresh()
+          ]);
         },
         child: SingleChildScrollView(
             child: Column(children: [

@@ -13,7 +13,6 @@ import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_core/core.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
@@ -27,20 +26,25 @@ void main() async {
   unawaited(initialisePreferences());
 
   runApp(MultiProvider(providers: [
-      ChangeNotifierProvider(
-        create: (_) => NewsProvider<TrendingNews>(),
-      ),
-      ChangeNotifierProvider(
-        create: (_) => NewsProvider<RecentNews>(),
-      ),
-      ChangeNotifierProvider(
-        create: (_) => NewsProvider<OldNews>(),
-      ),
-      ChangeNotifierProvider(
-        create: (_) => AttendanceProvider(),
-      ),
-      ChangeNotifierProvider(create: (_)=>NewsHistoryProvider())
-    ], child: MyApp()));
+    ChangeNotifierProvider(
+      create: (_) => NewsProvider<TrendingNews>(),
+    ),
+    ChangeNotifierProvider(
+      create: (_) => NewsProvider<RecentNews>(),
+    ),
+    ChangeNotifierProvider(
+      create: (_) => NewsProvider<OldNews>(),
+    ),
+    ChangeNotifierProvider(
+      create: (_) => AttendanceProvider(),
+    ),
+    ChangeNotifierProvider(
+      create: (_) => NewsHistoryProvider(),
+    ),
+    ChangeNotifierProvider<ThemeModel>(
+      create: (_) => ThemeModel(),
+    )
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -48,8 +52,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'IITD APP',
-      theme: Provider.of<ThemeModel>(context).themeType==ThemeType.Dark?darkTheme:lightTheme,
-      darkTheme: Provider.of<ThemeModel>(context).themeType==ThemeType.Light?lightTheme:darkTheme,
+      theme: Provider.of<ThemeModel>(context).themeType == ThemeType.Dark
+          ? darkTheme
+          : lightTheme,
+      darkTheme: Provider.of<ThemeModel>(context).themeType == ThemeType.Light
+          ? lightTheme
+          : darkTheme,
 //      ThemeData(
 ////        primarySwatch: Colors.indigo,
 //        hintColor: Colors.white54,
@@ -66,7 +74,7 @@ class MyApp extends StatelessWidget {
 }
 
 // ignore: always_declare_return_types
-initialisePreferences() async{
+initialisePreferences() async {
   var res = await SettingsHandler.getSettingValue(commonKeys[0]);
   defaultScreen = res;
 }
