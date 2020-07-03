@@ -1,26 +1,29 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:IITDAPP/modules/news/data/report.dart';
+import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 import 'package:IITDAPP/utility/apiHelper.dart';
 import 'package:IITDAPP/utility/apiResponse.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:localstorage/localstorage.dart';
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
 
 class NewsHistoryProvider with ChangeNotifier {
   final ls = LocalStorage('newsClickHistory${currentUser.id}');
   List newsHistory = [];
-  NewsHistoryProvider() {
-    ls.ready
-        .then((value) => newsHistory = (ls.getItem('newsID') ?? []) as List);
-    // ls.ready.then((value) => ls.clear());
+
+  static void clearHistory(bool clear) {
+    print('cleared');
+    final ls = LocalStorage('newsClickHistory${currentUser.id}');
+    ls.ready.then((value) => ls.clear());
   }
 
   Future<bool> getViewed(id) async {
     if (currentUser == null) {
       return false;
     }
-    await ls.ready;
+    await ls.ready
+        .then((value) => newsHistory = (ls.getItem('newsID') ?? []) as List);
     return newsHistory.contains(id);
   }
 
@@ -74,6 +77,7 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
     } on FetchDataException catch (e) {
       returnMessage = e.toString();
     }
+    notifyListeners();
     return returnMessage;
   }
 
@@ -108,9 +112,11 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
       try {
         Map detailsjson = await ApiBaseHelper().get(NewsType.baseUrl + '/$id');
         contentLocal = detailsjson['content'];
-        reports = <Report>[...detailsjson['reports']
-            .map((json) => Report.fromJson(json))
-            .toList()];
+        reports = <Report>[
+          ...detailsjson['reports']
+              .map((json) => Report.fromJson(json))
+              .toList()
+        ];
         version = detailsjson['__v'];
         updatedAt = DateTime.parse(detailsjson['updatedAt']);
         details = ApiResponse<String>.completed(contentLocal);
@@ -171,13 +177,16 @@ class OldNews extends NewsType {
 
 class NewsProvider<T extends NewsType> with ChangeNotifier {
   int maxNewsItems;
-  final itemsPerPage = 4;
+
+  static int itemsPerPage;
+
   List<bool> pageLoaded;
   List<bool> pageLoading;
   int pages;
   int pageAfterRefresh;
 
-  ApiResponse<List<NewsModel<T>>> displayedData;
+  ApiResponse<List<NewsModel<T>>> displayedData =
+      ApiResponse.loading('message');
   List<NewsModel<T>> cacheData;
 
   ApiBaseHelper api = ApiBaseHelper();
@@ -197,7 +206,9 @@ class NewsProvider<T extends NewsType> with ChangeNotifier {
     refresh();
   }
 
-  Future<void> refresh([int page = 0]) {
+  Future<void> refresh([int page = 0]) async {
+    NewsProvider.itemsPerPage =
+        int.parse(await SettingsHandler.getSettingValue('newsItemPerPage'));
     pageAfterRefresh = page;
     displayedData = ApiResponse.loading('');
     notifyListeners();
@@ -214,16 +225,19 @@ class NewsProvider<T extends NewsType> with ChangeNotifier {
   }
 
   Future<int> getMaxItems() async {
-    try{
+    try {
       maxNewsItems = (await apiBaseHelper.get(baseUrl)).length;
-    }on FetchDataException catch(e){
-      displayedData=ApiResponse.error(e.toString());
+    } on FetchDataException catch (e) {
+      displayedData = ApiResponse.error(e.toString());
       notifyListeners();
     }
-    return maxNewsItems??0;
+    return maxNewsItems ?? 0;
   }
 
   Future<void> loadPage(int pageNumber) async {
+    if (pageNumber > maxNewsItems) {
+      return;
+    }
     if (!pageLoaded[pageNumber]) {
       pageLoading[pageNumber] = true;
       try {

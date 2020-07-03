@@ -1,4 +1,7 @@
 import 'package:IITDAPP/modules/quickLinks/screens/LinksScreen.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +18,8 @@ class _QuickLinksState extends State<QuickLinks> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:
+          Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       appBar: CustomAppBar(
         title: Text('Quick Links'),
       ),

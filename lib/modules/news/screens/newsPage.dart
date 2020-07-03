@@ -1,11 +1,11 @@
 import 'package:IITDAPP/modules/dashboard/widgets/errorWidget.dart';
 import 'package:IITDAPP/modules/news/screens/resportsList.dart';
+import 'package:IITDAPP/modules/news/utility/showSnackBarResult.dart';
 import 'package:IITDAPP/modules/news/widgets/reportScreen.dart';
 import 'package:IITDAPP/utility/apiResponse.dart';
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
-import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 
 import 'package:IITDAPP/modules/news/data/newsData.dart';
@@ -16,7 +16,8 @@ import 'package:IITDAPP/modules/news/widgets/cards/imageOverlay/text/newsDate.da
 import 'package:IITDAPP/modules/news/widgets/cards/imageOverlay/text/newsTitle.dart';
 import 'package:IITDAPP/modules/news/widgets/cards/imageOverlay/text/newsSource.dart';
 import 'package:IITDAPP/modules/news/widgets/shimmers/shimmerSection.dart';
-import 'package:IITDAPP/values/colors/colors.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
 import 'newsUpdate.dart';
 
 class NewsPage extends StatelessWidget {
@@ -29,6 +30,8 @@ class NewsPage extends StatelessWidget {
     return ChangeNotifierProvider.value(
       value: item,
       builder: (_, c) => Scaffold(
+        backgroundColor:
+            Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
         body: Consumer<NewsModel>(
           builder: (_, syncItem, c) => CustomScrollView(
             slivers: <Widget>[
@@ -42,8 +45,10 @@ class NewsPage extends StatelessWidget {
                 floating: false,
                 pinned: true,
                 snap: false,
-                backgroundColorStart: AppColors.APP_BAR_START,
-                backgroundColorEnd: AppColors.APP_BAR_END,
+                backgroundColorStart:
+                    Provider.of<ThemeModel>(context).theme.APP_BAR_START,
+                backgroundColorEnd:
+                    Provider.of<ThemeModel>(context).theme.APP_BAR_END,
                 expandedHeight: 300,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Hero(
@@ -63,12 +68,20 @@ class NewsPage extends StatelessWidget {
                         NewsSource(
                           sourceName: syncItem.sourceName,
                           size: 15,
-                          color: Theme.of(context).textTheme.headline1.color.withOpacity(0.70),
+                          color: Theme.of(context)
+                              .textTheme
+                              .headline1
+                              .color
+                              .withOpacity(0.70),
                         ),
                         NewsDate(
                           createdAt: syncItem.createdAt,
                           size: 15,
-                          color: Theme.of(context).textTheme.headline1.color.withOpacity(0.70),
+                          color: Theme.of(context)
+                              .textTheme
+                              .headline1
+                              .color
+                              .withOpacity(0.70),
                         ),
                       ],
                     ),
@@ -90,14 +103,22 @@ class NewsPage extends StatelessWidget {
                         NewsAuthor(
                           author: syncItem.author,
                           size: 15,
-                          color: Theme.of(context).textTheme.headline1.color.withOpacity(0.70),
+                          color: Theme.of(context)
+                              .textTheme
+                              .headline1
+                              .color
+                              .withOpacity(0.70),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(right: 8.0),
                           child: NewsClicks(
                             clicks: syncItem.clicks,
                             size: 15,
-                            color: Theme.of(context).textTheme.headline1.color.withOpacity(0.70),
+                            color: Theme.of(context)
+                                .textTheme
+                                .headline1
+                                .color
+                                .withOpacity(0.70),
                           ),
                         ),
                       ],
@@ -125,15 +146,30 @@ class NewsPage extends StatelessWidget {
                   ),
                   currentUser.isAdmin
                       ? FlatButton(
-                          color: Colors.blueGrey.withOpacity(0.1),
+                          color: (syncItem.details.status == Status.COMPLETED &&
+                                  syncItem.reports.isNotEmpty)
+                              ? Provider.of<ThemeModel>(context, listen: false)
+                                  .theme
+                                  .RAISED_BUTTON_BACKGROUND
+                              : Provider.of<ThemeModel>(context, listen: false)
+                                  .theme
+                                  .RAISED_BUTTON_BACKGROUND
+                                  .withOpacity(0.4),
                           child: Text('View Reports',
                               style: TextStyle(
                                 fontSize: 15,
                                 color: (syncItem.details.status ==
                                             Status.COMPLETED &&
                                         syncItem.reports.isNotEmpty)
-                                    ? Theme.of(context).textTheme.headline1.color
-                                    : Theme.of(context).textTheme.headline1.color.withOpacity(0.38),
+                                    ? Provider.of<ThemeModel>(context,
+                                            listen: false)
+                                        .theme
+                                        .RAISED_BUTTON_FOREGROUND
+                                    : Provider.of<ThemeModel>(context,
+                                            listen: false)
+                                        .theme
+                                        .RAISED_BUTTON_FOREGROUND
+                                        .withOpacity(0.4),
                               )),
                           onPressed: () {
                             if (syncItem.details.status == Status.COMPLETED) {
@@ -145,15 +181,24 @@ class NewsPage extends StatelessWidget {
                       : FlatButton(
                           child: Text(
                             'Report This Article',
-                            style:
-                                TextStyle(color: Theme.of(context).textTheme.headline1.color.withOpacity(0.54), fontSize: 15),
+                            style: TextStyle(
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .headline1
+                                    .color
+                                    .withOpacity(0.54),
+                                fontSize: 15),
                           ),
-                          onPressed: () =>
-                              Navigator.of(context).push(MaterialPageRoute(
-                            builder: (_) => ReportScreen(
-                              item: syncItem,
-                            ),
-                          )),
+                          onPressed: () async {
+                            final result = await Navigator.of(context)
+                                .push(MaterialPageRoute(
+                              builder: (_) => ReportScreen(
+                                item: syncItem,
+                              ),
+                            ));
+
+                            showSnackbarResult(result, Scaffold.of(context));
+                          },
                         ),
                   if (item.details.status == Status.COMPLETED)
                     Container(
@@ -161,7 +206,16 @@ class NewsPage extends StatelessWidget {
                       color: Colors.blueGrey.withOpacity(0.1),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text('Article Revisions : ${syncItem.version}',style: TextStyle(color:Theme.of(context).textTheme.headline1.color.withOpacity(0.54),fontSize: 12),),
+                        child: Text(
+                          'Article Revisions : ${syncItem.version}',
+                          style: TextStyle(
+                              color: Theme.of(context)
+                                  .textTheme
+                                  .headline1
+                                  .color
+                                  .withOpacity(0.54),
+                              fontSize: 12),
+                        ),
                       ),
                     ),
                 ]),
@@ -191,22 +245,14 @@ class DeleteButton extends StatelessWidget {
       child: IconButton(
           icon: Icon(Icons.delete),
           onPressed: () {
-            Scaffold.of(context).showSnackBar(SnackBar(
-              content: Text('Deleting, Please Wait'),
-            ));
-            item.delete().then((value) async {
-              Scaffold.of(context).removeCurrentSnackBar();
-              Scaffold.of(context).showSnackBar(SnackBar(
-                content: Text(value),
-                duration: Duration(seconds: 1),
-              ));
-              unawaited(Provider.of<NewsProvider<TrendingNews>>(context,
-                      listen: false)
-                  .refresh());
-              await Provider.of<NewsProvider<RecentNews>>(context,
-                      listen: false)
+            showSnackbarResult('Deleting, please wait', Scaffold.of(context));
+            item.delete().then((value) {
+              Provider.of<NewsProvider<TrendingNews>>(context, listen: false)
                   .refresh();
-            }).then((value) => Navigator.pop(context));
+              Provider.of<NewsProvider<RecentNews>>(context, listen: false)
+                  .refresh();
+              Navigator.pop(context, value);
+            });
           }),
     );
   }
@@ -228,14 +274,15 @@ class EditButton extends StatelessWidget {
           boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 50)]),
       child: IconButton(
           icon: Icon(Icons.edit),
-          onPressed: () {
-            Navigator.push(
+          onPressed: () async {
+            final result = await Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (c) => NewsUpdate(
                           nm: item,
                           title: 'Update',
                         )));
+            showSnackbarResult(result, Scaffold.of(context));
           }),
     );
   }

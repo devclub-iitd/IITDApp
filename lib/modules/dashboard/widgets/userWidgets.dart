@@ -1,9 +1,12 @@
+import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/routes/Routes.dart';
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:localstorage/localstorage.dart';
+import 'package:provider/provider.dart';
+
 class UserEmail extends StatelessWidget {
   const UserEmail({
     Key key,
@@ -16,7 +19,9 @@ class UserEmail extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.02,
       child: AutoSizeText(
         currentUser.email,
-        style: TextStyle(fontSize: 500),
+        style: TextStyle(
+            fontSize: 500,
+            color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR),
       ),
     );
   }
@@ -33,7 +38,9 @@ class UserName extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.05,
       child: AutoSizeText(
         currentUser.name ?? 'Unnamed',
-        style: TextStyle(fontSize: 500),
+        style: TextStyle(
+            fontSize: 500,
+            color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR),
       ),
     );
   }
@@ -56,7 +63,6 @@ class UserImage extends StatelessWidget {
     );
   }
 }
-
 
 class SignOutButton extends StatelessWidget {
   const SignOutButton({

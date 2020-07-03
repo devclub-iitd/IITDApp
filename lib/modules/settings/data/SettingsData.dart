@@ -1,3 +1,4 @@
+import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/settings/widgets/SettingsTextWidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -51,6 +52,7 @@ var indivScreenSettingsData = {
     )),
     SettingsModel(
         widgetType: SettingsAlertDialogButton(
+            onTap: NewsHistoryProvider.clearHistory,
             text: 'Clear History',
             alertTitle: 'Clear complete news History?',
             alertDesc: 'This will erase all news history from device',

@@ -1,11 +1,13 @@
+import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/modules/login/userlogin/login_page.dart';
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/widgets/cancel_alert.dart';
 import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:pedantic/pedantic.dart';
+import 'package:provider/provider.dart';
 import 'package:validators/validators.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -155,10 +157,13 @@ class _SignUpFormState extends State<SignUpForm> {
                         'Are you sure you want to cancel making new account?');
                   },
                   child: Text('CANCEL'),
-                  color: Colors.indigo[400],
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .SIGNUP_BUTTON_COLOR,
                 ),
                 RaisedButton(
-                  color: Colors.blueAccent,
+                  color:
+                      Provider.of<ThemeModel>(context).theme.LOGIN_BUTTON_COLOR,
                   child: Text(
                     'SUBMIT',
                     style: TextStyle(color: Colors.white),

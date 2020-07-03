@@ -1,340 +1,950 @@
 [
     {
-        "name": "BioTech Lawns",
-        "subtitle": "Park",
-        "latitude": 28.545176,
-        "longitude": 77.193654,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 2,
-        "type": 3,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
+        "id": 0,
+        "cd": [
+            28.544966,
+            77.192497
+        ],
+        "name": "Dogra Hall",
+        "category": "academic",
+        "details": "IIT Delhi\"s main multipurpose auditorium hall with the iconic hyperbolic paraboloid roof.",
+        "infoUrl": "https: //en.wikipedia.org/wiki/Indian_Institute_of_Technology_Delhi",
+        "mapUrl": "https: //www.google.com/maps/place/Dogra+Hall/@28.5901753,77.1735223,13z/data=!4m8!1m2!2m1!1sdogra+hall!3m4!1s0x390d1df65e4c0773:0x20ba4c995cbfbf85!8m2!3d28.5449009!4d77.1921234",
+        "phoneUrl": "011-2659-7135",
+        "webUrl": "https: //home.iitd.ac.in/"
     },
     {
-        "name": "Main Building",
-        "subtitle": "Main Building",
-        "latitude": 28.544635,
-        "longitude": 77.192082,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 0,
-        "type": 10,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
+        "id": 1,
+        "cd": [
+            28.545379,
+            77.192362
+        ],
+        "name": "Cafe Coffee Day",
+        "category": "eat",
+        "details": "The famous Café cum restaurant, serving coffee, cakes and sandwiches at subsidized rates.",
+        "infoUrl": "https: //www.tripadvisor.in/ShowUserReviews-g304551-d13190474-r551981783-Cafe_Coffee_Day-New_Delhi_National_Capital_Territory_of_Delhi.html",
+        "mapUrl": "https: //www.google.com/maps/place/Caf%C3%A9+Coffee+Day/@28.5453802,77.192356,15z/data=!4m2!3m1!1s0x0:0xefd3c272b0349c81?sa=X&ved=2ahUKEwiPjMz4p9LqAhUTILcAHVS6BSQQ_BIwG3oECBkQCA",
+        "phoneUrl": "+9118001025093",
+        "webUrl": "https: //www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwiPjMz4p9LqAhUTILcAHVS6BSQQhAcwJ3oECCYQAg&url=http%3A%2F%2Fwww.cafecoffeeday.com%2Fcafe-menu%2F&usg=AOvVaw1KfIdk_LDEK6oyvjVTrTQv"
     },
     {
-        "name": "Lecture Hall Complex",
-        "subtitle": "Academic Building",
-        "latitude": 28.543136,
-        "longitude": 77.193248,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 1,
-        "type": 1,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
+        "id": 2,
+        "cd": [
+            28.545423,
+            77.191826
+        ],
+        "name": "SCOOPS",
+        "category": "util",
+        "details": "SCOOPS or Student Co-Operative Society is the one stop for all your stationery needs, at affordable rates.",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/SCOOPS/@28.5454204,77.1918162,15z/data=!4m2!3m1!1s0x0:0x6d4bcc8551f7c0dd?sa=X&ved=2ahUKEwjB8bq6qNLqAhWiW3wKHfmyB0oQ_BIwE3oECBIQCA",
+        "phoneUrl": "+911126597155",
+        "webUrl": ""
     },
     {
-        "name": "Block 6",
-        "subtitle": "Academic Building",
-        "latitude": 28.546861,
-        "longitude": 77.190828,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 3,
-        "type": 1,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
+        "id": 3,
+        "cd": [
+            28.545488,
+            77.191608
+        ],
+        "name": "Dept. Of Electrical Engineering",
+        "category": "academic",
+        "details": "The Department of Electrical Engineering, IIT Delhi is situated here.",
+        "infoUrl": "http: //ee.iitd.ernet.in/programmes.html",
+        "mapUrl": "https: //www.google.com/maps/place/Department+of+Electrical+Engineering/@28.5454915,77.1894161,17z/data=!3m1!4b1!4m5!3m4!1s0x390d1df69b432ec5:0x4c7708541c8923b7!8m2!3d28.5454915!4d77.1916048?hl=en",
+        "phoneUrl": "+911126596102",
+        "webUrl": "http: //ee.iitd.ernet.in/"
     },
     {
-        "name": "Block 5",
-        "subtitle": "Academic Building",
-        "latitude": 28.546558,
-        "longitude": 77.191223,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 3,
-        "type": 1,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
+        "id": 4,
+        "cd": [
+            28.545119,
+            77.191288
+        ],
+        "name": "Red Square",
+        "category": "academic",
+        "details": "A popular hangout spot, Red Square is so named because of the colour of its flooring. ",
+        "infoUrl": "",
+        "mapUrl": "",
+        "phoneUrl": "",
+        "webUrl": "https: //www.google.com/maps/place/Red+square,+IIT+DELHI/@28.5454735,77.1215651,12z/data=!4m8!1m2!2m1!1sred+square!3m4!1s0x390d1d41725491fd:0x518fb79156e8806c!8m2!3d28.5451199!4d77.1912828?hl=en"
     },
     {
-        "name": "Block 4",
-        "subtitle": "Academic Building",
-        "latitude": 28.546361,
-        "longitude": 77.191656,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 3,
-        "type": 1,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
+        "id": 5,
+        "cd": [
+            28.544848,
+            77.191558
+        ],
+        "name": "Amul Cafe",
+        "category": "eat",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+        "infoUrl": "https: //www.justdial.com/Delhi/Amul-Cafe-Registrar-IIT-New-Delhi/011PXX11-XX11-170113083022-Y6Z3_BZDET",
+        "mapUrl": "https: //www.google.com/maps/place/Amul+Cafe/@28.5449093,77.1898985,17z/data=!4m8!1m2!2m1!1samul+iit+delhi!3m4!1s0x390d1df6f4d3717f:0xfbe464f1c1ada2b9!8m2!3d28.5448431!4d77.191546?hl=en",
+        "phoneUrl": "",
+        "webUrl": "http: //amul.com/m/cafe-amul"
     },
     {
-        "name": "Block 3",
-        "subtitle": "Academic Building",
-        "latitude": 28.546073,
-        "longitude": 77.192092,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 3,
-        "type": 1,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    },
-    {
-        "name": "Block 2",
-        "subtitle": "Academic Building",
-        "latitude": 28.545984,
-        "longitude": 77.193105,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 3,
-        "type": 1,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    },
-    {
-        "name": "Block 1",
-        "subtitle": "Academic Building",
-        "latitude": 28.545796,
-        "longitude": 77.193674,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 3,
-        "type": 1,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    },
-    {
-        "name": "Central Workshop",
-        "subtitle": "Workshop",
-        "latitude": 28.543400,
-        "longitude": 77.192190,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 1,
-        "type": 1,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    },
-    {
-        "name": "Football Ground",
-        "subtitle": "Playground",
-        "latitude": 28.544878,
-        "longitude": 77.187617,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 1,
-        "type": 6,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    },
-    {
-        "name": "Hockey Ground",
-        "subtitle": "Playground",
-        "latitude": 28.543568,
-        "longitude": 77.190285,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 1,
-        "type": 6,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    },
-    {
-        "name": "Cricket Ground",
-        "subtitle": "Playground",
-        "latitude": 28.544303,
-        "longitude": 77.188970,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 1,
-        "type": 6,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    },
-    {
-        "name": "Student Activities Center",
-        "subtitle": "Activity Center",
-        "latitude": 28.544900,
-        "longitude": 77.185382,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 2,
-        "type": 6,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    },
-    {
-        "name": "Swimming Pool",
-        "subtitle": "Pool",
-        "latitude": 28.545839,
-        "longitude": 77.186101,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 2,
-        "type": 6,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    },
-    {
-        "name": "Cafetaria",
-        "subtitle": "Cafe",
-        "latitude": 28.543429,
-        "longitude": 77.191293,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 3,
-        "type": 2,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    },
-    {
-        "name": "Masala Mix",
-        "subtitle": "Food",
-        "latitude": 28.546227,
-        "longitude": 77.186645,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 2,
-        "type": 2,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    },
-    {
-        "name": "NesCafe",
-        "subtitle": "Cafe",
-        "latitude": 28.544598,
-        "longitude": 77.191728,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 3,
-        "type": 2,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    },
-    {
+        "id": 6,
+        "cd": [
+            28.544719,
+            77.19118
+        ],
         "name": "Shiru Cafe",
-        "subtitle": "Cafe",
-        "latitude": 28.544799,
-        "longitude": 77.191181,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 3,
-        "type": 2,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
+        "category": "eat",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/Shiru+Caf%C3%A9/@28.5447198,77.18899,17z/data=!3m1!4b1!4m5!3m4!1s0x390d1df6f322a9a3:0x169cff78856757e3!8m2!3d28.5447198!4d77.1911787?hl=en",
+        "phoneUrl": "",
+        "webUrl": "http: //global.shirucafe.com/"
     },
     {
+        "id": 7,
+        "cd": [
+            28.544717,
+            77.191666
+        ],
+        "name": "HPMC Store",
+        "category": "eat",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/HPMC+store/@28.5447125,77.1894686,17z/data=!3m1!4b1!4m5!3m4!1s0x390d1df65f7e86b5:0xa7db5cd397466521!8m2!3d28.5447125!4d77.1916573?hl=en",
+        "phoneUrl": "",
+        "webUrl": "https: //hpmc.gov.in/"
+    },
+    {
+        "id": 8,
+        "cd": [
+            28.544595,
+            77.191713
+        ],
+        "name": "Nescafé",
+        "category": "eat",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/HPMC+store/@28.5447125,77.1894686,17z/data=!3m1!4b1!4m5!3m4!1s0x390d1df65f7e86b5:0xa7db5cd397466521!8m2!3d28.5447125!4d77.1916573?hl=en",
+        "phoneUrl": "",
+        "webUrl": ""
+},
+    {
+        "id": 9,
+        "cd": [
+            28.544668,
+            77.191461
+        ],
+        "name": "Central Library",
+        "category": "academic",
+        "details": "IIT Delhi\"s main library with a rich collection of books and academic journals. ",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/Central+Library/@28.5449056,77.1899347,17z/data=!4m12!1m6!3m5!1s0x390d1df65e4c0773:0x20ba4c995cbfbf85!2sDogra+Hall!8m2!3d28.5449009!4d77.1921234!3m4!1s0x390d1df6f4136245:0x77ecaff1b3699806!8m2!3d28.5446611!4d77.1914528",
+        "phoneUrl": "tel:+91-11-26591451",
+        "webUrl": "http: //library.iitd.ac.in/"
+},
+    {
+        "id": 10,
+        "cd": [
+            28.546202,
+            77.191276
+        ],
+        "name": "Dept. Of Civil Engineering",
+        "category": "academic",
+        "details": "The Department of Civil Engineering, IIT Delhi is situated here.",
+        "infoUrl": "http: //civil.iitd.ac.in/index.php?lmenuid=academicprograms",
+        "mapUrl": "https: //www.google.com/maps/place/Civil+Engineering+Department/@28.5462037,77.1890884,17z/data=!3m1!4b1!4m5!3m4!1s0x390d1df682212463:0xbd6b2f68242221b7!8m2!3d28.5462037!4d77.1912771?hl=en",
+        "phoneUrl": "+911126591241",
+        "webUrl": "http: //civil.iitd.ac.in/"
+},
+    {
+        "id": 11,
+        "cd": [
+            28.547591,
+            77.188799
+        ],
+        "name": "Girnar House",
+        "category": "hostel",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+        "infoUrl": "http: //www.iitd.ac.in/content/halls-residence",
+        "mapUrl": "https: //goo.gl/maps/w63tTyrBJgxzAkHc8",
+        "phoneUrl": "+911126596890",
+        "webUrl": "http: //www.iitd.ac.in/content/halls-residence"
+},
+    {
+        "id": 12,
+        "cd": [
+            28.547718,
+            77.1892
+        ],
+        "name": "Udaigiri Hostel",
+        "category": "hostel",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+        "infoUrl": "http: //www.iitd.ac.in/content/halls-residence",
+        "mapUrl": "https: //goo.gl/maps/1KjtHKaA37fSdiq8A",
+        "phoneUrl": "+911126596899",
+        "webUrl": "http: //www.iitd.ac.in/content/halls-residence"
+},
+    {
+        "id": 13,
+        "cd": [
+            28.548277,
+            77.187985
+        ],
+        "name": "Satpura House",
+        "category": "hostel",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+        "infoUrl": "http: //www.iitd.ac.in/content/halls-residence",
+        "mapUrl": "https: //goo.gl/maps/c7UZDwrC8wKhPdXb8",
+        "phoneUrl": "+911126969111",
+        "webUrl": "http: //www.iitd.ac.in/content/halls-residence"
+},
+    {
+        "id": 14,
+        "cd": [
+            28.548729,
+            77.18622
+        ],
+        "name": "Vindhyachal Hostel",
+        "category": "hostel",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+        "infoUrl": "http: //www.iitd.ac.in/content/halls-residence",
+        "mapUrl": "https: //goo.gl/maps/ek7e1odhwHGSoSkq5",
+        "phoneUrl": "+919540099719",
+        "webUrl": "http: //www.iitd.ac.in/content/halls-residence"
+},
+    {
+        "id": 15,
+        "cd": [
+            28.54764,
+            77.185877
+        ],
         "name": "Shivalik Hostel",
-        "subtitle": "Hostel",
-        "latitude": 28.547646,
-        "longitude": 77.185889,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 2,
-        "type": 0,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    },
+        "category": "hostel",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+        "infoUrl": "http: //www.iitd.ac.in/content/halls-residence",
+        "mapUrl": "https: //goo.gl/maps/ujqQ6UiyD38w8KDy5",
+        "phoneUrl": "+911126596921",
+        "webUrl": "http: //www.iitd.ac.in/content/halls-residence"
+},
     {
+        "id": 16,
+        "cd": [
+            28.54667,
+            77.18626
+        ],
         "name": "Zanskar Hostel",
-        "subtitle": "Hostel",
-        "latitude": 28.546642,
-        "longitude": 77.186313,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 2,
-        "type": 0,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    },
+        "category": "hostel",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+        "infoUrl": "http: //www.iitd.ac.in/content/halls-residence",
+        "mapUrl": "https: //goo.gl/maps/ZgxCSeRtxHGF1PdUA",
+        "phoneUrl": "+911126597068",
+        "webUrl": "http: //www.iitd.ac.in/content/halls-residence"
+},
     {
-        "name": "Vindhyanchal Hostel",
-        "subtitle": "Hostel",
-        "latitude": 28.548470,
-        "longitude": 77.186314,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 2,
-        "type": 0,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    },
-    {
+        "id": 17,
+        "cd": [
+            28.549264,
+            77.185153
+        ],
         "name": "Kumaon Hostel",
-        "subtitle": "Hostel",
-        "latitude": 28.549162,
-        "longitude": 77.185329,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 2,
-        "type": 0,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    },
+        "category": "hostel",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+        "infoUrl": "http: //www.iitd.ac.in/",
+        "mapUrl": "https: //goo.gl/maps/Kze1176A9LS8TrPG7",
+        "phoneUrl": "+911126596992",
+        "webUrl": "http: //www.iitd.ac.in/"
+},
     {
-        "name": "Aravalli Hostel",
-        "subtitle": "Hostel",
-        "latitude": 28.548363,
-        "longitude": 77.183643,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 2,
-        "type": 0,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    },
+        "id": 18,
+        "cd": [
+            28.549678,
+            77.18394
+        ],
+        "name": "Jwalamukhi Hostel",
+        "category": "hostel",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+        "infoUrl": "http: //jwalamukhi.iitd.ac.in/",
+        "mapUrl": "https: //goo.gl/maps/eAmS1TsNP5m1LnDh6",
+        "phoneUrl": "",
+        "webUrl": "http: //jwalamukhi.iitd.ac.in/"
+},
     {
+        "id": 19,
+        "cd": [
+            28.548771,
+            77.183583
+        ],
+        "name": "Aravali Hostel",
+        "category": "hostel",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+        "infoUrl": "http: //www.iitd.ac.in/content/halls-residence",
+        "mapUrl": "https: //goo.gl/maps/mWKenH5ZZrESUHVD8",
+        "phoneUrl": "+911126596911",
+        "webUrl": "http: //www.iitd.ac.in/content/halls-residence"
+},
+    {
+        "id": 20,
+        "cd": [
+            28.547332,
+            77.183122
+        ],
+        "name": "Karakoram Hostel",
+        "category": "hostel",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+        "infoUrl": "http: //www.iitd.ac.in/",
+        "mapUrl": "https: //goo.gl/maps/FJj9G3i97T7JDpKR6",
+        "phoneUrl": "",
+        "webUrl": "http: //www.iitd.ac.in/"
+},
+    {
+        "id": 21,
+        "cd": [
+            28.546281,
+            77.182476
+        ],
+        "name": "Nilgiri Hostel",
+        "category": "hostel",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+        "infoUrl": "http: //www.iitd.ac.in/",
+        "mapUrl": "https: //goo.gl/maps/JgHDHNw9WYRDckFn6",
+        "phoneUrl": "",
+        "webUrl": "http: //www.iitd.ac.in/"
+},
+    {
+        "id": 22,
+        "cd": [
+            28.545202,
+            77.197092
+        ],
+        "name": "Himadri Hostel",
+        "category": "hostel",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+        "infoUrl": "http: //www.iitd.ac.in/content/contact-us",
+        "mapUrl": "https: //goo.gl/maps/uzupEtgPEoAg1vPq6",
+        "phoneUrl": "",
+        "webUrl": "http: //www.iitd.ac.in/content/contact-us"
+},
+    {
+        "id": 23,
+        "cd": [
+            28.544632,
+            77.196963
+        ],
+        "name": "Kailash Hostel",
+        "category": "hostel",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+        "infoUrl": "http: //www.iitd.ac.in/content/contact-us",
+        "mapUrl": "https: //goo.gl/maps/eD7q11byMmBTYRfB7",
+        "phoneUrl": "+911126596826",
+        "webUrl": "http: //www.iitd.ac.in/content/contact-us"
+},
+    {
+        "id": 24,
+        "cd": [
+            28.5428665,
+            77.1931332
+        ],
+        "name": "Lecture Hall Complex",
+        "category": "academic",
+        "details": "Arguably the most modern part of IIT Delhi, all the classes take place here.",
+        "infoUrl": "http: //www.iitd.ac.in/",
+        "mapUrl": "https: //www.google.com/maps/place/New+Lecture+Theater+Complex/@28.5428665,77.1909445,17z/data=!3m1!4b1!4m5!3m4!1s0x390d1df7c7e53247:0x622632306b9cf812!8m2!3d28.5428665!4d77.1931332?hl=en",
+        "phoneUrl": "",
+        "webUrl": ""
+},
+    {
+        "id": 25,
+        "cd": [
+            28.54343789812074,
+            77.19127982854845
+        ],
+        "name": "Staff Canteen",
+        "category": "eat",
+        "details": "IIT Delhi\"s Staff Canteen. Unlike its name, it is open to all and provides clean, hygenic and affordable meals.",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/Staff+Canteen/@28.5435735,77.1912549,15z/data=!4m2!3m1!1s0x0:0x6cda61906d75bd1b?sa=X&hl=en&ved=2ahUKEwjKgZOX9dTqAhXQyjgGHc9YDRkQ_BIwG3oECBMQCA",
+        "phoneUrl": "",
+        "webUrl": ""
+},
+    {
+        "id": 26,
+        "cd": [
+            28.54571905400154,
+            77.19358921051027
+        ],
+        "name": "Dept. of Biotechnology",
+        "category": "academic",
+        "details": "The Dept. of Biochemical Engineering and Biotechnology, IIT Delhi is situated here.",
+        "infoUrl": "http: //beb.iitd.ac.in/academics.html",
+        "mapUrl": "https: //www.google.com/maps/place/Department+of+Biochemical+Engineering+and+Biotechnology/@28.5459016,77.1918095,17z/data=!3m1!4b1!4m5!3m4!1s0x390d1df604d9d223:0xa0152dedab2a1135!8m2!3d28.5459016!4d77.1939982?hl=en",
+        "phoneUrl": "+911126591001",
+        "webUrl": "http: //beb.iitd.ac.in/"
+},
+    {
+        "id": 27,
+        "cd": [
+            28.548201298663667,
+            77.18435704708101
+        ],
+        "name": "Rajdhani Chatkare Foods",
+        "category": "eat",
+        "details": "Affordable snacks and meals across cuisines available here.",
+        "infoUrl": "https: //www.zomato.com/ncr/rajdhani-chatkhare-food-hauz-khas-new-delhi",
+        "mapUrl": "https: //www.google.com/maps/place/Rajdhani+Chatkare+Foods/@28.5482115,77.1842648,15z/data=!4m2!3m1!1s0x0:0x9afe153cd05ebaa2?sa=X&hl=en&ved=2ahUKEwjGmuG099TqAhXI7XMBHZSOAdsQ_BIwCnoECBcQCA",
+        "phoneUrl": "+919999916948",
+        "webUrl": ""
+},
+    {
+        "id": 28,
+        "cd": [
+            28.54370308948772,
+            77.19027936458589
+        ],
+        "name": "Hockey/Athletics Field",
+        "category": "sport",
+        "details": "The Institute hockey and athletics field.",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/Athletic+Sports+Complex/@28.5440509,77.1879436,18.68z/data=!4m8!1m2!2m1!1sathletics+iit+delhi!3m4!1s0x0:0x3da7970552952fdf!8m2!3d28.5435984!4d77.1896407?hl=en",
+        "phoneUrl": "",
+        "webUrl": ""
+},
+    {
+        "id": 29,
+        "cd": [
+            28.544343680524918,
+            77.1889114379883
+        ],
+        "name": "Cricket Ground",
+        "category": "sport",
+        "details": "The institute cricket ground.",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/IITD+Cricket+Ground/@28.5440509,77.1879436,18.68z/data=!4m8!1m2!2m1!1sathletics+iit+delhi!3m4!1s0x0:0x2d1159fa75a3c17b!8m2!3d28.5442746!4d77.1889208?hl=en",
+        "phoneUrl": "",
+        "webUrl": ""
+},
+    {
+        "id": 30,
+        "cd": [
+            28.544941875990535,
+            77.18845009803773
+        ],
+        "name": "Basketball Courts",
+        "category": "sport",
+        "details": "The Institute basketball courts",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/IIT+delhi+Basketball+Ground/@28.5440509,77.1879436,18.68z/data=!4m8!1m2!2m1!1sathletics+iit+delhi!3m4!1s0x0:0xcde0f54b6433ab70!8m2!3d28.5441763!4d77.1879837?hl=en",
+        "phoneUrl": "",
+        "webUrl": ""
+},
+    {
+        "id": 31,
+        "cd": [
+            28.544833541630556,
+            77.18754887580873
+        ],
+        "name": "Football Ground",
+        "category": "sport",
+        "details": "The institute football ground. Also home to the BHaichung Bhutia Football Schools.",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/Bhaichung+Bhutia+Football+Schools/@28.5440509,77.1879436,18.68z/data=!4m8!1m2!2m1!1sathletics+iit+delhi!3m4!1s0x390d1df143ff6a31:0x978fc174afc22b46!8m2!3d28.5449102!4d77.1876917?hl=en",
+        "phoneUrl": "+919582008744",
+        "webUrl": "http: //www.bbfootballschools.com/"
+},
+    {
+        "id": 32,
+        "cd": [
+            28.545126,
+            77.193483
+        ],
+        "name": "BioTech Lawns",
+        "category": "sport",
+        "details": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/Biotech+Lawns/@28.5449,77.192805,19.24z/data=!4m8!1m2!2m1!1sathletics+iit+delhi!3m4!1s0x390d1df6164b7e83:0xf3f35535e518cc44!8m2!3d28.5452118!4d77.1936167?hl=en",
+        "phoneUrl": "",
+        "webUrl": ""
+},
+    {
+        "id": 33,
+        "cd": [
+            28.545940430931072,
+            77.18602001667024
+        ],
+        "name": "Swimming Pool",
+        "category": "sport",
+        "details": "IIT Delhi\"s Olympic size, best in class swimming pool",
+        "infoUrl": "http: //www.iitd.ac.in/",
+        "mapUrl": "https: //www.google.com/maps/place/IIT+Delhi+Swimming+Pool/@28.5531205,77.1728763,16z/data=!4m8!1m2!2m1!1sswimming+pool+iit+delhi!3m4!1s0x390d1df3d5852431:0x87a0ef61281f295!8m2!3d28.5459552!4d77.1861403?hl=en",
+        "phoneUrl": "+919986541329",
+        "webUrl": ""
+},
+    {
+        "id": 34,
+        "cd": [
+            28.548183537902325,
+            77.18495249748231
+        ],
+        "name": "Volleyball Courts",
+        "category": "sport",
+        "details": "Institute Volleyball courts.",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/IIT+Delhi+Volleyball+Court,+IIT+Campus,+Indian+Institute+of+Technology+Delhi,+Hauz+Khas,+New+Delhi,+Delhi+110016/@28.5482174,77.1847116,21z/data=!4m8!1m2!2m1!1sswimming+pool+iit+delhi!3m4!1s0x390d1df25eb42103:0x292c4601011a2cd0!8m2!3d28.5482459!4d77.1847761?hl=en",
+        "phoneUrl": "",
+        "webUrl": ""
+},
+    {
+        "id": 35,
+        "cd": [
+            28.54758896789944,
+            77.18481838703157
+        ],
+        "name": "Lawn Tennis Courts",
+        "category": "sport",
+        "details": "The institute Lawn Tennis courts. Home to the Peninsula Tennis Academy.",
+        "infoUrl": "http: //www.iitd.ac.in/",
+        "mapUrl": "https: //www.google.com/maps/place/Tennis+Courts/@28.5481955,77.1843557,19.13z/data=!4m8!1m2!2m1!1sswimming+pool+iit+delhi!3m4!1s0x390d1df24601731f:0x2209fd43671535c0!8m2!3d28.5475886!4d77.1846172?hl=en",
+        "phoneUrl": "",
+        "webUrl": ""
+},
+    {
+        "id": 36,
+        "cd": [
+            28.544899,
+            77.19221
+        ],
+        "name": "Department of Mathematics",
+        "category": "academic",
+        "details": "The department of Mathematics IIT Delhi is situated here.",
+        "infoUrl": "http: //maths.iitd.ac.in/drupal/Undergraduate",
+        "mapUrl": "https: //www.google.com/maps/place/Department+of+Mathematics,+IIT+Delhi/@28.5448675,77.1919694,21z/data=!4m5!3m4!1s0x390d1df65ef41ab3:0x776445d9865b62a!8m2!3d28.5447965!4d77.1920067",
+        "phoneUrl": "+911126591471",
+        "webUrl": "http: //maths.iitd.ac.in/"
+},
+    {
+        "id": 37,
+        "cd": [
+            28.546115,
+            77.193850
+        ],
+        "name": "Department of Chemical Engineering",
+        "category": "academic",
+        "details": "The department of Chemical Engineering IIT Delhi is situated here.",
+        "infoUrl": "http: //chemistry.iitd.ac.in/courses.html",
+        "mapUrl": "https: //www.google.com/maps/place/Department+Of+Chemical+Engineering/@28.5458552,77.1933628,19.44z/data=!4m5!3m4!1s0x390d1d96497e8f9d:0xd581fb2eb97cadc7!8m2!3d28.5460689!4d77.1934915",
+        "phoneUrl": "",
+        "webUrl": "http: //chemistry.iitd.ac.in/"
+},
+    {
+        "id": 37,
+        "cd": [
+            28.545029,
+            77.190730
+        ],
+        "name": "Department of Computer Science & Engineering  ",
+      "infoUrl": "https: //www.cse.iitd.ernet.in/index.php/2011-12-29-22-45-50/courses",
+        "mapUrl": "https: //www.google.com/maps/place/Department+of+Computer+Science+and+Engineering/@28.5450865,77.1885222,17z/data=!3m1!4b1!4m5!3m4!1s0x390d1df6aeec8f6b:0xd6886dc6b70b6eb!8m2!3d28.5450865!4d77.1907109",
+        "phoneUrl": "+911126591291",
+        "webUrl": "https: //www.cse.iitd.ernet.in/"
+},
+    {
+        "id": 38,
+        "cd": [
+            28.543435,
+            77.192915
+        ],
+        "name": "Department of Design",
+        "category": "academic",
+        "details": "The Department Of Design IIT Delhi is situated here.",
+        "infoUrl": "http: //iddcweb.iitd.ac.in/",
+        "mapUrl": "https: //www.google.com/maps/place/Department+of+Design,+IIT+Delhi/@28.5434218,77.1899207,17z/data=!3m1!4b1!4m5!3m4!1s0x390d1df7aceb01cf:0x37394bfb5d80173f!8m2!3d28.5434218!4d77.1921094",
+        "phoneUrl": "",
+        "webUrl": "http: //iddcweb.iitd.ac.in/"
+},
+    {
+        "id": 39,
+        "cd": [
+            28.5452869,
+            77.1923669
+        ],
+        "name": "Department of Humanities and Social Sciences",
+        "category": "academic",
+        "details": "The Department Of HuSS IIT Delhi is situated here.",
+        "infoUrl": "http: //hss.iitd.ac.in/courses",
+        "mapUrl": "https: //www.google.com/maps/place/Department+of+Humanities+and+Social+Sciences/@28.5452869,77.1923669,21z/data=!4m14!1m8!2m7!1sdepartment+of+humanities!3m5!1sdepartment+of+humanities!2s28.543425,+77.192915!4m2!1d77.1929154!2d28.5434253!3m4!1s0x390d1df665927a0b:0xe0c148de657541a!8m2!3d28.5454395!4d77.1923219",
+        "phoneUrl": "+911126591371",
+        "webUrl": "http: //hss.iitd.ac.in/"
+},
+    {
+        "id": 40,
+        "cd": [
+            28.542632,
+            77.183011
+        ],
+        "name": "Department of Management Studies ",
+      "infoUrl": "http: //dms.iitd.ac.in/",
+        "mapUrl": "https: //www.google.com/maps/place/Department+of+Management+Studies,+IIT+Delhi/@28.5426238,77.1808715,17z/data=!3m1!4b1!4m5!3m4!1s0x390d1df1d55fb887:0xe469935d376ee021!8m2!3d28.5426238!4d77.1830602",
+        "phoneUrl": "+911126591171",
+        "webUrl": "http: //dms.iitd.ac.in/"
+},
+    {
+        "id": 41,
+        "cd": [
+            28.544346,
+            77.193415
+        ],
+        "name": "Department of Material Science and Engineering",
+        "category": "academic",
+        "details": "The Department Of Material Science and Engineering IITD.",
+        "infoUrl": "http: //mse.iitd.ac.in/",
+        "mapUrl": "https: //www.google.com/maps/place/Department+of+Materials+Science+and+Engineering/@28.5443692,77.1913546,17z/data=!3m1!4b1!4m5!3m4!1s0x390d1df6309fbc65:0xf97dd8724c49e240!8m2!3d28.5443692!4d77.1935433",
+        "phoneUrl": "",
+        "webUrl": "http: //mse.iitd.ac.in/"
+},
+    {
+        "id": 42,
+        "cd": [
+            28.5458986,
+            77.1930107
+        ],
+        "name": "Department of Mechanical Engineering",
+        "category": "academic",
+        "details": "The Department Of Mechanical Engineering IITD.",
+        "infoUrl": "http: //mech.iitd.ac.in/content/academic-programmes",
+        "mapUrl": "https: //www.google.com/maps/place/Department+of+Mechanical+Engineering/@28.5459267,77.1908014,17z/data=!3m1!4b1!4m5!3m4!1s0x390ce209ea4fb5e5:0x284dcb6bb0d51484!8m2!3d28.5459267!4d77.1929901",
+        "phoneUrl": "+911126591051",
+        "webUrl": "http: //mech.iitd.ac.in/"
+},
+    {
+        "id": 43,
+        "cd": [
+            28.5452623,
+            77.1924184
+        ],
+        "name": "Department of Physics",
+        "category": "academic",
+        "details": "The Department Of Physics IITD.",
+        "infoUrl": "http: //www.iitd.ac.in/",
+        "mapUrl": "https: //www.google.com/maps/place/Department+Of+Physics,+IIT+Delhi/@28.5452623,77.1924184,20.06z/data=!4m5!3m4!1s0x390d1dc87305e40d:0xcca0ec09258fe592!8m2!3d28.5454041!4d77.1922877",
+        "phoneUrl": "",
+        "webUrl": "http: //www.iitd.ac.in/"
+},
+    {
+        "id": 44,
+        "cd": [
+            28.543972,
+            77.193585
+        ],
+        "name": "Department of Textile & Fibre Engineering",
+        "category": "academic",
+        "details": "The Department Of Textile & Fibre Enginnering IITD.",
+        "infoUrl": "http: //textile.iitd.ac.in/programs.htm",
+        "mapUrl": "https: //www.google.com/maps/place/Department+of+Textile+and+Fibre+Engineering/@28.5442287,77.1911444,17z/data=!3m1!4b1!4m5!3m4!1s0x390d1df63a7bde9d:0xb7e99df7edb5d29a!8m2!3d28.5442287!4d77.1933331",
+        "phoneUrl": "+911126591401",
+        "webUrl": "http: //textile.iitd.ac.in/"
+},
+    {
+        "id": 44,
+        "cd": [
+            28.545558,
+            77.194176
+        ],
+        "name": "Kusuma School of Biological Sciences",
+        "category": "academic",
+        "details": "The Kusuma Schhol of Biological Sciences.",
+        "infoUrl": "http: //bioschool.iitd.ac.in/",
+        "mapUrl": "https: //www.google.com/maps/place/Kusuma+School+Of+Biological+Sciences/@28.5455658,77.1919809,17z/data=!3m1!4b1!4m5!3m4!1s0x390d1df61c0830cb:0xe9b22b5b631fe9d6!8m2!3d28.5455658!4d77.1941696",
+        "phoneUrl": "+911126597500",
+        "webUrl": "http: //bioschool.iitd.ac.in/"
+},
+    {
+        "id": 45,
+        "cd": [
+            28.5454911,
+            77.1902656
+        ],
+        "name": "Amar Nath and Shashi Khosla School of Information Technology",
+        "category": "academic",
+        "details": "School of IT.",
+        "infoUrl": "http: //www.sit.iitd.ernet.in/",
+        "mapUrl": "https: //www.google.com/maps/place/Amar+Nath+and+Shashi+Khosla+School+of+Information+Technology/@28.5454911,77.1902656,20.64z/data=!4m5!3m4!1s0x390d1df6bd59d11d:0x667b88d0e2a5a8a9!8m2!3d28.5454451!4d77.1901989",
+        "phoneUrl": "+911126596056",
+        "webUrl": "http: //www.sit.iitd.ernet.in/"
+},
+    {
+        "id": 46,
+        "cd": [
+            28.5463962,
+            77.1867577
+        ],
+        "name": "Chaayos",
+        "category": "eat",
+        "details": "Chaayos\" IIT Delhi outlet. Subsidized rates, amazing ambience and some great chai.",
+        "infoUrl": "https: //www.tripadvisor.in/ShowUserReviews-g304551-d10382590-r561220093-Chaayos_Hauz_Khas_Village-New_Delhi_National_Capital_Territory_of_Delhi.html",
+        "mapUrl": "https: //www.google.com/maps/search/chaayos+iit+delhi/@28.5463959,77.1867586,20.99z",
+        "phoneUrl": "+919821193375",
+        "webUrl": "http: //www.chaayos.com/"
+},
+    {
+        "id": 47,
+        "cd": [
+            28.546414,
+            77.186691
+        ],
+        "name": "Roopsagar Bakery",
+        "category": "eat",
+        "details": "This bakery serves pure-vegetarian treats such as cakes, pastries, cookies, snacks, cheesecakes and muffins.",
+        "infoUrl": "https: //www.justdial.com/Delhi/Roop-Sagar-Bakery-Jia-Sarai-IIT/011PXX11-XX11-140624095712-G2R4_BZDET",
+        "mapUrl": "https: //www.google.com/maps/place/Roopsagar+Bakery/@28.5462598,77.1867701,20.99z/data=!4m8!1m2!2m1!1schaayos+iit+delhi!3m4!1s0x390d1df3d079797d:0xad66433f77174401!8m2!3d28.5464176!4d77.1866872",
+        "phoneUrl": "+917838118004",
+        "webUrl": ""
+},
+    {
+        "id": 48,
+        "cd": [
+            28.546455,
+            77.186709
+        ],
+        "name": "Quiet Kitchen",
+        "category": "eat",
+        "details": "Quiet Kitchen IIT Delhi",
+        "infoUrl": "https: //www.nearbuy.com/delhi-ncr/quiet-kitchen-iit-campus",
+        "mapUrl": "https: //www.google.com/maps/place/Roopsagar+Bakery/@28.5462598,77.1867701,20.99z/data=!4m8!1m2!2m1!1schaayos+iit+delhi!3m4!1s0x390d1df3d079797d:0xad66433f77174401!8m2!3d28.5464176!4d77.1866872",
+        "phoneUrl": "",
+        "webUrl": ""
+},
+    {
+        "id": 49,
+        "cd": [
+            28.546196,
+            77.186630
+        ],
+        "name": "Masala Mix",
+        "category": "eat",
+        "details": "Masala Mix IIT Delhi",
+        "infoUrl": "https: //magicpin.in/New-Delhi/Jia-Sarai/Restaurant/Masala-Mix/store/24c966/",
+        "mapUrl": "https: //www.google.com/maps/place/Masala+Mix/@28.546261,77.1867698,21z/data=!4m8!1m2!2m1!1schaayos+iit+delhi!3m4!1s0x390d1df3d9fde9d3:0xc363b8f7c4ed3f8a!8m2!3d28.5462002!4d77.1866235",
+        "phoneUrl": "+919810061748",
+        "webUrl": ""
+},
+    {
+        "id": 50,
+        "cd": [
+            28.5471611,
+            77.186354
+        ],
+        "name": "Shadab Cafe",
+        "category": "eat",
+        "details": "Shadab Cafe, near Zanskar Hostel IIT Delhi",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/Shadab+Cafe/@28.5470604,77.1864516,21z/data=!4m8!1m2!2m1!1schaayos+iit+delhi!3m4!1s0x390d1d42fb9211",
+        "phoneUrl": "",
+        "webUrl": ""
+},
+    {
+        "id": 51,
+        "cd": [
+            28.5483362,
+            77.1841118
+        ],
+        "name": "Koolees",
+        "category": "eat",
+        "details": "Koolees Shakes and Ice Creams",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/Koolees/@28.5483362,77.1841118,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipODhrEABfAzgrLd8HtyX6iYGnmanW9_qx5eYjMt!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipODhrEABfAzgrLd8HtyX6iYGnmanW9_qx5eYjMt%3Dw203-h114-k-no!7i1920!8i1080!4m8!1m2!2m1!1schaayos+iit+delhi!3m4!1s0x390d1df2610d33ab:0xcee0f14dea219558!8m2!3d28.5482842!4d77.1842343",
+        "phoneUrl": "",
+        "webUrl": ""
+},
+    {
+        "id": 52,
+        "cd": [
+            28.5450913,
+            77.1852827
+        ],
+        "name": "Open Air Theatre",
+        "category": "ent",
+        "details": "Open Air Theatre IIT Delhi",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/Open+Air+Theatre,+IIT+Delhi/@28.5450913,77.1852827,11z/data=!4m8!1m2!2m1!1samphitheater+near+Indian+Institute+of+Technology+Delhi,+Hauz+Khas,+New+Delhi,+Delhi!3m4!1s0x390d1df1853f6eed:0xb5bdb65b286c76e0!8m2!3d28.5450913!4d77.1852827",
+        "phoneUrl": "+911126597135",
+        "webUrl": ""
+},
+    {
+        "id": 53,
+        "cd": [
+            28.5450925,
+            77.1835998
+        ],
+        "name": "Faculty Guest House",
+        "category": "other",
+        "details": "Faculty Guest House IIT Delhi",
+        "infoUrl": "http: //iitd.ac.in/",
+        "mapUrl": "https: //www.google.com/maps/place/Faculty+Guest+House/@28.5450925,77.1835998,19.12z/data=!4m11!1m2!2m1!1siit+delhi!3m7!1s0x390d1df1f9cd908f:0x2f34da024d2322f9!5m2!4m1!1i2!8m2!3d28.5453491!4d77.1836275",
+        "phoneUrl": "+911126591699",
+        "webUrl": "http: //iitd.ac.in/"
+},
+    {
+        "id": 54,
+        "cd": [
+            28.5449127,
+            77.184791
+        ],
+        "name": "Student Activity Center  ",
+        "category": "other",
+        "details": "Well maintained multi-sports facility. Accessible to the Students, Staff and Alumni only.",
+        "infoUrl": "https: //m.sportsjig.com/advancedSearch/playspaces/973/IIT-Delhi---Student-Activities-Center",
+        "mapUrl": "https: //www.google.com/maps/place/SAC+Library,+IIT+Delhi/@28.5449842,77.1850801,20.04z/data=!4m12!1m6!2m5!1ssac+iit+delhi!5m3!5m2!4m1!1i2!3m4!1s0x390d1d13172d8629:0x6422e160f6070b87!8m2!3d28.545069!4d77.1853048",
+        "phoneUrl": "",
+        "webUrl": "http: //sac.iitd.ac.in/"
+},
+    {
+        "id": 55,
+        "cd": [
+            28.5458768,
+            77.1880759
+        ],
+        "name": "Hospital",
+        "category": "other",
+        "details": "The medical needs of the Campus population met by the Institute Hospital.",
+        "infoUrl": "http: //hospital.iitd.ac.in/",
+        "mapUrl": "https: //www.google.com/maps/place/IITD+Hospital/@28.5458768,77.1880759,21z/data=!4m12!1m6!2m5!1ssac+iit+delhi!5m3!5m2!4m1!1i2!3m4!1s0x390d1df3fd840dfb:0xaa742411591954de!8m2!3d28.5458768!4d77.1882127",
+        "phoneUrl": "+911126596628",
+        "webUrl": "http: //hospital.iitd.ac.in/"
+},
+    {
+        "id": 56,
+        "cd": [
+            28.5458568,
+            77.1856583
+        ],
+        "name": "Apollo Pharmacy",
+        "category": "other",
+        "details": "The campus pharmacy.",
+        "infoUrl": "http: //stores.apollopharmacy.in/apollo-pharmacy-greater-kailash-ii-s-block-pharmacy-hauz-khas-new-delhi-30329/Home?utm_source=locator&utm_medium=googleplaces",
+        "mapUrl": "https: //www.google.com/maps/place/Apollo+Pharmacy/@28.5458568,77.1856583,17z/data=!3m1!4b1!4m5!3m4!1s0x390d1df15770dce3:0xbb86890ffb8130d9!8m2!3d28.5458568!4d77.187847",
+        "phoneUrl": "+911141402222",
+        "webUrl": "http: //stores.apollopharmacy.in/apollo-pharmacy-greater-kailash-ii-s-block-pharmacy-hauz-khas-new-delhi-30329/Home?utm_source=locator&utm_medium=googleplaces"
+},
+    {
+        "id": 57,
+        "cd": [
+            28.5438559,
+            77.1933482
+        ],
+        "name": "Chai Point",
+        "category": "eat",
+        "details": "Best place for a cup of tea inside IIT and it\"s quite pocket friendly as well .",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/Chai+point/@28.5438559,77.1933482,21z/data=!4m12!1m6!3m5!1s0x390d1df15770dce3:0xbb86890ffb8130d9!2sApollo+Pharmacy!8m2!3d28.5458568!4d77.187847!3m4!1s0x390d1d0986f3a585:0x141996188ca40268!8m2!3d28.5438882!4d77.1934082",
+        "phoneUrl": "+918880141000",
+        "webUrl": ""
+},
+    {
+        "id": 58,
+        "cd": [
+            28.5437328,
+            77.1930072
+        ],
         "name": "State Bank Of India",
-        "subtitle": "Bank",
-        "latitude": 28.543778,
-        "longitude": 77.193065,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 2,
-        "type": 8,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    },
+        "category": "other",
+        "details":
+              "State Bank of India",  
+      "infoUrl": "https: //banksifsccode.com/state-bank-of-india-ifsc-code/delhi/new-delhi/iit-hauz-khas-branch/",
+        "mapUrl": "https: //www.google.com/maps/place/State+Bank+of+India+IIT+Delhi/@28.5437328,77.1930072,20.36z/data=!4m12!1m6!3m5!1s0x390d1df15770dce3:0xbb86890ffb8130d9!2sApollo+Pharmacy!8m2!3d28.5458568!4d77.187847!3m4!1s0x390d1df64a7a253b:0xe027cf3d2506106e!8m2!3d28.5438988!4d77.1932251",
+        "phoneUrl": "+911126581842",
+        "webUrl": ""
+},
     {
-        "name": "IIT Hospital",
-        "subtitle": "Hospital",
-        "latitude": 28.545992,
-        "longitude": 77.188156,
-        "contact": 1234567890,
-        "link": "https://google.co.in",
-        "opentime": "0800",
-        "closetime": "2000",
-        "minscale": 2,
-        "type": 4,
-        "details": "Maecenas odio tortor, convallis sit amet sagittis at, ultrices a urna. Praesent maximus quam elementum augue pellentesque, ut dapibus leo feugiat. Praesent quam dolor, aliquam in eros quis, venenatis fermentum nulla. Maecenas finibus, sem ut ornare varius, nisi nulla placerat lorem, ut pellentesque metus libero posuere mauris. Ut sed massa elit. Cras quis urna et dui eleifend maximus. Suspendisse vitae velit sodales, malesuada tellus vitae, viverra erat. Nam ut dui et est volutpat congue ut ut neque. "
-    }
+        "id": 59,
+        "cd": [
+            28.5453426,
+            77.1909557
+        ],
+        "name": "Computer Services Centre",
+        "category": "other",
+        "details": "The CSC manages all of the centrally available network, IT resources in IIT .",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/Computer+Services+Centre/@28.5453426,77.1909557,18.58z/data=!4m5!3m4!1s0x390d1df66748619d:0x90021d25eee641fc!8m2!3d28.54498!4d77.1920647",
+        "phoneUrl": "+919210109494",
+        "webUrl": "http: //www.cc.iitd.ac.in/"
+},
+    {
+        "id": 60,
+        "cd": [
+            28.5450672,
+            77.1920865
+        ],
+        "name": "Seminar Hall",
+        "category": "entermainment",
+        "details": "IIT Delhi Seminar Hall.",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/Seminar+Hall/@28.5450672,77.1920865,19z/data=!3m1!4b1!4m5!3m4!1s0x390d1df669c26951:0x94b46b5f3cfd7d17!8m2!3d28.5450672!4d77.1926337",
+        "phoneUrl": "",
+        "webUrl": ""
+},
+    {
+        "id": 61,
+        "cd": [
+            28.5427956,
+            77.1984536
+        ],
+        "name": "Post Office",
+        "category": "other",
+        "details": "IIT Delhi Post Office.",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/Post+Office/@28.5427956,77.1984536,19z/data=!4m12!1m6!3m5!1s0x390d1df669c26951:0x94b46b5f3cfd7d17!2sSeminar+Hall!8m2!3d28.5450672!4d77.1926337!3m4!1s0x390ce208b8849405:0xa3f06d642dc9bccc!8m2!3d28.542719!4d77.1991789",
+        "phoneUrl": "+91180012011",
+        "webUrl": "http: //www.indiapost.gov.in/"
+},
+    {
+        "id": 62,
+        "cd": [
+            28.5427987,
+            77.1979836
+        ],
+        "name": "Kendriya Vidyalaya IIT Delhi",
+        "category": "academic",
+        "details": "Kendriya Vidyala IIT Delhi",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/Kendriya+Vidyalaya/@28.5427987,77.1979836,19z/data=!4m12!1m6!3m5!1s0x390d1df669c26951:0x94b46b5f3cfd7d17!2sSeminar+Hall!8m2!3d28.5450672!4d77.1926337!3m4!1s0x390ce2088d66be57:0xa28ca87f2ea489b1!8m2!3d28.5426165!4d77.1983441",
+        "phoneUrl": "+911126741327",
+        "webUrl": "http: //www.kvjnu.org/english/"
+},
+    {
+        "id": 63,
+        "cd": [
+            28.5423368,
+            77.1992711
+        ],
+        "name": "Kids Planet School",
+        "category": "academic",
+        "details": "Kids Planet IIT Delhi : Play School, Nursery School, Kindergarten or Daycare",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/Kids+Planet+School/@28.5423368,77.1992711,19z/data=!4m12!1m6!3m5!1s0x390d1df669c26951:0x94b46b5f3cfd7d17!2sSeminar+Hall!8m2!3d28.5450672!4d77.1926337!3m4!1s0x390d1f1f6d05414f:0xaaec14c5d0e2a1e1!8m2!3d28.542478!4d77.1997127",
+        "phoneUrl": "",
+        "webUrl": ""
+},
+    {
+        "id": 64,
+        "cd": [
+            28.5433479,
+            77.1989034
+        ],
+        "name": "Mother Dairy Booth & Safal Store",
+        "category": "shop",
+        "details": "Mother Dairy Booth & Safal Store",
+        "infoUrl": "",
+        "mapUrl": "https: //www.google.com/maps/place/Mother+Dairy+Booth+%26+Safal+Store/@28.5433479,77.1989034,18.32z/data=!4m12!1m6!3m5!1s0x390d1df669c26951:0x94b46b5f3cfd7d17!2sSeminar+Hall!8m2!3d28.5450672!4d77.1926337!3m4!1s0x390ce208ca8f6a05:0x6825a535f0aca1ee!8m2!3d28.5429564!4d77.2001512",
+        "phoneUrl": "+9118001801018",
+        "webUrl": "http: //www.motherdairy.com/"
+},
+    {
+        "id": 65,
+        "cd": [
+            28.5436112,
+            77.1983934
+        ],
+        "name": "Main Guest House",
+        "category": "other",
+        "details": "Main Guest House IIT Delhi",
+        "infoUrl": "http: //iitd.ac.in/",
+        "phoneUrl": "+911126597287",
+        "webUrl": "http: //iitd.ac.in/"
+}
 ]

@@ -1,12 +1,12 @@
 import 'dart:math' as math;
 import 'dart:ui' as ui;
 
-import 'package:IITDAPP/values/colors/colors.dart';
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:latlong/latlong.dart';
-import 'package:provider/provider.dart';
 
 import 'package:IITDAPP/modules/map/widgets/marker/marker.dart';
 import 'package:IITDAPP/modules/map/data/mapCondition.dart';
@@ -30,7 +30,7 @@ class MapLayer extends StatefulWidget {
       /// Maximum ratio to blow up image pixels. A value of 2.0 means that the
       /// a single device pixel will be rendered as up to 4 logical pixels.
       this.maxScale = 2.0,
-      this.backgroundColor = AppColors.MAP_BACKGROUND_COLOR,
+      this.backgroundColor = Colors.grey,
 
       /// Placeholder widget to be used while [image] is being resolved.
       this.placeholder,
@@ -45,8 +45,6 @@ class MapLayer extends StatefulWidget {
 
 // See /flutter/examples/layers/widgets/gestures.dart
 class _MapLayerState extends State<MapLayer> {
-  Color blendColor = ThemeData.dark().accentColor;
-
   ImageStream _imageStream;
   ui.Image _image;
 
@@ -170,6 +168,7 @@ class _MapLayerState extends State<MapLayer> {
 
   @override
   Widget build(BuildContext ctx) {
+    Color blendColor = Provider.of<ThemeModel>(context).theme.MAP_BLEND_COLOR;
     print('built map layer');
     mo = Provider.of<MapOffset>(ctx, listen: false);
     Widget paintWidget() {
@@ -200,7 +199,13 @@ class _MapLayerState extends State<MapLayer> {
 
       return Stack(children: [
         GestureDetector(
-          child: ColorFiltered(colorFilter: ColorFilter.mode(blendColor.withOpacity(0.35), BlendMode.luminosity),child: ColorFiltered(colorFilter: ColorFilter.mode(blendColor.withOpacity(0.35), BlendMode.colorBurn),child: paintWidget())),
+          child: ColorFiltered(
+              colorFilter: ColorFilter.mode(
+                  blendColor.withOpacity(0.35), BlendMode.luminosity),
+              child: ColorFiltered(
+                  colorFilter: ColorFilter.mode(
+                      blendColor.withOpacity(0.35), BlendMode.colorBurn),
+                  child: paintWidget())),
           onTap: () {
             Provider.of<MapConditions>(context, listen: false)
                 .markerSelected(-1);

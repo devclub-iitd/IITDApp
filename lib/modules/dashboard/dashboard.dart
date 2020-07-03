@@ -9,11 +9,12 @@ import 'package:IITDAPP/modules/dashboard/widgets/tab/tabHead.dart';
 import 'package:IITDAPP/modules/dashboard/widgets/userWidgets.dart';
 import 'package:IITDAPP/modules/login/RequestLoginScreen.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class Dashboard extends StatefulWidget {
   static const String routeName = '/dashboard';
@@ -73,6 +74,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
     tabList.clear();
     if (atdp == null) {
       atdp = (TabDataProvider<AttendanceProvider>(
+          limit: 4,
           cnp: Provider.of<AttendanceProvider>(context, listen: false),
           getCacheData: (AttendanceProvider item) => item.data,
           da: dashboardAlerts,
@@ -80,9 +82,11 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
               .where((element) =>
                   element.daysPresent /
                       (element.daysAbsent + element.daysPresent) <
-                  0.75)
+                  Provider.of<AttendanceProvider>(context, listen: false)
+                      .minimumAttendance)
               .toList()));
       etdp = (TabDataProvider<EventsProvider>(
+        limit: 4,
         cnp: eventsProvider,
         getCacheData: (EventsProvider item) => item.upcomingEvents,
         da: dashboardAlerts,
@@ -109,6 +113,8 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
       return RequestLoginScreen('User Dashboard');
     }
     return Scaffold(
+      backgroundColor:
+          Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       appBar: CustomAppBar(
         title: Text('User Dashboard'),
       ),
@@ -142,9 +148,27 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
                 UserEmail(),
                 SignOutButton(),
                 Container(
-                  decoration:
-                      BoxDecoration(color: Theme.of(context).primaryColor),
+                  decoration: BoxDecoration(
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .DEFAULT_WIDGET_BACKGROUND,
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(0, 2),
+                            blurRadius: 2,
+                            spreadRadius: 1,
+                            color: Provider.of<ThemeModel>(context)
+                                .theme
+                                .PRIMARY_TEXT_COLOR
+                                .withOpacity(0.1))
+                      ]),
                   child: TabBar(
+                      labelColor: Theme.of(context).textTheme.headline1.color,
+                      unselectedLabelColor: Theme.of(context)
+                          .textTheme
+                          .headline1
+                          .color
+                          .withOpacity(0.9),
                       controller: _tabController,
                       indicatorSize: TabBarIndicatorSize.tab,
                       tabs: tabList),

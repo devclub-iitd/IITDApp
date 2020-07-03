@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 
 import 'package:IITDAPP/modules/attendance/widgets/headings/attendanceListHeader.dart';
 import 'package:IITDAPP/modules/attendance/widgets/cards/courseCard.dart';
-import 'package:IITDAPP/values/colors/colors.dart';
-import 'package:IITDAPP/modules/news/widgets/shimmers/sizedShimmer.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
 import 'package:provider/provider.dart';
+import 'package:IITDAPP/modules/news/widgets/shimmers/sizedShimmer.dart';
 
 class AttendanceList extends StatefulWidget {
   final entryNumber;
@@ -26,8 +27,10 @@ class _AttendanceListState extends State<AttendanceList> {
         .setEntryNumber(widget.entryNumber);
     // print('built AttendanceList');
     final loadingShimmer = SizedShimmer(
-      baseColor: AppColors.COURSE_CARD.withAlpha(100),
-      highlightColor: AppColors.COURSE_CARD.withAlpha(200),
+      baseColor:
+          Provider.of<ThemeModel>(context).theme.COURSE_CARD.withAlpha(100),
+      highlightColor:
+          Provider.of<ThemeModel>(context).theme.COURSE_CARD.withAlpha(200),
       height: 75,
     );
     return Stack(
@@ -67,15 +70,19 @@ class _AttendanceListState extends State<AttendanceList> {
                 Text(
                   'Error: ${ap.data.message}',
                   textAlign: TextAlign.center,
-                  style: TextStyle(color: AppColors.PRIMARY_COLOR_LIGHT),
+                  style: TextStyle(
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .PRIMARY_COLOR_LIGHT),
                 ),
                 FlatButton(
                   onPressed: () {
                     ap.fetchData();
                   },
                   child: Text('REFRESH'),
-                  textColor: AppColors.PRIMARY_COLOR_DARK,
-                  color: AppColors.PRIMARY_COLOR,
+                  textColor:
+                      Provider.of<ThemeModel>(context).theme.PRIMARY_COLOR_DARK,
+                  color: Provider.of<ThemeModel>(context).theme.PRIMARY_COLOR,
                 )
               ],
             );
@@ -94,7 +101,7 @@ class _AttendanceListState extends State<AttendanceList> {
               children.addAll(regular.map((i) => CourseCard(i)));
             }
             return RefreshIndicator(
-              color: AppColors.COURSE_CARD,
+              color: Provider.of<ThemeModel>(context).theme.COURSE_CARD,
               onRefresh: () {
                 return ap.fetchData();
               },
@@ -114,7 +121,12 @@ class _AttendanceListState extends State<AttendanceList> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
                 Text('Disclaimer : This information may be inaccurate.',
-                    style: TextStyle(color: Colors.white30,)),
+                    style: TextStyle(
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .PRIMARY_TEXT_COLOR
+                          .withOpacity(0.3),
+                    )),
               ],
             ),
           ),

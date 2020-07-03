@@ -1,4 +1,7 @@
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -34,19 +37,6 @@ class StarButtonState extends State<StarButton> {
     onpress = () {
       onStarPress();
     };
-    if (_event.isStarred) {
-      _icon = Icon(
-        Icons.star,
-        color: Colors.amberAccent,
-      );
-      _toolTip = 'Unstar';
-    } else {
-      _icon = Icon(
-        Icons.star_border,
-        color: Colors.white,
-      );
-      _toolTip = 'Star';
-    }
   }
 
   Future<Null> starEvent(String eventid) async {
@@ -55,13 +45,14 @@ class StarButtonState extends State<StarButton> {
     final response = await http.post(
       '$url/api/events/$eventid/star',
       headers: {'authorization': 'Bearer $token'},
-    ).timeout(Duration(seconds: 5),
-    onTimeout: () {
+    ).timeout(Duration(seconds: 5), onTimeout: () {
       timeOutFlag = true;
       return null;
     });
-    if(timeOutFlag){
-      Scaffold.of(context).showSnackBar(SnackBar(content: Text('Cannot connect to server'),));
+    if (timeOutFlag) {
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text('Cannot connect to server'),
+      ));
       return;
     }
     print(response.statusCode);
@@ -78,7 +69,9 @@ class StarButtonState extends State<StarButton> {
         } else {
           _icon = Icon(
             Icons.star_border,
-            color: Colors.white,
+            color: Provider.of<ThemeModel>(context, listen: false)
+                .theme
+                .PRIMARY_TEXT_COLOR,
           );
           _toolTip = 'Star';
         }
@@ -93,30 +86,32 @@ class StarButtonState extends State<StarButton> {
             duration: Duration(seconds: 1),
             content: Text(
                 (_event.isStarred) ? 'Event Starred' : 'Event Unstarred')));
-        
       }
     } else {
       if (_event.isStarred) {
-          _icon = Icon(
-            Icons.star,
-            color: Colors.amberAccent,
-          );
-          _toolTip = 'Unstar';
-        } else {
-          _icon = Icon(
-            Icons.star_border,
-            color: Colors.white,
-          );
-          _toolTip = 'Star';
-        }
-        onpress = () {
-          onStarPress();
-        };
-        setState(() {});
-        Scaffold.of(context).showSnackBar(SnackBar(
-            duration: Duration(seconds: 1),
-            content: Text(
-                (_event.isStarred) ? 'Could not unstar event' : 'Could not star event')));
+        _icon = Icon(
+          Icons.star,
+          color: Colors.amberAccent,
+        );
+        _toolTip = 'Unstar';
+      } else {
+        _icon = Icon(
+          Icons.star_border,
+          color: Provider.of<ThemeModel>(context, listen: false)
+              .theme
+              .PRIMARY_TEXT_COLOR,
+        );
+        _toolTip = 'Star';
+      }
+      onpress = () {
+        onStarPress();
+      };
+      setState(() {});
+      Scaffold.of(context).showSnackBar(SnackBar(
+          duration: Duration(seconds: 1),
+          content: Text((_event.isStarred)
+              ? 'Could not unstar event'
+              : 'Could not star event')));
       throw Exception('Failed to star event');
     }
   }
@@ -125,7 +120,10 @@ class StarButtonState extends State<StarButton> {
     setState(() {
       _icon = Icon(
         Icons.star,
-        color: Colors.white54,
+        color: Provider.of<ThemeModel>(context, listen: false)
+            .theme
+            .PRIMARY_TEXT_COLOR
+            .withOpacity(0.54),
       );
       onpress = () {};
     });
@@ -134,6 +132,19 @@ class StarButtonState extends State<StarButton> {
 
   @override
   Widget build(BuildContext context) {
+    if (_event.isStarred) {
+      _icon = Icon(
+        Icons.star,
+        color: Colors.amberAccent,
+      );
+      _toolTip = 'Unstar';
+    } else {
+      _icon = Icon(
+        Icons.star_border,
+        color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
+      );
+      _toolTip = 'Star';
+    }
     return IconButton(
       onPressed: onpress,
       icon: _icon,

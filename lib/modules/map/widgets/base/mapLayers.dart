@@ -2,10 +2,11 @@ import 'package:IITDAPP/modules/dashboard/widgets/errorWidget.dart';
 import 'package:IITDAPP/modules/map/data/slidePanelPosition.dart';
 import 'package:IITDAPP/modules/map/widgets/customSearchBar.dart';
 import 'package:IITDAPP/modules/map/widgets/marker/marker.dart';
-import 'package:IITDAPP/values/colors/colors.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:latlong/latlong.dart';
-import 'package:provider/provider.dart';
 
 import 'package:IITDAPP/modules/map/data/mapCondition.dart';
 import 'package:IITDAPP/modules/map/data/mapOffsets.dart';
@@ -52,12 +53,16 @@ class _MapLayersState extends State<MapLayers> with TickerProviderStateMixin {
         future: mc.fetchData(),
         builder: (_, AsyncSnapshot<List<Marker>> markers) {
           if (markers.hasError) {
-            return ErrorDisplay(refresh: mc.fetchData, error: markers.error);
+            return Center(
+              child: ErrorDisplay(
+                  refresh: mc.fetchData, error: markers.error.toString()),
+            );
           }
           if (markers.hasData) {
             return Stack(children: [
               Container(
-                color: AppColors.MAP_BACKGROUND_COLOR,
+                color:
+                    Provider.of<ThemeModel>(context).theme.MAP_BACKGROUND_COLOR,
                 alignment: Alignment.center,
                 height: MediaQuery.of(context).size.height,
                 child: MapLayer(
@@ -89,8 +94,7 @@ class _MapLayersState extends State<MapLayers> with TickerProviderStateMixin {
               SlideUpSheet(),
               SearchBar(duration: Duration(milliseconds: 5)),
             ]);
-          }
-          else{
+          } else {
             return Center(child: CircularProgressIndicator());
           }
         });
@@ -108,9 +112,16 @@ class FilterButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var colors = <Color>[
+      Provider.of<ThemeModel>(context).theme.FLOATING_BUTTON_BG,
+      Provider.of<ThemeModel>(context).theme.FLOATING_BUTTON_FG,
+      Provider.of<ThemeModel>(context).theme.FLOATING_BUTTON_SELECTED_BG,
+      Provider.of<ThemeModel>(context).theme.FLOATING_BUTTON_SELECTED_FG
+    ];
     return CustomAnimatedButton(
         controller: _controller,
         icon: Icons.layers,
+        colors: colors,
         tag: 'Layers',
         onTap: () {
           return true;
@@ -130,9 +141,16 @@ class LocationButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var colors = <Color>[
+      Provider.of<ThemeModel>(context).theme.FLOATING_BUTTON_BG,
+      Provider.of<ThemeModel>(context).theme.FLOATING_BUTTON_FG,
+      Provider.of<ThemeModel>(context).theme.FLOATING_BUTTON_SELECTED_BG,
+      Provider.of<ThemeModel>(context).theme.FLOATING_BUTTON_SELECTED_FG
+    ];
     return CustomAnimatedButton(
         icon: Icons.location_searching,
         tag: 'Locate',
+        colors: colors,
         onTap: () {
           if (mc.currentLocationMarker == null) {
             return mc.searchLocation().then(

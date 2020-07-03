@@ -1,3 +1,6 @@
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
+import 'package:IITDAPP/widgets/sectionTitle.dart';
 import 'package:flutter/material.dart';
 import '../event_class.dart';
 
@@ -15,26 +18,17 @@ class EventAbout extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              'ABOUT THE EVENT',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 15,
-                  letterSpacing: 4),
+            SectionTitle(
+              title: 'ABOUT THE EVENT',
             ),
-            Container(
-              height: 3,
-              width: 60,
-              margin: EdgeInsets.symmetric(vertical: 10),
-              color: Colors.blue,
-            ),
+            SectionUnderLine(),
             Container(
               margin: EdgeInsets.only(bottom: 20),
               child: Text(
                 _event.about,
                 style: TextStyle(
-                  color: Colors.white,
+                  color:
+                      Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
                   fontWeight: FontWeight.w300,
                   fontSize: 15,
                   letterSpacing: 0.5,

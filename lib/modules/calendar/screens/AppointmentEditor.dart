@@ -119,371 +119,425 @@ class AppointmentEditorState extends State<AppointmentEditor> {
 
   Widget _getAppointmentEditor(BuildContext context) {
     return Container(
-        color: Colors.white,
+        // color: Colors.white,
         child: ListView(
-          padding: EdgeInsets.all(0),
-          children: <Widget>[
-            ListTile(
-              contentPadding: EdgeInsets.fromLTRB(5, 0, 5, 5),
-              leading: Text(''),
-              title: TextField(
-                controller: TextEditingController(text: _subject),
-                onChanged: (String value) {
-                  _subject = value;
-                },
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                style: TextStyle(
-                    fontSize: 25,
-                    color: Colors.black,
-                    fontWeight: FontWeight.w400),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Add title',
-                ),
+      padding: EdgeInsets.all(0),
+      children: <Widget>[
+        ListTile(
+          contentPadding: EdgeInsets.fromLTRB(5, 0, 5, 5),
+          leading: Text(''),
+          title: TextField(
+            controller: TextEditingController(text: _subject),
+            onChanged: (String value) {
+              _subject = value;
+            },
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
+            style: TextStyle(
+                fontSize: 25,
+                color:
+                    Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
+                fontWeight: FontWeight.w400),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintStyle: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR
+                      .withOpacity(0.54)),
+              hintText: 'Add title',
+            ),
+          ),
+        ),
+        const Divider(
+          height: 1.0,
+          thickness: 1,
+        ),
+        ListTile(
+            contentPadding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
+            leading: Icon(
+              Icons.access_time,
+              color: Provider.of<ThemeModel>(context)
+                  .theme
+                  .PRIMARY_TEXT_COLOR
+                  .withOpacity(0.54),
+            ),
+            title: Row(children: <Widget>[
+              const Expanded(
+                child: Text('All-day'),
               ),
-            ),
-            const Divider(
-              height: 1.0,
-              thickness: 1,
-            ),
-            ListTile(
-                contentPadding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
-                leading: Icon(
-                  Icons.access_time,
-                  color: Colors.black54,
-                ),
-                title: Row(children: <Widget>[
-                  const Expanded(
-                    child: Text('All-day'),
+              Expanded(
+                  child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Switch(
+                        value: _isAllDay,
+                        onChanged: (bool value) {
+                          setState(() {
+                            _isAllDay = value;
+                          });
+                        },
+                      ))),
+            ])),
+        ListTile(
+            contentPadding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
+            leading: const Text(''),
+            title: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    flex: 7,
+                    child: GestureDetector(
+                        child: Text(
+                            DateFormat('EEE, MMM dd yyyy').format(_startDate),
+                            textAlign: TextAlign.left),
+                        onTap: () async {
+                          var date = await showDatePicker(
+                            context: context,
+                            initialDate: _startDate,
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2100),
+                          );
+
+                          if (date != null && date != _startDate) {
+                            setState(() {
+                              var difference = _endDate.difference(_startDate);
+                              _startDate = DateTime(
+                                  date.year,
+                                  date.month,
+                                  date.day,
+                                  _startTime.hour,
+                                  _startTime.minute,
+                                  0);
+                              _endDate = _startDate.add(difference);
+                              _endTime = TimeOfDay(
+                                  hour: _endDate.hour, minute: _endDate.minute);
+                            });
+                          }
+                        }),
                   ),
                   Expanded(
-                      child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Switch(
-                            value: _isAllDay,
-                            onChanged: (bool value) {
-                              setState(() {
-                                _isAllDay = value;
-                              });
-                            },
-                          ))),
+                      flex: 3,
+                      child: _isAllDay
+                          ? const Text('')
+                          : GestureDetector(
+                              child: Text(
+                                DateFormat('hh:mm a').format(_startDate),
+                                textAlign: TextAlign.right,
+                              ),
+                              onTap: () async {
+                                var time = await showTimePicker(
+                                    context: context,
+                                    initialTime: TimeOfDay(
+                                        hour: _startTime.hour,
+                                        minute: _startTime.minute));
+
+                                if (time != null && time != _startTime) {
+                                  setState(() {
+                                    _startTime = time;
+                                    var difference =
+                                        _endDate.difference(_startDate);
+                                    _startDate = DateTime(
+                                        _startDate.year,
+                                        _startDate.month,
+                                        _startDate.day,
+                                        _startTime.hour,
+                                        _startTime.minute,
+                                        0);
+                                    _endDate = _startDate.add(difference);
+                                    _endTime = TimeOfDay(
+                                        hour: _endDate.hour,
+                                        minute: _endDate.minute);
+                                  });
+                                }
+                              })),
                 ])),
-            ListTile(
-                contentPadding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
-                leading: const Text(''),
-                title: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Expanded(
-                        flex: 7,
-                        child: GestureDetector(
-                            child: Text(
-                                DateFormat('EEE, MMM dd yyyy')
-                                    .format(_startDate),
-                                textAlign: TextAlign.left),
-                            onTap: () async {
-                              var date = await showDatePicker(
-                                context: context,
-                                initialDate: _startDate,
-                                firstDate: DateTime(1900),
-                                lastDate: DateTime(2100),
-                              );
+        ListTile(
+            contentPadding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
+            leading: const Text(''),
+            title: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Expanded(
+                    flex: 7,
+                    child: GestureDetector(
+                        child: Text(
+                          DateFormat('EEE, MMM dd yyyy').format(_endDate),
+                          textAlign: TextAlign.left,
+                        ),
+                        onTap: () async {
+                          var date = await showDatePicker(
+                            context: context,
+                            initialDate: _endDate,
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2100),
+                          );
 
-                              if (date != null && date != _startDate) {
-                                setState(() {
-                                  var difference =
-                                      _endDate.difference(_startDate);
-                                  _startDate = DateTime(
-                                      date.year,
-                                      date.month,
-                                      date.day,
-                                      _startTime.hour,
-                                      _startTime.minute,
-                                      0);
-                                  _endDate = _startDate.add(difference);
-                                  _endTime = TimeOfDay(
-                                      hour: _endDate.hour,
-                                      minute: _endDate.minute);
-                                });
+                          if (date != null && date != _endDate) {
+                            setState(() {
+                              var difference = _endDate.difference(_startDate);
+                              _endDate = DateTime(date.year, date.month,
+                                  date.day, _endTime.hour, _endTime.minute, 0);
+                              if (_endDate.isBefore(_startDate)) {
+                                _startDate = _endDate.subtract(difference);
+                                _startTime = TimeOfDay(
+                                    hour: _startDate.hour,
+                                    minute: _startDate.minute);
                               }
-                            }),
-                      ),
-                      Expanded(
-                          flex: 3,
-                          child: _isAllDay
-                              ? const Text('')
-                              : GestureDetector(
-                                  child: Text(
-                                    DateFormat('hh:mm a').format(_startDate),
-                                    textAlign: TextAlign.right,
-                                  ),
-                                  onTap: () async {
-                                    var time = await showTimePicker(
-                                        context: context,
-                                        initialTime: TimeOfDay(
-                                            hour: _startTime.hour,
-                                            minute: _startTime.minute));
+                            });
+                          }
+                        }),
+                  ),
+                  Expanded(
+                      flex: 3,
+                      child: _isAllDay
+                          ? const Text('')
+                          : GestureDetector(
+                              child: Text(
+                                DateFormat('hh:mm a').format(_endDate),
+                                textAlign: TextAlign.right,
+                              ),
+                              onTap: () async {
+                                var time = await showTimePicker(
+                                    context: context,
+                                    initialTime: TimeOfDay(
+                                        hour: _endTime.hour,
+                                        minute: _endTime.minute));
 
-                                    if (time != null && time != _startTime) {
-                                      setState(() {
-                                        _startTime = time;
-                                        var difference =
-                                            _endDate.difference(_startDate);
-                                        _startDate = DateTime(
-                                            _startDate.year,
-                                            _startDate.month,
-                                            _startDate.day,
-                                            _startTime.hour,
-                                            _startTime.minute,
-                                            0);
-                                        _endDate = _startDate.add(difference);
-                                        _endTime = TimeOfDay(
-                                            hour: _endDate.hour,
-                                            minute: _endDate.minute);
-                                      });
+                                if (time != null && time != _endTime) {
+                                  setState(() {
+                                    _endTime = time;
+                                    var difference =
+                                        _endDate.difference(_startDate);
+                                    _endDate = DateTime(
+                                        _endDate.year,
+                                        _endDate.month,
+                                        _endDate.day,
+                                        _endTime.hour,
+                                        _endTime.minute,
+                                        0);
+                                    if (_endDate.isBefore(_startDate)) {
+                                      _startDate =
+                                          _endDate.subtract(difference);
+                                      _startTime = TimeOfDay(
+                                          hour: _startDate.hour,
+                                          minute: _startDate.minute);
                                     }
-                                  })),
-                    ])),
-            ListTile(
-                contentPadding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
-                leading: const Text(''),
-                title: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Expanded(
-                        flex: 7,
-                        child: GestureDetector(
-                            child: Text(
-                              DateFormat('EEE, MMM dd yyyy').format(_endDate),
-                              textAlign: TextAlign.left,
-                            ),
-                            onTap: () async {
-                              var date = await showDatePicker(
-                                context: context,
-                                initialDate: _endDate,
-                                firstDate: DateTime(1900),
-                                lastDate: DateTime(2100),
-                              );
-
-                              if (date != null && date != _endDate) {
-                                setState(() {
-                                  var difference =
-                                      _endDate.difference(_startDate);
-                                  _endDate = DateTime(
-                                      date.year,
-                                      date.month,
-                                      date.day,
-                                      _endTime.hour,
-                                      _endTime.minute,
-                                      0);
-                                  if (_endDate.isBefore(_startDate)) {
-                                    _startDate = _endDate.subtract(difference);
-                                    _startTime = TimeOfDay(
-                                        hour: _startDate.hour,
-                                        minute: _startDate.minute);
-                                  }
-                                });
-                              }
-                            }),
-                      ),
-                      Expanded(
-                          flex: 3,
-                          child: _isAllDay
-                              ? const Text('')
-                              : GestureDetector(
-                                  child: Text(
-                                    DateFormat('hh:mm a').format(_endDate),
-                                    textAlign: TextAlign.right,
-                                  ),
-                                  onTap: () async {
-                                    var time = await showTimePicker(
-                                        context: context,
-                                        initialTime: TimeOfDay(
-                                            hour: _endTime.hour,
-                                            minute: _endTime.minute));
-
-                                    if (time != null && time != _endTime) {
-                                      setState(() {
-                                        _endTime = time;
-                                        var difference =
-                                            _endDate.difference(_startDate);
-                                        _endDate = DateTime(
-                                            _endDate.year,
-                                            _endDate.month,
-                                            _endDate.day,
-                                            _endTime.hour,
-                                            _endTime.minute,
-                                            0);
-                                        if (_endDate.isBefore(_startDate)) {
-                                          _startDate =
-                                              _endDate.subtract(difference);
-                                          _startTime = TimeOfDay(
-                                              hour: _startDate.hour,
-                                              minute: _startDate.minute);
-                                        }
-                                      });
-                                    }
-                                  })),
-                    ])),
-            ListTile(
-              contentPadding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
-              leading: Icon(Icons.lens, color: Color(_selectedColor)),
-              title: Text(
-                colorCollection[_selectedColorIndex] == Color(_selectedColor)
-                    ? colorNames[_selectedColorIndex]
-                    : '',
-              ),
-              onTap: () {
-                showDialog<Widget>(
-                  context: context,
-                  barrierDismissible: true,
-                  builder: (BuildContext context) {
-                    return _ColorPicker();
-                  },
-                ).then((dynamic value) => setState(() {}));
+                                  });
+                                }
+                              })),
+                ])),
+        ListTile(
+          contentPadding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
+          leading: Icon(Icons.lens, color: Color(_selectedColor)),
+          title: Text(
+            colorCollection[_selectedColorIndex] == Color(_selectedColor)
+                ? colorNames[_selectedColorIndex]
+                : '',
+            style: TextStyle(
+                color:
+                    Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR),
+          ),
+          onTap: () {
+            showDialog<Widget>(
+              context: context,
+              barrierDismissible: true,
+              builder: (BuildContext context) {
+                return _ColorPicker();
               },
+            ).then((dynamic value) => setState(() {}));
+          },
+        ),
+        const Divider(
+          height: 1.0,
+          thickness: 1,
+        ),
+        ListTile(
+          // Reminder Tile
+          contentPadding: const EdgeInsets.all(5),
+          leading: Icon(
+            Icons.notifications,
+            color: Provider.of<ThemeModel>(context)
+                .theme
+                .PRIMARY_TEXT_COLOR
+                .withOpacity(0.87),
+          ),
+          title: TextField(
+            controller: TextEditingController(text: _reminder),
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) => ReminderPicker(),
+              ).then((dynamic value) => setState(() {}));
+            },
+            onChanged: (String value) {
+              _reminder = value;
+            },
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
+            style: TextStyle(
+                fontSize: 18,
+                color: Provider.of<ThemeModel>(context)
+                    .theme
+                    .PRIMARY_TEXT_COLOR
+                    .withOpacity(0.87),
+                fontWeight: FontWeight.w400),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintStyle: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR
+                      .withOpacity(0.54)),
+              hintText: 'Add Reminder',
             ),
-            const Divider(
-              height: 1.0,
-              thickness: 1,
+          ),
+        ),
+        ListTile(
+          // Location
+          contentPadding: const EdgeInsets.all(5),
+          leading: Icon(
+            Icons.local_airport,
+            color: Provider.of<ThemeModel>(context)
+                .theme
+                .PRIMARY_TEXT_COLOR
+                .withOpacity(0.87),
+          ),
+          title: TextField(
+            controller: TextEditingController(text: _location),
+            onChanged: (String value) {
+              _location = value;
+            },
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
+            style: TextStyle(
+                fontSize: 18,
+                color: Provider.of<ThemeModel>(context)
+                    .theme
+                    .PRIMARY_TEXT_COLOR
+                    .withOpacity(0.87),
+                fontWeight: FontWeight.w400),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintStyle: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR
+                      .withOpacity(0.54)),
+              hintText: 'Add Location',
             ),
-            ListTile(
-              // Reminder Tile
-              contentPadding: const EdgeInsets.all(5),
-              leading: Icon(
-                Icons.notifications,
-                color: Colors.black87,
-              ),
-              title: TextField(
-                controller: TextEditingController(text: _reminder),
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) => ReminderPicker(),
-                  ).then((dynamic value) => setState(() {}));
-                },
-                onChanged: (String value) {
-                  _reminder = value;
-                },
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w400),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Add Reminder',
-                ),
-              ),
+          ),
+        ),
+        ListTile(
+          // Attendee
+          contentPadding: const EdgeInsets.all(5),
+          leading: Icon(
+            Icons.people,
+            color: Provider.of<ThemeModel>(context)
+                .theme
+                .PRIMARY_TEXT_COLOR
+                .withOpacity(0.87),
+          ),
+          title: TextField(
+            controller: TextEditingController(text: _attendee),
+            onChanged: (String value) {
+              _attendee = value;
+            },
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
+            style: TextStyle(
+                fontSize: 18,
+                color: Provider.of<ThemeModel>(context)
+                    .theme
+                    .PRIMARY_TEXT_COLOR
+                    .withOpacity(0.87),
+                fontWeight: FontWeight.w400),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintStyle: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR
+                      .withOpacity(0.54)),
+              hintText: 'Add Attendee',
             ),
-            ListTile(
-              // Location
-              contentPadding: const EdgeInsets.all(5),
-              leading: Icon(
-                Icons.local_airport,
-                color: Colors.black87,
-              ),
-              title: TextField(
-                controller: TextEditingController(text: _location),
-                onChanged: (String value) {
-                  _location = value;
-                },
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w400),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Add Location',
-                ),
-              ),
+          ),
+        ),
+        ListTile(
+          // Attendee
+          onTap: () {
+            showDialog(
+              context: context,
+              builder: (BuildContext context) => RecurrenceDialog(),
+            ).then((dynamic value) => setState(() {}));
+          },
+          contentPadding: const EdgeInsets.all(5),
+          leading: Icon(
+            Icons.repeat,
+            color: Provider.of<ThemeModel>(context)
+                .theme
+                .PRIMARY_TEXT_COLOR
+                .withOpacity(0.87),
+          ),
+          title: Text(
+            'Repeat',
+            style: TextStyle(fontSize: 18),
+          ),
+          subtitle: Text(
+            _recurrence,
+            style: TextStyle(color: Colors.green),
+          ),
+        ),
+        ListTile(
+          contentPadding: const EdgeInsets.all(5),
+          leading: Icon(
+            Icons.subject,
+            color: Provider.of<ThemeModel>(context)
+                .theme
+                .PRIMARY_TEXT_COLOR
+                .withOpacity(0.87),
+          ),
+          title: TextField(
+            controller: TextEditingController(text: _notes),
+            onChanged: (String value) {
+              _notes = value;
+            },
+            keyboardType: TextInputType.multiline,
+            maxLines: null,
+            style: TextStyle(
+                fontSize: 18,
+                color: Provider.of<ThemeModel>(context)
+                    .theme
+                    .PRIMARY_TEXT_COLOR
+                    .withOpacity(0.87),
+                fontWeight: FontWeight.w400),
+            decoration: InputDecoration(
+              border: InputBorder.none,
+              hintStyle: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR
+                      .withOpacity(0.54)),
+              hintText: 'Add description',
             ),
-            ListTile(
-              // Attendee
-              contentPadding: const EdgeInsets.all(5),
-              leading: Icon(
-                Icons.people,
-                color: Colors.black87,
-              ),
-              title: TextField(
-                controller: TextEditingController(text: _attendee),
-                onChanged: (String value) {
-                  _attendee = value;
-                },
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w400),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Add Attendee',
-                ),
-              ),
-            ),
-            ListTile(
-              // Attendee
-              onTap: () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) => RecurrenceDialog(),
-                ).then((dynamic value) => setState(() {}));
-              },
-              contentPadding: const EdgeInsets.all(5),
-              leading: Icon(
-                Icons.repeat,
-                color: Colors.black87,
-              ),
-              title: Text(
-                'Repeat',
-                style: TextStyle(fontSize: 18),
-              ),
-              subtitle: Text(
-                _recurrence,
-                style: TextStyle(color: Colors.green),
-              ),
-            ),
-            ListTile(
-              contentPadding: const EdgeInsets.all(5),
-              leading: Icon(
-                Icons.subject,
-                color: Colors.black87,
-              ),
-              title: TextField(
-                controller: TextEditingController(text: _notes),
-                onChanged: (String value) {
-                  _notes = value;
-                },
-                keyboardType: TextInputType.multiline,
-                maxLines: null,
-                style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black87,
-                    fontWeight: FontWeight.w400),
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: 'Add description',
-                ),
-              ),
-            ),
-            const Divider(
-              height: 1.0,
-              thickness: 1,
-            ),
-          ],
-        ));
+          ),
+        ),
+        const Divider(
+          height: 1.0,
+          thickness: 1,
+        ),
+      ],
+    ));
   }
 
   @override
   Widget build([BuildContext context]) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
+        theme: Theme.of(context),
         home: Scaffold(
+            backgroundColor: Provider.of<ThemeModel>(context, listen: false)
+                .theme
+                .SCAFFOLD_BACKGROUND,
             appBar: AppBar(
               title: Text(getTile()),
               backgroundColor:
@@ -763,6 +817,11 @@ class _ReminderPickerState extends State<ReminderPicker> {
                       color: Colors.white,
                       fontWeight: FontWeight.w400),
                   decoration: InputDecoration(
+                    hintStyle: TextStyle(
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .PRIMARY_TEXT_COLOR
+                            .withOpacity(0.54)),
                     hintText: 'Time',
                   ),
                 ),

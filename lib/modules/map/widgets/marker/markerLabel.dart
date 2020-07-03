@@ -1,4 +1,5 @@
-import 'package:IITDAPP/values/colors/colors.dart';
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -34,7 +35,10 @@ class MarkerLabel extends StatelessWidget {
                   textAlign: TextAlign.center,
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
-                      color: color ?? AppColors.DEFAULT_LABEL_COLOR),
+                      color: color ??
+                          Provider.of<ThemeModel>(context)
+                              .theme
+                              .DEFAULT_LABEL_COLOR),
                 )),
           ),
         ],

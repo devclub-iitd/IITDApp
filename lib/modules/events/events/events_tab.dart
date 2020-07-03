@@ -1,4 +1,5 @@
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -9,19 +10,23 @@ import 'package:localstorage/localstorage.dart';
 import './events_page.dart';
 import './event_class.dart';
 
-Widget loadingIcon() {
+Widget loadingIcon(context) {
   return Center(
     child: CircularProgressIndicator(
-      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-    ),
+        // valueColor: AlwaysStoppedAnimation<Color>(
+        //     Provider.of<ThemeModel>(context,listen:false).theme.PRIMARY_TEXT_COLOR),
+        ),
   );
 }
 
-Widget errorMessage() {
+Widget errorMessage(context) {
   return Center(
     child: Text(
       'Some Error Occured',
-      style: TextStyle(color: Colors.white70),
+      style: TextStyle(
+        fontSize: 25,
+        fontWeight: FontWeight.w200,
+      ),
     ),
   );
 }
@@ -52,8 +57,8 @@ class EventsTabState extends State<EventsTab> {
     final LocalStorage localStorage = LocalStorage('iitdapp');
     var timeOutFlag = false;
     var returnObj;
-    final response = await http
-        .get('$url/api/events', headers: {'authorization': 'Bearer $token'}).timeout(
+    final response = await http.get('$url/api/events',
+        headers: {'authorization': 'Bearer $token'}).timeout(
       Duration(seconds: 5),
       onTimeout: () async {
         var parsedJson = await localStorage.getItem('events');
@@ -63,7 +68,7 @@ class EventsTabState extends State<EventsTab> {
       },
     );
     connectedToInternet = !timeOutFlag;
-    if(timeOutFlag) {
+    if (timeOutFlag) {
       return returnObj;
     }
 
@@ -80,7 +85,7 @@ class EventsTabState extends State<EventsTab> {
   }
 
   // ignore: always_declare_return_types
-  handleGetEventsSuccess(var parsedJson){
+  handleGetEventsSuccess(var parsedJson) {
     todayEvents = List<List<Event>>.generate(3, (i) => []);
     tomorrowEvents = List<List<Event>>.generate(3, (i) => []);
     upcomingEvents = List<List<Event>>.generate(3, (i) => []);
@@ -116,18 +121,18 @@ class EventsTabState extends State<EventsTab> {
           return TabBarView(
             controller: _controller,
             children: [
-              errorMessage(),
-              errorMessage(),
-              errorMessage(),
+              errorMessage(context),
+              errorMessage(context),
+              errorMessage(context),
             ],
           );
         }
         return TabBarView(
           controller: _controller,
           children: [
-            loadingIcon(),
-            loadingIcon(),
-            loadingIcon(),
+            loadingIcon(context),
+            loadingIcon(context),
+            loadingIcon(context),
           ],
         );
       },

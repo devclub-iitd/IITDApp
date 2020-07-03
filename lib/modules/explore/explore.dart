@@ -6,20 +6,15 @@ import 'package:IITDAPP/widgets/Drawer.dart';
 import 'package:flutter/material.dart';
 
 class Explore extends StatefulWidget {
-
   static const String routeName = '/explore';
-
 
   @override
   _ExploreState createState() => _ExploreState();
 }
 
 class _ExploreState extends State<Explore> with TickerProviderStateMixin {
-
   TabController _controller;
   Widget appBar;
-
-
 
   @override
   void initState() {
@@ -43,20 +38,20 @@ class _ExploreState extends State<Explore> with TickerProviderStateMixin {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar,
-      drawer: AppDrawer(tag: 'Explore',),
-       body:  TabBarView(
+        appBar: appBar,
+        drawer: AppDrawer(
+          tag: 'Explore',
+        ),
+        body: TabBarView(
           controller: _controller,
           children: [
             ClubsListView(),
             HostelsListView(),
             HangoutsListView(),
           ],
-        )
-    );
+        ));
   }
 }

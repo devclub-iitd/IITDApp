@@ -1,5 +1,9 @@
 import 'package:IITDAPP/modules/login/user_class.dart';
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
+import 'package:IITDAPP/widgets/sectionTitle.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -64,9 +68,6 @@ class _ManageTabState extends State<ManageTab> {
           value: currentUser.adminof[i],
           child: AutoSizeText(
             currentUser.adminof[i].clubName,
-            style: TextStyle(
-              color: Colors.white,
-            ),
             maxLines: 1,
           ),
         ),
@@ -77,14 +78,13 @@ class _ManageTabState extends State<ManageTab> {
   Widget viewAdminButton() {
     if (currentUser.isSuperAdmin) {
       return FlatButton(
-        color: Colors.indigo[400],
+        color: Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_BACKGROUND,
         onPressed: () {
           Navigator.push(
               context, MaterialPageRoute(builder: (context) => AdminScreen()));
         },
         child: Text(
           'VIEW ADMINS',
-          style: TextStyle(color: Colors.white),
         ),
       );
     } else {
@@ -117,7 +117,8 @@ class _ManageTabState extends State<ManageTab> {
         //       )
         //     : null,
         FlatButton(
-          color: Colors.indigo[400],
+          color:
+              Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_BACKGROUND,
           onPressed: () {
             Navigator.push(
               context,
@@ -128,7 +129,11 @@ class _ManageTabState extends State<ManageTab> {
           },
           child: Text(
             'ADD NEW EVENT',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+              color: Provider.of<ThemeModel>(context)
+                  .theme
+                  .RAISED_BUTTON_FOREGROUND,
+            ),
           ),
         ),
         Container(
@@ -136,20 +141,10 @@ class _ManageTabState extends State<ManageTab> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                'YOUR CLUB EVENTS',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w900,
-                    fontSize: 15,
-                    letterSpacing: 4),
+              SectionTitle(
+                title: 'YOUR CLUB EVENTS',
               ),
-              Container(
-                height: 3,
-                width: 60,
-                margin: EdgeInsets.only(top: 10),
-                color: Colors.blue,
-              ),
+              SectionUnderLine(),
             ],
           ),
         ),
@@ -160,16 +155,29 @@ class _ManageTabState extends State<ManageTab> {
             items: clubList,
             decoration: InputDecoration(
               labelText: 'Select Club',
+              labelStyle: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR),
               contentPadding:
                   EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               filled: true,
               fillColor: Color(0x0AAAAAAA),
               enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(color: Colors.white30)),
+                borderRadius: BorderRadius.circular(20),
+                borderSide: BorderSide(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR
+                      .withOpacity(0.3),
+                ),
+              ),
               focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                  borderSide: BorderSide(color: Colors.white)),
+                borderRadius: BorderRadius.circular(20),
+                borderSide: BorderSide(
+                    // color: Provider.of<ThemeModel>(context,listen:false).theme.PRIMARY_TEXT_COLOR,
+                    ),
+              ),
             ),
             onChanged: (value) async {
               if (club != value) {
@@ -192,7 +200,8 @@ class _ManageTabState extends State<ManageTab> {
         FutureBuilder(
           future: getClubEvents(club.id),
           builder: (context, snapshot) {
-            if (snapshot.hasData && snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasData &&
+                snapshot.connectionState == ConnectionState.done) {
               return MyEventsList(snapshot.data, _refresh);
             } else if (snapshot.hasError) {
               return Center(
@@ -200,7 +209,10 @@ class _ManageTabState extends State<ManageTab> {
                   padding: EdgeInsets.all(20),
                   child: Text(
                     'Some Error Occured',
-                    style: TextStyle(color: Colors.white70),
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w200,
+                    ),
                   ),
                 ),
               );
@@ -210,8 +222,8 @@ class _ManageTabState extends State<ManageTab> {
                 margin: EdgeInsets.all(20),
                 child: Center(
                     child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                )));
+                        // valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                        )));
           },
         ),
       ],

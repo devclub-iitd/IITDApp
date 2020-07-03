@@ -1,4 +1,5 @@
 import 'package:IITDAPP/ThemeModel.dart';
+import 'package:IITDAPP/modules/news/utility/showSnackBarResult.dart';
 import 'package:flutter/material.dart';
 
 import 'package:IITDAPP/modules/news/screens/newsPage.dart';
@@ -23,12 +24,15 @@ class RecentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final parentScaffold = Scaffold.of(context);
     return Card(
+      elevation: 3,
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Container(
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
-          color: Provider.of<ThemeModel>(context,listen: false).themeType==ThemeType.Dark?Colors.grey[800]:Colors.grey[200],
+          color:
+              Provider.of<ThemeModel>(context).theme.DEFAULT_WIDGET_BACKGROUND,
           borderRadius: BorderRadius.circular(5),
         ),
         width: width - 16,
@@ -61,7 +65,11 @@ class RecentWidget extends StatelessWidget {
                     top: 0,
                     child: NewsSource(
                       sourceName: item.sourceName,
-                      color: Theme.of(context).textTheme.headline1.color.withOpacity(0.54),
+                      color: Theme.of(context)
+                          .textTheme
+                          .headline1
+                          .color
+                          .withOpacity(0.54),
                       size: 12.0,
                     ),
                   ),
@@ -70,20 +78,37 @@ class RecentWidget extends StatelessWidget {
                       top: 0,
                       child: NewsDate(
                         createdAt: item.createdAt,
-                        color: Theme.of(context).textTheme.headline1.color.withOpacity(0.54),
+                        color: Theme.of(context)
+                            .textTheme
+                            .headline1
+                            .color
+                            .withOpacity(0.54),
                         size: 12.0,
                       )),
                   Positioned(
                     left: 0,
                     bottom: 0,
                     child: NewsAuthor(
-                        author: item.author, size: 12, color: Theme.of(context).textTheme.headline1.color.withOpacity(0.54)),
+                        author: item.author,
+                        size: 12,
+                        color: Theme.of(context)
+                            .textTheme
+                            .headline1
+                            .color
+                            .withOpacity(0.54)),
                   ),
                   Positioned(
                     right: 0,
                     bottom: 0,
                     child: NewsClicks(
-                        clicks: item.clicks, size: 12, color: Theme.of(context).textTheme.headline1.color.withOpacity(0.54),),
+                      clicks: item.clicks,
+                      size: 12,
+                      color: Theme.of(context)
+                          .textTheme
+                          .headline1
+                          .color
+                          .withOpacity(0.54),
+                    ),
                   ),
                   Align(
                     alignment: Alignment.center,
@@ -99,7 +124,8 @@ class RecentWidget extends StatelessWidget {
                                       color: Theme.of(context)
                                           .textTheme
                                           .headline1
-                                          .color)
+                                          .color
+                                          .withOpacity(1))
                                   : NewsTitle(
                                       maxLines: 2,
                                       title: item.title,
@@ -115,10 +141,10 @@ class RecentWidget extends StatelessWidget {
               ),
             )
           ]),
-          onTap: () {
+          onTap: () async {
             Provider.of<NewsHistoryProvider>(context, listen: false)
                 .setViewed(item.id);
-            Navigator.push(
+            final result = await Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (_) => NewsPage(
@@ -127,6 +153,8 @@ class RecentWidget extends StatelessWidget {
                 ),
               ),
             );
+
+            showSnackbarResult(result, parentScaffold);
           },
         ),
       ),

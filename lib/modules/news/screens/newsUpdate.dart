@@ -1,8 +1,10 @@
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/modules/news/utility/showSnackBarResult.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:pedantic/pedantic.dart';
-import 'package:provider/provider.dart';
 
 import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/news/widgets/shimmers/sizedShimmer.dart';
@@ -60,6 +62,7 @@ class _NewsUpdateState extends State<NewsUpdate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // backgroundColor: Provider.of<ThemeModel>(context,listen:false).theme.SCAFFOLD_BACKGROUND,
       appBar: CustomAppBar(
         withMenu: false,
         title: Text(widget.title),
@@ -92,7 +95,16 @@ class _NewsUpdateState extends State<NewsUpdate> {
                           context, _authorFocusNode, _titleFocusNode),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.text,
-                      decoration: InputDecoration(labelText: 'Author'),
+                      decoration: InputDecoration(
+                          labelText: 'Author',
+                          labelStyle: TextStyle(
+                              color: _authorFocusNode.hasFocus
+                                  ? Colors.blue
+                                  : Provider.of<ThemeModel>(context,
+                                          listen: false)
+                                      .theme
+                                      .PRIMARY_TEXT_COLOR
+                                      .withOpacity(0.5))),
                       validator: (val) {
                         if (val.isEmpty) {
                           return 'Please enter the author\'s name';
@@ -115,7 +127,16 @@ class _NewsUpdateState extends State<NewsUpdate> {
                           context, _titleFocusNode, _contentFocusNode),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.text,
-                      decoration: InputDecoration(labelText: 'title'),
+                      decoration: InputDecoration(
+                          labelText: 'title',
+                          labelStyle: TextStyle(
+                              color: _titleFocusNode.hasFocus
+                                  ? Colors.blue
+                                  : Provider.of<ThemeModel>(context,
+                                          listen: false)
+                                      .theme
+                                      .PRIMARY_TEXT_COLOR
+                                      .withOpacity(0.5))),
                       validator: (val) {
                         if (val.isEmpty) {
                           return 'Please enter the title';
@@ -137,7 +158,16 @@ class _NewsUpdateState extends State<NewsUpdate> {
                       onFieldSubmitted: (s) => _fieldFocusChange(
                           context, _contentFocusNode, _sourceFocusNode),
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(labelText: 'Content'),
+                      decoration: InputDecoration(
+                          labelText: 'Content',
+                          labelStyle: TextStyle(
+                              color: _contentFocusNode.hasFocus
+                                  ? Colors.blue
+                                  : Provider.of<ThemeModel>(context,
+                                          listen: false)
+                                      .theme
+                                      .PRIMARY_TEXT_COLOR
+                                      .withOpacity(0.5))),
                       minLines: 1,
                       maxLines: 10,
                       keyboardType: TextInputType.multiline,
@@ -163,7 +193,16 @@ class _NewsUpdateState extends State<NewsUpdate> {
                           context, _sourceFocusNode, _imageUrlFocusNode),
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.text,
-                      decoration: InputDecoration(labelText: 'Source'),
+                      decoration: InputDecoration(
+                          labelText: 'Source',
+                          labelStyle: TextStyle(
+                              color: _sourceFocusNode.hasFocus
+                                  ? Colors.blue
+                                  : Provider.of<ThemeModel>(context,
+                                          listen: false)
+                                      .theme
+                                      .PRIMARY_TEXT_COLOR
+                                      .withOpacity(0.5))),
                       validator: (val) {
                         if (val.isEmpty) {
                           return 'Please enter the source name';
@@ -188,8 +227,15 @@ class _NewsUpdateState extends State<NewsUpdate> {
                           child: TextFormField(
                             keyboardType: TextInputType.url,
                             decoration: InputDecoration(
-                              labelText: 'Image URL',
-                            ),
+                                labelText: 'Image URL',
+                                labelStyle: TextStyle(
+                                    color: _imageUrlFocusNode.hasFocus
+                                        ? Colors.blue
+                                        : Provider.of<ThemeModel>(context,
+                                                listen: false)
+                                            .theme
+                                            .PRIMARY_TEXT_COLOR
+                                            .withOpacity(0.5))),
                             onTap: () {
                               print('call');
                               setState(() {});
@@ -219,7 +265,8 @@ class _NewsUpdateState extends State<NewsUpdate> {
                           child: CachedNetworkImage(
                               placeholder: (_, s) =>
                                   SizedShimmer(width: null, height: null),
-                              imageUrl: _imageUrlController.value.text??defaultImage,
+                              imageUrl: _imageUrlController.value.text ??
+                                  defaultImage,
                               fit: BoxFit.cover),
                         )
                       ],
@@ -254,23 +301,17 @@ class TickButton extends StatelessWidget {
           final form = _formKey.currentState;
           if (form.validate()) {
             form.save();
-            var updateFunc = widget.title == 'Create'?widget.nm.add:widget.nm.update; 
-              Scaffold.of(context).showSnackBar(SnackBar(
-                content: Text('Uploading, Please Wait'),
-              ));
-              updateFunc().then((value) async {
-                Scaffold.of(context).removeCurrentSnackBar();
-                Scaffold.of(context).showSnackBar(SnackBar(
-                  content: Text(value),
-                  duration: Duration(seconds: 1),
-                ));
-                unawaited(Provider.of<NewsProvider<TrendingNews>>(context,
-                        listen: false)
-                    .refresh());
-                await Provider.of<NewsProvider<RecentNews>>(context,
-                        listen: false)
-                    .refresh();
-              }).then((value) {Future.delayed(Duration(milliseconds:100),(){Navigator.popUntil(context,(route)=>route.isFirst);});});
+            var updateFunc =
+                widget.title == 'Create' ? widget.nm.add : widget.nm.update;
+
+            showSnackbarResult('Uploading, please wait', Scaffold.of(context));
+            updateFunc().then((value) {
+              Provider.of<NewsProvider<TrendingNews>>(context, listen: false)
+                  .refresh();
+              Provider.of<NewsProvider<RecentNews>>(context, listen: false)
+                  .refresh();
+              Navigator.pop(context, value);
+            });
           }
         });
   }

@@ -6,11 +6,12 @@ import 'package:IITDAPP/modules/login/userlogin/profile_dialog.dart';
 import 'package:IITDAPP/modules/map/data/mapCondition.dart';
 import 'package:IITDAPP/modules/map/data/mapOffsets.dart';
 import 'package:IITDAPP/modules/map/widgets/marker/marker.dart';
-import 'package:IITDAPP/values/colors/Constants.dart';
-import 'package:IITDAPP/values/colors/colors.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 
 class SearchBar extends StatefulWidget {
@@ -26,7 +27,6 @@ class SearchBar extends StatefulWidget {
 }
 
 class _SearchBarState extends State<SearchBar> with TickerProviderStateMixin {
-
   bool expanded = false;
   String query;
   AnimationController _controller;
@@ -47,12 +47,12 @@ class _SearchBarState extends State<SearchBar> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  void resetSearch(){
-    _searchInputControler.text ='';
-    query ='';
+  void resetSearch() {
+    _searchInputControler.text = '';
+    query = '';
   }
 
-  bool popOrClose(bool stopDefaultButtonEvent) {
+  bool popOrClose(bool stopDefaultButtonEvent, _) {
     if (!expanded) {
       return false;
     }
@@ -72,20 +72,25 @@ class _SearchBarState extends State<SearchBar> with TickerProviderStateMixin {
     final conditions = Provider.of<MapConditions>(context, listen: false);
     final offsets = Provider.of<MapOffset>(context, listen: false);
     final markers = conditions.markers;
-    List filtered =
-        markers.where((m) => m.location.name.toLowerCase().contains((query ?? '').toLowerCase())).toList();
+    List filtered = markers
+        .where((m) =>
+            m.location.name.toLowerCase().contains((query ?? '').toLowerCase()))
+        .toList();
     return Align(
         alignment: Alignment.topCenter,
         child: AnimatedContainer(
             margin: expanded
                 ? EdgeInsets.all(0)
-                : EdgeInsets.only(top:30,left:10,right:10),
+                : EdgeInsets.only(top: 30, left: 10, right: 10),
             padding: expanded
                 ? EdgeInsets.only(top: 42, left: 22, right: 22)
                 : EdgeInsets.all(10),
             decoration: BoxDecoration(
-                color: AppColors.SLIDE_UP_SHEET_COLOR,
-                border: Border.all(width: expanded ? 0 : 2, color: Colors.cyan),
+                color:
+                    Provider.of<ThemeModel>(context).theme.SLIDE_UP_SHEET_COLOR,
+                border: Border.all(
+                    width: expanded ? 0 : 2,
+                    color: Theme.of(context).accentColor),
                 borderRadius: BorderRadius.circular(expanded ? 0 : 10)),
             width: double.infinity,
             height: !expanded ? 50 : 1000,
@@ -103,7 +108,10 @@ class _SearchBarState extends State<SearchBar> with TickerProviderStateMixin {
                               child: GestureDetector(
                                   child: AnimatedIcon(
                                       icon: AnimatedIcons.menu_arrow,
-                                      color: Colors.white60,
+                                      color: Provider.of<ThemeModel>(context,
+                                              listen: false)
+                                          .theme
+                                          .PRIMARY_TEXT_COLOR,
                                       progress: _controller),
                                   onTap: () {
                                     if (!expanded) {
@@ -115,10 +123,12 @@ class _SearchBarState extends State<SearchBar> with TickerProviderStateMixin {
                             ),
                             Expanded(
                               child: GestureDetector(
-                                behavior: expanded?HitTestBehavior.deferToChild:HitTestBehavior.opaque,
+                                behavior: expanded
+                                    ? HitTestBehavior.deferToChild
+                                    : HitTestBehavior.opaque,
                                 child: expanded
                                     ? TextField(
-                                      controller: _searchInputControler,
+                                        controller: _searchInputControler,
                                         autofocus: true,
                                         style: Theme.of(context)
                                             .textTheme
@@ -131,17 +141,26 @@ class _SearchBarState extends State<SearchBar> with TickerProviderStateMixin {
                                         ),
                                       )
                                     : Container(
-                                      alignment: Alignment.centerLeft,
-                                      height: 25,
-                                      child: Text('Search',
-                                          style: TextStyle(
-                                              color:
-                                                  Theme.of(context).hintColor)),
-                                    ),
+                                        alignment: Alignment.centerLeft,
+                                        height: 25,
+                                        child: Text('Search',
+                                            style: TextStyle(
+                                                color: Theme.of(context)
+                                                    .hintColor)),
+                                      ),
                                 onTap: toggleExpansion,
                               ),
                             ),
-                            GestureDetector(child:expanded?Icon(Icons.cancel):Transform.scale(scale:1.8,child: FittedBox(child: PopupMenu())),onTap: ()=>(!expanded)?showAlert(context, logoutFunc):setState(()=>resetSearch()),)
+                            GestureDetector(
+                              child: expanded
+                                  ? Icon(Icons.cancel)
+                                  : Transform.scale(
+                                      scale: 1.8,
+                                      child: FittedBox(child: PopupMenu())),
+                              onTap: () => (!expanded)
+                                  ? showAlert(context, logoutFunc)
+                                  : setState(() => resetSearch()),
+                            )
                           ])),
                       AnimatedContainer(
                         margin: expanded

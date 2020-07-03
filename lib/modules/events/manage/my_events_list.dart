@@ -18,8 +18,8 @@ class MyEventsList extends StatelessWidget {
           'No events',
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Colors.white70,
-            fontSize: 15
+            fontSize: 25,
+            fontWeight: FontWeight.w200,
           ),
         ),
       );

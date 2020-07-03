@@ -15,7 +15,7 @@ class NewsDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      timeago.format(createdAt),
+      timeago.format(createdAt.subtract(Duration(minutes: 330))),
       style: TextStyle(
         color: color,
         fontSize: size,

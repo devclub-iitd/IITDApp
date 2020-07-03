@@ -1,7 +1,11 @@
 import 'package:IITDAPP/modules/settings/data/SettingsData.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 import 'package:IITDAPP/modules/settings/widgets/SettingsTextWidgets.dart';
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class IndivScreenSettings extends StatefulWidget {
@@ -26,20 +30,26 @@ class _IndivScreenSettingsState extends State<IndivScreenSettings> {
     setState(() {});
   }
 
-  dynamic getItem(SettingsModel e){
-    if(e.heading){
-      return SettingsSectionHeading(text: e.defaultValue,);
+  dynamic getItem(SettingsModel e) {
+    if (e.heading) {
+      return SettingsSectionHeading(
+        text: e.defaultValue,
+      );
     }
     return e.widgetType;
-
   }
 
   @override
-  Widget build(BuildContext context)  {
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('${widget.tag} Settings'),
-    ),
+      backgroundColor:
+          Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
+      appBar: GradientAppBar(
+          title: Text('${widget.tag} Settings'),
+          backgroundColorStart:
+              Provider.of<ThemeModel>(context).theme.APP_BAR_START,
+          backgroundColorEnd:
+              Provider.of<ThemeModel>(context).theme.APP_BAR_END),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
@@ -48,14 +58,14 @@ class _IndivScreenSettingsState extends State<IndivScreenSettings> {
               subtitle: 'Currently ${currentDefault} is set as default',
               showArrow: false,
               onTap: () async {
-                await SettingsHandler.setSettingValue(commonKeys[0], widget.tag);
+                await SettingsHandler.setSettingValue(
+                    commonKeys[0], widget.tag);
                 currentDefault = widget.tag;
                 defaultScreen = widget.tag;
-                setState(() { });
+                setState(() {});
               },
             ),
-            for (var e in indivScreenSettingsData[widget.tag])
-              getItem(e)
+            for (var e in indivScreenSettingsData[widget.tag]) getItem(e)
 
 //            SettingsSliderRow(
 //              title: 'Label Size',

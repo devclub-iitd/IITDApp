@@ -1,3 +1,6 @@
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
+import 'package:IITDAPP/widgets/sectionTitle.dart';
 import 'package:flutter/material.dart';
 
 class ClubAbout extends StatelessWidget {
@@ -10,28 +13,21 @@ class ClubAbout extends StatelessWidget {
     return FractionallySizedBox(
       widthFactor: 1,
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 25,),
+        margin: EdgeInsets.symmetric(
+          horizontal: 25,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              'ABOUT THE CLUB',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 15,
-                  letterSpacing: 4),
+            SectionTitle(
+              title: 'ABOUT THE CLUB',
             ),
-            Container(
-              height: 3,
-              width: 60,
-              margin: EdgeInsets.symmetric(vertical: 10),
-              color: Colors.blue,
-            ),
+            SectionUnderLine(),
             Text(
               _clubAbout,
               style: TextStyle(
-                color: Colors.white,
+                color:
+                    Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
                 fontWeight: FontWeight.w300,
                 fontSize: 15,
                 letterSpacing: 0.5,

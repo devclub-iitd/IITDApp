@@ -1,19 +1,21 @@
+import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/modules/login/user_class.dart';
 import 'package:IITDAPP/modules/login/userlogin/signup_page.dart';
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:pedantic/pedantic.dart';
+import 'package:provider/provider.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:validators/validators.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-
-Future login(BuildContext context, String _email, String _password,
-    Function onlogin, {bool pop = true}) async {
+Future login(
+    BuildContext context, String _email, String _password, Function onlogin,
+    {bool pop = true}) async {
   print('loggin in');
   final response = await http
       .post('$url/api/login', body: {'email': _email, 'password': _password});
@@ -22,7 +24,7 @@ Future login(BuildContext context, String _email, String _password,
     Map<String, dynamic> parsedJson = json.decode(response.body);
     if (parsedJson.containsKey('errors')) {
       print('Code 200 but has errors');
-      if(pop) Navigator.pop(context);
+      if (pop) Navigator.pop(context);
       scaffoldKey.currentState.showSnackBar(SnackBar(
         content: Text('Wrong email id or password. Try Again'),
       ));
@@ -41,18 +43,20 @@ Future login(BuildContext context, String _email, String _password,
         await storage.write(key: 'email', value: _email);
         await storage.write(key: 'password', value: _password);
         await storage.write(key: 'token', value: token);
-        if(pop) Navigator.pop(context);
+        if (pop) Navigator.pop(context);
         onlogin();
       } else {
         print('Could not get user info.');
-        if(pop) Navigator.pop(context);
-        await showErrorAlert(context, 'Login Failed', 'Something went wrong. Please Try Again');
+        if (pop) Navigator.pop(context);
+        await showErrorAlert(
+            context, 'Login Failed', 'Something went wrong. Please Try Again');
       }
     }
-  } else if (response.statusCode == 500 || response.statusCode==400) {
+  } else if (response.statusCode == 500 || response.statusCode == 400) {
     print('wrong email/pass');
-    if(pop) Navigator.pop(context);
-    await showErrorAlert(context, 'Login Failed', 'Wrong email id or password. Try Again');
+    if (pop) Navigator.pop(context);
+    await showErrorAlert(
+        context, 'Login Failed', 'Wrong email id or password. Try Again');
   } else {}
 }
 
@@ -75,7 +79,7 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.indigo[600],
+      backgroundColor: Provider.of<ThemeModel>(context).theme.LOGIN_BACKGROUND,
       body: GestureDetector(
         onTap: () {
           FocusScope.of(context).requestFocus(FocusNode());
@@ -181,7 +185,9 @@ class LoginPageState extends State<LoginPage> {
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: FlatButton(
                       child: Text('LOGIN'),
-                      color: Colors.indigo[400],
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .LOGIN_BUTTON_COLOR,
                       onPressed: () async {
                         if (_key.currentState.validate()) {
                           _key.currentState.save();
@@ -220,7 +226,9 @@ class LoginPageState extends State<LoginPage> {
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: FlatButton(
                       child: Text('SIGN UP'),
-                      color: Colors.blueAccent,
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .SIGNUP_BUTTON_COLOR,
                       onPressed: () {
                         Navigator.push(
                             context,
@@ -244,8 +252,10 @@ class LoginPageState extends State<LoginPage> {
                       },
                       child: Text(
                         'Continue as Guest',
-                        style: TextStyle(fontSize: 18,color: Colors.white70,),
-
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white70,
+                        ),
                       ),
                     ),
                   ),

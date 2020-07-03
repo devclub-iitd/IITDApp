@@ -1,4 +1,7 @@
 import 'package:IITDAPP/modules/news/data/newsData.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:flutter/material.dart';
 
@@ -42,6 +45,8 @@ class _ReportScreenState extends State<ReportScreen> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
+        backgroundColor:
+            Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
         appBar: CustomAppBar(withMenu: false, title: Text('Report')),
         body: SingleChildScrollView(
           child: Column(
@@ -109,7 +114,8 @@ class _ReportScreenState extends State<ReportScreen> {
                                       _selected[_options.indexOf(element)])
                                   .toList();
                               results.add(_reportTextController.text);
-                              widget.item.report(results);
+                              widget.item.report(results).then(
+                                  (value) => Navigator.pop(context, value));
                             }),
                       ]),
                 ),
@@ -137,10 +143,7 @@ class FormButton extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.all(8),
       child: FlatButton(
-          onPressed: () {
-            (onPressed ?? () {})();
-            Navigator.of(context).pop();
-          },
+          onPressed: onPressed,
           child: Text(
             text,
           )),

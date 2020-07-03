@@ -1,6 +1,8 @@
 import 'package:IITDAPP/modules/quickLinks/data/LinksData.dart';
 import 'package:IITDAPP/utility/UrlHandler.dart';
-import 'package:IITDAPP/values/colors/colors.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
@@ -57,8 +59,8 @@ class LinksScreen extends StatelessWidget {
                     begin: Alignment.topRight,
                     end: Alignment.bottomLeft,
                     colors: [
-                      AppColors.LinksSectionStart,
-                      AppColors.LinksSectionEnd
+                      Provider.of<ThemeModel>(context).theme.LinksSectionStart,
+                      Provider.of<ThemeModel>(context).theme.LinksSectionEnd
                     ])),
             child: Column(
               children: <Widget>[
@@ -73,7 +75,9 @@ class LinksScreen extends StatelessWidget {
                     var exp = ExpandableController.of(context);
                     return Container(
                       decoration: BoxDecoration(
-                        color: Colors.indigoAccent,
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .LinkSectionHeader,
                         borderRadius: !exp.expanded
                             ? BorderRadius.all(Radius.circular(radius))
                             : BorderRadius.only(

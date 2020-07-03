@@ -1,4 +1,5 @@
 import 'package:IITDAPP/modules/attendance/data/attendanceModel.dart';
+import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 import 'package:IITDAPP/utility/apiHelper.dart';
 import 'package:IITDAPP/utility/apiResponse.dart';
 import 'package:flutter/material.dart';
@@ -8,19 +9,7 @@ class AttendanceProvider with ChangeNotifier {
   final ApiBaseHelper abh = ApiBaseHelper();
   String entryNumber;
   bool loading = false;
-
-  List<AttendanceModel> getPoor(){
-    if(data.status == Status.LOADING||data.status == Status.ERROR){
-      return [];
-    }
-    else{
-      return data.data.where((element) =>
-                element.daysPresent /
-                    (element.daysAbsent + element.daysPresent) <
-                0.75)
-            .toList();
-    }
-  }
+  double minimumAttendance;
 
   void setEntryNumber(String a) {
     if (a.compareTo(entryNumber??'') != 0) {
@@ -30,6 +19,8 @@ class AttendanceProvider with ChangeNotifier {
   }
 
   Future<void> fetchData([reload = true]) async {
+    minimumAttendance = (await SettingsHandler.getSettingValue('MinimumAttendance'))/100;
+    print(minimumAttendance);
     data = ApiResponse.loading('Loading');
     if(reload){
       notifyListeners();

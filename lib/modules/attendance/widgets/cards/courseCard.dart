@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:IITDAPP/modules/attendance/data/attendanceModel.dart';
 import 'package:IITDAPP/modules/attendance/screens/attendanceDetail.dart';
-import 'package:IITDAPP/values/colors/colors.dart';
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:IITDAPP/routes/Transitions.dart';
 
 class CourseCard extends StatelessWidget {
@@ -17,7 +18,7 @@ class CourseCard extends StatelessWidget {
     return Card(
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       elevation: 3,
-      color: AppColors.COURSE_CARD,
+      color: Provider.of<ThemeModel>(context).theme.COURSE_CARD,
       child: Container(
         width: MediaQuery.of(context).size.width - 20,
         child: Material(
@@ -28,7 +29,9 @@ class CourseCard extends StatelessWidget {
                 child: Text(
                   _am.name,
                   style: Theme.of(context).primaryTextTheme.bodyText1.apply(
-                        color: AppColors.ATTENDANCE_HEADING_LIGHT,
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .PRIMARY_TEXT_COLOR,
                         fontSizeFactor: 1.15,
                         decoration: null,
                       ),
@@ -38,10 +41,13 @@ class CourseCard extends StatelessWidget {
             subtitle: Text(
               _am.abbr,
               style: Theme.of(context).primaryTextTheme.bodyText2.apply(
-                        color: AppColors.ATTENDANCE_HEADING_DARK,
-                        fontSizeFactor: 1,
-                        decoration: null,
-                      ),
+                    color: Provider.of<ThemeModel>(context)
+                        .theme
+                        .PRIMARY_TEXT_COLOR
+                        .withOpacity(0.5),
+                    fontSizeFactor: 1,
+                    decoration: null,
+                  ),
             ),
             onTap: () {
               Navigator.push(context, FadeRoute(page: AttendanceDetail(_am)));
@@ -54,7 +60,10 @@ class CourseCard extends StatelessWidget {
                     margin: EdgeInsets.only(right: 11),
                     width: 1,
                     decoration: BoxDecoration(
-                      color: AppColors.ATTENDANCE_HEADING_DARK,
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .PRIMARY_TEXT_COLOR
+                          .withOpacity(0.5),
                     ),
                   ),
                   Column(
@@ -64,7 +73,10 @@ class CourseCard extends StatelessWidget {
                           child: Text(
                             '$_percentage%',
                             style: TextStyle(
-                                color: AppColors.ATTENDANCE_HEADING_LIGHT,
+                                color: Provider.of<ThemeModel>(context,
+                                        listen: false)
+                                    .theme
+                                    .PRIMARY_TEXT_COLOR,
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -73,7 +85,11 @@ class CourseCard extends StatelessWidget {
                         Text(
                           'Present',
                           style: TextStyle(
-                              color: AppColors.ATTENDANCE_HEADING_DARK,
+                              color: Provider.of<ThemeModel>(context,
+                                      listen: false)
+                                  .theme
+                                  .PRIMARY_TEXT_COLOR
+                                  .withOpacity(0.5),
                               fontSize: 13),
                         )
                       ]),

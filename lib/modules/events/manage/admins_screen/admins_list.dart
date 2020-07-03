@@ -1,7 +1,9 @@
 import 'package:IITDAPP/modules/login/user_class.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:IITDAPP/modules/events/manage/admins_screen/admin_card.dart';
-
 
 class AdminList extends StatefulWidget {
   final List<Admin> admins;
@@ -32,13 +34,19 @@ class AdminListState extends State<AdminList> {
           child: Text(
             'No Admins apart from this account',
             textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white70),
+            style: TextStyle(
+                color: Provider.of<ThemeModel>(context)
+                    .theme
+                    .PRIMARY_TEXT_COLOR
+                    .withOpacity(0.7)),
           ),
         ),
       );
     }
     return Column(
-      children: admins.map((element) => AdminCard(element, ValueKey(element.id))).toList(),
+      children: admins
+          .map((element) => AdminCard(element, ValueKey(element.id)))
+          .toList(),
     );
   }
 }

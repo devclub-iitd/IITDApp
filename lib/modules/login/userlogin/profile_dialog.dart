@@ -1,11 +1,13 @@
+import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/routes/Routes.dart';
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'dart:async';
 import 'package:localstorage/localstorage.dart';
 import 'package:pedantic/pedantic.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../LoginScreen.dart';
@@ -53,12 +55,12 @@ void deleteSharedPrefs() async {
 }
 
 void showAlert(BuildContext context, Function onlogout) {
-  if(currentUser==null){
+  if (currentUser == null) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Colors.indigo[600],
+          backgroundColor: Provider.of<ThemeModel>(context).theme.ALERT_DIALOG,
           titlePadding: EdgeInsets.only(
             top: 20,
           ),
@@ -75,12 +77,18 @@ void showAlert(BuildContext context, Function onlogout) {
                 onPressed: () {
                   // getToken();
                   Navigator.pop(context);
-                  Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+                  Navigator.pushReplacementNamed(
+                      context, LoginScreen.routeName);
                 },
-                color: Colors.indigo[400],
+                color: Provider.of<ThemeModel>(context)
+                    .theme
+                    .RAISED_BUTTON_ALT_BACKGROUND,
                 child: Text(
                   'LOGIN',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .RAISED_BUTTON_ALT_FOREGROUND),
                 ),
               ),
             ],
@@ -88,8 +96,7 @@ void showAlert(BuildContext context, Function onlogout) {
         );
       },
     );
-  }
-  else {
+  } else {
     var role = currentUser.email;
     var name = (currentUser.name == null) ? 'User Name' : currentUser.name;
     // String url = "https://www.facebook.com/v3.3/dialog/oauth?client_id=826437701076131&redirect_uri=https://www.facebook.com/connect/login_success.html&state={st=state123abc,ds=123456789}";
@@ -102,7 +109,7 @@ void showAlert(BuildContext context, Function onlogout) {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Colors.indigo[600],
+          backgroundColor: Provider.of<ThemeModel>(context).theme.ALERT_DIALOG,
           titlePadding: EdgeInsets.only(
             top: 20,
           ),
@@ -131,12 +138,18 @@ void showAlert(BuildContext context, Function onlogout) {
                   unawaited(showLoading(context, message: 'Signing Out'));
                   await logout();
                   Navigator.pop(context);
-                  await Navigator.pushReplacementNamed(context, Routes.loginPage);
+                  await Navigator.pushReplacementNamed(
+                      context, Routes.loginPage);
                 },
-                color: Colors.indigo[400],
+                color: Provider.of<ThemeModel>(context)
+                    .theme
+                    .RAISED_BUTTON_ALT_BACKGROUND,
                 child: Text(
                   'LOGOUT',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .RAISED_BUTTON_ALT_FOREGROUND),
                 ),
               ),
             ],

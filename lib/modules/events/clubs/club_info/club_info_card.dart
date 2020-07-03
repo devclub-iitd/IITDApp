@@ -1,4 +1,7 @@
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:http/http.dart' as http;
@@ -15,9 +18,19 @@ class ClubInfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.indigo,
-        borderRadius: BorderRadius.all(Radius.circular(20.0)),
-      ),
+          color:
+              Provider.of<ThemeModel>(context).theme.DEFAULT_WIDGET_BACKGROUND,
+          borderRadius: BorderRadius.all(Radius.circular(20.0)),
+          boxShadow: [
+            BoxShadow(
+                offset: Offset(0, 2),
+                spreadRadius: 1,
+                blurRadius: 2,
+                color: Provider.of<ThemeModel>(context)
+                    .theme
+                    .PRIMARY_TEXT_COLOR
+                    .withOpacity(0.1))
+          ]),
       padding: EdgeInsets.symmetric(horizontal: 30.0, vertical: 20),
       margin: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
       child: Column(
@@ -26,7 +39,11 @@ class ClubInfoCard extends StatelessWidget {
             margin: EdgeInsets.only(bottom: 10),
             child: AutoSizeText(
               _club.clubName,
-              style: TextStyle(fontSize: 30, color: Colors.white),
+              style: TextStyle(
+                  fontSize: 30,
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR),
               maxLines: 1,
               textAlign: TextAlign.center,
             ),
@@ -61,15 +78,6 @@ class _SubButtonState extends State<SubButton> {
     super.initState();
     _club = widget._club;
     _enabled = true;
-    if (_club.isSubbed) {
-      _text = 'SUBSCRIBED';
-      _textColor = Colors.white54;
-      _buttonColor = Colors.indigo[400];
-    } else {
-      _text = 'SUBSCRIBE';
-      _textColor = Colors.white;
-      _buttonColor = Color(0xFF7C8EEF);
-    }
   }
 
   Future onButtonPress() async {
@@ -96,14 +104,22 @@ class _SubButtonState extends State<SubButton> {
         subbedClubs.add(_club);
         otherClubs.remove(_club);
         _text = 'SUBSCRIBED';
-        _textColor = Colors.white54;
-        _buttonColor = Colors.indigo[400];
+        _textColor = Provider.of<ThemeModel>(context, listen: false)
+            .theme
+            .RAISED_BUTTON_FOREGROUND;
+        _buttonColor = Provider.of<ThemeModel>(context, listen: false)
+            .theme
+            .RAISED_BUTTON_BACKGROUND;
       } else {
         subbedClubs.remove(_club);
         otherClubs.add(_club);
         _text = 'SUBSCRIBE';
-        _textColor = Colors.white;
-        _buttonColor = Color(0xFF7C8EEF);
+        _textColor = Provider.of<ThemeModel>(context, listen: false)
+            .theme
+            .RAISED_BUTTON_ALT_FOREGROUND;
+        _buttonColor = Provider.of<ThemeModel>(context, listen: false)
+            .theme
+            .RAISED_BUTTON_ALT_BACKGROUND;
       }
     }
     _enabled = true;
@@ -112,6 +128,23 @@ class _SubButtonState extends State<SubButton> {
 
   @override
   Widget build(BuildContext context) {
+    if (_club.isSubbed) {
+      _text = 'SUBSCRIBED';
+      _textColor = Provider.of<ThemeModel>(context, listen: false)
+          .theme
+          .RAISED_BUTTON_ALT_FOREGROUND;
+      _buttonColor = Provider.of<ThemeModel>(context, listen: false)
+          .theme
+          .RAISED_BUTTON_ALT_BACKGROUND;
+    } else {
+      _text = 'SUBSCRIBE';
+      _textColor = Provider.of<ThemeModel>(context, listen: false)
+          .theme
+          .RAISED_BUTTON_FOREGROUND;
+      _buttonColor = Provider.of<ThemeModel>(context, listen: false)
+          .theme
+          .RAISED_BUTTON_BACKGROUND;
+    }
     return FlatButton(
       onPressed: (_enabled)
           ? () {

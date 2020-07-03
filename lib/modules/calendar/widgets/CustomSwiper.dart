@@ -87,6 +87,8 @@ class _CustomCardState extends State<CustomCard> {
   Widget build(BuildContext context) {
     const height = 600.0;
     return Scaffold(
+        backgroundColor:
+            Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
         floatingActionButton: FloatingActionButton(
           heroTag: null,
           onPressed: () async {},
@@ -115,25 +117,20 @@ class _CustomCardState extends State<CustomCard> {
         body: Container(
           height: height, // change this
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(height / 20)),
-            // color: Color.fromARGB(255, 255, 255, 255),
-            color: Color.fromARGB(255, 37, 37, 37)
-          ),
+              borderRadius: BorderRadius.all(Radius.circular(height / 20)),
+              // color: Color.fromARGB(255, 255, 255, 255),
+              color: Color.fromARGB(255, 37, 37, 37)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(height: 10),
               Text(
                 '${widget.currDate.day}',
-                style: TextStyle(
-                    fontSize: 36,
-                    fontWeight: FontWeight.w600),
+                style: TextStyle(fontSize: 36, fontWeight: FontWeight.w600),
               ),
               Text(
                 DateFormat('EEEE').format(widget.currDate), // prints Tuesday
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w300),
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
               ),
               Container(height: 8),
               Divider(
@@ -145,8 +142,9 @@ class _CustomCardState extends State<CustomCard> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             'No events on this date',
-                            style:
-                                TextStyle(fontSize: 15,),
+                            style: TextStyle(
+                              fontSize: 15,
+                            ),
                           ),
                         )
                       : Column(
@@ -217,9 +215,8 @@ class EventListItem extends StatelessWidget {
                     ),
                     Text(
                       data.eventName,
-                      style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w400),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w400),
                     )
                   ],
                 ),

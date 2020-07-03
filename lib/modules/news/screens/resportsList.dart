@@ -1,5 +1,8 @@
 import 'package:IITDAPP/modules/news/data/report.dart';
 import 'package:IITDAPP/modules/news/widgets/cards/imageOverlay/text/newsDate.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +12,8 @@ class ReportsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:
+          Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       appBar: CustomAppBar(title: Text('Reports'), withMenu: false),
       body: Container(
         child: (reports.isEmpty)

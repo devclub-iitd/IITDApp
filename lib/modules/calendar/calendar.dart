@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:IITDAPP/modules/calendar/data/CalendarModel.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
 import 'package:device_calendar/device_calendar.dart';
@@ -25,7 +27,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:intl/intl.dart';
 import 'dart:math' as math;
 import 'package:http/http.dart' as http;
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
 
 part './screens/AppointmentEditor.dart';
 part './data/MeetingClass.dart';
@@ -71,7 +73,6 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScreenState extends State<CalendarScreen> {
-
   DeviceCalendarPlugin _deviceCalendarPlugin;
   List<CalendarModel> calendarModel = [];
   List<Calendar> _calendars;
@@ -146,7 +147,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   // ignore: always_declare_return_types
   getAppSettings() async {
-    excludeOtherCalendars = !(await SettingsHandler.getSettingValue('showOtherCalendars'));
+    excludeOtherCalendars =
+        !(await SettingsHandler.getSettingValue('showOtherCalendars'));
     var res = await SettingsHandler.getSettingValue('defaultCalendarView');
     changeViewType(viewOptions[res]);
   }
@@ -170,8 +172,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
         print('recieved data');
         print(calendarsResult?.data);
         _writableCalendars.asMap().forEach((idx, data) {
-          if(excludeOtherCalendars){
-            if(!(data.name=='User Events' || data.name=='IITD Connect' || data.name=='Academic Calendar')) {
+          if (excludeOtherCalendars) {
+            if (!(data.name == 'User Events' ||
+                data.name == 'IITD Connect' ||
+                data.name == 'Academic Calendar')) {
               return;
             }
           }
@@ -326,6 +330,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
     }
 
     return Scaffold(
+      backgroundColor:
+          Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       appBar: CustomAppBar(
         title: Text('Calendar'),
       ),
@@ -371,8 +377,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasError) {
             return Center(child: Text('Error occured'));
-          }
-          else if(snapshot.connectionState==ConnectionState.done){
+          } else if (snapshot.connectionState == ConnectionState.done) {
             return Stack(children: [
               Opacity(
                 opacity: showPopUp ? 0.2 : 1,
@@ -405,8 +410,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
                               : MonthAppointmentDisplayMode.appointment,
                           dayFormat: 'EEE',
                           monthCellStyle: MonthCellStyle(
-                            textStyle:
-                                TextStyle(fontSize: 17),
+                            textStyle: TextStyle(
+                                fontSize: 17,
+                                color: Provider.of<ThemeModel>(context)
+                                    .theme
+                                    .PRIMARY_TEXT_COLOR),
                             todayTextStyle: TextStyle(fontSize: 17),
                           ),
                         ),

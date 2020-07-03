@@ -1,3 +1,6 @@
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
+import 'package:IITDAPP/widgets/sectionTitle.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +20,7 @@ class EventsList extends StatelessWidget {
     this._onStarPress,
   );
 
-  Widget renderList() {
+  Widget renderList(context) {
     if (_events.isEmpty) {
       return Container(
         margin: EdgeInsets.all(25),
@@ -25,15 +28,22 @@ class EventsList extends StatelessWidget {
           child: Text(
             'No Events',
             style: TextStyle(
-              color: Colors.white70,
+              fontSize: 25,
+              fontWeight: FontWeight.w200,
+              color: Provider.of<ThemeModel>(context)
+                  .theme
+                  .PRIMARY_TEXT_COLOR
+                  .withOpacity(0.7),
             ),
           ),
         ),
       );
     } else {
       return Column(
-        children:
-            _events.map((element) => EventCard(element, _onStarPress, ValueKey(element.eventid))).toList(),
+        children: _events
+            .map((element) =>
+                EventCard(element, _onStarPress, ValueKey(element.eventid)))
+            .toList(),
       );
     }
   }
@@ -45,28 +55,9 @@ class EventsList extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  listTitle,
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w900,
-                      fontSize: 15,
-                      letterSpacing: 4),
-                ),
-                Container(
-                  height: 3,
-                  width: 60,
-                  margin: EdgeInsets.symmetric(vertical: 10),
-                  color: Colors.blue,
-                ),
-              ],
-            ),
-          ),
-          renderList()
+          SectionTitle(title: listTitle),
+          SectionUnderLine(),
+          renderList(context)
         ],
       ),
 

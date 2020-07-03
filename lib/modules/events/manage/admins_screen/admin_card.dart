@@ -1,5 +1,8 @@
 import 'package:IITDAPP/modules/login/user_class.dart';
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:IITDAPP/widgets/loading.dart';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -11,7 +14,7 @@ import 'package:pedantic/pedantic.dart';
 class AdminCard extends StatelessWidget {
   final Admin admin;
 
-  AdminCard(this.admin, Key key) : super(key : key);
+  AdminCard(this.admin, Key key) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,15 +32,22 @@ class AdminCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 AutoSizeText(
-                    admin.name,
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                    maxLines: 1,
-                  ),
+                  admin.name,
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .PRIMARY_TEXT_COLOR),
+                  maxLines: 1,
+                ),
                 AutoSizeText(
-                    admin.email,
-                    style: TextStyle(color: Colors.white),
-                    maxLines: 1,
-                  ),
+                  admin.email,
+                  style: TextStyle(
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .PRIMARY_TEXT_COLOR),
+                  maxLines: 1,
+                ),
               ],
             ),
           ),
@@ -86,7 +96,8 @@ class ResponseIconsState extends State<ResponseIcons> {
       });
     } else {
       Navigator.pop(context);
-      await showErrorAlert(context, 'Failed', 'Some error occcured. Please try again.');
+      await showErrorAlert(
+          context, 'Failed', 'Some error occcured. Please try again.');
     }
   }
 
@@ -94,10 +105,11 @@ class ResponseIconsState extends State<ResponseIcons> {
   Widget build(BuildContext context) {
     return (state == 'pending')
         ? PopupMenuButton<String>(
-            icon: Icon(
-              Icons.more_vert,
-              color: Colors.white70,
-            ),
+            icon: Icon(Icons.more_vert,
+                color: Provider.of<ThemeModel>(context)
+                    .theme
+                    .PRIMARY_TEXT_COLOR
+                    .withOpacity(0.7)),
             onSelected: (a) => _showAlert(context),
             itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
               PopupMenuItem<String>(
@@ -111,7 +123,10 @@ class ResponseIconsState extends State<ResponseIcons> {
               child: Text(
                 'removed',
                 style: TextStyle(
-                  color: Colors.white70,
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR
+                      .withOpacity(0.7),
                 ),
               ),
             ),
@@ -123,14 +138,18 @@ class ResponseIconsState extends State<ResponseIcons> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Colors.indigo,
+          backgroundColor: Provider.of<ThemeModel>(context).theme.ALERT_DIALOG,
           title: Text(
             'Remove Admin',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+                color:
+                    Provider.of<ThemeModel>(context).theme.ALERT_DIALOG_TEXT),
           ),
           content: Text(
             'Are you sure you want to remove this admin?',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+                color:
+                    Provider.of<ThemeModel>(context).theme.ALERT_DIALOG_TEXT),
           ),
           actions: <Widget>[
             FlatButton(
@@ -139,7 +158,11 @@ class ResponseIconsState extends State<ResponseIcons> {
               },
               child: Text(
                 'CANCEL',
-                style: TextStyle(color: Colors.white70),
+                style: TextStyle(
+                    color: Provider.of<ThemeModel>(context)
+                        .theme
+                        .ALERT_DIALOG_TEXT
+                        .withOpacity(0.7)),
               ),
             ),
             FlatButton(
@@ -150,7 +173,11 @@ class ResponseIconsState extends State<ResponseIcons> {
               },
               child: Text(
                 'YES',
-                style: TextStyle(color: Colors.white70),
+                style: TextStyle(
+                    color: Provider.of<ThemeModel>(context)
+                        .theme
+                        .ALERT_DIALOG_TEXT
+                        .withOpacity(0.7)),
               ),
             )
           ],

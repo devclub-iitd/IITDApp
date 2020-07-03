@@ -1,7 +1,8 @@
 import 'package:IITDAPP/modules/map/widgets/layers/toggleGrid/toggleIcon.dart';
-import 'package:IITDAPP/values/colors/colors.dart';
-import 'package:flutter/material.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 
 import 'package:IITDAPP/modules/map/data/mapCondition.dart';
 import 'package:IITDAPP/modules/map/widgets/marker/marker.dart';
@@ -31,7 +32,7 @@ class ToggleGrid extends StatelessWidget {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
-            color: AppColors.TOGGLE_GRID_COLOR,
+            color: Provider.of<ThemeModel>(context).theme.TOGGLE_GRID_COLOR,
           ),
           child: GridView.count(
               padding: EdgeInsets.all(5),
@@ -44,6 +45,14 @@ class ToggleGrid extends StatelessWidget {
 
                 return ToggleIcon(
                   iconData: widget,
+                  colors: [
+                    Provider.of<ThemeModel>(context)
+                        .theme
+                        .TOGGLE_GRID_BUTTON_ICON_DISABLED_COLOR,
+                    Provider.of<ThemeModel>(context)
+                        .theme
+                        .TOGGLE_GRID_BUTTON_ICON_COLOR
+                  ],
                   selected: selected[index],
                   onTap: () => mc.toggleType(index),
                 );

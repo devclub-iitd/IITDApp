@@ -11,9 +11,10 @@ import 'package:IITDAPP/modules/events/home.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/news/news.dart';
 import 'package:IITDAPP/utility/apiResponse.dart';
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class GeneralTab extends StatefulWidget {
   final ScrollController parentScrollController;
@@ -72,7 +73,10 @@ class _GeneralTabState extends State<GeneralTab> {
   @override
   Widget build(BuildContext context) {
     if (widget.apiResponse.status == Status.LOADING) {
-      return LoadingWidget(height: 55);
+      return Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: LoadingWidget(height: 75),
+      );
     } else if (widget.apiResponse.status == Status.ERROR) {
       return ErrorDisplay(
           refresh: widget.refresh, error: widget.apiResponse.message);
@@ -85,39 +89,72 @@ class _GeneralTabState extends State<GeneralTab> {
     }
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: ListView.separated(
-          controller: controller,
-          itemBuilder: (_, i) => Container(
-                color:  widget.newAlerts.contains(i)
-                    ? Colors.cyanAccent.withOpacity(0.1)
-                    : Colors.blueGrey.withOpacity(0.15),
-                child: ListTile(
-                  contentPadding:
-                      const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16),
-                  dense: true,
-                  title: Padding(
-                    padding: const EdgeInsets.only(bottom: 4.0),
-                    child: Text(
-                      widget.title(tabData[i]),
-                      maxLines:2,
-                      overflow:TextOverflow.ellipsis,
-                      style: TextStyle(fontSize: 14),
+      child: tabData.length == 0
+          ? Center(
+              child: Text('Nothing New',
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w200)),
+            )
+          : ListView.separated(
+              controller: controller,
+              itemBuilder: (_, i) => Container(
+                    decoration: BoxDecoration(
+                        color: widget.newAlerts.contains(i)
+                            ? Provider.of<ThemeModel>(context)
+                                .theme
+                                .DEFAULT_HIGHLIGHT_BACKGROUND
+                            : Provider.of<ThemeModel>(context)
+                                .theme
+                                .DEFAULT_WIDGET_BACKGROUND,
+                        boxShadow: [
+                          BoxShadow(
+                              offset: Offset(0, 2),
+                              blurRadius: 2,
+                              spreadRadius: 1,
+                              color: Provider.of<ThemeModel>(context,
+                                      listen: false)
+                                  .theme
+                                  .PRIMARY_TEXT_COLOR
+                                  .withOpacity(0.1))
+                        ]),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 16),
+                      dense: true,
+                      title: Padding(
+                        padding: const EdgeInsets.only(bottom: 4.0),
+                        child: Text(
+                          widget.title(tabData[i]),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Provider.of<ThemeModel>(context)
+                                  .theme
+                                  .PRIMARY_TEXT_COLOR),
+                        ),
+                      ),
+                      subtitle: Text(
+                        widget.subtitle(tabData[i]),
+                        style: TextStyle(
+                            fontSize: 14,
+                            color: Provider.of<ThemeModel>(context)
+                                .theme
+                                .PRIMARY_TEXT_COLOR
+                                .withOpacity(0.7)),
+                      ),
+                      trailing: Text(
+                        widget.trailing(tabData[i]),
+                        style: TextStyle(color: Theme.of(context).accentColor),
+                      ),
+                      onTap: () => Navigator.pushReplacementNamed(
+                          context, widget.routeName),
                     ),
                   ),
-                  subtitle: Text(widget.subtitle(tabData[i])),
-                  trailing: Text(
-                    widget.trailing(tabData[i]),
-                    style: TextStyle(color: Theme.of(context).accentColor),
+              separatorBuilder: (_, i) => Divider(
+                    height: 5,
+                    thickness: 0,
                   ),
-                  onTap: () =>
-                      Navigator.pushReplacementNamed(context, widget.routeName),
-                ),
-              ),
-          separatorBuilder: (_, i) => Divider(
-                height: 5,
-                thickness: 0,
-              ),
-          itemCount: tabData.length),
+              itemCount: tabData.length),
     );
   }
 }
@@ -126,31 +163,33 @@ class EventsTab extends StatelessWidget {
   final ScrollController parentScrollController;
   final List<dynamic> tabData;
   const EventsTab({
-    Key key, this.parentScrollController, this.tabData,
+    Key key,
+    this.parentScrollController,
+    this.tabData,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var ep = Provider.of<EventsProvider>(context,listen: false);
+    var ep = Provider.of<EventsProvider>(context, listen: false);
     return Consumer<TabDataProvider<EventsProvider>>(builder: (_, tdp, c) {
       return GeneralTab(
-        index:1,
+        index: 1,
         viewed: tdp.viewed,
         apiResponse: tdp.data,
-        newAlerts:
-            tdp.alerts,
+        newAlerts: tdp.alerts,
         parentScrollController: parentScrollController,
         refresh: ep.getUpcomingEvents,
         routeName: HomeScreen.routeName,
         subtitle: (Event item) => item.eventBody.clubName,
         title: (Event item) => item.eventName,
         tabData: tabData,
-        trailing: (Event item) => DateTime.now().isBefore(item.startsAt)?timeago.format(item.startsAt,allowFromNow: true):'ongoing',
+        trailing: (Event item) => DateTime.now().isBefore(item.startsAt)
+            ? timeago.format(item.startsAt, allowFromNow: true)
+            : 'ongoing',
       );
     });
   }
 }
-
 
 class NewsTab extends StatelessWidget {
   final ScrollController parentScrollController;
@@ -159,24 +198,24 @@ class NewsTab extends StatelessWidget {
   const NewsTab({Key key, this.parentScrollController, this.tabData})
       : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
-    var np = Provider.of<NewsProvider<RecentNews>>(context,listen: false);
-    return Consumer<TabDataProvider<NewsProvider<RecentNews>>>(builder: (_, tdp, c) {
+    var np = Provider.of<NewsProvider<RecentNews>>(context, listen: false);
+    return Consumer<TabDataProvider<NewsProvider<RecentNews>>>(
+        builder: (_, tdp, c) {
       return GeneralTab(
-        index:2,
+        index: 2,
         viewed: tdp.viewed,
         apiResponse: tdp.data,
-        newAlerts:
-            tdp.alerts,
+        newAlerts: tdp.alerts,
         parentScrollController: parentScrollController,
         refresh: np.refresh,
         routeName: News.routeName,
         subtitle: (item) => item.author + ' - ' + item.sourceName,
         title: (item) => item.title,
         tabData: tabData,
-        trailing: (item) => timeago.format(item.createdAt),
+        trailing: (item) => timeago.format(item.createdAt
+            .subtract(Duration(minutes: 330))), //330 minute difference
       );
     });
   }
@@ -192,17 +231,16 @@ class AttendanceTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var ap = Provider.of<AttendanceProvider>(context,listen: false);
+    var ap = Provider.of<AttendanceProvider>(context, listen: false);
     ap.setEntryNumber('2019CS10382');
     return Consumer<TabDataProvider<AttendanceProvider>>(builder: (_, tdp, c) {
       return GeneralTab(
         apiResponse: tdp.data,
-        index:0,
+        index: 0,
         // filter:(List<AttendanceModel> item)=> item.where((am)=>
         //     (am.daysPresent / (am.daysPresent + am.daysAbsent) )<0.75).toList(),
         viewed: tdp.viewed,
-        newAlerts:
-            tdp.alerts,
+        newAlerts: tdp.alerts,
         parentScrollController: parentScrollController,
         refresh: ap.fetchData,
         routeName: Attendance.routeName,

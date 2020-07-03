@@ -1,4 +1,7 @@
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,7 +15,6 @@ import './manage/manage_tab.dart';
 class HomeScreen extends StatefulWidget {
   final Function onlogout;
   static const String routeName = '/events';
-
 
   HomeScreen({this.onlogout});
 
@@ -70,7 +72,8 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.indigo[900],
+      backgroundColor:
+          Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       key: scaffoldKey,
       drawer: AppDrawer(
         tag: 'Events',
@@ -89,12 +92,11 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   width: MediaQuery.of(context).size.width,
                   color: Colors.red,
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0,horizontal: 16),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 8.0, horizontal: 16),
                     child: Text(
                       'Cannot Connect to Server',
-                      style: TextStyle(
-                        color: Colors.white
-                      ),
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ),
@@ -107,9 +109,12 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         ),
         child: BottomNavigationBar(
           elevation: 1,
-          backgroundColor: Colors.indigo[400].withOpacity(1),
-          selectedItemColor: Colors.lightBlueAccent[100],
-          unselectedItemColor: Colors.white.withOpacity(0.6),
+          backgroundColor:
+              Provider.of<ThemeModel>(context).theme.BOTTOM_NAV_BACKGROUND,
+          selectedItemColor:
+              Provider.of<ThemeModel>(context).theme.BOTTOM_NAV_SELECTED,
+          unselectedItemColor:
+              Provider.of<ThemeModel>(context).theme.BOTTOM_NAV_UNSELECTED,
           currentIndex: _selectedTab,
           onTap: (int index) {
             setState(() {

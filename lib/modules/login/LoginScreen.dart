@@ -1,7 +1,8 @@
+import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/modules/dashboard/dashboard.dart';
 // import 'package:IITDAPP/modules/events/home.dart';
 import 'package:IITDAPP/modules/login/user_class.dart';
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
 import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:flutter/material.dart';
@@ -13,14 +14,13 @@ import 'package:localstorage/localstorage.dart';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import 'userlogin/login_page.dart';
 // import 'package:intl/intl.dart';
 
-
 class LoginScreen extends StatefulWidget {
-
   static const String routeName = '/login';
 
   @override
@@ -35,8 +35,6 @@ class LoginScreenState extends State<LoginScreen>
   bool signedIn;
   bool start;
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
-
-
 
   void onlogin() {
     print('logged in');
@@ -84,16 +82,16 @@ class LoginScreenState extends State<LoginScreen>
           token = await storage.read(key: 'token');
           var parsedJson = await localStorage.getItem('currentUser');
           currentUser = User.fromJson(parsedJson['data']);
-          if(token==null || currentUser==null) {
+          if (token == null || currentUser == null) {
             print('Check your internet connection and try aagin');
-          }else {
+          } else {
             signedIn = true;
           }
           return null;
         },
       );
       connectedToInternet = !flag;
-      if(flag) {
+      if (flag) {
         return;
       }
       if (loginresponse.statusCode == 200) {
@@ -132,59 +130,56 @@ class LoginScreenState extends State<LoginScreen>
     return Container(
         child: (start == true)
             ? FutureBuilder(
-          future: checklogin(),
-          builder: (context, snapshot) {
-            start = false;
-            if (snapshot.connectionState == ConnectionState.done) {
-              Widget home;
-              if (signedIn == true) {
-                home = Dashboard();
-              } else {
-                home = LoginPage(onlogin: onlogin);
-              }
-              return home;
-            }
-            return Scaffold(
-              backgroundColor: Colors.indigo[600],
-              drawer: AppDrawer(
-                tag: 'Events',
-              ),
-              body: Center(
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        title,
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 50,
-                            fontWeight: FontWeight.w200),
+                future: checklogin(),
+                builder: (context, snapshot) {
+                  start = false;
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    Widget home;
+                    if (signedIn == true) {
+                      home = Dashboard();
+                    } else {
+                      home = LoginPage(onlogin: onlogin);
+                    }
+                    return home;
+                  }
+                  return Scaffold(
+                    backgroundColor:
+                        Provider.of<ThemeModel>(context).theme.LOGIN_BACKGROUND,
+                    drawer: AppDrawer(
+                      tag: 'Events',
+                    ),
+                    body: Center(
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              title,
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 50,
+                                  fontWeight: FontWeight.w200),
+                            ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              'by DevClub',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w200),
+                            ),
+                          ],
+                        ),
                       ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        'by DevClub',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w200),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          },
-        )
+                    ),
+                  );
+                },
+              )
             : (signedIn == true)
-            ? getScreenFromTag(defaultScreen)
-            : LoginPage(onlogin: onlogin));
+                ? getScreenFromTag(defaultScreen)
+                : LoginPage(onlogin: onlogin));
   }
-
-
-
-
 }

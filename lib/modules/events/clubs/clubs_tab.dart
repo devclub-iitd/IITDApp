@@ -1,4 +1,5 @@
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:http/http.dart' as http;
@@ -30,16 +31,14 @@ Future<List<List<Club>>> getClubs() async {
     },
   );
   connectedToInternet = !timeOutFlag;
-  if(timeOutFlag) {
+  if (timeOutFlag) {
     return returnObj;
   }
   print(response.statusCode);
   if (response.statusCode == 200) {
-
     var parsedJson = json.decode(response.body);
     returnObj = handleGetClubsSuccess(parsedJson);
     await localStorage.setItem('clubs', parsedJson);
-
   } else {
     throw Exception('Failed to load clubs');
   }
@@ -68,9 +67,7 @@ List<List<Club>> handleGetClubsSuccess(var parsedJson) {
   return [subbedClubs, otherClubs];
 }
 
-
 class ClubsTab extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     print('clubs_tab build called');
@@ -104,15 +101,20 @@ class ClubsTab extends StatelessWidget {
           return Center(
             child: Text(
               'Some Error Occured',
-              style: TextStyle(color: Colors.white70),
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.w200,
+              ),
             ),
           );
         }
 
         return Center(
           child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-          ),
+              // valueColor: AlwaysStoppedAnimation<Color>(
+              //     Provider.of<ThemeModel>(context,listen:false).theme.PRIMARY_TEXT_COLOR,
+              //     ),
+              ),
         );
       },
     );

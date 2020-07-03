@@ -1,7 +1,5 @@
-
-
 import 'package:IITDAPP/modules/map/widgets/marker/currentLocationMarker.dart';
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:IITDAPP/modules/map/widgets/marker/marker.dart';
 import 'package:IITDAPP/modules/map/data/locationDetails.dart';
@@ -44,18 +42,23 @@ class MapConditions with ChangeNotifier {
     return typesVisible[ti];
   }
 
-  Future<List<Marker>> fetchData() async{
+  Future<List<Marker>> fetchData() async {
     print('fetching markers');
     var id = 0;
-    markers = <Marker>[...(await apiBaseHelper.get('https://run.mocky.io/v3/b77bebef-1dff-446b-9d05-9ae25814996e')).map((e)=>Marker.fromJson(e, id++, bgcolor)).toList()];
+    markers = <Marker>[
+      ...(await apiBaseHelper.get(
+              'https://run.mocky.io/v3/fcdea4e4-65c3-41f1-8578-42ecaf13a8e7'))
+          .map((e) => Marker.fromJson(e, id++, bgcolor))
+          .toList()
+    ];
 
-  //   http.post(
-  //   'http://192.168.43.81:8080/',
-  //   headers: <String, String>{
-  //     'Content-Type': 'application/json; charset=UTF-8',
-  //   },
-  //   body: jsonEncode(markers.map((e) => e.toJson()).toList()),
-  // ).then((value) => print(value.body));
+    //   http.post(
+    //   'http://192.168.43.81:8080/',
+    //   headers: <String, String>{
+    //     'Content-Type': 'application/json; charset=UTF-8',
+    //   },
+    //   body: jsonEncode(markers.map((e) => e.toJson()).toList()),
+    // ).then((value) => print(value.body));
     onScreenOffset = List.filled(markers.length + 1, null);
     play = List.filled(markers.length + 1, false);
     return markers;
