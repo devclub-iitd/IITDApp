@@ -45,6 +45,8 @@ class MapLayer extends StatefulWidget {
 
 // See /flutter/examples/layers/widgets/gestures.dart
 class _MapLayerState extends State<MapLayer> {
+  Color blendColor = ThemeData.dark().accentColor;
+
   ImageStream _imageStream;
   ui.Image _image;
 
@@ -168,7 +170,7 @@ class _MapLayerState extends State<MapLayer> {
 
   @override
   Widget build(BuildContext ctx) {
-    // print('build image');
+    print('built map layer');
     mo = Provider.of<MapOffset>(ctx, listen: false);
     Widget paintWidget() {
       return MoveAroundWidget(
@@ -198,7 +200,7 @@ class _MapLayerState extends State<MapLayer> {
 
       return Stack(children: [
         GestureDetector(
-          child: paintWidget(),
+          child: ColorFiltered(colorFilter: ColorFilter.mode(blendColor.withOpacity(0.35), BlendMode.luminosity),child: ColorFiltered(colorFilter: ColorFilter.mode(blendColor.withOpacity(0.35), BlendMode.colorBurn),child: paintWidget())),
           onTap: () {
             Provider.of<MapConditions>(context, listen: false)
                 .markerSelected(-1);
@@ -214,6 +216,7 @@ class _MapLayerState extends State<MapLayer> {
   }
 
   Widget markerLayer(bc, Offset tweenOffset, _) {
+    print('built marker layer');
     // print('rebult marker layer');
     var mo = Provider.of<MapOffset>(bc, listen: false);
     var mc = Provider.of<MapConditions>(bc, listen: false);

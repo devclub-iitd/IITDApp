@@ -1,3 +1,4 @@
+import 'package:IITDAPP/ThemeModel.dart';
 import 'package:flutter/material.dart';
 
 import 'package:IITDAPP/modules/news/screens/newsPage.dart';
@@ -6,6 +7,7 @@ import 'package:IITDAPP/modules/news/widgets/cards/imageOverlay/text/newsAuthor.
 import 'package:IITDAPP/modules/news/widgets/cards/imageOverlay/text/newsDate.dart';
 import 'package:IITDAPP/modules/news/widgets/cards/imageOverlay/text/newsTitle.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
+import 'package:provider/provider.dart';
 import 'imageOverlay/text/newsClicks.dart';
 import 'imageOverlay/text/newsSource.dart';
 
@@ -26,7 +28,7 @@ class RecentWidget extends StatelessWidget {
       child: Container(
         clipBehavior: Clip.antiAlias,
         decoration: BoxDecoration(
-          color: Colors.grey[800],
+          color: Provider.of<ThemeModel>(context,listen: false).themeType==ThemeType.Dark?Colors.grey[800]:Colors.grey[200],
           borderRadius: BorderRadius.circular(5),
         ),
         width: width - 16,
@@ -39,7 +41,7 @@ class RecentWidget extends StatelessWidget {
               child: SizedBox(
                 width: (width - 16) * 0.45,
                 child: Hero(
-                  tag: 'r${item.imgUrl}${item.author}${item.clicks}',
+                  tag: 'r${item.id}',
                   child: NewsImage(
                     url: item.imgUrl,
                     width: (width - 16) * 0.45,
@@ -59,7 +61,7 @@ class RecentWidget extends StatelessWidget {
                     top: 0,
                     child: NewsSource(
                       sourceName: item.sourceName,
-                      color: Colors.white54,
+                      color: Theme.of(context).textTheme.headline1.color.withOpacity(0.54),
                       size: 12.0,
                     ),
                   ),
@@ -68,27 +70,45 @@ class RecentWidget extends StatelessWidget {
                       top: 0,
                       child: NewsDate(
                         createdAt: item.createdAt,
-                        color: Colors.white54,
+                        color: Theme.of(context).textTheme.headline1.color.withOpacity(0.54),
                         size: 12.0,
                       )),
                   Positioned(
                     left: 0,
                     bottom: 0,
                     child: NewsAuthor(
-                        author: item.author, size: 12, color: Colors.white54),
+                        author: item.author, size: 12, color: Theme.of(context).textTheme.headline1.color.withOpacity(0.54)),
                   ),
                   Positioned(
                     right: 0,
                     bottom: 0,
                     child: NewsClicks(
-                        clicks: item.clicks, size: 12, color: Colors.white54),
+                        clicks: item.clicks, size: 12, color: Theme.of(context).textTheme.headline1.color.withOpacity(0.54),),
                   ),
                   Align(
                     alignment: Alignment.center,
-                    child: NewsTitle(
-                      title: item.title,
-                      size: 15,
-                      color: Colors.white,
+                    child: Consumer<NewsHistoryProvider>(
+                      builder: (_, nhp, c) => FutureBuilder(
+                          future: nhp.getViewed(item.id),
+                          builder: (_, AsyncSnapshot<bool> snapshot) =>
+                              (!snapshot.hasData || !snapshot.data)
+                                  ? NewsTitle(
+                                      maxLines: 2,
+                                      title: item.title,
+                                      size: 14,
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .headline1
+                                          .color)
+                                  : NewsTitle(
+                                      maxLines: 2,
+                                      title: item.title,
+                                      size: 14,
+                                      color: Theme.of(context)
+                                          .textTheme
+                                          .headline1
+                                          .color
+                                          .withOpacity(0.54))),
                     ),
                   )
                 ],
@@ -96,12 +116,14 @@ class RecentWidget extends StatelessWidget {
             )
           ]),
           onTap: () {
+            Provider.of<NewsHistoryProvider>(context, listen: false)
+                .setViewed(item.id);
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (_) => NewsPage(
                   item: item,
-                  imageTag: 'r${item.imgUrl}${item.author}${item.clicks}',
+                  imageTag: 'r${item.id}',
                 ),
               ),
             );

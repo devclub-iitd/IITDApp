@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:timeago/timeago.dart' as timeago;
 class NewsDate extends StatelessWidget {
   const NewsDate(
       {Key key,
@@ -15,14 +15,7 @@ class NewsDate extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      '${createdAt.year}-' +
-          createdAt.month.toString().padLeft(2, '0') +
-          '-' +
-          createdAt.day.toString().padLeft(2, '0') +
-          ' | ' +
-          createdAt.hour.toString().padLeft(2, '0') +
-          ':' +
-          createdAt.minute.toString().padLeft(2, '0'),
+      timeago.format(createdAt),
       style: TextStyle(
         color: color,
         fontSize: size,

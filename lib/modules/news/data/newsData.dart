@@ -1,78 +1,146 @@
 import 'dart:async';
 import 'dart:math';
+import 'package:IITDAPP/modules/news/data/report.dart';
 import 'package:IITDAPP/utility/apiHelper.dart';
 import 'package:IITDAPP/utility/apiResponse.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:IITDAPP/values/colors/Constants.dart';
 
-class NewsModel<T extends NewsType> {
+class NewsHistoryProvider with ChangeNotifier {
+  final ls = LocalStorage('newsClickHistory${currentUser.id}');
+  List newsHistory = [];
+  NewsHistoryProvider() {
+    ls.ready
+        .then((value) => newsHistory = (ls.getItem('newsID') ?? []) as List);
+    // ls.ready.then((value) => ls.clear());
+  }
+
+  Future<bool> getViewed(id) async {
+    if (currentUser == null) {
+      return false;
+    }
+    await ls.ready;
+    return newsHistory.contains(id);
+  }
+
+  void setViewed(id) async {
+    if (currentUser == null) {
+      return;
+    }
+    await ls.ready;
+    if (!(newsHistory.contains(id))) {
+      newsHistory.add(id);
+      await ls.setItem('newsID', newsHistory);
+      notifyListeners();
+    }
+  }
+}
+
+class NewsModel<T extends NewsType> with ChangeNotifier {
   String title;
   String author;
   int clicks;
   String contentLocal;
+  ApiResponse details;
+  List<Report> reports;
+  DateTime updatedAt;
+  int version;
   DateTime createdAt;
-  int id;
+  String id;
   String sourceName;
   String imgUrl;
   bool loadingContent = false;
 
-  Future<void> add() {
-    print('added ${title}');
-    return Future.delayed(Duration(seconds: 1));
+  Future<String> add() async {
+    String returnMessage;
+    try {
+      var response =
+          (await apiBaseHelper.post(NewsType.baseUrl, toJson())) as Map;
+      returnMessage = response['message'];
+    } on FetchDataException catch (e) {
+      returnMessage = e.toString();
+    }
+    return returnMessage;
   }
 
-  Future<void> update() {
-    print('updated ${title}');
-    return Future.delayed(Duration(seconds: 1));
+  Future<String> update() async {
+    String returnMessage;
+    try {
+      var response = (await apiBaseHelper.patch(
+          NewsType.baseUrl + '/$id', toJson())) as Map;
+      returnMessage = response['message'];
+      notifyListeners();
+    } on FetchDataException catch (e) {
+      returnMessage = e.toString();
+    }
+    return returnMessage;
   }
 
-  Future<void> report(List<String> report) {
-    print(report);
-    print('reported ${title}');
-    return Future.delayed(Duration(seconds: 1));
+  Future<String> report(List<String> report) async {
+    String returnMessage;
+    try {
+      var response = (await apiBaseHelper.post(NewsType.baseUrl + '/report/$id',
+          {'description': report.join('\n')})) as Map;
+      returnMessage = response['message'];
+    } on FetchDataException catch (e) {
+      returnMessage = e.toString();
+    }
+    return returnMessage;
   }
 
-
-  Future<void> delete() {
-    print('deleted ${title}');
-    return Future.delayed(Duration(seconds: 1));
+  Future<String> delete() async {
+    String returnMessage;
+    try {
+      var response =
+          (await apiBaseHelper.delete(NewsType.baseUrl + '/$id')) as Map;
+      returnMessage = response['message'];
+    } on FetchDataException catch (e) {
+      returnMessage = e.toString();
+    }
+    return returnMessage;
   }
 
-  Future<String> get content async {
-    if (!loadingContent) {
-      if (contentLocal != null) {
-        return Future<String>(() => contentLocal);
-      } else {
-        loadingContent = true;
-        try {
-          contentLocal = await ApiBaseHelper()
-              .get(
-                  'https://baconipsum.com/api/?type=meat-and-filler&paras=3&format=json')
-              .then((value) {
-            contentLocal = value.join('\n\n');
-            loadingContent = false;
-            return contentLocal;
-          });
-          return contentLocal;
-        } catch (e) {
-          loadingContent = false;
-          return e.toString();
-        }
+  void getDetails() async {
+    if (contentLocal == null &&
+        (details == null || details.status == Status.ERROR)) {
+      details = ApiResponse.loading('message');
+      try {
+        Map detailsjson = await ApiBaseHelper().get(NewsType.baseUrl + '/$id');
+        contentLocal = detailsjson['content'];
+        reports = <Report>[...detailsjson['reports']
+            .map((json) => Report.fromJson(json))
+            .toList()];
+        version = detailsjson['__v'];
+        updatedAt = DateTime.parse(detailsjson['updatedAt']);
+        details = ApiResponse<String>.completed(contentLocal);
+      } on FetchDataException catch (e) {
+        details = ApiResponse.error(e.toString());
       }
-    } else {
-      return null;
+      notifyListeners();
     }
   }
 
   factory NewsModel.fromMap(Map map) {
     return NewsModel<T>(
       author: map['author'],
-      createdAt: DateTime.now(),
+      createdAt: DateTime.parse(map['createdAt']).add(Duration(minutes: 330)),
       clicks: map['clicks'],
       id: map['_id'],
-      title: map['title'],
+      title: map['description'],
       imgUrl: map['imgUrl'],
       sourceName: map['sourceName'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'author': author,
+      'content': contentLocal,
+      'description': title,
+      'imgUrl': imgUrl,
+      'sourceName': sourceName,
+    };
   }
 
   NewsModel(
@@ -86,19 +154,19 @@ class NewsModel<T extends NewsType> {
 }
 
 class NewsType {
-  static const baseUrl = '';
+  static const baseUrl = '$url/api/news';
 }
 
 class RecentNews extends NewsType {
-  static const baseUrl = '';
+  static final baseUrl = NewsType.baseUrl + '?sortBy=createdAt:desc';
 }
 
 class TrendingNews extends NewsType {
-  static const baseUrl = '';
+  static const baseUrl = NewsType.baseUrl + '?sortBy=clicks:desc';
 }
 
 class OldNews extends NewsType {
-  static const baseUrl = '';
+  static const baseUrl = NewsType.baseUrl + '?sortBy=createdAt:asc';
 }
 
 class NewsProvider<T extends NewsType> with ChangeNotifier {
@@ -123,6 +191,8 @@ class NewsProvider<T extends NewsType> with ChangeNotifier {
       baseUrl = RecentNews.baseUrl;
     } else if (type == typeOf<TrendingNews>()) {
       baseUrl = TrendingNews.baseUrl;
+    } else if (type == typeOf<OldNews>()) {
+      baseUrl = OldNews.baseUrl;
     }
     refresh();
   }
@@ -143,51 +213,60 @@ class NewsProvider<T extends NewsType> with ChangeNotifier {
     });
   }
 
-  Future<int> getMaxItems() {
-    return Future.delayed(Duration(seconds: 1), () => maxNewsItems = 30);
+  Future<int> getMaxItems() async {
+    try{
+      maxNewsItems = (await apiBaseHelper.get(baseUrl)).length;
+    }on FetchDataException catch(e){
+      displayedData=ApiResponse.error(e.toString());
+      notifyListeners();
+    }
+    return maxNewsItems??0;
   }
 
   Future<void> loadPage(int pageNumber) async {
     if (!pageLoaded[pageNumber]) {
       pageLoading[pageNumber] = true;
       try {
-        await _getExampleServerData(itemsPerPage).then((value) {
-          cacheData.setRange(
-              pageNumber * itemsPerPage,
-              min(maxNewsItems, (pageNumber + 1) * itemsPerPage),
-              value.map((e) => NewsModel<T>.fromMap(e)));
+        await apiBaseHelper
+            .get(baseUrl +
+                '&limit=$itemsPerPage&skip=${itemsPerPage * pageNumber}')
+            .then((value) {
+          var newsList = (<NewsModel<T>>[
+            ...value.map((e) => NewsModel<T>.fromMap(e)).toList()
+          ]);
+          cacheData.setRange(pageNumber * itemsPerPage,
+              min(maxNewsItems, (pageNumber + 1) * itemsPerPage), newsList);
           displayedData = ApiResponse.completed(cacheData);
           pageLoaded[pageNumber] = true;
           pageLoading[pageNumber] = false;
           notifyListeners();
         });
       } catch (e) {
-        print('here');
         pageLoading[pageNumber] = false;
         displayedData = ApiResponse.error(e.toString());
         notifyListeners();
-        print('here${e.toString()}');
+        print('${e.toString()}');
       }
     }
     return Future.value(null);
   }
 
-  Future<List<Map>> _getExampleServerData(int length) async {
-    print('loading...');
-    var httpResponse;
-    httpResponse = await api.get(
-        'https://baconipsum.com/api/?type=meat-and-filler&sentences=1&format=json');
-    var words = httpResponse[0].split(' ');
-    return List<Map>.generate(length, (int index) {
-      return {
-        'author': words[(0 + index) % words.length],
-        'clicks': words[(1 + index) % words.length].length,
-        'id': words[(2 + index) % words.length].length,
-        'title': httpResponse[0],
-        'imgUrl':
-            'https://api.adorable.io/avatars/80/${words[(4 + index) % words.length]}.png',
-        'sourceName': words[(3 + index) % words.length],
-      };
-    });
-  }
+  // Future<List<Map>> _getExampleServerData(int length) async {
+  //   print('loading...');
+  //   var httpResponse;
+  //   httpResponse = await api.get(
+  //       'https://baconipsum.com/api/?type=meat-and-filler&sentences=1&format=json');
+  //   var words = httpResponse[0].split(' ');
+  //   return List<Map>.generate(length, (int index) {
+  //     return {
+  //       'author': words[(0 + index) % words.length],
+  //       'clicks': words[(1 + index) % words.length].length,
+  //       '_id': words[(2 + index) % words.length],
+  //       'title': httpResponse[0],
+  //       'imgUrl':
+  //           'https://api.adorable.io/avatars/80/${words[(4 + index) % words.length]}.png',
+  //       'sourceName': words[(3 + index) % words.length],
+  //     };
+  //   });
+  // }
 }

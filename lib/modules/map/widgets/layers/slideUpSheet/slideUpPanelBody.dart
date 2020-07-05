@@ -78,7 +78,7 @@ class SlideUpPanelBody extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: Colors.indigoAccent[100]),
+                        color: AppColors.SLIDE_UP_SHEET_BUTTON_COLOR),
                     child: IconButton(
                       icon: Icon(Icons.phone),
                       onPressed: () {

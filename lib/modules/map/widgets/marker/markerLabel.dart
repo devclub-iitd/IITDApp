@@ -33,7 +33,7 @@ class MarkerLabel extends StatelessWidget {
                   wrapWords: false,
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w700,
                       color: color ?? AppColors.DEFAULT_LABEL_COLOR),
                 )),
           ),

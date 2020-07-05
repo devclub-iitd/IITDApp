@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:IITDAPP/modules/dashboard/widgets/errorWidget.dart';
 import 'package:IITDAPP/modules/news/data/carouselIndex.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/news/screens/newsList/newsListPage.dart';
@@ -35,11 +36,12 @@ class TrendingSection extends StatelessWidget {
               )));
             },
           ),
-          SizedBox(
-            width: width,
-            height: width * 2 / 3,
-            child: Center(child: Text(news.displayedData.message)),
-          ),
+          Container(
+              height: MediaQuery.of(context).size.height * 0.4,
+              child: Center(
+                  child: ErrorDisplay(
+                      refresh: news.refresh,
+                      error: news.displayedData.message))),
         ],
       );
     }

@@ -1,5 +1,7 @@
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 
 import 'package:IITDAPP/modules/news/data/newsData.dart';
@@ -19,7 +21,17 @@ class _NewsUpdateState extends State<NewsUpdate> {
   final _formKey = GlobalKey<FormState>();
 
   final _imageUrlController = TextEditingController();
+  final _authorFocusNode = FocusNode();
+  final _titleFocusNode = FocusNode();
+  final _contentFocusNode = FocusNode();
+  final _sourceFocusNode = FocusNode();
   final _imageUrlFocusNode = FocusNode();
+
+  void _fieldFocusChange(
+      BuildContext context, FocusNode currentFocus, FocusNode nextFocus) {
+    currentFocus.unfocus();
+    FocusScope.of(context).requestFocus(nextFocus);
+  }
 
   @override
   void initState() {
@@ -37,6 +49,10 @@ class _NewsUpdateState extends State<NewsUpdate> {
   @override
   void dispose() {
     _imageUrlFocusNode.dispose();
+    _authorFocusNode.dispose();
+    _titleFocusNode.dispose();
+    _sourceFocusNode.dispose();
+    _contentFocusNode.dispose();
     _imageUrlController.dispose();
     super.dispose();
   }
@@ -71,6 +87,10 @@ class _NewsUpdateState extends State<NewsUpdate> {
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0, bottom: 8),
                     child: TextFormField(
+                      focusNode: _authorFocusNode,
+                      onFieldSubmitted: (s) => _fieldFocusChange(
+                          context, _authorFocusNode, _titleFocusNode),
+                      textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(labelText: 'Author'),
                       validator: (val) {
@@ -90,6 +110,10 @@ class _NewsUpdateState extends State<NewsUpdate> {
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0, bottom: 8),
                     child: TextFormField(
+                      focusNode: _titleFocusNode,
+                      onFieldSubmitted: (s) => _fieldFocusChange(
+                          context, _titleFocusNode, _contentFocusNode),
+                      textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(labelText: 'title'),
                       validator: (val) {
@@ -109,6 +133,10 @@ class _NewsUpdateState extends State<NewsUpdate> {
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0, bottom: 8),
                     child: TextFormField(
+                      focusNode: _contentFocusNode,
+                      onFieldSubmitted: (s) => _fieldFocusChange(
+                          context, _contentFocusNode, _sourceFocusNode),
+                      textInputAction: TextInputAction.next,
                       decoration: InputDecoration(labelText: 'Content'),
                       minLines: 1,
                       maxLines: 10,
@@ -130,6 +158,10 @@ class _NewsUpdateState extends State<NewsUpdate> {
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0, bottom: 8),
                     child: TextFormField(
+                      focusNode: _sourceFocusNode,
+                      onFieldSubmitted: (s) => _fieldFocusChange(
+                          context, _sourceFocusNode, _imageUrlFocusNode),
+                      textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(labelText: 'Source'),
                       validator: (val) {
@@ -169,6 +201,7 @@ class _NewsUpdateState extends State<NewsUpdate> {
                               }
                               return null;
                             },
+                            //TODO: on field submitted
                             controller: _imageUrlController,
                             onSaved: (val) {
                               setState(() {
@@ -186,7 +219,7 @@ class _NewsUpdateState extends State<NewsUpdate> {
                           child: CachedNetworkImage(
                               placeholder: (_, s) =>
                                   SizedShimmer(width: null, height: null),
-                              imageUrl: _imageUrlController.value.text,
+                              imageUrl: _imageUrlController.value.text??defaultImage,
                               fit: BoxFit.cover),
                         )
                       ],
@@ -207,7 +240,8 @@ class TickButton extends StatelessWidget {
     Key key,
     @required GlobalKey<FormState> formKey,
     @required this.widget,
-  }) : _formKey = formKey, super(key: key);
+  })  : _formKey = formKey,
+        super(key: key);
 
   final GlobalKey<FormState> _formKey;
   final NewsUpdate widget;
@@ -220,29 +254,23 @@ class TickButton extends StatelessWidget {
           final form = _formKey.currentState;
           if (form.validate()) {
             form.save();
-            if (widget.title == 'Create') {
-          Scaffold.of(context).showSnackBar(SnackBar(content: Text('Uploading, Please Wait'),duration: Duration(seconds:2),));
-              widget.nm.add().then((value) {
-                    Provider.of<NewsProvider<TrendingNews>>(context,
-                            listen: false)
-                        .refresh();
-                    Provider.of<NewsProvider<RecentNews>>(context,
-                            listen: false)
-                        .refresh();
-                    }).then((value) => 
-            Navigator.of(context).popUntil((route) => route.isFirst));
-            } else if (widget.title == 'Update') {
-          Scaffold.of(context).showSnackBar(SnackBar(content: Text('Uploading, Please Wait'),duration: Duration(seconds:2),));
-              widget.nm.update().then((value) {
-                    Provider.of<NewsProvider<TrendingNews>>(context,
-                            listen: false)
-                        .refresh();
-                    Provider.of<NewsProvider<RecentNews>>(context,
-                            listen: false)
-                        .refresh();
-                    }).then((value) => 
-            Navigator.pop(context));
-            }
+            var updateFunc = widget.title == 'Create'?widget.nm.add:widget.nm.update; 
+              Scaffold.of(context).showSnackBar(SnackBar(
+                content: Text('Uploading, Please Wait'),
+              ));
+              updateFunc().then((value) async {
+                Scaffold.of(context).removeCurrentSnackBar();
+                Scaffold.of(context).showSnackBar(SnackBar(
+                  content: Text(value),
+                  duration: Duration(seconds: 1),
+                ));
+                unawaited(Provider.of<NewsProvider<TrendingNews>>(context,
+                        listen: false)
+                    .refresh());
+                await Provider.of<NewsProvider<RecentNews>>(context,
+                        listen: false)
+                    .refresh();
+              }).then((value) {Future.delayed(Duration(milliseconds:100),(){Navigator.popUntil(context,(route)=>route.isFirst);});});
           }
         });
   }

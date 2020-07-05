@@ -1,3 +1,4 @@
+import 'package:IITDAPP/modules/attendance/data/attendanceProvider.dart';
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/modules/login/LoginScreen.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
@@ -11,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_core/core.dart';
-
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -35,6 +35,12 @@ void main() async {
     ChangeNotifierProvider(
       create: (_) => NewsProvider<OldNews>(),
     ),
+    ChangeNotifierProvider(
+      create: (_) => AttendanceProvider(),
+    ),
+    ChangeNotifierProvider(
+      create: (_) => NewsHistoryProvider(),
+    ),
     ChangeNotifierProvider<ThemeModel>(
       create: (_) => ThemeModel(),
     )
@@ -46,8 +52,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'IITD APP',
-      theme: Provider.of<ThemeModel>(context).themeType==ThemeType.Dark?darkTheme:lightTheme,
-      darkTheme: Provider.of<ThemeModel>(context).themeType==ThemeType.Light?lightTheme:darkTheme,
+      theme: Provider.of<ThemeModel>(context).themeType == ThemeType.Dark
+          ? darkTheme
+          : lightTheme,
+      darkTheme: Provider.of<ThemeModel>(context).themeType == ThemeType.Light
+          ? lightTheme
+          : darkTheme,
 //      ThemeData(
 ////        primarySwatch: Colors.indigo,
 //        hintColor: Colors.white54,
@@ -64,7 +74,7 @@ class MyApp extends StatelessWidget {
 }
 
 // ignore: always_declare_return_types
-initialisePreferences() async{
+initialisePreferences() async {
   var res = await SettingsHandler.getSettingValue(commonKeys[0]);
   defaultScreen = res;
 }
