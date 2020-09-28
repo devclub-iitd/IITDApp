@@ -22,32 +22,35 @@ class QueueManager {
 
   // ignore: always_declare_return_types
   static executeList(var lis) async {
-    lis.forEach((data) async {
+    var prefs = await SharedPreferences.getInstance();
+    await lis.forEach((data) async {
       var succ = false;
       if(data['func']=='postReminder'){
-        var res = await postReminder(null, data['patch'],body: data['event']);
+        var res = await postReminder(Event('99',eventId: data['eventId']), data['patch'],body: data['event'],addToQueue: false);
         if(res=='timeout')
           {
             connectedToInternet = false;
-            return;
           }
         if(res=='') {
           succ = true;
         }
-
+        if(res!= 'error' && res!='timeout' && res!=''){
+          await prefs.setString(
+              'ser ' + res, 'loc ' + data['eventId']);
+        }
       }
       else if(data['func']=='deleteReminderFromServer'){
-        var res = await deleteReminderFromServer(data['eventId']);
+        var res = await deleteReminderFromServer(data['eventId'],addToQueue: false);
         if(res==-1){
           connectedToInternet =false;
-          return;
         }
         if(res==1) {
           succ = true;
         }
       }
-      if(succ) {
+      if(connectedToInternet) {
         lis.remove(data);
+        await storeList(lis);
       }
     });
     await storeList(lis);

@@ -106,3 +106,13 @@ String getReminderString(List<Reminder> rem){
   return (res).toString()+' Minutes';
 
 }
+
+makeEventElementsNonNull(Event ev){
+  ev.description ??= '';
+  ev.startTimeZone??='';
+  ev.endTimeZone??='';
+  ev.location??='';
+//  if(ev.url==''||ev.url==null) {
+//    ev.url ??= Uri('');
+//  }
+}

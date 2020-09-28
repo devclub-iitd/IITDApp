@@ -505,12 +505,14 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                       color: Colors.white,
                     ),
                     onPressed: () async {
+                      unawaited(showLoading(context, message: 'Loading'));
                       var meetings = <Meeting>[];
                       if (_selectedAppointment != null) {
                         _events.appointments.removeAt(
                             _events.appointments.indexOf(_selectedAppointment));
                         _events.notifyListeners(CalendarDataSourceAction.remove,
                             <Meeting>[]..add(_selectedAppointment));
+                        calForceSetsState();
                       }
                       var event = Event(
                           _selectedAppointment == null
@@ -527,21 +529,38 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                       event.attendees = getAttendeeList(_attendee);
                       event.reminders = getReminderList(_reminder);
                       event.allDay = _isAllDay;
+                      event.startTimeZone = '';
+                      event.endTimeZone = '';
                       event = addRecurrenceRule(_recurrence, event);
                       var res = await postReminder(
-                          event, !(_selectedAppointment == null));
+                          event, !(_selectedAppointment == null),addToQueue: false);
                       if (res == 'error') {
                         print('server error occured');
+                        Navigator.pop(context);
+                        scaffoldKey.currentState.showSnackBar(SnackBar(
+                          behavior: SnackBarBehavior.floating,
+                          content: CustomSnackBarContent(text: 'Server Error Occured',),
+                        ));
+                        Navigator.pop(context);
                         return;
                       }
                       if (res == 'timeout') {
                         connectedToInternet = false;
+                        scaffoldKey.currentState.showSnackBar(SnackBar(
+                          behavior: SnackBarBehavior.floating,
+                          content: CustomSnackBarContent(text: 'Unable to connect to server',),
+                        ));
                       }
+                      event.availability = 'BUSY';
                       var createEventResult = await DeviceCalendarPlugin()
                           .createOrUpdateEvent(event);
                       var prefs = await SharedPreferences.getInstance();
                       if (createEventResult.isSuccess) {
-                        if (res != '' || res != 'timeout') {
+                        if(res=='timeout'){
+                          QueueManager.addToList(
+                              {'func': 'postReminder', 'event': createPostReminderBody(event), 'patch': _selectedAppointment!=null,'eventId': createEventResult.data});
+                        }
+                        if (res != '' && res != 'timeout' && res!='error') {
                           await prefs.setString(
                               'ser ' + res, 'loc ' + createEventResult.data);
                         }
@@ -587,12 +606,15 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                         print(meetings);
                         _events.appointments.add(meetings[0]);
 
+
                         _events.notifyListeners(
-                            CalendarDataSourceAction.add, meetings);
+                            CalendarDataSourceAction.add, <Meeting>[]..add(meetings[0]));
                         _selectedAppointment = null;
+                        calForceSetsState();
                       } else {
                         print('error occured');
                       }
+                      Navigator.pop(context);
                       Navigator.pop(context);
                     })
               ],
@@ -607,6 +629,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                 ? const Text('')
                 : FloatingActionButton(
                     onPressed: () async {
+                      unawaited(showLoading(context,message: 'Loading'));
                       if (_selectedAppointment != null) {
                         var succ = await deleteReminderFromServer(
                             _selectedAppointment.eventId);
@@ -634,9 +657,11 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                               CalendarDataSourceAction.remove,
                               <Meeting>[]..add(_selectedAppointment));
                           _selectedAppointment = null;
+                          calForceSetsState();
                         } else {
                           print('Error:- Could not delete event');
                         }
+                        Navigator.pop(context);
                         Navigator.pop(context);
                       }
                     },
@@ -653,7 +678,8 @@ class AppointmentEditorState extends State<AppointmentEditor> {
 
 Event addRecurrenceRule(var rule, Event event) {
   //verify this function
-  if (rule == recurrenceOptions[0]) {
+
+  if (rule==null || rule == recurrenceOptions[0]) {
     return event;
   }
   RecurrenceFrequency temp;
@@ -672,10 +698,24 @@ Event addRecurrenceRule(var rule, Event event) {
   return event;
 }
 
-List<Attendee> getAttendeeList(var str) {
+List<Attendee> getAttendeeListFromList(var lis){
+  var res = List<Attendee>(); // ignore: prefer_collection_literals
+  for (var i = 0; i < lis.length; i++) {
+    if(lis[i]=='') {
+      continue;
+    }
+    res.add(Attendee(emailAddress: lis[i]));
+  }
+  return res;
+}
+
+List<Attendee> getAttendeeList(String str) {
+  var res = List<Attendee>(); // ignore: prefer_collection_literals
+  if(str=='' || str==null) {
+    return res;
+  }
   var ls = LineSplitter();
   var lines = ls.convert(str);
-  var res = List<Attendee>(); // ignore: prefer_collection_literals
   for (var i = 0; i < lines.length; i++) {
     res.add(Attendee(emailAddress: lines[i]));
   }
@@ -684,7 +724,7 @@ List<Attendee> getAttendeeList(var str) {
 
 List<Reminder> getReminderList(String rem) {
   var lis = <Reminder>[];
-  if (rem == '') {
+  if (rem == '' || rem==null) {
     return lis;
   }
   var t = int.parse(rem.substring(0, rem.indexOf(' ')));

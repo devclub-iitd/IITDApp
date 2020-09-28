@@ -43,8 +43,9 @@ Future logout() async {
   await storage.delete(key: 'email');
   await storage.delete(key: 'password');
   await storage.delete(key: 'token');
-  var ls = LocalStorage('iitapp');
+  var ls = LocalStorage('iitdapp');
   await ls.clear();
+  await deleteSharedPrefs();
 }
 
 void deleteSharedPrefs() async {
@@ -130,7 +131,7 @@ void showAlert(BuildContext context, Function onlogout) {
                   Navigator.pop(context);
                   unawaited(showLoading(context, message: 'Signing Out'));
                   await logout();
-                  Navigator.pop(context);
+                   Navigator.pop(context);
                   await Navigator.pushReplacementNamed(context, Routes.loginPage);
                 },
                 color: Colors.indigo[400],
