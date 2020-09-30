@@ -3,6 +3,7 @@ import 'package:IITDAPP/modules/login/LoginScreen.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsData.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
+import 'package:IITDAPP/push_notifications.dart';
 import 'package:IITDAPP/routes/router.dart';
 import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:IITDAPP/values/colors/colors.dart';
@@ -27,6 +28,7 @@ void main() async {
 
   unawaited(initialiseNotifications());
   unawaited(initialisePreferences());
+
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
@@ -77,6 +79,10 @@ initialisePreferences() async{
 initialiseNotifications() async{
   await Calendarnotificationprovider.setDescription(start: 'Time:- ',end: '',text: DynamicTextEventKeys.RangeTime);
   await Calendarnotificationprovider.setTitle(start: 'Event:- ',text: DynamicTextEventKeys.Title);
+  var pushNotificationsManager = PushNotificationsManager();
+  await pushNotificationsManager.init();
 }
+
+
 
 

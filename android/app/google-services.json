@@ -1,78 +1,35 @@
 {
   "project_info": {
-    "project_number": "440543785404",
-    "firebase_url": "https://iitd-connect-app.firebaseio.com",
-    "project_id": "iitd-connect-app",
-    "storage_bucket": "iitd-connect-app.appspot.com"
+    "project_number": "349254363312",
+    "firebase_url": "https://iitdapp-194f5.firebaseio.com",
+    "project_id": "iitdapp-194f5",
+    "storage_bucket": "iitdapp-194f5.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:440543785404:android:727979231fa08b6d73bbb9",
+        "mobilesdk_app_id": "1:349254363312:android:0759d10b8b15f946d9f375",
         "android_client_info": {
-          "package_name": "com.example.IITDAPP"
+          "package_name": "com.devclub.iitdapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "440543785404-mmucshmv8an29r0d4tbifvi18e78beug.apps.googleusercontent.com",
+          "client_id": "349254363312-7rumtaiijnarme7fv98vseec3iqknpoj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBZBT0m7MsHjoWVXijhKotkfZHIzSP0pNM"
+          "current_key": "AIzaSyAWjHQBxDXP7CobeXXAI9UpOUGFxrzc0IU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "440543785404-mmucshmv8an29r0d4tbifvi18e78beug.apps.googleusercontent.com",
+              "client_id": "349254363312-7rumtaiijnarme7fv98vseec3iqknpoj.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "440543785404-e98qeqqm8u1cl8hq9fp6oaqk85f5rdmt.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.tryst20User"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:440543785404:android:ca38aabedfc6110f73bbb9",
-        "android_client_info": {
-          "package_name": "com.tryst.tryst_20_user"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "440543785404-mmucshmv8an29r0d4tbifvi18e78beug.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBZBT0m7MsHjoWVXijhKotkfZHIzSP0pNM"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "440543785404-mmucshmv8an29r0d4tbifvi18e78beug.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "440543785404-e98qeqqm8u1cl8hq9fp6oaqk85f5rdmt.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.tryst20User"
-              }
             }
           ]
         }
