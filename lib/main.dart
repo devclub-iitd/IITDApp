@@ -1,3 +1,4 @@
+import 'package:IITDAPP/modules/attendance/data/attendanceProvider.dart';
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/modules/login/LoginScreen.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
@@ -37,6 +38,12 @@ void main() async {
     ),
     ChangeNotifierProvider(
       create: (_) => NewsProvider<OldNews>(),
+    ),
+    ChangeNotifierProvider(
+      create: (_) => AttendanceProvider(),
+    ),
+    ChangeNotifierProvider(
+      create: (_) => NewsHistoryProvider(),
     ),
     ChangeNotifierProvider<ThemeModel>(
       create: (_) => ThemeModel(),

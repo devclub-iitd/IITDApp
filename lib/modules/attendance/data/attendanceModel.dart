@@ -1,5 +1,3 @@
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 import 'package:intl/intl.dart';
 
 class AttendanceModel {
@@ -25,22 +23,5 @@ class AttendanceModel {
             .toList())
       ],
     );
-  }
-
-  static Future<List<AttendanceModel>> getAttendanceData(String entryNumber) async {
-    var data =
-        await http.get('http://www.mocky.io/v2/5ebc43f43100004a005b0a9b');
-    if (data.statusCode != 200) {
-      throw Exception('Failed to fetch data');
-    } else {
-      var jsondata = json.decode(data.body);
-      var attendances = <AttendanceModel>[];
-      for (var courseJSON in jsondata) {
-        var course = AttendanceModel.fromJSON(courseJSON);
-        attendances.add(course);
-      }
-      // print('fetched ' + attendances.length.toString());
-      return attendances;
-    }
   }
 }

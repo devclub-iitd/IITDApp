@@ -4,6 +4,7 @@ import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/news/widgets/cards/imageOverlay/text/newsAuthor.dart';
 import 'package:IITDAPP/modules/news/widgets/cards/imageOverlay/text/newsClicks.dart';
 import 'package:IITDAPP/modules/news/widgets/cards/imageOverlay/text/newsTitle.dart';
+import 'package:provider/provider.dart';
 
 class Overlaytitle extends StatelessWidget {
   const Overlaytitle({
@@ -30,7 +31,20 @@ class Overlaytitle extends StatelessWidget {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
-            child: NewsTitle(title: item.title, size: 20, color: Colors.white),
+            child: Consumer<NewsHistoryProvider>(
+              builder: (_, nhp, c) => FutureBuilder(
+                  future: nhp.getViewed(item.id),
+                  builder: (_, AsyncSnapshot<bool> snapshot) =>
+                      (!snapshot.hasData || !snapshot.data)
+                          ? NewsTitle(
+                              maxLines: 2,
+                              title: item.title, size: 20, color: Colors.white)
+                          : NewsTitle(
+                              maxLines: 2,
+                              title: item.title,
+                              size: 20,
+                              color: Colors.white54)),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

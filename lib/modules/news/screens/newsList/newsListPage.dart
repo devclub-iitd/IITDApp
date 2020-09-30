@@ -168,9 +168,7 @@ class PageList<K extends NewsType> extends StatelessWidget {
                     min((index + 1) * news.itemsPerPage, news.maxNewsItems)));
           } else {
             return ShimmerList(
-                itemCount: news.itemsPerPage * (index + 1) > news.maxNewsItems
-                    ? news.itemsPerPage * (index + 1) - news.maxNewsItems
-                    : news.itemsPerPage,
+                itemCount: min(news.itemsPerPage,news.maxNewsItems-index*news.itemsPerPage),
                 width: width);
           }
         },

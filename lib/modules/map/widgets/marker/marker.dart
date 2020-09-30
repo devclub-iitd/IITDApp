@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:IITDAPP/modules/map/data/locationDetails.dart';
+import 'package:latlong/latlong.dart';
 
 enum MinScaleLevel { HIGH, MID, LOW }
 
@@ -34,6 +35,33 @@ class Marker extends StatelessWidget {
       default:
         return 0;
     }
+  }
+
+  factory Marker.fromJson(
+      Map<String, dynamic> json, int id, List<Color> bgcolor) {
+    return Marker(
+      location: Location(
+          contact: json['contact'].toString(),
+          details: json['details'],
+          link: json['link'],
+          name: json['name'],
+          subtitle: json['subtitle'],
+          type: json['type'] < 10 ? MarkerType.values[json['type']] : null,
+          location: LatLng(
+              json['latitude'], json['longitude']),
+          closeTime: TimeOfDay(
+              hour: int.parse(json['closetime'].substring(0, 2)),
+              minute: int.parse(json['closetime'].substring(2, 4))),
+          openTime: TimeOfDay(
+              hour: int.parse(json['opentime'].substring(0, 2)),
+              minute: int.parse(json['opentime'].substring(2, 4)))),
+      id: id,
+      size: 48,
+      bgcolor: bgcolor,
+      minScale: json['minscale'] != 0
+          ? MinScaleLevel.values[3-json['minscale']]
+          : null,
+    );
   }
 
   Color getbgcolor(m) {

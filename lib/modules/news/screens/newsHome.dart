@@ -1,7 +1,7 @@
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:IITDAPP/globals.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/news/widgets/sections/recentsSection.dart';
 import 'package:IITDAPP/modules/news/widgets/sections/trendingSection.dart';
@@ -41,11 +41,12 @@ class NewsHome extends StatelessWidget {
       ),
       body: RefreshIndicator(
         onRefresh: () {
-          return Provider.of<NewsProvider<TrendingNews>>(context, listen: false)
-              .refresh()
-              .then((value) =>
-                  Provider.of<NewsProvider<RecentNews>>(context, listen: false)
-                      .refresh());
+          return Future.wait([
+            Provider.of<NewsProvider<TrendingNews>>(context, listen: false)
+                .refresh(),
+            Provider.of<NewsProvider<RecentNews>>(context, listen: false)
+                .refresh()
+          ]);
         },
         child: SingleChildScrollView(
             child: Column(children: [

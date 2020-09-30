@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:IITDAPP/modules/news/screens/newsPage.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
+import 'package:provider/provider.dart';
 import 'imageOverlay/newsImage.dart';
 import 'imageOverlay/overlayTitle.dart';
 import 'imageOverlay/overlayHeading.dart';
@@ -20,15 +21,18 @@ class TrendingWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => NewsPage(
-            item: item,
-            imageTag: 't${item.imgUrl}${item.author}${item.clicks}',
+      onTap: () {
+        Provider.of<NewsHistoryProvider>(context,listen: false).setViewed(item.id);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => NewsPage(
+              item: item,
+              imageTag: 't${item.id}',
+            ),
           ),
-        ),
-      ),
+        );
+      },
       child: Container(
         margin: EdgeInsets.all(5.0),
         child: ClipRRect(
@@ -36,7 +40,7 @@ class TrendingWidget extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               Hero(
-                  tag: 't${item.imgUrl}${item.author}${item.clicks}',
+                  tag: 't${item.id}',
                   child: NewsImage(
                     url: item.imgUrl,
                     height: width * 2 / 3,

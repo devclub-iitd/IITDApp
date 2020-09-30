@@ -1,3 +1,4 @@
+import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class NewsImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CachedNetworkImage(
-      imageUrl: url,
+      imageUrl: url??defaultImage,
       placeholder: (_, s) => SizedShimmer(width: width, height: height),
       imageBuilder: (_, ip) {
         return Container(
