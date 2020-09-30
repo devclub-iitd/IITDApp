@@ -14,21 +14,19 @@ import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_core/core.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
     await GlobalConfiguration().loadFromAsset('secrets');
     SyncfusionLicense.registerLicense(
+        // ignore: deprecated_member_use
         GlobalConfiguration().getString('calendar_api_key'));
   } catch (e) {
     print('secrets.json file is required');
   }
 
-
   unawaited(initialiseNotifications());
   unawaited(initialisePreferences());
-
 
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
@@ -49,11 +47,14 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       title: 'IITD APP',
-      theme: Provider.of<ThemeModel>(context).themeType==ThemeType.Dark?darkTheme:lightTheme,
-      darkTheme: Provider.of<ThemeModel>(context).themeType==ThemeType.Light?lightTheme:darkTheme,
+      theme: Provider.of<ThemeModel>(context).themeType == ThemeType.Dark
+          ? darkTheme
+          : lightTheme,
+      darkTheme: Provider.of<ThemeModel>(context).themeType == ThemeType.Light
+          ? lightTheme
+          : darkTheme,
 //      ThemeData(
 ////        primarySwatch: Colors.indigo,
 //        hintColor: Colors.white54,
@@ -70,19 +71,17 @@ class MyApp extends StatelessWidget {
 }
 
 // ignore: always_declare_return_types
-initialisePreferences() async{
+initialisePreferences() async {
   var res = await SettingsHandler.getSettingValue(commonKeys[0]);
   defaultScreen = res;
 }
 
 // ignore: always_declare_return_types
-initialiseNotifications() async{
-  await Calendarnotificationprovider.setDescription(start: 'Time:- ',end: '',text: DynamicTextEventKeys.RangeTime);
-  await Calendarnotificationprovider.setTitle(start: 'Event:- ',text: DynamicTextEventKeys.Title);
+initialiseNotifications() async {
+  await Calendarnotificationprovider.setDescription(
+      start: 'Time:- ', end: '', text: DynamicTextEventKeys.RangeTime);
+  await Calendarnotificationprovider.setTitle(
+      start: 'Event:- ', text: DynamicTextEventKeys.Title);
   var pushNotificationsManager = PushNotificationsManager();
   await pushNotificationsManager.init();
 }
-
-
-
-

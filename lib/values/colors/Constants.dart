@@ -20,9 +20,8 @@ var loginFunc;
 bool guest = false;
 var defaultScreen = 'Dashboard';
 
-
-Widget getScreenFromTag(var tag){
-  switch(tag){
+Widget getScreenFromTag(var tag) {
+  switch (tag) {
     case 'Dashboard':
       return Dashboard();
     case 'Events':

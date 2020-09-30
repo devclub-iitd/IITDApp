@@ -32,7 +32,6 @@ var reminderUnits = <String>[
   'Weeks',
 ];
 
-
 var recurrenceOptions = <String>[
   'Does Not Repeat',
   'Daily',

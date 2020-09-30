@@ -533,13 +533,16 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                       event.endTimeZone = '';
                       event = addRecurrenceRule(_recurrence, event);
                       var res = await postReminder(
-                          event, !(_selectedAppointment == null),addToQueue: false);
+                          event, !(_selectedAppointment == null),
+                          addToQueue: false);
                       if (res == 'error') {
                         print('server error occured');
                         Navigator.pop(context);
                         scaffoldKey.currentState.showSnackBar(SnackBar(
                           behavior: SnackBarBehavior.floating,
-                          content: CustomSnackBarContent(text: 'Server Error Occured',),
+                          content: CustomSnackBarContent(
+                            text: 'Server Error Occured',
+                          ),
                         ));
                         Navigator.pop(context);
                         return;
@@ -548,7 +551,9 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                         connectedToInternet = false;
                         scaffoldKey.currentState.showSnackBar(SnackBar(
                           behavior: SnackBarBehavior.floating,
-                          content: CustomSnackBarContent(text: 'Unable to connect to server',),
+                          content: CustomSnackBarContent(
+                            text: 'Unable to connect to server',
+                          ),
                         ));
                       }
                       // event.availability = 'BUSY';
@@ -556,11 +561,15 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                           .createOrUpdateEvent(event);
                       var prefs = await SharedPreferences.getInstance();
                       if (createEventResult.isSuccess) {
-                        if(res=='timeout'){
-                          QueueManager.addToList(
-                              {'func': 'postReminder', 'event': createPostReminderBody(event), 'patch': _selectedAppointment!=null,'eventId': createEventResult.data});
+                        if (res == 'timeout') {
+                          QueueManager.addToList({
+                            'func': 'postReminder',
+                            'event': createPostReminderBody(event),
+                            'patch': _selectedAppointment != null,
+                            'eventId': createEventResult.data
+                          });
                         }
-                        if (res != '' && res != 'timeout' && res!='error') {
+                        if (res != '' && res != 'timeout' && res != 'error') {
                           await prefs.setString(
                               'ser ' + res, 'loc ' + createEventResult.data);
                         }
@@ -607,9 +616,8 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                         print(meetings);
                         _events.appointments.add(meetings[0]);
 
-
-                        _events.notifyListeners(
-                            CalendarDataSourceAction.add, <Meeting>[]..add(meetings[0]));
+                        _events.notifyListeners(CalendarDataSourceAction.add,
+                            <Meeting>[]..add(meetings[0]));
                         _selectedAppointment = null;
                         calForceSetsState();
                       } else {
@@ -630,7 +638,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                 ? const Text('')
                 : FloatingActionButton(
                     onPressed: () async {
-                      unawaited(showLoading(context,message: 'Loading'));
+                      unawaited(showLoading(context, message: 'Loading'));
                       if (_selectedAppointment != null) {
                         var succ = await deleteReminderFromServer(
                             _selectedAppointment.eventId);
@@ -680,7 +688,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
 Event addRecurrenceRule(var rule, Event event) {
   //verify this function
 
-  if (rule==null || rule == recurrenceOptions[0]) {
+  if (rule == null || rule == recurrenceOptions[0]) {
     return event;
   }
   RecurrenceFrequency temp;
@@ -699,10 +707,10 @@ Event addRecurrenceRule(var rule, Event event) {
   return event;
 }
 
-List<Attendee> getAttendeeListFromList(var lis){
+List<Attendee> getAttendeeListFromList(var lis) {
   var res = List<Attendee>(); // ignore: prefer_collection_literals
   for (var i = 0; i < lis.length; i++) {
-    if(lis[i]=='') {
+    if (lis[i] == '') {
       continue;
     }
     res.add(Attendee(emailAddress: lis[i]));
@@ -712,7 +720,7 @@ List<Attendee> getAttendeeListFromList(var lis){
 
 List<Attendee> getAttendeeList(String str) {
   var res = List<Attendee>(); // ignore: prefer_collection_literals
-  if(str=='' || str==null) {
+  if (str == '' || str == null) {
     return res;
   }
   var ls = LineSplitter();
@@ -725,7 +733,7 @@ List<Attendee> getAttendeeList(String str) {
 
 List<Reminder> getReminderList(String rem) {
   var lis = <Reminder>[];
-  if (rem == '' || rem==null) {
+  if (rem == '' || rem == null) {
     return lis;
   }
   var t = int.parse(rem.substring(0, rem.indexOf(' ')));

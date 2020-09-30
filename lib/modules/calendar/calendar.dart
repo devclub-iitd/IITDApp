@@ -10,7 +10,6 @@ import 'package:IITDAPP/widgets/Drawer.dart';
 import 'package:IITDAPP/widgets/loading.dart';
 import 'package:device_calendar/device_calendar.dart';
 import 'package:expandable/expandable.dart';
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -75,7 +74,6 @@ class CalendarScreen extends StatefulWidget {
 }
 
 class _CalendarScreenState extends State<CalendarScreen> {
-
   DeviceCalendarPlugin _deviceCalendarPlugin;
   List<CalendarModel> calendarModel = [];
   List<Calendar> _calendars;
@@ -160,7 +158,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   // ignore: always_declare_return_types
   getAppSettings() async {
-    excludeOtherCalendars = !(await SettingsHandler.getSettingValue('showOtherCalendars'));
+    excludeOtherCalendars =
+        !(await SettingsHandler.getSettingValue('showOtherCalendars'));
     var res = await SettingsHandler.getSettingValue('defaultCalendarView');
     changeViewType(viewOptions[res]);
   }
@@ -176,7 +175,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       }
 
       print('Calendars will be retrieved now');
-      unawaited(showLoading(context,message: 'Syncing Changes'));
+      unawaited(showLoading(context, message: 'Syncing Changes'));
       await QueueManager.executeList(await QueueManager.getList());
       Navigator.pop(context);
       final calendarsResult = await _deviceCalendarPlugin.retrieveCalendars();
@@ -185,8 +184,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
         print('recieved data');
         print(calendarsResult?.data);
         _writableCalendars.asMap().forEach((idx, data) {
-          if(excludeOtherCalendars){
-            if(!(data.name=='User Events' || data.name=='IITD Connect' || data.name=='Academic Calendar')) {
+          if (excludeOtherCalendars) {
+            if (!(data.name == 'User Events' ||
+                data.name == 'IITD Connect' ||
+                data.name == 'Academic Calendar')) {
               return;
             }
           }
@@ -342,8 +343,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       );
     }
 
-
-    SfCalendar CustomCalendar(){
+    SfCalendar CustomCalendar() {
       return SfCalendar(
         initialSelectedDate: _calendarController.displayDate,
         controller: _calendarController,
@@ -369,16 +369,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
               : MonthAppointmentDisplayMode.appointment,
           dayFormat: 'EEE',
           monthCellStyle: MonthCellStyle(
-            textStyle:
-            TextStyle(fontSize: 17),
+            textStyle: TextStyle(fontSize: 17),
             todayTextStyle: TextStyle(fontSize: 17),
           ),
         ),
         selectionDecoration: BoxDecoration(
           color: Colors.transparent,
           border: Border.all(color: Colors.blue, width: 2),
-          borderRadius:
-          const BorderRadius.all(Radius.circular(6)),
+          borderRadius: const BorderRadius.all(Radius.circular(6)),
           shape: BoxShape.rectangle,
         ),
         todayHighlightColor: Colors.blue,
@@ -432,8 +430,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
           if (snapshot.hasError) {
             return Center(child: Text('Error occured'));
-          }
-          else if(snapshot.connectionState==ConnectionState.done){
+          } else if (snapshot.connectionState == ConnectionState.done) {
             return Stack(children: [
               Opacity(
                 opacity: showPopUp ? 0.2 : 1,

@@ -43,7 +43,7 @@ Future<int> deleteReminderFromServer(var eventId,
         if (res.statusCode != 200) {
           success = 0;
         }
-        if(res.statusCode==200){
+        if (res.statusCode == 200) {
           await prefs.remove(element);
         }
         return;
@@ -55,10 +55,10 @@ Future<int> deleteReminderFromServer(var eventId,
   return success;
 }
 
-searchItemFromLocal(var controlEvents,serverItem,var type){
+String searchItemFromLocal(var controlEvents, serverItem, var type) {
   var res = '';
-  controlEvents.data.forEach((data){
-    if(checkEquality(data, serverItem, type)){
+  controlEvents.data.forEach((data) {
+    if (checkEquality(data, serverItem, type)) {
       res = data.eventId;
     }
   });
@@ -72,49 +72,49 @@ Future<void> getEventsFromResponse(
   var serKeys = <String>[];
   var allKeys = await prefs.getKeys();
   await allKeys.forEach((element) async {
-    if(element.startsWith('ser')) {
+    if (element.startsWith('ser')) {
       serKeys.add(element);
     }
   });
   await rems.forEach((data) async {
     var item = await prefs.getString('ser ' + data['_id']);
-    serKeys.remove('ser '+data['_id']);
+    serKeys.remove('ser ' + data['_id']);
     print('ok type ${type}');
     item = item != null ? item.substring(4) : item;
     if (item == null) {
       var localId = searchItemFromLocal(controlEvents, data, type);
-      if(localId!=''){
+      if (localId != '') {
         var prefs = await SharedPreferences.getInstance();
         await prefs.setString('ser ' + data['_id'], 'loc ' + localId);
-      }
-      else {
+      } else {
         print('adding ev');
         await getEventObject(data, '', type);
       }
     } else {
       controlEvents.data.forEach((data2) {
         if (data2.eventId == item) {
-          var equal = checkEquality(data2, data,type);
+          var equal = checkEquality(data2, data, type);
           if (!equal) {
-            print('the given event is not equal to its counterpart ${data2.title}');
+            print(
+                'the given event is not equal to its counterpart ${data2.title}');
             getEventObject(data, item, type);
           }
         }
       });
     }
   });
-  if(type==1) {
+  if (type == 1) {
     serKeys.forEach((element) async {
       var eventId = await prefs.getString(element).substring(4);
       var deleteEv = false;
       await controlEvents.data.forEach((ev) {
-        if(ev.eventId == eventId){
+        if (ev.eventId == eventId) {
           deleteEv = true;
         }
       });
-      if(deleteEv) {
-        var res = await DeviceCalendarPlugin().deleteEvent(
-            userEventsCalendarId, eventId);
+      if (deleteEv) {
+        var res = await DeviceCalendarPlugin()
+            .deleteEvent(userEventsCalendarId, eventId);
         print('deleted ${res} with event id ${eventId}');
         if (res.isSuccess) {
           await prefs.remove(element);
@@ -124,29 +124,40 @@ Future<void> getEventsFromResponse(
   }
 }
 
-bool checkEquality(var localItem, var serverItem,var type) {
+bool checkEquality(var localItem, var serverItem, var type) {
   if (localItem.title != serverItem['name']) {
     return false;
   }
-    String temp = serverItem['startDate'].substring(0,serverItem['startDate'].indexOf('T'))+' '+serverItem['startDate'].substring(serverItem['startDate'].indexOf('T')+1,serverItem['startDate'].indexOf('Z')-0);
-    if(localItem.start != DateTime.parse(temp)) {
-      return false;
-    }
-    temp = serverItem['endDate'].substring(0,serverItem['endDate'].indexOf('T'))+' '+serverItem['endDate'].substring(serverItem['endDate'].indexOf('T')+1,serverItem['endDate'].indexOf('Z')-0);
-    if(localItem.end != DateTime.parse(temp)) {
-      return false;
-    }
-  if (!(localItem.attendees.isEmpty && getAttendeeListFromList(serverItem['participants']).isEmpty) && (localItem.attendees !=
-      getAttendeeListFromList(serverItem['participants']))) {
+  String temp = serverItem['startDate']
+          .substring(0, serverItem['startDate'].indexOf('T')) +
+      ' ' +
+      serverItem['startDate'].substring(
+          serverItem['startDate'].indexOf('T') + 1,
+          serverItem['startDate'].indexOf('Z') - 0);
+  if (localItem.start != DateTime.parse(temp)) {
     return false;
   }
-  if (localItem.location != null &&
-      localItem.location != serverItem['venue']) {
+  temp =
+      serverItem['endDate'].substring(0, serverItem['endDate'].indexOf('T')) +
+          ' ' +
+          serverItem['endDate'].substring(
+              serverItem['endDate'].indexOf('T') + 1,
+              serverItem['endDate'].indexOf('Z') - 0);
+  if (localItem.end != DateTime.parse(temp)) {
+    return false;
+  }
+  if (!(localItem.attendees.isEmpty &&
+          getAttendeeListFromList(serverItem['participants']).isEmpty) &&
+      (localItem.attendees !=
+          getAttendeeListFromList(serverItem['participants']))) {
+    return false;
+  }
+  if (localItem.location != null && localItem.location != serverItem['venue']) {
     return false;
   }
 
   /*** Uncomment this once backend is fixed ***/
-  if(type==1) {
+  if (type == 1) {
     if (localItem.description != null &&
         localItem.description != serverItem['description']) {
       return false;
@@ -154,14 +165,17 @@ bool checkEquality(var localItem, var serverItem,var type) {
 //  if(localItem.url!=serverItem['url']) {
 //    return false;
 //  }
-    if (!(localItem.reminders.isEmpty && getReminderList(serverItem['reminder']).isEmpty)&&(localItem.reminders != getReminderList(serverItem['reminder']))) {
+    if (!(localItem.reminders.isEmpty &&
+            getReminderList(serverItem['reminder']).isEmpty) &&
+        (localItem.reminders != getReminderList(serverItem['reminder']))) {
       return false;
     }
-    if (localItem.recurrenceRule != null && localItem.recurrenceRule != getRecurrenceString(serverItem['recurrence'])) {
+    if (localItem.recurrenceRule != null &&
+        localItem.recurrenceRule !=
+            getRecurrenceString(serverItem['recurrence'])) {
       return false;
     }
-  }
-  else{
+  } else {
     if (localItem.description != null &&
         localItem.description != serverItem['about']) {
       return false;
@@ -174,9 +188,9 @@ Future<void> getEventObject(var data, var eventId, var type) async {
   // ignore: omit_local_variable_types
   // final LocalStorage ls = LocalStorage('IITDAPP Calendar');
   Event event;
-    event = Event(type==1?userEventsCalendarId:starredCalendarId,
-        start: DateTime.parse(data['startDate']),
-        end: DateTime.parse(data['endDate']));
+  event = Event(type == 1 ? userEventsCalendarId : starredCalendarId,
+      start: DateTime.parse(data['startDate']),
+      end: DateTime.parse(data['endDate']));
   if (eventId != '') {
     event.eventId = eventId;
   }
@@ -185,12 +199,11 @@ Future<void> getEventObject(var data, var eventId, var type) async {
   /**** Uncomment the following lines once the backend has been updated ****/
   event.location = data['venue'];
   event.attendees = getAttendeeListFromList(data['participants']);
-  if(type==1) {
+  if (type == 1) {
     event.description = data['description'];
     event.reminders = getReminderList(data['reminder']);
     event = addRecurrenceRule(data['recurrence'], event);
-  }
-  else{
+  } else {
     event.description = data['about'];
   }
   event.allDay = false;
@@ -221,14 +234,15 @@ Future<void> getEventObject(var data, var eventId, var type) async {
     print(meetings);
     _events.appointments.add(meetings[0]);
 
-    _events.notifyListeners(CalendarDataSourceAction.add, <Meeting>[]..add(meetings[0]));
+    _events.notifyListeners(
+        CalendarDataSourceAction.add, <Meeting>[]..add(meetings[0]));
   } else {
     print('error occured');
   }
   return;
 }
 
-Future<String> getServerIdFromPrefs(var id) async{
+Future<String> getServerIdFromPrefs(var id) async {
   var prefs = await SharedPreferences.getInstance();
   var keys = prefs.getKeys();
   var res = '';
@@ -240,7 +254,6 @@ Future<String> getServerIdFromPrefs(var id) async{
   });
   print('to be exec 1');
   return res;
-
 }
 
 Future<String> getServerId(var eventId) async {
@@ -256,7 +269,7 @@ Future<String> getServerId(var eventId) async {
   return ans;
 }
 
-Map<String, String> createPostReminderBody(Event ev){
+Map<String, String> createPostReminderBody(Event ev) {
   return {
     'name': ev.title,
     'startDate': DateFormat('yyyy-MM-ddTHH:mm:ss').format(ev.start) + '.000Z',
@@ -266,14 +279,14 @@ Map<String, String> createPostReminderBody(Event ev){
     'repeat': getRecurrenceString(ev.recurrenceRule),
     'participants': getAttendeeString(ev.attendees),
     'venue': ev.location,
-    'url': ''   // check this
+    'url': '' // check this
   };
 }
 
 Future<String> postReminder(Event ev, bool patch,
     {var body, bool addToQueue = true}) async {
   body ??= createPostReminderBody(ev);
-  if(body['url']==null){
+  if (body['url'] == null) {
     body['url'] = '';
   }
   var response;
@@ -281,15 +294,15 @@ Future<String> postReminder(Event ev, bool patch,
   if (patch) {
     // this will not work until backend is fixed
 //    try {
-          var serverId = await getServerIdFromPrefs(ev.eventId);
-          print('to be exec 2');
-          response = await http
-              .patch('$url/api/calendar/reminder/' + serverId,
-                  headers: {'authorization': 'Bearer $token'}, body: body)
-              .timeout(Duration(seconds: 5), onTimeout: () async {
-            flagTimeout = true;
-            return null;
-          });
+    var serverId = await getServerIdFromPrefs(ev.eventId);
+    print('to be exec 2');
+    response = await http
+        .patch('$url/api/calendar/reminder/' + serverId,
+            headers: {'authorization': 'Bearer $token'}, body: body)
+        .timeout(Duration(seconds: 5), onTimeout: () async {
+      flagTimeout = true;
+      return null;
+    });
 
 //    } catch (e) {
 //      flagTimeout = true;
@@ -312,8 +325,12 @@ Future<String> postReminder(Event ev, bool patch,
   if (flagTimeout) {
     connectedToInternet = false;
     if (addToQueue) {
-      QueueManager.addToList(
-          {'func': 'postReminder', 'event': body, 'patch': patch,'eventId': ev!=null?ev.eventId:''});
+      QueueManager.addToList({
+        'func': 'postReminder',
+        'event': body,
+        'patch': patch,
+        'eventId': ev != null ? ev.eventId : ''
+      });
     }
     return 'timeout';
   }
