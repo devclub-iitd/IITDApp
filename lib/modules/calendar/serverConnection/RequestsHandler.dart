@@ -196,7 +196,7 @@ Future<void> getEventObject(var data, var eventId, var type) async {
     event.description = data['about'];
   }
   event.allDay = false;
-  event.availability = 'BUSY';
+  // event.availability = Availibility.B//'BUSY';
   makeEventElementsNonNull(event);
   var res = await DeviceCalendarPlugin().createOrUpdateEvent(event);
   if (res.isSuccess) {

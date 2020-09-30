@@ -551,7 +551,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                           content: CustomSnackBarContent(text: 'Unable to connect to server',),
                         ));
                       }
-                      event.availability = 'BUSY';
+                      // event.availability = 'BUSY';
                       var createEventResult = await DeviceCalendarPlugin()
                           .createOrUpdateEvent(event);
                       var prefs = await SharedPreferences.getInstance();
@@ -586,6 +586,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                               payload: generatePayload(event));
                         }
                         meetings.add(Meeting(
+                          eventId: createEventResult.data,
                           from: _startDate,
                           to: _endDate,
                           background: Color(

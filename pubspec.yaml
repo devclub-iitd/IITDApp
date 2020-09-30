@@ -34,21 +34,21 @@ dependencies:
   google_fonts: ^1.1.0
   font_awesome_flutter: ^8.8.1
   flutter_speed_dial: ^1.2.1
-  flutter_svg: ^0.17.4
+  flutter_svg: ^0.19.0
   url_launcher: ^5.4.7
   expandable: ^4.1.4
   carousel_slider: ^2.0.0
   cached_network_image: ^2.2.0+1
   scrollable_positioned_list: ^0.1.6
   shimmer: ^1.1.1
-  syncfusion_flutter_calendar: ^18.1.53-beta
+  syncfusion_flutter_calendar: ^18.2.59
   modal_bottom_sheet: ^0.1.5
   flutter_swiper: ^1.1.6
   localstorage: ^3.0.2+5
-  device_calendar: ^3.2.0-dev.11602    # comment this and uncomment either of below 2 url lines if only want to add for one platform
-# device_calendar:
-#    git:
-#      url: https://github.com/Pranjal2041/device_calendar.git   #  for android use only one of 3 options
+#  device_calendar: ^3.2.0-dev.11602    # comment this and uncomment either of below 2 url lines if only want to add for one platform
+  device_calendar:
+    git:
+      url: https://github.com/Pranjal2041/device_calendar.git   #  for android use only one of 3 options
 #      url: https://github.com/thiszhong/device_calendar.git   # for ios
   global_configuration: ^1.5.0
   flutter_spinkit: "^4.1.2"
@@ -63,6 +63,7 @@ dependencies:
   settings_ui: ^0.3.0
   flare_flutter: ^2.0.3
   flushbar: ^1.10.4
+  calendarnotificationprovider: ^0.0.1
   flutter:
     sdk: flutter
 

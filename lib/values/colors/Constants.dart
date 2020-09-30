@@ -9,7 +9,7 @@ import 'package:IITDAPP/modules/news/news.dart';
 import 'package:IITDAPP/modules/quickLinks/quickLinks.dart';
 import 'package:flutter/material.dart';
 
-String url = 'http://192.168.1.195:5000';
+String url = 'http://192.168.43.251:5000';
 String title = 'IITD APP';
 String token;
 bool connectedToInternet = true;

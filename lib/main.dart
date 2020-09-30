@@ -6,6 +6,7 @@ import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 import 'package:IITDAPP/routes/router.dart';
 import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:IITDAPP/values/colors/colors.dart';
+import 'package:calendarnotificationprovider/calendarnotificationprovider.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:flutter/material.dart';
 import 'package:pedantic/pedantic.dart';
@@ -23,6 +24,8 @@ void main() async {
     print('secrets.json file is required');
   }
 
+
+  unawaited(initialiseNotifications());
   unawaited(initialisePreferences());
 
   runApp(MultiProvider(providers: [
@@ -44,6 +47,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'IITD APP',
       theme: Provider.of<ThemeModel>(context).themeType==ThemeType.Dark?darkTheme:lightTheme,
@@ -68,3 +72,11 @@ initialisePreferences() async{
   var res = await SettingsHandler.getSettingValue(commonKeys[0]);
   defaultScreen = res;
 }
+
+// ignore: always_declare_return_types
+initialiseNotifications() async{
+  await Calendarnotificationprovider.setDescription(start: 'Time:- ',end: '',text: DynamicTextEventKeys.RangeTime);
+  await Calendarnotificationprovider.setTitle(start: 'Event:- ',text: DynamicTextEventKeys.Title);
+}
+
+
