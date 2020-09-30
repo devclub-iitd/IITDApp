@@ -76,7 +76,6 @@ Future<void> getEventsFromResponse(
       serKeys.add(element);
     }
   });
-  print('i am here');
   await rems.forEach((data) async {
     var item = await prefs.getString('ser ' + data['_id']);
     serKeys.remove('ser '+data['_id']);
@@ -123,22 +122,20 @@ Future<void> getEventsFromResponse(
       }
     });
   }
-  print('ok so now we have to delete these itmes... ${serKeys} of type ${type}');
 }
 
 bool checkEquality(var localItem, var serverItem,var type) {
-  if(localItem.title == 'fhfu'){
-    print('fhfu is here');
-  }
   if (localItem.title != serverItem['name']) {
     return false;
   }
-  if (localItem.start.toUtc() != DateTime.parse(serverItem['startDate'])) {
-    return false;
-  }
-  if (localItem.end.toUtc() != DateTime.parse(serverItem['endDate'])) {
-    return false;
-  }
+    String temp = serverItem['startDate'].substring(0,serverItem['startDate'].indexOf('T'))+' '+serverItem['startDate'].substring(serverItem['startDate'].indexOf('T')+1,serverItem['startDate'].indexOf('Z')-0);
+    if(localItem.start != DateTime.parse(temp)) {
+      return false;
+    }
+    temp = serverItem['endDate'].substring(0,serverItem['endDate'].indexOf('T'))+' '+serverItem['endDate'].substring(serverItem['endDate'].indexOf('T')+1,serverItem['endDate'].indexOf('Z')-0);
+    if(localItem.end != DateTime.parse(temp)) {
+      return false;
+    }
   if (!(localItem.attendees.isEmpty && getAttendeeListFromList(serverItem['participants']).isEmpty) && (localItem.attendees !=
       getAttendeeListFromList(serverItem['participants']))) {
     return false;
@@ -176,13 +173,14 @@ bool checkEquality(var localItem, var serverItem,var type) {
 Future<void> getEventObject(var data, var eventId, var type) async {
   // ignore: omit_local_variable_types
   // final LocalStorage ls = LocalStorage('IITDAPP Calendar');
-  var event;
+  Event event;
     event = Event(type==1?userEventsCalendarId:starredCalendarId,
         start: DateTime.parse(data['startDate']),
         end: DateTime.parse(data['endDate']));
   if (eventId != '') {
     event.eventId = eventId;
   }
+
   event.title = data['name'];
   /**** Uncomment the following lines once the backend has been updated ****/
   event.location = data['venue'];
@@ -210,7 +208,7 @@ Future<void> getEventObject(var data, var eventId, var type) async {
       from: event.start,
       to: event.end,
       calendarId: type == 1 ? userEventsCalendarId : starredCalendarId,
-      background: Color(_selectedColor), //colorCollection[_selectedColorIndex],
+      background: Color(-30000), //colorCollection[_selectedColorIndex],
       startTimeZone: '',
       endTimeZone: '',
       /**** Uncomment the following lines once the backend has been updated ****/

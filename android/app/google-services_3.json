@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "349254363312",
+    "firebase_url": "https://iitdapp-194f5.firebaseio.com",
+    "project_id": "iitdapp-194f5",
+    "storage_bucket": "iitdapp-194f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:349254363312:android:0759d10b8b15f946d9f375",
+        "android_client_info": {
+          "package_name": "com.devclub.iitdapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "349254363312-7rumtaiijnarme7fv98vseec3iqknpoj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAWjHQBxDXP7CobeXXAI9UpOUGFxrzc0IU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "349254363312-7rumtaiijnarme7fv98vseec3iqknpoj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

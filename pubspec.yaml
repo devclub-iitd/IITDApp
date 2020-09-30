@@ -63,7 +63,7 @@ dependencies:
   settings_ui: ^0.3.0
   flare_flutter: ^2.0.3
   flushbar: ^1.10.4
-  calendarnotificationprovider: ^0.0.1
+  calendarnotificationprovider: ^0.0.2
   firebase_analytics: ^5.0.11
   flutter:
     sdk: flutter
