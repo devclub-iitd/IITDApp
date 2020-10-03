@@ -168,7 +168,7 @@ class _MapLayerState extends State<MapLayer> {
 
   @override
   Widget build(BuildContext ctx) {
-    Color blendColor = Provider.of<ThemeModel>(context).theme.MAP_BLEND_COLOR;
+    var blendColor = Provider.of<ThemeModel>(context).theme.MAP_BLEND_COLOR;
     print('built map layer');
     mo = Provider.of<MapOffset>(ctx, listen: false);
     Widget paintWidget() {

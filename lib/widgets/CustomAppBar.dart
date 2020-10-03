@@ -97,7 +97,7 @@ class PopupMenu extends StatelessWidget {
       ),
     ];
 
-    handleClick(value) {
+    void handleClick(value) {
       switch (value) {
         case 'User Profile':
           showAlert(context, loginFunc);

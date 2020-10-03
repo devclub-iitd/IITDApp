@@ -53,18 +53,18 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _navBarItems = [
       BottomNavigationBarItem(
         icon: Icon(Icons.list),
-        title: Text('Clubs'),
+        label: 'Clubs',
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.event),
-        title: Text('Events'),
+        label: 'Events',
       ),
     ];
     if (currentUser.isAdmin) {
       _tabs.add(ManageTab());
       _navBarItems.add(BottomNavigationBarItem(
         icon: Icon(Icons.edit),
-        title: Text('Manage'),
+        label: 'Manage',
       ));
     }
   }

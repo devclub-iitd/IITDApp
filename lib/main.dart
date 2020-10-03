@@ -4,7 +4,7 @@ import 'package:IITDAPP/modules/login/LoginScreen.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsData.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
-import 'package:IITDAPP/routes/router.dart';
+import 'package:IITDAPP/routes/router.dart' as app_router;
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/values/colors/colors.dart';
 import 'package:IITDAPP/values/colors/darkColors.dart';
@@ -12,14 +12,11 @@ import 'package:global_configuration/global_configuration.dart';
 import 'package:flutter/material.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
-import 'package:syncfusion_flutter_core/core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
     await GlobalConfiguration().loadFromAsset('secrets');
-    SyncfusionLicense.registerLicense(
-        GlobalConfiguration().getString('calendar_api_key'));
   } catch (e) {
     print('secrets.json file is required');
   }
@@ -69,7 +66,7 @@ class MyApp extends StatelessWidget {
 ////            accentColor: Colors.lightBlueAccent
 //      ),
       home: LoginScreen(),
-      onGenerateRoute: Router.generateRoute,
+      onGenerateRoute: app_router.Router.generateRoute,
     );
   }
 }

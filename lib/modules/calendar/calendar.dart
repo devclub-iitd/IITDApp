@@ -386,6 +386,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     Expanded(
                       flex: 3,
                       child: SfCalendar(
+                        todayTextStyle: TextStyle(fontSize: 17),
                         initialSelectedDate: _calendarController.displayDate,
                         controller: _calendarController,
                         headerHeight: 60,
@@ -415,7 +416,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                 color: Provider.of<ThemeModel>(context)
                                     .theme
                                     .PRIMARY_TEXT_COLOR),
-                            todayTextStyle: TextStyle(fontSize: 17),
                           ),
                         ),
                         selectionDecoration: BoxDecoration(

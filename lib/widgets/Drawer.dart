@@ -100,7 +100,7 @@ class AppDrawer extends StatelessWidget {
   Widget _createDrawerItem(
       {IconData icon,
       String text,
-      GestureTapCallback onTap,
+      // GestureTapCallback onTap,
       bool selected,
       BuildContext context,
       String routeName,
