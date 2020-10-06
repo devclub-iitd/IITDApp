@@ -10,7 +10,6 @@ import 'package:IITDAPP/modules/news/news.dart';
 import 'package:IITDAPP/modules/quickLinks/quickLinks.dart';
 import 'package:IITDAPP/modules/settings/SettingsScreen.dart';
 
-
 class Routes {
   static const String dashboard = Dashboard.routeName;
   static const String attendance = Attendance.routeName;
@@ -23,5 +22,4 @@ class Routes {
   static const String reqLogin = RequestLoginScreen.routeName;
   static const String loginPage = LoginScreen.routeName;
   static const String settingsPage = SettingsScreen.routeName;
-
 }

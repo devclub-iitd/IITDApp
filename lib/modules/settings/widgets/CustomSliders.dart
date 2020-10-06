@@ -19,20 +19,17 @@ class CustomSliderThumbCircle extends SliderComponentShape {
   }
 
   @override
-  void paint(
-    PaintingContext context,
-    Offset center, {
-    Animation<double> activationAnimation,
-    Animation<double> enableAnimation,
-    bool isDiscrete,
-    TextPainter labelPainter,
-    RenderBox parentBox,
-    SliderThemeData sliderTheme,
-    TextDirection textDirection,
-    double value,
-    double textScaleFactor,
-    Size sizeWithOverflow
-      }) {
+  void paint(PaintingContext context, Offset center,
+      {Animation<double> activationAnimation,
+      Animation<double> enableAnimation,
+      bool isDiscrete,
+      TextPainter labelPainter,
+      RenderBox parentBox,
+      SliderThemeData sliderTheme,
+      TextDirection textDirection,
+      double value,
+      double textScaleFactor,
+      Size sizeWithOverflow}) {
     // ignore: omit_local_variable_types
     final Canvas canvas = context.canvas;
 
@@ -46,7 +43,9 @@ class CustomSliderThumbCircle extends SliderComponentShape {
         fontWeight: FontWeight.w700,
         color: sliderTheme.thumbColor,
       ),
-      text: getTextValue != null ? getTextValue((max-min)*value+min) : getValue(value),
+      text: getTextValue != null
+          ? getTextValue((max - min) * value + min)
+          : getValue(value),
     );
 
     var tp = TextPainter(
@@ -62,7 +61,7 @@ class CustomSliderThumbCircle extends SliderComponentShape {
   }
 
   String getValue(double value) {
-    return (((max-min) * value + min).round()).toString();
+    return (((max - min) * value + min).round()).toString();
   }
 }
 
@@ -86,20 +85,17 @@ class CustomSliderThumbRect extends SliderComponentShape {
   }
 
   @override
-  void paint(
-    PaintingContext context,
-    Offset center, {
-    Animation<double> activationAnimation,
-    Animation<double> enableAnimation,
-    bool isDiscrete,
-    TextPainter labelPainter,
-    RenderBox parentBox,
-    SliderThemeData sliderTheme,
-    TextDirection textDirection,
-    double value,
-    double textScaleFactor,
-    Size sizeWithOverflow
-  }) {
+  void paint(PaintingContext context, Offset center,
+      {Animation<double> activationAnimation,
+      Animation<double> enableAnimation,
+      bool isDiscrete,
+      TextPainter labelPainter,
+      RenderBox parentBox,
+      SliderThemeData sliderTheme,
+      TextDirection textDirection,
+      double value,
+      double textScaleFactor,
+      Size sizeWithOverflow}) {
     // ignore: omit_local_variable_types
     final Canvas canvas = context.canvas;
 
@@ -119,7 +115,9 @@ class CustomSliderThumbRect extends SliderComponentShape {
             fontWeight: FontWeight.w700,
             color: sliderTheme.thumbColor,
             height: 0.9),
-        text: getTextValue != null ? getTextValue((max-min)*value+min) : getValue(value));
+        text: getTextValue != null
+            ? getTextValue((max - min) * value + min)
+            : getValue(value));
     var tp = TextPainter(
         text: span,
         textAlign: TextAlign.left,
@@ -175,8 +173,8 @@ class _CustomSlidersState extends State<CustomSliders> {
     super.initState();
   }
 
-  Future<void> getValue() async{
-    if(widget.SPkey==null) {
+  Future<void> getValue() async {
+    if (widget.SPkey == null) {
       return;
     }
     var res = await SettingsHandler.getSettingValue(widget.SPkey);
@@ -260,7 +258,10 @@ class _CustomSlidersState extends State<CustomSliders> {
                         setState(() {
                           _value = value;
                         });
-                        widget.SPkey!=null?SettingsHandler.setSettingValue(widget.SPkey, value):null;
+                        widget.SPkey != null
+                            ? SettingsHandler.setSettingValue(
+                                widget.SPkey, value)
+                            : null;
                         widget.valueChangeCallback != null
                             ? widget.valueChangeCallback(value)
                             : null;

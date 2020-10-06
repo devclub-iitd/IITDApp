@@ -98,19 +98,19 @@ class DataSource extends CalendarDataSource {
 class Meeting {
   Meeting(
       {@required this.from,
-        @required this.to,
-        this.background = Colors.green,
-        this.isAllDay = false,
-        this.eventName = '',
-        this.startTimeZone = '',
-        this.endTimeZone = '',
-        this.calendarId = '',
-        this.description = '',
-        this.location,
-        this.recurrence,
-        this.attendee,
-        this.reminder,
-        this.eventId});
+      @required this.to,
+      this.background = Colors.green,
+      this.isAllDay = false,
+      this.eventName = '',
+      this.startTimeZone = '',
+      this.endTimeZone = '',
+      this.calendarId = '',
+      this.description = '',
+      this.location,
+      this.recurrence,
+      this.attendee,
+      this.reminder,
+      this.eventId});
 
   final String eventId;
   final String eventName;

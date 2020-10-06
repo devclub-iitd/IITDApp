@@ -97,9 +97,7 @@ class _CustomModalState extends State<CustomModal> {
           children: <Widget>[
             Text(
               'Settings',
-              style: TextStyle(
-                  fontSize: 23,
-                  fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
             ),
             Padding(
               padding:
@@ -133,8 +131,10 @@ class _CustomModalState extends State<CustomModal> {
             ),
             Padding(
               padding: EdgeInsets.only(left: 10),
-              child:  Text('Filter',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w600),),
-
+              child: Text(
+                'Filter',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+              ),
             ),
             Expanded(
               flex: 1,
@@ -172,7 +172,8 @@ class _CustomModalState extends State<CustomModal> {
                                             Expanded(
                                               child: Text(e.key,
                                                   style: TextStyle(
-                                                      fontSize: 15,)),
+                                                    fontSize: 15,
+                                                  )),
                                             ),
                                             Spacer(),
                                             ExpandableIcon(
@@ -211,10 +212,12 @@ class _CustomModalState extends State<CustomModal> {
                                                     color: Color(data.color)),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 12.0),
-                                                child: Text(data.name,)
-                                              ),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 12.0),
+                                                  child: Text(
+                                                    data.name,
+                                                  )),
                                               Spacer(),
                                               Checkbox(
                                                 value: !exempted[data.name],

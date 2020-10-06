@@ -4,9 +4,11 @@ import 'package:IITDAPP/modules/login/LoginScreen.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsData.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
+import 'package:IITDAPP/push_notifications.dart';
 import 'package:IITDAPP/routes/router.dart';
 import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:IITDAPP/values/colors/colors.dart';
+import 'package:calendarnotificationprovider/calendarnotificationprovider.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:flutter/material.dart';
 import 'package:pedantic/pedantic.dart';
@@ -18,11 +20,13 @@ void main() async {
   try {
     await GlobalConfiguration().loadFromAsset('secrets');
     SyncfusionLicense.registerLicense(
+        // ignore: deprecated_member_use
         GlobalConfiguration().getString('calendar_api_key'));
   } catch (e) {
     print('secrets.json file is required');
   }
 
+  unawaited(initialiseNotifications());
   unawaited(initialisePreferences());
 
   runApp(MultiProvider(providers: [
@@ -77,4 +81,14 @@ class MyApp extends StatelessWidget {
 initialisePreferences() async {
   var res = await SettingsHandler.getSettingValue(commonKeys[0]);
   defaultScreen = res;
+}
+
+// ignore: always_declare_return_types
+initialiseNotifications() async {
+  await Calendarnotificationprovider.setDescription(
+      start: 'Time:- ', end: '', text: DynamicTextEventKeys.RangeTime);
+  await Calendarnotificationprovider.setTitle(
+      start: 'Event:- ', text: DynamicTextEventKeys.Title);
+  var pushNotificationsManager = PushNotificationsManager();
+  await pushNotificationsManager.init();
 }
