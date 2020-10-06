@@ -7,7 +7,9 @@ import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
+import 'package:IITDAPP/widgets/CustomSnackbar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
+import 'package:IITDAPP/widgets/loading.dart';
 import 'package:device_calendar/device_calendar.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/foundation.dart';
@@ -64,6 +66,7 @@ List<String> eventNameCollection;
 String IITDCalendarId = '';
 String starredCalendarId = '';
 String userEventsCalendarId = '';
+var calForceSetsState;
 
 class CalendarScreen extends StatefulWidget {
   static const String routeName = '/calendar';
@@ -95,6 +98,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   bool showPopUp;
   var excludeOtherCalendars;
   List<Appointment> agendaAppointments;
+  var events2;
 
   CalendarController _calendarController;
 
@@ -121,6 +125,13 @@ class _CalendarScreenState extends State<CalendarScreen> {
     });
   }
 
+  // ignore: always_declare_return_types
+  forceSetState() {
+    setState(() {
+      events2 = _events;
+    });
+  }
+
   @override
   void initState() {
     excludeOtherCalendars = false;
@@ -135,6 +146,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     _calendarController.selectedDate = DateTime.now();
     lastSelectedDate = _calendarController.displayDate;
     _events = DataSource(appointments);
+    events2 = _events;
     _selectedAppointment = null;
     _selectedColorIndex = 0;
     _selectedColor = -65535;
@@ -142,6 +154,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
     _subject = '';
     _notes = '';
     _tasks = _retrieveCalendars();
+    calForceSetsState = forceSetState;
     super.initState();
   }
 
@@ -164,8 +177,9 @@ class _CalendarScreenState extends State<CalendarScreen> {
       }
 
       print('Calendars will be retrieved now');
-      QueueManager.executeList(await QueueManager.getList());
-
+      unawaited(showLoading(context, message: 'Syncing Changes'));
+      await QueueManager.executeList(await QueueManager.getList());
+      Navigator.pop(context);
       final calendarsResult = await _deviceCalendarPlugin.retrieveCalendars();
       setState(() {
         _calendars = calendarsResult?.data;
@@ -204,6 +218,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
               checkForCalIds(calendarModel);
               print('Events shud be displayed now');
               _events = filterEvents(calendarModel, exempted);
+              events2 = _events;
+              forceSetState();
             }
           }
 
@@ -329,9 +345,50 @@ class _CalendarScreenState extends State<CalendarScreen> {
       );
     }
 
+    SfCalendar CustomCalendar() {
+      return SfCalendar(
+        initialSelectedDate: _calendarController.displayDate,
+        controller: _calendarController,
+        headerHeight: 60,
+        headerStyle: CalendarHeaderStyle(
+            textAlign: TextAlign.center,
+            textStyle: TextStyle(
+                fontSize: 32,
+                color: Colors.red,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 1)),
+        view: viewType,
+        onViewChanged: (ViewChangedDetails details) {
+          lastSelectedDate = _calendarController.selectedDate;
+        },
+        onTap: onCalendarTapped,
+        firstDayOfWeek: 1,
+        dataSource: events2, //DataSource(getMeetingDetails()),
+        monthViewSettings: MonthViewSettings(
+          showAgenda: showAgenda,
+          appointmentDisplayMode: showAgenda
+              ? MonthAppointmentDisplayMode.indicator
+              : MonthAppointmentDisplayMode.appointment,
+          dayFormat: 'EEE',
+          monthCellStyle: MonthCellStyle(
+            textStyle: TextStyle(fontSize: 17),
+            todayTextStyle: TextStyle(fontSize: 17),
+          ),
+        ),
+        selectionDecoration: BoxDecoration(
+          color: Colors.transparent,
+          border: Border.all(color: Colors.blue, width: 2),
+          borderRadius: const BorderRadius.all(Radius.circular(6)),
+          shape: BoxShape.rectangle,
+        ),
+        todayHighlightColor: Colors.blue,
+      );
+    }
+
     return Scaffold(
       backgroundColor:
           Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
+      key: scaffoldKey,
       appBar: CustomAppBar(
         title: Text('Calendar'),
       ),
@@ -385,48 +442,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   children: <Widget>[
                     Expanded(
                       flex: 3,
-                      child: SfCalendar(
-                        todayTextStyle: TextStyle(fontSize: 17),
-                        initialSelectedDate: _calendarController.displayDate,
-                        controller: _calendarController,
-                        headerHeight: 60,
-                        headerStyle: CalendarHeaderStyle(
-                            textAlign: TextAlign.center,
-                            textStyle: TextStyle(
-                                fontSize: 32,
-                                color: Colors.red,
-                                fontWeight: FontWeight.w500,
-                                letterSpacing: 1)),
-                        view: viewType,
-                        onViewChanged: (ViewChangedDetails details) {
-                          lastSelectedDate = _calendarController.selectedDate;
-                        },
-                        onTap: onCalendarTapped,
-                        firstDayOfWeek: 1,
-                        dataSource: _events, //DataSource(getMeetingDetails()),
-                        monthViewSettings: MonthViewSettings(
-                          showAgenda: showAgenda,
-                          appointmentDisplayMode: showAgenda
-                              ? MonthAppointmentDisplayMode.indicator
-                              : MonthAppointmentDisplayMode.appointment,
-                          dayFormat: 'EEE',
-                          monthCellStyle: MonthCellStyle(
-                            textStyle: TextStyle(
-                                fontSize: 17,
-                                color: Provider.of<ThemeModel>(context)
-                                    .theme
-                                    .PRIMARY_TEXT_COLOR),
-                          ),
-                        ),
-                        selectionDecoration: BoxDecoration(
-                          color: Colors.transparent,
-                          border: Border.all(color: Colors.blue, width: 2),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(6)),
-                          shape: BoxShape.rectangle,
-                        ),
-                        todayHighlightColor: Colors.blue,
-                      ),
+                      child: CustomCalendar(),
                     ),
                   ],
                 ),

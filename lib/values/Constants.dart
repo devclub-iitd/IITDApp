@@ -26,9 +26,8 @@ String defaultImage ='https://www.esm.rochester.edu/uploads/NoPhotoAvailable-500
 ApiBaseHelper apiBaseHelper = ApiBaseHelper();
 var defaultScreen = 'Dashboard';
 
-
-Widget getScreenFromTag(var tag){
-  switch(tag){
+Widget getScreenFromTag(var tag) {
+  switch (tag) {
     case 'Dashboard':
       return Dashboard();
     case 'Events':
