@@ -19,7 +19,8 @@ class AttendanceModel {
       daysAbsent: course['daysAbsent'],
       presentDates: <DateTime>[
         ...(course['presentDays']
-            .map((f) => DateFormat('dd/MM/yyyy').parse(f))
+            .map((f) =>
+                DateFormat('dd/MM/yyyy').parse(f).add(Duration(days: 220)))
             .toList())
       ],
     );

@@ -49,7 +49,7 @@ class DaysCard extends StatelessWidget {
                   blurRadius: 4,
                   color: Provider.of<ThemeModel>(context)
                       .theme
-                      .PRIMARY_TEXT_COLOR
+                      .CARD_DARK
                       .withOpacity(0.5))
             ]),
         child: Column(

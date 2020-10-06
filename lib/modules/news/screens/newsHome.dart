@@ -1,3 +1,4 @@
+import 'package:IITDAPP/modules/news/screens/reports/allReports.dart';
 import 'package:IITDAPP/modules/news/utility/showSnackBarResult.dart';
 import 'package:IITDAPP/values/Constants.dart';
 
@@ -25,7 +26,9 @@ class NewsHome extends StatelessWidget {
           Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       appBar: CustomAppBar(
         title: Text('News'),
-        actions: (!currentUser.isAdmin) ? [] : <Widget>[AddNewsButton()],
+        actions: (!currentUser.isAdmin)
+            ? []
+            : <Widget>[AddNewsButton(), AllReportsButton()],
       ),
       drawer: AppDrawer(
         tag: 'News',
@@ -46,6 +49,20 @@ class NewsHome extends StatelessWidget {
         ])),
       ),
     );
+  }
+}
+
+class AllReportsButton extends StatelessWidget {
+  const AllReportsButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+        icon: Icon(Icons.report),
+        onPressed: () => Navigator.of(context)
+            .push(MaterialPageRoute(builder: (_) => AllReports())));
   }
 }
 

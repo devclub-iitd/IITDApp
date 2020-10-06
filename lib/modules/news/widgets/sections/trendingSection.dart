@@ -53,23 +53,38 @@ class TrendingSection extends StatelessWidget {
       indicator = Container(
           margin: EdgeInsets.all(5),
           child: SizedShimmer(width: width / 4, height: 15));
-    }
-    if (news.displayedData.status == Status.COMPLETED) {
-      indicator = Indicators(
-        length: NewsProvider.itemsPerPage,
+    } else {
+      carousel = Container(
+        margin: EdgeInsets.all(5),
+        width: width,
+        height: width * 2 / 3 - 10,
+        child: Center(
+          child: Text(
+            'No News',
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.w200,
+            ),
+          ),
+        ),
       );
-      carousel = CarouselSlider.builder(
-          itemCount: min(NewsProvider.itemsPerPage, news.maxNewsItems),
-          itemBuilder: (_, index) => TrendingWidget(
-              width: width, item: news.displayedData.data[index]),
-          options: CarouselOptions(
-              autoPlay: true,
-              height: width * 2 / 3,
-              viewportFraction: 1,
-              onPageChanged: (index, r) {
-                Provider.of<CarouselIndex>(context, listen: false)
-                    .setCurrent(index);
-              }));
+      if (news.displayedData.data.isNotEmpty) {
+        indicator = Indicators(
+          length: NewsProvider.itemsPerPage>news.displayedData.data.length?news.displayedData.data.length:NewsProvider.itemsPerPage,
+        );
+        carousel = CarouselSlider.builder(
+            itemCount: min(NewsProvider.itemsPerPage, news.maxNewsItems),
+            itemBuilder: (_, index) => TrendingWidget(
+                width: width, item: news.displayedData.data[index]),
+            options: CarouselOptions(
+                autoPlay: true,
+                height: width * 2 / 3,
+                viewportFraction: 1,
+                onPageChanged: (index, r) {
+                  Provider.of<CarouselIndex>(context, listen: false)
+                      .setCurrent(index);
+                }));
+      }
     }
     return Column(children: [
       SectionHeading(
@@ -82,7 +97,7 @@ class TrendingSection extends StatelessWidget {
         },
       ),
       carousel,
-      indicator,
+      indicator ?? Text(''),
       Divider(height: 1, thickness: 1)
     ]);
   }

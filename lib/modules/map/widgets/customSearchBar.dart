@@ -88,9 +88,15 @@ class _SearchBarState extends State<SearchBar> with TickerProviderStateMixin {
             decoration: BoxDecoration(
                 color:
                     Provider.of<ThemeModel>(context).theme.SLIDE_UP_SHEET_COLOR,
+                boxShadow: [
+                  BoxShadow(
+                      blurRadius: 2,
+                      spreadRadius: 0,
+                      color: Theme.of(context).accentColor)
+                ],
                 border: Border.all(
                     width: expanded ? 0 : 2,
-                    color: Theme.of(context).accentColor),
+                    color: Theme.of(context).accentColor.withOpacity(0.5)),
                 borderRadius: BorderRadius.circular(expanded ? 0 : 10)),
             width: double.infinity,
             height: !expanded ? 50 : 1000,

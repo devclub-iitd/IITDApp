@@ -26,4 +26,19 @@ class UrlHandler {
       throw 'Could not place phone call';
     }
   }
+
+  static Future<void> startEmail(String mail,
+      {String subject = '', String body = ''}) async {
+    final params = Uri(
+      scheme: 'mailto',
+      path: '$mail',
+      query: 'subject=$subject&body=$body', //add subject and body here
+    );
+    var url = params.toString();
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not email';
+    }
+  }
 }

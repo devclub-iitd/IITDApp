@@ -32,12 +32,30 @@ class RecentsSections extends StatelessWidget {
         ShimmerList(itemCount: NewsProvider.itemsPerPage, width: width)
       ];
     } else {
-      children = List.generate(
-          NewsProvider.itemsPerPage > news.displayedData.data.length
-              ? news.displayedData.data.length
-              : NewsProvider.itemsPerPage,
-          (index) =>
-              RecentWidget(width: width, item: news.displayedData.data[index]));
+      children = [
+        Container(
+          margin: EdgeInsets.all(5),
+          width: width,
+          height: width * 3 / 7,
+          child: Center(
+            child: Text(
+              'No News',
+              style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.w200,
+              ),
+            ),
+          ),
+        )
+      ];
+      if (news.displayedData.data.isNotEmpty) {
+        children = List.generate(
+            NewsProvider.itemsPerPage > news.displayedData.data.length
+                ? news.displayedData.data.length
+                : NewsProvider.itemsPerPage,
+            (index) => RecentWidget(
+                width: width, item: news.displayedData.data[index]));
+      }
     }
     return Column(children: [
       SectionHeading(

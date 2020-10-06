@@ -12,17 +12,18 @@ class AttendanceProvider with ChangeNotifier {
   double minimumAttendance;
 
   void setEntryNumber(String a) {
-    if (a.compareTo(entryNumber??'') != 0) {
+    if (a.compareTo(entryNumber ?? '') != 0) {
       entryNumber = a;
       fetchData(false);
     }
   }
 
   Future<void> fetchData([reload = true]) async {
-    minimumAttendance = (await SettingsHandler.getSettingValue('MinimumAttendance'))/100;
+    minimumAttendance =
+        (await SettingsHandler.getSettingValue('MinimumAttendance')) / 100;
     print(minimumAttendance);
     data = ApiResponse.loading('Loading');
-    if(reload){
+    if (reload) {
       notifyListeners();
     }
     loading = true;
@@ -39,8 +40,7 @@ class AttendanceProvider with ChangeNotifier {
         data = ApiResponse.completed(attendances);
         if (enToFetch == entryNumber) {
           notifyListeners();
-        }
-        else{
+        } else {
           print('reloaded');
         }
         loading = false;
