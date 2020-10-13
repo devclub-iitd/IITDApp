@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 
 class TabDataProvider<T> with ChangeNotifier {
   ApiResponse data;
-  List<int> alerts =[];
+  List<int> alerts = [];
   var cnp;
   DashboardAlerts da;
   Function getCacheData;
@@ -17,8 +17,8 @@ class TabDataProvider<T> with ChangeNotifier {
     cnp.removeListener(listenerAttachment);
     super.dispose();
   }
-  
-  void listenerAttachment(){
+
+  void listenerAttachment() {
     update(getCacheData(cnp));
   }
 
@@ -29,7 +29,8 @@ class TabDataProvider<T> with ChangeNotifier {
       notifyListeners();
     } else {
       // print('completed');
-      var filteredData = filter(newData.data.sublist(0, limit));
+      var filteredData = filter(newData.data.sublist(
+          0, newData.data.length > limit ? limit : newData.data.length));
       // print('data $filteredData');
       alerts = await da.getAlerts(filteredData);
       // print('alerts $alerts');
@@ -38,9 +39,9 @@ class TabDataProvider<T> with ChangeNotifier {
     }
   }
 
-  void viewed(){
-      da.setAlerts(data.data);
-      // print('set alerts $alerts');
+  void viewed() {
+    da.setAlerts(data.data);
+    // print('set alerts $alerts');
   }
 
   void refreshAlerts() async {
@@ -52,8 +53,12 @@ class TabDataProvider<T> with ChangeNotifier {
   }
 
   TabDataProvider(
-      {this.cnp, this.getCacheData, this.da, this.limit, this.filter}) {
-        // print('new tab');
+      {this.cnp,
+      this.getCacheData,
+      this.da,
+      @required this.limit,
+      this.filter}) {
+    // print('new tab');
     filter ??= (i) => i;
     data = getCacheData(cnp);
     update(getCacheData(cnp));

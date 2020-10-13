@@ -1,4 +1,8 @@
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
+import 'package:IITDAPP/widgets/sectionTitle.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
@@ -54,20 +58,10 @@ class EventUpdatesListState extends State<EventUpdatesList> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            'UPDATES',
-            style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w900,
-                fontSize: 15,
-                letterSpacing: 4),
+          SectionTitle(
+            title: 'UPDATES',
           ),
-          Container(
-            height: 3,
-            width: 60,
-            margin: EdgeInsets.symmetric(vertical: 10),
-            color: Colors.blue,
-          ),
+          SectionUnderLine(),
           FutureBuilder(
             future: _updates,
             builder: (context, snapshot) {
@@ -80,22 +74,30 @@ class EventUpdatesListState extends State<EventUpdatesList> {
                       child: Text(
                         'No Updates',
                         style: TextStyle(
-                          color: Colors.white70,
+                          color: Provider.of<ThemeModel>(context)
+                              .theme
+                              .PRIMARY_TEXT_COLOR
+                              .withOpacity(0.7),
                         ),
                       ),
                     ),
                   );
                 } else {
                   return Column(
-                    children:
-                        upd.map((element) => EventUpdate(element, ValueKey(element.id))).toList(),
+                    children: upd
+                        .map((element) =>
+                            EventUpdate(element, ValueKey(element.id)))
+                        .toList(),
                   );
                 }
               } else if (snapshot.hasError) {
                 return Center(
                   child: Text(
                     'Some Error Occured',
-                    style: TextStyle(color: Colors.white70),
+                    style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.w200,
+                    ),
                   ),
                 );
               }
@@ -104,8 +106,9 @@ class EventUpdatesListState extends State<EventUpdatesList> {
                 margin: EdgeInsets.all(20),
                 child: Center(
                   child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  ),
+                      // valueColor: AlwaysStoppedAnimation<Color>(
+                      //     Provider.of<ThemeModel>(context,listen:false).theme.PRIMARY_TEXT_COLOR),
+                      ),
                 ),
               );
             },

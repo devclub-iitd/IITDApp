@@ -1,4 +1,7 @@
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:http/http.dart' as http;
@@ -12,11 +15,8 @@ import './club_info_card.dart';
 import '../../events/event_class.dart';
 
 Future<List<Event>> getClubEvents(String id) async {
-  final response = await http
-      .get('$url/api/events/?body=$id', headers: {
-    'authorization':
-        'Bearer $token'
-  });
+  final response = await http.get('$url/api/events/?body=$id',
+      headers: {'authorization': 'Bearer $token'});
   if (response.statusCode == 200) {
     var parsedJson = json.decode(response.body);
     var events = <Event>[];
@@ -30,7 +30,7 @@ Future<List<Event>> getClubEvents(String id) async {
     });
     events.sort((a, b) {
       if (a.isStarred == b.isStarred) return 0;
-      return (a.isStarred)? -1:1;
+      return (a.isStarred) ? -1 : 1;
     });
     return events;
   } else {
@@ -67,11 +67,14 @@ class ClubInfoState extends State<ClubInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:
+          Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       appBar: GradientAppBar(
         title: Text('Club'),
         centerTitle: true,
-        backgroundColorStart: Colors.indigo,
-        backgroundColorEnd: Colors.cyan,
+        backgroundColorStart:
+            Provider.of<ThemeModel>(context).theme.APP_BAR_START,
+        backgroundColorEnd: Provider.of<ThemeModel>(context).theme.APP_BAR_END,
         // actions: <Widget>[ProfileIcon()],
       ),
       body: ListView(
@@ -87,7 +90,11 @@ class ClubInfoState extends State<ClubInfo> {
                 return Center(
                   child: Text(
                     'Could not get events',
-                    style: TextStyle(color: Colors.white70),
+                    style: TextStyle(
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .PRIMARY_TEXT_COLOR
+                            .withOpacity(0.7)),
                   ),
                 );
               }
@@ -96,8 +103,9 @@ class ClubInfoState extends State<ClubInfo> {
                 margin: EdgeInsets.all(20),
                 child: Center(
                   child: CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  ),
+                      // valueColor: AlwaysStoppedAnimation<Color>(
+                      //     Provider.of<ThemeModel>(context,listen:false).theme.PRIMARY_TEXT_COLOR),
+                      ),
                 ),
               );
             },

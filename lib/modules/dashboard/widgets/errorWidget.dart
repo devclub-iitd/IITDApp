@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:IITDAPP/values/colors/colors.dart';
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 
 class ErrorDisplay extends StatelessWidget {
   const ErrorDisplay({
-    Key key, @required this.refresh,@required this.error,
+    Key key,
+    @required this.refresh,
+    @required this.error,
   }) : super(key: key);
 
   final Function refresh;
@@ -25,8 +28,10 @@ class ErrorDisplay extends StatelessWidget {
             refresh();
           },
           child: Text('REFRESH'),
-          textColor: AppColors.PRIMARY_COLOR_DARK,
-          color: AppColors.PRIMARY_COLOR,
+          textColor:
+              Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_FOREGROUND,
+          color:
+              Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_BACKGROUND,
         )
       ],
     );

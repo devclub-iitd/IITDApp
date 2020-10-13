@@ -1,3 +1,5 @@
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -27,37 +29,47 @@ class MyEventCard extends StatelessWidget {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.indigo,
-          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-        ),
+            color: Provider.of<ThemeModel>(context)
+                .theme
+                .DEFAULT_WIDGET_BACKGROUND,
+            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            boxShadow: [
+              BoxShadow(
+                  offset: Offset(0, 2),
+                  spreadRadius: 1,
+                  blurRadius: 2,
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR
+                      .withOpacity(0.1))
+            ]),
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
         margin: EdgeInsets.symmetric(vertical: 7),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Row(
-              children: <Widget>[
-              Expanded(child: 
-              Container(
-                margin: EdgeInsets.only(bottom: 10, right: 10, left: 10),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    AutoSizeText(
-                      _event.eventName,
-                      style: TextStyle(fontSize: 23, color: Colors.white),
-                      minFontSize: 18,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
-                  ],
+            Row(children: <Widget>[
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.only(bottom: 10, right: 10, left: 10),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      AutoSizeText(
+                        _event.eventName,
+                        style: TextStyle(fontSize: 23),
+                        minFontSize: 18,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                      ),
+                    ],
+                  ),
                 ),
-              ),),
+              ),
               IconButton(
                 onPressed: () {},
                 icon: Icon(Icons.calendar_today),
                 tooltip: 'Add to Calendar',
-                color: Colors.white,
               ),
               IconButton(
                 onPressed: () {
@@ -70,7 +82,6 @@ class MyEventCard extends StatelessWidget {
                 },
                 icon: Icon(
                   Icons.edit,
-                  color: Colors.white,
                 ),
                 tooltip: 'Edit Event Info',
                 splashColor: Colors.transparent,

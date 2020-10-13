@@ -1,5 +1,8 @@
 import 'package:IITDAPP/modules/login/user_class.dart';
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/cancel_alert.dart';
 import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
@@ -71,7 +74,9 @@ class _EventFormState extends State<EventForm> {
           value: currentUser.adminof[i],
           child: Text(
             currentUser.adminof[i].clubName,
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+                color:
+                    Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR),
           ),
         ),
       );
@@ -94,7 +99,10 @@ class _EventFormState extends State<EventForm> {
                   helperText: ''),
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR),
               onSaved: (text) {
                 _eventName = text;
               },
@@ -121,11 +129,11 @@ class _EventFormState extends State<EventForm> {
                 selectedClub = value;
               },
               decoration: InputDecoration(
-                  alignLabelWithHint: true,
-                  labelText: 'Organizer',
-                  helperText: '',
-                  contentPadding: EdgeInsets.symmetric(vertical: 0),
-                  ),
+                alignLabelWithHint: true,
+                labelText: 'Organizer',
+                helperText: '',
+                contentPadding: EdgeInsets.symmetric(vertical: 0),
+              ),
               onChanged: (value) {
                 setState(() {
                   selectedClub = value;
@@ -137,7 +145,10 @@ class _EventFormState extends State<EventForm> {
                   alignLabelWithHint: true, labelText: 'Venue', helperText: ''),
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR),
               onSaved: (text) {
                 _venue = text;
               },
@@ -176,7 +187,10 @@ class _EventFormState extends State<EventForm> {
                   labelText: 'Starts At',
                   floatingLabelBehavior: FloatingLabelBehavior.auto,
                   helperText: ''),
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR),
               onChanged: (dt) {
                 _endsAt = dt;
               },
@@ -218,7 +232,10 @@ class _EventFormState extends State<EventForm> {
                   labelText: 'Ends At',
                   floatingLabelBehavior: FloatingLabelBehavior.auto,
                   helperText: ''),
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR),
               onChanged: (dt) {
                 _endsAt = dt;
               },
@@ -243,7 +260,10 @@ class _EventFormState extends State<EventForm> {
               onSaved: (text) {
                 _about = text;
               },
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR),
               validator: (text) {
                 if (text.isEmpty) {
                   return 'Required';
@@ -259,7 +279,10 @@ class _EventFormState extends State<EventForm> {
                   helperText: ''),
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR),
               onSaved: (text) {
                 _imageLink = text;
               },
@@ -276,16 +299,28 @@ class _EventFormState extends State<EventForm> {
               children: <Widget>[
                 RaisedButton(
                   onPressed: () {
-                    showCancelAlert(context, 'Cancel making new event?', 'Are you sure you want discard this event?');
+                    showCancelAlert(context, 'Cancel making new event?',
+                        'Are you sure you want discard this event?');
                   },
-                  child: Text('CANCEL'),
-                  color: Colors.indigo[400],
+                  child: Text('CANCEL',
+                      style: TextStyle(
+                          color: Provider.of<ThemeModel>(context)
+                              .theme
+                              .RAISED_BUTTON_FOREGROUND)),
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .RAISED_BUTTON_BACKGROUND,
                 ),
                 RaisedButton(
-                  color: Colors.indigo[500],
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .RAISED_BUTTON_BACKGROUND,
                   child: Text(
                     'SUBMIT',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .RAISED_BUTTON_FOREGROUND),
                   ),
                   onPressed: () async {
                     if (_key.currentState.validate()) {

@@ -28,10 +28,14 @@ class RecentsSections extends StatelessWidget {
                     refresh: news.refresh, error: news.displayedData.message))),
       ];
     } else if (news.displayedData.status == Status.LOADING) {
-      children = [ShimmerList(itemCount: news.itemsPerPage, width: width)];
+      children = [
+        ShimmerList(itemCount: NewsProvider.itemsPerPage, width: width)
+      ];
     } else {
       children = List.generate(
-          news.itemsPerPage,
+          NewsProvider.itemsPerPage > news.displayedData.data.length
+              ? news.displayedData.data.length
+              : NewsProvider.itemsPerPage,
           (index) =>
               RecentWidget(width: width, item: news.displayedData.data[index]));
     }

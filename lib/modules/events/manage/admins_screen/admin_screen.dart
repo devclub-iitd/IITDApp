@@ -1,5 +1,8 @@
 import 'package:IITDAPP/modules/login/user_class.dart';
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +12,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:IITDAPP/modules/events/manage/admins_screen/admins_list.dart';
 import 'package:pedantic/pedantic.dart';
-
 
 Future<List<Admin>> getAdmins() async {
   print('Getting Admins');
@@ -55,9 +57,12 @@ class AdminScreenState extends State<AdminScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:
+          Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       appBar: GradientAppBar(
-        backgroundColorStart: Colors.indigo,
-        backgroundColorEnd: Colors.cyan,
+        backgroundColorStart:
+            Provider.of<ThemeModel>(context).theme.APP_BAR_START,
+        backgroundColorEnd: Provider.of<ThemeModel>(context).theme.APP_BAR_END,
         title: Text('${currentUser.superAdminOf[0].clubName} Admins'),
         centerTitle: true,
       ),
@@ -66,13 +71,18 @@ class AdminScreenState extends State<AdminScreen> {
           Container(
             margin: EdgeInsets.all(15),
             child: FlatButton(
-              color: Colors.indigo[400],
+              color: Provider.of<ThemeModel>(context)
+                  .theme
+                  .RAISED_BUTTON_BACKGROUND,
               onPressed: () async {
                 _showAlert(context);
               },
               child: Text(
                 'ADD NEW ADMIN',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                    color: Provider.of<ThemeModel>(context)
+                        .theme
+                        .RAISED_BUTTON_FOREGROUND),
               ),
             ),
           ),
@@ -86,14 +96,21 @@ class AdminScreenState extends State<AdminScreen> {
                 return Container(
                     padding: EdgeInsets.all(50),
                     child: Center(
-                      child: Text('Some Error Occured'),
+                      child: Text(
+                        'Some Error Occured',
+                        style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.w200,
+                        ),
+                      ),
                     ));
               }
 
               return Center(
                 child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                ),
+                    // valueColor: AlwaysStoppedAnimation<Color>(
+                    //     Provider.of<ThemeModel>(context,listen:false).theme.PRIMARY_TEXT_COLOR),
+                    ),
               );
             },
           ),
@@ -153,17 +170,20 @@ class AddDialogState extends State<AddDialog> {
         FocusScope.of(context).requestFocus(FocusNode());
       },
       child: AlertDialog(
-        backgroundColor: Colors.indigo,
+        backgroundColor: Provider.of<ThemeModel>(context).theme.ALERT_DIALOG,
         title: Text(
           'Add a ${currentUser.superAdminOf[0].clubName} admin',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+              color: Provider.of<ThemeModel>(context).theme.ALERT_DIALOG_TEXT),
         ),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Text(
               'Enter the email of the user and the club you want to make the user admin of.',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color:
+                      Provider.of<ThemeModel>(context).theme.ALERT_DIALOG_TEXT),
             ),
             Form(
               key: _key,
@@ -175,7 +195,10 @@ class AddDialogState extends State<AddDialog> {
                     ),
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .ALERT_DIALOG_TEXT),
                     onSaved: (text) {
                       email = text;
                     },
@@ -201,7 +224,11 @@ class AddDialogState extends State<AddDialog> {
             },
             child: Text(
               'CANCEL',
-              style: TextStyle(color: Colors.white70),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .ALERT_DIALOG_TEXT
+                      .withOpacity(0.7)),
             ),
           ),
           FlatButton(
@@ -214,7 +241,11 @@ class AddDialogState extends State<AddDialog> {
             },
             child: Text(
               'ADD',
-              style: TextStyle(color: Colors.white70),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .ALERT_DIALOG_TEXT
+                      .withOpacity(0.7)),
             ),
           )
         ],

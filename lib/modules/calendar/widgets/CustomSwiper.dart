@@ -87,6 +87,8 @@ class _CustomCardState extends State<CustomCard> {
   Widget build(BuildContext context) {
     const height = 600.0;
     return Scaffold(
+        backgroundColor:
+            Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
         floatingActionButton: FloatingActionButton(
           heroTag: null,
           onPressed: () async {},

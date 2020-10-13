@@ -1,3 +1,5 @@
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -20,7 +22,7 @@ class EventInfoCard extends StatelessWidget {
       onPressed: () {},
       icon: Icon(Icons.calendar_today),
       tooltip: 'Add to Calendar',
-      color: Colors.white,
+      color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
       iconSize: 20,
     ));
     actionRow.add(
@@ -35,17 +37,29 @@ class EventInfoCard extends StatelessWidget {
                   builder: (context) => ClubInfo(_event.eventBody)));
         },
         child: Text('SEE CLUB'),
-        color: Colors.indigo[400],
-        textColor: Colors.white,
+        color: Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_BACKGROUND,
+        textColor:
+            Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_FOREGROUND,
       ));
     }
     return ConstrainedBox(
       constraints: BoxConstraints(maxWidth: 500),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.indigo,
-          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-        ),
+            color: Provider.of<ThemeModel>(context)
+                .theme
+                .DEFAULT_WIDGET_BACKGROUND,
+            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            boxShadow: [
+              BoxShadow(
+                  offset: Offset(0, 2),
+                  spreadRadius: 1,
+                  blurRadius: 2,
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR
+                      .withOpacity(0.1))
+            ]),
         margin: EdgeInsets.symmetric(vertical: 25, horizontal: 15),
         child: Column(
           children: <Widget>[
@@ -55,7 +69,11 @@ class EventInfoCard extends StatelessWidget {
                 children: <Widget>[
                   AutoSizeText(
                     _event.eventName,
-                    style: TextStyle(fontSize: 23, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: 23,
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .PRIMARY_TEXT_COLOR),
                     textAlign: TextAlign.center,
                   ),
                   Container(
@@ -64,7 +82,9 @@ class EventInfoCard extends StatelessWidget {
                   AutoSizeText(
                     _event.eventBody.clubName,
                     style: TextStyle(
-                        color: Colors.white,
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .PRIMARY_TEXT_COLOR,
                         fontSize: 15,
                         fontWeight: FontWeight.w300),
                     maxLines: 1,
@@ -86,9 +106,8 @@ class EventInfoCard extends StatelessWidget {
             Container(
               padding: EdgeInsets.only(bottom: 20),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: actionRow
-              ),
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: actionRow),
             ),
           ],
         ),

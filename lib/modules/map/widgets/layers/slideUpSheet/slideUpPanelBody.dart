@@ -1,5 +1,7 @@
 import 'package:IITDAPP/utility/UrlHandler.dart';
-import 'package:IITDAPP/values/colors/colors.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class SlideUpPanelBody extends StatelessWidget {
@@ -26,7 +28,10 @@ class SlideUpPanelBody extends StatelessWidget {
               style: TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 17,
-                  color: Colors.white70),
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR
+                      .withOpacity(0.6)),
             ),
           ),
           Divider(
@@ -42,12 +47,20 @@ class SlideUpPanelBody extends StatelessWidget {
                   Text(
                     'Opens at ' + timeToString(locationDetails.openTime),
                     style: TextStyle(
-                        fontWeight: FontWeight.w400, color: Colors.white54),
+                        fontWeight: FontWeight.w400,
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .PRIMARY_TEXT_COLOR
+                            .withOpacity(0.54)),
                   ),
                   Text(
                     'Closes at ' + timeToString(locationDetails.closeTime),
                     style: TextStyle(
-                        fontWeight: FontWeight.w400, color: Colors.white54),
+                        fontWeight: FontWeight.w400,
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .PRIMARY_TEXT_COLOR
+                            .withOpacity(0.54)),
                   ),
                 ],
               ),
@@ -65,26 +78,37 @@ class SlideUpPanelBody extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: AppColors.SLIDE_UP_SHEET_BUTTON_COLOR),
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .SLIDE_UP_SHEET_BUTTON_COLOR),
                     child: IconButton(
-                      icon: Icon(Icons.link),
+                      icon: Icon(Icons.link, color: Colors.black),
                       onPressed: () {
                         UrlHandler.launchInBrowser(locationDetails.link);
                       },
-                      color: Colors.indigo,
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .SLIDE_UP_SHEET_BUTTON_COLOR,
                     ),
                   ),
                 if (locationDetails.contact != null)
                   Container(
                     decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: AppColors.SLIDE_UP_SHEET_BUTTON_COLOR),
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .SLIDE_UP_SHEET_BUTTON_COLOR),
                     child: IconButton(
-                      icon: Icon(Icons.phone),
+                      icon: Icon(
+                        Icons.phone,
+                        color: Colors.black,
+                      ),
                       onPressed: () {
                         UrlHandler.makePhoneCall(locationDetails.contact);
                       },
-                      color: Colors.indigo,
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .SLIDE_UP_SHEET_BUTTON_COLOR,
                     ),
                   ),
               ],

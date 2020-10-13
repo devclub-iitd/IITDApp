@@ -1,4 +1,7 @@
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -43,10 +46,11 @@ class _AddUpdateState extends State<AddUpdate> {
     hint = 'Add an update...';
     setState(() {});
     print(response.statusCode);
-    if(response.statusCode == 200){
-    _onSubmit();}
-    else {
-      await showErrorAlert(context, 'Could not add', 'Something went wrong. Please try again');
+    if (response.statusCode == 200) {
+      _onSubmit();
+    } else {
+      await showErrorAlert(
+          context, 'Could not add', 'Something went wrong. Please try again');
     }
     return null;
   }
@@ -71,18 +75,32 @@ class _AddUpdateState extends State<AddUpdate> {
                   fillColor: Color(0x0AAAAAAA),
                   enabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(color: Colors.white54)),
+                      borderSide: BorderSide(
+                          color: Provider.of<ThemeModel>(context)
+                              .theme
+                              .PRIMARY_TEXT_COLOR
+                              .withOpacity(0.54))),
                   focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
-                      borderSide: BorderSide(color: Colors.white)),
+                      borderSide: BorderSide(
+                          color: Provider.of<ThemeModel>(context)
+                              .theme
+                              .PRIMARY_TEXT_COLOR)),
                   disabledBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
                       borderSide: BorderSide(color: Colors.grey)),
                   hintText: hint,
-                  hintStyle: TextStyle(color: Colors.white54)),
+                  hintStyle: TextStyle(
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .PRIMARY_TEXT_COLOR
+                          .withOpacity(0.54))),
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR),
               controller: _controller,
               onChanged: (text) {
                 _message = text;
@@ -110,9 +128,13 @@ class _AddUpdateState extends State<AddUpdate> {
             },
             child: Text(
               'SUBMIT',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .RAISED_BUTTON_FOREGROUND),
             ),
-            color: Colors.indigo[400],
+            color:
+                Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_BACKGROUND,
           )
         ],
       ),

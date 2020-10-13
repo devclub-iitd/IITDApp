@@ -1,3 +1,5 @@
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 import 'package:IITDAPP/widgets/Drawer.dart';
@@ -12,6 +14,8 @@ class MapHome extends StatelessWidget {
   Widget build(BuildContext context) {
     print('built home');
     return Scaffold(
+      backgroundColor:
+          Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       drawer: AppDrawer(
         tag: 'Campus Map',
       ),

@@ -11,7 +11,8 @@ import 'package:IITDAPP/modules/news/widgets/shimmers/shimmerList.dart';
 import 'package:IITDAPP/modules/news/widgets/shimmers/sizedShimmer.dart';
 import 'package:IITDAPP/routes/Transitions.dart';
 import 'package:IITDAPP/utility/apiResponse.dart';
-import 'package:IITDAPP/values/colors/colors.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 
 class NewsList<K extends NewsType> extends StatefulWidget {
@@ -37,6 +38,8 @@ class _NewsListState<K extends NewsType> extends State<NewsList<K>> {
     final width = MediaQuery.of(context).size.width;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
+      backgroundColor:
+          Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       appBar: CustomAppBar(
         title: Theme(
           child: DropdownButtonHideUnderline(
@@ -84,7 +87,9 @@ class _NewsListState<K extends NewsType> extends State<NewsList<K>> {
               },
             ),
           ),
-          data: ThemeData.dark().copyWith(canvasColor: AppColors.APP_BAR_START),
+          data: ThemeData.dark().copyWith(
+              canvasColor:
+                  Provider.of<ThemeModel>(context).theme.APP_BAR_START),
         ),
         withMenu: false,
       ),
@@ -98,7 +103,7 @@ class _NewsListState<K extends NewsType> extends State<NewsList<K>> {
                   Container(
                       height: height * 0.8,
                       child: ShimmerList(
-                        itemCount: news.itemsPerPage,
+                        itemCount: NewsProvider.itemsPerPage,
                         width: width,
                       )),
                   SizedShimmer(width: width - 100, height: 30)
@@ -112,9 +117,10 @@ class _NewsListState<K extends NewsType> extends State<NewsList<K>> {
             }
             return ChangeNotifierProvider(
               create: (_) {
-                  var par = news.pageAfterRefresh;
-                  news.pageAfterRefresh = 0;
-                  return PageCarouselIndex(width, news.pages, par);},
+                var par = news.pageAfterRefresh;
+                news.pageAfterRefresh = 0;
+                return PageCarouselIndex(width, news.pages, par);
+              },
               child: Stack(
                 children: <Widget>[
                   child,
@@ -150,7 +156,7 @@ class PageList<K extends NewsType> extends StatelessWidget {
     final pci = Provider.of<PageCarouselIndex>(context, listen: false);
     if (news.displayedData.status == Status.LOADING) {
       return ShimmerList(
-        itemCount: news.itemsPerPage,
+        itemCount: NewsProvider.itemsPerPage,
         width: width,
       );
     }
@@ -164,11 +170,14 @@ class PageList<K extends NewsType> extends StatelessWidget {
           if (news.pageLoaded[index]) {
             return SlidingListPage<K>(
                 width: width,
-                data: news.displayedData.data.sublist(index * news.itemsPerPage,
-                    min((index + 1) * news.itemsPerPage, news.maxNewsItems)));
+                data: news.displayedData.data.sublist(
+                    index * NewsProvider.itemsPerPage,
+                    min((index + 1) * NewsProvider.itemsPerPage,
+                        news.maxNewsItems)));
           } else {
             return ShimmerList(
-                itemCount: min(news.itemsPerPage,news.maxNewsItems-index*news.itemsPerPage),
+                itemCount: min(
+                    4, news.maxNewsItems - index * NewsProvider.itemsPerPage),
                 width: width);
           }
         },
@@ -185,7 +194,7 @@ class PageList<K extends NewsType> extends StatelessWidget {
               news.loadPage(index);
             }
           },
-          height: height * 0.8,
+          height: height * 0.78,
           viewportFraction: 1,
           autoPlay: false,
         ));

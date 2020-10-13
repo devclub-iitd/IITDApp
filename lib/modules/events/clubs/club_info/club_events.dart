@@ -1,3 +1,6 @@
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
+import 'package:IITDAPP/widgets/sectionTitle.dart';
 import 'package:flutter/material.dart';
 
 import '../../events/event_class.dart';
@@ -18,20 +21,10 @@ class ClubEvents extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              'CLUB EVENTS',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 15,
-                  letterSpacing: 4),
+            SectionTitle(
+              title: 'CLUB EVENTS',
             ),
-            Container(
-              height: 3,
-              width: 60,
-              margin: EdgeInsets.symmetric(vertical: 10),
-              color: Colors.blue,
-            ),
+            SectionUnderLine(),
             (_clubEvents.isEmpty)
                 ? Center(
                     child: Container(
@@ -39,13 +32,20 @@ class ClubEvents extends StatelessWidget {
                       child: Text(
                         'No Events',
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white70),
+                        style: TextStyle(
+                            fontSize: 25,
+                            fontWeight: FontWeight.w200,
+                            color: Provider.of<ThemeModel>(context)
+                                .theme
+                                .PRIMARY_TEXT_COLOR
+                                .withOpacity(0.7)),
                       ),
                     ),
                   )
                 : Column(
                     children: _clubEvents
-                        .map((element) => ClubEventCard(element, reload, ValueKey(element.eventid)))
+                        .map((element) => ClubEventCard(
+                            element, reload, ValueKey(element.eventid)))
                         .toList(),
                   )
           ],

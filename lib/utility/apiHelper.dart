@@ -2,14 +2,16 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
 import 'package:http/http.dart' as http;
 
 class ApiBaseHelper {
-  Future<dynamic> patch(String url,dynamic body) async {
+  Future<dynamic> patch(String url, dynamic body) async {
     var responseJson;
     try {
-      final response = await http.patch(url, headers: {'authorization': 'Bearer $token'},body: body).timeout(Duration(seconds: 10));
+      final response = await http
+          .patch(url, headers: {'authorization': 'Bearer $token'}, body: body)
+          .timeout(Duration(seconds: 10));
       responseJson = _returnResponse(response);
       print('called $url');
     } on SocketException {
@@ -23,7 +25,10 @@ class ApiBaseHelper {
   Future<dynamic> delete(String url) async {
     var responseJson;
     try {
-      final response = await http.delete(url, headers: {'authorization': 'Bearer $token'},).timeout(Duration(seconds: 10));
+      final response = await http.delete(
+        url,
+        headers: {'authorization': 'Bearer $token'},
+      ).timeout(Duration(seconds: 10));
       responseJson = _returnResponse(response);
       print('called $url');
     } on SocketException {
@@ -37,7 +42,10 @@ class ApiBaseHelper {
   Future<dynamic> get(String url) async {
     var responseJson;
     try {
-      final response = await http.get(url, headers: {'authorization': 'Bearer $token'},).timeout(Duration(seconds: 10));
+      final response = await http.get(
+        url,
+        headers: {'authorization': 'Bearer $token'},
+      ).timeout(Duration(seconds: 10));
       responseJson = _returnResponse(response);
       print('called $url');
     } on SocketException {
@@ -48,10 +56,12 @@ class ApiBaseHelper {
     return responseJson;
   }
 
-  Future<dynamic> post(String url,dynamic body) async {
+  Future<dynamic> post(String url, dynamic body) async {
     var responseJson;
     try {
-      final response = await http.post(url, headers: {'authorization': 'Bearer $token'},body: body).timeout(Duration(seconds: 10));
+      final response = await http
+          .post(url, headers: {'authorization': 'Bearer $token'}, body: body)
+          .timeout(Duration(seconds: 10));
       responseJson = _returnResponse(response);
       print('called $url');
     } on SocketException {
@@ -68,7 +78,8 @@ class ApiBaseHelper {
         var responseJson = json.decode(response.body.toString());
         return responseJson;
       case 500:
-      throw FetchDataException(json.decode(response.body.toString())['errors']['message']);
+        throw FetchDataException(
+            json.decode(response.body.toString())['errors']['message']);
       default:
         throw FetchDataException(
             'Error occured while Communication with Server with StatusCode : ${response.statusCode}');

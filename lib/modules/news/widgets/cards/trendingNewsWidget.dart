@@ -1,3 +1,4 @@
+import 'package:IITDAPP/modules/news/utility/showSnackBarResult.dart';
 import 'package:flutter/material.dart';
 
 import 'package:IITDAPP/modules/news/screens/newsPage.dart';
@@ -19,11 +20,12 @@ class TrendingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final parentScaffold = Scaffold.of(context);
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () {
+      onTap: () async{
         Provider.of<NewsHistoryProvider>(context,listen: false).setViewed(item.id);
-        Navigator.push(
+        final result = await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (_) => NewsPage(
@@ -32,8 +34,11 @@ class TrendingWidget extends StatelessWidget {
             ),
           ),
         );
+            
+          showSnackbarResult(result, parentScaffold);
       },
-      child: Container(
+      child: Card(
+        elevation: 3,
         margin: EdgeInsets.all(5.0),
         child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(5.0)),

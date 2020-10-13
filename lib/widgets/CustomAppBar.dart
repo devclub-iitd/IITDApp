@@ -1,9 +1,11 @@
 import 'package:IITDAPP/modules/login/userlogin/profile_dialog.dart';
 import 'package:IITDAPP/modules/settings/SettingsScreen.dart';
-import 'package:IITDAPP/values/colors/Constants.dart';
-import 'package:IITDAPP/values/colors/colors.dart';
+import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:provider/provider.dart';
+
+import '../ThemeModel.dart';
 
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   CustomAppBar(
@@ -30,8 +32,9 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
     return (GradientAppBar(
       title: title,
       elevation: 10,
-      backgroundColorStart: AppColors.APP_BAR_START,
-      backgroundColorEnd: AppColors.APP_BAR_END,
+      backgroundColorStart:
+          Provider.of<ThemeModel>(context).theme.APP_BAR_START,
+      backgroundColorEnd: Provider.of<ThemeModel>(context).theme.APP_BAR_END,
       actions: actionsArray,
       leading: withMenu
           ? Builder(
@@ -57,37 +60,44 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
 
 // ignore: must_be_immutable
 class PopupMenu extends StatelessWidget {
-  var menuArray = [
-    PopupMenuItem<String>(
-      value: 'Settings',
-      child: Row(
-        children: <Widget>[
-          Icon(Icons.settings),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Text('Settings'),
-          )
-        ],
-      ),
-    ),
-    PopupMenuItem<String>(
-      value: 'User Profile',
-      child: Row(
-        children: <Widget>[
-          Icon(Icons.person),
-          Padding(
-            padding: const EdgeInsets.only(left: 8.0),
-            child: Text('User Profile'),
-          ),
-        ],
-      ),
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
     // ignore: always_declare_return_types
-    handleClick(value) {
+
+    var menuArray = [
+      PopupMenuItem<String>(
+        value: 'Settings',
+        child: Row(
+          children: <Widget>[
+            Icon(
+              Icons.settings,
+              color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Text('Settings'),
+            )
+          ],
+        ),
+      ),
+      PopupMenuItem<String>(
+        value: 'User Profile',
+        child: Row(
+          children: <Widget>[
+            Icon(
+              Icons.person,
+              color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Text('User Profile'),
+            ),
+          ],
+        ),
+      ),
+    ];
+
+    void handleClick(value) {
       switch (value) {
         case 'User Profile':
           showAlert(context, loginFunc);

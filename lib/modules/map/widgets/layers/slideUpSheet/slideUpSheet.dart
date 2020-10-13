@@ -1,10 +1,11 @@
 import 'package:IITDAPP/modules/map/data/slidePanelPosition.dart';
 import 'package:IITDAPP/modules/map/widgets/layers/slideUpSheet/slideUpPanelBody.dart';
 import 'package:IITDAPP/modules/map/widgets/layers/slideUpSheet/slideUpPanelHeader.dart';
-import 'package:IITDAPP/values/colors/colors.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
-import 'package:provider/provider.dart';
 
 import 'package:IITDAPP/modules/map/data/mapCondition.dart';
 
@@ -22,21 +23,21 @@ class _SlideUpSheetState extends State<SlideUpSheet>
   var canvasHeight;
 
   void changeHeight() {
-    var spp =Provider.of<SlidePanelPosition>(context, listen: false);
-    if(_animationController.value<0.02){
+    var spp = Provider.of<SlidePanelPosition>(context, listen: false);
+    if (_animationController.value < 0.02) {
       return;
     }
-      var h = canvasHeight * 0.15 * _animationController.value;
-      
-    if(spp.position == h){
+    var h = canvasHeight * 0.15 * _animationController.value;
+
+    if (spp.position == h) {
       return;
     }
-      //TODO check rebuild call during build
-      if (pc.isAttached && !pc.isPanelAnimating) {
-          // print('position called');
-        spp.setPosition(h);
-      }
+    //TODO check rebuild call during build
+    if (pc.isAttached && !pc.isPanelAnimating) {
+      // print('position called');
+      spp.setPosition(h);
     }
+  }
 
   @override
   void initState() {
@@ -95,7 +96,8 @@ class _SlideUpSheetState extends State<SlideUpSheet>
               controller: pc,
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(5), topRight: Radius.circular(5)),
-              color: AppColors.SLIDE_UP_SHEET_COLOR,
+              color:
+                  Provider.of<ThemeModel>(context).theme.SLIDE_UP_SHEET_COLOR,
               margin: EdgeInsets.symmetric(horizontal: 5),
               panelBuilder: (sc) {
                 if (resetScroll) {

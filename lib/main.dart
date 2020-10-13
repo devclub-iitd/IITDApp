@@ -4,16 +4,17 @@ import 'package:IITDAPP/modules/login/LoginScreen.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsData.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
-import 'package:IITDAPP/push_notifications.dart';
-import 'package:IITDAPP/routes/router.dart';
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/routes/router.dart' as app_router;
+import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/values/colors/colors.dart';
+import 'package:IITDAPP/values/colors/darkColors.dart';
+import 'package:IITDAPP/push_notifications.dart';
 import 'package:calendarnotificationprovider/calendarnotificationprovider.dart';
 import 'package:global_configuration/global_configuration.dart';
+import 'package:syncfusion_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
-import 'package:syncfusion_flutter_core/core.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -72,7 +73,7 @@ class MyApp extends StatelessWidget {
 ////            accentColor: Colors.lightBlueAccent
 //      ),
       home: LoginScreen(),
-      onGenerateRoute: Router.generateRoute,
+      onGenerateRoute: app_router.Router.generateRoute,
     );
   }
 }

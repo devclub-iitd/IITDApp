@@ -1,4 +1,7 @@
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'dart:async';
@@ -32,9 +35,12 @@ class RequestScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:
+          Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       appBar: GradientAppBar(
-        backgroundColorStart: Colors.indigo,
-        backgroundColorEnd: Colors.cyan,
+        backgroundColorStart:
+            Provider.of<ThemeModel>(context).theme.APP_BAR_START,
+        backgroundColorEnd: Provider.of<ThemeModel>(context).theme.APP_BAR_END,
         title: Text('Admins'),
         centerTitle: true,
       ),
@@ -45,14 +51,21 @@ class RequestScreen extends StatelessWidget {
             return RequestList(snapshot.data);
           } else if (snapshot.hasError) {
             return Center(
-              child: Text('Some Error Occured'),
+              child: Text(
+                'Some Error Occured',
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.w200,
+                ),
+              ),
             );
           }
 
           return Center(
             child: CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-            ),
+                // valueColor: AlwaysStoppedAnimation<Color>(
+                //     Provider.of<ThemeModel>(context,listen:false).theme.PRIMARY_TEXT_COLOR),
+                ),
           );
         },
       ),

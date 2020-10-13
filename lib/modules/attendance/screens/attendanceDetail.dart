@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:IITDAPP/modules/attendance/data/attendanceModel.dart';
 import 'package:IITDAPP/modules/attendance/widgets/cards/daysCard.dart';
 import 'package:IITDAPP/modules/attendance/widgets/headings/coursePageHeader.dart';
-import 'package:IITDAPP/values/colors/colors.dart';
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/modules/attendance/widgets/attendanceCalendar.dart';
 
@@ -14,11 +15,12 @@ class AttendanceDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     // print('built AttendanceDetail');
     return Scaffold(
+      backgroundColor:
+          Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       appBar: CustomAppBar(
         title: const Text('Attendance'),
         withMenu: false,
       ),
-      backgroundColor: AppColors.PRIMARY_COLOR_DARK,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [

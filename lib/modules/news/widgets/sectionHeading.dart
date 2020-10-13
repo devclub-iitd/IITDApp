@@ -1,6 +1,8 @@
+import 'package:IITDAPP/widgets/sectionTitle.dart';
 import 'package:flutter/material.dart';
 
-import 'package:IITDAPP/values/colors/colors.dart';
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 
 class SectionHeading extends StatelessWidget {
   const SectionHeading({
@@ -19,20 +21,30 @@ class SectionHeading extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
-            text,
-            style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 25,
-                color: Theme.of(context).textTheme.headline1.color.withOpacity(0.54),),
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SectionTitle(
+                  title: text.toUpperCase(),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 2.0),
+                  child: SectionUnderLine(),
+                ),
+              ],
+            ),
           ),
           RaisedButton(
-            color: AppColors.RAISED_BUTTON_COLOR,
-            child: Text('More', style: TextStyle(color: AppColors.RAISED_BUTTON_TEXT_COLOR)),
+            color:
+                Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_BACKGROUND,
+            child: Text('More',
+                style: TextStyle(
+                    color: Provider.of<ThemeModel>(context)
+                        .theme
+                        .RAISED_BUTTON_FOREGROUND)),
             onPressed: onTap,
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(18.0),
-                side: BorderSide(color: AppColors.RAISED_BUTTON_TEXT_COLOR)),
           )
         ],
       ),

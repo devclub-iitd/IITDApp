@@ -1,6 +1,9 @@
-import 'package:IITDAPP/values/colors/Constants.dart';
-import 'package:flutter/material.dart';
+import 'package:IITDAPP/modules/news/utility/showSnackBarResult.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 
 import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/news/widgets/sections/recentsSection.dart';
@@ -18,23 +21,11 @@ class NewsHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:
+          Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       appBar: CustomAppBar(
         title: Text('News'),
-        actions: (!currentUser.isAdmin)
-            ? []
-            : <Widget>[
-                IconButton(
-                    icon: Icon(Icons.add),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (c) => NewsUpdate(
-                                    nm: NewsModel(),
-                                    title: 'Create',
-                                  )));
-                    })
-              ],
+        actions: (!currentUser.isAdmin) ? [] : <Widget>[AddNewsButton()],
       ),
       drawer: AppDrawer(
         tag: 'News',
@@ -55,5 +46,27 @@ class NewsHome extends StatelessWidget {
         ])),
       ),
     );
+  }
+}
+
+class AddNewsButton extends StatelessWidget {
+  const AddNewsButton({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+        icon: Icon(Icons.add),
+        onPressed: () async {
+          final result = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (c) => NewsUpdate(
+                        nm: NewsModel(),
+                        title: 'Create',
+                      )));
+          showSnackbarResult(result, Scaffold.of(context));
+        });
   }
 }

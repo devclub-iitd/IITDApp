@@ -1,4 +1,3 @@
-import 'package:IITDAPP/values/colors/colors.dart';
 import 'package:flutter/material.dart';
 
 class CustomAnimatedButton extends StatefulWidget {
@@ -8,6 +7,7 @@ class CustomAnimatedButton extends StatefulWidget {
     @required IconData icon,
     @required String tag,
     @required Function onTap,
+    @required this.colors,
   })  : _controller = controller,
         _icon = icon,
         _tag = tag,
@@ -18,6 +18,7 @@ class CustomAnimatedButton extends StatefulWidget {
   final IconData _icon;
   final String _tag;
   final Function _onTap;
+  final List<Color> colors;
 
   @override
   _CustomAnimatedButtonState createState() => _CustomAnimatedButtonState();
@@ -35,14 +36,12 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
     _localController = widget._controller ??
         AnimationController(
             duration: const Duration(milliseconds: 250), vsync: this, value: 0);
-    _iconColorAnimation = ColorTween(
-            begin: AppColors.FLOATING_BUTTON_FG,
-            end: AppColors.FLOATING_BUTTON_SELECTED_FG)
-        .animate(_localController);
-    _buttonColorAnimation = ColorTween(
-            begin: AppColors.FLOATING_BUTTON_BG,
-            end: AppColors.FLOATING_BUTTON_SELECTED_BG)
-        .animate(_localController);
+    _iconColorAnimation =
+        ColorTween(begin: widget.colors[1], end: widget.colors[3])
+            .animate(_localController);
+    _buttonColorAnimation =
+        ColorTween(begin: widget.colors[0], end: widget.colors[2])
+            .animate(_localController);
     super.initState();
   }
 

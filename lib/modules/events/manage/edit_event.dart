@@ -1,4 +1,7 @@
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
@@ -38,11 +41,15 @@ class EditEvent extends StatelessWidget {
     return WillPopScope(
       onWillPop: () => _showCancelAlert(context),
       child: Scaffold(
+        backgroundColor:
+            Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
         appBar: GradientAppBar(
           title: Text('Edit Event'),
           centerTitle: true,
-          backgroundColorStart: Colors.indigo,
-          backgroundColorEnd: Colors.cyan,
+          backgroundColorStart:
+              Provider.of<ThemeModel>(context).theme.APP_BAR_START,
+          backgroundColorEnd:
+              Provider.of<ThemeModel>(context).theme.APP_BAR_END,
         ),
         body: GestureDetector(
           onTap: () {
@@ -120,7 +127,10 @@ class _EditEventFormState extends State<EditEventForm> {
               ),
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR),
               initialValue: _event.eventName,
               onSaved: (text) {
                 _eventName = text;
@@ -139,7 +149,10 @@ class _EditEventFormState extends State<EditEventForm> {
                   alignLabelWithHint: true, labelText: 'Venue', helperText: ''),
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR),
               onSaved: (text) {
                 _venue = text;
               },
@@ -181,7 +194,10 @@ class _EditEventFormState extends State<EditEventForm> {
                 labelText: 'Starts At',
                 floatingLabelBehavior: FloatingLabelBehavior.auto,
               ),
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR),
               onSaved: (dt) {
                 _startsAt = dt;
               },
@@ -224,7 +240,10 @@ class _EditEventFormState extends State<EditEventForm> {
                 labelText: 'Ends At',
                 floatingLabelBehavior: FloatingLabelBehavior.auto,
               ),
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR),
               onSaved: (dt) {
                 _endsAt = dt;
               },
@@ -251,7 +270,10 @@ class _EditEventFormState extends State<EditEventForm> {
               onSaved: (text) {
                 _about = text;
               },
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR),
               validator: (text) {
                 if (text.isEmpty) {
                   return 'Required';
@@ -268,7 +290,10 @@ class _EditEventFormState extends State<EditEventForm> {
                   helperText: ''),
               keyboardType: TextInputType.multiline,
               maxLines: null,
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR),
               onSaved: (text) {
                 _imageLink = text;
               },
@@ -289,7 +314,10 @@ class _EditEventFormState extends State<EditEventForm> {
                   },
                   child: Text(
                     'DELETE',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .RAISED_BUTTON_FOREGROUND),
                   ),
                   color: Colors.red[300],
                 ),
@@ -298,12 +326,19 @@ class _EditEventFormState extends State<EditEventForm> {
                       _showCancelAlert(context);
                     },
                     child: Text('CANCEL'),
-                    color: Colors.indigo[400]),
+                    color: Provider.of<ThemeModel>(context)
+                        .theme
+                        .RAISED_BUTTON_BACKGROUND),
                 RaisedButton(
-                  color: Colors.indigo[500],
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .RAISED_BUTTON_BACKGROUND,
                   child: Text(
                     'SUBMIT',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .RAISED_BUTTON_FOREGROUND),
                   ),
                   onPressed: () async {
                     if (_key.currentState.validate()) {
@@ -334,14 +369,25 @@ Future<bool> _showCancelAlert(BuildContext context) {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            backgroundColor: Colors.indigo[600],
+            backgroundColor:
+                Provider.of<ThemeModel>(context).theme.ALERT_DIALOG,
             title: Text(
               'Cancel editing',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .ALERT_DIALOG_TEXT
+                      .withOpacity(0.7)),
+              // style: TextStyle(color: Colors.white),
             ),
             content: Text(
               'Are you sure you want to discard new changes?',
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .ALERT_DIALOG_TEXT
+                      .withOpacity(0.7)),
+              // style: TextStyle(color: Colors.white),
             ),
             actions: <Widget>[
               FlatButton(
@@ -350,7 +396,11 @@ Future<bool> _showCancelAlert(BuildContext context) {
                 },
                 child: Text(
                   'NO',
-                  style: TextStyle(color: Colors.white70),
+                  style: TextStyle(
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .ALERT_DIALOG_TEXT
+                          .withOpacity(0.7)),
                 ),
               ),
               FlatButton(
@@ -360,7 +410,11 @@ Future<bool> _showCancelAlert(BuildContext context) {
                 },
                 child: Text(
                   'YES',
-                  style: TextStyle(color: Colors.white70),
+                  style: TextStyle(
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .ALERT_DIALOG_TEXT
+                          .withOpacity(0.7)),
                 ),
               )
             ],
@@ -375,14 +429,16 @@ void _showDeleteAlert(BuildContext context, Event _event) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        backgroundColor: Colors.indigo[600],
+        backgroundColor: Provider.of<ThemeModel>(context).theme.ALERT_DIALOG,
         title: Text(
           'Delete Event',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+              color: Provider.of<ThemeModel>(context).theme.ALERT_DIALOG_TEXT),
         ),
         content: Text(
           'Are you sure you want to delete this event?',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(
+              color: Provider.of<ThemeModel>(context).theme.ALERT_DIALOG_TEXT),
         ),
         actions: <Widget>[
           FlatButton(
@@ -391,7 +447,11 @@ void _showDeleteAlert(BuildContext context, Event _event) {
             },
             child: Text(
               'NO',
-              style: TextStyle(color: Colors.white70),
+              style: TextStyle(
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .ALERT_DIALOG_TEXT
+                      .withOpacity(0.7)),
             ),
           ),
           FlatButton(

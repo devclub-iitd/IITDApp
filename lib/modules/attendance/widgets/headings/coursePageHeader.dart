@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:IITDAPP/values/colors/colors.dart';
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 
 class CoursePageHeader extends StatelessWidget {
   final String _name, _abbr;
@@ -28,7 +29,9 @@ class CoursePageHeader extends StatelessWidget {
                 child: Text(
                   _name,
                   style: Theme.of(context).primaryTextTheme.headline4.apply(
-                        color: AppColors.ATTENDANCE_HEADING_LIGHT,
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .PRIMARY_TEXT_COLOR,
                         fontSizeFactor: 0.8,
                         decoration: null,
                       ),
@@ -40,7 +43,10 @@ class CoursePageHeader extends StatelessWidget {
           Text(
             _abbr,
             style: Theme.of(context).primaryTextTheme.bodyText2.apply(
-                  color: AppColors.ATTENDANCE_HEADING_DARK,
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR
+                      .withOpacity(0.3),
                   fontSizeFactor: 1,
                   decoration: null,
                 ),

@@ -1,3 +1,6 @@
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
+import 'package:IITDAPP/widgets/sectionTitle.dart';
 import 'package:flutter/material.dart';
 import 'package:IITDAPP/modules/events/globals.dart';
 
@@ -74,36 +77,45 @@ class ClubsScreenState extends State<ClubsScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Text(
-            listTitle,
-            style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.w900,
-                fontSize: 15,
-                letterSpacing: 4),
+          SectionTitle(
+            title: listTitle,
           ),
-          Container(
-            height: 3,
-            width: 60,
-            margin: EdgeInsets.only(top: 10, bottom: 20),
-            color: Colors.blue,
-          ),
+          SectionUnderLine(),
           (clubs.isEmpty)
               ? Center(
                   // padding: EdgeInsets.all(20),
                   child: Text(
                     'No Clubs',
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white70),
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w200,
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .PRIMARY_TEXT_COLOR
+                            .withOpacity(0.7)),
                   ),
                 )
-              : ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: Column(
-                    children: makeClubCardList(clubs),
-                    // clubs
-                    //     .map((element) => ClubCard(element, refresh))
-                    //     .toList(),
+              : Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      boxShadow: [
+                        BoxShadow(
+                            offset: Offset(0, 2),
+                            blurRadius: 2,
+                            color: Provider.of<ThemeModel>(context)
+                                .theme
+                                .PRIMARY_TEXT_COLOR
+                                .withOpacity(0.1))
+                      ]),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: Column(
+                      children: makeClubCardList(clubs),
+                      // clubs
+                      //     .map((element) => ClubCard(element, refresh))
+                      //     .toList(),
+                    ),
                   ),
                 ),
         ],

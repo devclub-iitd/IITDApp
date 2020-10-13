@@ -56,10 +56,10 @@ class TrendingSection extends StatelessWidget {
     }
     if (news.displayedData.status == Status.COMPLETED) {
       indicator = Indicators(
-        length: news.itemsPerPage,
+        length: NewsProvider.itemsPerPage,
       );
       carousel = CarouselSlider.builder(
-          itemCount: min(news.itemsPerPage, news.maxNewsItems),
+          itemCount: min(NewsProvider.itemsPerPage, news.maxNewsItems),
           itemBuilder: (_, index) => TrendingWidget(
               width: width, item: news.displayedData.data[index]),
           options: CarouselOptions(

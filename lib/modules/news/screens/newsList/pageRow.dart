@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 import 'package:IITDAPP/modules/news/data/pageCarouselIndex.dart';
@@ -20,7 +20,17 @@ class _PageNumberRowState extends State<PageNumberRow> {
   @override
   Widget build(BuildContext context) {
     final isc = Provider.of<PageCarouselIndex>(context, listen: false).isc;
-    return Padding(
+    return Container(
+      decoration:
+          BoxDecoration(color: Colors.blueGrey.withOpacity(0.05), boxShadow: [
+        BoxShadow(
+            color: Theme.of(context).brightness == Brightness.dark
+                ? Colors.black87
+                : Colors.white,
+            blurRadius: 20,
+            spreadRadius: 15,
+            offset: Offset(0, -3))
+      ]),
       padding: const EdgeInsets.symmetric(
         horizontal: 50.0,
         vertical: 5,
@@ -36,7 +46,9 @@ class _PageNumberRowState extends State<PageNumberRow> {
               width: widget.width - 196,
               height: 50,
               child: ScrollablePositionedList.builder(
-                  initialScrollIndex: Provider.of<PageCarouselIndex>(context, listen: false).current,
+                  initialScrollIndex:
+                      Provider.of<PageCarouselIndex>(context, listen: false)
+                          .current,
                   itemScrollController: isc,
                   scrollDirection: Axis.horizontal,
                   itemCount:

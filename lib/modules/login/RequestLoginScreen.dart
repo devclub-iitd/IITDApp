@@ -1,4 +1,7 @@
 import 'package:IITDAPP/modules/login/LoginScreen.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 //import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
@@ -8,7 +11,6 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class RequestLoginScreen extends StatefulWidget {
-
   static const String routeName = '/requestLogin';
 
   RequestLoginScreen(this.tag);
@@ -21,8 +23,14 @@ class _RequestLoginScreenState extends State<RequestLoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: Text(widget.tag),),
-      drawer: AppDrawer(tag: widget.tag,),
+      backgroundColor:
+          Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
+      appBar: CustomAppBar(
+        title: Text(widget.tag),
+      ),
+      drawer: AppDrawer(
+        tag: widget.tag,
+      ),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.max,
@@ -32,17 +40,21 @@ class _RequestLoginScreenState extends State<RequestLoginScreen> {
               padding: const EdgeInsets.only(bottom: 28.0),
               child: Text(
                 'You need to login to continue',
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(
+                    fontSize: 18,
+                    color: Provider.of<ThemeModel>(context)
+                        .theme
+                        .RAISED_BUTTON_FOREGROUND),
               ),
             ),
             FlatButton(
-              onPressed: ()  {
+              onPressed: () {
                 // getToken();
                 Navigator.pushReplacementNamed(context, LoginScreen.routeName);
-
-
               },
-              color: Colors.indigo[400],
+              color: Provider.of<ThemeModel>(context)
+                  .theme
+                  .RAISED_BUTTON_BACKGROUND,
               child: Text(
                 'LOGIN NOW',
                 style: TextStyle(color: Colors.white),
@@ -54,4 +66,3 @@ class _RequestLoginScreenState extends State<RequestLoginScreen> {
     );
   }
 }
-

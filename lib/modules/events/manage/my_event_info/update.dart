@@ -1,4 +1,7 @@
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
@@ -32,13 +35,19 @@ class EventUpdate extends StatelessWidget {
               Expanded(
                 child: Text(
                   _update.message,
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .PRIMARY_TEXT_COLOR),
                 ),
               ),
               PopupMenuButton<String>(
                 icon: Icon(
                   Icons.more_vert,
-                  color: Colors.white70,
+                  color: Provider.of<ThemeModel>(context)
+                      .theme
+                      .PRIMARY_TEXT_COLOR
+                      .withOpacity(0.7),
                 ),
                 onSelected: (a) => _showAlert(context),
                 itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
@@ -61,15 +70,29 @@ class EventUpdate extends StatelessWidget {
             children: <Widget>[
               Text(
                 DateFormat('d MMM').format(_update.dateTime),
-                style: TextStyle(fontSize: 10, color: Colors.white54),
+                style: TextStyle(
+                    fontSize: 10,
+                    color: Provider.of<ThemeModel>(context)
+                        .theme
+                        .PRIMARY_TEXT_COLOR
+                        .withOpacity(0.54)),
               ),
               Text(
                 ' • ',
-                style: TextStyle(color: Colors.white54),
+                style: TextStyle(
+                    color: Provider.of<ThemeModel>(context)
+                        .theme
+                        .PRIMARY_TEXT_COLOR
+                        .withOpacity(0.54)),
               ),
               Text(
                 DateFormat('h:mm a').format(_update.dateTime),
-                style: TextStyle(fontSize: 10, color: Colors.white54),
+                style: TextStyle(
+                    fontSize: 10,
+                    color: Provider.of<ThemeModel>(context)
+                        .theme
+                        .PRIMARY_TEXT_COLOR
+                        .withOpacity(0.54)),
               ),
               Container(
                 width: 25,
@@ -114,14 +137,18 @@ class EventUpdate extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Colors.indigo,
+          backgroundColor: Provider.of<ThemeModel>(context).theme.ALERT_DIALOG,
           title: Text(
             'Delete Update',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+                color:
+                    Provider.of<ThemeModel>(context).theme.ALERT_DIALOG_TEXT),
           ),
           content: Text(
             'Are you sure you want to delete this update?',
-            style: TextStyle(color: Colors.white),
+            style: TextStyle(
+                color:
+                    Provider.of<ThemeModel>(context).theme.ALERT_DIALOG_TEXT),
           ),
           actions: <Widget>[
             FlatButton(
@@ -130,7 +157,11 @@ class EventUpdate extends StatelessWidget {
               },
               child: Text(
                 'CANCEL',
-                style: TextStyle(color: Colors.white70),
+                style: TextStyle(
+                    color: Provider.of<ThemeModel>(context)
+                        .theme
+                        .ALERT_DIALOG_TEXT
+                        .withOpacity(0.7)),
               ),
             ),
             FlatButton(
@@ -139,7 +170,11 @@ class EventUpdate extends StatelessWidget {
               },
               child: Text(
                 'YES',
-                style: TextStyle(color: Colors.white70),
+                style: TextStyle(
+                    color: Provider.of<ThemeModel>(context)
+                        .theme
+                        .ALERT_DIALOG_TEXT
+                        .withOpacity(0.7)),
               ),
             )
           ],

@@ -3,7 +3,8 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/classes/event_list.dart';
 
-import 'package:IITDAPP/values/colors/colors.dart';
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 
 class AttendanceCalendar extends StatelessWidget {
   // Text Styles
@@ -11,13 +12,11 @@ class AttendanceCalendar extends StatelessWidget {
       color: Color(0xFF12EAD4), fontSize: 15, fontWeight: FontWeight.w900);
   static const DAY_TEXT_STYLE = TextStyle(
       color: Color(0xFFA1A1A1), fontSize: 15, fontWeight: FontWeight.w300);
-  static const HEADER_TEXT_STYLE =
-      TextStyle(color: Colors.white38, fontSize: 20);
   static const DAY_NAME_TEXT_STYLE =
       TextStyle(color: Color(0x701A1A1A), fontSize: 18);
 
   final List<DateTime> presentDates;
-  const AttendanceCalendar(this.presentDates);
+  AttendanceCalendar(this.presentDates);
 
   @override
   Widget build(BuildContext context) {
@@ -31,20 +30,25 @@ class AttendanceCalendar extends StatelessWidget {
               date: presentDates[i],
               icon: _presentIcon(day: presentDates[i].day.toString())));
     }
-
+    var HEADER_TEXT_STYLE = TextStyle(
+        color: Provider.of<ThemeModel>(context)
+            .theme
+            .PRIMARY_TEXT_COLOR
+            .withOpacity(0.3),
+        fontSize: 20);
     return Container(
       padding: EdgeInsets.only(left: 5, right: 5),
       margin: EdgeInsets.all(10),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(5),
-        color: AppColors.CALENDAR_BACKGROUND,
+        color: Provider.of<ThemeModel>(context).theme.CALENDAR_BACKGROUND,
       ),
       child: CalendarCarousel<Event>(
         weekendTextStyle: DAY_TEXT_STYLE,
         weekdayTextStyle: DAY_NAME_TEXT_STYLE,
         daysTextStyle: DAY_TEXT_STYLE,
         headerTextStyle: HEADER_TEXT_STYLE,
-        iconColor: AppColors.CALENDAR_BUTTON_COLOR,
+        iconColor: Provider.of<ThemeModel>(context).theme.CALENDAR_BUTTON_COLOR,
         todayButtonColor: Colors.transparent,
         markedDatesMap: _markedDates,
         markedDateShowIcon: true,
@@ -71,7 +75,7 @@ class _presentIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.CALENDAR_BACKGROUND,
+      color: Provider.of<ThemeModel>(context).theme.CALENDAR_BACKGROUND,
       child: Center(
         child: Text(day, style: AttendanceCalendar.PRESENT_DAY_TEXT_STYLE),
       ),

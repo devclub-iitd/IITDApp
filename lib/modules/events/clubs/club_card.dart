@@ -1,4 +1,6 @@
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:http/http.dart' as http;
@@ -34,7 +36,6 @@ class ClubCardState extends State<ClubCard> {
     onPress = onButtonPress;
     _club = widget.club;
     refresh = widget._onAddPress;
-    color = Colors.white;
   }
 
   Future onButtonPress() async {
@@ -44,7 +45,9 @@ class ClubCardState extends State<ClubCard> {
     onPress = () {};
     setState(() {});
     final response = await http.post('$url/api/body/${_club.id}/subscribe',
-        headers: {'authorization': 'Bearer $token'}).timeout(Duration(seconds: 5), onTimeout: () {
+        headers: {
+          'authorization': 'Bearer $token'
+        }).timeout(Duration(seconds: 5), onTimeout: () {
       timeOutFlag = true;
       return null;
     });
@@ -64,7 +67,9 @@ class ClubCardState extends State<ClubCard> {
         otherClubs.add(_club);
       }
     }
-    color = Colors.white;
+    color = Provider.of<ThemeModel>(context, listen: false)
+        .theme
+        .PRIMARY_TEXT_COLOR;
     refresh();
   }
 
@@ -97,8 +102,16 @@ class ClubCardState extends State<ClubCard> {
       },
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.indigo,
-        ),
+            color: Provider.of<ThemeModel>(context)
+                .theme
+                .DEFAULT_WIDGET_BACKGROUND,
+            boxShadow: [
+              BoxShadow(
+                  offset: Offset(0, 2),
+                  spreadRadius: 1,
+                  blurRadius: 2,
+                  color: Colors.black.withOpacity(0.5))
+            ]),
         padding: EdgeInsets.symmetric(horizontal: 25.0, vertical: 10),
         margin: EdgeInsets.symmetric(vertical: 0.2),
         child: Row(
@@ -107,7 +120,7 @@ class ClubCardState extends State<ClubCard> {
               child: Container(
                 child: AutoSizeText(
                   _club.clubName,
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                  style: TextStyle(fontSize: 20),
                   maxLines: 1,
                 ),
               ),
@@ -115,7 +128,7 @@ class ClubCardState extends State<ClubCard> {
             IconButton(
               onPressed: onPress,
               icon: _icon,
-              color: color,
+              // color: color,
               tooltip: _toolTip,
               padding: EdgeInsets.all(0),
             ),

@@ -4,6 +4,8 @@ import 'dart:convert';
 import 'dart:math';
 import 'package:IITDAPP/modules/calendar/data/CalendarModel.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/CustomSnackbar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
@@ -27,7 +29,7 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 import 'package:intl/intl.dart';
 import 'dart:math' as math;
 import 'package:http/http.dart' as http;
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
 
 part './screens/AppointmentEditor.dart';
 part './data/MeetingClass.dart';
@@ -384,6 +386,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
     }
 
     return Scaffold(
+      backgroundColor:
+          Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       key: scaffoldKey,
       appBar: CustomAppBar(
         title: Text('Calendar'),

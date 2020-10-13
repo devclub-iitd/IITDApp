@@ -1,8 +1,9 @@
 import 'package:IITDAPP/modules/map/widgets/marker/markerLabel.dart';
 import 'package:IITDAPP/modules/map/widgets/marker/selectedMarker.dart';
-import 'package:IITDAPP/values/colors/colors.dart';
-import 'package:flutter/material.dart';
+
+import 'package:IITDAPP/ThemeModel.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 import 'package:IITDAPP/modules/map/data/mapCondition.dart';
 import 'package:IITDAPP/modules/map/widgets/marker/marker.dart';
 
@@ -66,14 +67,18 @@ class _CurrentLocationMarkerState extends State<CurrentLocationMarker>
               alignment: Alignment.bottomCenter,
               child: Icon(
                 Icons.location_on,
-                color: AppColors.CURRENT_LOCATION_COLOR,
+                color: Provider.of<ThemeModel>(context)
+                    .theme
+                    .CURRENT_LOCATION_COLOR,
                 size: SelectedMarker.selectedIconSize,
               ),
             ),
           ),
           MarkerLabel(
               label: 'You',
-              color: AppColors.CURRENT_LOCATION_LABEL_COLOR,
+              color: Provider.of<ThemeModel>(context)
+                  .theme
+                  .CURRENT_LOCATION_LABEL_COLOR,
               y: -SelectedMarker.selectedIconSize * 3 / 4)
         ],
       ),

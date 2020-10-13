@@ -17,7 +17,7 @@ class LoadingWidget extends StatelessWidget {
         children: List.generate(
             2,
             (index) => Padding(
-                  padding: const EdgeInsets.only(top: 2.0),
+                  padding: const EdgeInsets.only(top: 4.0),
                   child: Container(
                     color: Colors.white,
                     height: height,

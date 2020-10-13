@@ -1,4 +1,5 @@
-import 'package:IITDAPP/values/colors/colors.dart';
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class SlideUpPanelHeader extends StatelessWidget {
@@ -18,7 +19,7 @@ class SlideUpPanelHeader extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
-            color: AppColors.SLIDE_UP_SHEET_COLOR,
+            color: Provider.of<ThemeModel>(context).theme.SLIDE_UP_SHEET_COLOR,
             borderRadius: BorderRadius.circular(5)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -31,7 +32,9 @@ class SlideUpPanelHeader extends StatelessWidget {
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 23,
-                    color: AppColors.SLIDE_UP_SHEET_TEXT_COLOR),
+                    color: Provider.of<ThemeModel>(context)
+                        .theme
+                        .SLIDE_UP_SHEET_TEXT_COLOR),
               ),
             ),
             Padding(
@@ -41,7 +44,9 @@ class SlideUpPanelHeader extends StatelessWidget {
                 style: TextStyle(
                     fontWeight: FontWeight.w200,
                     fontSize: 16,
-                    color: AppColors.SLIDE_UP_SHEET_TEXT_COLOR),
+                    color: Provider.of<ThemeModel>(context)
+                        .theme
+                        .SLIDE_UP_SHEET_TEXT_COLOR),
               ),
             ),
             Divider(

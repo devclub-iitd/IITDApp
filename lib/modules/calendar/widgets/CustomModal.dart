@@ -81,6 +81,9 @@ class _CustomModalState extends State<CustomModal> {
       return DropdownMenuItem(
         child: Text(
           text,
+          style: TextStyle(
+            color: Provider.of<ThemeModel>(context).theme.ACCENT_TEXT_COLOR,
+          ),
         ),
         value: value,
       );
@@ -97,7 +100,11 @@ class _CustomModalState extends State<CustomModal> {
           children: <Widget>[
             Text(
               'Settings',
-              style: TextStyle(fontSize: 23, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color:
+                      Provider.of<ThemeModel>(context).theme.ACCENT_TEXT_COLOR,
+                  fontSize: 23,
+                  fontWeight: FontWeight.bold),
             ),
             Padding(
               padding:
@@ -106,7 +113,12 @@ class _CustomModalState extends State<CustomModal> {
                 children: <Widget>[
                   Text(
                     'Calendar View',
-                    style: TextStyle(fontSize: 21),
+                    style: TextStyle(
+                      fontSize: 21,
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .ACCENT_TEXT_COLOR,
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 20.0),
@@ -133,7 +145,12 @@ class _CustomModalState extends State<CustomModal> {
               padding: EdgeInsets.only(left: 10),
               child: Text(
                 'Filter',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                  color:
+                      Provider.of<ThemeModel>(context).theme.ACCENT_TEXT_COLOR,
+                ),
               ),
             ),
             Expanded(
@@ -173,6 +190,11 @@ class _CustomModalState extends State<CustomModal> {
                                               child: Text(e.key,
                                                   style: TextStyle(
                                                     fontSize: 15,
+                                                    color:
+                                                        Provider.of<ThemeModel>(
+                                                                context)
+                                                            .theme
+                                                            .ACCENT_TEXT_COLOR,
                                                   )),
                                             ),
                                             Spacer(),

@@ -1,5 +1,5 @@
 import 'package:IITDAPP/routes/Routes.dart';
-import 'package:IITDAPP/values/colors/Constants.dart';
+import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -83,13 +83,15 @@ class AppDrawer extends StatelessWidget {
             icon: Icons.map,
             text: 'Campus Map',
             context: context,
-            routeName: Routes.map,),
+            routeName: Routes.map,
+          ),
           _createDrawerItem(
-              selected: tag == 'News',
-              icon: Icons.fiber_new,
-              text: 'News',
+            selected: tag == 'News',
+            icon: Icons.fiber_new,
+            text: 'News',
             context: context,
-            routeName: Routes.news,),
+            routeName: Routes.news,
+          ),
         ],
       ),
     );
@@ -98,7 +100,7 @@ class AppDrawer extends StatelessWidget {
   Widget _createDrawerItem(
       {IconData icon,
       String text,
-      GestureTapCallback onTap,
+      // GestureTapCallback onTap,
       bool selected,
       BuildContext context,
       String routeName,
