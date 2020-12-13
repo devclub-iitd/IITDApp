@@ -33,7 +33,7 @@ class MarkerLayer extends StatelessWidget {
           y = -SelectedMarker.selectedIconSize * 3 / 4;
         }
 
-        final label = MarkerLabel(y: y, label: m.location.name);
+        final label = MarkerLabel(y: y, label: m.location.short);
 
         return Positioned(
           left: mc.onScreenOffset[m.id].dx + x,

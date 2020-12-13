@@ -54,6 +54,7 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
   String sourceName;
   String imgUrl;
   bool loadingContent = false;
+  bool visible = true;
 
   Future<String> add() async {
     String returnMessage;
@@ -105,6 +106,18 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
     return returnMessage;
   }
 
+  Future<String> hide() async {
+    String returnMessage;
+    try {
+      var response = (await apiBaseHelper
+          .get(NewsType.baseUrl + '/report/toggle/$id')) as Map;
+      returnMessage = response['message'];
+    } on FetchDataException catch (e) {
+      returnMessage = e.toString();
+    }
+    return returnMessage;
+  }
+
   void getDetails() async {
     if (contentLocal == null &&
         (details == null || details.status == Status.ERROR)) {
@@ -129,14 +142,19 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
 
   factory NewsModel.fromMap(Map map) {
     return NewsModel<T>(
-      author: map['author'],
-      createdAt: DateTime.parse(map['createdAt']).add(Duration(minutes: 330)),
-      clicks: map['clicks'],
-      id: map['_id'],
-      title: map['description'],
-      imgUrl: map['imgUrl'],
-      sourceName: map['sourceName'],
-    );
+        author: map['author'],
+        createdAt: DateTime.parse(map['createdAt']).add(Duration(minutes: 330)),
+        clicks: map['clicks'],
+        id: map['_id'],
+        title: map['description'],
+        imgUrl: map['imgUrl'],
+        sourceName: map['sourceName'],
+        visible: map['visible'] ?? true,
+        reports: <Report>[
+          ...(map['reports'] ?? [])
+              .map((json) => Report.fromJson(json))
+              .toList()
+        ]);
   }
 
   Map<String, dynamic> toJson() {
@@ -156,7 +174,9 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
       this.clicks,
       this.createdAt,
       this.id,
-      this.sourceName});
+      this.sourceName,
+      this.visible,
+      this.reports});
 }
 
 class NewsType {
@@ -245,6 +265,7 @@ class NewsProvider<T extends NewsType> with ChangeNotifier {
             .get(baseUrl +
                 '&limit=$itemsPerPage&skip=${itemsPerPage * pageNumber}')
             .then((value) {
+          // print([...value]);
           var newsList = (<NewsModel<T>>[
             ...value.map((e) => NewsModel<T>.fromMap(e)).toList()
           ]);

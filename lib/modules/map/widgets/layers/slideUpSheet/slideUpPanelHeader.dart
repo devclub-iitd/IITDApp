@@ -15,7 +15,7 @@ class SlideUpPanelHeader extends StatelessWidget {
     var canvasSize = MediaQuery.of(context).size;
     return SizedBox(
       width: canvasSize.width - 10,
-      height: canvasSize.height * 0.15,
+      height: canvasSize.height * 0.18,
       child: Container(
         padding: EdgeInsets.all(10),
         decoration: BoxDecoration(

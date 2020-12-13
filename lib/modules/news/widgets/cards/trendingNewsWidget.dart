@@ -23,19 +23,21 @@ class TrendingWidget extends StatelessWidget {
     final parentScaffold = Scaffold.of(context);
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: () async{
-        Provider.of<NewsHistoryProvider>(context,listen: false).setViewed(item.id);
+      onTap: () async {
+        Provider.of<NewsHistoryProvider>(context, listen: false)
+            .setViewed(item.id);
         final result = await Navigator.push(
           context,
           MaterialPageRoute(
             builder: (_) => NewsPage(
               item: item,
               imageTag: 't${item.id}',
+              redirectPossible: true,
             ),
           ),
         );
-            
-          showSnackbarResult(result, parentScaffold);
+
+        showSnackbarResult(result, parentScaffold);
       },
       child: Card(
         elevation: 3,

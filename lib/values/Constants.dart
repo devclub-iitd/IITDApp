@@ -21,7 +21,8 @@ var logoutFunc;
 var loginFunc;
 bool guest = false;
 
-String defaultImage ='https://www.esm.rochester.edu/uploads/NoPhotoAvailable-500x625.jpg';
+String defaultImage =
+    'https://www.esm.rochester.edu/uploads/NoPhotoAvailable-500x625.jpg';
 
 ApiBaseHelper apiBaseHelper = ApiBaseHelper();
 var defaultScreen = 'Dashboard';

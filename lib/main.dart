@@ -56,6 +56,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      // debugShowCheckedModeBanner: false,
       title: 'IITD APP',
       theme: Provider.of<ThemeModel>(context).themeType == ThemeType.Dark
           ? darkTheme

@@ -45,10 +45,10 @@ class AttendanceCalendar extends StatelessWidget {
       ),
       child: CalendarCarousel<Event>(
         weekendTextStyle: DAY_TEXT_STYLE,
-        weekdayTextStyle: DAY_NAME_TEXT_STYLE,
+        weekdayTextStyle: DAY_NAME_TEXT_STYLE.copyWith(color: Colors.white70),
         daysTextStyle: DAY_TEXT_STYLE,
         headerTextStyle: HEADER_TEXT_STYLE,
-        iconColor: Provider.of<ThemeModel>(context).theme.CALENDAR_BUTTON_COLOR,
+        iconColor: Colors.white60,
         todayButtonColor: Colors.transparent,
         markedDatesMap: _markedDates,
         markedDateShowIcon: true,

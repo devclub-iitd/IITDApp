@@ -28,6 +28,9 @@ class DarkAppColors extends AppColors {
 
     //Attendance
     COURSE_CARD = DEFAULT_WIDGET_BACKGROUND;
+    CALENDAR_BACKGROUND = DEFAULT_WIDGET_BACKGROUND;
+    CARD_LIGHT = Colors.greenAccent[700].withOpacity(0.6);
+    CARD_DARK = Colors.black54;
 
     //Events
     TITLE_UNDERLINE = Colors.teal;

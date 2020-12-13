@@ -18,6 +18,7 @@ class UserEmail extends StatelessWidget {
       margin: EdgeInsets.only(top: 5),
       height: MediaQuery.of(context).size.height * 0.02,
       child: AutoSizeText(
+        // 'kadir.corekci@gmail.com',
         currentUser.email,
         style: TextStyle(
             fontSize: 500,
@@ -38,6 +39,7 @@ class UserName extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.05,
       child: AutoSizeText(
         currentUser.name ?? 'Unnamed',
+        // 'Kadir Corekci',
         style: TextStyle(
             fontSize: 500,
             color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR),
@@ -56,8 +58,8 @@ class UserImage extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(40),
       child: CircleAvatar(
-        backgroundImage: NetworkImage(
-            'https://images.unsplash.com/photo-1494253109108-2e30c049369b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80'),
+        backgroundImage:
+            NetworkImage('https://randomuser.me/api/portraits/men/26.jpg'),
         radius: MediaQuery.of(context).size.width / 5,
       ),
     );

@@ -228,7 +228,8 @@ class LoginPageState extends State<LoginPage> {
                       child: Text('SIGN UP'),
                       color: Provider.of<ThemeModel>(context)
                           .theme
-                          .SIGNUP_BUTTON_COLOR,
+                          .LOGIN_BUTTON_COLOR
+                          .withOpacity(0.8),
                       onPressed: () {
                         Navigator.push(
                             context,

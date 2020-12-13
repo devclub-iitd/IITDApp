@@ -30,6 +30,13 @@ class RecentWidget extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
       child: Container(
         clipBehavior: Clip.antiAlias,
+        foregroundDecoration: BoxDecoration(
+            color: item.visible
+                ? Colors.transparent
+                : Provider.of<ThemeModel>(context)
+                    .theme
+                    .SCAFFOLD_BACKGROUND
+                    .withOpacity(0.5)),
         decoration: BoxDecoration(
           color:
               Provider.of<ThemeModel>(context).theme.DEFAULT_WIDGET_BACKGROUND,
@@ -150,6 +157,7 @@ class RecentWidget extends StatelessWidget {
                 builder: (_) => NewsPage(
                   item: item,
                   imageTag: 'r${item.id}',
+                  redirectPossible: true,
                 ),
               ),
             );

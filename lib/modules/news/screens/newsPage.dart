@@ -1,6 +1,7 @@
 import 'package:IITDAPP/modules/dashboard/widgets/errorWidget.dart';
-import 'package:IITDAPP/modules/news/screens/resportsList.dart';
+import 'package:IITDAPP/modules/news/screens/reports/resportsList.dart';
 import 'package:IITDAPP/modules/news/utility/showSnackBarResult.dart';
+import 'package:IITDAPP/modules/news/widgets/confirmationDialog.dart';
 import 'package:IITDAPP/modules/news/widgets/reportScreen.dart';
 import 'package:IITDAPP/utility/apiResponse.dart';
 import 'package:IITDAPP/values/Constants.dart';
@@ -23,7 +24,13 @@ import 'newsUpdate.dart';
 class NewsPage extends StatelessWidget {
   final NewsModel item;
   final String imageTag;
-  const NewsPage({Key key, this.item, this.imageTag}) : super(key: key);
+  final bool redirectPossible;
+  const NewsPage(
+      {Key key,
+      @required this.item,
+      this.imageTag,
+      @required this.redirectPossible})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     item.getDetails();
@@ -40,7 +47,8 @@ class NewsPage extends StatelessWidget {
                     ? []
                     : <Widget>[
                         EditButton(item: syncItem),
-                        DeleteButton(item: syncItem),
+                        HideButton(item: syncItem),
+                        DeleteButton(item: syncItem)
                       ],
                 floating: false,
                 pinned: true,
@@ -145,39 +153,46 @@ class NewsPage extends StatelessWidget {
                                     fontWeight: FontWeight.w400))),
                   ),
                   currentUser.isAdmin
-                      ? FlatButton(
-                          color: (syncItem.details.status == Status.COMPLETED &&
-                                  syncItem.reports.isNotEmpty)
-                              ? Provider.of<ThemeModel>(context, listen: false)
-                                  .theme
-                                  .RAISED_BUTTON_BACKGROUND
-                              : Provider.of<ThemeModel>(context, listen: false)
-                                  .theme
-                                  .RAISED_BUTTON_BACKGROUND
-                                  .withOpacity(0.4),
-                          child: Text('View Reports',
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: (syncItem.details.status ==
-                                            Status.COMPLETED &&
-                                        syncItem.reports.isNotEmpty)
-                                    ? Provider.of<ThemeModel>(context,
-                                            listen: false)
-                                        .theme
-                                        .RAISED_BUTTON_FOREGROUND
-                                    : Provider.of<ThemeModel>(context,
-                                            listen: false)
-                                        .theme
-                                        .RAISED_BUTTON_FOREGROUND
-                                        .withOpacity(0.4),
-                              )),
-                          onPressed: () {
-                            if (syncItem.details.status == Status.COMPLETED) {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => ReportsList(syncItem.reports),
-                              ));
-                            }
-                          })
+                      ? redirectPossible
+                          ? FlatButton(
+                              color: (syncItem.details.status ==
+                                          Status.COMPLETED &&
+                                      syncItem.reports.isNotEmpty)
+                                  ? Provider.of<ThemeModel>(context,
+                                          listen: false)
+                                      .theme
+                                      .RAISED_BUTTON_BACKGROUND
+                                  : Provider.of<ThemeModel>(context,
+                                          listen: false)
+                                      .theme
+                                      .RAISED_BUTTON_BACKGROUND
+                                      .withOpacity(0.4),
+                              child: Text('View Reports',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    color: (syncItem.details.status ==
+                                                Status.COMPLETED &&
+                                            syncItem.reports.isNotEmpty)
+                                        ? Provider.of<ThemeModel>(context,
+                                                listen: false)
+                                            .theme
+                                            .RAISED_BUTTON_FOREGROUND
+                                        : Provider.of<ThemeModel>(context,
+                                                listen: false)
+                                            .theme
+                                            .RAISED_BUTTON_FOREGROUND
+                                            .withOpacity(0.4),
+                                  )),
+                              onPressed: () {
+                                if (syncItem.details.status ==
+                                    Status.COMPLETED) {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (_) =>
+                                        ReportsList(syncItem, false),
+                                  ));
+                                }
+                              })
+                          : Container()
                       : FlatButton(
                           child: Text(
                             'Report This Article',
@@ -245,14 +260,68 @@ class DeleteButton extends StatelessWidget {
       child: IconButton(
           icon: Icon(Icons.delete),
           onPressed: () {
-            showSnackbarResult('Deleting, please wait', Scaffold.of(context));
-            item.delete().then((value) {
-              Provider.of<NewsProvider<TrendingNews>>(context, listen: false)
-                  .refresh();
-              Provider.of<NewsProvider<RecentNews>>(context, listen: false)
-                  .refresh();
-              Navigator.pop(context, value);
-            });
+            showAlertDialog(
+              context: context,
+              news: item,
+              actionName: 'Delete',
+              action: () {
+                showSnackbarResult(
+                  'Deleting, please wait',
+                  Scaffold.of(context),
+                );
+                item.delete().then((value) {
+                  Provider.of<NewsProvider<TrendingNews>>(context,
+                          listen: false)
+                      .refresh();
+                  Provider.of<NewsProvider<RecentNews>>(context, listen: false)
+                      .refresh();
+                  Navigator.pop(context, value);
+                });
+              },
+              content: 'Are you sure you want to delete this article ?',
+            );
+          }),
+    );
+  }
+}
+
+class HideButton extends StatelessWidget {
+  const HideButton({
+    Key key,
+    @required this.item,
+  }) : super(key: key);
+
+  final NewsModel<NewsType> item;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 50)]),
+      child: IconButton(
+          icon: Icon(item.visible ? Icons.visibility_off : Icons.visibility),
+          onPressed: () {
+            showAlertDialog(
+              context: context,
+              news: item,
+              actionName: 'Hide',
+              action: () {
+                showSnackbarResult(
+                  'Hiding, please wait',
+                  Scaffold.of(context),
+                );
+                item.hide().then((value) {
+                  Provider.of<NewsProvider<TrendingNews>>(context,
+                          listen: false)
+                      .refresh();
+                  Provider.of<NewsProvider<RecentNews>>(context, listen: false)
+                      .refresh();
+                  Navigator.pop(context, value);
+                });
+              },
+              content: 'Are you sure you want to hide this article ?',
+            );
           }),
     );
   }

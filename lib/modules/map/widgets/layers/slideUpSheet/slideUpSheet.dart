@@ -27,7 +27,7 @@ class _SlideUpSheetState extends State<SlideUpSheet>
     if (_animationController.value < 0.02) {
       return;
     }
-    var h = canvasHeight * 0.15 * _animationController.value;
+    var h = canvasHeight * 0.18 * _animationController.value;
 
     if (spp.position == h) {
       return;
@@ -107,8 +107,8 @@ class _SlideUpSheetState extends State<SlideUpSheet>
                 return SlideUpPanelBody(
                     locationDetails: locationDetails, sc: sc);
               },
-              minHeight: canvasHeight * 0.15,
-              maxHeight: canvasHeight * 0.5,
+              minHeight: canvasHeight * 0.18,
+              maxHeight: canvasHeight * 0.7,
               panelSnapping: true,
               isDraggable: true,
             ),

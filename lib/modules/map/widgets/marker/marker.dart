@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:IITDAPP/modules/map/data/locationDetails.dart';
 import 'package:latlong/latlong.dart';
 
-enum MinScaleLevel { HIGH, MID, LOW }
+enum MinScaleLevel { LOW, MID, HIGH }
 
 class Marker extends StatelessWidget {
   final Location location;
@@ -27,11 +27,11 @@ class Marker extends StatelessWidget {
   static double zoomLevel(MinScaleLevel l) {
     switch (l) {
       case MinScaleLevel.HIGH:
-        return 0.7;
+        return 0.8;
       case MinScaleLevel.MID:
-        return 0.5;
+        return 0.4;
       case MinScaleLevel.LOW:
-        return 0.3;
+        return 0;
       default:
         return 0;
     }
@@ -40,28 +40,28 @@ class Marker extends StatelessWidget {
   factory Marker.fromJson(
       Map<String, dynamic> json, int id, List<Color> bgcolor) {
     return Marker(
-      location: Location(
-          contact: json['contact'].toString(),
+        location: Location(
+          contact: json['phoneUrl'].toString(),
           details: json['details'],
-          link: json['link'],
+          img: json['img'],
+          link: json['webUrl'],
+          location: LatLng(json['cd'][0], json['cd'][1]),
+          mapUrl: json['mapUrl'],
           name: json['name'],
-          subtitle: json['subtitle'],
-          type: json['type'] < 10 ? MarkerType.values[json['type']] : null,
-          location: LatLng(
-              json['latitude'], json['longitude']),
-          closeTime: TimeOfDay(
-              hour: int.parse(json['closetime'].substring(0, 2)),
-              minute: int.parse(json['closetime'].substring(2, 4))),
-          openTime: TimeOfDay(
-              hour: int.parse(json['opentime'].substring(0, 2)),
-              minute: int.parse(json['opentime'].substring(2, 4)))),
-      id: id,
-      size: 48,
-      bgcolor: bgcolor,
-      minScale: json['minscale'] != 0
-          ? MinScaleLevel.values[3-json['minscale']]
-          : null,
-    );
+          short: json['short'] ?? json['name'],
+          subtitle: json['category'],
+          type: getType(json['category']),
+          // closeTime: TimeOfDay(
+          //     hour: int.parse(json['closetime'].substring(0, 2)),
+          //     minute: int.parse(json['closetime'].substring(2, 4))),
+          // openTime: TimeOfDay(
+          //     hour: int.parse(json['opentime'].substring(0, 2)),
+          //     minute: int.parse(json['opentime'].substring(2, 4)))
+        ),
+        id: id,
+        size: 48,
+        bgcolor: bgcolor,
+        minScale: MinScaleLevel.values[json['minScale']]);
   }
 
   Color getbgcolor(m) {
@@ -132,5 +132,30 @@ class Marker extends StatelessWidget {
       color: fc,
       size: size,
     );
+  }
+}
+
+MarkerType getType(String category) {
+  switch (category) {
+    case 'academic':
+      return MarkerType.ACADEMIC;
+    case 'bank':
+      return MarkerType.BANK;
+    case 'hostel':
+      return MarkerType.RESIDENCE;
+    case 'ent':
+      return MarkerType.THEATRE;
+    case 'eat':
+      return MarkerType.FOOD;
+    case 'medical':
+      return MarkerType.MEDICAL;
+    case 'park':
+      return MarkerType.PARK;
+    case 'sport':
+      return MarkerType.PLAYGROUND;
+    case 'shop':
+      return MarkerType.SHOP;
+    default:
+      return null;
   }
 }
