@@ -1,4 +1,5 @@
 import 'package:IITDAPP/ThemeModel.dart';
+import 'package:IITDAPP/modules/about/privacyPolicy.dart';
 import 'package:IITDAPP/modules/about/releaseNotes.dart';
 import 'package:IITDAPP/modules/settings/widgets/SettingsTextWidgets.dart';
 import 'package:IITDAPP/utility/UrlHandler.dart';
@@ -22,7 +23,7 @@ class AboutScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Padding(
-            padding: EdgeInsets.fromLTRB(0, 100, 0, 0),
+            padding: EdgeInsets.fromLTRB(0, 80, 0, 0),
             child: Center(
               child: Column(children: [
                 RichText(
@@ -73,6 +74,14 @@ class AboutScreen extends StatelessWidget {
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(builder: (_) {
                       return ReleaseNotes();
+                    }));
+                  },
+                ),
+                SettingsTextButton(
+                  text: 'Privacy Policy',
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+                      return PrivacyPolicy();
                     }));
                   },
                 ),
