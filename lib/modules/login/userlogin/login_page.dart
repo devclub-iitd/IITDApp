@@ -1,26 +1,26 @@
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/modules/login/user_class.dart';
-import 'package:IITDAPP/modules/login/userlogin/signup_page.dart';
+// import 'package:IITDAPP/modules/login/userlogin/signup_page.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 import 'dart:async';
 import 'dart:convert';
-import 'package:validators/validators.dart';
+// import 'package:validators/validators.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../casi_user.dart';
 
 void onLoginSuccess(
     BuildContext context, String newtoken, Function onlogin) async {
-  print("newtoken: $newtoken");
-  print('Getting User Info');
+  print('newtoken: $newtoken');
+  // ignore: unawaited_futures
   showLoading(context);
   final storage = FlutterSecureStorage();
+  print('Getting User Info');
   final response = await http
       .get('$url/api/user/me', headers: {'authorization': 'Bearer $newtoken'});
   print('got user info response');
@@ -46,12 +46,13 @@ Future login(BuildContext context, Function onlogin, {bool pop = true}) async {
   final storage = FlutterSecureStorage();
   // SharedPreferences prefs = await SharedPreferences.getInstance();
   var oldToken = await storage.read(key: 'token');
-  String clientId = '5f7ca56f01cb380034260a02';
-  String secret =
+  var clientId = '5f7ca56f01cb380034260a02';
+  var secret =
       'o8ggsY3EeNeCdl0U3izDF1LvR0cU33zopJeFHltapvle8bBChvzHT5miRN23o5v0';
 
   try {
-    CasiUser user = await CasiLogin.fromToken(oldToken).refreshToken(
+    // ignore: unused_local_variable
+    var user = await CasiLogin.fromToken(oldToken).refreshToken(
         onRefreshSuccess: (String newToken) {
       print(newToken);
       onLoginSuccess(context, newToken, onlogin);
@@ -90,6 +91,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class LoginPageState extends State<LoginPage> {
+  // ignore: unused_field
   final _key = GlobalKey<FormState>();
 
   @override

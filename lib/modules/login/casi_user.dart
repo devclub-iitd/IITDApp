@@ -34,7 +34,7 @@ class CasiUser {
 class CasiLogin {
   String clientId;
   String secret;
-  String _serverUrl = "https://auth.devclub.in";
+  final String _serverUrl = 'https://auth.devclub.in';
   String _loginURL;
   String _token;
   Function(String token, CasiUser user) _onSuccess =
@@ -47,46 +47,46 @@ class CasiLogin {
       Function(dynamic err) onError}) {
     this.clientId = clientId;
 
-    this._onSuccess = onSuccess ?? _onSuccess;
-    this._onError = onError ?? _onError;
+    _onSuccess = onSuccess ?? _onSuccess;
+    _onError = onError ?? _onError;
 
-    var builder = new JWTBuilder();
-    var signer = new JWTHmacSha256Signer(accessToken);
+    var builder =  JWTBuilder();
+    var signer =  JWTHmacSha256Signer(accessToken);
     builder
-      ..expiresAt = new DateTime.now().add(new Duration(minutes: 5))
+      ..expiresAt =  DateTime.now().add( Duration(minutes: 5))
       ..setClaim('data', {'clientId': clientId});
 
     var signedToken = builder.getSignedToken(signer);
-    this.secret = signedToken.toString();
+    secret = signedToken.toString();
 
-    this._loginURL =
-        "${this._serverUrl}/user/login?serviceURL=${this._serverUrl}/auth/clientVerify?q=${Uri.encodeQueryComponent(this.secret)}";
+    _loginURL =
+        '${_serverUrl}/user/login?serviceURL=${_serverUrl}/auth/clientVerify?q=${Uri.encodeQueryComponent(secret)}';
   }
 
   CasiLogin.fromToken(String token) {
-    this._token = token;
+    _token = token;
   }
 
   Future<void> signIn() async {
     if (_loginURL == null)
-      throw Exception("No client ID and client secret found");
-    final webview = new FlutterWebviewPlugin();
+      {throw Exception('No client ID and client secret found');}
+    final webview =  FlutterWebviewPlugin();
     webview.onUrlChanged.listen((url) async {
-      print("URL CHANGED: $url");
+      print('URL CHANGED: $url');
 
-      if (url.startsWith("${this._serverUrl}/auth/clientVerify?q=")) {
+      if (url.startsWith('${_serverUrl}/auth/clientVerify?q=')) {
         if (_token != null) return;
         _token = 'mutex';
         try {
           _cookies = await webview.getCookies();
           _token = _cookies['"_token'].toString();
           _token = _token.trim().substring(0, _token.length - 1);
-          CasiUser user = await fetchUserDetails();
-          this._onSuccess(_token, user);
+          var user = await fetchUserDetails();
+          _onSuccess(_token, user);
         } catch (e) {
-          this._onError("Login Failed");
+          _onError('Login Failed');
         }
-        webview.close();
+        await webview.close();
       }
     });
     _token = null;
@@ -101,8 +101,8 @@ class CasiLogin {
   }
 
   Future<CasiUser> fetchUserDetails() async {
-    final response = await http.post(this._serverUrl + '/profile', headers: {
-      'Cookie': "token=${this._token};",
+    final response = await http.post(_serverUrl + '/profile', headers: {
+      'Cookie': 'token=${_token};',
     });
     final jsonData = jsonDecode(response.body);
     if (response.statusCode == 200) {
@@ -114,10 +114,10 @@ class CasiLogin {
 
   Future<CasiUser> refreshToken(
       {String oldToken, Function(String token) onRefreshSuccess}) async {
-    if (oldToken == null && _token == null) throw Exception("No token found");
-    String toSendToken = oldToken ?? _token;
+    if (oldToken == null && _token == null) throw Exception('No token found');
+    var toSendToken = oldToken ?? _token;
 
-    final response = await http.post(this._serverUrl + '/auth/refresh-token',
+    final response = await http.post(_serverUrl + '/auth/refresh-token',
         body: {'token': toSendToken});
     final jsonData = jsonDecode(response.body);
     if (response.statusCode == 200) {
