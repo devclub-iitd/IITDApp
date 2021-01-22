@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/modules/dashboard/dashboard.dart';
 // import 'package:IITDAPP/modules/events/home.dart';
@@ -48,72 +50,79 @@ class LoginScreenState extends State<LoginScreen>
     await prefs.clear();
   }
 
-  void onlogout() {
+  Future onlogout() async {
     print('logged out');
     final storage = FlutterSecureStorage();
-    storage.deleteAll();
+    await storage.delete(key: 'email');
+    await storage.delete(key: 'password');
+    await storage.delete(key: 'token');
+    // storage.deleteAll();
+    token = null;
     var ls = LocalStorage('iitapp');
-    ls.clear();
-    deleteSharedPrefs();
+    await ls.clear();
+    await deleteSharedPrefs();
     setState(() {
       signedIn = false;
     });
   }
 
-  Future checklogin() async {
-    print('Checking login');
-    final storage = FlutterSecureStorage();
-    // ignore: omit_local_variable_types
-    final LocalStorage localStorage = LocalStorage('iitdapp');
-    var tempEmail = await storage.read(key: 'email');
-    var tempPass = await storage.read(key: 'password');
-    print('Saved email: $tempEmail');
-    if (tempEmail == null) {
-      print('Not logged in');
-      return;
-    } else {
-      var flag = false;
-      final loginresponse = await http.post('$url/api/login',
-          body: {'email': tempEmail, 'password': tempPass}).timeout(
-        Duration(seconds: 5),
-        onTimeout: () async {
-          flag = true;
-          print('Cannot connect to iternet');
-          token = await storage.read(key: 'token');
-          var parsedJson = await localStorage.getItem('currentUser');
-          currentUser = User.fromJson(parsedJson['data']);
-          if (token == null || currentUser == null) {
-            print('Check your internet connection and try aagin');
-          } else {
-            signedIn = true;
-          }
-          return null;
-        },
-      );
-      connectedToInternet = !flag;
-      if (flag) {
-        return;
-      }
-      if (loginresponse.statusCode == 200) {
-        var parsedJson = json.decode(loginresponse.body);
-        token = parsedJson['data']['token'];
-        await storage.write(key: 'token', value: token);
-      } else {
-        await showErrorAlert(context, 'Session Expired', 'Please Login Again');
-        return;
-      }
-      print('already logged in');
-      signedIn = true;
-      final response = await http
-          .get('$url/api/user/me', headers: {'authorization': 'Bearer $token'});
-      if (response.statusCode == 200) {
-        // print(response.body);
-        var parsedJson = json.decode(response.body);
-        currentUser = User.fromJson(parsedJson['data']);
-        await localStorage.setItem('currentUser', parsedJson);
-      }
-    }
-  }
+  // Future checklogin() async {
+  //   print('Checking login');
+  //   final storage = FlutterSecureStorage();
+  //   // ignore: omit_local_variable_types
+  //   final LocalStorage localStorage = LocalStorage('iitdapp');
+  //   var tempToken = await storage.read(key: 'token');
+  //   // var tempEmail = await storage.read(key: 'email');
+  //   // var tempPass = await storage.read(key: 'password');
+  //   // print('Saved email: $tempEmail');
+  //     await sleep(Duration(seconds: 4));
+  //   if (tempToken == null) {
+  //     print('Not logged in');
+  //     return;
+  //   } else {
+  //     // var flag = false;
+  //     // final loginresponse = await http.post('$url/api/login',
+  //     //     body: {'email': tempEmail, 'password': tempPass}).timeout(
+  //     //   Duration(seconds: 5),
+  //     //   onTimeout: () async {
+  //     //     flag = true;
+  //     //     print('Cannot connect to internet');
+  //     //     token = await storage.read(key: 'token');
+  //     //     var parsedJson = await localStorage.getItem('currentUser');
+  //     //     currentUser = User.fromJson(parsedJson['data']);
+  //     //     if (token == null || currentUser == null) {
+  //     //       print('Check your internet connection and try aagin');
+  //     //     } else {
+  //     //       signedIn = true;
+  //     //     }
+  //     //     return null;
+  //     //   },
+  //     // );
+  //     // connectedToInternet = !flag;
+  //     // if (flag) {
+  //     //   return;
+  //     // }
+  //     // if (loginresponse.statusCode == 200) {
+  //     //   var parsedJson = json.decode(loginresponse.body);
+  //     //   token = parsedJson['data']['token'];
+  //     //   await storage.write(key: 'token', value: token);
+  //     // } else {
+  //     //   await showErrorAlert(context, 'Session Expired', 'Please Login Again');
+  //     //   return;
+  //     // }
+  //     print('already logged in');
+  //     await login(context, onlogin);
+  //     // signedIn = true;
+  //     // final response = await http
+  //     //     .get('$url/api/user/me', headers: {'authorization': 'Bearer $token'});
+  //     // if (response.statusCode == 200) {
+  //     //   // print(response.body);
+  //     //   var parsedJson = json.decode(response.body);
+  //     //   currentUser = User.fromJson(parsedJson['data']);
+  //     //   await localStorage.setItem('currentUser', parsedJson);
+  //     // }
+  //   }
+  // }
 
   @override
   void initState() {
@@ -130,7 +139,7 @@ class LoginScreenState extends State<LoginScreen>
     return Container(
         child: (start == true)
             ? FutureBuilder(
-                future: checklogin(),
+                // future: checklogin(),
                 builder: (context, snapshot) {
                   start = false;
                   if (snapshot.connectionState == ConnectionState.done) {

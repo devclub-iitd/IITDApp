@@ -9,11 +9,11 @@ class Club {
 
   factory Club.fromJson(Map<String, dynamic> json) {
     return Club(
-      clubName: json['name'],
-      clubAbout: json['about'],
+      clubName: json['body']['name'],
+      clubAbout: json['body']['about'],
       isSubbed: json['isSub'],
       // clubDept: json["dept"],
-      id: json['id']
+      id: json['body']['_id']
     );
   }
 

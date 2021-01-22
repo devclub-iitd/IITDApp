@@ -40,20 +40,21 @@ import '../LoginScreen.dart';
 //   // final response = await http.post("http://192.168.43.231:5000/api/users/facebookLogin", body: {"code" : code});
 // }
 
-Future logout() async {
-  final storage = FlutterSecureStorage();
-  await storage.delete(key: 'email');
-  await storage.delete(key: 'password');
-  await storage.delete(key: 'token');
-  var ls = LocalStorage('iitdapp');
-  await ls.clear();
-  await deleteSharedPrefs();
-}
+// Future logout() async {
+//   final storage = FlutterSecureStorage();
+//   await storage.delete(key: 'email');
+//   await storage.delete(key: 'password');
+//   await storage.delete(key: 'token');
+//   token = null;
+//   var ls = LocalStorage('iitdapp');
+//   await ls.clear();
+//   await deleteSharedPrefs();
+// }
 
-void deleteSharedPrefs() async {
-  var prefs = await SharedPreferences.getInstance();
-  await prefs.clear();
-}
+// void deleteSharedPrefs() async {
+//   var prefs = await SharedPreferences.getInstance();
+//   await prefs.clear();
+// }
 
 void showAlert(BuildContext context, Function onlogout) {
   if (currentUser == null) {
@@ -134,10 +135,10 @@ void showAlert(BuildContext context, Function onlogout) {
               FlatButton(
                 onPressed: () async {
                   // getToken();
-                  print('oh yeah');
+                  print('oh yeahd');
                   Navigator.pop(context);
                   unawaited(showLoading(context, message: 'Signing Out'));
-                  await logout();
+                  await onlogout();
                   Navigator.pop(context);
                   await Navigator.pushReplacementNamed(
                       context, Routes.loginPage);

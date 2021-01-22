@@ -38,7 +38,15 @@ class Event {
     var endDate = (json.containsKey('endDate')) ? DateTime.parse(json['endDate']) : startDate.add(Duration(hours: 1));
     return Event(
       eventName: json['name'], //
-      eventBody: Club.fromJson(json['body']), //
+      eventBody: 
+      // Club.fromJson(json['body']), //
+      Club(
+      clubName: json['body']['name'],
+      clubAbout: json['body']['about'],
+      isSubbed: json['body']['isSub'],
+      // clubDept: json["dept"],
+      id: json['body']['id']
+    ),
       imageLink: json.containsKey('image') ? json['image'] : '',
       start: startDate, //
       end: endDate,
