@@ -49,8 +49,8 @@ List<List<Club>> handleGetClubsSuccess(var parsedJson) {
   allClubs.clear();
   subbedClubs.clear();
   otherClubs.clear();
-  for (var i = 0; i < parsedJson['bodies'].length; i++) {
-    var club = Club.fromJson(parsedJson['bodies'][i]);
+  for (var i = 0; i < parsedJson['data'].length; i++) {
+    var club = Club.fromJson(parsedJson['data'][i]);
     allClubs.add(club);
     if (club.isSubbed) {
       subbedClubs.add(club);
