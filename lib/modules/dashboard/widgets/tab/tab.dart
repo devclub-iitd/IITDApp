@@ -183,8 +183,10 @@ class EventsTab extends StatelessWidget {
         subtitle: (Event item) => item.eventBody.clubName,
         title: (Event item) => item.eventName,
         tabData: tabData,
-        trailing: (Event item) => DateTime.now().isBefore(item.startsAt)
-            ? timeago.format(item.startsAt, allowFromNow: true)
+        trailing: (Event item) => DateTime.now()
+                .isBefore(item.startsAt.subtract(Duration(minutes: 330)))
+            ? timeago.format(item.startsAt.subtract(Duration(minutes: 330)),
+                allowFromNow: true)
             : 'ongoing',
       );
     });

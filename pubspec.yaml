@@ -53,9 +53,10 @@ dependencies:
       url: https://github.com/Pranjal2041/device_calendar.git   #  for android use only one of 3 options
   timeago: ^2.0.26
   global_configuration: ^1.5.0
+  firebase_messaging: ^7.0.1
+  flutter_markdown: ^0.5.2
   flutter_spinkit: "^4.1.2"
   flutter_secure_storage: ^3.3.3
-  firebase_messaging: ^7.0.1
   validators: ^2.0.0+1
   auto_size_text: ^2.0.1
   datetime_picker_formfield: ^1.0.0

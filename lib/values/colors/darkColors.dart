@@ -61,6 +61,7 @@ class DarkAppColors extends AppColors {
 ThemeData darkTheme = ThemeData(
 //            primarySwatch: Colors.indigo,
   hintColor: Colors.white54,
+  highlightColor: Colors.white54,
 //            scaffoldBackgroundColor: Colors.indigo[900],
 //            canvasColor: Colors.indigo[700],
   brightness: Brightness.dark,

@@ -15,7 +15,7 @@ class UserEmail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 5),
+      margin: EdgeInsets.only(top: 15, bottom: 30),
       height: MediaQuery.of(context).size.height * 0.02,
       child: AutoSizeText(
         // 'kadir.corekci@gmail.com',
@@ -58,38 +58,9 @@ class UserImage extends StatelessWidget {
     return Container(
       padding: EdgeInsets.all(40),
       child: CircleAvatar(
-        backgroundImage:
-            NetworkImage('https://randomuser.me/api/portraits/men/26.jpg'),
+        backgroundImage: NetworkImage(
+            'https://www.nacdnet.org/wp-content/uploads/2016/06/person-placeholder.jpg'),
         radius: MediaQuery.of(context).size.width / 5,
-      ),
-    );
-  }
-}
-
-class SignOutButton extends StatelessWidget {
-  const SignOutButton({
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      child: FlatButton(
-        child: Text(
-          'SIGN OUT',
-        ),
-        onPressed: () async {
-          final storage = FlutterSecureStorage();
-          await storage.delete(key: 'email');
-          await storage.delete(key: 'password');
-          await storage.delete(key: 'token');
-          var ls = LocalStorage('iitapp');
-          currentUser = null;
-          await ls.clear().then((value) =>
-              Navigator.pushReplacementNamed(context, Routes.loginPage));
-        },
-        textColor: Theme.of(context).accentColor,
       ),
     );
   }

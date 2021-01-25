@@ -24,7 +24,16 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    var actionsArray = <Widget>[PopupMenu()];
+    var actionsArray = <Widget>[
+      IconButton(
+        icon: Icon(Icons.settings),
+        onPressed: () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SettingsScreen()),
+        ),
+      ),
+      // PopupMenu()
+    ];
     if (actions != null) {
       actions.add(actionsArray[0]);
       actionsArray = actions;

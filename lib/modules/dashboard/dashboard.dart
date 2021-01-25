@@ -146,7 +146,6 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
                 UserImage(),
                 UserName(),
                 UserEmail(),
-                SignOutButton(),
                 Container(
                   decoration: BoxDecoration(
                       color: Provider.of<ThemeModel>(context)
