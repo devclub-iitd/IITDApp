@@ -29,7 +29,10 @@ void onLoginSuccess(
     currentUser = User.fromJson(parsedJson['data']);
     print('Login successful');
     print('newtoken : $newtoken');
-    await storage.write(key: token, value: token);
+    await storage.write(key: 'token', value: newtoken);
+    print('token stored');
+    var topr = await storage.read(key: 'token');
+    print(topr);
     token = newtoken;
     Navigator.pop(context);
     onlogin();
@@ -51,6 +54,8 @@ Future login(BuildContext context, Function onlogin, {bool pop = true}) async {
       'o8ggsY3EeNeCdl0U3izDF1LvR0cU33zopJeFHltapvle8bBChvzHT5miRN23o5v0';
 
   try {
+    print('trying old token');
+    print(oldToken);
     // ignore: unused_local_variable
     var user = await CasiLogin.fromToken(oldToken).refreshToken(
         onRefreshSuccess: (String newToken) {
@@ -93,6 +98,14 @@ class LoginPage extends StatefulWidget {
 class LoginPageState extends State<LoginPage> {
   // ignore: unused_field
   final _key = GlobalKey<FormState>();
+
+  // @override
+  // void initState() {
+  //   var storage = FlutterSecureStorage();
+  //   var token = await storage.read(key: 'token');
+
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
