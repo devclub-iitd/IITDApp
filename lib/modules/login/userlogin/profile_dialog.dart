@@ -3,12 +3,12 @@ import 'package:IITDAPP/routes/Routes.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'dart:async';
-import 'package:localstorage/localstorage.dart';
+// import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+// import 'dart:async';
+// import 'package:localstorage/localstorage.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 import '../LoginScreen.dart';
 
@@ -40,20 +40,21 @@ import '../LoginScreen.dart';
 //   // final response = await http.post("http://192.168.43.231:5000/api/users/facebookLogin", body: {"code" : code});
 // }
 
-Future logout() async {
-  final storage = FlutterSecureStorage();
-  await storage.delete(key: 'email');
-  await storage.delete(key: 'password');
-  await storage.delete(key: 'token');
-  var ls = LocalStorage('iitdapp');
-  await ls.clear();
-  await deleteSharedPrefs();
-}
+// Future logout() async {
+//   final storage = FlutterSecureStorage();
+//   await storage.delete(key: 'email');
+//   await storage.delete(key: 'password');
+//   await storage.delete(key: 'token');
+//   token = null;
+//   var ls = LocalStorage('iitdapp');
+//   await ls.clear();
+//   await deleteSharedPrefs();
+// }
 
-void deleteSharedPrefs() async {
-  var prefs = await SharedPreferences.getInstance();
-  await prefs.clear();
-}
+// void deleteSharedPrefs() async {
+//   var prefs = await SharedPreferences.getInstance();
+//   await prefs.clear();
+// }
 
 void showAlert(BuildContext context, Function onlogout) {
   if (currentUser == null) {
@@ -134,10 +135,10 @@ void showAlert(BuildContext context, Function onlogout) {
               FlatButton(
                 onPressed: () async {
                   // getToken();
-                  print('oh yeah');
+                  print('oh yeahd');
                   Navigator.pop(context);
                   unawaited(showLoading(context, message: 'Signing Out'));
-                  await logout();
+                  await onlogout();
                   Navigator.pop(context);
                   await Navigator.pushReplacementNamed(
                       context, Routes.loginPage);
