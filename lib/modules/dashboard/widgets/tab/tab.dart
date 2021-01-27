@@ -92,7 +92,7 @@ class _GeneralTabState extends State<GeneralTab> {
       child: tabData.length == 0
           ? Center(
               child: Text('Nothing New',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w200)),
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w300)),
             )
           : ListView.separated(
               controller: controller,

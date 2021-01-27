@@ -45,6 +45,7 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
   String author;
   int clicks;
   String contentLocal;
+  String createdBy;
   ApiResponse details;
   List<Report> reports;
   DateTime updatedAt;
@@ -124,6 +125,7 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
       details = ApiResponse.loading('message');
       try {
         Map detailsjson = await ApiBaseHelper().get(NewsType.baseUrl + '/$id');
+        createdBy = detailsjson['createdBy'];
         contentLocal = detailsjson['content'];
         reports = <Report>[
           ...detailsjson['reports']
@@ -188,7 +190,7 @@ class RecentNews extends NewsType {
 }
 
 class TrendingNews extends NewsType {
-  static const baseUrl = NewsType.baseUrl + '?sortBy=clicks:desc';
+  static const baseUrl = NewsType.baseUrl + '?trend';
 }
 
 class OldNews extends NewsType {

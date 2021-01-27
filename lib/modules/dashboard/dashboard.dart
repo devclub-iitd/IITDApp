@@ -31,32 +31,36 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
   TabDataProvider<NewsProvider<RecentNews>> ntdp;
   TabDataProvider<EventsProvider> etdp;
   CurrentTabProvider ctp;
-  final DashboardAlerts dashboardAlerts = DashboardAlerts();
-  final EventsProvider eventsProvider = EventsProvider();
+  DashboardAlerts dashboardAlerts;
+  EventsProvider eventsProvider;
 
   @override
   void initState() {
-    ctp = CurrentTabProvider();
-    _tabController = TabController(vsync: this, length: 3);
-    _tabController.addListener(() {
-      // print(_tabController.index);
-      ctp.setCurrent(_tabController.index);
-      print('set current ${_tabController.index}');
-      if (_tabController.previousIndex != null) {
-        switch (_tabController.previousIndex) {
-          case 0:
-            atdp.refreshAlerts();
-            break;
-          case 1:
-            etdp.refreshAlerts();
-            break;
-          case 2:
-            ntdp.refreshAlerts();
-            break;
-          default:
+    if (currentUser != null) {
+      ctp = CurrentTabProvider();
+      dashboardAlerts = DashboardAlerts();
+      eventsProvider = EventsProvider();
+      _tabController = TabController(vsync: this, length: 3);
+      _tabController.addListener(() {
+        // print(_tabController.index);
+        ctp.setCurrent(_tabController.index);
+        print('set current ${_tabController.index}');
+        if (_tabController.previousIndex != null) {
+          switch (_tabController.previousIndex) {
+            case 0:
+              atdp.refreshAlerts();
+              break;
+            case 1:
+              etdp.refreshAlerts();
+              break;
+            case 2:
+              ntdp.refreshAlerts();
+              break;
+            default:
+          }
         }
-      }
-    });
+      });
+    }
     super.initState();
   }
 
@@ -107,6 +111,9 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    if (currentUser == null) {
+      return RequestLoginScreen('Dashboard');
+    }
     var _parentScrollController = ScrollController();
     initializeTabs(context);
     if (currentUser == null) {

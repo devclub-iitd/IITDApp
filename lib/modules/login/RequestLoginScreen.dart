@@ -41,10 +41,11 @@ class _RequestLoginScreenState extends State<RequestLoginScreen> {
               child: Text(
                 'You need to login to continue',
                 style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w300,
                     color: Provider.of<ThemeModel>(context)
                         .theme
-                        .RAISED_BUTTON_FOREGROUND),
+                        .PRIMARY_TEXT_COLOR),
               ),
             ),
             FlatButton(
@@ -57,7 +58,10 @@ class _RequestLoginScreenState extends State<RequestLoginScreen> {
                   .RAISED_BUTTON_BACKGROUND,
               child: Text(
                 'LOGIN NOW',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                    color: Provider.of<ThemeModel>(context)
+                        .theme
+                        .RAISED_BUTTON_FOREGROUND),
               ),
             ),
           ],

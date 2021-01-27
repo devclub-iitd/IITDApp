@@ -1,6 +1,7 @@
 // import 'dart:io';
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/modules/dashboard/dashboard.dart';
+import 'package:IITDAPP/modules/explore/explore.dart';
 // import 'package:IITDAPP/modules/events/home.dart';
 // import 'package:IITDAPP/modules/login/user_class.dart';
 import 'package:IITDAPP/values/Constants.dart';
@@ -144,7 +145,7 @@ class LoginScreenState extends State<LoginScreen>
                   if (snapshot.connectionState == ConnectionState.done) {
                     Widget home;
                     if (signedIn == true) {
-                      home = Dashboard();
+                      home = currentUser == null ? Explore() : Dashboard();
                     } else {
                       home = LoginPage(onlogin: onlogin);
                     }
@@ -168,7 +169,7 @@ class LoginScreenState extends State<LoginScreen>
                               style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 50,
-                                  fontWeight: FontWeight.w200),
+                                  fontWeight: FontWeight.w300),
                             ),
                             SizedBox(
                               height: 15,
@@ -177,7 +178,7 @@ class LoginScreenState extends State<LoginScreen>
                               'by DevClub',
                               style: TextStyle(
                                   color: Colors.white,
-                                  fontWeight: FontWeight.w200),
+                                  fontWeight: FontWeight.w300),
                             ),
                           ],
                         ),

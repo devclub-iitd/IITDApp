@@ -15,23 +15,27 @@ class ErrorDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Text(
           'Error: ${error}',
           textAlign: TextAlign.center,
-          style: TextStyle(color: Theme.of(context).textTheme.headline1.color),
+          style: TextStyle(
+              color: Theme.of(context).textTheme.headline1.color, fontSize: 20),
         ),
-        FlatButton(
-          onPressed: () {
-            refresh();
-          },
-          child: Text('REFRESH'),
-          textColor:
-              Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_FOREGROUND,
-          color:
-              Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_BACKGROUND,
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: 100),
+          child: FlatButton(
+            onPressed: () {
+              refresh();
+            },
+            child: Text('REFRESH'),
+            textColor:
+                Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_FOREGROUND,
+            color:
+                Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_BACKGROUND,
+          ),
         )
       ],
     );

@@ -1,10 +1,7 @@
 import 'package:IITDAPP/ThemeModel.dart';
-import 'package:IITDAPP/routes/Routes.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:localstorage/localstorage.dart';
 import 'package:provider/provider.dart';
 
 class UserEmail extends StatelessWidget {

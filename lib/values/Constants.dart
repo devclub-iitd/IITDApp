@@ -10,7 +10,7 @@ import 'package:IITDAPP/modules/news/news.dart';
 import 'package:IITDAPP/modules/quickLinks/quickLinks.dart';
 import 'package:flutter/material.dart';
 
-const String url = 'http://10.0.2.2:5000';
+const String url = 'https://campusserver.herokuapp.com';
 String title = 'IITD APP';
 String token;
 bool connectedToInternet = true;

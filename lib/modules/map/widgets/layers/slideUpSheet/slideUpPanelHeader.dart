@@ -31,7 +31,7 @@ class SlideUpPanelHeader extends StatelessWidget {
                 locationDetails.name,
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 23,
+                    fontSize: 21,
                     color: Provider.of<ThemeModel>(context)
                         .theme
                         .SLIDE_UP_SHEET_TEXT_COLOR),
@@ -42,7 +42,7 @@ class SlideUpPanelHeader extends StatelessWidget {
               child: Text(
                 locationDetails.subtitle ?? 'Landmark',
                 style: TextStyle(
-                    fontWeight: FontWeight.w200,
+                    fontWeight: FontWeight.w300,
                     fontSize: 16,
                     color: Provider.of<ThemeModel>(context)
                         .theme

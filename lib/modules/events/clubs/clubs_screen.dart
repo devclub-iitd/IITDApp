@@ -89,7 +89,7 @@ class ClubsScreenState extends State<ClubsScreen> {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 25,
-                        fontWeight: FontWeight.w200,
+                        fontWeight: FontWeight.w300,
                         color: Provider.of<ThemeModel>(context)
                             .theme
                             .PRIMARY_TEXT_COLOR

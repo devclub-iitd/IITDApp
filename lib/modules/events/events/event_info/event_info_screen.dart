@@ -81,7 +81,7 @@ class EventInfoState extends State<EventInfo> {
                 'Some Error Occured',
                 style: TextStyle(
                   fontSize: 25,
-                  fontWeight: FontWeight.w200,
+                  fontWeight: FontWeight.w300,
                 ),
               ),
             );

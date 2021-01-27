@@ -27,6 +27,7 @@ void onLoginSuccess(
   if (response.statusCode == 200) {
     var parsedJson = json.decode(response.body);
     currentUser = User.fromJson(parsedJson['data']);
+    // print(parsedJson['data']);
     print('Login successful');
     print('newtoken : $newtoken');
     await storage.write(key: token, value: token);
@@ -114,7 +115,13 @@ class LoginPageState extends State<LoginPage> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: FlatButton(
-                      child: Text('LOGIN'),
+                      child: Text(
+                        'LOGIN',
+                        style: TextStyle(
+                            color: Provider.of<ThemeModel>(context)
+                                .theme
+                                .RAISED_BUTTON_FOREGROUND),
+                      ),
                       color: Provider.of<ThemeModel>(context)
                           .theme
                           .LOGIN_BUTTON_COLOR,

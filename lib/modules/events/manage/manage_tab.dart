@@ -211,7 +211,7 @@ class _ManageTabState extends State<ManageTab> {
                     'Some Error Occured',
                     style: TextStyle(
                       fontSize: 25,
-                      fontWeight: FontWeight.w200,
+                      fontWeight: FontWeight.w300,
                     ),
                   ),
                 ),

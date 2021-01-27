@@ -23,7 +23,7 @@ class ReportsList extends StatelessWidget {
             ? Center(
                 child: Text(
                   'No Reports',
-                  style: TextStyle(fontWeight: FontWeight.w200, fontSize: 25),
+                  style: TextStyle(fontWeight: FontWeight.w300, fontSize: 25),
                 ),
               )
             : ListView.builder(

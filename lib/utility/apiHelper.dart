@@ -17,7 +17,7 @@ class ApiBaseHelper {
     } on SocketException {
       throw FetchDataException('No Internet connection');
     } on TimeoutException {
-      throw FetchDataException('Connection tiimed out');
+      throw FetchDataException('Connection timed out');
     }
     return responseJson;
   }
@@ -34,7 +34,7 @@ class ApiBaseHelper {
     } on SocketException {
       throw FetchDataException('No Internet connection');
     } on TimeoutException {
-      throw FetchDataException('Connection tiimed out');
+      throw FetchDataException('Connection timed out');
     }
     return responseJson;
   }
@@ -51,7 +51,7 @@ class ApiBaseHelper {
     } on SocketException {
       throw FetchDataException('No Internet connection');
     } on TimeoutException {
-      throw FetchDataException('Connection tiimed out');
+      throw FetchDataException('Connection timed out');
     }
     return responseJson;
   }

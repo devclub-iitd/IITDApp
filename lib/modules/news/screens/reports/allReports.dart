@@ -13,6 +13,13 @@ class AllReports extends StatefulWidget {
 }
 
 class _AllReportsState extends State<AllReports> {
+  Future<List<NewsModel>> allReports;
+  @override
+  void initState() {
+    allReports = getAllReports();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +31,7 @@ class _AllReportsState extends State<AllReports> {
       ),
       body: RefreshIndicator(
           child: FutureBuilder(
-            future: getAllReports(),
+            future: allReports,
             builder: (_, AsyncSnapshot<List<NewsModel>> as) {
               if (as.hasError) {
                 return ErrorDisplay(
@@ -80,7 +87,9 @@ class _AllReportsState extends State<AllReports> {
   }
 
   Future<void> refresh() {
-    setState(() {});
+    setState(() {
+      allReports = getAllReports();
+    });
     return null;
   }
 }

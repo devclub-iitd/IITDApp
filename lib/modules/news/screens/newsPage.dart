@@ -3,9 +3,11 @@ import 'package:IITDAPP/modules/news/screens/reports/resportsList.dart';
 import 'package:IITDAPP/modules/news/utility/showSnackBarResult.dart';
 import 'package:IITDAPP/modules/news/widgets/confirmationDialog.dart';
 import 'package:IITDAPP/modules/news/widgets/reportScreen.dart';
+import 'package:IITDAPP/utility/UrlHandler.dart';
 import 'package:IITDAPP/utility/apiResponse.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:provider/provider.dart';
 
@@ -39,17 +41,21 @@ class NewsPage extends StatelessWidget {
       builder: (_, c) => Scaffold(
         backgroundColor:
             Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
-        body: Consumer<NewsModel>(
-          builder: (_, syncItem, c) => CustomScrollView(
+        body: Consumer<NewsModel>(builder: (_, syncItem, c) {
+          var showEdit = currentUser.isAdmin ||
+              currentUser.isSSAdmin ||
+              currentUser.isSuperAdmin;
+          var showDelete = currentUser.isSSAdmin ||
+              currentUser.isSuperAdmin ||
+              (syncItem.createdBy ?? '') == currentUser.id;
+          return CustomScrollView(
             slivers: <Widget>[
               SliverGradientAppBar(
-                actions: (!currentUser.isAdmin)
-                    ? []
-                    : <Widget>[
-                        EditButton(item: syncItem),
-                        HideButton(item: syncItem),
-                        DeleteButton(item: syncItem)
-                      ],
+                actions: <Widget>[
+                  if (showEdit) EditButton(item: syncItem),
+                  if (showEdit) HideButton(item: syncItem),
+                  if (showDelete) DeleteButton(item: syncItem)
+                ],
                 floating: false,
                 pinned: true,
                 snap: false,
@@ -138,7 +144,8 @@ class NewsPage extends StatelessWidget {
                     endIndent: 5,
                     indent: 5,
                   ),
-                  Padding(
+                  Container(
+                    constraints: BoxConstraints(minHeight: 300),
                     padding: const EdgeInsets.symmetric(
                         horizontal: 25.0, vertical: 20),
                     child: syncItem.details.status == Status.LOADING
@@ -147,74 +154,74 @@ class NewsPage extends StatelessWidget {
                             ? ErrorDisplay(
                                 refresh: syncItem.getDetails,
                                 error: syncItem.details.message)
-                            : Text(syncItem.details.data,
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400))),
+                            : MarkdownBody(
+                                data: syncItem.details.data,
+                                onTapLink: (text, href, title) =>
+                                    UrlHandler.launchInBrowser(href),
+                                selectable: true,
+                                styleSheet:
+                                    MarkdownStyleSheet(textScaleFactor: 1.2),
+                              )),
                   ),
-                  currentUser.isAdmin
-                      ? redirectPossible
-                          ? FlatButton(
+                  if (redirectPossible &&
+                      (currentUser.isAdmin ||
+                          currentUser.isSuperAdmin ||
+                          currentUser.isSSAdmin))
+                    FlatButton(
+                        color: (syncItem.details.status == Status.COMPLETED &&
+                                syncItem.reports.isNotEmpty)
+                            ? Provider.of<ThemeModel>(context, listen: false)
+                                .theme
+                                .RAISED_BUTTON_BACKGROUND
+                            : Provider.of<ThemeModel>(context, listen: false)
+                                .theme
+                                .RAISED_BUTTON_BACKGROUND
+                                .withOpacity(0.4),
+                        child: Text('View Reports',
+                            style: TextStyle(
+                              fontSize: 15,
                               color: (syncItem.details.status ==
                                           Status.COMPLETED &&
                                       syncItem.reports.isNotEmpty)
                                   ? Provider.of<ThemeModel>(context,
                                           listen: false)
                                       .theme
-                                      .RAISED_BUTTON_BACKGROUND
+                                      .RAISED_BUTTON_FOREGROUND
                                   : Provider.of<ThemeModel>(context,
                                           listen: false)
                                       .theme
-                                      .RAISED_BUTTON_BACKGROUND
+                                      .RAISED_BUTTON_FOREGROUND
                                       .withOpacity(0.4),
-                              child: Text('View Reports',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: (syncItem.details.status ==
-                                                Status.COMPLETED &&
-                                            syncItem.reports.isNotEmpty)
-                                        ? Provider.of<ThemeModel>(context,
-                                                listen: false)
-                                            .theme
-                                            .RAISED_BUTTON_FOREGROUND
-                                        : Provider.of<ThemeModel>(context,
-                                                listen: false)
-                                            .theme
-                                            .RAISED_BUTTON_FOREGROUND
-                                            .withOpacity(0.4),
-                                  )),
-                              onPressed: () {
-                                if (syncItem.details.status ==
-                                    Status.COMPLETED) {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (_) =>
-                                        ReportsList(syncItem, false),
-                                  ));
-                                }
-                              })
-                          : Container()
-                      : FlatButton(
-                          child: Text(
-                            'Report This Article',
-                            style: TextStyle(
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .headline1
-                                    .color
-                                    .withOpacity(0.54),
-                                fontSize: 15),
-                          ),
-                          onPressed: () async {
-                            final result = await Navigator.of(context)
-                                .push(MaterialPageRoute(
-                              builder: (_) => ReportScreen(
-                                item: syncItem,
-                              ),
+                            )),
+                        onPressed: () {
+                          if (syncItem.details.status == Status.COMPLETED) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => ReportsList(syncItem, false),
                             ));
-
-                            showSnackbarResult(result, Scaffold.of(context));
-                          },
+                          }
+                        }),
+                  FlatButton(
+                    child: Text(
+                      'Report This Article',
+                      style: TextStyle(
+                          color: Theme.of(context)
+                              .textTheme
+                              .headline1
+                              .color
+                              .withOpacity(0.54),
+                          fontSize: 15),
+                    ),
+                    onPressed: () async {
+                      final result =
+                          await Navigator.of(context).push(MaterialPageRoute(
+                        builder: (_) => ReportScreen(
+                          item: syncItem,
                         ),
+                      ));
+
+                      showSnackbarResult(result, Scaffold.of(context));
+                    },
+                  ),
                   if (item.details.status == Status.COMPLETED)
                     Container(
                       alignment: Alignment.bottomRight,
@@ -236,8 +243,8 @@ class NewsPage extends StatelessWidget {
                 ]),
               )
             ],
-          ),
-        ),
+          );
+        }),
       ),
     );
   }

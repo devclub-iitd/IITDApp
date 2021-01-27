@@ -19,7 +19,7 @@ class MyEventsList extends StatelessWidget {
           textAlign: TextAlign.center,
           style: TextStyle(
             fontSize: 25,
-            fontWeight: FontWeight.w200,
+            fontWeight: FontWeight.w300,
           ),
         ),
       );
