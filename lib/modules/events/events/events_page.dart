@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:IITDAPP/modules/events/globals.dart';
+import 'package:provider/provider.dart';
 
+import '../EventsTabProvider.dart';
 import './event_class.dart';
 import './events_list.dart';
 
@@ -24,18 +26,18 @@ class EventsPageState extends State<EventsPage> {
   void initState() {
     super.initState();
     _title = widget._title;
-    switch (_title) {
-      case 'TODAY':
-        _events = todayEvents;
-        break;
-      case 'TOMORROW':
-        _events = tomorrowEvents;
-        break;
-      case 'UPCOMING':
-        _events = upcomingEvents;
-        break;
-      default:
-    }
+    // switch (_title) {
+    //   case 'TODAY':
+    //     _events = Provider.of<EventsTabProvider>(context).todayEvents;
+    //     break;
+    //   case 'TOMORROW':
+    //     _events = Provider.of<EventsTabProvider>(context).tomorrowEvents;
+    //     break;
+    //   case 'UPCOMING':
+    //     _events = Provider.of<EventsTabProvider>(context).upcomingEvents;
+    //     break;
+    //   default:
+    // }
   }
 
   void reorderList() {
@@ -59,6 +61,18 @@ class EventsPageState extends State<EventsPage> {
 
   @override
   Widget build(BuildContext context) {
+    switch (_title) {
+      case 'TODAY':
+        _events = Provider.of<EventsTabProvider>(context, listen: false).todayEvents;
+        break;
+      case 'TOMORROW':
+        _events = Provider.of<EventsTabProvider>(context, listen: false).tomorrowEvents;
+        break;
+      case 'UPCOMING':
+        _events = Provider.of<EventsTabProvider>(context, listen: false).upcomingEvents;
+        break;
+      default:
+    }
     return SingleChildScrollView(
       key: PageStorageKey(_title),
       child: Column(

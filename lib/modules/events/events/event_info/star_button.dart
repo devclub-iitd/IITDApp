@@ -1,3 +1,4 @@
+import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
 import 'package:IITDAPP/values/Constants.dart';
 
 import 'package:IITDAPP/ThemeModel.dart';
@@ -28,18 +29,23 @@ class StarButtonState extends State<StarButton> {
   Event _event;
   Function _reorderList;
   Function onpress;
+  bool isLoading;
 
   @override
   void initState() {
     super.initState();
     _reorderList = widget._reorderList;
+    // _event = Provider.of<EventsTabProvider>(context).allEvents.firstWhere((element) => element.eventid == widget._event.eventid);
     _event = widget._event;
-    onpress = () {
-      onStarPress();
-    };
+    isLoading = false;
+    // onpress = () {
+    //   onStarPress();
+    // };
+    
   }
 
   Future<Null> starEvent(String eventid) async {
+    var workingEvent =  Provider.of<EventsTabProvider>(context, listen: false).allEvents.firstWhere((element) => element.eventid == widget._event.eventid);
     print('Starring Event');
     var timeOutFlag = false;
     final response = await http.post(
@@ -59,57 +65,41 @@ class StarButtonState extends State<StarButton> {
     if (response.statusCode == 200) {
       var parsedJson = json.decode(response.body);
       if (parsedJson['message'] == 'Successfully Starred') {
-        _event.isStarred = !_event.isStarred;
-        if (_event.isStarred) {
-          _icon = Icon(
-            Icons.star,
-            color: Colors.amberAccent,
-          );
-          _toolTip = 'Unstar';
-        } else {
-          _icon = Icon(
-            Icons.star_border,
-            color: Provider.of<ThemeModel>(context, listen: false)
-                .theme
-                .PRIMARY_TEXT_COLOR,
-          );
-          _toolTip = 'Star';
-        }
-        // refreshLists(_event);
-        unawaited(sortEvents());
-        _reorderList();
-        onpress = () {
-          onStarPress();
-        };
-        setState(() {});
+        Provider.of<EventsTabProvider>(context, listen: false).toggleEventStar(eventid);
+        _event.isStarred = workingEvent.isStarred;
+        // if (_event.isStarred) {
+        //   _icon = Icon(
+        //     Icons.star,
+        //     color: Colors.amberAccent,
+        //   );
+        //   _toolTip = 'Unstar';
+        // } else {
+        //   _icon = Icon(
+        //     Icons.star_border,
+        //     color: Provider.of<ThemeModel>(context, listen: false)
+        //         .theme
+        //         .PRIMARY_TEXT_COLOR,
+        //   );
+        //   _toolTip = 'Star';
+        // }
+        // // refreshLists(_event);
+        // // unawaited(sortEvents());
+        // // _reorderList();
+        // onpress = () {
+        //   onStarPress();
+        // };
+        setState(() {isLoading=false;});
         Scaffold.of(context).showSnackBar(SnackBar(
             duration: Duration(seconds: 1),
             content: Text(
-                (_event.isStarred) ? 'Event Starred' : 'Event Unstarred')));
+                (workingEvent.isStarred) ? 'Event Starred' : 'Event Unstarred')));
       }
     } else {
-      if (_event.isStarred) {
-        _icon = Icon(
-          Icons.star,
-          color: Colors.amberAccent,
-        );
-        _toolTip = 'Unstar';
-      } else {
-        _icon = Icon(
-          Icons.star_border,
-          color: Provider.of<ThemeModel>(context, listen: false)
-              .theme
-              .PRIMARY_TEXT_COLOR,
-        );
-        _toolTip = 'Star';
-      }
-      onpress = () {
-        onStarPress();
-      };
-      setState(() {});
+      _event.isStarred = workingEvent.isStarred;
+      setState(() {isLoading = false;});
       Scaffold.of(context).showSnackBar(SnackBar(
           duration: Duration(seconds: 1),
-          content: Text((_event.isStarred)
+          content: Text((workingEvent.isStarred)
               ? 'Could not unstar event'
               : 'Could not star event')));
       throw Exception('Failed to star event');
@@ -118,6 +108,14 @@ class StarButtonState extends State<StarButton> {
 
   void onStarPress() {
     setState(() {
+      isLoading = true;
+    });
+    starEvent(_event.eventid);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (isLoading){
       _icon = Icon(
         Icons.star,
         color: Provider.of<ThemeModel>(context, listen: false)
@@ -126,24 +124,21 @@ class StarButtonState extends State<StarButton> {
             .withOpacity(0.54),
       );
       onpress = () {};
-    });
-    starEvent(_event.eventid);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    if (_event.isStarred) {
+    }
+    else if (_event.isStarred) {
       _icon = Icon(
         Icons.star,
         color: Colors.amberAccent,
       );
       _toolTip = 'Unstar';
+      onpress = (){onStarPress();};
     } else {
       _icon = Icon(
         Icons.star_border,
         color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
       );
       _toolTip = 'Star';
+      onpress = (){onStarPress();};
     }
     return IconButton(
       onPressed: onpress,

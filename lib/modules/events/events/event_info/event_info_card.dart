@@ -28,20 +28,20 @@ class EventInfoCard extends StatelessWidget {
     actionRow.add(
       StarButton(_event, _refreshLists),
     );
-    if (showButton) {
-      actionRow.add(FlatButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => ClubInfo(_event.eventBody)));
-        },
-        child: Text('SEE CLUB'),
-        color: Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_BACKGROUND,
-        textColor:
-            Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_FOREGROUND,
-      ));
-    }
+    // if (showButton) {
+    //   actionRow.add(FlatButton(
+    //     onPressed: () {
+    //       Navigator.push(
+    //           context,
+    //           MaterialPageRoute(
+    //               builder: (context) => ClubInfo(_event.eventBody)));
+    //     },
+    //     child: Text('SEE CLUB'),
+    //     color: Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_BACKGROUND,
+    //     textColor:
+    //         Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_FOREGROUND,
+    //   ));
+    // }
     return ConstrainedBox(
       constraints: BoxConstraints(maxWidth: 500),
       child: Container(
