@@ -1,6 +1,11 @@
+import 'dart:convert';
+import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:IITDAPP/values/Constants.dart';
 
 import 'package:IITDAPP/ThemeModel.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
@@ -11,12 +16,68 @@ import 'package:flutter/widgets.dart';
 import './events/events_tab.dart';
 import './clubs/clubs_tab.dart';
 import './manage/manage_tab.dart';
+import 'events/event_class.dart';
+import 'globals.dart';
+
+Future<List<List<List<Event>>>> getEvents() async {
+    print('Getting Events');
+    // ignore: omit_local_variable_types
+    final LocalStorage localStorage = LocalStorage('iitdapp');
+    var timeOutFlag = false;
+    var returnObj;
+    final response = await http.get('$url/api/events',
+        headers: {'authorization': 'Bearer $token'}).timeout(
+      Duration(seconds: 5),
+      onTimeout: () async {
+        var parsedJson = await localStorage.getItem('events');
+        returnObj = handleGetEventsSuccess(parsedJson);
+        timeOutFlag = true;
+        return null;
+      },
+    );
+    connectedToInternet = !timeOutFlag;
+    if (timeOutFlag) {
+      return returnObj;
+    }
+
+    print(response.statusCode);
+    if (response.statusCode == 200) {
+      print('Events received');
+      var parsedJson = json.decode(response.body);
+      returnObj = handleGetEventsSuccess(parsedJson);
+      await localStorage.setItem('events', parsedJson);
+    } else {
+      throw Exception('Failed to load events');
+    }
+    return returnObj;
+  }
+
+  // ignore: always_declare_return_types
+  handleGetEventsSuccess(var parsedJson) {
+    todayEvents = List<List<Event>>.generate(3, (i) => []);
+    tomorrowEvents = List<List<Event>>.generate(3, (i) => []);
+    upcomingEvents = List<List<Event>>.generate(3, (i) => []);
+    // ignore: prefer_collection_literals
+    eventsList = List<Event>();
+    if (parsedJson['message'] != 'Events Found') {
+      return [todayEvents, tomorrowEvents, upcomingEvents];
+    }
+    print(parsedJson['data']['events'].length);
+    for (var i = 0; i < parsedJson['data']['events'].length; i++) {
+      var ev = Event.fromJson(parsedJson['data']['events'][i]);
+      eventsList.add(ev);
+    }
+    return sortEvents();
+  }
+
+  // var a = getEvents();
+
 
 class HomeScreen extends StatefulWidget {
-  final Function onlogout;
+  // final Function onlogout;
   static const String routeName = '/events';
 
-  HomeScreen({this.onlogout});
+  // HomeScreen({this.onlogout});
 
   @override
   State<StatefulWidget> createState() {
@@ -26,16 +87,23 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   TabController _controller;
+  TabController _managetabcontroller;
   int _selectedTab = 1;
   List<Widget> _tabs;
   List<BottomNavigationBarItem> _navBarItems;
 
   Widget appBar;
 
+
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_){
+    Provider.of<EventsTabProvider>(context, listen: false)
+    .getData();  
+  });
     _controller = TabController(length: 3, vsync: this);
+    _managetabcontroller = TabController(length: 2, vsync: this);
     appBar = CustomAppBar(
       title: Text('$title'),
       height: 2,
@@ -61,7 +129,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       ),
     ];
     if (currentUser.isAdmin) {
-      _tabs.add(ManageTab());
+      _tabs.add(ManageTab(_managetabcontroller));
       _navBarItems.add(BottomNavigationBarItem(
         icon: Icon(Icons.edit),
         label: 'Manage',
@@ -71,6 +139,10 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    // return ChangeNotifierProvider<EventsTabProvider>(
+    //   create: (context) => EventsTabProvider(),
+    //   child: Builder(
+    //     builder: (context) {
     return Scaffold(
       backgroundColor:
           Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
@@ -144,5 +216,5 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         ),
       ),
     );
-  }
-}
+  // }));
+}}

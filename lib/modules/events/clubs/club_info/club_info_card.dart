@@ -1,3 +1,4 @@
+import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
 import 'package:IITDAPP/values/Constants.dart';
 
 import 'package:IITDAPP/ThemeModel.dart';
@@ -5,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:http/http.dart' as http;
-import 'package:IITDAPP/modules/events/globals.dart';
+// import 'package:IITDAPP/modules/events/globals.dart';
 
 import '../club_class.dart';
 
@@ -99,28 +100,31 @@ class _SubButtonState extends State<SubButton> {
     }
     print(response.statusCode);
     if (response.statusCode == 200) {
-      _club.isSubbed = !_club.isSubbed;
-      if (_club.isSubbed) {
-        subbedClubs.add(_club);
-        otherClubs.remove(_club);
-        _text = 'SUBSCRIBED';
-        _textColor = Provider.of<ThemeModel>(context, listen: false)
-            .theme
-            .RAISED_BUTTON_FOREGROUND;
-        _buttonColor = Provider.of<ThemeModel>(context, listen: false)
-            .theme
-            .RAISED_BUTTON_BACKGROUND;
-      } else {
-        subbedClubs.remove(_club);
-        otherClubs.add(_club);
-        _text = 'SUBSCRIBE';
-        _textColor = Provider.of<ThemeModel>(context, listen: false)
-            .theme
-            .RAISED_BUTTON_ALT_FOREGROUND;
-        _buttonColor = Provider.of<ThemeModel>(context, listen: false)
-            .theme
-            .RAISED_BUTTON_ALT_BACKGROUND;
-      }
+      var workingClub = Provider.of<EventsTabProvider>(context, listen: false).allClubs.firstWhere((element) => element.id == _club.id);
+      Provider.of<EventsTabProvider>(context, listen: false).toggleClubSubscribe(_club.id);
+      _club.isSubbed = workingClub.isSubbed;
+      // _club.isSubbed = !_club.isSubbed;
+      // if (_club.isSubbed) {
+      //   subbedClubs.add(_club);
+      //   otherClubs.remove(_club);
+      //   _text = 'SUBSCRIBED';
+      //   _textColor = Provider.of<ThemeModel>(context, listen: false)
+      //       .theme
+      //       .RAISED_BUTTON_FOREGROUND;
+      //   _buttonColor = Provider.of<ThemeModel>(context, listen: false)
+      //       .theme
+      //       .RAISED_BUTTON_BACKGROUND;
+      // } else {
+      //   subbedClubs.remove(_club);
+      //   otherClubs.add(_club);
+      //   _text = 'SUBSCRIBE';
+      //   _textColor = Provider.of<ThemeModel>(context, listen: false)
+      //       .theme
+      //       .RAISED_BUTTON_ALT_FOREGROUND;
+      //   _buttonColor = Provider.of<ThemeModel>(context, listen: false)
+      //       .theme
+      //       .RAISED_BUTTON_ALT_BACKGROUND;
+      // }
     }
     _enabled = true;
     setState(() {});

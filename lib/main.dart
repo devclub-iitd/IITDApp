@@ -1,6 +1,8 @@
 import 'package:IITDAPP/modules/attendance/data/attendanceProvider.dart';
 import 'package:IITDAPP/ThemeModel.dart';
+import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
 import 'package:IITDAPP/modules/login/LoginScreen.dart';
+import 'package:IITDAPP/modules/login/LoginStateProvider.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsData.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
@@ -48,7 +50,13 @@ void main() async {
     ),
     ChangeNotifierProvider<ThemeModel>(
       create: (_) => ThemeModel(),
-    )
+    ),
+    ChangeNotifierProvider(
+      create: (_) => EventsTabProvider(),
+    ),
+    ChangeNotifierProvider(
+      create: (_) => LoginStateProvider()
+    ),
   ], child: MyApp()));
 }
 

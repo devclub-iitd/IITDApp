@@ -44,7 +44,7 @@ class MyEventCard extends StatelessWidget {
                       .withOpacity(0.1))
             ]),
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-        margin: EdgeInsets.symmetric(vertical: 7),
+        margin: EdgeInsets.symmetric(vertical: 7, horizontal: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[

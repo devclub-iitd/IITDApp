@@ -1,8 +1,9 @@
 import 'package:IITDAPP/ThemeModel.dart';
+import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/sectionTitle.dart';
 import 'package:flutter/material.dart';
-import 'package:IITDAPP/modules/events/globals.dart';
+// import 'package:IITDAPP/modules/events/globals.dart';
 
 import './club_class.dart';
 import './club_card.dart';
@@ -15,24 +16,24 @@ class ClubsScreen extends StatefulWidget {
 }
 
 class ClubsScreenState extends State<ClubsScreen> {
-  void refresh() {
-    print('refreshing club list');
-    // if (widget.l == 0)
-    //   clubs = subbedClubs;
-    // else if (widget.l == 1) clubs = otherClubs;
-    // clubs.forEach((f) => print(f.clubName));
-    subbedClubs.sort((a, b) {
-      return a.clubName.toLowerCase().compareTo(b.clubName.toLowerCase());
-    });
-    otherClubs.sort((a, b) {
-      return a.clubName.toLowerCase().compareTo(b.clubName.toLowerCase());
-    });
-    print('Subbed Clubs:');
-    subbedClubs.forEach((f) => print(f.clubName));
-    print('Other Clubs:');
-    otherClubs.forEach((f) => print(f.clubName));
-    setState(() {});
-  }
+  // void refresh() {
+  //   print('refreshing club list');
+  //   // if (widget.l == 0)
+  //   //   clubs = subbedClubs;
+  //   // else if (widget.l == 1) clubs = otherClubs;
+  //   // clubs.forEach((f) => print(f.clubName));
+  //   subbedClubs.sort((a, b) {
+  //     return a.clubName.toLowerCase().compareTo(b.clubName.toLowerCase());
+  //   });
+  //   otherClubs.sort((a, b) {
+  //     return a.clubName.toLowerCase().compareTo(b.clubName.toLowerCase());
+  //   });
+  //   print('Subbed Clubs:');
+  //   subbedClubs.forEach((f) => print(f.clubName));
+  //   print('Other Clubs:');
+  //   otherClubs.forEach((f) => print(f.clubName));
+  //   setState(() {});
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +47,9 @@ class ClubsScreenState extends State<ClubsScreen> {
         ),
         clubsList(
           'SUBSCRIBED CLUBS',
-          subbedClubs,
+          Provider.of<EventsTabProvider>(context, listen: false).subbedClubs,
         ),
-        clubsList('OTHER CLUBS', otherClubs),
+        clubsList('OTHER CLUBS', Provider.of<EventsTabProvider>(context, listen: false).otherClubs),
         Container(
           height: 5,
         ),
@@ -62,7 +63,7 @@ class ClubsScreenState extends State<ClubsScreen> {
     // ignore: prefer_collection_literals
     var toReturn = List<ClubCard>();
     for (var i = 0; i < clubs.length; i++) {
-      toReturn.add(ClubCard(clubs[i], refresh, ValueKey(clubs[i].id)));
+      toReturn.add(ClubCard(clubs[i], ValueKey(clubs[i].id)));
       print('adding + ${clubs[i].clubName}');
     }
     print('To return:');

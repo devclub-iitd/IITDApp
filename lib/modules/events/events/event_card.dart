@@ -36,7 +36,7 @@ class EventCard extends StatelessWidget {
         await Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => EventInfo(_event.eventid, _onStarPress)));
+                builder: (context) => EventInfo(_event.eventid)));
         _onStarPress();
       },
       child: Container(
@@ -109,7 +109,7 @@ class EventCard extends StatelessWidget {
                   //   splashColor: Colors.transparent,
                   //   highlightColor: Colors.transparent,
                   // ),
-                  StarButton(_event, _onStarPress)
+                  StarButton(_event)
                 ],
               ),
             ),
