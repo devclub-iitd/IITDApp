@@ -9,7 +9,7 @@ import 'package:http/http.dart' as http;
 // import 'dart:convert';
 
 import './club_class.dart';
-import 'package:IITDAPP/modules/events/globals.dart';
+// import 'package:IITDAPP/modules/events/globals.dart';
 import './club_info/club_info.dart';
 
 class ClubCard extends StatefulWidget {

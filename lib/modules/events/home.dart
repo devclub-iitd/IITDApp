@@ -87,6 +87,7 @@ class HomeScreen extends StatefulWidget {
 
 class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   TabController _controller;
+  TabController _managetabcontroller;
   int _selectedTab = 1;
   List<Widget> _tabs;
   List<BottomNavigationBarItem> _navBarItems;
@@ -102,6 +103,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     .getData();  
   });
     _controller = TabController(length: 3, vsync: this);
+    _managetabcontroller = TabController(length: 2, vsync: this);
     appBar = CustomAppBar(
       title: Text('$title'),
       height: 2,
@@ -127,7 +129,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       ),
     ];
     if (currentUser.isAdmin) {
-      _tabs.add(ManageTab());
+      _tabs.add(ManageTab(_managetabcontroller));
       _navBarItems.add(BottomNavigationBarItem(
         icon: Icon(Icons.edit),
         label: 'Manage',

@@ -3,7 +3,7 @@ import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/sectionTitle.dart';
 import 'package:flutter/material.dart';
-import 'package:IITDAPP/modules/events/globals.dart';
+// import 'package:IITDAPP/modules/events/globals.dart';
 
 import './club_class.dart';
 import './club_card.dart';

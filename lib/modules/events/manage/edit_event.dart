@@ -1,3 +1,5 @@
+import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
+// import 'package:IITDAPP/routes/Routes.dart';
 import 'package:IITDAPP/values/Constants.dart';
 
 import 'package:IITDAPP/ThemeModel.dart';
@@ -15,19 +17,23 @@ import 'dart:async';
 import '../events/event_class.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
 
-Future<bool> deleteEvent(BuildContext context, String id) async {
+Future<void> deleteEvent(BuildContext context, String id) async {
   print('Deleting Event');
   final response = await http.delete('$url/api/events/$id',
       headers: {'authorization': 'Bearer $token'});
   print(response.statusCode);
   if (response.statusCode == 200) {
-    return true;
+    // var count = 0;
+    // Navigator.of(context).popUntil((_) => count++ >= 3);
+    await Provider.of<EventsTabProvider>(context, listen: false).getData();
+    Navigator.of(context).popUntil((route) => route.isFirst);
+    // Navigator.popUntil(context, ModalRoute.withName(Routes.events));
+    // await Navigator.pushReplacementNamed(context, Routes.events);
   } else {
     Navigator.pop(context);
     Navigator.pop(context);
     await showErrorAlert(
         context, 'Could not delete', 'Something went wrong. Please try again.');
-    return false;
   }
 }
 
@@ -99,8 +105,9 @@ class _EditEventFormState extends State<EditEventForm> {
         headers: {'authorization': 'Bearer $token'},
         body: _event.toMapForUpdate());
     print(response.statusCode);
-    // print(response.body);
+    print(response.body);
     if (response.statusCode == 200) {
+      await Provider.of<EventsTabProvider>(context, listen: false).getData();
       Navigator.pop(context);
     } else {
       Navigator.pop(context);
@@ -124,6 +131,11 @@ class _EditEventFormState extends State<EditEventForm> {
                 helperText: '',
                 alignLabelWithHint: true,
                 labelText: 'Event Name',
+                labelStyle: TextStyle(
+                    color: Provider.of<ThemeModel>(context, listen: false)
+                        .theme
+                        .PRIMARY_TEXT_COLOR
+                        .withOpacity(0.5)),
               ),
               keyboardType: TextInputType.multiline,
               maxLines: null,
@@ -146,7 +158,14 @@ class _EditEventFormState extends State<EditEventForm> {
             TextFormField(
               initialValue: _event.venue,
               decoration: InputDecoration(
-                  alignLabelWithHint: true, labelText: 'Venue', helperText: ''),
+                  alignLabelWithHint: true,
+                  labelText: 'Venue',
+                  labelStyle: TextStyle(
+                      color: Provider.of<ThemeModel>(context, listen: false)
+                          .theme
+                          .PRIMARY_TEXT_COLOR
+                          .withOpacity(0.5)),
+                  helperText: ''),
               keyboardType: TextInputType.multiline,
               maxLines: null,
               style: TextStyle(
@@ -192,6 +211,11 @@ class _EditEventFormState extends State<EditEventForm> {
                 helperText: '',
                 alignLabelWithHint: true,
                 labelText: 'Starts At',
+                labelStyle: TextStyle(
+                    color: Provider.of<ThemeModel>(context, listen: false)
+                        .theme
+                        .PRIMARY_TEXT_COLOR
+                        .withOpacity(0.5)),
                 floatingLabelBehavior: FloatingLabelBehavior.auto,
               ),
               style: TextStyle(
@@ -238,6 +262,11 @@ class _EditEventFormState extends State<EditEventForm> {
                 helperText: '',
                 alignLabelWithHint: true,
                 labelText: 'Ends At',
+                labelStyle: TextStyle(
+                    color: Provider.of<ThemeModel>(context, listen: false)
+                        .theme
+                        .PRIMARY_TEXT_COLOR
+                        .withOpacity(0.5)),
                 floatingLabelBehavior: FloatingLabelBehavior.auto,
               ),
               style: TextStyle(
@@ -252,8 +281,8 @@ class _EditEventFormState extends State<EditEventForm> {
                   return 'Required';
                 } else if (_startsAt != null && dt.isBefore(_startsAt)) {
                   return 'Event should end after it starts';
-                } else if (dt.isBefore(DateTime.now())) {
-                  return 'Event has already ended';
+                  // } else if (dt.isBefore(DateTime.now())) {
+                  //   return 'Event has already ended';
                 } else {
                   return null;
                 }
@@ -264,6 +293,11 @@ class _EditEventFormState extends State<EditEventForm> {
               decoration: InputDecoration(
                   alignLabelWithHint: true,
                   labelText: 'Event About',
+                  labelStyle: TextStyle(
+                    color: Provider.of<ThemeModel>(context, listen: false)
+                        .theme
+                        .PRIMARY_TEXT_COLOR
+                        .withOpacity(0.5)),
                   helperText: ''),
               keyboardType: TextInputType.multiline,
               maxLines: null,
@@ -287,6 +321,11 @@ class _EditEventFormState extends State<EditEventForm> {
               decoration: InputDecoration(
                   alignLabelWithHint: true,
                   labelText: 'Image Link',
+                  labelStyle: TextStyle(
+                    color: Provider.of<ThemeModel>(context, listen: false)
+                        .theme
+                        .PRIMARY_TEXT_COLOR
+                        .withOpacity(0.5)),
                   helperText: ''),
               keyboardType: TextInputType.multiline,
               maxLines: null,
@@ -325,7 +364,14 @@ class _EditEventFormState extends State<EditEventForm> {
                     onPressed: () {
                       _showCancelAlert(context);
                     },
-                    child: Text('CANCEL'),
+                    child: Text(
+                      'CANCEL',
+                      style: TextStyle(
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .RAISED_BUTTON_FOREGROUND,
+                      ),
+                    ),
                     color: Provider.of<ThemeModel>(context)
                         .theme
                         .RAISED_BUTTON_BACKGROUND),
@@ -458,11 +504,7 @@ void _showDeleteAlert(BuildContext context, Event _event) {
             onPressed: () async {
               // Navigator.pop(context);
               unawaited(showLoading(context, message: 'Deleting Event'));
-              var b = await deleteEvent(context, _event.eventid);
-              if (b) {
-                Navigator.popUntil(
-                    context, ModalRoute.withName(Navigator.defaultRouteName));
-              }
+              await deleteEvent(context, _event.eventid);
             },
             child: Text(
               'YES',

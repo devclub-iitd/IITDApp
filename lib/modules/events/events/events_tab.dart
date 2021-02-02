@@ -1,17 +1,17 @@
 import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
-import 'package:IITDAPP/values/Constants.dart';
+// import 'package:IITDAPP/values/Constants.dart';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-import 'dart:async';
-import 'dart:convert';
+// import 'package:http/http.dart' as http;
+// import 'dart:async';
+// import 'dart:convert';
 
-import 'package:IITDAPP/modules/events/globals.dart';
-import 'package:localstorage/localstorage.dart';
+// import 'package:IITDAPP/modules/events/globals.dart';
+// import 'package:localstorage/localstorage.dart';
 import 'package:provider/provider.dart';
-import '../home.dart';
+// import '../home.dart';
 import './events_page.dart';
-import './event_class.dart';
+// import './event_class.dart';
 
 Widget loadingIcon(context) {
   return Center(

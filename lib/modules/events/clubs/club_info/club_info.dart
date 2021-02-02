@@ -1,16 +1,16 @@
-import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
-import 'package:IITDAPP/values/Constants.dart';
+// import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
+// import 'package:IITDAPP/values/Constants.dart';
 
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'dart:async';
+// import 'package:http/http.dart' as http;
+// import 'dart:convert';
+// import 'dart:async';
 
 import '../club_class.dart';
-import './club_about.dart';
+// import './club_about.dart';
 import './club_events.dart';
 import './club_info_card.dart';
 import '../../events/event_class.dart';
@@ -61,36 +61,35 @@ class ClubInfoState extends State<ClubInfo> {
     // events = getClubEvents(_club.id);
   }
 
-  void reload() {
-    setState(() {});
-  }
-
   @override
   Widget build(BuildContext context) {
-    events = Provider.of<EventsTabProvider>(context, listen: false).allEvents.where((element) => element.eventBody.id == _club.id).toList();
-    events.sort((a, b) {
-      return a.startsAt.compareTo(b.startsAt);
-    });
-    events.sort((a, b) {
-      if (a.isStarred == b.isStarred) return 0;
-      return (a.isStarred) ? -1 : 1;
-    });
+    // events = Provider.of<EventsTabProvider>(context, listen: false)
+    //     .allEvents
+    //     .where((element) => element.eventBody.id == _club.id)
+    //     .toList();
+    // events.sort((a, b) {
+    //   return a.startsAt.compareTo(b.startsAt);
+    // });
+    // events.sort((a, b) {
+    //   if (a.isStarred == b.isStarred) return 0;
+    //   return (a.isStarred) ? -1 : 1;
+    // });
     return Scaffold(
-      backgroundColor:
-          Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
-      appBar: GradientAppBar(
-        title: Text('Club'),
-        centerTitle: true,
-        backgroundColorStart:
-            Provider.of<ThemeModel>(context).theme.APP_BAR_START,
-        backgroundColorEnd: Provider.of<ThemeModel>(context).theme.APP_BAR_END,
-        // actions: <Widget>[ProfileIcon()],
-      ),
-      body: ListView(
-        children: <Widget>[
+        backgroundColor:
+            Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
+        appBar: GradientAppBar(
+          title: Text('Club'),
+          centerTitle: true,
+          backgroundColorStart:
+              Provider.of<ThemeModel>(context).theme.APP_BAR_START,
+          backgroundColorEnd:
+              Provider.of<ThemeModel>(context).theme.APP_BAR_END,
+          // actions: <Widget>[ProfileIcon()],
+        ),
+        body: ListView(children: <Widget>[
           ClubInfoCard(_club),
-          ClubAbout(_club.clubAbout),
-          ClubEvents(events, reload)])
-          );
+          // ClubAbout(_club.clubAbout),
+          ClubEvents(_club.id)
+        ]));
   }
 }

@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:http/http.dart' as http;
-import 'package:IITDAPP/modules/events/globals.dart';
+// import 'package:IITDAPP/modules/events/globals.dart';
 
 import '../club_class.dart';
 

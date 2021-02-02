@@ -1,4 +1,6 @@
 import 'package:IITDAPP/ThemeModel.dart';
+// import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
+import 'package:IITDAPP/modules/login/LoginStateProvider.dart';
 import 'package:IITDAPP/modules/login/user_class.dart';
 // import 'package:IITDAPP/modules/login/userlogin/signup_page.dart';
 import 'package:IITDAPP/values/Constants.dart';
@@ -15,15 +17,16 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../casi_user.dart';
 
 void onLoginSuccess(
-    BuildContext context, String newtoken, Function onlogin) async {
+    BuildContext context, String newtoken) async {
   print('newtoken: $newtoken');
   // ignore: unawaited_futures
-  showLoading(context);
+  if (!Provider.of<LoginStateProvider>(context, listen: false).loading) showLoading(context);
   final storage = FlutterSecureStorage();
   print('Getting User Info');
   final response = await http
       .get('$url/api/user/me', headers: {'authorization': 'Bearer $newtoken'});
   print('got user info response');
+  print(response.body);
   if (response.statusCode == 200) {
     var parsedJson = json.decode(response.body);
     currentUser = User.fromJson(parsedJson['data']);
@@ -34,17 +37,17 @@ void onLoginSuccess(
     var topr = await storage.read(key: 'token');
     print(topr);
     token = newtoken;
-    Navigator.pop(context);
-    onlogin();
+    if (!Provider.of<LoginStateProvider>(context, listen: false).loading) Navigator.pop(context);
+    Provider.of<LoginStateProvider>(context, listen: false).signIn();
   } else {
     print('Could not get user info.');
-    Navigator.pop(context);
+    if (!Provider.of<LoginStateProvider>(context, listen: false).loading) Navigator.pop(context);
     await showErrorAlert(
         context, 'Login Failed', 'Something went wrong. Please Try Again');
   }
 }
 
-Future login(BuildContext context, Function onlogin, {bool pop = true}) async {
+Future login(BuildContext context, {bool pop = true}) async {
   print('loggin in');
   final storage = FlutterSecureStorage();
   // SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -60,11 +63,11 @@ Future login(BuildContext context, Function onlogin, {bool pop = true}) async {
     var user = await CasiLogin.fromToken(oldToken).refreshToken(
         onRefreshSuccess: (String newToken) {
       print(newToken);
-      onLoginSuccess(context, newToken, onlogin);
+      onLoginSuccess(context, newToken);
     });
   } catch (e) {
     await CasiLogin(clientId, secret, onSuccess: (String token, CasiUser user) {
-      onLoginSuccess(context, token, onlogin);
+      onLoginSuccess(context, token);
     }, onError: (dynamic e) {
       showDialog(
         context: context,
@@ -85,9 +88,9 @@ Future login(BuildContext context, Function onlogin, {bool pop = true}) async {
 }
 
 class LoginPage extends StatefulWidget {
-  final Function onlogin;
+  // final Function onlogin;
 
-  LoginPage({this.onlogin});
+  // LoginPage({this.onlogin});
 
   @override
   State<StatefulWidget> createState() {
@@ -133,8 +136,9 @@ class LoginPageState extends State<LoginPage> {
                           .LOGIN_BUTTON_COLOR,
                       onPressed: () async {
                         // unawaited(showLoading(context));
-                        await login(context, widget.onlogin);
+                        await login(context);
                         // widget.onlogin();
+                        // Provider.of<LoginStateProvider>(context, listen: false).signIn();
                       },
                     ),
                   ),
@@ -143,7 +147,8 @@ class LoginPageState extends State<LoginPage> {
                     child: InkWell(
                       onTap: () {
                         guest = true;
-                        widget.onlogin();
+                        // widget.onlogin();
+                        Provider.of<LoginStateProvider>(context, listen: false).signIn();
 //                          Navigator.push(
 //                              context,
 //                              MaterialPageRoute(

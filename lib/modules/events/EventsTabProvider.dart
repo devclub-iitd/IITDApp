@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:IITDAPP/modules/events/events/event_class.dart';
-import 'package:IITDAPP/modules/events/globals.dart';
+// import 'package:IITDAPP/modules/events/globals.dart';
 // import 'package:IITDAPP/modules/events/home.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
@@ -269,7 +269,7 @@ class EventsTabProvider extends ChangeNotifier {
       });
     }
 
-    print("evlistmade");
+    print('evlistmade');
     print(_todayEvents);
     notifyListeners();
   }

@@ -7,15 +7,15 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:pedantic/pedantic.dart';
-import 'package:IITDAPP/modules/events/globals.dart';
+// import 'package:pedantic/pedantic.dart';
+// import 'package:IITDAPP/modules/events/globals.dart';
 import '../event_class.dart';
 
 class StarButton extends StatefulWidget {
   final Event _event;
-  final Function _reorderList;
+  // final Function _reorderList;
 
-  StarButton(this._event, this._reorderList);
+  StarButton(this._event);
 
   @override
   State<StatefulWidget> createState() {
@@ -27,14 +27,14 @@ class StarButtonState extends State<StarButton> {
   Icon _icon;
   String _toolTip;
   Event _event;
-  Function _reorderList;
+  // Function _reorderList;
   Function onpress;
   bool isLoading;
 
   @override
   void initState() {
     super.initState();
-    _reorderList = widget._reorderList;
+    // _reorderList = widget._reorderList;
     // _event = Provider.of<EventsTabProvider>(context).allEvents.firstWhere((element) => element.eventid == widget._event.eventid);
     _event = widget._event;
     isLoading = false;

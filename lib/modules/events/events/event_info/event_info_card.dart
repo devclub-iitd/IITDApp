@@ -6,15 +6,15 @@ import 'package:auto_size_text/auto_size_text.dart';
 import '../event_class.dart';
 import '../event_card_contents/event_time.dart';
 import '../event_card_contents/event_venue.dart';
-import '../../clubs/club_info/club_info.dart';
+// import '../../clubs/club_info/club_info.dart';
 import './star_button.dart';
 
 class EventInfoCard extends StatelessWidget {
   final Event _event;
-  final Function _refreshLists;
+  // final Function _refreshLists;
   final bool showButton;
 
-  EventInfoCard(this._event, this._refreshLists, {this.showButton = true});
+  EventInfoCard(this._event, {this.showButton = true});
   @override
   Widget build(BuildContext context) {
     var actionRow = <Widget>[];
@@ -26,7 +26,7 @@ class EventInfoCard extends StatelessWidget {
       iconSize: 20,
     ));
     actionRow.add(
-      StarButton(_event, _refreshLists),
+      StarButton(_event),
     );
     // if (showButton) {
     //   actionRow.add(FlatButton(
