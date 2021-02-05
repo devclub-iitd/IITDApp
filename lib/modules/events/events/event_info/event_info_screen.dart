@@ -27,10 +27,10 @@ Future<Event> getEvent(String eventid) async {
 
 class EventInfo extends StatefulWidget {
   final String id;
-  final Function _reorderLists;
+  // final Function _reorderLists;
   final bool showButton;
 
-  EventInfo(this.id, this._reorderLists, {this.showButton = true});
+  EventInfo(this.id, {this.showButton = true});
 
   @override
   State<StatefulWidget> createState() {
@@ -68,7 +68,6 @@ class EventInfoState extends State<EventInfo> {
               children: <Widget>[
                 EventInfoCard(
                   snapshot.data,
-                  widget._reorderLists,
                   showButton: widget.showButton,
                 ),
                 EventAbout(snapshot.data),

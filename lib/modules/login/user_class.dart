@@ -36,8 +36,9 @@ class User {
     // ignore: prefer_collection_literals
     var superadminof = List<UClub>();
     for (var i = 0; i < json['superAdminOf'].length; i++) {
-      adminof.add(UClub.fromJson(json['superAdminOf'][i]));
-      superadminof.add(UClub.fromJson(json['superAdminOf'][i]));
+      var _uclub = UClub.fromJson(json['superAdminOf'][i]);
+      if (adminof.contains(_uclub)) adminof.add(_uclub);
+      superadminof.add(_uclub);
     }
     return User(
         name: json['name'],

@@ -26,7 +26,7 @@ class MyEventsList extends StatelessWidget {
     }
     return ListView.builder(
       key: PageStorageKey('myEventsList'),
-      physics: NeverScrollableScrollPhysics(),
+      // physics: NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: _events.length,
       padding: const EdgeInsets.symmetric(vertical: 10),

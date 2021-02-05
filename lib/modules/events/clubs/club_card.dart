@@ -1,3 +1,4 @@
+import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:provider/provider.dart';
@@ -8,14 +9,14 @@ import 'package:http/http.dart' as http;
 // import 'dart:convert';
 
 import './club_class.dart';
-import 'package:IITDAPP/modules/events/globals.dart';
+// import 'package:IITDAPP/modules/events/globals.dart';
 import './club_info/club_info.dart';
 
 class ClubCard extends StatefulWidget {
   final Club club;
-  final Function _onAddPress;
+  // final Function _onAddPress;
 
-  ClubCard(this.club, this._onAddPress, Key key) : super(key: key);
+  ClubCard(this.club, Key key) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -35,7 +36,7 @@ class ClubCardState extends State<ClubCard> {
     print('initState ${widget.club.clubName}');
     onPress = onButtonPress;
     _club = widget.club;
-    refresh = widget._onAddPress;
+    // refresh = widget._onAddPress;
   }
 
   Future onButtonPress() async {
@@ -58,19 +59,20 @@ class ClubCardState extends State<ClubCard> {
     }
     print(response.statusCode);
     if (response.statusCode == 200) {
-      _club.isSubbed = !_club.isSubbed;
-      if (_club.isSubbed) {
-        otherClubs.remove(_club);
-        subbedClubs.add(_club);
-      } else {
-        subbedClubs.remove(_club);
-        otherClubs.add(_club);
-      }
+      Provider.of<EventsTabProvider>(context, listen: false).toggleClubSubscribe(_club.id);
+      // _club.isSubbed = !_club.isSubbed;
+      // if (_club.isSubbed) {
+      //   otherClubs.remove(_club);
+      //   subbedClubs.add(_club);
+      // } else {
+      //   subbedClubs.remove(_club);
+      //   otherClubs.add(_club);
+      // }
     }
     color = Provider.of<ThemeModel>(context, listen: false)
         .theme
         .PRIMARY_TEXT_COLOR;
-    refresh();
+    // refresh();
   }
 
   // Future onSub() async {
@@ -98,7 +100,7 @@ class ClubCardState extends State<ClubCard> {
         await Navigator.push(
             context, MaterialPageRoute(builder: (context) => ClubInfo(_club)));
         setState(() {});
-        refresh();
+        // refresh();
       },
       child: Container(
         decoration: BoxDecoration(

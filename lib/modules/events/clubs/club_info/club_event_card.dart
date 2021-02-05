@@ -25,7 +25,6 @@ class ClubEventCard extends StatelessWidget {
           MaterialPageRoute(
               builder: (context) => EventInfo(
                     _event.eventid,
-                    () {},
                     showButton: false,
                   )),
         ).then((value) {
@@ -49,7 +48,7 @@ class ClubEventCard extends StatelessWidget {
                       .withOpacity(0.1))
             ]),
         padding: EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-        margin: EdgeInsets.symmetric(vertical: 7),
+        margin: EdgeInsets.symmetric(vertical: 7, horizontal: 5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -78,7 +77,7 @@ class ClubEventCard extends StatelessWidget {
                       Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
                   tooltip: 'Add to Calendar',
                 ),
-                StarButton(_event, () {}),
+                StarButton(_event),
               ],
             ),
             Row(

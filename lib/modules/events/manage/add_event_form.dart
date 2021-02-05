@@ -1,3 +1,4 @@
+import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
 import 'package:IITDAPP/modules/login/user_class.dart';
 import 'package:IITDAPP/values/Constants.dart';
 
@@ -12,7 +13,7 @@ import 'package:intl/intl.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:validators/validators.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+// import 'dart:convert';
 import 'dart:async';
 
 import '../events/event_class.dart';
@@ -23,19 +24,24 @@ Future<void> addEventRequest(Event event, BuildContext context) async {
       headers: {'authorization': 'Bearer $token'}, body: event.toMap());
   print(event.toMap());
   if (response.statusCode == 200) {
-    var parsedJson = json.decode(response.body);
-    if (parsedJson['message'] == 'Event Created Successfully') {
-      Navigator.popUntil(
-          context, ModalRoute.withName(Navigator.defaultRouteName));
-      scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text('Event Added'),
-      ));
-    } else {
-      Navigator.pop(context);
-      scaffoldKey.currentState.showSnackBar(SnackBar(
-        content: Text('Cannot add event. Try Again'),
-      ));
-    }
+    await Provider.of<EventsTabProvider>(context, listen: false).getData();
+    // var parsedJson = json.decode(response.body);
+    // if (parsedJson['message'] == 'Event Created Successfully') {
+    // Navigator.popUntil(
+    //     context, ModalRoute.withName('/events'));
+
+    //Fix this to use named routes
+    var count = 0;
+    Navigator.of(context).popUntil((_) => count++ >= 2);
+    scaffoldKey.currentState.showSnackBar(SnackBar(
+      content: Text('Event Added'),
+    ));
+    // } else {
+    //   Navigator.pop(context);
+    //   scaffoldKey.currentState.showSnackBar(SnackBar(
+    //     content: Text('Cannot add event. Try Again'),
+    //   ));
+    // }
   } else {
     Navigator.pop(context);
     Scaffold.of(context).showSnackBar(SnackBar(
@@ -96,6 +102,11 @@ class _EventFormState extends State<EventForm> {
               decoration: InputDecoration(
                   alignLabelWithHint: true,
                   labelText: 'Event Name',
+                  labelStyle: TextStyle(
+                      color: Provider.of<ThemeModel>(context, listen: false)
+                          .theme
+                          .PRIMARY_TEXT_COLOR
+                          .withOpacity(0.5)),
                   helperText: ''),
               keyboardType: TextInputType.multiline,
               maxLines: null,
@@ -131,6 +142,11 @@ class _EventFormState extends State<EventForm> {
               decoration: InputDecoration(
                 alignLabelWithHint: true,
                 labelText: 'Organizer',
+                labelStyle: TextStyle(
+                    color: Provider.of<ThemeModel>(context, listen: false)
+                        .theme
+                        .PRIMARY_TEXT_COLOR
+                        .withOpacity(0.5)),
                 helperText: '',
                 contentPadding: EdgeInsets.symmetric(vertical: 0),
               ),
@@ -142,7 +158,14 @@ class _EventFormState extends State<EventForm> {
             ),
             TextFormField(
               decoration: InputDecoration(
-                  alignLabelWithHint: true, labelText: 'Venue', helperText: ''),
+                  alignLabelWithHint: true,
+                  labelText: 'Venue',
+                  labelStyle: TextStyle(
+                      color: Provider.of<ThemeModel>(context, listen: false)
+                          .theme
+                          .PRIMARY_TEXT_COLOR
+                          .withOpacity(0.5)),
+                  helperText: ''),
               keyboardType: TextInputType.multiline,
               maxLines: null,
               style: TextStyle(
@@ -185,6 +208,11 @@ class _EventFormState extends State<EventForm> {
               decoration: InputDecoration(
                   alignLabelWithHint: true,
                   labelText: 'Starts At',
+                  labelStyle: TextStyle(
+                    color: Provider.of<ThemeModel>(context, listen: false)
+                        .theme
+                        .PRIMARY_TEXT_COLOR
+                        .withOpacity(0.5)),
                   floatingLabelBehavior: FloatingLabelBehavior.auto,
                   helperText: ''),
               style: TextStyle(
@@ -230,6 +258,11 @@ class _EventFormState extends State<EventForm> {
               decoration: InputDecoration(
                   alignLabelWithHint: true,
                   labelText: 'Ends At',
+                  labelStyle: TextStyle(
+                    color: Provider.of<ThemeModel>(context, listen: false)
+                        .theme
+                        .PRIMARY_TEXT_COLOR
+                        .withOpacity(0.5)),
                   floatingLabelBehavior: FloatingLabelBehavior.auto,
                   helperText: ''),
               style: TextStyle(
@@ -254,6 +287,11 @@ class _EventFormState extends State<EventForm> {
               decoration: InputDecoration(
                   alignLabelWithHint: true,
                   labelText: 'Event About',
+                  labelStyle: TextStyle(
+                    color: Provider.of<ThemeModel>(context, listen: false)
+                        .theme
+                        .PRIMARY_TEXT_COLOR
+                        .withOpacity(0.5)),
                   helperText: ''),
               keyboardType: TextInputType.multiline,
               maxLines: null,
@@ -276,6 +314,11 @@ class _EventFormState extends State<EventForm> {
               decoration: InputDecoration(
                   alignLabelWithHint: true,
                   labelText: 'Image Link',
+                  labelStyle: TextStyle(
+                    color: Provider.of<ThemeModel>(context, listen: false)
+                        .theme
+                        .PRIMARY_TEXT_COLOR
+                        .withOpacity(0.5)),
                   helperText: ''),
               keyboardType: TextInputType.multiline,
               maxLines: null,
