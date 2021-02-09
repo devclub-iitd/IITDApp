@@ -163,10 +163,7 @@ class NewsPage extends StatelessWidget {
                                     MarkdownStyleSheet(textScaleFactor: 1.2),
                               )),
                   ),
-                  if (redirectPossible &&
-                      (currentUser.isAdmin ||
-                          currentUser.isSuperAdmin ||
-                          currentUser.isSSAdmin))
+                  if (redirectPossible && showEdit)
                     FlatButton(
                         color: (syncItem.details.status == Status.COMPLETED &&
                                 syncItem.reports.isNotEmpty)

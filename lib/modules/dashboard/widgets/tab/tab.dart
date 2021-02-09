@@ -151,7 +151,7 @@ class _GeneralTabState extends State<GeneralTab> {
                     ),
                   ),
               separatorBuilder: (_, i) => Divider(
-                    height: 5,
+                    height: 10,
                     thickness: 0,
                   ),
               itemCount: tabData.length),

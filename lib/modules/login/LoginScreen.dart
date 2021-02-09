@@ -242,7 +242,8 @@ class LoginScreenState extends State<LoginScreen>
           ),
         );
       } else if (provider.signedIn) {
-        return getScreenFromTag(defaultScreen);
+        return getScreenFromTag(
+            currentUser == null ? 'Explore' : defaultScreen);
       } else {
         return LoginPage();
       }

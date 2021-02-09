@@ -67,10 +67,18 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
   @override
   void dispose() {
     print('disposing dashboard');
-    atdp.dispose();
-    etdp.dispose();
-    ntdp.dispose();
-    _tabController.dispose();
+    if (atdp != null) {
+      atdp.dispose();
+    }
+    if (etdp != null) {
+      etdp.dispose();
+    }
+    if (ntdp != null) {
+      ntdp.dispose();
+    }
+    if (_tabController != null) {
+      _tabController.dispose();
+    }
     super.dispose();
   }
 
@@ -99,7 +107,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
           cnp: Provider.of<NewsProvider<RecentNews>>(context, listen: false),
           getCacheData: (NewsProvider<RecentNews> item) => item.displayedData,
           da: dashboardAlerts,
-          limit: 4));
+          limit: 10));
     }
     tabList.add(Tab(child: TabHead<AttendanceProvider>(title: 'Attendance')));
     tabList.add(Tab(
@@ -180,7 +188,8 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
                       tabs: tabList),
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.3,
+                  // margin: EdgeInsets.all(1),
+                  height: MediaQuery.of(context).size.height * 0.4,
                   child: TabBarView(
                       controller: _tabController,
                       children: tabList

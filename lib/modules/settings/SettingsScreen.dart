@@ -8,9 +8,7 @@ import 'package:IITDAPP/modules/settings/widgets/DarkModeSwitch.dart';
 import 'package:IITDAPP/modules/settings/widgets/SettingsTextWidgets.dart';
 import 'package:IITDAPP/routes/Routes.dart';
 import 'package:IITDAPP/values/Constants.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:gradient_app_bar/gradient_app_bar.dart';
-import 'package:localstorage/localstorage.dart';
 
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -145,28 +143,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     title: Text('Change Course Details'),
                     trailing: Icon(Icons.keyboard_arrow_right),
                   ),
-                  CustomDivider(),
-                  ListTile(
-                    leading: Icon(
-                      Icons.logout,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.purpleAccent
-                          : Colors.purple,
+                  if (currentUser != null) CustomDivider(),
+                  if (currentUser != null)
+                    ListTile(
+                      leading: Icon(
+                        Icons.logout,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.purpleAccent
+                            : Colors.purple,
+                      ),
+                      title: Text('Sign Out'),
+                      trailing: Icon(Icons.keyboard_arrow_right),
+                      onTap: () {
+                        context.read<LoginStateProvider>().signOut().then(
+                            (value) => Navigator.pushReplacementNamed(
+                                context, Routes.loginPage));
+                      },
                     ),
-                    title: Text('Sign Out'),
-                    trailing: Icon(Icons.keyboard_arrow_right),
-                    onTap: () async {
-                      final storage = FlutterSecureStorage();
-                      await storage.delete(key: 'email');
-                      await storage.delete(key: 'password');
-                      await storage.delete(key: 'token');
-                      var ls = LocalStorage('iitapp');
-                      currentUser = null;
-                      await ls.clear().then((value) =>
-                          Navigator.pushReplacementNamed(
-                              context, Routes.loginPage));
-                    },
-                  ),
                 ],
               ),
             ),
@@ -274,15 +267,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     MaterialPageRoute(builder: (context) => AboutScreen()));
               },
             ),
-            SettingsTextButton(
-              text: 'Logout',
-              onTap: () async {
-                await Provider.of<LoginStateProvider>(context, listen: false)
-                    .signOut()
-                    .then((value) => Navigator.pushReplacementNamed(
-                        context, Routes.loginPage));
-              },
-            )
+            // SettingsTextButton(
+            //   text: 'Logout',
+            //   onTap: () async {
+            //     await Provider.of<LoginStateProvider>(context, listen: false)
+            //         .signOut()
+            //         .then((value) => Navigator.pushReplacementNamed(
+            //             context, Routes.loginPage));
+            //   },
+            // )
           ],
         ),
       ),

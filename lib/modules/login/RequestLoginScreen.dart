@@ -1,6 +1,6 @@
-import 'package:IITDAPP/modules/login/LoginScreen.dart';
-
 import 'package:IITDAPP/ThemeModel.dart';
+import 'package:IITDAPP/modules/login/LoginStateProvider.dart';
+import 'package:IITDAPP/routes/Routes.dart';
 import 'package:provider/provider.dart';
 //import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
@@ -51,7 +51,8 @@ class _RequestLoginScreenState extends State<RequestLoginScreen> {
             FlatButton(
               onPressed: () {
                 // getToken();
-                Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+                context.read<LoginStateProvider>().signOut().then((value) =>
+                    Navigator.pushReplacementNamed(context, Routes.loginPage));
               },
               color: Provider.of<ThemeModel>(context)
                   .theme

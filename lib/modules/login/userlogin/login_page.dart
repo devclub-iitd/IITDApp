@@ -16,8 +16,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../casi_user.dart';
 
-void onLoginSuccess(
-    BuildContext context, String newtoken) async {
+void onLoginSuccess(BuildContext context, String newtoken) async {
   print('newtoken: $newtoken');
   // ignore: unawaited_futures
   if (!Provider.of<LoginStateProvider>(context, listen: false).loading) showLoading(context);
@@ -155,7 +154,8 @@ class LoginPageState extends State<LoginPage> {
                       onTap: () {
                         guest = true;
                         // widget.onlogin();
-                        Provider.of<LoginStateProvider>(context, listen: false).signIn();
+                        Provider.of<LoginStateProvider>(context, listen: false)
+                            .signIn();
 //                          Navigator.push(
 //                              context,
 //                              MaterialPageRoute(
