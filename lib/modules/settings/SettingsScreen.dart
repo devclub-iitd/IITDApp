@@ -1,5 +1,6 @@
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/modules/about/about.dart';
+import 'package:IITDAPP/modules/login/LoginStateProvider.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsData.dart';
 import 'package:IITDAPP/modules/settings/screens/IndivScreenSettings.dart';
 import 'package:IITDAPP/modules/settings/utility/ResetSharedPrefs.dart';
@@ -271,6 +272,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => AboutScreen()));
+              },
+            ),
+            SettingsTextButton(
+              text: 'Logout',
+              onTap: () async {
+                await Provider.of<LoginStateProvider>(context, listen: false)
+                    .signOut()
+                    .then((value) => Navigator.pushReplacementNamed(
+                        context, Routes.loginPage));
               },
             )
           ],
