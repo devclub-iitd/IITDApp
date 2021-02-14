@@ -1,4 +1,4 @@
-import 'package:IITDAPP/modules/attendance/attendance.dart';
+import 'package:IITDAPP/modules/attendance/EmptyScreen.dart';
 import 'package:IITDAPP/modules/calendar/calendar.dart';
 import 'package:IITDAPP/modules/dashboard/dashboard.dart';
 import 'package:IITDAPP/modules/events/home.dart';
@@ -10,15 +10,54 @@ import 'package:IITDAPP/modules/quickLinks/quickLinks.dart';
 import 'package:IITDAPP/modules/map/map.dart';
 import 'package:IITDAPP/modules/settings/SettingsScreen.dart';
 import 'package:IITDAPP/routes/Routes.dart';
+import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
+    if (currentUser == null) {
+      switch (settings.name) {
+        case Routes.dashboard:
+        case Routes.news:
+        case Routes.events:
+        case Routes.calendar:
+          return _createRoute(RequestLoginScreen(
+              settings.name[1].toUpperCase() + settings.name.substring(2)));
+        case Routes.attendance:
+          return _createRoute(EmptyScreen(
+            title: 'Attendance',
+            message: 'Coming Soon!',
+            tag: 'Attendance',
+          ));
+        case Routes.explore:
+          return _createRoute(Explore());
+        case Routes.map:
+          return _createRoute(Map());
+        case Routes.quickLinks:
+          return _createRoute(QuickLinks());
+        case Routes.reqLogin:
+          return _createRoute(RequestLoginScreen(settings.arguments));
+        case Routes.loginPage:
+          return _createRoute(LoginScreen());
+        case Routes.settingsPage:
+          return _createRoute(SettingsScreen());
+        default:
+          return MaterialPageRoute(
+              builder: (_) => Scaffold(
+                    body: Center(
+                        child: Text('No route defined for ${settings.name}')),
+                  ));
+      }
+    }
     switch (settings.name) {
       case Routes.dashboard:
         return _createRoute(Dashboard());
       case Routes.attendance:
-        return _createRoute(Attendance());
+        return _createRoute(EmptyScreen(
+          title: 'Attendance',
+          message: 'Coming Soon!',
+          tag: 'Attendance',
+        ));
       case Routes.explore:
         return _createRoute(Explore());
       case Routes.map:

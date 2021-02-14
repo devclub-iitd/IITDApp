@@ -76,8 +76,8 @@ class ClubsTab extends StatelessWidget {
     // return FutureBuilder(
     //   future: getClubs(),
     //   builder: (context, snapshot) {
-      return Consumer<EventsTabProvider>(
-        builder: (context, provider, child) {
+    return Consumer<EventsTabProvider>(
+      builder: (context, provider, child) {
         if (provider.error) {
           return Center(
             child: Text(

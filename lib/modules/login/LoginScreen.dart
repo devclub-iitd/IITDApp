@@ -127,11 +127,12 @@ class LoginScreenState extends State<LoginScreen>
   @override
   void initState() {
     super.initState();
-    
+
     print('startup');
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-    await Provider.of<LoginStateProvider>(context, listen: false).checklogin(context);
-  });
+      await Provider.of<LoginStateProvider>(context, listen: false)
+          .checklogin(context);
+    });
     // loginFunc = onlogin;
     // logoutFunc = onlogout;
     // start = true;
@@ -241,7 +242,8 @@ class LoginScreenState extends State<LoginScreen>
           ),
         );
       } else if (provider.signedIn) {
-        return getScreenFromTag(defaultScreen);
+        return getScreenFromTag(
+            currentUser == null ? 'Explore' : defaultScreen);
       } else {
         return LoginPage();
       }

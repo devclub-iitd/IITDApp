@@ -28,6 +28,7 @@ class LoginStateProvider extends ChangeNotifier {
     await storage.delete(key: 'token');
     // storage.deleteAll();
     token = null;
+    currentUser = null;
     var ls = LocalStorage('iitapp');
     await ls.clear();
     // await deleteSharedPrefs();

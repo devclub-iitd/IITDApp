@@ -1,6 +1,6 @@
-import 'package:IITDAPP/modules/login/LoginScreen.dart';
-
 import 'package:IITDAPP/ThemeModel.dart';
+import 'package:IITDAPP/modules/login/LoginStateProvider.dart';
+import 'package:IITDAPP/routes/Routes.dart';
 import 'package:provider/provider.dart';
 //import 'package:IITDAPP/values/colors/Constants.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
@@ -41,23 +41,28 @@ class _RequestLoginScreenState extends State<RequestLoginScreen> {
               child: Text(
                 'You need to login to continue',
                 style: TextStyle(
-                    fontSize: 18,
+                    fontSize: 22,
+                    fontWeight: FontWeight.w300,
                     color: Provider.of<ThemeModel>(context)
                         .theme
-                        .RAISED_BUTTON_FOREGROUND),
+                        .PRIMARY_TEXT_COLOR),
               ),
             ),
             FlatButton(
               onPressed: () {
                 // getToken();
-                Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+                context.read<LoginStateProvider>().signOut().then((value) =>
+                    Navigator.pushReplacementNamed(context, Routes.loginPage));
               },
               color: Provider.of<ThemeModel>(context)
                   .theme
                   .RAISED_BUTTON_BACKGROUND,
               child: Text(
                 'LOGIN NOW',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(
+                    color: Provider.of<ThemeModel>(context)
+                        .theme
+                        .RAISED_BUTTON_FOREGROUND),
               ),
             ),
           ],

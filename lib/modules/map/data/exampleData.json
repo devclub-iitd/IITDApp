@@ -621,6 +621,7 @@
         "name": "Department of Computer Science & Engineering  ",
         "img":"https://photos.wikimapia.org/p/00/00/30/72/84_big.jpg",
         "short": "C.S.E. Department",
+        "category": "academic",
         "infoUrl": "https://www.cse.iitd.ernet.in/index.php/2011-12-29-22-45-50/courses",
         "mapUrl": "https://www.google.com/maps/place/Department+of+Computer+Science+and+Engineering/@28.5450865,77.1885222,17z/data=!3m1!4b1!4m5!3m4!1s0x390d1df6aeec8f6b:0xd6886dc6b70b6eb!8m2!3d28.5450865!4d77.1907109",
         "phoneUrl": "+911126591291",

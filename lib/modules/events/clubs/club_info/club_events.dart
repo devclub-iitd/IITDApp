@@ -16,7 +16,8 @@ class ClubEvents extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<EventsTabProvider>(builder: (context, provider, child) {
-      var _clubEvents = provider.allEvents.where((element) => element.eventBody.id == _clubId);
+      var _clubEvents = provider.allEvents
+          .where((element) => element.eventBody.id == _clubId);
       var _upcomingEvents = _clubEvents
           .where((element) => element.endsAt.isAfter(DateTime.now()))
           .toList();
@@ -63,8 +64,7 @@ class ClubEvents extends StatelessWidget {
                                       .withOpacity(0.1))
                             ]),
                         child: TabBar(
-                          labelColor:
-                              Theme.of(context).primaryColor,
+                          labelColor: Theme.of(context).primaryColor,
                           unselectedLabelColor: Theme.of(context)
                               .textTheme
                               .headline1
@@ -81,8 +81,7 @@ class ClubEvents extends StatelessWidget {
                         ),
                       ),
                       Expanded(
-                          child: 
-                          TabBarView(children: [
+                          child: TabBarView(children: [
                         _clubEventsList(_upcomingEvents, context),
                         _clubEventsList(_pastEvents, context)
                       ]))

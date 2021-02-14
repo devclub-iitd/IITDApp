@@ -77,7 +77,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           .SCAFFOLD_BACKGROUND,
       appBar: GradientAppBar(
           title: Text('Settings'),
-          actions: <Widget>[PopupMenu(forceUpdateScreen)],
+          actions: <Widget>[ResetButton(resetMethod: forceUpdateScreen)],
           backgroundColorStart:
               Provider.of<ThemeModel>(context).theme.APP_BAR_START,
           backgroundColorEnd:
@@ -100,7 +100,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               child: ListTile(
                 leading: CircleAvatar(
                   backgroundImage: CachedNetworkImageProvider(
-                      'https://images.pexels.com/photos/1458332/pexels-photo-1458332.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500'),
+                      'https://www.nacdnet.org/wp-content/uploads/2016/06/person-placeholder.jpg'),
                 ),
                 title: Text(
                   currentUser != null ? currentUser.name : 'Guest',
@@ -143,6 +143,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     title: Text('Change Course Details'),
                     trailing: Icon(Icons.keyboard_arrow_right),
                   ),
+                  if (currentUser != null) CustomDivider(),
+                  if (currentUser != null)
+                    ListTile(
+                      leading: Icon(
+                        Icons.logout,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.purpleAccent
+                            : Colors.purple,
+                      ),
+                      title: Text('Sign Out'),
+                      trailing: Icon(Icons.keyboard_arrow_right),
+                      onTap: () {
+                        context.read<LoginStateProvider>().signOut().then(
+                            (value) => Navigator.pushReplacementNamed(
+                                context, Routes.loginPage));
+                      },
+                    ),
                 ],
               ),
             ),
@@ -250,15 +267,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     MaterialPageRoute(builder: (context) => AboutScreen()));
               },
             ),
-            SettingsTextButton(
-              text: 'Logout',
-              onTap: () async {
-                await Provider.of<LoginStateProvider>(context, listen: false)
-                    .signOut()
-                    .then((value) => Navigator.pushReplacementNamed(
-                        context, Routes.loginPage));
-              },
-            )
+            // SettingsTextButton(
+            //   text: 'Logout',
+            //   onTap: () async {
+            //     await Provider.of<LoginStateProvider>(context, listen: false)
+            //         .signOut()
+            //         .then((value) => Navigator.pushReplacementNamed(
+            //             context, Routes.loginPage));
+            //   },
+            // )
           ],
         ),
       ),
@@ -312,6 +329,21 @@ class PopupMenu extends StatelessWidget {
       itemBuilder: (BuildContext context) {
         return menuArray;
       },
+    );
+  }
+}
+
+class ResetButton extends StatelessWidget {
+  final resetMethod;
+
+  const ResetButton({Key key, this.resetMethod}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+      icon: Icon(
+        Icons.refresh,
+      ),
+      onPressed: resetMethod,
     );
   }
 }

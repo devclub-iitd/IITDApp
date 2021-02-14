@@ -23,8 +23,10 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) {
     // print("ADMINOF LENGTH: ${json["adminOf"].length}");
-    var iA = (json['adminOf'].length + json['superAdminOf'].length > 0) ? true : false;
-    var iSA = (json['superAdminOf'].length > 0) ? true:false;
+    var iA = (json['adminOf'].length + json['superAdminOf'].length > 0)
+        ? true
+        : false;
+    var iSA = (json['superAdminOf'].length > 0) ? true : false;
     // bool iSA = false;
     // ignore: prefer_collection_literals
     var adminof = List<UClub>();
@@ -33,20 +35,20 @@ class User {
     }
     // ignore: prefer_collection_literals
     var superadminof = List<UClub>();
-    for (var i = 0; i<json['superAdminOf'].length; i++){
+    for (var i = 0; i < json['superAdminOf'].length; i++) {
       var _uclub = UClub.fromJson(json['superAdminOf'][i]);
-      if(adminof.contains(_uclub))adminof.add(_uclub);
+      if (adminof.contains(_uclub)) adminof.add(_uclub);
       superadminof.add(_uclub);
     }
     return User(
-      name: json['name'],
-      email: json['email'],
-      id: json['_id'],
-      isAdmin: iA,
-      isSuperAdmin: iSA,
-      adminof: adminof,
-      superAdminOf: superadminof,
-    );
+        name: json['name'],
+        email: json['email'],
+        id: json['_id'],
+        isAdmin: iA,
+        isSuperAdmin: iSA,
+        adminof: adminof,
+        superAdminOf: superadminof,
+        isSSAdmin: json['superSuperAdmin']);
   }
 }
 
@@ -77,12 +79,9 @@ class Admin extends User {
 
   Admin({this.name, this.email, this.id});
 
-  factory Admin.fromJson(Map<String, dynamic> json){
-    String name = (json.containsKey('name')) ? json['name'] : "Test ${json["email"]}";
-    return Admin(
-      name: name,
-      email: json['email'],
-      id: json['_id']
-    );
+  factory Admin.fromJson(Map<String, dynamic> json) {
+    String name =
+        (json.containsKey('name')) ? json['name'] : "Test ${json["email"]}";
+    return Admin(name: name, email: json['email'], id: json['_id']);
   }
 }

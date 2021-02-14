@@ -63,14 +63,16 @@ class TrendingSection extends StatelessWidget {
             'No News',
             style: TextStyle(
               fontSize: 25,
-              fontWeight: FontWeight.w200,
+              fontWeight: FontWeight.w300,
             ),
           ),
         ),
       );
       if (news.displayedData.data.isNotEmpty) {
         indicator = Indicators(
-          length: NewsProvider.itemsPerPage>news.displayedData.data.length?news.displayedData.data.length:NewsProvider.itemsPerPage,
+          length: NewsProvider.itemsPerPage > news.displayedData.data.length
+              ? news.displayedData.data.length
+              : NewsProvider.itemsPerPage,
         );
         carousel = CarouselSlider.builder(
             itemCount: min(NewsProvider.itemsPerPage, news.maxNewsItems),

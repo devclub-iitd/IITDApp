@@ -92,7 +92,7 @@ class _GeneralTabState extends State<GeneralTab> {
       child: tabData.length == 0
           ? Center(
               child: Text('Nothing New',
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w200)),
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w300)),
             )
           : ListView.separated(
               controller: controller,
@@ -151,7 +151,7 @@ class _GeneralTabState extends State<GeneralTab> {
                     ),
                   ),
               separatorBuilder: (_, i) => Divider(
-                    height: 5,
+                    height: 10,
                     thickness: 0,
                   ),
               itemCount: tabData.length),
@@ -183,8 +183,10 @@ class EventsTab extends StatelessWidget {
         subtitle: (Event item) => item.eventBody.clubName,
         title: (Event item) => item.eventName,
         tabData: tabData,
-        trailing: (Event item) => DateTime.now().isBefore(item.startsAt)
-            ? timeago.format(item.startsAt, allowFromNow: true)
+        trailing: (Event item) => DateTime.now()
+                .isBefore(item.startsAt.subtract(Duration(minutes: 330)))
+            ? timeago.format(item.startsAt.subtract(Duration(minutes: 330)),
+                allowFromNow: true)
             : 'ongoing',
       );
     });

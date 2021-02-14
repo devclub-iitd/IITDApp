@@ -16,8 +16,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../casi_user.dart';
 
-void onLoginSuccess(
-    BuildContext context, String newtoken) async {
+void onLoginSuccess(BuildContext context, String newtoken) async {
   print('newtoken: $newtoken');
   // ignore: unawaited_futures
   if (!Provider.of<LoginStateProvider>(context, listen: false).loading) showLoading(context);
@@ -30,6 +29,7 @@ void onLoginSuccess(
   if (response.statusCode == 200) {
     var parsedJson = json.decode(response.body);
     currentUser = User.fromJson(parsedJson['data']);
+    // print(parsedJson['data']);
     print('Login successful');
     print('newtoken : $newtoken');
     await storage.write(key: 'token', value: newtoken);
@@ -130,7 +130,13 @@ class LoginPageState extends State<LoginPage> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: FlatButton(
-                      child: Text('LOGIN'),
+                      child: Text(
+                        'LOGIN',
+                        style: TextStyle(
+                            color: Provider.of<ThemeModel>(context)
+                                .theme
+                                .RAISED_BUTTON_FOREGROUND),
+                      ),
                       color: Provider.of<ThemeModel>(context)
                           .theme
                           .LOGIN_BUTTON_COLOR,
@@ -148,7 +154,8 @@ class LoginPageState extends State<LoginPage> {
                       onTap: () {
                         guest = true;
                         // widget.onlogin();
-                        Provider.of<LoginStateProvider>(context, listen: false).signIn();
+                        Provider.of<LoginStateProvider>(context, listen: false)
+                            .signIn();
 //                          Navigator.push(
 //                              context,
 //                              MaterialPageRoute(
