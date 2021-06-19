@@ -50,10 +50,10 @@ class CasiLogin {
     _onSuccess = onSuccess ?? _onSuccess;
     _onError = onError ?? _onError;
 
-    var builder =  JWTBuilder();
-    var signer =  JWTHmacSha256Signer(accessToken);
+    var builder = JWTBuilder();
+    var signer = JWTHmacSha256Signer(accessToken);
     builder
-      ..expiresAt =  DateTime.now().add( Duration(minutes: 5))
+      ..expiresAt = DateTime.now().add(Duration(minutes: 5))
       ..setClaim('data', {'clientId': clientId});
 
     var signedToken = builder.getSignedToken(signer);
@@ -68,9 +68,10 @@ class CasiLogin {
   }
 
   Future<void> signIn() async {
-    if (_loginURL == null)
-      {throw Exception('No client ID and client secret found');}
-    final webview =  FlutterWebviewPlugin();
+    if (_loginURL == null) {
+      throw Exception('No client ID and client secret found');
+    }
+    final webview = FlutterWebviewPlugin();
     webview.onUrlChanged.listen((url) async {
       print('URL CHANGED: $url');
 
@@ -79,7 +80,7 @@ class CasiLogin {
         _token = 'mutex';
         try {
           _cookies = await webview.getCookies();
-          _token = _cookies['"_token'].toString();
+          _token = _cookies['"_rememberme'].toString();
           _token = _token.trim().substring(0, _token.length - 1);
           var user = await fetchUserDetails();
           _onSuccess(_token, user);
@@ -102,7 +103,7 @@ class CasiLogin {
 
   Future<CasiUser> fetchUserDetails() async {
     final response = await http.post(_serverUrl + '/profile', headers: {
-      'Cookie': 'token=${_token};',
+      'Cookie': 'rememberme=${_token};',
     });
     final jsonData = jsonDecode(response.body);
     if (response.statusCode == 200) {
@@ -118,7 +119,7 @@ class CasiLogin {
     var toSendToken = oldToken ?? _token;
 
     final response = await http.post(_serverUrl + '/auth/refresh-token',
-        body: {'token': toSendToken});
+        body: {'rememberme': toSendToken});
     final jsonData = jsonDecode(response.body);
     if (response.statusCode == 200) {
       if (onRefreshSuccess != null) {
