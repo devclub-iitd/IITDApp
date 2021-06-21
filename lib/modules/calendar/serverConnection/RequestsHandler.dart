@@ -4,8 +4,8 @@ void getAllEvents(
     var controlEvents, int type, DateTime startTime, DateTime endTime) async {
   print('keep coutning this as well');
   var queryParameters = {
-    'startDate': DateFormat('yyyy-MM-ddTHH:mm:ss').format(startTime) + '.000Z',
-    'endDate': DateFormat('yyyy-MM-ddTHH:mm:ss').format(endTime) + '.000Z'
+    'startDate': DateFormat('yyyy-MM-ddTHH:mm:ss').format(startTime.toUtc()) + '.000Z',
+    'endDate': DateFormat('yyyy-MM-ddTHH:mm:ss').format(endTime.toUtc()) + '.000Z'
   };
   var response = await http.post('$url/api/calendar/all/',
       headers: {'authorization': 'Bearer $token'}, body: queryParameters);
@@ -125,25 +125,14 @@ Future<void> getEventsFromResponse(
 }
 
 bool checkEquality(var localItem, var serverItem, var type) {
+
   if (localItem.title != serverItem['name']) {
     return false;
   }
-  String temp = serverItem['startDate']
-          .substring(0, serverItem['startDate'].indexOf('T')) +
-      ' ' +
-      serverItem['startDate'].substring(
-          serverItem['startDate'].indexOf('T') + 1,
-          serverItem['startDate'].indexOf('Z') - 0);
-  if (localItem.start != DateTime.parse(temp)) {
+  if (localItem.start.toUtc() != DateTime.parse(serverItem['startDate'])) {
     return false;
   }
-  temp =
-      serverItem['endDate'].substring(0, serverItem['endDate'].indexOf('T')) +
-          ' ' +
-          serverItem['endDate'].substring(
-              serverItem['endDate'].indexOf('T') + 1,
-              serverItem['endDate'].indexOf('Z') - 0);
-  if (localItem.end != DateTime.parse(temp)) {
+  if (localItem.end.toUtc() != DateTime.parse(serverItem['endDate'])) {
     return false;
   }
   if (!(localItem.attendees.isEmpty &&
@@ -189,8 +178,8 @@ Future<void> getEventObject(var data, var eventId, var type) async {
   // final LocalStorage ls = LocalStorage('IITDAPP Calendar');
   Event event;
   event = Event(type == 1 ? userEventsCalendarId : starredCalendarId,
-      start: DateTime.parse(data['startDate']),
-      end: DateTime.parse(data['endDate']));
+      start: DateTime.parse(data['startDate']).toLocal(),
+      end: DateTime.parse(data['endDate']).toLocal());
   if (eventId != '') {
     event.eventId = eventId;
   }
@@ -272,8 +261,8 @@ Future<String> getServerId(var eventId) async {
 Map<String, String> createPostReminderBody(Event ev) {
   return {
     'name': ev.title,
-    'startDate': DateFormat('yyyy-MM-ddTHH:mm:ss').format(ev.start) + '.000Z',
-    'endDate': DateFormat('yyyy-MM-ddTHH:mm:ss').format(ev.end) + '.000Z',
+    'startDate': DateFormat('yyyy-MM-ddTHH:mm:ss').format(ev.start.toUtc()) + '.000Z',
+    'endDate': DateFormat('yyyy-MM-ddTHH:mm:ss').format(ev.end.toUtc()) + '.000Z',
     'description': ev.description,
     'reminder': getReminderString(ev.reminders),
     'repeat': getRecurrenceString(ev.recurrenceRule),
@@ -292,8 +281,6 @@ Future<String> postReminder(Event ev, bool patch,
   var response;
   var flagTimeout = false;
   if (patch) {
-    // this will not work until backend is fixed
-//    try {
     var serverId = await getServerIdFromPrefs(ev.eventId);
     print('to be exec 2');
     response = await http
@@ -304,10 +291,6 @@ Future<String> postReminder(Event ev, bool patch,
       return null;
     });
 
-//    } catch (e) {
-//      flagTimeout = true;
-//      print(e);
-//    }
   } else {
     try {
       response = await http

@@ -79,7 +79,7 @@ class CasiLogin {
         _token = 'mutex';
         try {
           _cookies = await webview.getCookies();
-          _token = _cookies['"_token'].toString();
+          _token = _cookies['"_rememberme'].toString();
           _token = _token.trim().substring(0, _token.length - 1);
           var user = await fetchUserDetails();
           _onSuccess(_token, user);

@@ -34,9 +34,11 @@ class QueueManager {
         }
         if (res == '') {
           // succ = true;
+          connectedToInternet = true;
         }
         if (res != 'error' && res != 'timeout' && res != '') {
           await prefs.setString('ser ' + res, 'loc ' + data['eventId']);
+          connectedToInternet = true;
         }
       } else if (data['func'] == 'deleteReminderFromServer') {
         var res =
@@ -46,6 +48,7 @@ class QueueManager {
         }
         if (res == 1) {
           // succ = true;
+          connectedToInternet = true;
         }
       }
       if (connectedToInternet) {
