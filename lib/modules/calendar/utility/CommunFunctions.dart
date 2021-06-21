@@ -80,7 +80,7 @@ String getAttendeeString(List<Attendee> lis) {
     return res;
   }
   lis.forEach((element) {
-    res += element.emailAddress + '\n';
+    res += element.name + '\n';
   });
   return res;
 }

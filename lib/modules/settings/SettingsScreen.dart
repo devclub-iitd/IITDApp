@@ -1,5 +1,6 @@
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/modules/about/about.dart';
+import 'package:IITDAPP/modules/casiViews/password_change.dart';
 import 'package:IITDAPP/modules/login/LoginStateProvider.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsData.dart';
 import 'package:IITDAPP/modules/settings/screens/IndivScreenSettings.dart';
@@ -131,6 +132,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     ),
                     title: Text('Change Password'),
                     trailing: Icon(Icons.keyboard_arrow_right),
+                    onTap: () {
+                      launchPasswordChangeScreen(token);
+                    },
                   ),
                   CustomDivider(),
                   ListTile(

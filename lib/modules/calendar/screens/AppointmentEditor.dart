@@ -780,7 +780,7 @@ List<Attendee> getAttendeeList(String str) {
   var ls = LineSplitter();
   var lines = ls.convert(str);
   for (var i = 0; i < lines.length; i++) {
-    res.add(Attendee(emailAddress: lines[i]));
+    res.add(Attendee(name: lines[i],emailAddress: '',isOrganiser: false));
   }
   return res;
 }
