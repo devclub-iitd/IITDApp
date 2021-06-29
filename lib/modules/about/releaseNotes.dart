@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/widgets/sectionTitle.dart';
 import 'package:flutter/material.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
+//import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:provider/provider.dart';
 import '../dashboard/widgets/errorWidget.dart';
 import 'package:http/http.dart' as http;
@@ -19,11 +19,11 @@ class _ReleaseNotesState extends State<ReleaseNotes> {
     return Scaffold(
       backgroundColor:
           Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
-      appBar: GradientAppBar(
+      appBar: AppBar(
+        //Gradient
         title: Text('Release Notes'),
-        backgroundColorStart:
-            Provider.of<ThemeModel>(context).theme.APP_BAR_START,
-        backgroundColorEnd: Provider.of<ThemeModel>(context).theme.APP_BAR_END,
+        backgroundColor: Provider.of<ThemeModel>(context).theme.APP_BAR_START,
+        //backgroundColorEnd: Provider.of<ThemeModel>(context).theme.APP_BAR_END,
       ),
       body: FutureBuilder(
         builder: (_, AsyncSnapshot<List<String>> as) {

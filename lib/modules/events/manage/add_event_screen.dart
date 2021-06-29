@@ -2,7 +2,7 @@ import 'package:IITDAPP/ThemeModel.dart';
 import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/cancel_alert.dart';
 import 'package:flutter/material.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
+//import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 import './add_event_form.dart';
 // import '../events/event_class.dart';
@@ -16,13 +16,12 @@ class AddEvent extends StatelessWidget {
       child: Scaffold(
         backgroundColor:
             Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
-        appBar: GradientAppBar(
+        appBar: AppBar(
           title: Text('Create Event'),
           centerTitle: true,
-          backgroundColorStart:
-              Provider.of<ThemeModel>(context).theme.APP_BAR_START,
-          backgroundColorEnd:
-              Provider.of<ThemeModel>(context).theme.APP_BAR_END,
+          backgroundColor: Provider.of<ThemeModel>(context).theme.APP_BAR_START,
+          // backgroundColorEnd:
+          //     Provider.of<ThemeModel>(context).theme.APP_BAR_END,
         ),
         body: GestureDetector(
           onTap: () {

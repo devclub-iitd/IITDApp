@@ -22,7 +22,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:localstorage/localstorage.dart';
 //import 'package:google_fonts/google_fonts.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+//import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
@@ -412,16 +412,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
             child: FloatingActionButton(
               heroTag: null,
               onPressed: () {
-                showBarModalBottomSheet(
-                  expand: false,
+                showModalBottomSheet(
+                  //expand: false,
                   context: context,
-                  builder: (context, scrollController) => CustomModal(
-                      changeViewType,
-                      viewType,
-                      showAgenda,
-                      calendarModel,
-                      changeExempted,
-                      exempted),
+                  builder: (context) => CustomModal(changeViewType, viewType,
+                      showAgenda, calendarModel, changeExempted, exempted),
                 );
               },
               child: Icon(Icons.graphic_eq),

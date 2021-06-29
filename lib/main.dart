@@ -11,7 +11,7 @@ import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/values/colors/colors.dart';
 import 'package:IITDAPP/values/colors/darkColors.dart';
 import 'package:IITDAPP/push_notifications.dart';
-import 'package:calendarnotificationprovider/calendarnotificationprovider.dart';
+//import 'package:calendarnotificationprovider/calendarnotificationprovider.dart';
 import 'package:global_configuration/global_configuration.dart';
 import 'package:syncfusion_flutter_core/core.dart';
 import 'package:flutter/material.dart';
@@ -54,9 +54,7 @@ void main() async {
     ChangeNotifierProvider(
       create: (_) => EventsTabProvider(),
     ),
-    ChangeNotifierProvider(
-      create: (_) => LoginStateProvider()
-    ),
+    ChangeNotifierProvider(create: (_) => LoginStateProvider()),
   ], child: MyApp()));
 }
 
@@ -95,10 +93,10 @@ initialisePreferences() async {
 
 // ignore: always_declare_return_types
 initialiseNotifications() async {
-  await Calendarnotificationprovider.setDescription(
-      start: 'Time:- ', end: '', text: DynamicTextEventKeys.RangeTime);
-  await Calendarnotificationprovider.setTitle(
-      start: 'Event:- ', text: DynamicTextEventKeys.Title);
+  // await Calendarnotificationprovider.setDescription(
+  //     start: 'Time:- ', end: '', text: DynamicTextEventKeys.RangeTime);
+  // await Calendarnotificationprovider.setTitle(
+  //     start: 'Event:- ', text: DynamicTextEventKeys.Title);
   var pushNotificationsManager = PushNotificationsManager();
   await pushNotificationsManager.init();
 }

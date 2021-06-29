@@ -1,5 +1,4 @@
 # IITDApp
-//check
 An application to provide various services related to IIT Delhi
 
 ## Getting Started

@@ -1,7 +1,7 @@
 import 'package:IITDAPP/ThemeModel.dart';
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
+//import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -58,12 +58,11 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
     return Scaffold(
         backgroundColor:
             Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
-        appBar: GradientAppBar(
+        appBar: AppBar(
           title: Text('Privacy Policy'),
-          backgroundColorStart:
-              Provider.of<ThemeModel>(context).theme.APP_BAR_START,
-          backgroundColorEnd:
-              Provider.of<ThemeModel>(context).theme.APP_BAR_END,
+          backgroundColor: Provider.of<ThemeModel>(context).theme.APP_BAR_START,
+          // backgroundColorEnd:
+          //     Provider.of<ThemeModel>(context).theme.APP_BAR_END,
         ),
         body: Stack(children: [
           WebView(

@@ -2,7 +2,7 @@ import 'package:IITDAPP/modules/login/userlogin/profile_dialog.dart';
 import 'package:IITDAPP/modules/settings/SettingsScreen.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
+//import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:provider/provider.dart';
 
 import '../ThemeModel.dart';
@@ -38,12 +38,11 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
       actions.add(actionsArray[0]);
       actionsArray = actions;
     }
-    return (GradientAppBar(
+    return (AppBar(
       title: title,
       elevation: 10,
-      backgroundColorStart:
-          Provider.of<ThemeModel>(context).theme.APP_BAR_START,
-      backgroundColorEnd: Provider.of<ThemeModel>(context).theme.APP_BAR_END,
+      backgroundColor: Provider.of<ThemeModel>(context).theme.APP_BAR_START,
+      //backgroundColorEnd: Provider.of<ThemeModel>(context).theme.APP_BAR_END,
       actions: actionsArray,
       leading: withMenu
           ? Builder(
