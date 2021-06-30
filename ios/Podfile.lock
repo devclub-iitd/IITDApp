@@ -1,4 +1,6 @@
 PODS:
+  - calendarnotificationprovider (0.0.1):
+    - Flutter
   - device_calendar (0.0.1):
     - Flutter
   - Flutter (1.0.0)
@@ -26,6 +28,7 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - calendarnotificationprovider (from `.symlinks/plugins/calendarnotificationprovider/ios`)
   - device_calendar (from `.symlinks/plugins/device_calendar/ios`)
   - Flutter (from `Flutter`)
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
@@ -43,6 +46,8 @@ SPEC REPOS:
     - FMDB
 
 EXTERNAL SOURCES:
+  calendarnotificationprovider:
+    :path: ".symlinks/plugins/calendarnotificationprovider/ios"
   device_calendar:
     :path: ".symlinks/plugins/device_calendar/ios"
   Flutter:
@@ -67,6 +72,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/webview_flutter/ios"
 
 SPEC CHECKSUMS:
+  calendarnotificationprovider: 6cfdd951d824ae670a07fb8f7ed3ca2aebf311c6
   device_calendar: 23b28a5f1ab3bf77e34542fb1167e1b8b29a98f5
   Flutter: 434fef37c0980e73bb6479ef766c45957d4b510c
   flutter_local_notifications: 9e4738ce2471c5af910d961a6b7eadcf57c50186
