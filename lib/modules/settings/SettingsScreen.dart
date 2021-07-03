@@ -9,7 +9,7 @@ import 'package:IITDAPP/modules/settings/widgets/DarkModeSwitch.dart';
 import 'package:IITDAPP/modules/settings/widgets/SettingsTextWidgets.dart';
 import 'package:IITDAPP/routes/Routes.dart';
 import 'package:IITDAPP/values/Constants.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
+//import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -76,13 +76,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
       backgroundColor: Provider.of<ThemeModel>(context, listen: true)
           .theme
           .SCAFFOLD_BACKGROUND,
-      appBar: GradientAppBar(
-          title: Text('Settings'),
-          actions: <Widget>[ResetButton(resetMethod: forceUpdateScreen)],
-          backgroundColorStart:
-              Provider.of<ThemeModel>(context).theme.APP_BAR_START,
-          backgroundColorEnd:
-              Provider.of<ThemeModel>(context).theme.APP_BAR_END),
+      appBar: AppBar(
+        title: Text('Settings'),
+        actions: <Widget>[ResetButton(resetMethod: forceUpdateScreen)],
+        backgroundColor: Provider.of<ThemeModel>(context).theme.APP_BAR_START,
+        // backgroundColorEnd:
+        //     Provider.of<ThemeModel>(context).theme.APP_BAR_END),
+      ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(
           10,

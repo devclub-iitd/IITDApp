@@ -4,7 +4,7 @@ import 'package:IITDAPP/modules/settings/widgets/SettingsTextWidgets.dart';
 import 'package:IITDAPP/values/Constants.dart';
 
 import 'package:IITDAPP/ThemeModel.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
+//import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -44,12 +44,12 @@ class _IndivScreenSettingsState extends State<IndivScreenSettings> {
     return Scaffold(
       backgroundColor:
           Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
-      appBar: GradientAppBar(
-          title: Text('${widget.tag} Settings'),
-          backgroundColorStart:
-              Provider.of<ThemeModel>(context).theme.APP_BAR_START,
-          backgroundColorEnd:
-              Provider.of<ThemeModel>(context).theme.APP_BAR_END),
+      appBar: AppBar(
+        title: Text('${widget.tag} Settings'),
+        backgroundColor: Provider.of<ThemeModel>(context).theme.APP_BAR_START,
+        // backgroundColorEnd:
+        //     Provider.of<ThemeModel>(context).theme.APP_BAR_END),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[

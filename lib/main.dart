@@ -54,9 +54,7 @@ void main() async {
     ChangeNotifierProvider(
       create: (_) => EventsTabProvider(),
     ),
-    ChangeNotifierProvider(
-      create: (_) => LoginStateProvider()
-    ),
+    ChangeNotifierProvider(create: (_) => LoginStateProvider()),
   ], child: MyApp()));
 }
 
