@@ -199,13 +199,6 @@ class _MapLayerState extends State<MapLayer> {
 
       return Stack(children: [
         GestureDetector(
-          child: ColorFiltered(
-              colorFilter: ColorFilter.mode(
-                  blendColor.withOpacity(0.35), BlendMode.luminosity),
-              child: ColorFiltered(
-                  colorFilter: ColorFilter.mode(
-                      blendColor.withOpacity(0.35), BlendMode.colorBurn),
-                  child: paintWidget())),
           onTap: () {
             Provider.of<MapConditions>(context, listen: false)
                 .markerSelected(-1);
@@ -214,6 +207,13 @@ class _MapLayerState extends State<MapLayer> {
           onScaleStart: _handleScaleStart,
           onScaleUpdate: _handleScaleUpdate,
           onScaleEnd: _handleScaleEnd,
+          child: ColorFiltered(
+              colorFilter: ColorFilter.mode(
+                  blendColor.withOpacity(0.35), BlendMode.luminosity),
+              child: ColorFiltered(
+                  colorFilter: ColorFilter.mode(
+                      blendColor.withOpacity(0.35), BlendMode.colorBurn),
+                  child: paintWidget())),
         ),
         MoveAroundWidget(child: markerLayer)
       ]);
@@ -250,13 +250,13 @@ class _MapLayerState extends State<MapLayer> {
 
   Widget mapImageBody(bc, Offset tweenOffset, _) {
     return CustomPaint(
-      child: Container(color: widget.backgroundColor),
       foregroundPainter: _MapLayerPainter(
         image: _image,
         offset:
             mo.panDuration == 0 ? tweenOffset : mo.verifyOffset(tweenOffset),
         scale: mo.scale,
       ),
+      child: Container(color: widget.backgroundColor),
     );
   }
 

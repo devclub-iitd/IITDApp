@@ -17,11 +17,13 @@ import 'package:syncfusion_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
+import 'package:IITDAPP/modules/courses/screens/search.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
     await GlobalConfiguration().loadFromAsset('secrets');
+
     SyncfusionLicense.registerLicense(
         // ignore: deprecated_member_use
         GlobalConfiguration().getString('calendar_api_key'));
@@ -31,7 +33,7 @@ void main() async {
 
   unawaited(initialiseNotifications());
   unawaited(initialisePreferences());
-
+  await savedstate.init();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
       create: (_) => NewsProvider<TrendingNews>(),
@@ -54,9 +56,7 @@ void main() async {
     ChangeNotifierProvider(
       create: (_) => EventsTabProvider(),
     ),
-    ChangeNotifierProvider(
-      create: (_) => LoginStateProvider()
-    ),
+    ChangeNotifierProvider(create: (_) => LoginStateProvider()),
   ], child: MyApp()));
 }
 

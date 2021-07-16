@@ -49,7 +49,8 @@ class ClubsScreenState extends State<ClubsScreen> {
           'SUBSCRIBED CLUBS',
           Provider.of<EventsTabProvider>(context, listen: false).subbedClubs,
         ),
-        clubsList('OTHER CLUBS', Provider.of<EventsTabProvider>(context, listen: false).otherClubs),
+        clubsList('OTHER CLUBS',
+            Provider.of<EventsTabProvider>(context, listen: false).otherClubs),
         Container(
           height: 5,
         ),
@@ -61,7 +62,7 @@ class ClubsScreenState extends State<ClubsScreen> {
     print('makeClubCardList received:::');
     clubs.forEach((f) => print(f.clubName));
     // ignore: prefer_collection_literals
-    var toReturn = List<ClubCard>();
+    var toReturn = [];
     for (var i = 0; i < clubs.length; i++) {
       toReturn.add(ClubCard(clubs[i], ValueKey(clubs[i].id)));
       print('adding + ${clubs[i].clubName}');

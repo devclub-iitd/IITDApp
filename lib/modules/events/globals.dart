@@ -1,7 +1,5 @@
-
 import 'events/event_class.dart';
 import 'clubs/club_class.dart';
-
 
 List<Event> eventsList;
 
@@ -9,13 +7,12 @@ List<List<Event>> todayEvents = List<List<Event>>.generate(3, (i) => []);
 List<List<Event>> tomorrowEvents = List<List<Event>>.generate(3, (i) => []);
 List<List<Event>> upcomingEvents = List<List<Event>>.generate(3, (i) => []);
 
-
 // ignore: prefer_collection_literals
-List<Club> subbedClubs = List<Club>();
+List<Club> subbedClubs = [];
 // ignore: prefer_collection_literals
-List<Club> otherClubs = List<Club>();
+List<Club> otherClubs = [];
 // ignore: prefer_collection_literals
-List<Club> allClubs = List<Club>();
+List<Club> allClubs = [];
 
 Future<List<List<List<Event>>>> sortEvents() async {
   todayEvents = List<List<Event>>.generate(3, (i) => []);
@@ -39,8 +36,10 @@ Future<List<List<List<Event>>>> sortEvents() async {
         (DateTime.now().add(Duration(days: 1)).difference(ev.endsAt).inDays ==
                 0 &&
             DateTime.now().add(Duration(days: 1)).day == ev.endsAt.day));
-    var isUpcoming =
-        (DateTime.now().add(Duration(days: 2)).isBefore(ev.endsAt) || (DateTime.now().add(Duration(days: 2)).difference(ev.endsAt).inDays ==
+    var isUpcoming = (DateTime.now()
+            .add(Duration(days: 2))
+            .isBefore(ev.endsAt) ||
+        (DateTime.now().add(Duration(days: 2)).difference(ev.endsAt).inDays ==
                 0 &&
             DateTime.now().add(Duration(days: 2)).day == ev.endsAt.day));
     if (isToday) {
@@ -90,8 +89,6 @@ Future<List<List<List<Event>>>> sortEvents() async {
   }
   return [todayEvents, tomorrowEvents, upcomingEvents];
 }
-
-
 
 // void refreshLists(Event event) {
 //   bool isToday = (DateTime.now().difference(event.startsAt).inDays >= 0 &&

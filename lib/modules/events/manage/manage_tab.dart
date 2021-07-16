@@ -81,9 +81,11 @@ class _ManageTabState extends State<ManageTab> {
 
   Widget viewAdminButton() {
     if (currentUser.isSuperAdmin) {
-      return FlatButton(
-          color:
-              Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_BACKGROUND,
+      return TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor:
+                Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_BACKGROUND,
+          ),
           onPressed: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => AdminScreen()));
@@ -126,9 +128,11 @@ class _ManageTabState extends State<ManageTab> {
         //         ),
         //       )
         //     : null,
-        FlatButton(
-          color:
-              Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_BACKGROUND,
+        TextButton(
+          style: TextButton.styleFrom(
+            backgroundColor:
+                Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_BACKGROUND,
+          ),
           onPressed: () {
             Navigator.push(
               context,

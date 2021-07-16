@@ -350,12 +350,12 @@ class CustomSocialMediaButton extends StatelessWidget {
       child: FloatingActionButton(
         heroTag: null,
         onPressed: () {},
+        backgroundColor: Color.fromARGB(255, 200, 189, 176),
         child: FaIcon(
           icon,
           size: 20,
           color: Colors.black87,
         ),
-        backgroundColor: Color.fromARGB(255, 200, 189, 176),
       ),
     );
   }

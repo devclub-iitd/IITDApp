@@ -30,6 +30,7 @@ class _AllReportsState extends State<AllReports> {
         title: Text('All Reports'),
       ),
       body: RefreshIndicator(
+          onRefresh: refresh,
           child: FutureBuilder(
             future: allReports,
             builder: (_, AsyncSnapshot<List<NewsModel>> as) {
@@ -75,8 +76,7 @@ class _AllReportsState extends State<AllReports> {
                     ))
               ]);
             },
-          ),
-          onRefresh: refresh),
+          )),
     );
   }
 

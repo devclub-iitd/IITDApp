@@ -53,13 +53,14 @@ class ClubCardState extends State<ClubCard> {
       return null;
     });
     if (timeOutFlag) {
-      Scaffold.of(context)
+      ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Cannot Connect to Server!')));
       return;
     }
     print(response.statusCode);
     if (response.statusCode == 200) {
-      Provider.of<EventsTabProvider>(context, listen: false).toggleClubSubscribe(_club.id);
+      Provider.of<EventsTabProvider>(context, listen: false)
+          .toggleClubSubscribe(_club.id);
       // _club.isSubbed = !_club.isSubbed;
       // if (_club.isSubbed) {
       //   otherClubs.remove(_club);

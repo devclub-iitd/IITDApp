@@ -294,10 +294,10 @@ class _EditEventFormState extends State<EditEventForm> {
                   alignLabelWithHint: true,
                   labelText: 'Event About',
                   labelStyle: TextStyle(
-                    color: Provider.of<ThemeModel>(context, listen: false)
-                        .theme
-                        .PRIMARY_TEXT_COLOR
-                        .withOpacity(0.5)),
+                      color: Provider.of<ThemeModel>(context, listen: false)
+                          .theme
+                          .PRIMARY_TEXT_COLOR
+                          .withOpacity(0.5)),
                   helperText: ''),
               keyboardType: TextInputType.multiline,
               maxLines: null,
@@ -322,10 +322,10 @@ class _EditEventFormState extends State<EditEventForm> {
                   alignLabelWithHint: true,
                   labelText: 'Image Link',
                   labelStyle: TextStyle(
-                    color: Provider.of<ThemeModel>(context, listen: false)
-                        .theme
-                        .PRIMARY_TEXT_COLOR
-                        .withOpacity(0.5)),
+                      color: Provider.of<ThemeModel>(context, listen: false)
+                          .theme
+                          .PRIMARY_TEXT_COLOR
+                          .withOpacity(0.5)),
                   helperText: ''),
               keyboardType: TextInputType.multiline,
               maxLines: null,
@@ -347,10 +347,11 @@ class _EditEventFormState extends State<EditEventForm> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () {
                     _showDeleteAlert(context, _event);
                   },
+                  style: ElevatedButton.styleFrom(primary: Colors.red[30]),
                   child: Text(
                     'DELETE',
                     style: TextStyle(
@@ -358,27 +359,31 @@ class _EditEventFormState extends State<EditEventForm> {
                             .theme
                             .RAISED_BUTTON_FOREGROUND),
                   ),
-                  color: Colors.red[300],
                 ),
-                RaisedButton(
-                    onPressed: () {
-                      _showCancelAlert(context);
-                    },
-                    child: Text(
-                      'CANCEL',
-                      style: TextStyle(
-                        color: Provider.of<ThemeModel>(context)
-                            .theme
-                            .RAISED_BUTTON_FOREGROUND,
-                      ),
-                    ),
-                    color: Provider.of<ThemeModel>(context)
+                ElevatedButton(
+                  onPressed: () {
+                    _showCancelAlert(context);
+                  },
+                  style: ElevatedButton.styleFrom(
+                    primary: Provider.of<ThemeModel>(context)
                         .theme
-                        .RAISED_BUTTON_BACKGROUND),
-                RaisedButton(
-                  color: Provider.of<ThemeModel>(context)
-                      .theme
-                      .RAISED_BUTTON_BACKGROUND,
+                        .RAISED_BUTTON_BACKGROUND,
+                  ),
+                  child: Text(
+                    'CANCEL',
+                    style: TextStyle(
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .RAISED_BUTTON_FOREGROUND,
+                    ),
+                  ),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Provider.of<ThemeModel>(context)
+                        .theme
+                        .RAISED_BUTTON_BACKGROUND,
+                  ),
                   child: Text(
                     'SUBMIT',
                     style: TextStyle(
@@ -436,7 +441,7 @@ Future<bool> _showCancelAlert(BuildContext context) {
               // style: TextStyle(color: Colors.white),
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.of(context).pop(false);
                 },
@@ -449,7 +454,7 @@ Future<bool> _showCancelAlert(BuildContext context) {
                           .withOpacity(0.7)),
                 ),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                   Navigator.pop(context);
@@ -487,7 +492,7 @@ void _showDeleteAlert(BuildContext context, Event _event) {
               color: Provider.of<ThemeModel>(context).theme.ALERT_DIALOG_TEXT),
         ),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
@@ -500,7 +505,7 @@ void _showDeleteAlert(BuildContext context, Event _event) {
                       .withOpacity(0.7)),
             ),
           ),
-          FlatButton(
+          TextButton(
             onPressed: () async {
               // Navigator.pop(context);
               unawaited(showLoading(context, message: 'Deleting Event'));

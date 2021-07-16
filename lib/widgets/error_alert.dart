@@ -19,7 +19,7 @@ Future<bool> showErrorAlert(BuildContext context, String title, String message,
               style: TextStyle(color: Colors.white),
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.of(context).pop(false);
                 },

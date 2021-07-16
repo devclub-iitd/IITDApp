@@ -20,7 +20,7 @@ class MarkerLabel extends StatelessWidget {
       width: 50,
       height: 20,
       child: Stack(
-        overflow: Overflow.visible,
+        clipBehavior: Clip.none,
         children: <Widget>[
           Positioned(
             top: y / 2 + 6,

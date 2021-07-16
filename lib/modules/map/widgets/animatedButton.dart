@@ -51,21 +51,21 @@ class _CustomAnimatedButtonState extends State<CustomAnimatedButton>
       animation: _localController,
       builder: (ctx, child) => FloatingActionButton(
           heroTag: widget._tag,
-          child: Icon(
-            widget._icon,
-            color: _iconColorAnimation.value,
-          ),
           backgroundColor: _buttonColorAnimation.value,
           onPressed: () async {
             if ((await widget._onTap()) == true) {
               if (!displayToggle) {
-                _localController.forward();
+                await _localController.forward();
               } else {
-                _localController.reverse();
+                await _localController.reverse();
               }
               displayToggle = !displayToggle;
             }
-          }),
+          },
+          child: Icon(
+            widget._icon,
+            color: _iconColorAnimation.value,
+          )),
     );
   }
 }

@@ -34,7 +34,7 @@ class ThemeModel extends ChangeNotifier {
 
   void initTheme() async {
     var temp = await SettingsHandler.getSettingValue(commonKeys[1]);
-    print('and the theme from sp is${temp}');
+    print('and the theme from sp is$temp');
     switch (temp) {
       case 'System':
         themeType = ThemeType.System;

@@ -75,14 +75,18 @@ class _AttendanceListState extends State<AttendanceList> {
                           .theme
                           .PRIMARY_COLOR_LIGHT),
                 ),
-                FlatButton(
+                TextButton(
                   onPressed: () {
                     ap.fetchData();
                   },
+                  style: TextButton.styleFrom(
+                    primary: Provider.of<ThemeModel>(context)
+                        .theme
+                        .PRIMARY_COLOR_DARK, // foreground
+                    backgroundColor:
+                        Provider.of<ThemeModel>(context).theme.PRIMARY_COLOR,
+                  ),
                   child: Text('REFRESH'),
-                  textColor:
-                      Provider.of<ThemeModel>(context).theme.PRIMARY_COLOR_DARK,
-                  color: Provider.of<ThemeModel>(context).theme.PRIMARY_COLOR,
                 )
               ],
             );

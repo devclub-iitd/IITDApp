@@ -22,6 +22,7 @@ class CourseCard extends StatelessWidget {
       child: Container(
         width: MediaQuery.of(context).size.width - 20,
         child: Material(
+          color: Colors.transparent,
           child: ListTile(
             title: Hero(
               tag: _am.abbr,
@@ -70,6 +71,7 @@ class CourseCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
+                          padding: EdgeInsets.only(bottom: 2),
                           child: Text(
                             '$_percentage%',
                             style: TextStyle(
@@ -80,7 +82,6 @@ class CourseCard extends StatelessWidget {
                                 fontSize: 15,
                                 fontWeight: FontWeight.bold),
                           ),
-                          padding: EdgeInsets.only(bottom: 2),
                         ),
                         Text(
                           'Present',
@@ -97,7 +98,6 @@ class CourseCard extends StatelessWidget {
               ),
             ),
           ),
-          color: Colors.transparent,
         ),
       ),
     );

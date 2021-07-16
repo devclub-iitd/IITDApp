@@ -14,11 +14,11 @@ class AppDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
-            child: Text('IITD APP'),
             decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage('assets/images/iitd_building.jpg'),
                     fit: BoxFit.cover)),
+            child: Text('IITD APP'),
           ),
           _createDrawerItem(
             selected: tag == 'User Dashboard',
@@ -33,6 +33,12 @@ class AppDrawer extends StatelessWidget {
             onTap: () {},
           ),
           _createDrawerItem(
+              selected: tag == 'Courses',
+              icon: Icons.bookmark_border_rounded,
+              text: 'Courses',
+              context: context,
+              routeName: Routes.coursesPage),
+          _createDrawerItem(
               selected: tag == 'Events',
               icon: Icons.event,
               text: 'Events',
@@ -45,7 +51,7 @@ class AppDrawer extends StatelessWidget {
               text: 'Calendar',
               context: context,
               routeName: Routes.calendar,
-              loginRequired: true),
+              loginRequired: false),
           Divider(),
           ListTile(
             title: Text(

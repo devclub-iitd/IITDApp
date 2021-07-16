@@ -55,7 +55,7 @@ class _IndivScreenSettingsState extends State<IndivScreenSettings> {
           children: <Widget>[
             SettingsTextButton(
               text: 'Set as default Screen',
-              subtitle: 'Currently ${currentDefault} is set as default',
+              subtitle: 'Currently $currentDefault is set as default',
               showArrow: false,
               onTap: () async {
                 await SettingsHandler.setSettingValue(
