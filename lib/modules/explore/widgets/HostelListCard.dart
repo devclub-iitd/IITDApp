@@ -11,7 +11,7 @@ class HostelListCard extends StatelessWidget {
   Widget build(BuildContext context) {
     // var cardColors = [Colors.red, Colors.green, Colors.blue];
     return Container(
-     // color: cardColors[data['idx'] % 3],
+      // color: cardColors[data['idx'] % 3],
 //      shape: RoundedRectangleBorder(
 //        borderRadius: BorderRadius.circular(15.0),
 //      ),
@@ -19,7 +19,12 @@ class HostelListCard extends StatelessWidget {
         onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AboutScreen(name: data['name'],obj: hostelDetails,)),
+            MaterialPageRoute(
+                builder: (context) => AboutScreen(
+                      name: data['name'],
+                      obj: hostelDetails,
+                      isHostel: true,
+                    )),
           );
         },
         splashColor: Colors.white.withAlpha(100),
