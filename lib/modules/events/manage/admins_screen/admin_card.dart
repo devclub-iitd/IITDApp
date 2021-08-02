@@ -152,7 +152,7 @@ class ResponseIconsState extends State<ResponseIcons> {
                     Provider.of<ThemeModel>(context).theme.ALERT_DIALOG_TEXT),
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -165,7 +165,7 @@ class ResponseIconsState extends State<ResponseIcons> {
                         .withOpacity(0.7)),
               ),
             ),
-            FlatButton(
+            TextButton(
               onPressed: () async {
                 Navigator.pop(context);
                 unawaited(showLoading(context));

@@ -458,6 +458,7 @@ class CustomSocialMediaButton extends StatelessWidget {
       width: 35,
       child: FloatingActionButton(
         heroTag: null,
+
         onPressed: () {
           url != '' ? UrlHandler.launchInBrowser(url) : null;
         },
@@ -466,7 +467,6 @@ class CustomSocialMediaButton extends StatelessWidget {
           size: 20,
           color: Colors.black87,
         ),
-        backgroundColor: Color.fromARGB(255, 200, 189, 176),
       ),
     );
   }

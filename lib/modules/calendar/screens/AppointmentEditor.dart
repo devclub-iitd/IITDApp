@@ -93,11 +93,11 @@ class AppointmentEditorState extends State<AppointmentEditor> {
               ],
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
+                child: Text('OK'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                child: Text('OK'),
               ),
             ]);
       },
@@ -569,7 +569,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                         _events.appointments.removeAt(
                             _events.appointments.indexOf(_selectedAppointment));
                         _events.notifyListeners(CalendarDataSourceAction.remove,
-                            <Meeting>[]..add(_selectedAppointment));
+                            <Meeting>[_selectedAppointment]);
                         calForceSetsState();
                       }
                       var event = Event(
@@ -596,7 +596,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                       if (res == 'error') {
                         print('server error occured');
                         Navigator.pop(context);
-                        scaffoldKey.currentState.showSnackBar(SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           behavior: SnackBarBehavior.floating,
                           content: CustomSnackBarContent(
                             text: 'Server Error Occured',
@@ -607,7 +607,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                       }
                       if (res == 'timeout') {
                         connectedToInternet = false;
-                        scaffoldKey.currentState.showSnackBar(SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           behavior: SnackBarBehavior.floating,
                           content: CustomSnackBarContent(
                             text: 'Unable to connect to server',
@@ -632,8 +632,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                               'ser ' + res, 'loc ' + createEventResult.data);
                         }
                         if (_selectedAppointment != null) {
-                          var id = await prefs
-                              .getInt('rem' + createEventResult.data);
+                          var id = prefs.getInt('rem' + createEventResult.data);
                           if (id != null && id != 0) {
                             await flutterLocalNotificationsPlugin.cancel(id);
                           }
@@ -675,7 +674,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                         _events.appointments.add(meetings[0]);
 
                         _events.notifyListeners(CalendarDataSourceAction.add,
-                            <Meeting>[]..add(meetings[0]));
+                            <Meeting>[meetings[0]]);
                         _selectedAppointment = null;
                         calForceSetsState();
                       } else {
@@ -711,7 +710,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                             _selectedAppointment.eventId);
                         if (res.isSuccess) {
                           var prefs = await SharedPreferences.getInstance();
-                          var id = await prefs
+                          var id = prefs
                               .getInt('rem' + _selectedAppointment.eventId);
                           if (id != null && id != 0) {
                             await flutterLocalNotificationsPlugin.cancel(id);
@@ -722,7 +721,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                               .indexOf(_selectedAppointment));
                           _events.notifyListeners(
                               CalendarDataSourceAction.remove,
-                              <Meeting>[]..add(_selectedAppointment));
+                              <Meeting>[_selectedAppointment]);
                           _selectedAppointment = null;
                           calForceSetsState();
                         } else {
@@ -766,7 +765,7 @@ Event addRecurrenceRule(var rule, Event event) {
 }
 
 List<Attendee> getAttendeeListFromList(var lis) {
-  var res = List<Attendee>(); // ignore: prefer_collection_literals
+  var res = []; // ignore: prefer_collection_literals
   for (var i = 0; i < lis.length; i++) {
     if (lis[i] == '') {
       continue;
@@ -777,14 +776,14 @@ List<Attendee> getAttendeeListFromList(var lis) {
 }
 
 List<Attendee> getAttendeeList(String str) {
-  var res = List<Attendee>(); // ignore: prefer_collection_literals
+  var res = []; // ignore: prefer_collection_literals
   if (str == '' || str == null) {
     return res;
   }
   var ls = LineSplitter();
   var lines = ls.convert(str);
   for (var i = 0; i < lines.length; i++) {
-    res.add(Attendee(name: lines[i],emailAddress: '',isOrganiser: false));
+    res.add(Attendee(name: lines[i], emailAddress: '', isOrganiser: false));
   }
   return res;
 }
@@ -907,12 +906,15 @@ class _ReminderPickerState extends State<ReminderPicker> {
               Row(
                 children: <Widget>[
                   Spacer(),
-                  FlatButton(
+                  TextButton(
+                    child: Text('CANCEL'),
+
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text('CANCEL'),
                   ),
+                  TextButton(
+                    child: Text('SAVE'),
                   FlatButton(
                     onPressed: () {
                       setReminder(time + ' ' + reminderUnits[type]);
@@ -1002,18 +1004,18 @@ class _RecurrenceDialogState extends State<RecurrenceDialog> {
         Row(
           children: <Widget>[
             Spacer(),
-            FlatButton(
+            TextButton(
+              child: Text('CANCEL'),
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('CANCEL'),
             ),
-            FlatButton(
+            TextButton(
+              child: Text('SAVE'),
               onPressed: () {
                 setRecurrence(recurrenceOptions[type]);
                 Navigator.pop(context);
               },
-              child: Text('SAVE'),
             ),
           ],
         )

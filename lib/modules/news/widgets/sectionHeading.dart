@@ -36,15 +36,18 @@ class SectionHeading extends StatelessWidget {
               ],
             ),
           ),
-          RaisedButton(
-            color:
-                Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_BACKGROUND,
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              primary: Provider.of<ThemeModel>(context)
+                  .theme
+                  .RAISED_BUTTON_BACKGROUND,
+            ),
+            onPressed: onTap,
             child: Text('More',
                 style: TextStyle(
                     color: Provider.of<ThemeModel>(context)
                         .theme
                         .RAISED_BUTTON_FOREGROUND)),
-            onPressed: onTap,
           )
         ],
       ),

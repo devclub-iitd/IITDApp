@@ -3,7 +3,7 @@ import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 
 Future<String> generateDefaultScreenSubtitle() async {
   var res = await SettingsHandler.getSettingValue(commonKeys[0]);
-  return 'Current Default is ${res}';
+  return 'Current Default is $res';
 }
 
 // ignore: always_declare_return_types

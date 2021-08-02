@@ -33,10 +33,10 @@ Widget buildTab(String title, int alerts, Color titleColor) {
       ),
       if (alerts > 0)
         CircleAvatar(
-          child: Text(alerts.toString(),
-              style: TextStyle(color: Colors.white, fontSize: 12)),
           radius: 10,
           backgroundColor: Colors.red,
+          child: Text(alerts.toString(),
+              style: TextStyle(color: Colors.white, fontSize: 12)),
         )
     ],
   );

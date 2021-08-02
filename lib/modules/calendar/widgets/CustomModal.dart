@@ -79,13 +79,13 @@ class _CustomModalState extends State<CustomModal> {
     // ignore: non_constant_identifier_names
     DropdownMenuItem CustomDropDownItem(text, value) {
       return DropdownMenuItem(
+        value: value,
         child: Text(
           text,
           style: TextStyle(
             color: Provider.of<ThemeModel>(context).theme.ACCENT_TEXT_COLOR,
           ),
         ),
-        value: value,
       );
     }
 

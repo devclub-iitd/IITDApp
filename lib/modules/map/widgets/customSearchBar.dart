@@ -132,6 +132,7 @@ class _SearchBarState extends State<SearchBar> with TickerProviderStateMixin {
                                 behavior: expanded
                                     ? HitTestBehavior.deferToChild
                                     : HitTestBehavior.opaque,
+                                onTap: toggleExpansion,
                                 child: expanded
                                     ? TextField(
                                         controller: _searchInputControler,
@@ -154,7 +155,6 @@ class _SearchBarState extends State<SearchBar> with TickerProviderStateMixin {
                                                 color: Theme.of(context)
                                                     .hintColor)),
                                       ),
-                                onTap: toggleExpansion,
                               ),
                             ),
                             GestureDetector(

@@ -19,22 +19,25 @@ class ErrorDisplay extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Text(
-          'Error: ${error}',
+          'Error: $error',
           textAlign: TextAlign.center,
           style: TextStyle(
               color: Theme.of(context).textTheme.headline1.color, fontSize: 20),
         ),
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 100),
-          child: FlatButton(
+          child: TextButton(
             onPressed: () {
               refresh();
             },
+            style: TextButton.styleFrom(
+                primary: Provider.of<ThemeModel>(context)
+                    .theme
+                    .RAISED_BUTTON_FOREGROUND,
+                backgroundColor: Provider.of<ThemeModel>(context)
+                    .theme
+                    .RAISED_BUTTON_BACKGROUND),
             child: Text('REFRESH'),
-            textColor:
-                Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_FOREGROUND,
-            color:
-                Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_BACKGROUND,
           ),
         )
       ],

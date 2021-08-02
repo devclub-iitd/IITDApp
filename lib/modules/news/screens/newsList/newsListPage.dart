@@ -50,25 +50,25 @@ class _NewsListState<K extends NewsType> extends State<NewsList<K>> {
               value: _value,
               items: <DropdownMenuItem<String>>[
                 DropdownMenuItem(
+                  value: 'Trending',
                   child: Text(
                     'Trending',
                     style: Theme.of(context).primaryTextTheme.headline6,
                   ),
-                  value: 'Trending',
                 ),
                 DropdownMenuItem(
+                  value: 'Recent',
                   child: Text(
                     'Recent',
                     style: Theme.of(context).primaryTextTheme.headline6,
                   ),
-                  value: 'Recent',
                 ),
                 DropdownMenuItem(
+                  value: 'Old',
                   child: Text(
                     'Old',
                     style: Theme.of(context).primaryTextTheme.headline6,
                   ),
-                  value: 'Old',
                 ),
               ],
               onChanged: (String value) {

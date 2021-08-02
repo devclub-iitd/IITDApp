@@ -142,7 +142,7 @@ class FormButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(8),
-      child: FlatButton(
+      child: TextButton(
           onPressed: onPressed,
           child: Text(
             text,

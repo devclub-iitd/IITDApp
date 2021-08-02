@@ -18,9 +18,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
+import 'package:IITDAPP/modules/courses/screens/search.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
 
   // try {
   //   await GlobalConfiguration().loadFromAsset('secrets');
@@ -33,7 +35,7 @@ void main() async {
 
   unawaited(initialiseNotifications());
   unawaited(initialisePreferences());
-
+  await savedstate.init();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
       create: (_) => NewsProvider<TrendingNews>(),

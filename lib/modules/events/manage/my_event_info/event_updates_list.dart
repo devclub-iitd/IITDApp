@@ -42,7 +42,7 @@ class _EventUpdateList extends State<EventUpdatesList> {
     if (response.statusCode == 200) {
       var parsedJson = json.decode(response.body);
       // ignore: prefer_collection_literals
-      var updateList = List<Update>();
+      var updateList = [];
       for (var i = 0; i < parsedJson['event']['updates'].length; i++) {
         var update = Update.fromJson(parsedJson['event']['updates'][i]);
         updateList.add(update);
