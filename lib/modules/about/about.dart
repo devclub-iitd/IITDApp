@@ -3,7 +3,7 @@ import 'package:IITDAPP/modules/about/privacyPolicy.dart';
 import 'package:IITDAPP/modules/about/releaseNotes.dart';
 import 'package:IITDAPP/modules/settings/widgets/SettingsTextWidgets.dart';
 import 'package:IITDAPP/utility/UrlHandler.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
+//import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -13,11 +13,11 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor:
           Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
-      appBar: GradientAppBar(
+      appBar: AppBar(
+        //GradientAppBar
         title: Text('About'),
-        backgroundColorStart:
-            Provider.of<ThemeModel>(context).theme.APP_BAR_START,
-        backgroundColorEnd: Provider.of<ThemeModel>(context).theme.APP_BAR_END,
+        backgroundColor: Provider.of<ThemeModel>(context).theme.APP_BAR_START,
+        //backgroundColorEnd: Provider.of<ThemeModel>(context).theme.APP_BAR_END,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,

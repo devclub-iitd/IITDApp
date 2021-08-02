@@ -8,7 +8,7 @@ import 'package:IITDAPP/utility/apiResponse.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
+//import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:provider/provider.dart';
 
 import 'package:IITDAPP/modules/news/data/newsData.dart';
@@ -50,7 +50,7 @@ class NewsPage extends StatelessWidget {
               (syncItem.createdBy ?? '') == currentUser.id;
           return CustomScrollView(
             slivers: <Widget>[
-              SliverGradientAppBar(
+              SliverAppBar(
                 actions: <Widget>[
                   if (showEdit) EditButton(item: syncItem),
                   if (showEdit) HideButton(item: syncItem),
@@ -59,10 +59,10 @@ class NewsPage extends StatelessWidget {
                 floating: false,
                 pinned: true,
                 snap: false,
-                backgroundColorStart:
+                backgroundColor:
                     Provider.of<ThemeModel>(context).theme.APP_BAR_START,
-                backgroundColorEnd:
-                    Provider.of<ThemeModel>(context).theme.APP_BAR_END,
+                // backgroundColorEnd:
+                //     Provider.of<ThemeModel>(context).theme.APP_BAR_END,
                 expandedHeight: 300,
                 flexibleSpace: FlexibleSpaceBar(
                   background: Hero(

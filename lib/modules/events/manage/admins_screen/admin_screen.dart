@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
+//import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -59,10 +59,9 @@ class AdminScreenState extends State<AdminScreen> {
     return Scaffold(
       backgroundColor:
           Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
-      appBar: GradientAppBar(
-        backgroundColorStart:
-            Provider.of<ThemeModel>(context).theme.APP_BAR_START,
-        backgroundColorEnd: Provider.of<ThemeModel>(context).theme.APP_BAR_END,
+      appBar: AppBar(
+        backgroundColor: Provider.of<ThemeModel>(context).theme.APP_BAR_START,
+        //backgroundColorEnd: Provider.of<ThemeModel>(context).theme.APP_BAR_END,
         title: Text('${currentUser.superAdminOf[0].clubName} Admins'),
         centerTitle: true,
       ),

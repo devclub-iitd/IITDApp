@@ -21,57 +21,58 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
-  sliding_up_panel: ^1.0.2
-  latlong: ^0.6.1
-  provider: ^4.1.2
-  photo_view: ^0.9.2
-  gradient_app_bar: ^0.0.1
+  sliding_up_panel: ^2.0.0+1
+  latlong:
+  provider: ^5.0.0
+  photo_view: ^0.12.0
+ # gradient_app_bar: ^0.0.1
   pedantic: ^1.8.0
-  http: ^0.12.1
-  flutter_calendar_carousel: ^1.4.12
-  location: ^3.0.0
-  flutter_staggered_animations: "^0.1.2"
-  google_fonts: ^1.1.0
-  font_awesome_flutter: ^8.8.1
-  flutter_speed_dial: ^1.2.1
-  flutter_svg: ^0.19.0
-  back_button_interceptor: ^4.2.4
-  url_launcher: ^5.4.7
-  expandable: ^4.1.4
+  http: #^0.13.3
+  flutter_calendar_carousel: ^2.0.2
+  location: #^4.3.0
+  flutter_staggered_animations: ^1.0.0
+  google_fonts:
+  font_awesome_flutter: ^9.1.0
+  flutter_speed_dial: ^4.2.0
+  flutter_svg: ^0.22.0
+  back_button_interceptor: ^5.0.1
+  url_launcher:
+  expandable: ^5.0.1
   carousel_slider: ^2.0.0
-  cached_network_image: ^2.2.0+1
+  cached_network_image:
   scrollable_positioned_list: ^0.1.6
-  shimmer: ^1.1.1
-  syncfusion_flutter_calendar: ^18.2.59
-  modal_bottom_sheet: ^0.1.0 #0.1.5 0.1.6 2.0.0
+
+  shimmer: ^2.0.0
+  syncfusion_flutter_calendar: ^19.2.49
+ # modal_bottom_sheet: ^0.1.5
   flutter_swiper: ^1.1.6
-  localstorage: ^3.0.2+5
-  flutter_webview_plugin: ^0.3.11
-  corsac_jwt: ^0.2.2
+  localstorage:
+  flutter_webview_plugin: ^0.4.0
+  corsac_jwt:
 
 #  device_calendar: ^3.2.0-dev.11602    # comment this and uncomment either of below 2 url lines if only want to add for one platform
   device_calendar:
     git:
       url: https://github.com/Pranjal2041/device_calendar.git   #  for android use only one of 3 options
-  timeago: ^2.0.26
-  html: ^0.15.0
-  global_configuration: ^1.5.0
-  firebase_messaging: ^7.0.1
-  flutter_markdown: ^0.5.2
-  flutter_spinkit: "^4.1.2"
-  flutter_secure_storage: ^3.3.3
-  validators: ^2.0.0+1
+  timeago: ^3.1.0
+  global_configuration:
+  firebase_messaging: ^10.0.4
+  flutter_markdown: ^0.6.4
+  flutter_spinkit: ^5.0.0
+  flutter_secure_storage: ^4.2.1
+  validators: ^3.0.0
   auto_size_text: ^2.0.1
-  datetime_picker_formfield: ^1.0.0
-  date_format: ^1.0.8
+  datetime_picker_formfield: ^2.0.0
+  date_format: ^2.0.2
   shared_preferences: ^0.5.7+3
-  flutter_local_notifications: ^1.4.4+1
-  settings_ui: ^0.3.0
-  flare_flutter: ^2.0.3
+  flutter_local_notifications:
+  settings_ui: ^1.0.0
+  flare_flutter: ^3.0.2
   flushbar: ^1.10.4
-  calendarnotificationprovider: ^0.0.2
-  firebase_analytics: ^5.0.11
-  webview_flutter: ^1.0.7
+  calendarnotificationprovider: ^0.0.3
+  firebase_core:
+  firebase_analytics: 
+  webview_flutter: ^2.0.10
   flutter:
     sdk: flutter
 

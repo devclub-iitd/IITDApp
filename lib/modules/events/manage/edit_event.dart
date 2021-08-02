@@ -15,7 +15,7 @@ import 'package:http/http.dart' as http;
 import 'dart:async';
 
 import '../events/event_class.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
+//import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 Future<void> deleteEvent(BuildContext context, String id) async {
   print('Deleting Event');
@@ -49,13 +49,12 @@ class EditEvent extends StatelessWidget {
       child: Scaffold(
         backgroundColor:
             Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
-        appBar: GradientAppBar(
+        appBar: AppBar(
           title: Text('Edit Event'),
           centerTitle: true,
-          backgroundColorStart:
-              Provider.of<ThemeModel>(context).theme.APP_BAR_START,
-          backgroundColorEnd:
-              Provider.of<ThemeModel>(context).theme.APP_BAR_END,
+          backgroundColor: Provider.of<ThemeModel>(context).theme.APP_BAR_START,
+          // backgroundColorEnd:
+          //     Provider.of<ThemeModel>(context).theme.APP_BAR_END,
         ),
         body: GestureDetector(
           onTap: () {

@@ -19,9 +19,8 @@ const String url = 'https://iitd-connect-server.herokuapp.com';
 String title = 'IITD APP';
 String token;
 bool connectedToInternet = true;
-//User currentUser;
-User currentUser =
-    User(isAdmin: true, name: 'Vaibhav Mishra', email: 'cs5200448@iitd.ac.in');
+User currentUser;
+// User currentUser = User(isAdmin: true,name: 'Prakhar Jagwani',email: 'cs1190382@iitd.ac.in');
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 var logoutFunc;
 var loginFunc;

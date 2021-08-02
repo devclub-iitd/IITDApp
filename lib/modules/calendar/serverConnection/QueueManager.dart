@@ -4,7 +4,11 @@ class QueueManager {
   static final LocalStorage ls = LocalStorage('iitdapp');
 
   static Future<List> storeList(List lis) async {
-    await ls.setItem('calQueue', {'data': lis});
+    print('Storing List');
+    if (lis.isNotEmpty) {
+      await ls.setItem('calQueue', {'data': lis});
+    }
+    print('List Storage Done');
     return lis;
   }
 

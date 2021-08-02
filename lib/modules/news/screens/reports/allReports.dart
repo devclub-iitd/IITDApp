@@ -4,7 +4,7 @@ import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/news/screens/reports/resportsList.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
-import 'package:gradient_app_bar/gradient_app_bar.dart';
+//import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:provider/provider.dart';
 
 class AllReports extends StatefulWidget {
@@ -23,10 +23,9 @@ class _AllReportsState extends State<AllReports> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: GradientAppBar(
-        backgroundColorStart:
-            Provider.of<ThemeModel>(context).theme.APP_BAR_START,
-        backgroundColorEnd: Provider.of<ThemeModel>(context).theme.APP_BAR_END,
+      appBar: AppBar(
+        backgroundColor: Provider.of<ThemeModel>(context).theme.APP_BAR_START,
+        //backgroundColorEnd: Provider.of<ThemeModel>(context).theme.APP_BAR_END,
         title: Text('All Reports'),
       ),
       body: RefreshIndicator(
