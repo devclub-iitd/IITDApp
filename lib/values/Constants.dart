@@ -12,8 +12,10 @@ import 'package:flutter/material.dart';
 
 // const String url = '172.27.20.227:5000';
 // const String url = 'http://192.168.43.251:5000';
-const String url = 'http://192.168.180.77:5000';
+// const String url = 'http://192.168.180.77:5000';
 // const String url = 'https://campusserver2.herokuapp.com/';
+const String url = 'https://iitd-connect-server.herokuapp.com';
+
 String title = 'IITD APP';
 String token;
 bool connectedToInternet = true;
