@@ -12,22 +12,24 @@ import 'package:IITDAPP/values/colors/colors.dart';
 import 'package:IITDAPP/values/colors/darkColors.dart';
 import 'package:IITDAPP/push_notifications.dart';
 import 'package:calendarnotificationprovider/calendarnotificationprovider.dart';
-import 'package:global_configuration/global_configuration.dart';
-import 'package:syncfusion_flutter_core/core.dart';
+import 'package:firebase_core/firebase_core.dart';
+// import 'package:global_configuration/global_configuration.dart';
+// import 'package:syncfusion_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  try {
-    await GlobalConfiguration().loadFromAsset('secrets');
-    SyncfusionLicense.registerLicense(
-        // ignore: deprecated_member_use
-        GlobalConfiguration().getString('calendar_api_key'));
-  } catch (e) {
-    print('secrets.json file is required');
-  }
+
+  // try {
+  //   await GlobalConfiguration().loadFromAsset('secrets');
+  //   SyncfusionLicense.registerLicense(
+  //       // ignore: deprecated_member_use
+  //       GlobalConfiguration().getString('calendar_api_key'));
+  // } catch (e) {
+  //   print('secrets.json file is required');
+  // }
 
   unawaited(initialiseNotifications());
   unawaited(initialisePreferences());
@@ -93,10 +95,13 @@ initialisePreferences() async {
 
 // ignore: always_declare_return_types
 initialiseNotifications() async {
+  print('Initialising Notifications');
+  await Firebase.initializeApp();
+  print('Testing Push Notifications');
+  var pushNotificationsManager = PushNotificationsManager();
+  await pushNotificationsManager.init();
   await Calendarnotificationprovider.setDescription(
       start: 'Time:- ', end: '', text: DynamicTextEventKeys.RangeTime);
   await Calendarnotificationprovider.setTitle(
       start: 'Event:- ', text: DynamicTextEventKeys.Title);
-  var pushNotificationsManager = PushNotificationsManager();
-  await pushNotificationsManager.init();
 }
