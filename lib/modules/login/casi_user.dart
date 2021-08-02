@@ -60,7 +60,7 @@ class CasiLogin {
     secret = signedToken.toString();
 
     _loginURL =
-        '${_serverUrl}/user/login?serviceURL=${_serverUrl}/auth/clientVerify?q=${Uri.encodeQueryComponent(secret)}';
+        '$_serverUrl/user/login?serviceURL=$_serverUrl/auth/clientVerify?q=${Uri.encodeQueryComponent(secret)}';
   }
 
   CasiLogin.fromToken(String token) {
@@ -75,7 +75,7 @@ class CasiLogin {
     webview.onUrlChanged.listen((url) async {
       print('URL CHANGED: $url');
 
-      if (url.startsWith('${_serverUrl}/auth/clientVerify?q=')) {
+      if (url.startsWith('$_serverUrl/auth/clientVerify?q=')) {
         if (_token != null) return;
         _token = 'mutex';
         try {
@@ -103,7 +103,7 @@ class CasiLogin {
 
   Future<CasiUser> fetchUserDetails() async {
     final response = await http.post(_serverUrl + '/profile', headers: {
-      'Cookie': 'rememberme=${_token};',
+      'Cookie': 'rememberme=$_token;',
     });
     final jsonData = jsonDecode(response.body);
     if (response.statusCode == 200) {

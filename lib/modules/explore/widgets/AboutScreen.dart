@@ -128,7 +128,7 @@ class SpeedDialSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getChildren() {
+    List getChildren() {
       var list = <SpeedDialChild>[];
       if (links == []) {
         return [];
@@ -458,7 +458,6 @@ class CustomSocialMediaButton extends StatelessWidget {
       width: 35,
       child: FloatingActionButton(
         heroTag: null,
-
         onPressed: () {
           url != '' ? UrlHandler.launchInBrowser(url) : null;
         },

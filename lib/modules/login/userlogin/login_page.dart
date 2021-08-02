@@ -19,7 +19,8 @@ import '../casi_user.dart';
 void onLoginSuccess(BuildContext context, String newtoken) async {
   print('newtoken: $newtoken');
   // ignore: unawaited_futures
-  if (!Provider.of<LoginStateProvider>(context, listen: false).loading) showLoading(context);
+  if (!Provider.of<LoginStateProvider>(context, listen: false).loading)
+    showLoading(context);
   final storage = FlutterSecureStorage();
   print('Getting User Info');
   final response = await http
@@ -37,11 +38,13 @@ void onLoginSuccess(BuildContext context, String newtoken) async {
     var topr = await storage.read(key: 'token');
     print(topr);
     token = newtoken;
-    if (!Provider.of<LoginStateProvider>(context, listen: false).loading) Navigator.pop(context);
+    if (!Provider.of<LoginStateProvider>(context, listen: false).loading)
+      Navigator.pop(context);
     Provider.of<LoginStateProvider>(context, listen: false).signIn();
   } else {
     print('Could not get user info.');
-    if (!Provider.of<LoginStateProvider>(context, listen: false).loading) Navigator.pop(context);
+    if (!Provider.of<LoginStateProvider>(context, listen: false).loading)
+      Navigator.pop(context);
     await showErrorAlert(
         context, 'Login Failed', 'Something went wrong. Please Try Again');
   }
@@ -130,13 +133,6 @@ class LoginPageState extends State<LoginPage> {
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.8,
                     child: FlatButton(
-                      child: Text(
-                        'LOGIN',
-                        style: TextStyle(
-                            color: Provider.of<ThemeModel>(context)
-                                .theme
-                                .RAISED_BUTTON_FOREGROUND),
-                      ),
                       color: Provider.of<ThemeModel>(context)
                           .theme
                           .LOGIN_BUTTON_COLOR,
@@ -146,6 +142,13 @@ class LoginPageState extends State<LoginPage> {
                         // widget.onlogin();
                         // Provider.of<LoginStateProvider>(context, listen: false).signIn();
                       },
+                      child: Text(
+                        'LOGIN',
+                        style: TextStyle(
+                            color: Provider.of<ThemeModel>(context)
+                                .theme
+                                .RAISED_BUTTON_FOREGROUND),
+                      ),
                     ),
                   ),
                   Padding(

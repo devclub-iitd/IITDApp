@@ -360,16 +360,16 @@ Future<ConfirmAction> SettingsAlertDialog(BuildContext context,
         content: Text(desc),
         actions: <Widget>[
           TextButton(
-            child: Text(cancelButton),
             onPressed: () {
               Navigator.of(context).pop(ConfirmAction.Cancel);
             },
+            child: Text(cancelButton),
           ),
           TextButton(
-            child: Text(acceptButton),
             onPressed: () {
               Navigator.of(context).pop(ConfirmAction.Accept);
             },
+            child: Text(acceptButton),
           )
         ],
       );

@@ -29,12 +29,13 @@ class User {
     var iSA = (json['superAdminOf'].length > 0) ? true : false;
     // bool iSA = false;
     // ignore: prefer_collection_literals
-    var adminof = [];
+    // ignore: omit_local_variable_types
+    var adminof = <UClub>[];
     for (var i = 0; i < json['adminOf'].length; i++) {
       adminof.add(UClub.fromJson(json['adminOf'][i]));
     }
     // ignore: prefer_collection_literals
-    var superadminof = [];
+    var superadminof = <UClub>[];
     for (var i = 0; i < json['superAdminOf'].length; i++) {
       var _uclub = UClub.fromJson(json['superAdminOf'][i]);
       if (adminof.contains(_uclub)) adminof.add(_uclub);

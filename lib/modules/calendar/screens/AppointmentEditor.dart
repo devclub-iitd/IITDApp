@@ -42,7 +42,6 @@ class AppointmentEditorState extends State<AppointmentEditor> {
     //     );
     var result = true;
 
-
     setState(() {
       permissionGranted = result;
     });
@@ -908,19 +907,16 @@ class _ReminderPickerState extends State<ReminderPicker> {
                   Spacer(),
                   TextButton(
                     child: Text('CANCEL'),
-
                     onPressed: () {
                       Navigator.pop(context);
                     },
                   ),
                   TextButton(
                     child: Text('SAVE'),
-                  FlatButton(
                     onPressed: () {
                       setReminder(time + ' ' + reminderUnits[type]);
                       Navigator.pop(context);
                     },
-                    child: Text('SAVE'),
                   ),
                 ],
               )
