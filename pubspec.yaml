@@ -43,6 +43,7 @@ dependencies:
   cached_network_image:
   scrollable_positioned_list: ^0.1.6
 
+
   shimmer: ^2.0.0
   syncfusion_flutter_calendar: ^19.2.49
  # modal_bottom_sheet: ^0.1.5
@@ -55,6 +56,7 @@ dependencies:
   device_calendar:
     git:
       url: https://github.com/Pranjal2041/device_calendar.git   #  for android use only one of 3 options
+
   timeago: ^3.1.0
   global_configuration:
   firebase_messaging: ^10.0.4
@@ -70,6 +72,7 @@ dependencies:
   settings_ui: ^1.0.0
   flare_flutter: ^3.0.2
   flushbar: ^1.10.4
+
   calendarnotificationprovider: ^0.0.3
   firebase_core:
   firebase_analytics: 
