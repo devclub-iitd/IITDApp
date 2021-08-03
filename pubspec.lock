@@ -71,6 +71,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.5.1"
+  calendarnotificationprovider:
+    dependency: "direct main"
+    description:
+      name: calendarnotificationprovider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.2"
   carousel_slider:
     dependency: "direct main"
     description:
