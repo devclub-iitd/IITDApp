@@ -23,7 +23,7 @@ Future<List<Admin>> getAdmins() async {
     print('afdv');
     var parsedJson = json.decode(response.body);
     // ignore: prefer_collection_literals
-    var admins = List<Admin>();
+    var admins = [];
     for (var i = 0; i < parsedJson['data']['admins'].length; i++) {
       var r = Admin.fromJson(parsedJson['data']['admins'][i]);
       print('qwerty');
@@ -69,10 +69,12 @@ class AdminScreenState extends State<AdminScreen> {
         children: <Widget>[
           Container(
             margin: EdgeInsets.all(15),
-            child: FlatButton(
-              color: Provider.of<ThemeModel>(context)
-                  .theme
-                  .RAISED_BUTTON_BACKGROUND,
+            child: TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Provider.of<ThemeModel>(context)
+                    .theme
+                    .RAISED_BUTTON_BACKGROUND,
+              ),
               onPressed: () async {
                 _showAlert(context);
               },
@@ -217,7 +219,7 @@ class AddDialogState extends State<AddDialog> {
           ],
         ),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
             onPressed: () {
               Navigator.pop(context);
             },
@@ -230,7 +232,7 @@ class AddDialogState extends State<AddDialog> {
                       .withOpacity(0.7)),
             ),
           ),
-          FlatButton(
+          TextButton(
             onPressed: () async {
               if (_key.currentState.validate()) {
                 _key.currentState.save();

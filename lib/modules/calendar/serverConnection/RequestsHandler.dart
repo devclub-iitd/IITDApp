@@ -4,8 +4,10 @@ void getAllEvents(
     var controlEvents, int type, DateTime startTime, DateTime endTime) async {
   print('keep coutning this as well');
   var queryParameters = {
-    'startDate': DateFormat('yyyy-MM-ddTHH:mm:ss').format(startTime.toUtc()) + '.000Z',
-    'endDate': DateFormat('yyyy-MM-ddTHH:mm:ss').format(endTime.toUtc()) + '.000Z'
+    'startDate':
+        DateFormat('yyyy-MM-ddTHH:mm:ss').format(startTime.toUtc()) + '.000Z',
+    'endDate':
+        DateFormat('yyyy-MM-ddTHH:mm:ss').format(endTime.toUtc()) + '.000Z'
   };
   var response = await http.post('$url/api/calendar/all/',
       headers: {'authorization': 'Bearer $token'}, body: queryParameters);
@@ -70,16 +72,16 @@ Future<void> getEventsFromResponse(
   // ignore: omit_local_variable_types
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var serKeys = <String>[];
-  var allKeys = await prefs.getKeys();
-  await allKeys.forEach((element) async {
+  var allKeys = prefs.getKeys();
+  allKeys.forEach((element) async {
     if (element.startsWith('ser')) {
       serKeys.add(element);
     }
   });
   await rems.forEach((data) async {
-    var item = await prefs.getString('ser ' + data['_id']);
+    var item = prefs.getString('ser ' + data['_id']);
     serKeys.remove('ser ' + data['_id']);
-    print('ok type ${type}');
+    print('ok type $type');
     item = item != null ? item.substring(4) : item;
     if (item == null) {
       var localId = searchItemFromLocal(controlEvents, data, type);
@@ -105,7 +107,7 @@ Future<void> getEventsFromResponse(
   });
   if (type == 1) {
     serKeys.forEach((element) async {
-      var eventId = await prefs.getString(element).substring(4);
+      var eventId = prefs.getString(element).substring(4);
       var deleteEv = false;
       await controlEvents.data.forEach((ev) {
         if (ev.eventId == eventId) {
@@ -115,7 +117,7 @@ Future<void> getEventsFromResponse(
       if (deleteEv) {
         var res = await DeviceCalendarPlugin()
             .deleteEvent(userEventsCalendarId, eventId);
-        print('deleted ${res} with event id ${eventId}');
+        print('deleted $res with event id $eventId');
         if (res.isSuccess) {
           await prefs.remove(element);
         }
@@ -125,7 +127,6 @@ Future<void> getEventsFromResponse(
 }
 
 bool checkEquality(var localItem, var serverItem, var type) {
-
   if (localItem.title != serverItem['name']) {
     return false;
   }
@@ -224,7 +225,9 @@ Future<void> getEventObject(var data, var eventId, var type) async {
     _events.appointments.add(meetings[0]);
 
     _events.notifyListeners(
-        CalendarDataSourceAction.add, <Meeting>[]..add(meetings[0]));
+        // ignore: prefer_inlined_adds
+        CalendarDataSourceAction.add,
+        <Meeting>[meetings[0]]);
   } else {
     print('error occured');
   }
@@ -261,8 +264,10 @@ Future<String> getServerId(var eventId) async {
 Map<String, String> createPostReminderBody(Event ev) {
   return {
     'name': ev.title,
-    'startDate': DateFormat('yyyy-MM-ddTHH:mm:ss').format(ev.start.toUtc()) + '.000Z',
-    'endDate': DateFormat('yyyy-MM-ddTHH:mm:ss').format(ev.end.toUtc()) + '.000Z',
+    'startDate':
+        DateFormat('yyyy-MM-ddTHH:mm:ss').format(ev.start.toUtc()) + '.000Z',
+    'endDate':
+        DateFormat('yyyy-MM-ddTHH:mm:ss').format(ev.end.toUtc()) + '.000Z',
     'description': ev.description,
     'reminder': getReminderString(ev.reminders),
     'repeat': getRecurrenceString(ev.recurrenceRule),
@@ -290,7 +295,6 @@ Future<String> postReminder(Event ev, bool patch,
       flagTimeout = true;
       return null;
     });
-
   } else {
     try {
       response = await http

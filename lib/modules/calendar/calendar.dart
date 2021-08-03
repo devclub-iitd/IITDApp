@@ -179,6 +179,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
       print('Calendars will be retrieved now');
       unawaited(showLoading(context, message: 'Syncing Changes'));
       await QueueManager.executeList(await QueueManager.getList());
+      // print('List Execution Complete');
       Navigator.pop(context);
       final calendarsResult = await _deviceCalendarPlugin.retrieveCalendars();
       setState(() {

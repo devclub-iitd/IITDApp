@@ -19,7 +19,7 @@ Future<bool> showCancelAlert(
               style: TextStyle(color: Colors.white),
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.of(context).pop(false);
                 },
@@ -28,7 +28,7 @@ Future<bool> showCancelAlert(
                   style: TextStyle(color: Colors.white70),
                 ),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                   Navigator.pop(context);

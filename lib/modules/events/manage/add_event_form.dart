@@ -33,7 +33,7 @@ Future<void> addEventRequest(Event event, BuildContext context) async {
     //Fix this to use named routes
     var count = 0;
     Navigator.of(context).popUntil((_) => count++ >= 2);
-    scaffoldKey.currentState.showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text('Event Added'),
     ));
     // } else {
@@ -44,7 +44,7 @@ Future<void> addEventRequest(Event event, BuildContext context) async {
     // }
   } else {
     Navigator.pop(context);
-    Scaffold.of(context).showSnackBar(SnackBar(
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text('Cannot add event. Try Again'),
     ));
     throw Exception('Failed to add event');
@@ -209,10 +209,10 @@ class _EventFormState extends State<EventForm> {
                   alignLabelWithHint: true,
                   labelText: 'Starts At',
                   labelStyle: TextStyle(
-                    color: Provider.of<ThemeModel>(context, listen: false)
-                        .theme
-                        .PRIMARY_TEXT_COLOR
-                        .withOpacity(0.5)),
+                      color: Provider.of<ThemeModel>(context, listen: false)
+                          .theme
+                          .PRIMARY_TEXT_COLOR
+                          .withOpacity(0.5)),
                   floatingLabelBehavior: FloatingLabelBehavior.auto,
                   helperText: ''),
               style: TextStyle(
@@ -259,10 +259,10 @@ class _EventFormState extends State<EventForm> {
                   alignLabelWithHint: true,
                   labelText: 'Ends At',
                   labelStyle: TextStyle(
-                    color: Provider.of<ThemeModel>(context, listen: false)
-                        .theme
-                        .PRIMARY_TEXT_COLOR
-                        .withOpacity(0.5)),
+                      color: Provider.of<ThemeModel>(context, listen: false)
+                          .theme
+                          .PRIMARY_TEXT_COLOR
+                          .withOpacity(0.5)),
                   floatingLabelBehavior: FloatingLabelBehavior.auto,
                   helperText: ''),
               style: TextStyle(
@@ -288,10 +288,10 @@ class _EventFormState extends State<EventForm> {
                   alignLabelWithHint: true,
                   labelText: 'Event About',
                   labelStyle: TextStyle(
-                    color: Provider.of<ThemeModel>(context, listen: false)
-                        .theme
-                        .PRIMARY_TEXT_COLOR
-                        .withOpacity(0.5)),
+                      color: Provider.of<ThemeModel>(context, listen: false)
+                          .theme
+                          .PRIMARY_TEXT_COLOR
+                          .withOpacity(0.5)),
                   helperText: ''),
               keyboardType: TextInputType.multiline,
               maxLines: null,
@@ -315,10 +315,10 @@ class _EventFormState extends State<EventForm> {
                   alignLabelWithHint: true,
                   labelText: 'Image Link',
                   labelStyle: TextStyle(
-                    color: Provider.of<ThemeModel>(context, listen: false)
-                        .theme
-                        .PRIMARY_TEXT_COLOR
-                        .withOpacity(0.5)),
+                      color: Provider.of<ThemeModel>(context, listen: false)
+                          .theme
+                          .PRIMARY_TEXT_COLOR
+                          .withOpacity(0.5)),
                   helperText: ''),
               keyboardType: TextInputType.multiline,
               maxLines: null,
@@ -340,24 +340,28 @@ class _EventFormState extends State<EventForm> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                RaisedButton(
+                ElevatedButton(
                   onPressed: () {
                     showCancelAlert(context, 'Cancel making new event?',
                         'Are you sure you want discard this event?');
                   },
+                  style: ElevatedButton.styleFrom(
+                    primary: Provider.of<ThemeModel>(context)
+                        .theme
+                        .RAISED_BUTTON_BACKGROUND,
+                  ),
                   child: Text('CANCEL',
                       style: TextStyle(
                           color: Provider.of<ThemeModel>(context)
                               .theme
                               .RAISED_BUTTON_FOREGROUND)),
-                  color: Provider.of<ThemeModel>(context)
-                      .theme
-                      .RAISED_BUTTON_BACKGROUND,
                 ),
-                RaisedButton(
-                  color: Provider.of<ThemeModel>(context)
-                      .theme
-                      .RAISED_BUTTON_BACKGROUND,
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Provider.of<ThemeModel>(context)
+                        .theme
+                        .RAISED_BUTTON_BACKGROUND,
+                  ),
                   child: Text(
                     'SUBMIT',
                     style: TextStyle(

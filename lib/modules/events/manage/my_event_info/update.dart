@@ -151,7 +151,7 @@ class EventUpdate extends StatelessWidget {
                     Provider.of<ThemeModel>(context).theme.ALERT_DIALOG_TEXT),
           ),
           actions: <Widget>[
-            FlatButton(
+            TextButton(
               onPressed: () {
                 Navigator.pop(context);
               },
@@ -164,7 +164,7 @@ class EventUpdate extends StatelessWidget {
                         .withOpacity(0.7)),
               ),
             ),
-            FlatButton(
+            TextButton(
               onPressed: () async {
                 await deleteUpdate(context);
               },

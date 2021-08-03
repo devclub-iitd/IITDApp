@@ -76,7 +76,7 @@ class DashboardAlerts {
               ? getNewsKey(item)
               : getEventKey(item)));
     }
-    print('set ${alerts}');
+    print('set $alerts');
     ls.ready.then((value) => ls.setItem(itemname, alerts));
   }
 }

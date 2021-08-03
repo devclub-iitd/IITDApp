@@ -31,14 +31,17 @@ class AppointmentEditorState extends State<AppointmentEditor> {
   }
 
   Future requestPermission() async {
-    var result = await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>()
-        ?.requestPermissions(
-          alert: true,
-          badge: true,
-          sound: true,
-        );
+    // TODO: Fix this
+    // var result = await flutterLocalNotificationsPlugin
+    //     .resolvePlatformSpecificImplementation<
+    //         IOSFlutterLocalNotificationsPlugin>()
+    //     ?.requestPermissions(
+    //       alert: true,
+    //       badge: true,
+    //       sound: true,
+    //     );
+    var result = true;
+
     setState(() {
       permissionGranted = result;
     });
@@ -89,7 +92,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
               ],
             ),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                 child: Text('OK'),
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -187,9 +190,6 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                   Expanded(
                     flex: 7,
                     child: GestureDetector(
-                        child: Text(
-                            DateFormat('EEE, MMM dd yyyy').format(_startDate),
-                            textAlign: TextAlign.left),
                         onTap: () async {
                           var date = await showDatePicker(
                             context: context,
@@ -213,17 +213,16 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                                   hour: _endDate.hour, minute: _endDate.minute);
                             });
                           }
-                        }),
+                        },
+                        child: Text(
+                            DateFormat('EEE, MMM dd yyyy').format(_startDate),
+                            textAlign: TextAlign.left)),
                   ),
                   Expanded(
                       flex: 3,
                       child: _isAllDay
                           ? const Text('')
                           : GestureDetector(
-                              child: Text(
-                                DateFormat('hh:mm a').format(_startDate),
-                                textAlign: TextAlign.right,
-                              ),
                               onTap: () async {
                                 var time = await showTimePicker(
                                     context: context,
@@ -249,7 +248,11 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                                         minute: _endDate.minute);
                                   });
                                 }
-                              })),
+                              },
+                              child: Text(
+                                DateFormat('hh:mm a').format(_startDate),
+                                textAlign: TextAlign.right,
+                              ))),
                 ])),
         ListTile(
             contentPadding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
@@ -260,10 +263,6 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                   Expanded(
                     flex: 7,
                     child: GestureDetector(
-                        child: Text(
-                          DateFormat('EEE, MMM dd yyyy').format(_endDate),
-                          textAlign: TextAlign.left,
-                        ),
                         onTap: () async {
                           var date = await showDatePicker(
                             context: context,
@@ -285,17 +284,17 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                               }
                             });
                           }
-                        }),
+                        },
+                        child: Text(
+                          DateFormat('EEE, MMM dd yyyy').format(_endDate),
+                          textAlign: TextAlign.left,
+                        )),
                   ),
                   Expanded(
                       flex: 3,
                       child: _isAllDay
                           ? const Text('')
                           : GestureDetector(
-                              child: Text(
-                                DateFormat('hh:mm a').format(_endDate),
-                                textAlign: TextAlign.right,
-                              ),
                               onTap: () async {
                                 var time = await showTimePicker(
                                     context: context,
@@ -324,29 +323,33 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                                     }
                                   });
                                 }
-                              })),
+                              },
+                              child: Text(
+                                DateFormat('hh:mm a').format(_endDate),
+                                textAlign: TextAlign.right,
+                              ))),
                 ])),
-        ListTile(
-          contentPadding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
-          leading: Icon(Icons.lens, color: Color(_selectedColor)),
-          title: Text(
-            colorCollection[_selectedColorIndex] == Color(_selectedColor)
-                ? colorNames[_selectedColorIndex]
-                : '',
-            style: TextStyle(
-                color:
-                    Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR),
-          ),
-          onTap: () {
-            showDialog<Widget>(
-              context: context,
-              barrierDismissible: true,
-              builder: (BuildContext context) {
-                return _ColorPicker();
-              },
-            ).then((dynamic value) => setState(() {}));
-          },
-        ),
+        // ListTile(
+        //   contentPadding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
+        //   leading: Icon(Icons.lens, color: Color(_selectedColor)),
+        //   title: Text(
+        //     colorCollection[_selectedColorIndex] == Color(_selectedColor)
+        //         ? colorNames[_selectedColorIndex]
+        //         : '',
+        //     style: TextStyle(
+        //         color:
+        //             Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR),
+        //   ),
+        //   onTap: () {
+        //     showDialog<Widget>(
+        //       context: context,
+        //       barrierDismissible: true,
+        //       builder: (BuildContext context) {
+        //         return _ColorPicker();
+        //       },
+        //     ).then((dynamic value) => setState(() {}));
+        //   },
+        // ),
         const Divider(
           height: 1.0,
           thickness: 1,
@@ -565,7 +568,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                         _events.appointments.removeAt(
                             _events.appointments.indexOf(_selectedAppointment));
                         _events.notifyListeners(CalendarDataSourceAction.remove,
-                            <Meeting>[]..add(_selectedAppointment));
+                            <Meeting>[_selectedAppointment]);
                         calForceSetsState();
                       }
                       var event = Event(
@@ -592,7 +595,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                       if (res == 'error') {
                         print('server error occured');
                         Navigator.pop(context);
-                        scaffoldKey.currentState.showSnackBar(SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           behavior: SnackBarBehavior.floating,
                           content: CustomSnackBarContent(
                             text: 'Server Error Occured',
@@ -603,7 +606,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                       }
                       if (res == 'timeout') {
                         connectedToInternet = false;
-                        scaffoldKey.currentState.showSnackBar(SnackBar(
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                           behavior: SnackBarBehavior.floating,
                           content: CustomSnackBarContent(
                             text: 'Unable to connect to server',
@@ -628,8 +631,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                               'ser ' + res, 'loc ' + createEventResult.data);
                         }
                         if (_selectedAppointment != null) {
-                          var id = await prefs
-                              .getInt('rem' + createEventResult.data);
+                          var id = prefs.getInt('rem' + createEventResult.data);
                           if (id != null && id != 0) {
                             await flutterLocalNotificationsPlugin.cancel(id);
                           }
@@ -671,7 +673,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                         _events.appointments.add(meetings[0]);
 
                         _events.notifyListeners(CalendarDataSourceAction.add,
-                            <Meeting>[]..add(meetings[0]));
+                            <Meeting>[meetings[0]]);
                         _selectedAppointment = null;
                         calForceSetsState();
                       } else {
@@ -707,7 +709,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                             _selectedAppointment.eventId);
                         if (res.isSuccess) {
                           var prefs = await SharedPreferences.getInstance();
-                          var id = await prefs
+                          var id = prefs
                               .getInt('rem' + _selectedAppointment.eventId);
                           if (id != null && id != 0) {
                             await flutterLocalNotificationsPlugin.cancel(id);
@@ -718,7 +720,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                               .indexOf(_selectedAppointment));
                           _events.notifyListeners(
                               CalendarDataSourceAction.remove,
-                              <Meeting>[]..add(_selectedAppointment));
+                              <Meeting>[_selectedAppointment]);
                           _selectedAppointment = null;
                           calForceSetsState();
                         } else {
@@ -728,9 +730,9 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                         Navigator.pop(context);
                       }
                     },
+                    backgroundColor: Colors.red,
                     child:
                         const Icon(Icons.delete_outline, color: Colors.white),
-                    backgroundColor: Colors.red,
                   )));
   }
 
@@ -762,7 +764,7 @@ Event addRecurrenceRule(var rule, Event event) {
 }
 
 List<Attendee> getAttendeeListFromList(var lis) {
-  var res = List<Attendee>(); // ignore: prefer_collection_literals
+  var res = []; // ignore: prefer_collection_literals
   for (var i = 0; i < lis.length; i++) {
     if (lis[i] == '') {
       continue;
@@ -773,14 +775,14 @@ List<Attendee> getAttendeeListFromList(var lis) {
 }
 
 List<Attendee> getAttendeeList(String str) {
-  var res = List<Attendee>(); // ignore: prefer_collection_literals
+  var res = []; // ignore: prefer_collection_literals
   if (str == '' || str == null) {
     return res;
   }
   var ls = LineSplitter();
   var lines = ls.convert(str);
   for (var i = 0; i < lines.length; i++) {
-    res.add(Attendee(name: lines[i],emailAddress: '',isOrganiser: false));
+    res.add(Attendee(name: lines[i], emailAddress: '', isOrganiser: false));
   }
   return res;
 }
@@ -903,13 +905,13 @@ class _ReminderPickerState extends State<ReminderPicker> {
               Row(
                 children: <Widget>[
                   Spacer(),
-                  FlatButton(
+                  TextButton(
                     child: Text('CANCEL'),
                     onPressed: () {
                       Navigator.pop(context);
                     },
                   ),
-                  FlatButton(
+                  TextButton(
                     child: Text('SAVE'),
                     onPressed: () {
                       setReminder(time + ' ' + reminderUnits[type]);
@@ -998,13 +1000,13 @@ class _RecurrenceDialogState extends State<RecurrenceDialog> {
         Row(
           children: <Widget>[
             Spacer(),
-            FlatButton(
+            TextButton(
               child: Text('CANCEL'),
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
-            FlatButton(
+            TextButton(
               child: Text('SAVE'),
               onPressed: () {
                 setRecurrence(recurrenceOptions[type]);

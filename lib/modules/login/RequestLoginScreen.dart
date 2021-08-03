@@ -48,15 +48,17 @@ class _RequestLoginScreenState extends State<RequestLoginScreen> {
                         .PRIMARY_TEXT_COLOR),
               ),
             ),
-            FlatButton(
+            TextButton(
               onPressed: () {
                 // getToken();
                 context.read<LoginStateProvider>().signOut().then((value) =>
                     Navigator.pushReplacementNamed(context, Routes.loginPage));
               },
-              color: Provider.of<ThemeModel>(context)
-                  .theme
-                  .RAISED_BUTTON_BACKGROUND,
+              style: TextButton.styleFrom(
+                backgroundColor: Provider.of<ThemeModel>(context)
+                    .theme
+                    .RAISED_BUTTON_BACKGROUND,
+              ),
               child: Text(
                 'LOGIN NOW',
                 style: TextStyle(

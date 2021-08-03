@@ -112,7 +112,7 @@ class _AddUpdateState extends State<AddUpdate> {
               // },
             ),
           ),
-          FlatButton(
+          TextButton(
             onPressed: () async {
               if (_message == null || _message.isEmpty) {
                 return null;
@@ -133,8 +133,6 @@ class _AddUpdateState extends State<AddUpdate> {
                       .theme
                       .RAISED_BUTTON_FOREGROUND),
             ),
-            color:
-                Provider.of<ThemeModel>(context).theme.RAISED_BUTTON_BACKGROUND,
           )
         ],
       ),

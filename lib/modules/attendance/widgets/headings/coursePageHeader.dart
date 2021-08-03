@@ -21,6 +21,7 @@ class CoursePageHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Padding(
+            padding: const EdgeInsets.only(bottom: 5),
             child: Hero(
               tag: _abbr,
               child: Container(
@@ -38,7 +39,6 @@ class CoursePageHeader extends StatelessWidget {
                 ),
               ),
             ),
-            padding: const EdgeInsets.only(bottom: 5),
           ),
           Text(
             _abbr,

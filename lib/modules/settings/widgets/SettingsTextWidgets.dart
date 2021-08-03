@@ -25,6 +25,7 @@ class _SettingsDropdownTileState extends State<SettingsDropdownTile> {
   var value;
   @override
   void initState() {
+    // ignore: todo
     // TODO: implement initState
     value = widget.defaultValue;
     getValue();
@@ -46,10 +47,10 @@ class _SettingsDropdownTileState extends State<SettingsDropdownTile> {
     // ignore: non_constant_identifier_names
     DropdownMenuItem CustomDropDownItem(text, value) {
       return DropdownMenuItem(
+        value: value,
         child: Text(
           text,
         ),
-        value: value,
       );
     }
 
@@ -358,17 +359,17 @@ Future<ConfirmAction> SettingsAlertDialog(BuildContext context,
         title: Text(title),
         content: Text(desc),
         actions: <Widget>[
-          FlatButton(
-            child: Text(cancelButton),
+          TextButton(
             onPressed: () {
               Navigator.of(context).pop(ConfirmAction.Cancel);
             },
+            child: Text(cancelButton),
           ),
-          FlatButton(
-            child: Text(acceptButton),
+          TextButton(
             onPressed: () {
               Navigator.of(context).pop(ConfirmAction.Accept);
             },
+            child: Text(acceptButton),
           )
         ],
       );

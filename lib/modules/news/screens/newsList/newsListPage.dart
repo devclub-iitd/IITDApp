@@ -42,30 +42,33 @@ class _NewsListState<K extends NewsType> extends State<NewsList<K>> {
           Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       appBar: CustomAppBar(
         title: Theme(
+          data: ThemeData.dark().copyWith(
+              canvasColor:
+                  Provider.of<ThemeModel>(context).theme.APP_BAR_START),
           child: DropdownButtonHideUnderline(
             child: DropdownButton<String>(
               value: _value,
               items: <DropdownMenuItem<String>>[
                 DropdownMenuItem(
+                  value: 'Trending',
                   child: Text(
                     'Trending',
                     style: Theme.of(context).primaryTextTheme.headline6,
                   ),
-                  value: 'Trending',
                 ),
                 DropdownMenuItem(
+                  value: 'Recent',
                   child: Text(
                     'Recent',
                     style: Theme.of(context).primaryTextTheme.headline6,
                   ),
-                  value: 'Recent',
                 ),
                 DropdownMenuItem(
+                  value: 'Old',
                   child: Text(
                     'Old',
                     style: Theme.of(context).primaryTextTheme.headline6,
                   ),
-                  value: 'Old',
                 ),
               ],
               onChanged: (String value) {
@@ -87,9 +90,6 @@ class _NewsListState<K extends NewsType> extends State<NewsList<K>> {
               },
             ),
           ),
-          data: ThemeData.dark().copyWith(
-              canvasColor:
-                  Provider.of<ThemeModel>(context).theme.APP_BAR_START),
         ),
         withMenu: false,
       ),

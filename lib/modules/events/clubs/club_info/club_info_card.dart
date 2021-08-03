@@ -94,14 +94,17 @@ class _SubButtonState extends State<SubButton> {
       return null;
     });
     if (timeOutFlag) {
-      Scaffold.of(context)
+      ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text('Cannot Connect to Server!')));
       return;
     }
     print(response.statusCode);
     if (response.statusCode == 200) {
-      var workingClub = Provider.of<EventsTabProvider>(context, listen: false).allClubs.firstWhere((element) => element.id == _club.id);
-      Provider.of<EventsTabProvider>(context, listen: false).toggleClubSubscribe(_club.id);
+      var workingClub = Provider.of<EventsTabProvider>(context, listen: false)
+          .allClubs
+          .firstWhere((element) => element.id == _club.id);
+      Provider.of<EventsTabProvider>(context, listen: false)
+          .toggleClubSubscribe(_club.id);
       _club.isSubbed = workingClub.isSubbed;
       // _club.isSubbed = !_club.isSubbed;
       // if (_club.isSubbed) {
@@ -149,16 +152,16 @@ class _SubButtonState extends State<SubButton> {
           .theme
           .RAISED_BUTTON_BACKGROUND;
     }
-    return FlatButton(
-      onPressed: (_enabled)
-          ? () {
-              onButtonPress();
-            }
-          : null,
-      color: _buttonColor,
-      textColor: _textColor,
-      child: Text(_text),
-      disabledColor: Colors.grey.withOpacity(0.5),
-    );
+    return TextButton(
+        onPressed: (_enabled)
+            ? () {
+                onButtonPress();
+              }
+            : null,
+        style: TextButton.styleFrom(
+          primary: _textColor, // foreground
+          backgroundColor: _buttonColor,
+        ),
+        child: Text(_text));
   }
 }

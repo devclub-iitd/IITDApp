@@ -13,6 +13,7 @@ import 'package:IITDAPP/modules/settings/SettingsScreen.dart';
 import 'package:IITDAPP/routes/Routes.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
+import 'package:IITDAPP/modules/courses/courses.dart';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -44,6 +45,8 @@ class Router {
           return _createRoute(LoginScreen());
         case Routes.settingsPage:
           return _createRoute(SettingsScreen());
+        case Routes.coursesPage:
+          return _createRoute(CoursesScreen());
         default:
           return MaterialPageRoute(
               builder: (_) => Scaffold(
@@ -81,6 +84,8 @@ class Router {
         return _createRoute(LoginScreen());
       case Routes.settingsPage:
         return _createRoute(SettingsScreen());
+      case Routes.coursesPage:
+        return _createRoute(CoursesScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

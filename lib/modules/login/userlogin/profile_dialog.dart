@@ -75,16 +75,18 @@ void showAlert(BuildContext context, Function onlogout) {
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              FlatButton(
+              TextButton(
                 onPressed: () {
                   // getToken();
                   Navigator.pop(context);
                   Navigator.pushReplacementNamed(
                       context, LoginScreen.routeName);
                 },
-                color: Provider.of<ThemeModel>(context)
-                    .theme
-                    .RAISED_BUTTON_ALT_BACKGROUND,
+                style: TextButton.styleFrom(
+                  backgroundColor: Provider.of<ThemeModel>(context)
+                      .theme
+                      .RAISED_BUTTON_ALT_BACKGROUND,
+                ),
                 child: Text(
                   'LOGIN',
                   style: TextStyle(
@@ -132,7 +134,7 @@ void showAlert(BuildContext context, Function onlogout) {
                   textAlign: TextAlign.center,
                 ),
               ),
-              FlatButton(
+              TextButton(
                 onPressed: () async {
                   // getToken();
                   print('oh yeahd');
@@ -143,9 +145,11 @@ void showAlert(BuildContext context, Function onlogout) {
                   await Navigator.pushReplacementNamed(
                       context, Routes.loginPage);
                 },
-                color: Provider.of<ThemeModel>(context)
-                    .theme
-                    .RAISED_BUTTON_ALT_BACKGROUND,
+                style: TextButton.styleFrom(
+                  backgroundColor: Provider.of<ThemeModel>(context)
+                      .theme
+                      .RAISED_BUTTON_ALT_BACKGROUND,
+                ),
                 child: Text(
                   'LOGOUT',
                   style: TextStyle(

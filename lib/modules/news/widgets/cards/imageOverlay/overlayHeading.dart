@@ -21,6 +21,7 @@ class OverlayHeading extends StatelessWidget {
       ),
       padding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
       child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           NewsSource(
             sourceName: item.sourceName,
@@ -33,7 +34,6 @@ class OverlayHeading extends StatelessWidget {
             size: 12,
           ),
         ],
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
       ),
     );
   }

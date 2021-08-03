@@ -95,7 +95,7 @@ class EventInfoCard extends StatelessWidget {
                         .PRIMARY_TEXT_COLOR,
                     tooltip: 'Add to Calendar',
                   ),
-                  FlatButton(
+                  TextButton(
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -105,9 +105,11 @@ class EventInfoCard extends StatelessWidget {
                         _refresh();
                       });
                     },
-                    color: Provider.of<ThemeModel>(context)
-                        .theme
-                        .RAISED_BUTTON_BACKGROUND,
+                    style: TextButton.styleFrom(
+                      backgroundColor: Provider.of<ThemeModel>(context)
+                          .theme
+                          .RAISED_BUTTON_BACKGROUND,
+                    ),
                     child: Text(
                       'EDIT EVENT',
                       style: TextStyle(

@@ -13,18 +13,18 @@ import 'clubs/club_class.dart';
 
 class EventsTabProvider extends ChangeNotifier {
   // ignore: prefer_collection_literals
-  final List<Event> _allEvents = List<Event>();
+  final List<Event> _allEvents = [];
   // ignore: prefer_collection_literals
-  final List<Club> _allClubs = List<Club>();
+  final List<Club> _allClubs = [];
 
   List<List<Event>> _todayEvents = List<List<Event>>.generate(3, (i) => []);
   List<List<Event>> _tomorrowEvents = List<List<Event>>.generate(3, (i) => []);
   List<List<Event>> _upcomingEvents = List<List<Event>>.generate(3, (i) => []);
 
   // ignore: prefer_collection_literals
-  final List<Club> _subbedClubs = List<Club>();
+  final List<Club> _subbedClubs = [];
   // ignore: prefer_collection_literals
-  final List<Club> _otherClubs = List<Club>();
+  final List<Club> _otherClubs = [];
 
   bool _loaded = false;
   bool _error = false;
@@ -55,7 +55,7 @@ class EventsTabProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void handleGetClubsSuccess (var parsedJson) {
+  void handleGetClubsSuccess(var parsedJson) {
     _allClubs.clear();
     // _subbedClubs.clear();
     // _otherClubs.clear();
@@ -90,7 +90,7 @@ class EventsTabProvider extends ChangeNotifier {
       Duration(seconds: 5),
       onTimeout: () async {
         var parsedJson = await localStorage.getItem('clubs');
-        await handleGetClubsSuccess(parsedJson);
+        handleGetClubsSuccess(parsedJson);
         timeOutFlag = true;
         return null;
       },
@@ -116,7 +116,7 @@ class EventsTabProvider extends ChangeNotifier {
     _upcomingEvents = List<List<Event>>.generate(3, (i) => []);
     // ignore: prefer_collection_literals
     // eventsList = List<Event>();
-      // return [_todayEvents, _tomorrowEvents, _upcomingEvents];
+    // return [_todayEvents, _tomorrowEvents, _upcomingEvents];
     if (parsedJson['message'] == 'Events Found') {
       print(parsedJson['data']['events'].length);
       for (var i = 0; i < parsedJson['data']['events'].length; i++) {
@@ -144,7 +144,7 @@ class EventsTabProvider extends ChangeNotifier {
       },
     );
     connectedToInternet = !timeOutFlag;
-    
+
     if (timeOutFlag) {
       return returnObj;
     }
@@ -166,7 +166,7 @@ class EventsTabProvider extends ChangeNotifier {
     buildEventsList();
   }
 
-  void toggleClubSubscribe(String club_id){
+  void toggleClubSubscribe(String club_id) {
     var club = _allClubs.firstWhere((element) => element.id == club_id);
     club.isSubbed = !club.isSubbed;
     buildClubsList();
@@ -174,25 +174,25 @@ class EventsTabProvider extends ChangeNotifier {
   }
 
   Future<void> buildClubsList() async {
-      _subbedClubs.clear();
-      _otherClubs.clear();
-      for (var i = 0; i < _allClubs.length; i++) {
-        var club = _allClubs[i];
-        if (club.isSubbed) {
-          _subbedClubs.add(club);
-        } else {
-          _otherClubs.add(club);
-        }
+    _subbedClubs.clear();
+    _otherClubs.clear();
+    for (var i = 0; i < _allClubs.length; i++) {
+      var club = _allClubs[i];
+      if (club.isSubbed) {
+        _subbedClubs.add(club);
+      } else {
+        _otherClubs.add(club);
       }
-      _subbedClubs.sort((a, b) {
-        return a.clubName.toLowerCase().compareTo(b.clubName.toLowerCase());
-      });
-      _otherClubs.sort((a, b) {
-        return a.clubName.toLowerCase().compareTo(b.clubName.toLowerCase());
-      });
-
-      notifyListeners();
     }
+    _subbedClubs.sort((a, b) {
+      return a.clubName.toLowerCase().compareTo(b.clubName.toLowerCase());
+    });
+    _otherClubs.sort((a, b) {
+      return a.clubName.toLowerCase().compareTo(b.clubName.toLowerCase());
+    });
+
+    notifyListeners();
+  }
 
   void buildEventsList() {
     _todayEvents = List<List<Event>>.generate(3, (i) => []);
@@ -210,21 +210,28 @@ class EventsTabProvider extends ChangeNotifier {
                   .add(Duration(days: 1))
                   .isAfter(ev.startsAt) &&
               DateTime.now().add(Duration(days: 1)).isBefore(ev.endsAt)) ||
-          (DateTime.now().add(Duration(days: 1)).difference(ev.startsAt).inDays ==
+          (DateTime.now()
+                      .add(Duration(days: 1))
+                      .difference(ev.startsAt)
+                      .inDays ==
                   0 &&
               DateTime.now().add(Duration(days: 1)).day == ev.startsAt.day) ||
           (DateTime.now().add(Duration(days: 1)).difference(ev.endsAt).inDays ==
                   0 &&
               DateTime.now().add(Duration(days: 1)).day == ev.endsAt.day));
-      var isUpcoming =
-          (DateTime.now().add(Duration(days: 2)).isBefore(ev.endsAt) || (DateTime.now().add(Duration(days: 2)).difference(ev.endsAt).inDays ==
+      var isUpcoming = (DateTime.now()
+              .add(Duration(days: 2))
+              .isBefore(ev.endsAt) ||
+          (DateTime.now().add(Duration(days: 2)).difference(ev.endsAt).inDays ==
                   0 &&
               DateTime.now().add(Duration(days: 2)).day == ev.endsAt.day));
       if (isToday) {
         if (ev.isStarred) {
           _todayEvents[0].add(ev);
-        } else if (_allClubs.firstWhere((element) => element.id == ev.eventBody.id).isSubbed) {
-        // } else if (ev.isBodySub) {
+        } else if (_allClubs
+            .firstWhere((element) => element.id == ev.eventBody.id)
+            .isSubbed) {
+          // } else if (ev.isBodySub) {
           _todayEvents[1].add(ev);
         } else {
           _todayEvents[2].add(ev);
@@ -233,8 +240,10 @@ class EventsTabProvider extends ChangeNotifier {
       if (isTommorow) {
         if (ev.isStarred) {
           _tomorrowEvents[0].add(ev);
-        } else if (_allClubs.firstWhere((element) => element.id == ev.eventBody.id).isSubbed) {
-        // } else if (ev.isBodySub) {
+        } else if (_allClubs
+            .firstWhere((element) => element.id == ev.eventBody.id)
+            .isSubbed) {
+          // } else if (ev.isBodySub) {
           _tomorrowEvents[1].add(ev);
         } else {
           _tomorrowEvents[2].add(ev);
@@ -243,8 +252,10 @@ class EventsTabProvider extends ChangeNotifier {
       if (isUpcoming) {
         if (ev.isStarred) {
           _upcomingEvents[0].add(ev);
-        } else if (_allClubs.firstWhere((element) => element.id == ev.eventBody.id).isSubbed) {
-        // } else if (ev.isBodySub) {
+        } else if (_allClubs
+            .firstWhere((element) => element.id == ev.eventBody.id)
+            .isSubbed) {
+          // } else if (ev.isBodySub) {
           _upcomingEvents[1].add(ev);
         } else {
           _upcomingEvents[2].add(ev);

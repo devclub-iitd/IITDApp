@@ -164,16 +164,19 @@ class NewsPage extends StatelessWidget {
                               )),
                   ),
                   if (redirectPossible && showEdit)
-                    FlatButton(
-                        color: (syncItem.details.status == Status.COMPLETED &&
-                                syncItem.reports.isNotEmpty)
-                            ? Provider.of<ThemeModel>(context, listen: false)
-                                .theme
-                                .RAISED_BUTTON_BACKGROUND
-                            : Provider.of<ThemeModel>(context, listen: false)
-                                .theme
-                                .RAISED_BUTTON_BACKGROUND
-                                .withOpacity(0.4),
+                    TextButton(
+                        style: TextButton.styleFrom(
+                          backgroundColor: (syncItem.details.status ==
+                                      Status.COMPLETED &&
+                                  syncItem.reports.isNotEmpty)
+                              ? Provider.of<ThemeModel>(context, listen: false)
+                                  .theme
+                                  .RAISED_BUTTON_BACKGROUND
+                              : Provider.of<ThemeModel>(context, listen: false)
+                                  .theme
+                                  .RAISED_BUTTON_BACKGROUND
+                                  .withOpacity(0.4),
+                        ),
                         child: Text('View Reports',
                             style: TextStyle(
                               fontSize: 15,
@@ -197,7 +200,7 @@ class NewsPage extends StatelessWidget {
                             ));
                           }
                         }),
-                  FlatButton(
+                  TextButton(
                     child: Text(
                       'Report This Article',
                       style: TextStyle(

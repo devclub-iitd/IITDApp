@@ -33,7 +33,7 @@ class ReportsList extends StatelessWidget {
                     if (!redirectPossible) {
                       return Container();
                     }
-                    return RaisedButton(
+                    return ElevatedButton(
                       onPressed: () => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (_) => NewsPage(
@@ -43,9 +43,11 @@ class ReportsList extends StatelessWidget {
                           ),
                         ),
                       ),
-                      color: Provider.of<ThemeModel>(context)
-                          .theme
-                          .RAISED_BUTTON_BACKGROUND,
+                      style: ElevatedButton.styleFrom(
+                        primary: Provider.of<ThemeModel>(context)
+                            .theme
+                            .RAISED_BUTTON_BACKGROUND,
+                      ),
                       child: Text(
                         'View News',
                         style: TextStyle(

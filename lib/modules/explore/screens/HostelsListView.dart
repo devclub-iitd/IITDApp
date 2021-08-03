@@ -9,18 +9,16 @@ class HostelsListView extends StatefulWidget {
 }
 
 class _HostelsListViewState extends State<HostelsListView> {
-
   @override
   Widget build(BuildContext context) {
-    var lis = List(hostelsList.length);
-    for (var i=0;i<hostelsList.length;i++){
+    var lis = List.filled(hostelsList.length, HostelListCard(), growable: true);
+    for (var i = 0; i < hostelsList.length; i++) {
       var temp = hostelsList[i];
       temp['idx'] = i;
-      lis[i] = HostelListCard(data: temp,);
+      lis[i] = HostelListCard(
+        data: temp,
+      );
     }
-
-    return CustomAnimatedListView(
-        list: lis
-    );
+    return CustomAnimatedListView(list: lis);
   }
 }

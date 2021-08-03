@@ -18,7 +18,7 @@ Future<List<Request>> getRequests() async {
   if (response.statusCode == 200) {
     var parsedJson = json.decode(response.body);
     // ignore: prefer_collection_literals
-    var requests = List<Request>();
+    var requests = [];
     for (var i = 0; i < parsedJson[''].length; i++) {
       var r = Request.fromJson(parsedJson[''][i]);
       requests.add(r);

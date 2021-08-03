@@ -10,7 +10,7 @@ void showAlertDialog(
     @required Function action,
     @required String content}) {
   // set up the buttons
-  Widget cancelButton = FlatButton(
+  Widget cancelButton = TextButton(
     child: Text('Cancel',
         style: TextStyle(
             color: Provider.of<ThemeModel>(context, listen: false)
@@ -20,7 +20,7 @@ void showAlertDialog(
       Navigator.of(context).pop();
     },
   );
-  Widget actioButton = FlatButton(
+  Widget actioButton = TextButton(
     child: Text(actionName,
         style: TextStyle(
             color: Provider.of<ThemeModel>(context, listen: false)

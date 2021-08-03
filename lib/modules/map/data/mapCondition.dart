@@ -95,9 +95,9 @@ class MapConditions with ChangeNotifier {
     }
 
     _permissionGranted = await location.hasPermission();
-    if (_permissionGranted == location_pack.PermissionStatus.denied) {
+    if (_permissionGranted == location_pack.PermissionStatus.DENIED) {
       _permissionGranted = await location.requestPermission();
-      if (_permissionGranted != location_pack.PermissionStatus.granted) {
+      if (_permissionGranted != location_pack.PermissionStatus.GRANTED) {
         return;
       }
     }

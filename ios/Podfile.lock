@@ -30,6 +30,7 @@ PODS:
 DEPENDENCIES:
   - calendarnotificationprovider (from `.symlinks/plugins/calendarnotificationprovider/ios`)
   - device_calendar (from `.symlinks/plugins/device_calendar/ios`)
+
   - Flutter (from `Flutter`)
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
   - flutter_secure_storage (from `.symlinks/plugins/flutter_secure_storage/ios`)
@@ -81,6 +82,7 @@ SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   location: 3a2eed4dd2fab25e7b7baf2a9efefe82b512d740
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904
   url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
