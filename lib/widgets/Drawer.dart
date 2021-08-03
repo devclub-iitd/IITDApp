@@ -82,7 +82,7 @@ class AppDrawer extends StatelessWidget {
             onTap: () {},
           ),
           _createDrawerItem(
-            selected: tag == 'Community Threads',
+            selected: tag == 'Chats',
             icon: Icons.chat_sharp,
             text: 'Chats',
             context: context,
