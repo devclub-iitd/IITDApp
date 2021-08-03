@@ -1,6 +1,7 @@
 import 'package:IITDAPP/modules/attendance/EmptyScreen.dart';
 import 'package:IITDAPP/modules/calendar/calendar.dart';
 import 'package:IITDAPP/modules/dashboard/dashboard.dart';
+import 'package:IITDAPP/modules/discussionForum/discuss.dart';
 import 'package:IITDAPP/modules/events/home.dart';
 import 'package:IITDAPP/modules/explore/explore.dart';
 import 'package:IITDAPP/modules/login/LoginScreen.dart';
@@ -33,6 +34,8 @@ class Router {
           return _createRoute(Explore());
         case Routes.map:
           return _createRoute(Map());
+        case Routes.discussionForum:
+          return _createRoute(MyNewApp());
         case Routes.quickLinks:
           return _createRoute(QuickLinks());
         case Routes.reqLogin:
@@ -62,6 +65,8 @@ class Router {
         return _createRoute(Explore());
       case Routes.map:
         return _createRoute(Map());
+      case Routes.discussionForum:
+        return _createRoute(MyNewApp());
       case Routes.quickLinks:
         return _createRoute(QuickLinks());
       case Routes.news:

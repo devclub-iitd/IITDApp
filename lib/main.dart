@@ -17,7 +17,7 @@ import 'package:syncfusion_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
-
+import 'package:IITDAPP/modules/discussionForum/discuss.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   try {
@@ -54,6 +54,9 @@ void main() async {
     ChangeNotifierProvider(
       create: (_) => EventsTabProvider(),
     ),
+    //ChangeNotifierProvider(
+    //  create: (_) => MyNewApp(),
+    //),
     ChangeNotifierProvider(create: (_) => LoginStateProvider()),
   ], child: MyApp()));
 }

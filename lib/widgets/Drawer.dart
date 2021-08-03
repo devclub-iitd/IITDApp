@@ -60,12 +60,28 @@ class AppDrawer extends StatelessWidget {
             context: context,
             routeName: Routes.attendance,
           ),
+          
           _createDrawerItem(
               selected: tag == 'Quick Links',
               icon: Icons.stars,
               text: 'Quick Links',
               context: context,
               routeName: Routes.quickLinks),
+
+          Divider(),
+          ListTile(
+            title: Text(
+              'Discussion Forum',
+            ),
+            onTap: () {},
+          ),
+          _createDrawerItem(
+            selected: tag == 'Community Threads',
+            icon: Icons.chat_sharp,
+            text: 'Chats',
+            context: context,
+            routeName: Routes.discussionForum,
+          ),    
           Divider(),
           ListTile(
             title: Text('Discover'),
