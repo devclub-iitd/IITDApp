@@ -15,29 +15,20 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.menu),
-            iconSize: 30,
-            color: Colors.white,
-            onPressed: (){}
-            ),
-          title: Text('Discussion Forum',
-           style: TextStyle(
-             fontSize: 28,
-             fontWeight: FontWeight.bold,
-          )),
-          elevation: 0.0,
-          actions: <Widget>[
-            IconButton(
+       appBar: CustomAppBar(
+        title: Text('Chats'),
+        height: 1,
+        actions: <Widget>[
+          IconButton(
               icon: Icon(Icons.search),
-            iconSize: 30,
-            color: Colors.white,
-            onPressed: (){}
-
-            ),
-          ]
-        ),
+              iconSize: 30,
+              color: Colors.white,
+              onPressed: () {}),
+        ],
+      ),
+      drawer: AppDrawer(
+        tag: 'Chats',
+      ),
         body: Column(children: <Widget>[
           CategorySelector(),
           Expanded(
