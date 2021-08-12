@@ -32,7 +32,7 @@ class _ChatScreenState extends State<ChatScreen> {
       //child:
       //Text(message.text),
       decoration: BoxDecoration(
-        color: isMe?Colors.teal[100]: Colors.lightBlueAccent[100],
+        color: isMe?Colors.grey[100]: Colors.lightBlue[100],
         borderRadius: isMe? BorderRadius.only(
           topLeft: Radius.circular(15),
           bottomLeft: Radius.circular(15),
@@ -49,7 +49,7 @@ class _ChatScreenState extends State<ChatScreen> {
               style: TextStyle(
                 color: Colors.blueGrey,
                 fontSize: 16,
-                fontWeight: FontWeight.w600,
+                //fontWeight: FontWeight.w600,
 
               )
               ),
@@ -85,7 +85,7 @@ class _ChatScreenState extends State<ChatScreen> {
             onPressed: (){},
            icon: Icon(Icons.photo),
            iconSize: 25, 
-           color: Colors.lightBlue,
+           color: Colors.black,//lightBlue
            ),
         ],
       ),
@@ -94,7 +94,7 @@ class _ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.teal,
+      backgroundColor: Colors.blue[50],
       appBar: AppBar(
         title: Text(
           widget.user.name,
