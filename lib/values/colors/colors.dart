@@ -4,6 +4,12 @@ import 'package:flutter/material.dart';
 /// App Colors Class - Resource class for storing app level color ants
 class AppColors {
   //Default
+
+  //User Search
+  Color SEARCH_BG;
+  Color Cancel_Button;
+  Color FILTER;
+
   Color PRIMARY_COLOR;
   Color PRIMARY_COLOR_LIGHT;
   Color PRIMARY_COLOR_DARK;
@@ -73,6 +79,11 @@ class AppColors {
   Color SLIDE_UP_SHEET_BUTTON_COLOR;
 
   AppColors() {
+    //User Search
+    SEARCH_BG = Color(0xffdddede);
+    Cancel_Button = Color(0xff666666);
+    FILTER = Color(0xff999999);
+
     //Default
     PRIMARY_COLOR = Color(0xFF35B4C5);
     PRIMARY_COLOR_LIGHT = Color(0xFFA5CFF1);
@@ -89,7 +100,7 @@ class AppColors {
     SCAFFOLD_BACKGROUND =
         //  Color.fromRGBO(26, 35, 126, 0.6);
         // Color(0xFFECEFF1);
-        Color(0xFFFAFAFA);
+        Color(0xFFfefffe);
     //BottomNavBar
     BOTTOM_NAV_BACKGROUND = Color.fromRGBO(92, 107, 192, 1);
     BOTTOM_NAV_SELECTED = Color.fromRGBO(225, 225, 225, 1);

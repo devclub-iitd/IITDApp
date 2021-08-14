@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -26,7 +26,7 @@ dependencies:
   latlong:
   provider: ^5.0.0
   photo_view: ^0.12.0
- # gradient_app_bar: ^0.0.1
+  # gradient_app_bar: ^0.0.1
   pedantic: ^1.8.0
   http: #^0.13.3
   flutter_calendar_carousel: ^2.0.2
@@ -43,19 +43,18 @@ dependencies:
   cached_network_image:
   scrollable_positioned_list: ^0.1.6
 
-
   shimmer: ^2.0.0
   syncfusion_flutter_calendar: ^19.2.49
- # modal_bottom_sheet: ^0.1.5
+  # modal_bottom_sheet: ^0.1.5
   flutter_swiper: ^1.1.6
   localstorage:
   flutter_webview_plugin: ^0.4.0
   corsac_jwt:
 
-#  device_calendar: ^3.2.0-dev.11602    # comment this and uncomment either of below 2 url lines if only want to add for one platform
+  #  device_calendar: ^3.2.0-dev.11602    # comment this and uncomment either of below 2 url lines if only want to add for one platform
   device_calendar:
     git:
-      url: https://github.com/Pranjal2041/device_calendar.git   #  for android use only one of 3 options
+      url: https://github.com/Pranjal2041/device_calendar.git #  for android use only one of 3 options
 
   timeago: ^3.1.0
   global_configuration:
@@ -75,11 +74,10 @@ dependencies:
 
   calendarnotificationprovider: ^0.0.3
   firebase_core:
-  firebase_analytics: 
+  firebase_analytics:
   webview_flutter: ^2.0.10
   flutter:
     sdk: flutter
-
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
