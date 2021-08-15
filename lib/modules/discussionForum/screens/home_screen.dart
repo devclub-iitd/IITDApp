@@ -35,10 +35,10 @@ class _HomeScreenState extends State<HomeScreen> {
           child:Container(
             
             decoration: BoxDecoration(
-              color: Colors.cyan,
+              color: Colors.blue[200],
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30),
-                topRight: Radius.circular(30),
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
                ),
               ),
               child: Column(children: <Widget>[
