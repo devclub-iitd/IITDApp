@@ -93,10 +93,10 @@ class AppointmentEditorState extends State<AppointmentEditor> {
             ),
             actions: <Widget>[
               TextButton(
-                child: Text('OK'),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
+                child: Text('OK'),
               ),
             ]);
       },
@@ -329,27 +329,6 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                                 textAlign: TextAlign.right,
                               ))),
                 ])),
-        // ListTile(
-        //   contentPadding: const EdgeInsets.fromLTRB(5, 2, 5, 2),
-        //   leading: Icon(Icons.lens, color: Color(_selectedColor)),
-        //   title: Text(
-        //     colorCollection[_selectedColorIndex] == Color(_selectedColor)
-        //         ? colorNames[_selectedColorIndex]
-        //         : '',
-        //     style: TextStyle(
-        //         color:
-        //             Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR),
-        //   ),
-        //   onTap: () {
-        //     showDialog<Widget>(
-        //       context: context,
-        //       barrierDismissible: true,
-        //       builder: (BuildContext context) {
-        //         return _ColorPicker();
-        //       },
-        //     ).then((dynamic value) => setState(() {}));
-        //   },
-        // ),
         const Divider(
           height: 1.0,
           thickness: 1,
@@ -461,35 +440,35 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                       .theme
                       .PRIMARY_TEXT_COLOR
                       .withOpacity(0.54)),
-              hintText: 'Add Attendee',
+              hintText: 'Add Attendees',
             ),
           ),
         ),
-        ListTile(
-          // Attendee
-          onTap: () {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) => RecurrenceDialog(),
-            ).then((dynamic value) => setState(() {}));
-          },
-          contentPadding: const EdgeInsets.all(5),
-          leading: Icon(
-            Icons.repeat,
-            color: Provider.of<ThemeModel>(context)
-                .theme
-                .PRIMARY_TEXT_COLOR
-                .withOpacity(0.87),
-          ),
-          title: Text(
-            'Repeat',
-            style: TextStyle(fontSize: 18),
-          ),
-          subtitle: Text(
-            _recurrence,
-            style: TextStyle(color: Colors.green),
-          ),
-        ),
+        // ListTile(
+        //   // Recurrence
+        //   onTap: () {
+        //     showDialog(
+        //       context: context,
+        //       builder: (BuildContext context) => RecurrenceDialog(),
+        //     ).then((dynamic value) => setState(() {}));
+        //   },
+        //   contentPadding: const EdgeInsets.all(5),
+        //   leading: Icon(
+        //     Icons.repeat,
+        //     color: Provider.of<ThemeModel>(context)
+        //         .theme
+        //         .PRIMARY_TEXT_COLOR
+        //         .withOpacity(0.87),
+        //   ),
+        //   title: Text(
+        //     'Repeat',
+        //     style: TextStyle(fontSize: 18),
+        //   ),
+        //   subtitle: Text(
+        //     _recurrence,
+        //     style: TextStyle(color: Colors.green),
+        //   ),
+        // ),
         ListTile(
           contentPadding: const EdgeInsets.all(5),
           leading: Icon(
@@ -562,125 +541,130 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                       color: Colors.white,
                     ),
                     onPressed: () async {
-                      unawaited(showLoading(context, message: 'Loading'));
-                      var meetings = <Meeting>[];
-                      if (_selectedAppointment != null) {
-                        _events.appointments.removeAt(
-                            _events.appointments.indexOf(_selectedAppointment));
-                        _events.notifyListeners(CalendarDataSourceAction.remove,
-                            <Meeting>[_selectedAppointment]);
-                        calForceSetsState();
-                      }
-                      var event = Event(
-                          _selectedAppointment == null
-                              ? userEventsCalendarId
-                              : _selectedAppointment.calendarId,
-                          start: _startDate,
-                          end: _endDate);
-                      if (_selectedAppointment != null) {
-                        event.eventId = _selectedAppointment.eventId;
-                      }
-                      event.title = _subject == '' ? '(No title)' : _subject;
-                      event.description = _notes;
-                      event.location = _location;
-                      event.attendees = getAttendeeList(_attendee);
-                      event.reminders = getReminderList(_reminder);
-                      event.allDay = _isAllDay;
-                      event.startTimeZone = '';
-                      event.endTimeZone = '';
-                      event = addRecurrenceRule(_recurrence, event);
-                      var res = await postReminder(
-                          event, !(_selectedAppointment == null),
-                          addToQueue: false);
-                      if (res == 'error') {
-                        print('server error occured');
-                        Navigator.pop(context);
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          behavior: SnackBarBehavior.floating,
-                          content: CustomSnackBarContent(
-                            text: 'Server Error Occured',
-                          ),
-                        ));
-                        Navigator.pop(context);
-                        return;
-                      }
-                      if (res == 'timeout') {
-                        connectedToInternet = false;
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          behavior: SnackBarBehavior.floating,
-                          content: CustomSnackBarContent(
-                            text: 'Unable to connect to server',
-                          ),
-                        ));
-                      }
-                      // event.availability = 'BUSY';
-                      var createEventResult = await DeviceCalendarPlugin()
-                          .createOrUpdateEvent(event);
-                      var prefs = await SharedPreferences.getInstance();
-                      if (createEventResult.isSuccess) {
-                        if (res == 'timeout') {
-                          QueueManager.addToList({
-                            'func': 'postReminder',
-                            'event': createPostReminderBody(event),
-                            'patch': _selectedAppointment != null,
-                            'eventId': createEventResult.data
-                          });
-                        }
-                        if (res != '' && res != 'timeout' && res != 'error') {
-                          await prefs.setString(
-                              'ser ' + res, 'loc ' + createEventResult.data);
-                        }
-                        if (_selectedAppointment != null) {
-                          var id = prefs.getInt('rem' + createEventResult.data);
-                          if (id != null && id != 0) {
-                            await flutterLocalNotificationsPlugin.cancel(id);
-                          }
-                          await prefs.setInt('rem' + createEventResult.data, 0);
-                        }
-                        if (event.reminders.isNotEmpty) {
-                          var rnd = Random().nextInt(1000000000) + 1;
-                          await prefs.setInt(
-                              'rem' + createEventResult.data, rnd);
-                          var rem = event.start.subtract(
-                              Duration(minutes: event.reminders[0].minutes));
-                          await _showNotificationWithDefaultSound(
-                              title: event.title,
-                              id: rnd,
-                              description: 'Starts in ' + _reminder,
-                              time: rem,
-                              payload: generatePayload(event));
-                        }
-                        meetings.add(Meeting(
-                          eventId: createEventResult.data,
-                          from: _startDate,
-                          to: _endDate,
-                          background: Color(
-                              _selectedColor), //colorCollection[_selectedColorIndex],
-                          startTimeZone: '',
-                          endTimeZone: '',
-                          location: _location,
-                          attendee: event.attendees,
-                          recurrence: event.recurrenceRule,
-                          reminder: event.reminders,
-                          calendarId: _selectedAppointment == null
-                              ? userEventsCalendarId
-                              : _selectedAppointment.calendarId,
-                          description: _notes,
-                          isAllDay: _isAllDay,
-                          eventName: _subject == '' ? '(No title)' : _subject,
-                        ));
-                        print(meetings);
-                        _events.appointments.add(meetings[0]);
+                      // Update or Create Event
+                      var isExternalCalendar = _selectedAppointment != null &&
+                          (_selectedAppointment.calendarId != IITDCalendarId ||
+                              _selectedAppointment.calendarId !=
+                                  userEventsCalendarId ||
+                              _selectedAppointment.calendarId !=
+                                  starredCalendarId);
 
-                        _events.notifyListeners(CalendarDataSourceAction.add,
-                            <Meeting>[meetings[0]]);
-                        _selectedAppointment = null;
-                        calForceSetsState();
+                      var isRecurring = _selectedAppointment != null &&
+                          _selectedAppointment.recurrence != null;
+
+                      unawaited(showLoading(context, message: 'Loading'));
+                      if (isRecurring && isExternalCalendar) {
+                        print('You can quit now');
+                        Navigator.pop(context);
+                        Navigator.pop(context);
                       } else {
-                        print('error occured');
+                        var meetings = <Meeting>[];
+                        if (_selectedAppointment != null) {
+                          _events.appointments.removeAt(_events.appointments
+                              .indexOf(_selectedAppointment));
+                          _events.notifyListeners(
+                              CalendarDataSourceAction.remove,
+                              <Meeting>[_selectedAppointment]);
+                          calForceSetsState();
+                        }
+                        var event = Event(
+                            _selectedAppointment == null
+                                ? userEventsCalendarId
+                                : _selectedAppointment.calendarId,
+                            start: _startDate,
+                            end: _endDate);
+                        if (_selectedAppointment != null) {
+                          event.eventId = _selectedAppointment.eventId;
+                        }
+                        event.title = _subject == '' ? '(No title)' : _subject;
+                        event.description = _notes;
+                        event.location = _location;
+                        event.attendees = getAttendeeList(_attendee);
+                        event.reminders = getReminderList(_reminder);
+                        event.allDay = _isAllDay;
+                        event.startTimeZone = '';
+                        event.endTimeZone = '';
+                        event = addRecurrenceRule(_recurrence, event);
+                        var res = '';
+                        if (!isExternalCalendar) {
+                          res = await postReminder(
+                              event, !(_selectedAppointment == null),
+                              addToQueue: false);
+                          if (res == 'error') {
+                            print('server error occured');
+                            Navigator.pop(context);
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              content: CustomSnackBarContent(
+                                text: 'Server Error Occured',
+                              ),
+                            ));
+                            Navigator.pop(context);
+                            return;
+                          }
+                          if (res == 'timeout') {
+                            connectedToInternet = false;
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              behavior: SnackBarBehavior.floating,
+                              content: CustomSnackBarContent(
+                                text: 'Unable to connect to server',
+                              ),
+                            ));
+                          }
+                        }
+                        // event.availability = 'BUSY';
+                        var createEventResult = await DeviceCalendarPlugin()
+                            .createOrUpdateEvent(event);
+                        var prefs = await SharedPreferences.getInstance();
+                        if (createEventResult.isSuccess) {
+                          if (!isExternalCalendar) {
+                            if (res == 'timeout') {
+                              QueueManager.addToList({
+                                'func': 'postReminder',
+                                'event': createPostReminderBody(event),
+                                'patch': _selectedAppointment != null,
+                                'eventId': createEventResult.data
+                              });
+                            }
+                            if (res != '' &&
+                                res != 'timeout' &&
+                                res != 'error') {
+                              await prefs.setString('ser ' + res,
+                                  'loc ' + createEventResult.data);
+                            }
+                          }
+                          meetings.add(Meeting(
+                            eventId: createEventResult.data,
+                            from: _startDate,
+                            to: _endDate,
+                            background: Color(
+                                _selectedColor), //colorCollection[_selectedColorIndex],
+                            startTimeZone: '',
+                            endTimeZone: '',
+                            location: _location,
+                            attendee: event.attendees,
+                            recurrence: event.recurrenceRule,
+                            reminder: event.reminders,
+                            calendarId: _selectedAppointment == null
+                                ? userEventsCalendarId
+                                : _selectedAppointment.calendarId,
+                            description: _notes,
+                            isAllDay: _isAllDay,
+                            eventName: _subject == '' ? '(No title)' : _subject,
+                          ));
+                          print(meetings);
+                          _events.appointments.add(meetings[0]);
+
+                          _events.notifyListeners(CalendarDataSourceAction.add,
+                              <Meeting>[meetings[0]]);
+                          _selectedAppointment = null;
+                          calForceSetsState();
+                        } else {
+                          print('error occured');
+                        }
+                        Navigator.pop(context);
+                        Navigator.pop(context);
                       }
-                      Navigator.pop(context);
-                      Navigator.pop(context);
                     })
               ],
             ),
@@ -694,40 +678,50 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                 ? const Text('')
                 : FloatingActionButton(
                     onPressed: () async {
-                      unawaited(showLoading(context, message: 'Loading'));
-                      if (_selectedAppointment != null) {
-                        var succ = await deleteReminderFromServer(
-                            _selectedAppointment.eventId);
-                        if (succ == -1) {
-                          print('unable to connect to server');
-                        } else if (succ == 0) {
-                          print('Error occured');
-                          return;
-                        }
-                        var res = await DeviceCalendarPlugin().deleteEvent(
-                            _selectedAppointment.calendarId,
-                            _selectedAppointment.eventId);
-                        if (res.isSuccess) {
-                          var prefs = await SharedPreferences.getInstance();
-                          var id = prefs
-                              .getInt('rem' + _selectedAppointment.eventId);
-                          if (id != null && id != 0) {
-                            await flutterLocalNotificationsPlugin.cancel(id);
+                      // Dlete the Given Appointment
+                      var isExternalCalendar =
+                          _selectedAppointment.calendarId != IITDCalendarId ||
+                              _selectedAppointment.calendarId !=
+                                  starredCalendarId ||
+                              _selectedAppointment.calendarId !=
+                                  userEventsCalendarId;
+
+                      var isRecurring = _selectedAppointment.recurrence != null;
+                      if (isRecurring && isExternalCalendar) {
+                        print('User shouldnt delete this');
+                        print('Show an appropriate Dialog and return');
+                        Navigator.pop(context);
+                        // Navigator.pop(context);
+                      } else {
+                        unawaited(showLoading(context, message: 'Loading'));
+                        if (_selectedAppointment != null) {
+                          if (!isExternalCalendar) {
+                            var succ = await deleteReminderFromServer(
+                                _selectedAppointment.eventId);
+                            if (succ == -1) {
+                              print('unable to connect to server');
+                            } else if (succ == 0) {
+                              print('Error occured');
+                              return;
+                            }
                           }
-                          await prefs.setInt(
-                              'rem' + _selectedAppointment.eventId, 0);
-                          _events.appointments.removeAt(_events.appointments
-                              .indexOf(_selectedAppointment));
-                          _events.notifyListeners(
-                              CalendarDataSourceAction.remove,
-                              <Meeting>[_selectedAppointment]);
-                          _selectedAppointment = null;
-                          calForceSetsState();
-                        } else {
-                          print('Error:- Could not delete event');
+                          var res = await DeviceCalendarPlugin().deleteEvent(
+                              _selectedAppointment.calendarId,
+                              _selectedAppointment.eventId);
+                          if (res.isSuccess) {
+                            _events.appointments.removeAt(_events.appointments
+                                .indexOf(_selectedAppointment));
+                            _events.notifyListeners(
+                                CalendarDataSourceAction.remove,
+                                <Meeting>[_selectedAppointment]);
+                            _selectedAppointment = null;
+                            calForceSetsState();
+                          } else {
+                            print('Error:- Could not delete event');
+                          }
+                          Navigator.pop(context);
+                          Navigator.pop(context);
                         }
-                        Navigator.pop(context);
-                        Navigator.pop(context);
                       }
                     },
                     backgroundColor: Colors.red,
@@ -743,7 +737,8 @@ class AppointmentEditorState extends State<AppointmentEditor> {
 
 Event addRecurrenceRule(var rule, Event event) {
   //verify this function
-
+  // TODO: Currently Forced -> rule = recurrenceOptions[0]
+  rule = recurrenceOptions[0];
   if (rule == null || rule == recurrenceOptions[0]) {
     return event;
   }
@@ -764,7 +759,7 @@ Event addRecurrenceRule(var rule, Event event) {
 }
 
 List<Attendee> getAttendeeListFromList(var lis) {
-  var res = []; // ignore: prefer_collection_literals
+  var res = <Attendee>[]; // ignore: prefer_collection_literals
   for (var i = 0; i < lis.length; i++) {
     if (lis[i] == '') {
       continue;
@@ -775,7 +770,7 @@ List<Attendee> getAttendeeListFromList(var lis) {
 }
 
 List<Attendee> getAttendeeList(String str) {
-  var res = []; // ignore: prefer_collection_literals
+  var res = <Attendee>[]; // ignore: prefer_collection_literals
   if (str == '' || str == null) {
     return res;
   }
@@ -906,17 +901,17 @@ class _ReminderPickerState extends State<ReminderPicker> {
                 children: <Widget>[
                   Spacer(),
                   TextButton(
-                    child: Text('CANCEL'),
                     onPressed: () {
                       Navigator.pop(context);
                     },
+                    child: Text('CANCEL'),
                   ),
                   TextButton(
-                    child: Text('SAVE'),
                     onPressed: () {
                       setReminder(time + ' ' + reminderUnits[type]);
                       Navigator.pop(context);
                     },
+                    child: Text('SAVE'),
                   ),
                 ],
               )
@@ -1001,17 +996,17 @@ class _RecurrenceDialogState extends State<RecurrenceDialog> {
           children: <Widget>[
             Spacer(),
             TextButton(
-              child: Text('CANCEL'),
               onPressed: () {
                 Navigator.pop(context);
               },
+              child: Text('CANCEL'),
             ),
             TextButton(
-              child: Text('SAVE'),
               onPressed: () {
                 setRecurrence(recurrenceOptions[type]);
                 Navigator.pop(context);
               },
+              child: Text('SAVE'),
             ),
           ],
         )

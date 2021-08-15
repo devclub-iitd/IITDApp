@@ -16,13 +16,14 @@ import 'package:firebase_core/firebase_core.dart';
 // import 'package:global_configuration/global_configuration.dart';
 // import 'package:syncfusion_flutter_core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
-import 'package:IITDAPP/modules/discussionForum/discuss.dart';
+// import 'package:IITDAPP/modules/discussionForum/discuss.dart';
 import 'package:IITDAPP/modules/courses/screens/search.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
 
   // try {
   //   await GlobalConfiguration().loadFromAsset('secrets');
@@ -58,7 +59,6 @@ void main() async {
     ChangeNotifierProvider(
       create: (_) => EventsTabProvider(),
     ),
-
     ChangeNotifierProvider(create: (_) => LoginStateProvider()),
   ], child: MyApp()));
 }
@@ -103,8 +103,13 @@ initialiseNotifications() async {
   print('Testing Push Notifications');
   var pushNotificationsManager = PushNotificationsManager();
   await pushNotificationsManager.init();
-  await Calendarnotificationprovider.setDescription(
-      start: 'Time:- ', end: '', text: DynamicTextEventKeys.RangeTime);
-  await Calendarnotificationprovider.setTitle(
-      start: 'Event:- ', text: DynamicTextEventKeys.Title);
+  try {
+    await Calendarnotificationprovider.setPackageName('com.example.IITDAPP');
+    await Calendarnotificationprovider.setDescription(
+        start: 'Time:- ', end: '', text: DynamicTextEventKeys.RangeTime);
+    await Calendarnotificationprovider.setTitle(
+        start: 'Event:- ', text: DynamicTextEventKeys.Title);
+  } on PlatformException {
+    print('Error Occured');
+  }
 }

@@ -202,6 +202,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     data.id,
                     RetrieveEventsParams(
                         startDate: startDate, endDate: endDate));
+
             calendarModel.add(CalendarModel(
                 id: data.id,
                 name: data.name,

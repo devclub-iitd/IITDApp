@@ -19,8 +19,9 @@ import '../casi_user.dart';
 void onLoginSuccess(BuildContext context, String newtoken) async {
   print('newtoken: $newtoken');
   // ignore: unawaited_futures
-  if (!Provider.of<LoginStateProvider>(context, listen: false).loading)
+  if (!Provider.of<LoginStateProvider>(context, listen: false).loading) {
     showLoading(context);
+  }
   final storage = FlutterSecureStorage();
   print('Getting User Info');
   final response = await http
@@ -38,8 +39,9 @@ void onLoginSuccess(BuildContext context, String newtoken) async {
     var topr = await storage.read(key: 'token');
     print(topr);
     token = newtoken;
-    if (!Provider.of<LoginStateProvider>(context, listen: false).loading)
+    if (!Provider.of<LoginStateProvider>(context, listen: false).loading) {
       Navigator.pop(context);
+    }
     Provider.of<LoginStateProvider>(context, listen: false).signIn();
   } else {
     print('Could not get user info.');
