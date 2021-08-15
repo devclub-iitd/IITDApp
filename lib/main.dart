@@ -17,6 +17,7 @@ import 'package:firebase_core/firebase_core.dart';
 // import 'package:syncfusion_flutter_core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:package_info/package_info.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 // import 'package:IITDAPP/modules/discussionForum/discuss.dart';
@@ -33,7 +34,7 @@ void main() async {
   // } catch (e) {
   //   print('secrets.json file is required');
   // }
-
+  unawaited(extractAppVersion());
   unawaited(initialiseNotifications());
   unawaited(initialisePreferences());
   await savedstate.init();
@@ -95,6 +96,15 @@ initialisePreferences() async {
   var res = await SettingsHandler.getSettingValue(commonKeys[0]);
   defaultScreen = res;
 }
+
+// ignore: always_declare_return_types
+extractAppVersion() async =>
+    PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
+      appName = packageInfo.appName;
+      packageName = packageInfo.packageName;
+      version = packageInfo.version;
+      buildNumber = packageInfo.buildNumber;
+    });
 
 // ignore: always_declare_return_types
 initialiseNotifications() async {

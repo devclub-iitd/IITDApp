@@ -264,7 +264,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               height: 5,
             ),
             SettingsTextButton(
-              subtitle: 'version 1.1.2',
+              subtitle: 'version $version',
               text: 'About',
               onTap: () {
                 Navigator.push(context,

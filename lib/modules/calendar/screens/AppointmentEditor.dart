@@ -103,22 +103,22 @@ class AppointmentEditorState extends State<AppointmentEditor> {
     );
   }
 
-  Future _showNotificationWithDefaultSound(
-      {String title,
-      String description,
-      int id,
-      String payload,
-      DateTime time}) async {
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-        'IITDAPP', 'IITD APP', 'IITD APP Calendar Events',
-        importance: Importance.Max, priority: Priority.High);
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
-    var platformChannelSpecifics = NotificationDetails(
-        androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.schedule(
-        id, title, description, time, platformChannelSpecifics,
-        payload: payload, androidAllowWhileIdle: true);
-  }
+  // Future _showNotificationWithDefaultSound(
+  //     {String title,
+  //     String description,
+  //     int id,
+  //     String payload,
+  //     DateTime time}) async {
+  //   var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+  //       'IITDAPP', 'IITD APP', 'IITD APP Calendar Events',
+  //       importance: Importance.Max, priority: Priority.High);
+  //   var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+  //   var platformChannelSpecifics = NotificationDetails(
+  //       androidPlatformChannelSpecifics, iOSPlatformChannelSpecifics);
+  //   await flutterLocalNotificationsPlugin.schedule(
+  //       id, title, description, time, platformChannelSpecifics,
+  //       payload: payload, androidAllowWhileIdle: true);
+  // }
 
   Widget _getAppointmentEditor(BuildContext context) {
     return Container(
@@ -556,6 +556,8 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                       if (isRecurring && isExternalCalendar) {
                         print('You can quit now');
                         Navigator.pop(context);
+                        await showErrorAlert(context, 'Event Cannot be updated',
+                            'The event was added from external calendar, cannot be updated from this App!!!');
                         Navigator.pop(context);
                       } else {
                         var meetings = <Meeting>[];
@@ -690,8 +692,11 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                       if (isRecurring && isExternalCalendar) {
                         print('User shouldnt delete this');
                         print('Show an appropriate Dialog and return');
-                        Navigator.pop(context);
                         // Navigator.pop(context);
+                        await showErrorAlert(context, 'Event Cannot be deleted',
+                            'The event was added from external calendar, cannot be deleted from this App!!!');
+
+                        Navigator.pop(context);
                       } else {
                         unawaited(showLoading(context, message: 'Loading'));
                         if (_selectedAppointment != null) {

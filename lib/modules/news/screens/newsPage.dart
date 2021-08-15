@@ -177,6 +177,13 @@ class NewsPage extends StatelessWidget {
                                   .RAISED_BUTTON_BACKGROUND
                                   .withOpacity(0.4),
                         ),
+                        onPressed: () {
+                          if (syncItem.details.status == Status.COMPLETED) {
+                            Navigator.of(context).push(MaterialPageRoute(
+                              builder: (_) => ReportsList(syncItem, false),
+                            ));
+                          }
+                        },
                         child: Text('View Reports',
                             style: TextStyle(
                               fontSize: 15,
@@ -192,25 +199,8 @@ class NewsPage extends StatelessWidget {
                                       .theme
                                       .RAISED_BUTTON_FOREGROUND
                                       .withOpacity(0.4),
-                            )),
-                        onPressed: () {
-                          if (syncItem.details.status == Status.COMPLETED) {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) => ReportsList(syncItem, false),
-                            ));
-                          }
-                        }),
+                            ))),
                   TextButton(
-                    child: Text(
-                      'Report This Article',
-                      style: TextStyle(
-                          color: Theme.of(context)
-                              .textTheme
-                              .headline1
-                              .color
-                              .withOpacity(0.54),
-                          fontSize: 15),
-                    ),
                     onPressed: () async {
                       final result =
                           await Navigator.of(context).push(MaterialPageRoute(
@@ -221,6 +211,16 @@ class NewsPage extends StatelessWidget {
 
                       showSnackbarResult(result, Scaffold.of(context));
                     },
+                    child: Text(
+                      'Report This Article',
+                      style: TextStyle(
+                          color: Theme.of(context)
+                              .textTheme
+                              .headline1
+                              .color
+                              .withOpacity(0.54),
+                          fontSize: 15),
+                    ),
                   ),
                   if (item.details.status == Status.COMPLETED)
                     Container(

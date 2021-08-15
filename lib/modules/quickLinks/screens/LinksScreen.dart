@@ -64,6 +64,7 @@ class LinksScreen extends StatelessWidget {
                     ])),
             child: Column(
               children: <Widget>[
+                // ignore: missing_required_param
                 ExpandablePanel(
                   theme: const ExpandableThemeData(
                     headerAlignment: ExpandablePanelHeaderAlignment.center,

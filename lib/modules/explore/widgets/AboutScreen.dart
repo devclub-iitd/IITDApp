@@ -1,3 +1,4 @@
+import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/modules/explore/data/ClubsData.dart';
 import 'package:IITDAPP/utility/UrlHandler.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
@@ -9,6 +10,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:math' as math;
+
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class AboutScreen extends StatelessWidget {
@@ -145,7 +148,9 @@ class SpeedDialSection extends StatelessWidget {
               child: FaIcon(FontAwesomeIcons.facebook),
             ),
             label: 'Visit FB Page',
-            labelStyle: TextStyle(color: Colors.black)));
+            labelStyle: TextStyle(
+              color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
+            )));
       }
       if (links['insta'] != '') {
         list.add(SpeedDialChild(
@@ -156,7 +161,9 @@ class SpeedDialSection extends StatelessWidget {
               child: FaIcon(FontAwesomeIcons.instagram),
             ),
             label: 'Visit Insta Page',
-            labelStyle: TextStyle(color: Colors.black)));
+            labelStyle: TextStyle(
+              color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
+            )));
       }
       if (links['linkedin'] != '') {
         list.add(SpeedDialChild(
@@ -167,7 +174,9 @@ class SpeedDialSection extends StatelessWidget {
               child: FaIcon(FontAwesomeIcons.linkedinIn),
             ),
             label: 'Visit LinkedIn Profile',
-            labelStyle: TextStyle(color: Colors.black)));
+            labelStyle: TextStyle(
+              color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
+            )));
       }
       if (links['web'] != '') {
         list.add(SpeedDialChild(
@@ -179,12 +188,15 @@ class SpeedDialSection extends StatelessWidget {
                 scale: 0.5,
                 child: SvgPicture.asset(
                   'assets/images/visit_web.svg',
-                  color: Colors.black,
+                  color:
+                      Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
                 ),
               ),
             ),
             label: 'Visit Website',
-            labelStyle: TextStyle(color: Colors.black)));
+            labelStyle: TextStyle(
+              color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
+            )));
       }
 
       return list;
@@ -268,7 +280,7 @@ class MemberCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(10),
-      height: 120,
+      // height: 140,
       color: Colors.blueAccent,
       child: Row(
         mainAxisSize: MainAxisSize.max,
@@ -313,7 +325,9 @@ class MemberCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 16),
                       child: Text(
-                        data.post,
+                        (data.post.length > 20)
+                            ? data.post.substring(0, 18) + '...'
+                            : data.post,
                         style: GoogleFonts.literata(
                             color: Colors.redAccent,
                             fontSize: 20,

@@ -70,6 +70,19 @@ import 'package:flutter/material.dart';
 // const String url = 'https://campusserver2.herokuapp.com/';
 const String url = 'https://iitd-connect-server.herokuapp.com';
 
+// ignore: always_declare_return_types
+// PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
+//   String appName = packageInfo.appName;
+//   String packageName = packageInfo.packageName;
+//   String version = packageInfo.version;
+//   String buildNumber = packageInfo.buildNumber;
+// });
+
+String appName;
+String packageName;
+String version;
+String buildNumber;
+
 String title = 'IITD APP';
 String token;
 bool connectedToInternet = true;
