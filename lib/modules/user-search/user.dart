@@ -168,6 +168,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             duration: Duration(milliseconds: 500),
                             margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
                             //color: Colors.red,
+                            // ignore: deprecated_member_use
                             child: FlatButton(
                               onPressed: () => {
                                 FocusManager.instance.primaryFocus?.unfocus(),

@@ -11,25 +11,25 @@ void showAlertDialog(
     @required String content}) {
   // set up the buttons
   Widget cancelButton = TextButton(
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
     child: Text('Cancel',
         style: TextStyle(
             color: Provider.of<ThemeModel>(context, listen: false)
                 .theme
                 .ALERT_DIALOG_TEXT)),
-    onPressed: () {
-      Navigator.of(context).pop();
-    },
   );
   Widget actioButton = TextButton(
+    onPressed: () {
+      Navigator.of(context).pop();
+      action();
+    },
     child: Text(actionName,
         style: TextStyle(
             color: Provider.of<ThemeModel>(context, listen: false)
                 .theme
                 .ALERT_DIALOG_TEXT)),
-    onPressed: () {
-      Navigator.of(context).pop();
-      action();
-    },
   );
   // set up the AlertDialog
   var alert = AlertDialog(

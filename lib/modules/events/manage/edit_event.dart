@@ -383,13 +383,6 @@ class _EditEventFormState extends State<EditEventForm> {
                         .theme
                         .RAISED_BUTTON_BACKGROUND,
                   ),
-                  child: Text(
-                    'SUBMIT',
-                    style: TextStyle(
-                        color: Provider.of<ThemeModel>(context)
-                            .theme
-                            .RAISED_BUTTON_FOREGROUND),
-                  ),
                   onPressed: () async {
                     if (_key.currentState.validate()) {
                       _key.currentState.save();
@@ -404,6 +397,13 @@ class _EditEventFormState extends State<EditEventForm> {
                       Navigator.pop(context);
                     }
                   },
+                  child: Text(
+                    'SUBMIT',
+                    style: TextStyle(
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .RAISED_BUTTON_FOREGROUND),
+                  ),
                 ),
               ],
             ),

@@ -46,6 +46,22 @@ class RecentWidget extends StatelessWidget {
         height: (width - 16) * 0.45 * 2 / 3,
         child: GestureDetector(
           behavior: HitTestBehavior.opaque,
+          onTap: () async {
+            Provider.of<NewsHistoryProvider>(context, listen: false)
+                .setViewed(item.id);
+            final result = await Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => NewsPage(
+                  item: item,
+                  imageTag: 'r${item.id}',
+                  redirectPossible: true,
+                ),
+              ),
+            );
+
+            showSnackbarResult(result, parentScaffold);
+          },
           child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(5),
@@ -148,22 +164,6 @@ class RecentWidget extends StatelessWidget {
               ),
             )
           ]),
-          onTap: () async {
-            Provider.of<NewsHistoryProvider>(context, listen: false)
-                .setViewed(item.id);
-            final result = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => NewsPage(
-                  item: item,
-                  imageTag: 'r${item.id}',
-                  redirectPossible: true,
-                ),
-              ),
-            );
-
-            showSnackbarResult(result, parentScaffold);
-          },
         ),
       ),
     );

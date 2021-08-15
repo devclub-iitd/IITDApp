@@ -1,7 +1,9 @@
 import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
+import 'package:IITDAPP/modules/events/events/event_info/update_calendar.dart';
 import 'package:IITDAPP/values/Constants.dart';
 
 import 'package:IITDAPP/ThemeModel.dart';
+import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
@@ -64,6 +66,7 @@ class StarButtonState extends State<StarButton> {
     }
     print(response.statusCode);
     if (response.statusCode == 200) {
+      unawaited(updateCalendar());
       var parsedJson = json.decode(response.body);
       if (parsedJson['message'] == 'Successfully Starred') {
         Provider.of<EventsTabProvider>(context, listen: false)

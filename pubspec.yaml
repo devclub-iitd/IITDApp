@@ -71,6 +71,7 @@ dependencies:
   settings_ui: ^1.0.0
   flare_flutter: ^3.0.2
   flushbar: ^1.10.4
+  package_info: ^2.0.2
 
   calendarnotificationprovider: ^0.0.3
   firebase_core:
@@ -84,8 +85,10 @@ dependencies:
   cupertino_icons: ^1.0.0
 
 dev_dependencies:
+  flutter_lints: ^1.0.4
   flutter_test:
     sdk: flutter
+  lints: ^1.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -22,9 +22,9 @@ class PushNotificationsManager {
       // // For testing purposes print the Firebase Messaging token
       var token = await _firebaseMessaging.getToken();
       // ignore: prefer_single_quotes
-      //print("FirebaseMessaging token: $token");
+      print('FirebaseMessaging token: $token');
 
-      //_initialized = true;
+      _initialized = true;
     }
   }
 }

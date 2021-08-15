@@ -19,8 +19,10 @@ import '../casi_user.dart';
 void onLoginSuccess(BuildContext context, String newtoken) async {
   print('newtoken: $newtoken');
   // ignore: unawaited_futures
-  if (!Provider.of<LoginStateProvider>(context, listen: false).loading)
+  if (!Provider.of<LoginStateProvider>(context, listen: false).loading) {
+    // ignore: unawaited_futures
     showLoading(context);
+  }
   final storage = FlutterSecureStorage();
   print('Getting User Info');
   final response = await http
@@ -38,13 +40,15 @@ void onLoginSuccess(BuildContext context, String newtoken) async {
     var topr = await storage.read(key: 'token');
     print(topr);
     token = newtoken;
-    if (!Provider.of<LoginStateProvider>(context, listen: false).loading)
+    if (!Provider.of<LoginStateProvider>(context, listen: false).loading) {
       Navigator.pop(context);
+    }
     Provider.of<LoginStateProvider>(context, listen: false).signIn();
   } else {
     print('Could not get user info.');
-    if (!Provider.of<LoginStateProvider>(context, listen: false).loading)
+    if (!Provider.of<LoginStateProvider>(context, listen: false).loading) {
       Navigator.pop(context);
+    }
     await showErrorAlert(
         context, 'Login Failed', 'Something went wrong. Please Try Again');
   }
@@ -78,6 +82,7 @@ Future login(BuildContext context, {bool pop = true}) async {
           title: Text('An Error Occured!'),
           content: Text(e.toString()),
           actions: <Widget>[
+            // ignore: deprecated_member_use
             FlatButton(
               onPressed: () => Navigator.of(context).pop(),
               child: Text('Try Again'),
@@ -132,6 +137,7 @@ class LoginPageState extends State<LoginPage> {
                 children: <Widget>[
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.8,
+                    // ignore: deprecated_member_use
                     child: FlatButton(
                       color: Provider.of<ThemeModel>(context)
                           .theme
