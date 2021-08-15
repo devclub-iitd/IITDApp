@@ -24,7 +24,7 @@ class RecentChats extends StatelessWidget {
           child: ListView.builder(
             itemCount: chats.length,
             itemBuilder: (BuildContext context, int index) {
-              final chat = chats[index];
+              final Message chat = chats[index];
               return GestureDetector(
                 onTap: () => Navigator.push(
                   context,
@@ -45,7 +45,7 @@ class RecentChats extends StatelessWidget {
                     vertical: 10,
                   ),
                   decoration: BoxDecoration(
-                    color: chat.unread ? Colors.lime[100] : Colors.white,
+                    color: chat.unread ? Colors.blue[100] : Colors.white,
                     borderRadius: BorderRadius.only(
                       topRight: Radius.circular(20),
                       bottomRight: Radius.circular(20),
@@ -67,7 +67,7 @@ class RecentChats extends StatelessWidget {
                           Text(chat.sender.name,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Colors.grey,
+                                color: Colors.black,
                                 fontSize: 15,
                               )),
                           SizedBox(height: 5.0),
@@ -77,7 +77,7 @@ class RecentChats extends StatelessWidget {
                               chat.text,
                               style: TextStyle(
                                 fontWeight: FontWeight.w600,
-                                color: Colors.teal,
+                                color: Colors.black, //blue[100]
                                 fontSize: 15,
                               ),
                               overflow: TextOverflow.ellipsis,

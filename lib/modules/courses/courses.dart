@@ -1,4 +1,4 @@
-// TODO: fetch data
+// TODO: fetch data, update data to backend about couyrss, make changes as discussed with pranjal sir,make the books and major minor sections into expandable panel
 //TODO: in improv week, swipe remove option, and maybe long press preview option and reordering the courses option, irritating when keyboard dismisses and comes back again while adding/removing courses.
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +64,7 @@ class _CoursesScreenState extends State<CoursesScreen>
                         showSearch(context: context, delegate: Search());
                       },
                       icon: Icon(
-                        Icons.search_outlined,
+                        CupertinoIcons.search,
                         size: 40,
                       )),
                 ),

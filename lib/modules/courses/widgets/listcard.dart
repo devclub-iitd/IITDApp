@@ -41,7 +41,7 @@ class ListCard extends StatelessWidget {
               child: Text(
                 utility.toUpperCase(),
                 style:
-                    GoogleFonts.robotoMono(fontSize: 30, color: Colors.white),
+                    GoogleFonts.montserrat(fontSize: 30, color: Colors.white),
               ),
             ),
             //Container(height: 10,),

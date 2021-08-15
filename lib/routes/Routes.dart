@@ -11,6 +11,7 @@ import 'package:IITDAPP/modules/quickLinks/quickLinks.dart';
 import 'package:IITDAPP/modules/settings/SettingsScreen.dart';
 import 'package:IITDAPP/modules/discussionForum/discuss.dart';
 import 'package:IITDAPP/modules/courses/courses.dart';
+import 'package:IITDAPP/modules/user-search/user.dart';
 
 
 class Routes {
@@ -27,4 +28,5 @@ class Routes {
   static const String settingsPage = SettingsScreen.routeName;
   static const String discussionForum = MyNewApp.routeName;
   static const String coursesPage = CoursesScreen.routeName;
+  static const String search = SearchScreen.routeName;
 }
