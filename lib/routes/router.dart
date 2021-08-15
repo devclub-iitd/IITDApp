@@ -14,6 +14,7 @@ import 'package:IITDAPP/routes/Routes.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:IITDAPP/modules/courses/courses.dart';
+import 'package:IITDAPP/modules/user-search/user.dart';
 
 class Router {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -47,6 +48,8 @@ class Router {
           return _createRoute(SettingsScreen());
         case Routes.coursesPage:
           return _createRoute(CoursesScreen());
+        case Routes.search:
+          return _createRoute(SearchScreen());
         default:
           return MaterialPageRoute(
               builder: (_) => Scaffold(
@@ -86,6 +89,8 @@ class Router {
         return _createRoute(SettingsScreen());
       case Routes.coursesPage:
         return _createRoute(CoursesScreen());
+      case Routes.search:
+        return _createRoute(SearchScreen());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

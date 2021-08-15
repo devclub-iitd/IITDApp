@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:math' as math;
+import 'package:IITDAPP/modules/roles/manage.dart';
 
 // ignore: must_be_immutable
 class AboutScreen extends StatelessWidget {
@@ -87,12 +88,47 @@ class AboutScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'ABOUT',
-                            style: GoogleFonts.arvo(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 36,
-                            ),
+                          Row(
+                            children: [
+                              Text(
+                                'ABOUT',
+                                style: GoogleFonts.arvo(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 36,
+                                ),
+                              ),
+                              Spacer(),
+                              Container(
+                                margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                                child: IconButton(
+                                  onPressed: () => Navigator.push(
+                                      context,
+                                      PageRouteBuilder(
+                                          transitionDuration:
+                                              Duration(milliseconds: 100),
+                                          transitionsBuilder:
+                                              (BuildContext context,
+                                                  Animation<double> first,
+                                                  Animation<double> second,
+                                                  Widget child) {
+                                            return FadeTransition(
+                                              opacity: first,
+                                              child: child,
+                                            );
+                                          },
+                                          pageBuilder: (BuildContext context,
+                                              Animation<double> first,
+                                              Animation<double> second) {
+                                            return Manage(name);
+                                          })),
+                                  icon: Icon(CupertinoIcons
+                                      .person_crop_circle_badge_exclam),
+                                  highlightColor: Colors.transparent,
+                                  splashColor: Colors.transparent,
+                                  iconSize: 40,
+                                ),
+                              )
+                            ],
                           ),
                           CustomTextDec(),
                           Padding(
@@ -508,5 +544,17 @@ class EventCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class ManageRoles extends StatefulWidget {
+  @override
+  _ManageRolesState createState() => _ManageRolesState();
+}
+
+class _ManageRolesState extends State<ManageRoles> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
