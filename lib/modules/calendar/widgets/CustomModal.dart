@@ -172,6 +172,7 @@ class _CustomModalState extends State<CustomModal> {
                           child: Container(
                             child: Column(
                               children: <Widget>[
+                                // ignore: missing_required_param
                                 ExpandablePanel(
                                   theme: const ExpandableThemeData(
                                     headerAlignment:

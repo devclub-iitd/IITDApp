@@ -5,6 +5,9 @@ import 'dart:math';
 import 'package:IITDAPP/modules/calendar/data/CalendarModel.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 import 'package:IITDAPP/ThemeModel.dart';
+import 'package:IITDAPP/utility/UrlHandler.dart';
+import 'package:IITDAPP/widgets/choice_alert.dart';
+import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/CustomSnackbar.dart';
@@ -202,6 +205,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     data.id,
                     RetrieveEventsParams(
                         startDate: startDate, endDate: endDate));
+
             calendarModel.add(CalendarModel(
                 id: data.id,
                 name: data.name,
@@ -373,6 +377,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
           dayFormat: 'EEE',
           monthCellStyle: MonthCellStyle(
             textStyle: TextStyle(fontSize: 17),
+            // ignore: deprecated_member_use
             todayTextStyle: TextStyle(fontSize: 17),
           ),
         ),
@@ -392,6 +397,21 @@ class _CalendarScreenState extends State<CalendarScreen> {
       key: scaffoldKey,
       appBar: CustomAppBar(
         title: Text('Calendar'),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.calendar_today),
+              iconSize: 30,
+              color: Colors.white,
+              onPressed: () async {
+                var openExternalCalendar = await showChoiceAlert(
+                    context,
+                    'Open Calendar in Device Default',
+                    'Are you sure you want to open events in Device Calendar?',
+                    UrlHandler.launchDeviceCalendar);
+                if (openExternalCalendar == null) {}
+                // Navigator.pop(context);
+              }),
+        ],
       ),
       drawer: AppDrawer(tag: 'Calendar'),
       floatingActionButton: Stack(

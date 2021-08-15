@@ -112,20 +112,20 @@ class _SearchBarState extends State<SearchBar> with TickerProviderStateMixin {
                             Padding(
                               padding: EdgeInsets.only(right: 10),
                               child: GestureDetector(
-                                  child: AnimatedIcon(
-                                      icon: AnimatedIcons.menu_arrow,
-                                      color: Provider.of<ThemeModel>(context,
-                                              listen: false)
-                                          .theme
-                                          .PRIMARY_TEXT_COLOR,
-                                      progress: _controller),
                                   onTap: () {
                                     if (!expanded) {
                                       Scaffold.of(context).openDrawer();
                                       return;
                                     }
                                     toggleExpansion();
-                                  }),
+                                  },
+                                  child: AnimatedIcon(
+                                      icon: AnimatedIcons.menu_arrow,
+                                      color: Provider.of<ThemeModel>(context,
+                                              listen: false)
+                                          .theme
+                                          .PRIMARY_TEXT_COLOR,
+                                      progress: _controller)),
                             ),
                             Expanded(
                               child: GestureDetector(
@@ -158,14 +158,14 @@ class _SearchBarState extends State<SearchBar> with TickerProviderStateMixin {
                               ),
                             ),
                             GestureDetector(
+                              onTap: () => (!expanded)
+                                  ? showAlert(context, logoutFunc)
+                                  : setState(() => resetSearch()),
                               child: expanded
                                   ? Icon(Icons.cancel)
                                   : Transform.scale(
                                       scale: 1.8,
                                       child: FittedBox(child: PopupMenu())),
-                              onTap: () => (!expanded)
-                                  ? showAlert(context, logoutFunc)
-                                  : setState(() => resetSearch()),
                             )
                           ])),
                       AnimatedContainer(

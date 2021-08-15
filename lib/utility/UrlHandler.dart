@@ -1,4 +1,5 @@
 import 'package:url_launcher/url_launcher.dart';
+import 'dart:io' show Platform;
 
 class UrlHandler {
   static Future<void> launchInBrowser(String url, {launchInApp = false}) async {
@@ -15,6 +16,21 @@ class UrlHandler {
     } else {
       print(url);
       throw 'Cannot Launch requested url';
+    }
+  }
+
+  static Future<void> launchDeviceCalendar() async {
+    var url = '';
+    if (Platform.isAndroid) {
+      // Android-specific code
+      url = 'content://com.android.calendar/time/';
+    } else if (Platform.isIOS) {
+      // iOS-specific code
+      // This should be tested for.
+      url = 'calshow://';
+    }
+    if (await canLaunch(url)) {
+      await launch(url);
     }
   }
 

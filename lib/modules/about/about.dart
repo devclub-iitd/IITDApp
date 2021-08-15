@@ -3,6 +3,7 @@ import 'package:IITDAPP/modules/about/privacyPolicy.dart';
 import 'package:IITDAPP/modules/about/releaseNotes.dart';
 import 'package:IITDAPP/modules/settings/widgets/SettingsTextWidgets.dart';
 import 'package:IITDAPP/utility/UrlHandler.dart';
+import 'package:IITDAPP/values/Constants.dart';
 //import 'package:gradient_app_bar/gradient_app_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +57,7 @@ class AboutScreen extends StatelessWidget {
                   ],
                 )),
                 Padding(padding: EdgeInsets.all(10)),
-                Text('1.2.3',
+                Text(version,
                     style: TextStyle(
                       fontSize:
                           Theme.of(context).primaryTextTheme.headline6.fontSize,
@@ -96,7 +97,7 @@ class AboutScreen extends StatelessWidget {
                   text: 'Feedback',
                   onTap: () {
                     UrlHandler.startEmail('devclub.iitd@gmail.com',
-                        subject: 'App Feedback', body: 'App Version 1.2.3');
+                        subject: 'App Feedback', body: 'App Version $version');
                   },
                 ),
               ],
