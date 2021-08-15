@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:IITDAPP/widgets/Drawer.dart';
+// import 'package:IITDAPP/widgets/Drawer.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:provider/provider.dart';
 import 'package:IITDAPP/ThemeModel.dart';
@@ -135,6 +135,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             duration: Duration(milliseconds: 500),
                             margin: EdgeInsets.fromLTRB(20, 0, 10, 0),
                             //color: Colors.red,
+                            // ignore: deprecated_member_use
                             child: FlatButton(
                               onPressed: () => {
                                 FocusManager.instance.primaryFocus?.unfocus(),
