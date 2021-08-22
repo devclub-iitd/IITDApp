@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:IITDAPP/modules/discussionForum/models/message_model.dart';
 import 'package:IITDAPP/modules/discussionForum/models/user_model.dart';
 
+import 'package:IITDAPP/ThemeModel.dart';
+import 'package:provider/provider.dart';
 //package:IITDAPP/modules/events/home.dart
 class ChatScreen extends StatefulWidget {
   final User user;
@@ -33,7 +35,7 @@ class _ChatScreenState extends State<ChatScreen> {
       //child:
       //Text(message.text),
       decoration: BoxDecoration(
-        color: isMe ? Colors.grey[100] : Colors.lightBlue[100],
+        color: isMe ? Provider.of<ThemeModel>(context).theme.PRIMARY_COLOR : Provider.of<ThemeModel>(context).theme.DEFAULT_HIGHLIGHT_BACKGROUND,//....Colors.lightBlue[100]
         borderRadius: isMe
             ? BorderRadius.only(
                 topLeft: Radius.circular(15),
@@ -49,7 +51,7 @@ class _ChatScreenState extends State<ChatScreen> {
         children: <Widget>[
           Text(message.time,
               style: TextStyle(
-                color: Colors.blueGrey,
+                color: Provider.of<ThemeModel>(context).theme.ACCENT_TEXT_COLOR,//
                 fontSize: 16,
                 //fontWeight: FontWeight.w600,
               )),
@@ -58,7 +60,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
           Text(message.text,
               style: TextStyle(
-                color: Colors.blue[900],
+                color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               )),
