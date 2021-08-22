@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:IITDAPP/modules/discussionForum/models/message_model.dart';
 import 'package:IITDAPP/modules/discussionForum/models/user_model.dart';
 
-<<<<<<< Updated upstream
-=======
+//<<<<<<< Updated upstream
+//=======
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:provider/provider.dart';
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
 //package:IITDAPP/modules/events/home.dart
 class ChatScreen extends StatefulWidget {
   final User user;
@@ -38,11 +38,10 @@ class _ChatScreenState extends State<ChatScreen> {
       //child:
       //Text(message.text),
       decoration: BoxDecoration(
-<<<<<<< Updated upstream
-        color: isMe ? Colors.grey[100] : Colors.lightBlue[100],
-=======
+//<<<<<<< Updated upstream
+//=======
         color: isMe ? Provider.of<ThemeModel>(context).theme.PRIMARY_COLOR : Provider.of<ThemeModel>(context).theme.DEFAULT_HIGHLIGHT_BACKGROUND,//....Colors.lightBlue[100]
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
         borderRadius: isMe
             ? BorderRadius.only(
                 topLeft: Radius.circular(15),
