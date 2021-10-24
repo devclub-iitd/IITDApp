@@ -12,7 +12,7 @@ import './updates_class.dart';
 import './update.dart';
 
 Future<List<Update>> getUpdates(String eventid) async {
-  final response = await http.get('$url/api/events/$eventid',
+  final response = await http.get('$uri/api/events/$eventid',
       headers: {'authorization': 'Bearer $token'});
 
   if (response.statusCode == 200) {

@@ -19,7 +19,7 @@ import '../events/event_class.dart';
 
 Future<void> deleteEvent(BuildContext context, String id) async {
   print('Deleting Event');
-  final response = await http.delete('$url/api/events/$id',
+  final response = await http.delete('$uri/api/events/$id',
       headers: {'authorization': 'Bearer $token'});
   print(response.statusCode);
   if (response.statusCode == 200) {
@@ -100,7 +100,7 @@ class _EditEventFormState extends State<EditEventForm> {
   Future editEvent() async {
     print('Editing event');
     // print(_event.toMapForUpdate());
-    final response = await http.put('$url/api/events/${_event.eventid}',
+    final response = await http.put('$uri/api/events/${_event.eventid}',
         headers: {'authorization': 'Bearer $token'},
         body: _event.toMapForUpdate());
     print(response.statusCode);

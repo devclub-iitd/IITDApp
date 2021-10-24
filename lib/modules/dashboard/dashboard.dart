@@ -19,6 +19,8 @@ import 'package:flutter/material.dart';
 class Dashboard extends StatefulWidget {
   static const String routeName = '/dashboard';
 
+  const Dashboard({Key key}) : super(key: key);
+
   @override
   _DashboardState createState() => _DashboardState();
 }
@@ -187,7 +189,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
                       indicatorSize: TabBarIndicatorSize.tab,
                       tabs: tabList),
                 ),
-                Container(
+                SizedBox(
                   // margin: EdgeInsets.all(1),
                   height: MediaQuery.of(context).size.height * 0.4,
                   child: TabBarView(

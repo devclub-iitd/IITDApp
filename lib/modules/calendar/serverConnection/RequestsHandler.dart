@@ -9,7 +9,7 @@ void getAllEvents(
     'endDate':
         DateFormat('yyyy-MM-ddTHH:mm:ss').format(endTime.toUtc()) + '.000Z'
   };
-  var response = await http.post('$url/api/calendar/all/',
+  var response = await http.post('$uri/api/calendar/all/',
       headers: {'authorization': 'Bearer $token'}, body: queryParameters);
   if (response.statusCode != 200) {
     return;
@@ -30,7 +30,7 @@ Future<int> deleteReminderFromServer(var eventId,
     keys.forEach((element) async {
       if (prefs.getString(element) == 'loc ' + eventId) {
         var res = await http.delete(
-            '$url/api/calendar/reminder/' + element.substring(4),
+            '$uri/api/calendar/reminder/' + element.substring(4),
             headers: {
               'authorization': 'Bearer $token'
             }).timeout(Duration(seconds: 5), onTimeout: () async {
@@ -289,7 +289,7 @@ Future<String> postReminder(Event ev, bool patch,
     var serverId = await getServerIdFromPrefs(ev.eventId);
     print('to be exec 2');
     response = await http
-        .patch('$url/api/calendar/reminder/' + serverId,
+        .patch('$uri/api/calendar/reminder/' + serverId,
             headers: {'authorization': 'Bearer $token'}, body: body)
         .timeout(Duration(seconds: 5), onTimeout: () async {
       flagTimeout = true;
@@ -298,7 +298,7 @@ Future<String> postReminder(Event ev, bool patch,
   } else {
     try {
       response = await http
-          .post('$url/api/calendar/reminder/',
+          .post('$uri/api/calendar/reminder/',
               headers: {'authorization': 'Bearer $token'}, body: body)
           .timeout(Duration(seconds: 5), onTimeout: () {
         flagTimeout = true;

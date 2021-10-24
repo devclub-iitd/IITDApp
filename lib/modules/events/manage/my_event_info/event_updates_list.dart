@@ -36,7 +36,7 @@ class _EventUpdateList extends State<EventUpdatesList> {
 
   Future<List<Update>> getUpdates(String eventid) async {
     print('getting updates');
-    final response = await http.get('$url/api/events/$eventid',
+    final response = await http.get('$uri/api/events/$eventid',
         headers: {'authorization': 'Bearer $token'});
 
     if (response.statusCode == 200) {

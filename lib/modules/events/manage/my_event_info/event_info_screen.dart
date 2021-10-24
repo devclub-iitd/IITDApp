@@ -13,7 +13,7 @@ import '../../events/event_info/event_about.dart';
 import './event_updates_list.dart';
 
 Future<Event> getEvent(String eventid) async {
-  final response = await http.get('$url/api/events/$eventid',
+  final response = await http.get('$uri/api/events/$eventid',
       headers: {'authorization': 'Bearer $token'});
   if (response.statusCode == 200) {
     var parsedJson = json.decode(response.body);

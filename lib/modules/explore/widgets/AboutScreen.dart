@@ -238,13 +238,11 @@ class SpeedDialSection extends StatelessWidget {
       return list;
     }
 
-    return Container(
-      child: SpeedDial(
-          heroTag: null,
-          animatedIcon: AnimatedIcons.menu_close,
-          elevation: 5,
-          children: getChildren()),
-    );
+    return SpeedDial(
+        heroTag: null,
+        animatedIcon: AnimatedIcons.menu_close,
+        elevation: 5,
+        children: getChildren());
   }
 }
 
@@ -254,43 +252,41 @@ class LinksSection extends StatelessWidget {
   var urls;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 64.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            FloatingActionButton(
-              heroTag: null,
-              onPressed: () {
-                UrlHandler.launchInBrowser(urls['loc']);
-              },
-              child: Icon(Icons.location_on),
-            ),
-            FloatingActionButton(
-              heroTag: null,
-              onPressed: () {
-                UrlHandler.makePhoneCall(urls['phone']);
-              },
-              child: Icon(Icons.phone),
-            ),
-            FloatingActionButton(
-              heroTag: null,
-              onPressed: () {
-                UrlHandler.launchInBrowser(urls['website']);
-              },
-              child: Center(
-                child: Transform.scale(
-                  scale: 0.5,
-                  child: SvgPicture.asset(
-                    'assets/images/visit_web.svg',
-                    color: Colors.black,
-                  ),
+    return Padding(
+      padding: const EdgeInsets.only(top: 64.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          FloatingActionButton(
+            heroTag: null,
+            onPressed: () {
+              UrlHandler.launchInBrowser(urls['loc']);
+            },
+            child: Icon(Icons.location_on),
+          ),
+          FloatingActionButton(
+            heroTag: null,
+            onPressed: () {
+              UrlHandler.makePhoneCall(urls['phone']);
+            },
+            child: Icon(Icons.phone),
+          ),
+          FloatingActionButton(
+            heroTag: null,
+            onPressed: () {
+              UrlHandler.launchInBrowser(urls['website']);
+            },
+            child: Center(
+              child: Transform.scale(
+                scale: 0.5,
+                child: SvgPicture.asset(
+                  'assets/images/visit_web.svg',
+                  color: Colors.black,
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

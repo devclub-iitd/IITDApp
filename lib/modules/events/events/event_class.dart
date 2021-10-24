@@ -28,35 +28,36 @@ class Event {
     this.imageLink = '',
     // this.updates
   }) {
-      startsAt = (start == null)? DateTime.now():start;
-      endsAt = (end == null)? startsAt.add(Duration(days: 1)):end;
+    startsAt = (start == null) ? DateTime.now() : start;
+    endsAt = (end == null) ? startsAt.add(Duration(days: 1)) : end;
   }
 
-  factory Event.fromJson(Map<String,dynamic> json) {
+  factory Event.fromJson(Map<String, dynamic> json) {
     // DateTime startDate = DateTime.parse(json["startDate"]).add(Duration(days: 2));
     var startDate = DateTime.parse(json['startDate']);
-    var endDate = (json.containsKey('endDate')) ? DateTime.parse(json['endDate']) : startDate.add(Duration(hours: 1));
+    var endDate = (json.containsKey('endDate'))
+        ? DateTime.parse(json['endDate'])
+        : startDate.add(Duration(hours: 1));
     return Event(
-      eventName: json['name'], //
-      eventBody: 
-      // Club.fromJson(json['body']), //
-      Club(
-      clubName: json['body']['name'],
-      clubAbout: json['body']['about'],
-      isSubbed: json['body']['isSub'],
-      // clubDept: json["dept"],
-      id: json['body']['id']
-    ),
-      imageLink: json.containsKey('image') ? json['image'] : '',
-      start: startDate, //
-      end: endDate,
-      // updates: json["updates"],
-      about: json['about'], //
-      venue: json['venue'], //
-      isStarred: json['stared'], //
-      eventid: json['id'], //
-      isBodySub: json['body']['isSub'] //
-    );
+        eventName: json['name'], //
+        eventBody:
+            // Club.fromJson(json['body']), //
+            Club(
+                clubName: json['body']['name'],
+                clubAbout: json['body']['about'],
+                isSubbed: json['body']['isSub'],
+                // clubDept: json["dept"],
+                id: json['body']['id']),
+        imageLink: json.containsKey('image') ? json['image'] : '',
+        start: startDate, //
+        end: endDate,
+        // updates: json["updates"],
+        about: json['about'], //
+        venue: json['venue'], //
+        isStarred: json['stared'], //
+        eventid: json['id'], //
+        isBodySub: json['body']['isSub'] //
+        );
   }
 
   Map toMap() {

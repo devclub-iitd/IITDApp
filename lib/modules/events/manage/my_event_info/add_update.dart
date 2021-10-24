@@ -40,7 +40,7 @@ class _AddUpdateState extends State<AddUpdate> {
     enabled = false;
     hint = 'Adding Update. Please Wait...';
     setState(() {});
-    final response = await http.post('$url/api/events/$eventid/addUpdate',
+    final response = await http.post('$uri/api/events/$eventid/addUpdate',
         headers: {'authorization': 'Bearer $token'}, body: update.toMap());
     enabled = true;
     hint = 'Add an update...';

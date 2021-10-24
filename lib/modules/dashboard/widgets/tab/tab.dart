@@ -144,6 +144,7 @@ class _GeneralTabState extends State<GeneralTab> {
                       ),
                       trailing: Text(
                         widget.trailing(tabData[i]),
+                        // ignore: deprecated_member_use
                         style: TextStyle(color: Theme.of(context).accentColor),
                       ),
                       onTap: () => Navigator.pushReplacementNamed(

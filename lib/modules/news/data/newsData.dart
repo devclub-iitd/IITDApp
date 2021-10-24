@@ -182,7 +182,7 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
 }
 
 class NewsType {
-  static const baseUrl = '$url/api/news';
+  static const baseUrl = '$uri/api/news';
 }
 
 class RecentNews extends NewsType {
