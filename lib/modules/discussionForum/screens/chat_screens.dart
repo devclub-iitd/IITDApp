@@ -90,7 +90,13 @@ class _ChatScreenState extends State<ChatScreen> {
             onPressed: () {},
             icon: Icon(Icons.photo),
             iconSize: 25,
-            color: Colors.black, //lightBlue
+            color: Colors.black, 
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.send),
+            iconSize: 25,
+            color: Colors.black, 
           ),
         ],
       ),

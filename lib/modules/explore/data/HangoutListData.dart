@@ -8,7 +8,7 @@ List<Map> hangoutsList = [
   },
   {
     'name': 'Cafe Coffee Day',
-    'comment': 'Serving coffee, cakes and sandwiches',
+    'comment': 'Serves coffee, cakes and more',
     'note': 'Open from 11:00 to 23:00',
     'rating': 3.8,
     'image':
@@ -53,7 +53,7 @@ List<Map> hangoutsList = [
         'https://qph.fs.quoracdn.net/main-qimg-9716df72fc0640634a9e7cd2cdaa1c96'
   },
   {
-    'name': 'Rajdhani Chatkare Foods',
+    'name': 'Rajdhani Foods',
     'comment': 'Serves Multi-Cuisine',
     'note': '',
     'rating': 3.8,
