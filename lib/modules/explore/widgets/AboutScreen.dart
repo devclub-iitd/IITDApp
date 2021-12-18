@@ -101,36 +101,37 @@ class AboutScreen extends StatelessWidget {
                                 ),
                               ),
                               Spacer(),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                                child: IconButton(
-                                  onPressed: () => Navigator.push(
-                                      context,
-                                      PageRouteBuilder(
-                                          transitionDuration:
-                                              Duration(milliseconds: 100),
-                                          transitionsBuilder:
-                                              (BuildContext context,
-                                                  Animation<double> first,
-                                                  Animation<double> second,
-                                                  Widget child) {
-                                            return FadeTransition(
-                                              opacity: first,
-                                              child: child,
-                                            );
-                                          },
-                                          pageBuilder: (BuildContext context,
-                                              Animation<double> first,
-                                              Animation<double> second) {
-                                            return Manage(name);
-                                          })),
-                                  icon: Icon(CupertinoIcons
-                                      .person_crop_circle_badge_exclam),
-                                  highlightColor: Colors.transparent,
-                                  splashColor: Colors.transparent,
-                                  iconSize: 40,
-                                ),
-                              )
+                              // Search Users, Not available in v1
+                              // Container(
+                              //   margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                              //   child: IconButton(
+                              //     onPressed: () => Navigator.push(
+                              //         context,
+                              //         PageRouteBuilder(
+                              //             transitionDuration:
+                              //                 Duration(milliseconds: 100),
+                              //             transitionsBuilder:
+                              //                 (BuildContext context,
+                              //                     Animation<double> first,
+                              //                     Animation<double> second,
+                              //                     Widget child) {
+                              //               return FadeTransition(
+                              //                 opacity: first,
+                              //                 child: child,
+                              //               );
+                              //             },
+                              //             pageBuilder: (BuildContext context,
+                              //                 Animation<double> first,
+                              //                 Animation<double> second) {
+                              //               return Manage(name);
+                              //             })),
+                              //     icon: Icon(CupertinoIcons
+                              //         .person_crop_circle_badge_exclam),
+                              //     highlightColor: Colors.transparent,
+                              //     splashColor: Colors.transparent,
+                              //     iconSize: 40,
+                              //   ),
+                              // )
                             ],
                           ),
                           CustomTextDec(),

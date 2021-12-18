@@ -25,7 +25,8 @@ void rebuildAllChildren(BuildContext context) {
 
   (context as Element).visitChildren(rebuild);
 }
-var avimage= '';//assets/images/udaigiri_logo.jpg
+
+var avimage = 'assets/images/origami.png'; //assets/images/udaigiri_logo.jpg
 
 class SettingsScreen extends StatefulWidget {
   static const String routeName = '/settings';
@@ -68,25 +69,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
           context, MaterialPageRoute(builder: (context) => SettingsScreen()));
     }
 
-    
-
-  
-    
-
     var dropdownLis = {
       'System': ThemeType.System,
       'Dark': ThemeType.Dark,
       'Light': ThemeType.Light,
     };
-    var avatars= {
-      'cosmos': 'assets/images/cosmos.png',//avimage=
+    var avatars = {
+      'cosmos': 'assets/images/cosmos.png', //avimage=
       'equations': 'assets/images/equations.png',
       'football': 'assets/images/football.png',
       'origami': 'assets/images/origami.png',
       'scenery': 'assets/images/scenery.png',
     };
-    
-    
+
     // ignore: non_constant_identifier_names
     return Scaffold(
       backgroundColor: Provider.of<ThemeModel>(context, listen: true)
@@ -119,10 +114,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   /*backgroundImage: CachedNetworkImageProvider(
                       'https://www.nacdnet.org/wp-content/uploads/2016/06/person-placeholder.jpg'),*/
                   backgroundImage: AssetImage(avimage),
-                  
-                      
                 ),
-                
                 title: Text(
                   currentUser != null ? currentUser.name : 'Guest',
                   style: TextStyle(fontSize: 17, color: Colors.white),
@@ -194,19 +186,17 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SettingsDropdownTile(
               lis: avatars,
               //SPkey: commonKeys[1],
-              leading:  Icon(Icons.account_circle_outlined),
+              leading: Icon(Icons.account_circle_outlined),
               text: 'Choose an Avatar',
               //defaultValue: defaultsForKey[commonKeys[
-                  //1]], //Provider.of<ThemeModel>(context,listen:false).themeType,
+              //1]], //Provider.of<ThemeModel>(context,listen:false).themeType,
               onChange: (value) {
                 //Provider.of<ThemeModel>(context, listen: false)
-                    //.toggleTheme(value);
-                    print(value);
-                    avimage= value;
-                    print(avimage);
+                //.toggleTheme(value);
+                print(value);
+                avimage = value;
+                print(avimage);
               },
-              
-              
             ),
             SizedBox(
               height: 25,
@@ -282,14 +272,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   )
                   ),
             ),*/
-            
-              
-            
-             
-                
-
-
-  
 
             //end
             SizedBox(
@@ -387,7 +369,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ],
         ),
       ),
-      
     );
   }
 }

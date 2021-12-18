@@ -49,24 +49,24 @@ class AppDrawer extends StatelessWidget {
             context: context,
             routeName: Routes.dashboard,
           ),
-          _createDrawerItem(
-            selected: tag == 'Search User',
-            icon: CupertinoIcons.search,
-            text: 'Search User',
-            context: context,
-            routeName: Routes.search,
-          ),
+          // _createDrawerItem(
+          //   selected: tag == 'Search User',
+          //   icon: CupertinoIcons.search,
+          //   text: 'Search User',
+          //   context: context,
+          //   routeName: Routes.search,
+          // ),
           const Divider(),
           ListTile(
             title: Text('Around'),
             onTap: () {},
           ),
-          _createDrawerItem(
-              selected: tag == 'Courses',
-              icon: Icons.bookmark_border_outlined,
-              text: 'Courses',
-              context: context,
-              routeName: Routes.coursesPage),
+          // _createDrawerItem(
+          //     selected: tag == 'Courses',
+          //     icon: Icons.bookmark_border_outlined,
+          //     text: 'Courses',
+          //     context: context,
+          //     routeName: Routes.coursesPage),
           _createDrawerItem(
               selected: tag == 'Events',
               icon: Icons.emoji_events_outlined,
@@ -102,20 +102,20 @@ class AppDrawer extends StatelessWidget {
               text: 'Quick Links',
               context: context,
               routeName: Routes.quickLinks),
-          Divider(),
-          ListTile(
-            title: Text(
-              'Discussion Forum',
-            ),
-            onTap: () {},
-          ),
-          _createDrawerItem(
-            selected: tag == 'Chats',
-            icon: CupertinoIcons.chat_bubble_2,
-            text: 'Chats',
-            context: context,
-            routeName: Routes.discussionForum,
-          ),
+          // Divider(),
+          // ListTile(
+          //   title: Text(
+          //     'Discussion Forum',
+          //   ),
+          //   onTap: () {},
+          // ),
+          // _createDrawerItem(
+          //   selected: tag == 'Chats',
+          //   icon: CupertinoIcons.chat_bubble_2,
+          //   text: 'Chats',
+          //   context: context,
+          //   routeName: Routes.discussionForum,
+          // ),
           const Divider(),
           ListTile(
             title: Text('Discover'),
