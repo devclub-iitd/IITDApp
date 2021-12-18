@@ -15,7 +15,7 @@ import 'package:pedantic/pedantic.dart';
 
 Future<List<Admin>> getAdmins() async {
   print('Getting Admins');
-  final response = await http.post('$url/api/users/getAdmins',
+  final response = await http.post('$uri/api/users/getAdmins',
       headers: {'authorization': 'Bearer $token'},
       body: {'clubId': currentUser.superAdminOf[0].id});
   print(response.statusCode);
@@ -148,7 +148,7 @@ class AddDialogState extends State<AddDialog> {
 
   Future<Null> addAdmin() async {
     print('Adding Admin');
-    final response = await http.post('$url/api/users/addAdmin',
+    final response = await http.post('$uri/api/users/addAdmin',
         headers: {'authorization': 'Bearer $token'},
         body: {'userEmail': email, 'clubId': currentUser.superAdminOf[0].id});
     print(response.statusCode);

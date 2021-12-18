@@ -26,7 +26,7 @@ void onLoginSuccess(BuildContext context, String newtoken) async {
   final storage = FlutterSecureStorage();
   print('Getting User Info');
   final response = await http
-      .get('$url/api/user/me', headers: {'authorization': 'Bearer $newtoken'});
+      .get('$uri/api/user/me', headers: {'authorization': 'Bearer $newtoken'});
   print('got user info response');
   print(response.body);
   if (response.statusCode == 200) {

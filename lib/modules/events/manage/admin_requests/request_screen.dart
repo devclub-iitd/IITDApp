@@ -13,7 +13,7 @@ import 'request_class.dart';
 
 Future<List<Request>> getRequests() async {
   final response =
-      await http.get('$url/api/', headers: {'authorization': 'Bearer $token'});
+      await http.get('$uri/api/', headers: {'authorization': 'Bearer $token'});
 
   if (response.statusCode == 200) {
     var parsedJson = json.decode(response.body);

@@ -45,7 +45,7 @@ class ClubCardState extends State<ClubCard> {
     var timeOutFlag = false;
     onPress = () {};
     setState(() {});
-    final response = await http.post('$url/api/body/${_club.id}/subscribe',
+    final response = await http.post('$uri/api/body/${_club.id}/subscribe',
         headers: {
           'authorization': 'Bearer $token'
         }).timeout(Duration(seconds: 5), onTimeout: () {

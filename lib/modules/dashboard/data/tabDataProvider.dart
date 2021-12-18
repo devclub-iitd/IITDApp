@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 class TabDataProvider<T> with ChangeNotifier {
   ApiResponse data;
   List<int> alerts = [];
+  // ignore: prefer_typing_uninitialized_variables
   var cnp;
   DashboardAlerts da;
   Function getCacheData;

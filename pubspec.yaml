@@ -22,7 +22,8 @@ environment:
 
 dependencies:
   sliding_up_panel: ^2.0.0+1
-  html: ^0.14.0+3
+  html: #^0.14.0+3
+  focused_menu: ^1.0.5
   latlong:
   provider: ^5.0.0
   photo_view: ^0.12.0
@@ -32,7 +33,7 @@ dependencies:
   flutter_calendar_carousel: ^2.0.2
   location: #^4.3.0
   flutter_staggered_animations: ^1.0.0
-  google_fonts:
+  # google_fonts:
   font_awesome_flutter: ^9.1.0
   flutter_speed_dial: ^4.2.0
   flutter_svg: ^0.22.0
@@ -51,7 +52,17 @@ dependencies:
   flutter_webview_plugin: ^0.4.0
   corsac_jwt:
 
+  # firebase_storage:
+  image_cropper:
+  image_picker: 
+  # image_picker:
+  #   git:
+  #     url: https://github.com/wiseyy/image_picker.git
   #  device_calendar: ^3.2.0-dev.11602    # comment this and uncomment either of below 2 url lines if only want to add for one platform
+  google_fonts:
+  # google_fonts:
+  #   git:
+  #     url: https://github.com/wiseyy/google-fonts-flutter.git
   device_calendar:
     git:
       url: https://github.com/Pranjal2041/device_calendar.git #  for android use only one of 3 options

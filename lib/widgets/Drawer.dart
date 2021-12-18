@@ -18,28 +18,29 @@ class AppDrawer extends StatelessWidget {
           DrawerHeader(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('assets/images/iitd_building.jpg'),
-                    fit: BoxFit.cover)),
-            child: Positioned(
-                left: 40,
-                child: Text(
-                  'IITD APP',
-                  style: GoogleFonts.montserrat(
-                      fontSize: 30,
-                      color: Color(0xffffffff),
-                      shadows: <Shadow>[
-                        Shadow(
-                          offset: Offset(0, 0),
-                          blurRadius: 3.0,
-                          color: Color.fromARGB(100, 0, 0, 0),
-                        ),
-                        Shadow(
-                          offset: Offset(0, 0),
-                          blurRadius: 3.0,
-                          color: Color.fromARGB(125, 0, 0, 0),
-                        )
-                      ]),
-                )),
+                    image: AssetImage('assets/images/icon.jpg'),
+                    fit: BoxFit.fill)),
+            // child: Container(
+            //     margin: EdgeInsets.fromLTRB(145, 120, 0, 0),
+            //     // color: Colors.red,
+            //     child: Text(
+            //       'IITD APP',
+            //       style: GoogleFonts.montserrat(
+            //           fontSize: 35,
+            //           color: Color(0xffffffff),
+            //           shadows: <Shadow>[
+            //             Shadow(
+            //               offset: Offset(0, 0),
+            //               blurRadius: 3.0,
+            //               color: Color.fromARGB(100, 0, 0, 0),
+            //             ),
+            //             Shadow(
+            //               offset: Offset(0, 0),
+            //               blurRadius: 3.0,
+            //               color: Color.fromARGB(125, 0, 0, 0),
+            //             )
+            //           ]),
+            //     )),
           ),
           _createDrawerItem(
             selected: tag == 'User Dashboard',
@@ -55,7 +56,7 @@ class AppDrawer extends StatelessWidget {
             context: context,
             routeName: Routes.search,
           ),
-          Divider(),
+          const Divider(),
           ListTile(
             title: Text('Around'),
             onTap: () {},
@@ -80,7 +81,7 @@ class AppDrawer extends StatelessWidget {
               context: context,
               routeName: Routes.calendar,
               loginRequired: false),
-          Divider(),
+          const Divider(),
           ListTile(
             title: Text(
               'Utility',
@@ -115,7 +116,7 @@ class AppDrawer extends StatelessWidget {
             context: context,
             routeName: Routes.discussionForum,
           ),
-          Divider(),
+          const Divider(),
           ListTile(
             title: Text('Discover'),
             onTap: () {},

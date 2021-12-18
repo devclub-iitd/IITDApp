@@ -1,3 +1,4 @@
+import 'package:IITDAPP/modules/discussionForum/models/message_model.dart';
 import 'package:IITDAPP/modules/events/clubs/club_class.dart';
 
 class User {

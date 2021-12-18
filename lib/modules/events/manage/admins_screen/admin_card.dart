@@ -81,7 +81,7 @@ class ResponseIconsState extends State<ResponseIcons> {
   }
 
   Future<Null> deleteAdmin() async {
-    final response = await http.post('$url/api/users/removeAdmin', headers: {
+    final response = await http.post('$uri/api/users/removeAdmin', headers: {
       'authorization': 'Bearer $token'
     }, body: {
       'clubId': currentUser.superAdminOf[0].id,
