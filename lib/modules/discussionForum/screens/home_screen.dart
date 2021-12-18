@@ -3,7 +3,7 @@ import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
 
 import 'package:IITDAPP/modules/discussionForum/widgets/category_selector.dart';
-import 'package:IITDAPP/modules/discussionForum/widgets/favourite_contacts.dart';
+//import 'package:IITDAPP/modules/discussionForum/widgets/favourite_contacts.dart';
 import 'package:IITDAPP/modules/discussionForum/widgets/recent_chats.dart';
 //package:IITDAPP/modules/discussionForum/
 class HomeScreen extends StatefulWidget {
@@ -42,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
                ),
               ),
               child: Column(children: <Widget>[
-                FavouriteContacts(),
+                //FavouriteContacts(),
                 RecentChats(),
               ],
               ),

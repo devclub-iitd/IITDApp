@@ -28,6 +28,16 @@ class EventInfoCard extends StatelessWidget {
     actionRow.add(
       StarButton(_event),
     );
+    actionRow.add(IconButton(
+      onPressed: (){},
+      icon: Icon(Icons.chat_bubble_outline),
+      tooltip: 'public discussion forum',
+    ));
+    actionRow.add(IconButton(
+      onPressed: (){},
+      icon: Icon(Icons.chat_bubble_outlined),
+      tooltip: 'intra club discussion forum',
+    ));
     // if (showButton) {
     //   actionRow.add(FlatButton(
     //     onPressed: () {
