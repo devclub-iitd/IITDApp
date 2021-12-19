@@ -19,12 +19,14 @@ import '../casi_user.dart';
 void onLoginSuccess(BuildContext context, String newtoken) async {
   print('newtoken: $newtoken');
   // ignore: unawaited_futures
-  if (!Provider.of<LoginStateProvider>(context, listen: false).loading)
+  if (!Provider.of<LoginStateProvider>(context, listen: false).loading) {
+    // ignore: unawaited_futures
     showLoading(context);
+  }
   final storage = FlutterSecureStorage();
   print('Getting User Info');
   final response = await http
-      .get('$url/api/user/me', headers: {'authorization': 'Bearer $newtoken'});
+      .get('$uri/api/user/me', headers: {'authorization': 'Bearer $newtoken'});
   print('got user info response');
   print(response.body);
   if (response.statusCode == 200) {
@@ -38,13 +40,23 @@ void onLoginSuccess(BuildContext context, String newtoken) async {
     var topr = await storage.read(key: 'token');
     print(topr);
     token = newtoken;
-    if (!Provider.of<LoginStateProvider>(context, listen: false).loading)
+    if (!Provider.of<LoginStateProvider>(context, listen: false).loading) {
       Navigator.pop(context);
+    }
     Provider.of<LoginStateProvider>(context, listen: false).signIn();
+    final response2 = await http.post("$uri/api/user/updatefcm",
+        headers: {'authorization': 'Bearer $token'},
+        body: {'fcmRegistrationToken': token});
+    print("start");
+    print(token);
+    print(response2.statusCode);
+    print(response2.reasonPhrase);
+    print("end");
   } else {
     print('Could not get user info.');
-    if (!Provider.of<LoginStateProvider>(context, listen: false).loading)
+    if (!Provider.of<LoginStateProvider>(context, listen: false).loading) {
       Navigator.pop(context);
+    }
     await showErrorAlert(
         context, 'Login Failed', 'Something went wrong. Please Try Again');
   }
@@ -58,7 +70,6 @@ Future login(BuildContext context, {bool pop = true}) async {
   var clientId = '5f7ca56f01cb380034260a02';
   var secret =
       'o8ggsY3EeNeCdl0U3izDF1LvR0cU33zopJeFHltapvle8bBChvzHT5miRN23o5v0';
-
   try {
     print('trying old token');
     print(oldToken);
@@ -78,6 +89,7 @@ Future login(BuildContext context, {bool pop = true}) async {
           title: Text('An Error Occured!'),
           content: Text(e.toString()),
           actions: <Widget>[
+            // ignore: deprecated_member_use
             FlatButton(
               onPressed: () => Navigator.of(context).pop(),
               child: Text('Try Again'),
@@ -132,6 +144,7 @@ class LoginPageState extends State<LoginPage> {
                 children: <Widget>[
                   SizedBox(
                     width: MediaQuery.of(context).size.width * 0.8,
+                    // ignore: deprecated_member_use
                     child: FlatButton(
                       color: Provider.of<ThemeModel>(context)
                           .theme

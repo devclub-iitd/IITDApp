@@ -81,7 +81,7 @@ class _AllReportsState extends State<AllReports> {
 
   Future<List<NewsModel>> getAllReports() async {
     var results =
-        (await apiBaseHelper.get('$url/api/news/report/all') as Map)['data'];
+        (await apiBaseHelper.get('$uri/api/news/report/all') as Map)['data'];
     return <NewsModel>[...results.map((i) => NewsModel.fromMap(i)).toList()];
   }
 

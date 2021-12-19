@@ -14,9 +14,9 @@ class FavouriteContacts extends StatelessWidget {
     child:  Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-                  Text('Favourite Threads', style: TextStyle(color: Colors.blueGrey, 
-                  fontSize:18.0,
-                    fontWeight: FontWeight.bold, 
+                  Text('Favourite Threads', style: TextStyle(color: Colors.black, 
+                  fontSize:22.0,
+                    //fontWeight: FontWeight.bold, 
                     letterSpacing: 1.0, 
                     ),
                     ),
@@ -60,9 +60,9 @@ class FavouriteContacts extends StatelessWidget {
            Text(
              favorites[index].name, 
               style: TextStyle(
-             color: Colors.blueGrey,
+             color: Colors.black,
               fontSize: 16,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w300,
                )
                ),
              ]

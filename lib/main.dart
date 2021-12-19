@@ -16,13 +16,15 @@ import 'package:firebase_core/firebase_core.dart';
 // import 'package:global_configuration/global_configuration.dart';
 // import 'package:syncfusion_flutter_core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:package_info/package_info.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
-import 'package:IITDAPP/modules/discussionForum/discuss.dart';
+// import 'package:IITDAPP/modules/discussionForum/discuss.dart';
 import 'package:IITDAPP/modules/courses/screens/search.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
 
   // try {
   //   await GlobalConfiguration().loadFromAsset('secrets');
@@ -32,7 +34,7 @@ void main() async {
   // } catch (e) {
   //   print('secrets.json file is required');
   // }
-
+  unawaited(extractAppVersion());
   unawaited(initialiseNotifications());
   unawaited(initialisePreferences());
   await savedstate.init();
@@ -58,7 +60,6 @@ void main() async {
     ChangeNotifierProvider(
       create: (_) => EventsTabProvider(),
     ),
-
     ChangeNotifierProvider(create: (_) => LoginStateProvider()),
   ], child: MyApp()));
 }
@@ -97,14 +98,28 @@ initialisePreferences() async {
 }
 
 // ignore: always_declare_return_types
+extractAppVersion() async =>
+    PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
+      appName = packageInfo.appName;
+      packageName = packageInfo.packageName;
+      version = packageInfo.version;
+      buildNumber = packageInfo.buildNumber;
+    });
+
+// ignore: always_declare_return_types
 initialiseNotifications() async {
   print('Initialising Notifications');
   await Firebase.initializeApp();
   print('Testing Push Notifications');
   var pushNotificationsManager = PushNotificationsManager();
   await pushNotificationsManager.init();
-  await Calendarnotificationprovider.setDescription(
-      start: 'Time:- ', end: '', text: DynamicTextEventKeys.RangeTime);
-  await Calendarnotificationprovider.setTitle(
-      start: 'Event:- ', text: DynamicTextEventKeys.Title);
+  try {
+    await Calendarnotificationprovider.setPackageName('com.example.IITDAPP');
+    await Calendarnotificationprovider.setDescription(
+        start: 'Time:- ', end: '', text: DynamicTextEventKeys.RangeTime);
+    await Calendarnotificationprovider.setTitle(
+        start: 'Event:- ', text: DynamicTextEventKeys.Title);
+  } on PlatformException {
+    print('Error Occured');
+  }
 }

@@ -7,6 +7,7 @@ import 'package:IITDAPP/utility/apiResponse.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:IITDAPP/values/Constants.dart';
+import 'dart:io';
 
 class NewsHistoryProvider with ChangeNotifier {
   final ls = LocalStorage('newsClickHistory${currentUser.id}');
@@ -54,45 +55,46 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
   String id;
   String sourceName;
   String imgUrl;
+  File newsImage;
   bool loadingContent = false;
   bool visible = true;
 
   Future<String> add() async {
     String returnMessage;
     try {
-      var response =
-          (await apiBaseHelper.post(NewsType.baseUrl, toJson())) as Map;
-      returnMessage = response['message'];
+      var response = (await apiBaseHelper.post(
+          NewsType.baseUrl, toJson(), newsImage)) as Map;
+      // returnMessage = response['message'];
     } on FetchDataException catch (e) {
       returnMessage = e.toString();
     }
-    return returnMessage;
+    return "returnMessage";
   }
 
   Future<String> update() async {
     String returnMessage;
     try {
-      var response = (await apiBaseHelper.patch(
-          NewsType.baseUrl + '/$id', toJson())) as Map;
-      returnMessage = response['message'];
+      var response = (await apiBaseHelper.put(
+          NewsType.baseUrl + '/$id', toJson(), newsImage)) as Map;
+      // returnMessage = response['message'];
       notifyListeners();
     } on FetchDataException catch (e) {
       returnMessage = e.toString();
     }
     notifyListeners();
-    return returnMessage;
+    return "returnMessage";
   }
 
   Future<String> report(List<String> report) async {
     String returnMessage;
     try {
       var response = (await apiBaseHelper.post(NewsType.baseUrl + '/report/$id',
-          {'description': report.join('\n')})) as Map;
-      returnMessage = response['message'];
+          {'description': report.join('\n')}, newsImage)) as Map;
+      // returnMessage = response['message'];
     } on FetchDataException catch (e) {
       returnMessage = e.toString();
     }
-    return returnMessage;
+    return "returnMessage";
   }
 
   Future<String> delete() async {
@@ -143,13 +145,14 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
   }
 
   factory NewsModel.fromMap(Map map) {
+    print(map);
     return NewsModel<T>(
         author: map['author'],
         createdAt: DateTime.parse(map['createdAt']).add(Duration(minutes: 330)),
         clicks: map['clicks'],
         id: map['_id'],
         title: map['description'],
-        imgUrl: map['imgUrl'],
+        imgUrl: uri + '/' + map['imgUrl'],
         sourceName: map['sourceName'],
         visible: map['visible'] ?? true,
         reports: <Report>[
@@ -170,7 +173,8 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
   }
 
   NewsModel(
-      {this.imgUrl,
+      {this.newsImage,
+      this.imgUrl,
       this.title,
       this.author,
       this.clicks,
@@ -182,7 +186,7 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
 }
 
 class NewsType {
-  static const baseUrl = '$url/api/news';
+  static const baseUrl = '$uri/api/news';
 }
 
 class RecentNews extends NewsType {

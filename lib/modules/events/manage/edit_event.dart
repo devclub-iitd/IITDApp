@@ -13,15 +13,23 @@ import 'package:pedantic/pedantic.dart';
 import 'package:validators/validators.dart';
 import 'package:http/http.dart' as http;
 import 'dart:async';
-
+import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
+import 'dart:io';
+import 'package:path_provider/path_provider.dart';
 import '../events/event_class.dart';
 //import 'package:gradient_app_bar/gradient_app_bar.dart';
+import 'package:flutter/services.dart';
+import 'package:path/path.dart';
+import 'package:async/async.dart';
+import 'dart:convert';
 
 Future<void> deleteEvent(BuildContext context, String id) async {
   print('Deleting Event');
-  final response = await http.delete('$url/api/events/$id',
-      headers: {'authorization': 'Bearer $token'});
+  final response = await http
+      .post('$uri/api/events/$id', headers: {'authorization': 'Bearer $token'});
   print(response.statusCode);
+  print(response.reasonPhrase);
   if (response.statusCode == 200) {
     // var count = 0;
     // Navigator.of(context).popUntil((_) => count++ >= 3);
@@ -87,7 +95,7 @@ class _EditEventFormState extends State<EditEventForm> {
   DateTime _startsAt;
   DateTime _endsAt;
   String _about;
-  String _imageLink;
+  File _img;
 
   Event _event;
 
@@ -95,23 +103,60 @@ class _EditEventFormState extends State<EditEventForm> {
   void initState() {
     super.initState();
     _event = widget._event;
+    _img = _event.eventImage;
+  }
+
+  Future pickImage(int crr) async {
+    try {
+      print("picking image");
+      var image = await ImagePicker.pickImage(
+          source: (crr == 0 ? ImageSource.camera : ImageSource.gallery));
+      if (image == null) {
+        return;
+      }
+      final perm = File(image.path);
+      // final perm = await Perm(image.path);
+      setState(() => {_img = perm});
+    } on PlatformException catch (e) {
+      print('failed to pick img $e');
+    }
   }
 
   Future editEvent() async {
     print('Editing event');
-    // print(_event.toMapForUpdate());
-    final response = await http.put('$url/api/events/${_event.eventid}',
-        headers: {'authorization': 'Bearer $token'},
-        body: _event.toMapForUpdate());
+    print(_event.eventid);
+
+    var stream =
+        http.ByteStream(DelegatingStream.typed(_event.eventImage.openRead()));
+    var length = await _event.eventImage.length();
+    String goto = '$uri/api/events/${_event.eventid}';
+    print(goto);
+    var request = http.MultipartRequest("PUT", Uri.parse(goto));
+    var multipartFile = http.MultipartFile('eventImage', stream, length,
+        filename: basename(_event.eventImage.path));
+    request.files.add(multipartFile);
+
+    request.fields['name'] = _event.eventName;
+    request.fields['about'] = _event.about;
+    request.fields['startDate'] = _event.startsAt.toIso8601String();
+    request.fields['endDate'] = _event.endsAt.toIso8601String();
+    request.fields['venue'] = _event.venue;
+    // request.fields['eventImage'] = base64image;
+    request.headers['authorization'] = 'Bearer $token';
+
+    final response = await request.send();
     print(response.statusCode);
-    print(response.body);
+    response.stream.transform(utf8.decoder).listen((value) {
+      print(value);
+    });
     if (response.statusCode == 200) {
-      await Provider.of<EventsTabProvider>(context, listen: false).getData();
-      Navigator.pop(context);
+      await Provider.of<EventsTabProvider>(this.context, listen: false)
+          .getData();
+      Navigator.pop(this.context);
     } else {
-      Navigator.pop(context);
+      Navigator.pop(this.context);
       await showErrorAlert(
-          context, 'Failed', 'Something went wrong. Please try again');
+          this.context, 'Failed', 'Something went wrong. Please try again');
     }
   }
 
@@ -315,33 +360,106 @@ class _EditEventFormState extends State<EditEventForm> {
                 }
               },
             ),
-            TextFormField(
-              initialValue: _event.imageLink,
-              decoration: InputDecoration(
-                  alignLabelWithHint: true,
-                  labelText: 'Image Link',
-                  labelStyle: TextStyle(
-                      color: Provider.of<ThemeModel>(context, listen: false)
-                          .theme
-                          .PRIMARY_TEXT_COLOR
-                          .withOpacity(0.5)),
-                  helperText: ''),
-              keyboardType: TextInputType.multiline,
-              maxLines: null,
-              style: TextStyle(
-                  color: Provider.of<ThemeModel>(context)
-                      .theme
-                      .PRIMARY_TEXT_COLOR),
-              onSaved: (text) {
-                _imageLink = text;
-              },
-              validator: (text) {
-                if (text.isEmpty || isURL(text)) {
-                  return null;
-                } else {
-                  return 'Not a valid URL';
-                }
-              },
+            Row(
+              children: [
+                Container(
+                  // color: Colors.red,
+                  margin: EdgeInsets.fromLTRB(10, 20, 0, 50),
+                  child: Column(
+                    children: [
+                      Card(
+                        // color: Colors.grey.shade900,
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .RAISED_BUTTON_BACKGROUND,
+                        elevation: 10,
+                        shadowColor: Colors.grey.shade900.withBlue(10),
+                        child: Container(
+                          // color: Colors.red,
+                          width: 140,
+                          padding: EdgeInsets.fromLTRB(3, 0, 0, 0),
+                          child: TextButton(
+                            onPressed: () => pickImage(0),
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  CupertinoIcons.camera,
+                                  size: 24,
+                                  // color: Colors.grey.shade600,
+                                  color: Colors.black,
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  "Open Camera",
+                                  style: TextStyle(
+                                    //color: Colors.grey.shade600
+                                    color: Colors.black,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(height: 10),
+                      Card(
+                        elevation: 10,
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .RAISED_BUTTON_BACKGROUND,
+                        // color: Colors.cyan.shade300,
+                        child: Container(
+                          padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
+                          width: 140,
+                          child: TextButton(
+                            onPressed: () => pickImage(1),
+                            style: ButtonStyle(
+                              overlayColor:
+                                  MaterialStateProperty.all(Colors.transparent),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  CupertinoIcons.square_on_square,
+                                  size: 24,
+                                  // color: Colors.grey.shade600,
+                                  color: Colors.black,
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  "Open Gallery",
+                                  style: TextStyle(
+                                    //color: Colors.grey.shade600
+                                    color: Colors.black,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Spacer(),
+                Container(
+                  // color: Colors.blue,
+                  margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                  height: 150,
+                  width: 200,
+                  child: _img != null
+                      ? Image.file(
+                          _img,
+                        )
+                      : Image.asset(
+                          'assets/images/null.png',
+                        ),
+                ),
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -383,13 +501,6 @@ class _EditEventFormState extends State<EditEventForm> {
                         .theme
                         .RAISED_BUTTON_BACKGROUND,
                   ),
-                  child: Text(
-                    'SUBMIT',
-                    style: TextStyle(
-                        color: Provider.of<ThemeModel>(context)
-                            .theme
-                            .RAISED_BUTTON_FOREGROUND),
-                  ),
                   onPressed: () async {
                     if (_key.currentState.validate()) {
                       _key.currentState.save();
@@ -398,12 +509,20 @@ class _EditEventFormState extends State<EditEventForm> {
                       _event.about = _about;
                       _event.startsAt = _startsAt;
                       _event.endsAt = _endsAt;
-                      _event.imageLink = _imageLink;
+                      _event.eventImage = _img;
                       unawaited(showLoading(context));
                       await editEvent();
                       Navigator.pop(context);
+                      Navigator.pop(context);
                     }
                   },
+                  child: Text(
+                    'SUBMIT',
+                    style: TextStyle(
+                        color: Provider.of<ThemeModel>(context)
+                            .theme
+                            .RAISED_BUTTON_FOREGROUND),
+                  ),
                 ),
               ],
             ),

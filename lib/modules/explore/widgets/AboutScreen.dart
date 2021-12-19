@@ -1,3 +1,4 @@
+import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/modules/explore/data/ClubsData.dart';
 import 'package:IITDAPP/utility/UrlHandler.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
@@ -9,6 +10,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:math' as math;
+import 'package:IITDAPP/modules/roles/manage.dart';
+
+import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
 class AboutScreen extends StatelessWidget {
@@ -87,12 +91,48 @@ class AboutScreen extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            'ABOUT',
-                            style: GoogleFonts.arvo(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 36,
-                            ),
+                          Row(
+                            children: [
+                              Text(
+                                'ABOUT',
+                                style: GoogleFonts.arvo(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 36,
+                                ),
+                              ),
+                              Spacer(),
+                              // Search Users, Not available in v1
+                              // Container(
+                              //   margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                              //   child: IconButton(
+                              //     onPressed: () => Navigator.push(
+                              //         context,
+                              //         PageRouteBuilder(
+                              //             transitionDuration:
+                              //                 Duration(milliseconds: 100),
+                              //             transitionsBuilder:
+                              //                 (BuildContext context,
+                              //                     Animation<double> first,
+                              //                     Animation<double> second,
+                              //                     Widget child) {
+                              //               return FadeTransition(
+                              //                 opacity: first,
+                              //                 child: child,
+                              //               );
+                              //             },
+                              //             pageBuilder: (BuildContext context,
+                              //                 Animation<double> first,
+                              //                 Animation<double> second) {
+                              //               return Manage(name);
+                              //             })),
+                              //     icon: Icon(CupertinoIcons
+                              //         .person_crop_circle_badge_exclam),
+                              //     highlightColor: Colors.transparent,
+                              //     splashColor: Colors.transparent,
+                              //     iconSize: 40,
+                              //   ),
+                              // )
+                            ],
                           ),
                           CustomTextDec(),
                           Padding(
@@ -145,7 +185,9 @@ class SpeedDialSection extends StatelessWidget {
               child: FaIcon(FontAwesomeIcons.facebook),
             ),
             label: 'Visit FB Page',
-            labelStyle: TextStyle(color: Colors.black)));
+            labelStyle: TextStyle(
+              color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
+            )));
       }
       if (links['insta'] != '') {
         list.add(SpeedDialChild(
@@ -156,7 +198,9 @@ class SpeedDialSection extends StatelessWidget {
               child: FaIcon(FontAwesomeIcons.instagram),
             ),
             label: 'Visit Insta Page',
-            labelStyle: TextStyle(color: Colors.black)));
+            labelStyle: TextStyle(
+              color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
+            )));
       }
       if (links['linkedin'] != '') {
         list.add(SpeedDialChild(
@@ -167,7 +211,9 @@ class SpeedDialSection extends StatelessWidget {
               child: FaIcon(FontAwesomeIcons.linkedinIn),
             ),
             label: 'Visit LinkedIn Profile',
-            labelStyle: TextStyle(color: Colors.black)));
+            labelStyle: TextStyle(
+              color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
+            )));
       }
       if (links['web'] != '') {
         list.add(SpeedDialChild(
@@ -179,24 +225,25 @@ class SpeedDialSection extends StatelessWidget {
                 scale: 0.5,
                 child: SvgPicture.asset(
                   'assets/images/visit_web.svg',
-                  color: Colors.black,
+                  color:
+                      Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
                 ),
               ),
             ),
             label: 'Visit Website',
-            labelStyle: TextStyle(color: Colors.black)));
+            labelStyle: TextStyle(
+              color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
+            )));
       }
 
       return list;
     }
 
-    return Container(
-      child: SpeedDial(
-          heroTag: null,
-          animatedIcon: AnimatedIcons.menu_close,
-          elevation: 5,
-          children: getChildren()),
-    );
+    return SpeedDial(
+        heroTag: null,
+        animatedIcon: AnimatedIcons.menu_close,
+        elevation: 5,
+        children: getChildren());
   }
 }
 
@@ -206,43 +253,41 @@ class LinksSection extends StatelessWidget {
   var urls;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 64.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            FloatingActionButton(
-              heroTag: null,
-              onPressed: () {
-                UrlHandler.launchInBrowser(urls['loc']);
-              },
-              child: Icon(Icons.location_on),
-            ),
-            FloatingActionButton(
-              heroTag: null,
-              onPressed: () {
-                UrlHandler.makePhoneCall(urls['phone']);
-              },
-              child: Icon(Icons.phone),
-            ),
-            FloatingActionButton(
-              heroTag: null,
-              onPressed: () {
-                UrlHandler.launchInBrowser(urls['website']);
-              },
-              child: Center(
-                child: Transform.scale(
-                  scale: 0.5,
-                  child: SvgPicture.asset(
-                    'assets/images/visit_web.svg',
-                    color: Colors.black,
-                  ),
+    return Padding(
+      padding: const EdgeInsets.only(top: 64.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          FloatingActionButton(
+            heroTag: null,
+            onPressed: () {
+              UrlHandler.launchInBrowser(urls['loc']);
+            },
+            child: Icon(Icons.location_on),
+          ),
+          FloatingActionButton(
+            heroTag: null,
+            onPressed: () {
+              UrlHandler.makePhoneCall(urls['phone']);
+            },
+            child: Icon(Icons.phone),
+          ),
+          FloatingActionButton(
+            heroTag: null,
+            onPressed: () {
+              UrlHandler.launchInBrowser(urls['website']);
+            },
+            child: Center(
+              child: Transform.scale(
+                scale: 0.5,
+                child: SvgPicture.asset(
+                  'assets/images/visit_web.svg',
+                  color: Colors.black,
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }
@@ -268,7 +313,7 @@ class MemberCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.all(10),
-      height: 120,
+      // height: 140,
       color: Colors.blueAccent,
       child: Row(
         mainAxisSize: MainAxisSize.max,
@@ -313,7 +358,9 @@ class MemberCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 16),
                       child: Text(
-                        data.post,
+                        (data.post.length > 20)
+                            ? data.post.substring(0, 18) + '...'
+                            : data.post,
                         style: GoogleFonts.literata(
                             color: Colors.redAccent,
                             fontSize: 20,
@@ -508,5 +555,17 @@ class EventCard extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class ManageRoles extends StatefulWidget {
+  @override
+  _ManageRolesState createState() => _ManageRolesState();
+}
+
+class _ManageRolesState extends State<ManageRoles> {
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }

@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -15,24 +15,25 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 0.0.1+1
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   sliding_up_panel: ^2.0.0+1
-  html: ^0.14.0+3
+  html: #^0.14.0+3
+  focused_menu: ^1.0.5
   latlong:
   provider: ^5.0.0
   photo_view: ^0.12.0
- # gradient_app_bar: ^0.0.1
+  # gradient_app_bar: ^0.0.1
   pedantic: ^1.8.0
   http: #^0.13.3
   flutter_calendar_carousel: ^2.0.2
-  location: #^4.3.0
+  location:
   flutter_staggered_animations: ^1.0.0
-  google_fonts:
+  # google_fonts:
   font_awesome_flutter: ^9.1.0
   flutter_speed_dial: ^4.2.0
   flutter_svg: ^0.22.0
@@ -43,19 +44,28 @@ dependencies:
   cached_network_image:
   scrollable_positioned_list: ^0.1.6
 
-
   shimmer: ^2.0.0
   syncfusion_flutter_calendar: ^19.2.49
- # modal_bottom_sheet: ^0.1.5
+  # modal_bottom_sheet: ^0.1.5
   flutter_swiper: ^1.1.6
   localstorage:
   flutter_webview_plugin: ^0.4.0
   corsac_jwt:
 
-#  device_calendar: ^3.2.0-dev.11602    # comment this and uncomment either of below 2 url lines if only want to add for one platform
+  # firebase_storage:
+  image_cropper:
+  image_picker: 
+  # image_picker:
+  #   git:
+  #     url: https://github.com/wiseyy/image_picker.git
+  #  device_calendar: ^3.2.0-dev.11602    # comment this and uncomment either of below 2 url lines if only want to add for one platform
+  google_fonts:
+  # google_fonts:
+  #   git:
+  #     url: https://github.com/wiseyy/google-fonts-flutter.git
   device_calendar:
     git:
-      url: https://github.com/Pranjal2041/device_calendar.git   #  for android use only one of 3 options
+      url: https://github.com/Pranjal2041/device_calendar.git #  for android use only one of 3 options
 
   timeago: ^3.1.0
   global_configuration:
@@ -72,22 +82,24 @@ dependencies:
   settings_ui: ^1.0.0
   flare_flutter: ^3.0.2
   flushbar: ^1.10.4
+  package_info: ^2.0.2
 
   calendarnotificationprovider: ^0.0.3
   firebase_core:
-  firebase_analytics: 
+  firebase_analytics:
   webview_flutter: ^2.0.10
   flutter:
     sdk: flutter
-
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
 
 dev_dependencies:
+  flutter_lints: ^1.0.4
   flutter_test:
     sdk: flutter
+  lints: ^1.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

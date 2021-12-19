@@ -4,6 +4,10 @@ import 'colors.dart';
 
 class DarkAppColors extends AppColors {
   DarkAppColors() {
+    //User Search
+    SEARCH_BG = Color(0xff2f2f2f);
+    Cancel_Button = Color(0xffcccccd);
+    FILTER = Color(0xffdddddd);
     //Default
     APP_BAR_START = Color(0xFF263238);
     APP_BAR_END = Color(0xFF455A64);

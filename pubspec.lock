@@ -7,28 +7,28 @@ packages:
       name: ansicolor
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.5"
+    version: "1.1.1"
   args:
     dependency: transitive
     description:
       name: args
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.2.0"
+    version: "2.3.0"
   asn1lib:
     dependency: transitive
     description:
       name: asn1lib
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.5"
+    version: "0.8.1"
   async:
     dependency: transitive
     description:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.8.1"
+    version: "2.8.2"
   auto_size_text:
     dependency: "direct main"
     description:
@@ -42,7 +42,7 @@ packages:
       name: back_button_interceptor
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.1"
+    version: "5.0.2"
   boolean_selector:
     dependency: transitive
     description:
@@ -56,7 +56,7 @@ packages:
       name: cached_network_image
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.2+1"
+    version: "2.3.3"
   calendarnotificationprovider:
     dependency: "direct main"
     description:
@@ -70,14 +70,14 @@ packages:
       name: carousel_slider
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.1"
+    version: "2.3.4"
   characters:
     dependency: transitive
     description:
       name: characters
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0"
+    version: "1.2.0"
   charcode:
     dependency: transitive
     description:
@@ -119,7 +119,7 @@ packages:
       name: corsac_jwt
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.2"
+    version: "0.4.0"
   crypto:
     dependency: transitive
     description:
@@ -133,14 +133,18 @@ packages:
       name: csslib
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "0.16.2"
+=======
+    version: "0.17.1"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   cupertino_icons:
     dependency: "direct main"
     description:
       name: cupertino_icons
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.0.4"
   date_format:
     dependency: "direct main"
     description:
@@ -184,62 +188,68 @@ packages:
       name: file
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.2.1"
-  firebase:
-    dependency: transitive
-    description:
-      name: firebase
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "7.3.0"
+    version: "6.1.2"
   firebase_analytics:
     dependency: "direct main"
     description:
       name: firebase_analytics
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "5.0.16"
+    version: "9.0.3"
   firebase_analytics_platform_interface:
     dependency: transitive
     description:
       name: firebase_analytics_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.3"
+    version: "3.0.2"
   firebase_analytics_web:
     dependency: transitive
     description:
       name: firebase_analytics_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.1"
+    version: "0.4.0+3"
   firebase_core:
     dependency: "direct main"
     description:
       name: firebase_core
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "1.4.0"
+=======
+    version: "1.10.5"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   firebase_core_platform_interface:
     dependency: transitive
     description:
       name: firebase_core_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "4.0.1"
+=======
+    version: "4.2.2"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   firebase_core_web:
     dependency: transitive
     description:
       name: firebase_core_web
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "1.1.0"
+=======
+    version: "1.5.2"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   firebase_messaging:
     dependency: "direct main"
     description:
       name: firebase_messaging
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "10.0.4"
   firebase_messaging_platform_interface:
     dependency: transitive
@@ -255,6 +265,23 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.3"
+=======
+    version: "10.0.9"
+  firebase_messaging_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_messaging_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.1.3"
+  firebase_messaging_web:
+    dependency: transitive
+    description:
+      name: firebase_messaging_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.4"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   flare_flutter:
     dependency: "direct main"
     description:
@@ -294,13 +321,29 @@ packages:
       name: flutter_calendar_carousel
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "2.0.3"
+  flutter_local_notifications:
+    dependency: "direct main"
+=======
+    version: "2.1.0"
+  flutter_lints:
+    dependency: "direct dev"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
+    description:
+      name: flutter_lints
+      url: "https://pub.dartlang.org"
+    source: hosted
+<<<<<<< HEAD
+=======
+    version: "1.0.4"
   flutter_local_notifications:
     dependency: "direct main"
     description:
       name: flutter_local_notifications
       url: "https://pub.dartlang.org"
     source: hosted
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
     version: "1.0.0"
   flutter_markdown:
     dependency: "direct main"
@@ -308,7 +351,11 @@ packages:
       name: flutter_markdown
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "0.6.4"
+=======
+    version: "0.6.8"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   flutter_page_indicator:
     dependency: transitive
     description:
@@ -316,6 +363,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.3"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.11"
   flutter_secure_storage:
     dependency: "direct main"
     description:
@@ -329,14 +383,22 @@ packages:
       name: flutter_speed_dial
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "4.2.0"
+=======
+    version: "4.4.0"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   flutter_spinkit:
     dependency: "direct main"
     description:
       name: flutter_spinkit
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "5.0.0"
+=======
+    version: "5.1.0"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   flutter_staggered_animations:
     dependency: "direct main"
     description:
@@ -375,13 +437,27 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.0"
+<<<<<<< HEAD
+=======
+  focused_menu:
+    dependency: "direct main"
+    description:
+      name: focused_menu
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.5"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   font_awesome_flutter:
     dependency: "direct main"
     description:
       name: font_awesome_flutter
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "9.1.0"
+=======
+    version: "9.2.0"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   global_configuration:
     dependency: "direct main"
     description:
@@ -395,14 +471,22 @@ packages:
       name: google_fonts
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "1.1.0"
+=======
+    version: "1.1.2"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   html:
     dependency: "direct main"
     description:
       name: html
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "0.14.0+4"
+=======
+    version: "0.15.0"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   http:
     dependency: "direct main"
     description:
@@ -417,6 +501,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.4"
+  image_cropper:
+    dependency: "direct main"
+    description:
+      name: image_cropper
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.4.1"
+  image_picker:
+    dependency: "direct main"
+    description:
+      name: image_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.5+3"
   intl:
     dependency: transitive
     description:
@@ -438,6 +536,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.1"
+  lints:
+    dependency: "direct dev"
+    description:
+      name: lints
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   localstorage:
     dependency: "direct main"
     description:
@@ -465,14 +570,18 @@ packages:
       name: markdown
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "4.0.0"
+=======
+    version: "4.0.1"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   matcher:
     dependency: transitive
     description:
       name: matcher
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.12.10"
+    version: "0.12.11"
   meta:
     dependency: transitive
     description:
@@ -494,6 +603,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.0"
+  package_info:
+    dependency: "direct main"
+    description:
+      name: package_info
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.2"
   path:
     dependency: transitive
     description:
@@ -507,7 +623,11 @@ packages:
       name: path_drawing
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "0.5.1"
+=======
+    version: "0.5.1+1"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   path_parsing:
     dependency: transitive
     description:
@@ -528,14 +648,18 @@ packages:
       name: pedantic
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.9.0"
+    version: "1.11.1"
   petitparser:
     dependency: transitive
     description:
       name: petitparser
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "4.2.0"
+=======
+    version: "4.1.0"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   photo_view:
     dependency: "direct main"
     description:
@@ -556,14 +680,22 @@ packages:
       name: plugin_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "2.0.1"
+=======
+    version: "2.0.2"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   pointycastle:
     dependency: transitive
     description:
       name: pointycastle
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "1.0.2"
+=======
+    version: "2.0.1"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   provider:
     dependency: "direct main"
     description:
@@ -577,7 +709,7 @@ packages:
       name: rsa_pkcs
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.3"
+    version: "1.1.4"
   rxdart:
     dependency: transitive
     description:
@@ -591,7 +723,7 @@ packages:
       name: scrollable_positioned_list
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.7"
+    version: "0.1.10"
   settings_ui:
     dependency: "direct main"
     description:
@@ -612,7 +744,7 @@ packages:
       name: shared_preferences_macos
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.0.1+10"
+    version: "0.0.1+11"
   shared_preferences_platform_interface:
     dependency: transitive
     description:
@@ -659,14 +791,14 @@ packages:
       name: sqflite
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.3.1+1"
+    version: "1.3.2+4"
   sqflite_common:
     dependency: transitive
     description:
       name: sqflite_common
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2+1"
+    version: "1.0.3+3"
   stack_trace:
     dependency: transitive
     description:
@@ -694,21 +826,33 @@ packages:
       name: syncfusion_flutter_calendar
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "19.2.55"
+=======
+    version: "19.3.59"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "19.2.55"
+=======
+    version: "19.3.59"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   syncfusion_flutter_datepicker:
     dependency: transitive
     description:
       name: syncfusion_flutter_datepicker
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "19.2.55"
+=======
+    version: "19.3.59"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   synchronized:
     dependency: transitive
     description:
@@ -729,7 +873,11 @@ packages:
       name: test_api
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "0.4.2"
+=======
+    version: "0.4.3"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   timeago:
     dependency: "direct main"
     description:
@@ -743,7 +891,11 @@ packages:
       name: timezone
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "0.7.0"
+=======
+    version: "0.8.0"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   transformer_page_view:
     dependency: transitive
     description:
@@ -764,21 +916,33 @@ packages:
       name: url_launcher
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "6.0.9"
+=======
+    version: "6.0.10"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   url_launcher_linux:
     dependency: transitive
     description:
       name: url_launcher_linux
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "2.0.1"
+=======
+    version: "2.0.2"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   url_launcher_macos:
     dependency: transitive
     description:
       name: url_launcher_macos
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "2.0.1"
+=======
+    version: "2.0.2"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   url_launcher_platform_interface:
     dependency: transitive
     description:
@@ -792,14 +956,22 @@ packages:
       name: url_launcher_web
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "2.0.2"
+=======
+    version: "2.0.5"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   url_launcher_windows:
     dependency: transitive
     description:
       name: url_launcher_windows
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "2.0.1"
+=======
+    version: "2.0.2"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   uuid:
     dependency: transitive
     description:
@@ -827,21 +999,35 @@ packages:
       name: vector_math
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "2.1.0"
+=======
+    version: "2.1.1"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   webview_flutter:
     dependency: "direct main"
     description:
       name: webview_flutter
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "2.0.12"
+=======
+    version: "2.0.13"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   xml:
     dependency: transitive
     description:
       name: xml
       url: "https://pub.dartlang.org"
     source: hosted
+<<<<<<< HEAD
     version: "5.2.0"
 sdks:
   dart: ">=2.13.0 <3.0.0"
+=======
+    version: "5.1.2"
+sdks:
+  dart: ">=2.14.0 <3.0.0"
+>>>>>>> 6140a43c5cfad26c8588c88aa5c519328d52a314
   flutter: ">=2.0.0"
