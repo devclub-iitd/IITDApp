@@ -26,7 +26,7 @@ void rebuildAllChildren(BuildContext context) {
   (context as Element).visitChildren(rebuild);
 }
 
-var avimage = 'assets/images/origami.png'; //assets/images/udaigiri_logo.jpg
+var avimage = 'assets/images/origami.png'; 
 
 class SettingsScreen extends StatefulWidget {
   static const String routeName = '/settings';
@@ -75,7 +75,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       'Light': ThemeType.Light,
     };
     var avatars = {
-      'cosmos': 'assets/images/cosmos.png', //avimage=
+      'cosmos': 'assets/images/cosmos.png', 
       'equations': 'assets/images/equations.png',
       'football': 'assets/images/football.png',
       'origami': 'assets/images/origami.png',
@@ -111,8 +111,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   : Colors.purple,
               child: ListTile(
                 leading: CircleAvatar(
-                  /*backgroundImage: CachedNetworkImageProvider(
-                      'https://www.nacdnet.org/wp-content/uploads/2016/06/person-placeholder.jpg'),*/
+                  
                   backgroundImage: AssetImage(avimage),
                 ),
                 title: Text(
@@ -149,16 +148,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     },
                   ),
                   CustomDivider(),
-                  /*ListTile(
-                    leading: Icon(
-                      Icons.apps,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.purpleAccent
-                          : Colors.purple,
-                    ),
-                    title: Text('Change Course Details'),
-                    trailing: Icon(Icons.keyboard_arrow_right),
-                  ),*/
+                  
                   if (currentUser != null) CustomDivider(),
                   if (currentUser != null)
                     ListTile(
@@ -191,11 +181,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
               //defaultValue: defaultsForKey[commonKeys[
               //1]], //Provider.of<ThemeModel>(context,listen:false).themeType,
               onChange: (value) {
+                setState(() {});
                 //Provider.of<ThemeModel>(context, listen: false)
                 //.toggleTheme(value);
+                onPressed: () {};
                 print(value);
                 avimage = value;
                 print(avimage);
+                onToggle: () {};
+                setState(() {});
               },
             ),
             SizedBox(
