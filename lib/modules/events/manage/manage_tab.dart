@@ -116,7 +116,7 @@ class _ManageTabState extends State<ManageTab> {
         padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         key: PageStorageKey('manageTab'),
         children: <Widget>[
-          viewAdminButton(),
+          // viewAdminButton(),
           // (currentUser.isSuperAdmin)
           //     ? FlatButton(
           //         color: Colors.indigo[400],
@@ -231,10 +231,19 @@ class _ManageTabState extends State<ManageTab> {
                 );
               } else if (provider.loaded) {
                 var _clubEvents = provider.allEvents
-                    .where((element) => element.eventBody.id == club.id)
+                    .where((element) =>
+                        club != null ? element.eventBody.id == club.id : false)
                     .toList();
+                print(DateTime.now());
                 var _upcomingEvents = _clubEvents
-                    .where((element) => element.endsAt.isAfter(DateTime.now()))
+                    .where(
+                        (element) => element.startsAt.isAfter(DateTime.now()))
+                    .toList();
+                print(_upcomingEvents);
+                var _currentEvents = _clubEvents
+                    .where((element) =>
+                        element.endsAt.isAfter(DateTime.now()) &&
+                        element.startsAt.isBefore(DateTime.now()))
                     .toList();
                 var _pastEvents = _clubEvents
                     .where((element) => element.endsAt.isBefore(DateTime.now()))
@@ -278,24 +287,27 @@ class _ManageTabState extends State<ManageTab> {
                               .withOpacity(0.9),
                           tabs: [
                             Tab(
-                              text: 'Upcoming',
+                              text: 'Past',
                             ),
                             Tab(
-                              text: 'Past',
-                            )
+                              text: 'Current',
+                            ),
+                            Tab(
+                              text: 'Upcoming',
+                            ),
                           ]),
                     ),
                     SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.6,
+                        height: MediaQuery.of(context).size.height * 0.54,
                         child: TabBarView(controller: _controller, children: [
-                          MyEventsList(_upcomingEvents, _refresh),
                           MyEventsList(_pastEvents, _refresh),
+                          MyEventsList(_currentEvents, _refresh),
+                          MyEventsList(_upcomingEvents, _refresh),
                         ]))
                   ],
                 );
                 // return MyEventsList(snapshot.data, _refresh);
               }
-
               return Container(
                   margin: EdgeInsets.all(20),
                   child: Center(

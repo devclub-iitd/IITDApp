@@ -19,24 +19,10 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Icon _icon;
-    // String _toolTip;
-    // if (_event.isStarred) {
-    //   _icon = Icon(Icons.star, color: Colors.amberAccent);
-    //   _toolTip = 'Unstar';
-    // } else {
-    //   _icon = Icon(
-    //     Icons.star_border,
-    //     color: Colors.white,
-    //   );
-    //   _toolTip = 'Star';
-    // }
     return GestureDetector(
       onTap: () async {
-        await Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => EventInfo(_event.eventid)));
+        await Navigator.push(context,
+            MaterialPageRoute(builder: (context) => EventInfo(_event.eventid)));
         _onStarPress();
       },
       child: Container(
@@ -98,17 +84,6 @@ class EventCard extends StatelessWidget {
                         .PRIMARY_TEXT_COLOR,
                     tooltip: 'Add to Calendar',
                   ),
-                  // IconButton(
-                  //   onPressed: () {
-                  //     _event.isStarred = !_event.isStarred;
-                  //     refreshLists(_event);
-                  //     _onStarPress(_event);
-                  //   },
-                  //   icon: _icon,
-                  //   tooltip: _toolTip,
-                  //   splashColor: Colors.transparent,
-                  //   highlightColor: Colors.transparent,
-                  // ),
                   StarButton(_event)
                 ],
               ),

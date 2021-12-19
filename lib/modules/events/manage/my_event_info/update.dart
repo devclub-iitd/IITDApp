@@ -112,7 +112,7 @@ class EventUpdate extends StatelessWidget {
     final client = http.Client();
     try {
       var rq = http.Request(
-          'DELETE', Uri.parse('$uri/api/events/$eventid/removeUpdate'))
+          'POST', Uri.parse('$uri/api/events/$eventid/removeUpdate'))
         ..headers['authorization'] = 'Bearer $token';
       rq.bodyFields = {'updateId': _update.id};
       response = await client.send(rq).then(http.Response.fromStream);

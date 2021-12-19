@@ -44,6 +44,14 @@ void onLoginSuccess(BuildContext context, String newtoken) async {
       Navigator.pop(context);
     }
     Provider.of<LoginStateProvider>(context, listen: false).signIn();
+    final response2 = await http.post("$uri/api/user/updatefcm",
+        headers: {'authorization': 'Bearer $token'},
+        body: {'fcmRegistrationToken': token});
+    print("start");
+    print(token);
+    print(response2.statusCode);
+    print(response2.reasonPhrase);
+    print("end");
   } else {
     print('Could not get user info.');
     if (!Provider.of<LoginStateProvider>(context, listen: false).loading) {
@@ -62,7 +70,6 @@ Future login(BuildContext context, {bool pop = true}) async {
   var clientId = '5f7ca56f01cb380034260a02';
   var secret =
       'o8ggsY3EeNeCdl0U3izDF1LvR0cU33zopJeFHltapvle8bBChvzHT5miRN23o5v0';
-
   try {
     print('trying old token');
     print(oldToken);

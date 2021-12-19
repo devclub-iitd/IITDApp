@@ -40,22 +40,6 @@ class EventsTab extends StatelessWidget {
   final TabController _controller;
 
   EventsTab(this._controller);
-
-//   @override
-//   State<StatefulWidget> createState() {
-//     return EventsTabState();
-//   }
-// }
-
-// class EventsTabState extends State<EventsTab> {
-//   TabController _controller;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _controller = widget._controller;
-//   }
-
   @override
   Widget build(BuildContext context) {
     // return ChangeNotifierProvider<EventsTabProvider>(
@@ -65,38 +49,39 @@ class EventsTab extends StatelessWidget {
     //         // future: a,
     //         // builder: (context, snapshot) {
     //         builder: (context) {
-          return Consumer<EventsTabProvider>(
-            builder: (context, provider, child) {
-              if (provider.error) {
-                // print(snapshot.data);
-                return TabBarView(
-                  controller: _controller,
-                  children: [
-                    errorMessage(context),
-                    errorMessage(context),
-                    errorMessage(context),
-                  ],
-                );
-              } else if (provider.loaded) {
-                return TabBarView(
-                  controller: _controller,
-                  children: [
-                    EventsPage('TODAY'),
-                    EventsPage('TOMORROW'),
-                    EventsPage('UPCOMING'),
-                  ],
-                );
-              }
-              return TabBarView(
-                controller: _controller,
-                children: [
-                  loadingIcon(context),
-                  loadingIcon(context),
-                  loadingIcon(context),
-                ],
-              );
-            },
+    return Consumer<EventsTabProvider>(
+      builder: (context, provider, child) {
+        if (provider.error) {
+          // print(snapshot.data);
+          return TabBarView(
+            controller: _controller,
+            children: [
+              errorMessage(context),
+              errorMessage(context),
+              errorMessage(context),
+            ],
           );
-        // }));
+        } else if (provider.loaded) {
+          return TabBarView(
+            controller: _controller,
+            children: [
+              EventsPage('TODAY'),
+              EventsPage('TOMORROW'),
+              EventsPage('UPCOMING'),
+            ],
+          );
+        }
+        return TabBarView(
+          controller: _controller,
+          children: [
+            loadingIcon(context),
+            loadingIcon(context),
+            loadingIcon(context),
+          ],
+        );
+        return null;
+      },
+    );
+    // }));
   }
 }

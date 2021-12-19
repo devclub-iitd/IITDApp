@@ -68,7 +68,8 @@ import 'package:flutter/material.dart';
 // const String url = 'http://192.168.43.251:5000';
 // const String url = 'http://192.168.180.77:5000';
 // const String url = 'https://campusserver2.herokuapp.com/';
-const String uri = 'https://iitd-connect-server.herokuapp.com';
+// const String uri = 'https://iitd-connect-server.herokuapp.com';
+const String uri = 'https://iitdconnect-server.devclub.in';
 
 // ignore: always_declare_return_types
 // PackageInfo.fromPlatform().then((PackageInfo packageInfo) {

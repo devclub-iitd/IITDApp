@@ -49,6 +49,7 @@ class RecentsSections extends StatelessWidget {
         )
       ];
       if (news.displayedData.data.isNotEmpty) {
+        print(news.displayedData.data);
         children = List.generate(
             NewsProvider.itemsPerPage > news.displayedData.data.length
                 ? news.displayedData.data.length

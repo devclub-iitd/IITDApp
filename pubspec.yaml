@@ -31,7 +31,7 @@ dependencies:
   pedantic: ^1.8.0
   http: #^0.13.3
   flutter_calendar_carousel: ^2.0.2
-  location: #^4.3.0
+  location:
   flutter_staggered_animations: ^1.0.0
   # google_fonts:
   font_awesome_flutter: ^9.1.0
