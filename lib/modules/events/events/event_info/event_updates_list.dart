@@ -11,7 +11,7 @@ import 'dart:convert';
 import './updates_class.dart';
 import './update.dart';
 
-Future<List<Update>> getUpdates(String eventid) async {
+Future<List<dynamic>> getUpdates(String eventid) async {
   final response = await http.get('$uri/api/events/$eventid',
       headers: {'authorization': 'Bearer $token'});
 
@@ -23,6 +23,7 @@ Future<List<Update>> getUpdates(String eventid) async {
       var update = Update.fromJson(parsedJson['event']['updates'][i]);
       updateList.add(update);
     }
+    print(updateList);
     return updateList;
   } else {
     throw Exception('Failed');
@@ -41,7 +42,7 @@ class EventUpdatesList extends StatefulWidget {
 }
 
 class EventUpdatesListState extends State<EventUpdatesList> {
-  Future<List<Update>> _updates;
+  Future<List<dynamic>> _updates;
   String eventid;
 
   @override
@@ -66,7 +67,7 @@ class EventUpdatesListState extends State<EventUpdatesList> {
             future: _updates,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                List<Update> upd = snapshot.data;
+                List<dynamic> upd = snapshot.data;
                 if (upd.isEmpty) {
                   return Container(
                     margin: EdgeInsets.all(25),
@@ -91,6 +92,7 @@ class EventUpdatesListState extends State<EventUpdatesList> {
                   );
                 }
               } else if (snapshot.hasError) {
+                print(snapshot);
                 return Center(
                   child: Text(
                     'Some Error Occured',

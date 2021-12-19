@@ -25,7 +25,7 @@ class EventUpdatesList extends StatefulWidget {
 class _EventUpdateList extends State<EventUpdatesList> {
   // List<Update> _updates;
   String id;
-  Future<List<Update>> _updates;
+  Future<List<dynamic>> _updates;
 
   @override
   void initState() {
@@ -34,7 +34,7 @@ class _EventUpdateList extends State<EventUpdatesList> {
     _updates = getUpdates(id);
   }
 
-  Future<List<Update>> getUpdates(String eventid) async {
+  Future<List<dynamic>> getUpdates(String eventid) async {
     print('getting updates');
     final response = await http.get('$uri/api/events/$eventid',
         headers: {'authorization': 'Bearer $token'});
@@ -75,7 +75,7 @@ class _EventUpdateList extends State<EventUpdatesList> {
             builder: (context, snapshot) {
               if (snapshot.hasData &&
                   snapshot.connectionState == ConnectionState.done) {
-                List<Update> upd = snapshot.data;
+                List<dynamic> upd = snapshot.data;
                 if (upd.isEmpty) {
                   return Container(
                     margin: EdgeInsets.all(25),

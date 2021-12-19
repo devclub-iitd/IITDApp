@@ -36,7 +36,6 @@ class _AddUpdateState extends State<AddUpdate> {
   }
 
   Future<Null> addUpdateRequest(String eventid, Update update) async {
-    print('adding event');
     enabled = false;
     hint = 'Adding Update. Please Wait...';
     setState(() {});
@@ -45,6 +44,7 @@ class _AddUpdateState extends State<AddUpdate> {
     enabled = true;
     hint = 'Add an update...';
     setState(() {});
+    print("added");
     print(response.statusCode);
     if (response.statusCode == 200) {
       _onSubmit();

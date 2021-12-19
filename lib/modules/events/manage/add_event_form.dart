@@ -21,38 +21,70 @@ import 'package:validators/validators.dart';
 import 'package:http/http.dart' as http;
 // import 'dart:convert';
 import 'dart:async';
-import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:image_picker/image_picker.dart';
-// import 'package:image_cropper/image_cropper.dart';
-// import 'package:firebase_storage/firebase_storage.dart';
 import 'package:path/path.dart';
-
+import 'package:async/async.dart';
+import 'dart:convert';
 import '../events/event_class.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:math';
 
 Future<void> addEventRequest(Event event, BuildContext context) async {
-  print("hello");
-  final response = await http.post('$uri/api/events',
-      headers: {'authorization': 'Bearer $token'}, body: event.toMap());
+  if (event.eventImage == null) {
+    var ok = Random();
+    var bytes = await rootBundle.load('assets/images/null.png');
+    String temp = (await getTemporaryDirectory()).path;
+    event.eventImage = File('$temp/imaag' +
+        ok.nextInt(1000).toString() +
+        ok.nextInt(1000).toString() +
+        ok.nextInt(1000).toString() +
+        '.png');
+    await event.eventImage.writeAsBytes(
+        bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes));
+  }
+  print("start");
   print(event.toMap());
+  var stream =
+      http.ByteStream(DelegatingStream.typed(event.eventImage.openRead()));
+  var length = await event.eventImage.length();
+  var request = http.MultipartRequest("POST", Uri.parse('$uri/api/events'));
+  var multipartFile = http.MultipartFile('eventImage', stream, length,
+      filename: basename(event.eventImage.path));
+  request.files.add(multipartFile);
+
+  // final response = await http.post(
+  //   '$uri/api/events',
+  //   headers: {'authorization': 'Bearer $token'},
+  //   body: event.toMap(),
+  // );
+
+  // var responseData = json.decode(response.body);
+  // var id = responseData["data"]["_id"];
+
+  List<int> imageBytes = event.eventImage.readAsBytesSync();
+  String base64image = base64.encode(imageBytes);
+  request.fields['name'] = event.eventName;
+  request.fields['about'] = event.about;
+  request.fields['startDate'] = event.startsAt.toIso8601String() + 'Z';
+  request.fields['endDate'] = event.endsAt.toIso8601String() + 'Z';
+  request.fields['venue'] = event.venue;
+  request.fields['body'] = event.eventBody.id;
+  // request.fields['eventImage'] = base64image;
+  request.headers['authorization'] = 'Bearer $token';
+
+  final response = await request.send();
+  print(response.statusCode);
+  response.stream.transform(utf8.decoder).listen((value) {
+    print(value);
+  });
+
   if (response.statusCode == 200) {
     await Provider.of<EventsTabProvider>(context, listen: false).getData();
-    // var parsedJson = json.decode(response.body);
-    // if (parsedJson['message'] == 'Event Created Successfully') {
-    // Navigator.popUntil(
-    //     context, ModalRoute.withName('/events'));
-
-    //Fix this to use named routes
     var count = 0;
     Navigator.of(context).popUntil((_) => count++ >= 2);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text('Event Added'),
     ));
-    // } else {
-    //   Navigator.pop(context);
-    //   scaffoldKey.currentState.showSnackBar(SnackBar(
-    //     content: Text('Cannot add event. Try Again'),
-    //   ));
-    // }
   } else {
     Navigator.pop(context);
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -72,6 +104,8 @@ class EventForm extends StatefulWidget {
 class _EventFormState extends State<EventForm> {
   String _eventName;
   // String _eventBody;
+  File img;
+  // String imgpath;
   String _venue;
   UClub selectedClub;
   UClub club;
@@ -101,23 +135,21 @@ class _EventFormState extends State<EventForm> {
     }
   }
 
-  File image;
   Future pickImage(int crr) async {
     try {
-      print("hello");
-      final image = await ImagePicker.pickImage(
+      print("picking image");
+      var image = await ImagePicker.pickImage(
           source: (crr == 0 ? ImageSource.camera : ImageSource.gallery));
-      if (image == null) return;
+      if (image == null) {
+        return null;
+      }
       final perm = File(image.path);
       // final perm = await Perm(image.path);
-      setState(() => this.image = perm);
-      upload();
+      setState(() => {img = perm});
     } on PlatformException catch (e) {
       print('failed to pick img $e');
     }
   }
-
-  void upload() {}
 
   @override
   Widget build(BuildContext context) {
@@ -340,33 +372,6 @@ class _EventFormState extends State<EventForm> {
                 }
               },
             ),
-            // TextFormField(
-            //   decoration: InputDecoration(
-            //       alignLabelWithHint: true,
-            //       labelText: 'Image Link',
-            //       labelStyle: TextStyle(
-            //           color: Provider.of<ThemeModel>(context, listen: false)
-            //               .theme
-            //               .PRIMARY_TEXT_COLOR
-            //               .withOpacity(0.5)),
-            //       helperText: ''),
-            //   keyboardType: TextInputType.multiline,
-            //   maxLines: null,
-            //   style: TextStyle(
-            //       color: Provider.of<ThemeModel>(context)
-            //           .theme
-            //           .PRIMARY_TEXT_COLOR),
-            //   onSaved: (text) {
-            //     _imageLink = text;
-            //   },
-            //   validator: (text) {
-            //     if (text.isEmpty || isURL(text)) {
-            //       return null;
-            //     } else {
-            //       return 'Not a valid URL';
-            //     }
-            //   },
-            // ),
             Row(
               children: [
                 Container(
@@ -458,9 +463,9 @@ class _EventFormState extends State<EventForm> {
                   margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
                   height: 150,
                   width: 200,
-                  child: image != null
+                  child: img != null
                       ? Image.file(
-                          image,
+                          img,
                         )
                       : Image.asset(
                           'assets/images/null.png',
@@ -506,16 +511,12 @@ class _EventFormState extends State<EventForm> {
                         isBodySub: false,
                         isStarred: false,
                         imageLink: _imageLink,
+                        eventImage: img,
                       );
-                      // Scaffold.of(context).showSnackBar(SnackBar(
-                      //   duration: Duration(minutes: 5),
-                      //   content: Text("Adding Event"),
-                      // ));
-                      print("hello");
                       unawaited(showLoading(context));
                       await addEventRequest(ev, context);
-                      Navigator.popUntil(context,
-                          ModalRoute.withName(Navigator.defaultRouteName));
+                      // Navigator.popUntil(context,
+                      //     ModalRoute.withName(Navigator.defaultRouteName));
                     }
                   },
                   child: Text(
