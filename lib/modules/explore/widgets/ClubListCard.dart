@@ -14,9 +14,12 @@ class _ClubListCardState extends State<ClubListCard> {
   Widget build(BuildContext context) {
     return ListTile(
       leading: ClipOval(
-        child: Image.asset('assets/images/devCLogo.png'),
+        //child: Image.asset('assets/images/ankahi.jpeg'),
+        child: Image.asset(widget.data['image']),
+        
       ),
-      title: Text(widget.data['name'], style: TextStyle(fontSize: 20)),
+      title: Text(widget.data['name'], style: TextStyle(fontSize: 20)),//name
+      //title: Text(widget.data['image'], style: TextStyle(fontSize: 20)),
       subtitle: Text(widget.data['motto'], style: TextStyle(fontSize: 16)),
       onTap: () {
         Navigator.push(
