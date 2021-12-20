@@ -14,6 +14,10 @@ void getAllEvents(
   if (response.statusCode != 200) {
     return;
   }
+  if (type == 0) {
+    print(
+        'Starred Events Data From Server is ${jsonDecode(response.body)["data"]}');
+  }
   await getEventsFromResponse(
       jsonDecode(response.body)['data']
           [type == 0 ? 'staredEvents' : 'reminders'],
@@ -80,6 +84,10 @@ Future<void> getEventsFromResponse(
   });
   await rems.forEach((data) async {
     var item = prefs.getString('ser ' + data['_id']);
+    if (data['_id'] == '61bf10d32c062cd0a214c137') {
+      print('this is the event id');
+      print(item);
+    }
     serKeys.remove('ser ' + data['_id']);
     print('ok type $type');
     item = item != null ? item.substring(4) : item;
@@ -99,6 +107,8 @@ Future<void> getEventsFromResponse(
           if (!equal) {
             print(
                 'the given event is not equal to its counterpart ${data2.title}');
+            print(data2);
+            print(data);
             getEventObject(data, item, type);
           }
         }
@@ -188,6 +198,7 @@ Future<void> getEventObject(var data, var eventId, var type) async {
   event.title = data['name'];
   /**** Uncomment the following lines once the backend has been updated ****/
   event.location = data['venue'];
+  print(data);
   event.attendees = getAttendeeListFromList(data['participants']);
   if (type == 1) {
     event.description = data['description'];

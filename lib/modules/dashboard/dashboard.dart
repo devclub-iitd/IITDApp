@@ -1,5 +1,5 @@
-import 'package:IITDAPP/modules/attendance/data/attendanceModel.dart';
-import 'package:IITDAPP/modules/attendance/data/attendanceProvider.dart';
+// import 'package:IITDAPP/modules/attendance/data/attendanceModel.dart';
+// import 'package:IITDAPP/modules/attendance/data/attendanceProvider.dart';
 import 'package:IITDAPP/modules/dashboard/data/currentTabProvider.dart';
 import 'package:IITDAPP/modules/dashboard/data/dashboardAlerts.dart';
 import 'package:IITDAPP/modules/dashboard/data/eventsProvider.dart';
@@ -29,7 +29,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
   TabController _tabController;
   List<Tab> tabList = [];
   List<List<dynamic>> tabData = [[], [], []];
-  TabDataProvider<AttendanceProvider> atdp;
+  // TabDataProvider<AttendanceProvider> atdp;
   TabDataProvider<NewsProvider<RecentNews>> ntdp;
   TabDataProvider<EventsProvider> etdp;
   CurrentTabProvider ctp;
@@ -42,20 +42,20 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
       ctp = CurrentTabProvider();
       dashboardAlerts = DashboardAlerts();
       eventsProvider = EventsProvider();
-      _tabController = TabController(vsync: this, length: 3);
+      _tabController = TabController(vsync: this, length: 2);
       _tabController.addListener(() {
         // print(_tabController.index);
         ctp.setCurrent(_tabController.index);
         print('set current ${_tabController.index}');
         if (_tabController.previousIndex != null) {
           switch (_tabController.previousIndex) {
-            case 0:
-              atdp.refreshAlerts();
-              break;
-            case 1:
+            // case 0:
+            //   atdp.refreshAlerts();
+            //   break;
+            case 1 - 1:
               etdp.refreshAlerts();
               break;
-            case 2:
+            case 2 - 1:
               ntdp.refreshAlerts();
               break;
             default:
@@ -69,9 +69,9 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
   @override
   void dispose() {
     print('disposing dashboard');
-    if (atdp != null) {
-      atdp.dispose();
-    }
+    // if (atdp != null) {
+    //   atdp.dispose();
+    // }
     if (etdp != null) {
       etdp.dispose();
     }
@@ -86,19 +86,20 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
 
   void initializeTabs(context) {
     tabList.clear();
-    if (atdp == null) {
-      atdp = (TabDataProvider<AttendanceProvider>(
-          limit: 4,
-          cnp: Provider.of<AttendanceProvider>(context, listen: false),
-          getCacheData: (AttendanceProvider item) => item.data,
-          da: dashboardAlerts,
-          filter: (List<AttendanceModel> items) => items
-              .where((element) =>
-                  element.daysPresent /
-                      (element.daysAbsent + element.daysPresent) <
-                  Provider.of<AttendanceProvider>(context, listen: false)
-                      .minimumAttendance)
-              .toList()));
+    if (true) {
+      // if (atdp == null) {
+      // atdp = (TabDataProvider<AttendanceProvider>(
+      //     limit: 4,
+      //     cnp: Provider.of<AttendanceProvider>(context, listen: false),
+      //     getCacheData: (AttendanceProvider item) => item.data,
+      //     da: dashboardAlerts,
+      //     filter: (List<AttendanceModel> items) => items
+      //         .where((element) =>
+      //             element.daysPresent /
+      //                 (element.daysAbsent + element.daysPresent) <
+      //             Provider.of<AttendanceProvider>(context, listen: false)
+      //                 .minimumAttendance)
+      //         .toList()));
       etdp = (TabDataProvider<EventsProvider>(
         limit: 4,
         cnp: eventsProvider,
@@ -111,7 +112,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
           da: dashboardAlerts,
           limit: 10));
     }
-    tabList.add(Tab(child: TabHead<AttendanceProvider>(title: 'Attendance')));
+    // tabList.add(Tab(child: TabHead<AttendanceProvider>(title: 'Attendance')));
     tabList.add(Tab(
         child: TabHead<EventsProvider>(
       title: 'Events',
@@ -143,7 +144,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
           return Future.wait([
             Provider.of<NewsProvider<RecentNews>>(context, listen: false)
                 .refresh(0),
-            Provider.of<AttendanceProvider>(context, listen: false).fetchData(),
+            // Provider.of<AttendanceProvider>(context, listen: false).fetchData(),
             eventsProvider.getUpcomingEvents()
           ]);
         },
@@ -152,7 +153,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
           child: MultiProvider(
             providers: [
               ChangeNotifierProvider.value(value: eventsProvider),
-              ChangeNotifierProvider.value(value: atdp),
+              // ChangeNotifierProvider.value(value: atdp),
               ChangeNotifierProvider.value(value: etdp),
               ChangeNotifierProvider.value(value: ntdp),
               ChangeNotifierProvider.value(value: ctp),
@@ -209,17 +210,17 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
 
   Widget _getTab(int tabIndex, ScrollController parentScrollController) {
     switch (tabIndex) {
-      case 0:
-        return AttendanceTab(
-            parentScrollController: parentScrollController,
-            tabData: tabData[0]);
-        break;
-      case 1:
+      // case 0:
+      //   return AttendanceTab(
+      //       parentScrollController: parentScrollController,
+      //       tabData: tabData[0]);
+      //   break;
+      case 1 - 1:
         return EventsTab(
             parentScrollController: parentScrollController,
             tabData: tabData[1]);
         break;
-      case 2:
+      case 2 - 1:
         return NewsTab(
             parentScrollController: parentScrollController,
             tabData: tabData[2]);
