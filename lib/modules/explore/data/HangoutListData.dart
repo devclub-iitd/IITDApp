@@ -10,7 +10,7 @@ List<Map> hangoutsList = [
     'name': 'Cafe Coffee Day',
     'comment': 'Serves coffee, cakes and more',
     'note': 'Open from 11:00 to 23:00',
-    'rating': 3.8,
+    'rating': 4.0,
     'image':
         'https://media-cdn.tripadvisor.com/media/photo-s/11/b2/71/6b/a-nice-overall-ambience.jpg'
   },
@@ -18,7 +18,7 @@ List<Map> hangoutsList = [
     'name': 'Amul Cafe',
     'comment': 'Serves Amul Products',
     'note': 'Open from 8:00 to 3:00',
-    'rating': 3.8,
+    'rating': 3.9,
     'image':
         'https://content.jdmagicbox.com/comp/delhi/z3/011pxx11.xx11.170113083022.y6z3/catalogue/amul-cafe-registrar-iit-new-delhi-delhi-coffee-shops-kemiks5i3f.jpg'
   },
@@ -26,29 +26,29 @@ List<Map> hangoutsList = [
     'name': 'Shiru Cafe',
     'comment': 'Free Drinks',
     'note': 'Open from 8:00 to 3:00',
-    'rating': 3.8,
+    'rating': 4.8,
     'image':
-        'https://scontent.fdel17-1.fna.fbcdn.net/v/t1.0-9/47444826_1920290698086829_3395463258587529216_n.jpg?_nc_cat=101&_nc_sid=8bfeb9&_nc_ohc=dNEk0u243lkAX8_WKqJ&_nc_ht=scontent.fdel17-1.fna&oh=642e9d05631a0e42c94d3697de0c215a&oe=5F353A1E'
+        'assets/images/shiru.jpeg'
   },
   {
     'name': 'HPMC Store',
     'comment': 'HPMC store in IITD',
     'note': '',
-    'rating': 3.8,
+    'rating': 3.6,
     'image': 'https://hpmc.in/portal_content/HPMC%20Final%20Logo.png'
   },
   {
     'name': 'Nescafe',
     'comment': '',
     'note': '',
-    'rating': 3.8,
+    'rating': 4.0,
     'image': 'https://blogs.ubc.ca/dominicinindia/files/2012/09/D-Nescafe.jpg'
   },
   {
     'name': 'Staff Canteen',
     'comment': 'Open For All',
     'note': '',
-    'rating': 3.8,
+    'rating': 4.7,
     'image':
         'https://qph.fs.quoracdn.net/main-qimg-9716df72fc0640634a9e7cd2cdaa1c96'
   },
@@ -56,7 +56,7 @@ List<Map> hangoutsList = [
     'name': 'Rajdhani Foods',
     'comment': 'Serves Multi-Cuisine',
     'note': '',
-    'rating': 3.8,
+    'rating': 3.0,
     'image':
         'https://content3.jdmagicbox.com/comp/delhi/j6/011pxx11.xx11.180505105548.e1j6/catalogue/rajdhani-chatkhare-food-hauz-khas-delhi-home-delivery-restaurants-xokptgx3q6.jpg'
   },
@@ -64,28 +64,28 @@ List<Map> hangoutsList = [
     'name': 'Chaayos',
     'comment': '',
     'note': '',
-    'rating': 3.8,
+    'rating': 4.0,
     'image': 'https://pbs.twimg.com/media/DUJgLPlXcAAp4Rk?format=jpg&name=large'
   },
   {
     'name': 'Roopsagar Bakery',
     'comment': 'IITD Bakery',
     'note': '',
-    'rating': 3.8,
+    'rating': 4.6,
     'image': 'https://img4.nbstatic.in/tr:w-500/5b0277acd60180000c8384fc.jpg'
   },
   {
     'name': 'Quiet Kitchen',
     'comment': '',
     'note': '',
-    'rating': 3.8,
+    'rating': 2.9,
     'image': 'https://img4.nbstatic.in/tr:w-500/5cbdb3e7d60180000d7ad0f2.png'
   },
   {
     'name': 'Shadab Cafe',
     'comment': 'near Zanskar Hostel',
     'note': '',
-    'rating': 3.8,
+    'rating': 4.0,
     'image': 'assets/images/masala_mix_food.jpg'
   },
   {
@@ -99,14 +99,14 @@ List<Map> hangoutsList = [
     'name': 'Chai Point',
     'comment': '',
     'note': '',
-    'rating': 3.8,
-    'image': 'assets/images/masala_mix_food.jpg'
+    'rating': 4.0,
+    'image': 'assets/images/chaipoint.jpeg'
   },
   {
     'name': 'Mother Dairy Booth',
     'comment': '',
     'note': '',
-    'rating': 3.8,
+    'rating': 3.7,
     'image':
         'https://content3.jdmagicbox.com/comp/delhi/q3/011pxx11.xx11.121229120836.z8q3/catalogue/safal-mother-dairy-defence-colony-delhi-fruit-vendors-isfkybyfxn.jpg'
   },
@@ -150,10 +150,10 @@ Map hangoutsDetails = {
     'loc':
         'https://www.google.com/maps/place/Amul+Cafe/@28.5449093,77.1898985,17z/data=!4m8!1m2!2m1!1samul+iit+delhi!3m4!1s0x390d1df6f4d3717f:0xfbe464f1c1ada2b9!8m2!3d28.5448431!4d77.191546?hl=en',
     'image':
-        'https://scontent.fdel17-1.fna.fbcdn.net/v/t1.0-9/47444826_1920290698086829_3395463258587529216_n.jpg?_nc_cat=101&_nc_sid=8bfeb9&_nc_ohc=dNEk0u243lkAX8_WKqJ&_nc_ht=scontent.fdel17-1.fna&oh=642e9d05631a0e42c94d3697de0c215a&oe=5F353A1E'
+        'assets/images/shiru.jpeg'
   },
   'HPMC Store': {
-    'about': 'Lorem Ipsum',
+    'about': 'H.P. Horticulture Produce Marketing & Processing Corporation Juice Shop.',
     'phone': '',
     'website': 'https://hpmc.gov.in/',
     'loc':
@@ -161,7 +161,7 @@ Map hangoutsDetails = {
     'image': 'https://hpmc.in/portal_content/HPMC%20Final%20Logo.png'
   },
   'Nescafe': {
-    'about': 'Lorem Impsum',
+    'about': 'The place to enjoy Maggi, coffee, sandwiches and more.',
     'phone': '',
     'website': '',
     'loc':
@@ -222,7 +222,7 @@ Map hangoutsDetails = {
     'website': '',
     'loc':
         'https://www.google.com/maps/place/Shadab+Cafe/@28.5470604,77.1864516,21z/data=!4m8!1m2!2m1!1schaayos+iit+delhi!3m4!1s0x390d1d42fb9211cd:0x37259187a509c7af!8m2!3d28.5471686!4d77.1863379',
-    'image': 'assets/images/masala_mix_food.jpg'
+    'image': 'assets/images/shadab.jpeg'
   },
   'Koolees': {
     'about': 'Koolees Shakes and Ice Creams',
@@ -230,7 +230,7 @@ Map hangoutsDetails = {
     'website': '',
     'loc':
         'https://www.google.com/maps/place/Koolees/@28.5483362,77.1841118,3a,75y,90t/data=!3m8!1e2!3m6!1sAF1QipODhrEABfAzgrLd8HtyX6iYGnmanW9_qx5eYjMt!2e10!3e12!6shttps:%2F%2Flh5.googleusercontent.com%2Fp%2FAF1QipODhrEABfAzgrLd8HtyX6iYGnmanW9_qx5eYjMt%3Dw203-h114-k-no!7i1920!8i1080!4m8!1m2!2m1!1schaayos+iit+delhi!3m4!1s0x390d1df2610d33ab:0xcee0f14dea219558!8m2!3d28.5482842!4d77.1842343',
-    'image': 'assets/images/masala_mix_food.jpg'
+    'image': 'assets/images/koolees.jpeg'
   },
   'Chai Point': {
     'about':
@@ -238,7 +238,7 @@ Map hangoutsDetails = {
     'loc':
         'https://www.google.com/maps/place/Chai+point/@28.5438559,77.1933482,21z/data=!4m12!1m6!3m5!1s0x390d1df15770dce3:0xbb86890ffb8130d9!2sApollo+Pharmacy!8m2!3d28.5458568!4d77.187847!3m4!1s0x390d1d0986f3a585:0x141996188ca40268!8m2!3d28.5438882!4d77.1934082',
     'phone': '+918880141000',
-    'image': 'assets/images/masala_mix_food.jpg'
+    'image': 'assets/images/chaipoint.jpeg'
   },
   'Mother Dairy Booth': {
     'about': 'Mother Dairy Booth & Safal Store',
