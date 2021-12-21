@@ -10,7 +10,7 @@ List<Map> hangoutsList = [
     'name': 'Cafe Coffee Day',
     'comment': 'Serving coffee, cakes and sandwiches',
     'note': 'Open from 11:00 to 23:00',
-    'rating': 3.8,
+    'rating': 4.0,
     'image':
         'https://media-cdn.tripadvisor.com/media/photo-s/11/b2/71/6b/a-nice-overall-ambience.jpg'
   },
@@ -18,7 +18,7 @@ List<Map> hangoutsList = [
     'name': 'Amul Cafe',
     'comment': 'Serves Amul Products',
     'note': 'Open from 8:00 to 3:00',
-    'rating': 3.8,
+    'rating': 3.9,
     'image':
         'https://content.jdmagicbox.com/comp/delhi/z3/011pxx11.xx11.170113083022.y6z3/catalogue/amul-cafe-registrar-iit-new-delhi-delhi-coffee-shops-kemiks5i3f.jpg'
   },
@@ -26,7 +26,7 @@ List<Map> hangoutsList = [
     'name': 'Shiru Cafe',
     'comment': 'Free Drinks',
     'note': 'Open from 8:00 to 3:00',
-    'rating': 3.8,
+    'rating': 4.8,
     'image':
         'https://scontent.fdel17-1.fna.fbcdn.net/v/t1.0-9/47444826_1920290698086829_3395463258587529216_n.jpg?_nc_cat=101&_nc_sid=8bfeb9&_nc_ohc=dNEk0u243lkAX8_WKqJ&_nc_ht=scontent.fdel17-1.fna&oh=642e9d05631a0e42c94d3697de0c215a&oe=5F353A1E'
   },
@@ -34,21 +34,21 @@ List<Map> hangoutsList = [
     'name': 'HPMC Store',
     'comment': 'HPMC store in IITD',
     'note': '',
-    'rating': 3.8,
+    'rating': 3.6,
     'image': 'https://hpmc.in/portal_content/HPMC%20Final%20Logo.png'
   },
   {
     'name': 'Nescafe',
     'comment': '',
     'note': '',
-    'rating': 3.8,
+    'rating': 4.0,
     'image': 'https://blogs.ubc.ca/dominicinindia/files/2012/09/D-Nescafe.jpg'
   },
   {
     'name': 'Staff Canteen',
     'comment': 'Open For All',
     'note': '',
-    'rating': 3.8,
+    'rating': 4.7,
     'image':
         'https://qph.fs.quoracdn.net/main-qimg-9716df72fc0640634a9e7cd2cdaa1c96'
   },
@@ -56,7 +56,7 @@ List<Map> hangoutsList = [
     'name': 'Rajdhani Chatkare Foods',
     'comment': 'Serves Multi-Cuisine',
     'note': '',
-    'rating': 3.8,
+    'rating': 3.0,
     'image':
         'https://content3.jdmagicbox.com/comp/delhi/j6/011pxx11.xx11.180505105548.e1j6/catalogue/rajdhani-chatkhare-food-hauz-khas-delhi-home-delivery-restaurants-xokptgx3q6.jpg'
   },
@@ -64,28 +64,28 @@ List<Map> hangoutsList = [
     'name': 'Chaayos',
     'comment': '',
     'note': '',
-    'rating': 3.8,
+    'rating': 4.0,
     'image': 'https://pbs.twimg.com/media/DUJgLPlXcAAp4Rk?format=jpg&name=large'
   },
   {
     'name': 'Roopsagar Bakery',
     'comment': 'IITD Bakery',
     'note': '',
-    'rating': 3.8,
+    'rating': 4.6,
     'image': 'https://img4.nbstatic.in/tr:w-500/5b0277acd60180000c8384fc.jpg'
   },
   {
     'name': 'Quiet Kitchen',
     'comment': '',
     'note': '',
-    'rating': 3.8,
+    'rating': 2.9,
     'image': 'https://img4.nbstatic.in/tr:w-500/5cbdb3e7d60180000d7ad0f2.png'
   },
   {
     'name': 'Shadab Cafe',
     'comment': 'near Zanskar Hostel',
     'note': '',
-    'rating': 3.8,
+    'rating': 4.0,
     'image': 'assets/images/masala_mix_food.jpg'
   },
   {
@@ -99,14 +99,14 @@ List<Map> hangoutsList = [
     'name': 'Chai Point',
     'comment': '',
     'note': '',
-    'rating': 3.8,
-    'image': 'assets/images/masala_mix_food.jpg'
+    'rating': 4.0,
+    'image': 'assets/images/chaipoint.jpg'
   },
   {
     'name': 'Mother Dairy Booth',
     'comment': '',
     'note': '',
-    'rating': 3.8,
+    'rating': 3.7,
     'image':
         'https://content3.jdmagicbox.com/comp/delhi/q3/011pxx11.xx11.121229120836.z8q3/catalogue/safal-mother-dairy-defence-colony-delhi-fruit-vendors-isfkybyfxn.jpg'
   },
