@@ -100,6 +100,14 @@ String defaultImage =
 
 ApiBaseHelper apiBaseHelper = ApiBaseHelper();
 var defaultScreen = 'Dashboard';
+var avatars = {
+  'cosmos': 'assets/images/cosmos.png',
+  'equations': 'assets/images/equations.png',
+  'football': 'assets/images/football.png',
+  'origami': 'assets/images/origami.png',
+  'scenery': 'assets/images/scenery.png',
+};
+var avImage = avatars['origami'];
 
 Widget getScreenFromTag(var tag) {
   switch (tag) {
