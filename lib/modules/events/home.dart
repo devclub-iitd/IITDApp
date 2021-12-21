@@ -25,7 +25,7 @@ Future<List<List<List<Event>>>> getEvents() async {
   final LocalStorage localStorage = LocalStorage('iitdapp');
   var timeOutFlag = false;
   var returnObj;
-  final response = await http.get('$url/api/events',
+  final response = await http.get('$uri/api/events',
       headers: {'authorization': 'Bearer $token'}).timeout(
     Duration(seconds: 5),
     onTimeout: () async {
@@ -100,7 +100,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       Provider.of<EventsTabProvider>(context, listen: false).getData();
     });
     _controller = TabController(length: 3, vsync: this);
-    _managetabcontroller = TabController(length: 2, vsync: this);
+    _managetabcontroller = TabController(length: 3, vsync: this);
     appBar = CustomAppBar(
       title: Text('$title'),
       height: 2,
@@ -125,13 +125,15 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         label: 'Events',
       ),
     ];
-    if (currentUser.isAdmin) {
+    print(currentUser.isAdmin);
+    if (currentUser.isAdmin || currentUser.isSSAdmin) {
       _tabs.add(ManageTab(_managetabcontroller));
       _navBarItems.add(BottomNavigationBarItem(
         icon: Icon(Icons.edit),
         label: 'Manage',
       ));
     }
+    print(_tabs.length);
   }
 
   @override

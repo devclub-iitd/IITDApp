@@ -52,7 +52,7 @@ class StarButtonState extends State<StarButton> {
     print('Starring Event');
     var timeOutFlag = false;
     final response = await http.post(
-      '$url/api/events/$eventid/star',
+      '$uri/api/events/$eventid/star',
       headers: {'authorization': 'Bearer $token'},
     ).timeout(Duration(seconds: 5), onTimeout: () {
       timeOutFlag = true;

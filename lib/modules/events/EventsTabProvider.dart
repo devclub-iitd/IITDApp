@@ -84,7 +84,7 @@ class EventsTabProvider extends ChangeNotifier {
     // var returnObj;
     var timeOutFlag = false;
     final response = await http.get(
-      '$url/api/body',
+      '$uri/api/body',
       headers: {'authorization': 'Bearer $token'},
     ).timeout(
       Duration(seconds: 5),
@@ -133,7 +133,7 @@ class EventsTabProvider extends ChangeNotifier {
     final LocalStorage localStorage = LocalStorage('iitdapp');
     var timeOutFlag = false;
     var returnObj;
-    final response = await http.get('$url/api/events',
+    final response = await http.get('$uri/api/events',
         headers: {'authorization': 'Bearer $token'}).timeout(
       Duration(seconds: 5),
       onTimeout: () async {

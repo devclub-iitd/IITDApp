@@ -18,6 +18,7 @@ class NewsImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(url);
     return CachedNetworkImage(
       imageUrl: url ?? defaultImage,
       placeholder: (_, s) => SizedShimmer(width: width, height: height),

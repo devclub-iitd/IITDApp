@@ -18,28 +18,29 @@ class AppDrawer extends StatelessWidget {
           DrawerHeader(
             decoration: BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage('assets/images/iitd_building.jpg'),
-                    fit: BoxFit.cover)),
-            child: Positioned(
-                left: 40,
-                child: Text(
-                  'IITD APP',
-                  style: GoogleFonts.montserrat(
-                      fontSize: 30,
-                      color: Color(0xffffffff),
-                      shadows: <Shadow>[
-                        Shadow(
-                          offset: Offset(0, 0),
-                          blurRadius: 3.0,
-                          color: Color.fromARGB(100, 0, 0, 0),
-                        ),
-                        Shadow(
-                          offset: Offset(0, 0),
-                          blurRadius: 3.0,
-                          color: Color.fromARGB(125, 0, 0, 0),
-                        )
-                      ]),
-                )),
+                    image: AssetImage('assets/images/icon.jpg'),
+                    fit: BoxFit.fill)),
+            // child: Container(
+            //     margin: EdgeInsets.fromLTRB(145, 120, 0, 0),
+            //     // color: Colors.red,
+            //     child: Text(
+            //       'IITD APP',
+            //       style: GoogleFonts.montserrat(
+            //           fontSize: 35,
+            //           color: Color(0xffffffff),
+            //           shadows: <Shadow>[
+            //             Shadow(
+            //               offset: Offset(0, 0),
+            //               blurRadius: 3.0,
+            //               color: Color.fromARGB(100, 0, 0, 0),
+            //             ),
+            //             Shadow(
+            //               offset: Offset(0, 0),
+            //               blurRadius: 3.0,
+            //               color: Color.fromARGB(125, 0, 0, 0),
+            //             )
+            //           ]),
+            //     )),
           ),
           _createDrawerItem(
             selected: tag == 'User Dashboard',
@@ -48,24 +49,24 @@ class AppDrawer extends StatelessWidget {
             context: context,
             routeName: Routes.dashboard,
           ),
-          _createDrawerItem(
-            selected: tag == 'Search User',
-            icon: CupertinoIcons.search,
-            text: 'Search User',
-            context: context,
-            routeName: Routes.search,
-          ),
-          Divider(),
+          // _createDrawerItem(
+          //   selected: tag == 'Search User',
+          //   icon: CupertinoIcons.search,
+          //   text: 'Search User',
+          //   context: context,
+          //   routeName: Routes.search,
+          // ),
+          const Divider(),
           ListTile(
             title: Text('Around'),
             onTap: () {},
           ),
-          _createDrawerItem(
-              selected: tag == 'Courses',
-              icon: Icons.bookmark_border_outlined,
-              text: 'Courses',
-              context: context,
-              routeName: Routes.coursesPage),
+          // _createDrawerItem(
+          //     selected: tag == 'Courses',
+          //     icon: Icons.bookmark_border_outlined,
+          //     text: 'Courses',
+          //     context: context,
+          //     routeName: Routes.coursesPage),
           _createDrawerItem(
               selected: tag == 'Events',
               icon: Icons.emoji_events_outlined,
@@ -80,7 +81,7 @@ class AppDrawer extends StatelessWidget {
               context: context,
               routeName: Routes.calendar,
               loginRequired: false),
-          Divider(),
+          const Divider(),
           ListTile(
             title: Text(
               'Utility',
@@ -101,21 +102,21 @@ class AppDrawer extends StatelessWidget {
               text: 'Quick Links',
               context: context,
               routeName: Routes.quickLinks),
-          Divider(),
-          ListTile(
-            title: Text(
-              'Discussion Forum',
-            ),
-            onTap: () {},
-          ),
-          _createDrawerItem(
-            selected: tag == 'Chats',
-            icon: CupertinoIcons.chat_bubble_2,
-            text: 'Chats',
-            context: context,
-            routeName: Routes.discussionForum,
-          ),
-          Divider(),
+          // Divider(),
+          // ListTile(
+          //   title: Text(
+          //     'Discussion Forum',
+          //   ),
+          //   onTap: () {},
+          // ),
+          // _createDrawerItem(
+          //   selected: tag == 'Chats',
+          //   icon: CupertinoIcons.chat_bubble_2,
+          //   text: 'Chats',
+          //   context: context,
+          //   routeName: Routes.discussionForum,
+          // ),
+          const Divider(),
           ListTile(
             title: Text('Discover'),
             onTap: () {},

@@ -101,36 +101,37 @@ class AboutScreen extends StatelessWidget {
                                 ),
                               ),
                               Spacer(),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                                child: IconButton(
-                                  onPressed: () => Navigator.push(
-                                      context,
-                                      PageRouteBuilder(
-                                          transitionDuration:
-                                              Duration(milliseconds: 100),
-                                          transitionsBuilder:
-                                              (BuildContext context,
-                                                  Animation<double> first,
-                                                  Animation<double> second,
-                                                  Widget child) {
-                                            return FadeTransition(
-                                              opacity: first,
-                                              child: child,
-                                            );
-                                          },
-                                          pageBuilder: (BuildContext context,
-                                              Animation<double> first,
-                                              Animation<double> second) {
-                                            return Manage(name);
-                                          })),
-                                  icon: Icon(CupertinoIcons
-                                      .person_crop_circle_badge_exclam),
-                                  highlightColor: Colors.transparent,
-                                  splashColor: Colors.transparent,
-                                  iconSize: 40,
-                                ),
-                              )
+                              // Search Users, Not available in v1
+                              // Container(
+                              //   margin: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                              //   child: IconButton(
+                              //     onPressed: () => Navigator.push(
+                              //         context,
+                              //         PageRouteBuilder(
+                              //             transitionDuration:
+                              //                 Duration(milliseconds: 100),
+                              //             transitionsBuilder:
+                              //                 (BuildContext context,
+                              //                     Animation<double> first,
+                              //                     Animation<double> second,
+                              //                     Widget child) {
+                              //               return FadeTransition(
+                              //                 opacity: first,
+                              //                 child: child,
+                              //               );
+                              //             },
+                              //             pageBuilder: (BuildContext context,
+                              //                 Animation<double> first,
+                              //                 Animation<double> second) {
+                              //               return Manage(name);
+                              //             })),
+                              //     icon: Icon(CupertinoIcons
+                              //         .person_crop_circle_badge_exclam),
+                              //     highlightColor: Colors.transparent,
+                              //     splashColor: Colors.transparent,
+                              //     iconSize: 40,
+                              //   ),
+                              // )
                             ],
                           ),
                           CustomTextDec(),
@@ -238,13 +239,11 @@ class SpeedDialSection extends StatelessWidget {
       return list;
     }
 
-    return Container(
-      child: SpeedDial(
-          heroTag: null,
-          animatedIcon: AnimatedIcons.menu_close,
-          elevation: 5,
-          children: getChildren()),
-    );
+    return SpeedDial(
+        heroTag: null,
+        animatedIcon: AnimatedIcons.menu_close,
+        elevation: 5,
+        children: getChildren());
   }
 }
 
@@ -254,43 +253,41 @@ class LinksSection extends StatelessWidget {
   var urls;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 64.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            FloatingActionButton(
-              heroTag: null,
-              onPressed: () {
-                UrlHandler.launchInBrowser(urls['loc']);
-              },
-              child: Icon(Icons.location_on),
-            ),
-            FloatingActionButton(
-              heroTag: null,
-              onPressed: () {
-                UrlHandler.makePhoneCall(urls['phone']);
-              },
-              child: Icon(Icons.phone),
-            ),
-            FloatingActionButton(
-              heroTag: null,
-              onPressed: () {
-                UrlHandler.launchInBrowser(urls['website']);
-              },
-              child: Center(
-                child: Transform.scale(
-                  scale: 0.5,
-                  child: SvgPicture.asset(
-                    'assets/images/visit_web.svg',
-                    color: Colors.black,
-                  ),
+    return Padding(
+      padding: const EdgeInsets.only(top: 64.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          FloatingActionButton(
+            heroTag: null,
+            onPressed: () {
+              UrlHandler.launchInBrowser(urls['loc']);
+            },
+            child: Icon(Icons.location_on),
+          ),
+          FloatingActionButton(
+            heroTag: null,
+            onPressed: () {
+              UrlHandler.makePhoneCall(urls['phone']);
+            },
+            child: Icon(Icons.phone),
+          ),
+          FloatingActionButton(
+            heroTag: null,
+            onPressed: () {
+              UrlHandler.launchInBrowser(urls['website']);
+            },
+            child: Center(
+              child: Transform.scale(
+                scale: 0.5,
+                child: SvgPicture.asset(
+                  'assets/images/visit_web.svg',
+                  color: Colors.black,
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          )
+        ],
       ),
     );
   }

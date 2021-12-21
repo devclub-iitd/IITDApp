@@ -15,7 +15,7 @@ class EventsProvider with ChangeNotifier {
       notifyListeners();
     }
     try {
-      var response = await apiBaseHelper.get(url + '/api/events/');
+      var response = await apiBaseHelper.get(uri + '/api/events/');
       upcomingEvents = ApiResponse.completed(<Event>[
         ...response['data']['events']
             .map((e) => Event.fromJson(e))

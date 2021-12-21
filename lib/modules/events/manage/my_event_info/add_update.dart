@@ -36,15 +36,15 @@ class _AddUpdateState extends State<AddUpdate> {
   }
 
   Future<Null> addUpdateRequest(String eventid, Update update) async {
-    print('adding event');
     enabled = false;
     hint = 'Adding Update. Please Wait...';
     setState(() {});
-    final response = await http.post('$url/api/events/$eventid/addUpdate',
+    final response = await http.post('$uri/api/events/$eventid/addUpdate',
         headers: {'authorization': 'Bearer $token'}, body: update.toMap());
     enabled = true;
     hint = 'Add an update...';
     setState(() {});
+    print("added");
     print(response.statusCode);
     if (response.statusCode == 200) {
       _onSubmit();

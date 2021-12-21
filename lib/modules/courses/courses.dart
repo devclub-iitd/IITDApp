@@ -52,7 +52,7 @@ class _CoursesScreenState extends State<CoursesScreen>
                 Expanded(
                     child: Container(
                   height: 82,
-                  child: Heading('Your Courses ', 36),
+                  child: Heading('Your Courses', 36),
                 )),
                 Container(
                   height: 80,

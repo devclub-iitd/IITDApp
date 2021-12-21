@@ -1,5 +1,7 @@
 import 'package:IITDAPP/ThemeModel.dart';
+import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 import 'package:IITDAPP/values/Constants.dart';
+import 'package:IITDAPP/modules/settings/SettingsScreen.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,7 +34,7 @@ class UserName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.05,
       child: AutoSizeText(
         currentUser.name ?? 'Unnamed',
@@ -52,11 +54,14 @@ class UserImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Load the avImage from the SettingsHandler
+
     return Container(
       padding: EdgeInsets.all(40),
       child: CircleAvatar(
-        backgroundImage: NetworkImage(
-            'https://www.nacdnet.org/wp-content/uploads/2016/06/person-placeholder.jpg'),
+        /*backgroundImage: NetworkImage(
+            'https://www.nacdnet.org/wp-content/uploads/2016/06/person-placeholder.jpg'),*/
+        backgroundImage: AssetImage(avImage),
         radius: MediaQuery.of(context).size.width / 5,
       ),
     );

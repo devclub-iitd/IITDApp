@@ -35,12 +35,7 @@ class EventAbout extends StatelessWidget {
                 ),
               ),
             ),
-            Center(
-              child: Image.network(
-                _event.imageLink,
-                fit: BoxFit.scaleDown,
-              ),
-            )
+            Center(child: Image.file(_event.eventImage)),
           ],
         ),
       ),

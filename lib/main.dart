@@ -95,6 +95,8 @@ class MyApp extends StatelessWidget {
 initialisePreferences() async {
   var res = await SettingsHandler.getSettingValue(commonKeys[0]);
   defaultScreen = res;
+  res = await SettingsHandler.getSettingValue(commonKeys[3]);
+  avImage = avatars[res];
 }
 
 // ignore: always_declare_return_types

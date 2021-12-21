@@ -3,13 +3,14 @@ import 'package:IITDAPP/modules/settings/widgets/SettingsTextWidgets.dart';
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-var commonKeys = ['defaultScreen', 'theme', 'showNotifications'];
+var commonKeys = ['defaultScreen', 'theme', 'showNotifications', 'avatar'];
 
 var defaultsForKey = {
   commonKeys[0]: 'Dashboard',
   'defaultCalendarView': 'Agenda View',
   'showOtherCalendars': true,
   'theme': 'System',
+  'avatar': 'origami',
   'showNotifications': true,
   'newsItemPerPage': '5',
   'MapMarkerSize': 15.0,
@@ -59,19 +60,21 @@ var indivScreenSettingsData = {
             showArrow: false))
   ],
   'Attendance': [
-    SettingsModel(widgetType: SettingsSliderRow(
+    SettingsModel(
+        widgetType: SettingsSliderRow(
       defaultValue: defaultsForKey['MinimumAttendance'],
       SPkey: 'MinimumAttendance',
       title: 'Minimum Attendance',
       max: 90.0,
       min: 30.0,
-      getTexValue: (value){
+      getTexValue: (value) {
         return '${value.round()}%';
       },
     )),
   ],
   'Map': [
-    SettingsModel(widgetType: SettingsSliderRow(
+    SettingsModel(
+        widgetType: SettingsSliderRow(
       defaultValue: defaultsForKey['MapLabelSize'],
       SPkey: 'MapLabelSize',
       title: 'LabelSize',
@@ -80,7 +83,8 @@ var indivScreenSettingsData = {
       divisions: 10,
       trailing: Icon(Icons.location_on),
     )),
-    SettingsModel(widgetType: SettingsSliderRow(
+    SettingsModel(
+        widgetType: SettingsSliderRow(
       defaultValue: defaultsForKey['MapMarkerSize'],
       SPkey: 'MapMarkerSize',
       title: 'MarkerSize',

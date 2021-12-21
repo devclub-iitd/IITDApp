@@ -9,10 +9,14 @@ void getAllEvents(
     'endDate':
         DateFormat('yyyy-MM-ddTHH:mm:ss').format(endTime.toUtc()) + '.000Z'
   };
-  var response = await http.post('$url/api/calendar/all/',
+  var response = await http.post('$uri/api/calendar/all/',
       headers: {'authorization': 'Bearer $token'}, body: queryParameters);
   if (response.statusCode != 200) {
     return;
+  }
+  if (type == 0) {
+    print(
+        'Starred Events Data From Server is ${jsonDecode(response.body)["data"]}');
   }
   await getEventsFromResponse(
       jsonDecode(response.body)['data']
@@ -30,7 +34,7 @@ Future<int> deleteReminderFromServer(var eventId,
     keys.forEach((element) async {
       if (prefs.getString(element) == 'loc ' + eventId) {
         var res = await http.delete(
-            '$url/api/calendar/reminder/' + element.substring(4),
+            '$uri/api/calendar/reminder/' + element.substring(4),
             headers: {
               'authorization': 'Bearer $token'
             }).timeout(Duration(seconds: 5), onTimeout: () async {
@@ -80,6 +84,10 @@ Future<void> getEventsFromResponse(
   });
   await rems.forEach((data) async {
     var item = prefs.getString('ser ' + data['_id']);
+    if (data['_id'] == '61bf10d32c062cd0a214c137') {
+      print('this is the event id');
+      print(item);
+    }
     serKeys.remove('ser ' + data['_id']);
     print('ok type $type');
     item = item != null ? item.substring(4) : item;
@@ -99,6 +107,8 @@ Future<void> getEventsFromResponse(
           if (!equal) {
             print(
                 'the given event is not equal to its counterpart ${data2.title}');
+            print(data2);
+            print(data);
             getEventObject(data, item, type);
           }
         }
@@ -188,6 +198,7 @@ Future<void> getEventObject(var data, var eventId, var type) async {
   event.title = data['name'];
   /**** Uncomment the following lines once the backend has been updated ****/
   event.location = data['venue'];
+  print(data);
   event.attendees = getAttendeeListFromList(data['participants']);
   if (type == 1) {
     event.description = data['description'];
@@ -289,7 +300,7 @@ Future<String> postReminder(Event ev, bool patch,
     var serverId = await getServerIdFromPrefs(ev.eventId);
     print('to be exec 2');
     response = await http
-        .patch('$url/api/calendar/reminder/' + serverId,
+        .patch('$uri/api/calendar/reminder/' + serverId,
             headers: {'authorization': 'Bearer $token'}, body: body)
         .timeout(Duration(seconds: 5), onTimeout: () async {
       flagTimeout = true;
@@ -298,7 +309,7 @@ Future<String> postReminder(Event ev, bool patch,
   } else {
     try {
       response = await http
-          .post('$url/api/calendar/reminder/',
+          .post('$uri/api/calendar/reminder/',
               headers: {'authorization': 'Bearer $token'}, body: body)
           .timeout(Duration(seconds: 5), onTimeout: () {
         flagTimeout = true;

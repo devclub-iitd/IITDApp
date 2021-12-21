@@ -68,7 +68,8 @@ import 'package:flutter/material.dart';
 // const String url = 'http://192.168.43.251:5000';
 // const String url = 'http://192.168.180.77:5000';
 // const String url = 'https://campusserver2.herokuapp.com/';
-const String url = 'https://iitd-connect-server.herokuapp.com';
+// const String uri = 'https://iitd-connect-server.herokuapp.com';
+const String uri = 'https://iitdconnect-server.devclub.in';
 
 // ignore: always_declare_return_types
 // PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
@@ -87,7 +88,8 @@ String title = 'IITD APP';
 String token;
 bool connectedToInternet = true;
 User currentUser;
-//  User currentUser = User(isAdmin: true,name: 'Riya Sawhney',email: 'cs1200374@iitd.ac.in');
+// User currentUser =
+//     User(isAdmin: true, name: 'Va', email: 'cs1200374@iitd.ac.in');
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 var logoutFunc;
 var loginFunc;
@@ -98,6 +100,14 @@ String defaultImage =
 
 ApiBaseHelper apiBaseHelper = ApiBaseHelper();
 var defaultScreen = 'Dashboard';
+var avatars = {
+  'cosmos': 'assets/images/cosmos.png',
+  'equations': 'assets/images/equations.png',
+  'football': 'assets/images/football.png',
+  'origami': 'assets/images/origami.png',
+  'scenery': 'assets/images/scenery.png',
+};
+var avImage = avatars['origami'];
 
 Widget getScreenFromTag(var tag) {
   switch (tag) {

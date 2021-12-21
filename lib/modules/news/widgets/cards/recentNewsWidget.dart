@@ -11,6 +11,8 @@ import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:provider/provider.dart';
 import 'imageOverlay/text/newsClicks.dart';
 import 'imageOverlay/text/newsSource.dart';
+import 'package:IITDAPP/values/Constants.dart';
+import 'dart:math';
 
 class RecentWidget extends StatelessWidget {
   const RecentWidget({
@@ -63,19 +65,10 @@ class RecentWidget extends StatelessWidget {
             showSnackbarResult(result, parentScaffold);
           },
           child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(5),
-              child: SizedBox(
-                width: (width - 16) * 0.45,
-                child: Hero(
-                  tag: 'r${item.id}',
-                  child: NewsImage(
-                    url: item.imgUrl,
-                    width: (width - 16) * 0.45,
-                    height: (width - 16) * 0.45 * 2 / 3,
-                  ),
-                ),
-              ),
+            Container(
+              width: 10,
+              color: Color((Random().nextDouble() * 0xFFFFFF).toInt())
+                  .withOpacity(1.0),
             ),
             Container(
               height: (width - 16) * 0.45 * 2 / 3,
@@ -162,7 +155,23 @@ class RecentWidget extends StatelessWidget {
                   )
                 ],
               ),
-            )
+            ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: SizedBox(
+                width: (width - 16) * 0.45 - 10,
+                child: Hero(
+                  tag: 'r${item.id}',
+                  child: NewsImage(
+                    url: item.imgUrl,
+                    width: (width - 16) * 0.45,
+                    height: (width - 16) * 0.45 * 2 / 3,
+                  ),
+                ),
+              ),
+            ),
+            // Image.network(item.imgUrl),
+            // Text(item.imgUrl),
           ]),
         ),
       ),

@@ -1,6 +1,6 @@
-import 'package:IITDAPP/modules/attendance/attendance.dart';
-import 'package:IITDAPP/modules/attendance/data/attendanceModel.dart';
-import 'package:IITDAPP/modules/attendance/data/attendanceProvider.dart';
+// import 'package:IITDAPP/modules/attendance/attendance.dart';
+// import 'package:IITDAPP/modules/attendance/data/attendanceModel.dart';
+// import 'package:IITDAPP/modules/attendance/data/attendanceProvider.dart';
 import 'package:IITDAPP/modules/dashboard/data/currentTabProvider.dart';
 import 'package:IITDAPP/modules/dashboard/data/eventsProvider.dart';
 import 'package:IITDAPP/modules/dashboard/data/tabDataProvider.dart';
@@ -144,6 +144,7 @@ class _GeneralTabState extends State<GeneralTab> {
                       ),
                       trailing: Text(
                         widget.trailing(tabData[i]),
+                        // ignore: deprecated_member_use
                         style: TextStyle(color: Theme.of(context).accentColor),
                       ),
                       onTap: () => Navigator.pushReplacementNamed(
@@ -223,38 +224,38 @@ class NewsTab extends StatelessWidget {
   }
 }
 
-class AttendanceTab extends StatelessWidget {
-  final ScrollController parentScrollController;
-  final List<dynamic> tabData;
+// class AttendanceTab extends StatelessWidget {
+//   final ScrollController parentScrollController;
+//   final List<dynamic> tabData;
 
-  const AttendanceTab(
-      {Key key, @required this.parentScrollController, @required this.tabData})
-      : super(key: key);
+//   const AttendanceTab(
+//       {Key key, @required this.parentScrollController, @required this.tabData})
+//       : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    var ap = Provider.of<AttendanceProvider>(context, listen: false);
-    ap.setEntryNumber('2019CS10382');
-    return Consumer<TabDataProvider<AttendanceProvider>>(builder: (_, tdp, c) {
-      return GeneralTab(
-        apiResponse: tdp.data,
-        index: 0,
-        // filter:(List<AttendanceModel> item)=> item.where((am)=>
-        //     (am.daysPresent / (am.daysPresent + am.daysAbsent) )<0.75).toList(),
-        viewed: tdp.viewed,
-        newAlerts: tdp.alerts,
-        parentScrollController: parentScrollController,
-        refresh: ap.fetchData,
-        routeName: Attendance.routeName,
-        subtitle: (AttendanceModel item) => item.abbr,
-        title: (AttendanceModel item) => item.name,
-        tabData: tabData,
-        trailing: (AttendanceModel item) =>
-            (item.daysPresent / (item.daysPresent + item.daysAbsent) * 100)
-                .round()
-                .toString() +
-            '%',
-      );
-    });
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     var ap = Provider.of<AttendanceProvider>(context, listen: false);
+//     ap.setEntryNumber('2019CS10382');
+//     return Consumer<TabDataProvider<AttendanceProvider>>(builder: (_, tdp, c) {
+//       return GeneralTab(
+//         apiResponse: tdp.data,
+//         index: 0,
+//         // filter:(List<AttendanceModel> item)=> item.where((am)=>
+//         //     (am.daysPresent / (am.daysPresent + am.daysAbsent) )<0.75).toList(),
+//         viewed: tdp.viewed,
+//         newAlerts: tdp.alerts,
+//         parentScrollController: parentScrollController,
+//         refresh: ap.fetchData,
+//         routeName: Attendance.routeName,
+//         subtitle: (AttendanceModel item) => item.abbr,
+//         title: (AttendanceModel item) => item.name,
+//         tabData: tabData,
+//         trailing: (AttendanceModel item) =>
+//             (item.daysPresent / (item.daysPresent + item.daysAbsent) * 100)
+//                 .round()
+//                 .toString() +
+//             '%',
+//       );
+//     });
+//   }
+// }

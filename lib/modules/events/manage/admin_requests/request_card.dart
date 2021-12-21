@@ -51,7 +51,7 @@ class ResponseIconsState extends State<ResponseIcons> {
   }
 
   Future<Null> reqeustResponse(String ans) async {
-    final response = await http.post('$url/api',
+    final response = await http.post('$uri/api',
         headers: {'authorization': 'Bearer $token'}, body: {'response': ans});
 
     if (response.statusCode == 200) {

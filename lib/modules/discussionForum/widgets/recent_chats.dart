@@ -68,10 +68,11 @@ class RecentChats extends StatelessWidget {
                           Text(chat.sender.name,
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: Provider.of<ThemeModel>(context)
+                   color: Provider.of<ThemeModel>(context)
                       .theme
                       .PRIMARY_TEXT_COLOR
                       .withOpacity(0.7),//Colors.black
+
                                 fontSize: 15,
                               )),
                           SizedBox(height: 5.0),
@@ -94,7 +95,8 @@ class RecentChats extends StatelessWidget {
                           Text(
                             chat.time,
                             style: TextStyle(
-                              color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,//Colors.grey
+                  color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,//Colors.grey
+
                               fontSize: 15,
                               fontWeight: FontWeight.bold,
                             ),

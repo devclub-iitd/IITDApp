@@ -73,32 +73,25 @@ class HangoutListCard extends StatelessWidget {
                           height: 1.2),
                     ),
                     Expanded(
-                      child: Container(
-//                      color: Colors.red,
-//                      child: Align(
-//                        alignment: Alignment.bottomLeft,
-//                        child: Text(data['comment'],style: TextStyle(color: Colors.lightBlue),),
-//                      ),
-                        child: Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Row(
-                            children: <Widget>[
-                              Text(data['comment'],
-                                  style:
-                                      TextStyle(color: Colors.lightBlueAccent)),
-                              Spacer(),
-                              IconButton(
-                                onPressed: () {
-                                  UrlHandler.launchInBrowser(
-                                      hangoutsDetails[data['name']]['loc']);
-                                },
-                                icon: Icon(
-                                  Icons.location_on,
-                                  color: Color.fromARGB(255, 240, 240, 240),
-                                ),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Row(
+                          children: <Widget>[
+                            Text(data['comment'],
+                                style:
+                                    TextStyle(color: Colors.lightBlueAccent)),
+                            Spacer(),
+                            IconButton(
+                              onPressed: () {
+                                UrlHandler.launchInBrowser(
+                                    hangoutsDetails[data['name']]['loc']);
+                              },
+                              icon: Icon(
+                                Icons.location_on,
+                                color: Color.fromARGB(255, 240, 240, 240),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),

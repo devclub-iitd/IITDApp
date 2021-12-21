@@ -9,6 +9,8 @@ import 'package:IITDAPP/modules/settings/widgets/DarkModeSwitch.dart';
 import 'package:IITDAPP/modules/settings/widgets/SettingsTextWidgets.dart';
 import 'package:IITDAPP/routes/Routes.dart';
 import 'package:IITDAPP/values/Constants.dart';
+import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
+
 //import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 import 'package:provider/provider.dart';
@@ -24,6 +26,8 @@ void rebuildAllChildren(BuildContext context) {
 
   (context as Element).visitChildren(rebuild);
 }
+
+//
 
 class SettingsScreen extends StatefulWidget {
   static const String routeName = '/settings';
@@ -71,6 +75,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       'Dark': ThemeType.Dark,
       'Light': ThemeType.Light,
     };
+
     // ignore: non_constant_identifier_names
     return Scaffold(
       backgroundColor: Provider.of<ThemeModel>(context, listen: true)
@@ -100,15 +105,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   : Colors.purple,
               child: ListTile(
                 leading: CircleAvatar(
-                  backgroundImage: CachedNetworkImageProvider(
-                      'https://www.nacdnet.org/wp-content/uploads/2016/06/person-placeholder.jpg'),
+                  backgroundImage: AssetImage(avImage),
                 ),
                 title: Text(
                   currentUser != null ? currentUser.name : 'Guest',
                   style: TextStyle(fontSize: 17, color: Colors.white),
                 ),
                 trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    launchPasswordChangeScreen(token);
+                  },
                   icon: Icon(
                     Icons.edit,
                     color: Colors.white,
@@ -137,16 +143,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     },
                   ),
                   CustomDivider(),
-                  ListTile(
-                    leading: Icon(
-                      Icons.apps,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.purpleAccent
-                          : Colors.purple,
-                    ),
-                    title: Text('Change Course Details'),
-                    trailing: Icon(Icons.keyboard_arrow_right),
-                  ),
                   if (currentUser != null) CustomDivider(),
                   if (currentUser != null)
                     ListTile(
@@ -170,6 +166,62 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SizedBox(
               height: 25,
             ),
+            SettingsSectionHeading(text: 'Choose An Avatar'),
+            SettingsDropdownTile(
+              lis: avatars,
+              SPkey: commonKeys[3],
+              defaultValue: defaultsForKey[commonKeys[3]],
+              leading: Icon(Icons.account_circle_outlined),
+              text: 'Choose an Avatar',
+              onChange: (value) {
+                setState(() {});
+                //Provider.of<ThemeModel>(context, listen: false)
+                //.toggleTheme(value);
+                onPressed:
+                () {};
+                print(value);
+                avImage = value;
+                print(avImage);
+                onToggle:
+                () {};
+                setState(() {});
+              },
+            ),
+            SizedBox(
+              height: 25,
+            ),
+            /*RaisedButton(  
+                  child: Text("devClogo", style: TextStyle(fontSize: 12),),  
+                  onPressed: (){
+                    avimage='assets/images/devCLogo.png';
+                  },  
+                  color: Colors.white,  
+                  textColor: Colors.black,  
+                  padding: EdgeInsets.all(8.0),  
+                  splashColor: Colors.grey,  
+                ),
+                
+                RaisedButton(  
+                  child: Text("udai_pic", style: TextStyle(fontSize: 12),),  
+                  onPressed: (){
+                    avimage='assets/images/udai_pic.jpeg';
+                  },  
+                  color: Colors.purple,  
+                  textColor: Colors.white,  
+                  padding: EdgeInsets.all(8.0),  
+                  splashColor: Colors.grey,  
+                ),
+                RaisedButton(  
+                  child: Text("map-image", style: TextStyle(fontSize: 12),),  
+                  onPressed: (){
+                    avimage='assets/images/map-image.png';
+                  },  
+                  color: Colors.purple,  
+                  textColor: Colors.white,  
+                  padding: EdgeInsets.all(8.0),  
+                  splashColor: Colors.grey,  
+                ),*/
+
             SettingsSectionHeading(text: 'Theme Settings'),
             SettingsDropdownTile(
               lis: dropdownLis,
@@ -188,6 +240,29 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     onToggle: () {},
                   )),
             ),
+            //start
+            /*SettingsDropdownTile(
+              lis: avatars,
+              SPkey: commonKeys[1],
+              text: 'Change Avatar',
+              defaultValue: defaultsForKey[commonKeys[
+                  1]], //Provider.of<ThemeModel>(context,listen:false).themeType,
+              onChange: (value) {
+                Provider.of<ThemeModel>(context, listen: false)
+                    .toggleTheme(value);
+              },
+               
+        
+              leading: IconButton(
+                  onPressed: () {},
+                  icon: DarkModeSwitch(
+                    Theme.of(context).brightness == Brightness.dark,
+                    onToggle: () {},
+                  )
+                  ),
+            ),*/
+
+            //end
             SizedBox(
               height: 25,
             ),

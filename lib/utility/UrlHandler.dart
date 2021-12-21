@@ -47,7 +47,7 @@ class UrlHandler {
       {String subject = '', String body = ''}) async {
     final params = Uri(
       scheme: 'mailto',
-      path: '$mail',
+      path: mail,
       query: 'subject=$subject&body=$body', //add subject and body here
     );
     var url = params.toString();
