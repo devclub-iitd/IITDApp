@@ -9,6 +9,7 @@ import 'package:IITDAPP/modules/settings/widgets/DarkModeSwitch.dart';
 import 'package:IITDAPP/modules/settings/widgets/SettingsTextWidgets.dart';
 import 'package:IITDAPP/routes/Routes.dart';
 import 'package:IITDAPP/values/Constants.dart';
+import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 
 //import 'package:gradient_app_bar/gradient_app_bar.dart';
 
@@ -26,7 +27,7 @@ void rebuildAllChildren(BuildContext context) {
   (context as Element).visitChildren(rebuild);
 }
 
-var avimage = 'assets/images/origami.png'; 
+//
 
 class SettingsScreen extends StatefulWidget {
   static const String routeName = '/settings';
@@ -74,13 +75,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       'Dark': ThemeType.Dark,
       'Light': ThemeType.Light,
     };
-    var avatars = {
-      'cosmos': 'assets/images/cosmos.png', 
-      'equations': 'assets/images/equations.png',
-      'football': 'assets/images/football.png',
-      'origami': 'assets/images/origami.png',
-      'scenery': 'assets/images/scenery.png',
-    };
 
     // ignore: non_constant_identifier_names
     return Scaffold(
@@ -111,15 +105,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   : Colors.purple,
               child: ListTile(
                 leading: CircleAvatar(
-                  
-                  backgroundImage: AssetImage(avimage),
+                  backgroundImage: AssetImage(avImage),
                 ),
                 title: Text(
                   currentUser != null ? currentUser.name : 'Guest',
                   style: TextStyle(fontSize: 17, color: Colors.white),
                 ),
                 trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    launchPasswordChangeScreen(token);
+                  },
                   icon: Icon(
                     Icons.edit,
                     color: Colors.white,
@@ -148,7 +143,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     },
                   ),
                   CustomDivider(),
-                  
                   if (currentUser != null) CustomDivider(),
                   if (currentUser != null)
                     ListTile(
@@ -175,20 +169,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SettingsSectionHeading(text: 'Choose An Avatar'),
             SettingsDropdownTile(
               lis: avatars,
-              //SPkey: commonKeys[1],
+              SPkey: commonKeys[3],
+              defaultValue: defaultsForKey[commonKeys[3]],
               leading: Icon(Icons.account_circle_outlined),
               text: 'Choose an Avatar',
-              //defaultValue: defaultsForKey[commonKeys[
-              //1]], //Provider.of<ThemeModel>(context,listen:false).themeType,
               onChange: (value) {
                 setState(() {});
                 //Provider.of<ThemeModel>(context, listen: false)
                 //.toggleTheme(value);
-                onPressed: () {};
+                onPressed:
+                () {};
                 print(value);
-                avimage = value;
-                print(avimage);
-                onToggle: () {};
+                avImage = value;
+                print(avImage);
+                onToggle:
+                () {};
                 setState(() {});
               },
             ),

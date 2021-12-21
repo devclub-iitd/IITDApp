@@ -86,6 +86,7 @@ class _SubButtonState extends State<SubButton> {
     _enabled = false;
     var timeOutFlag = false;
     setState(() {});
+    // uri is  https://iitdconnect-server.devclub.in
     final response = await http.post('$uri/api/body/${_club.id}/subscribe',
         headers: {
           'authorization': 'Bearer $token'

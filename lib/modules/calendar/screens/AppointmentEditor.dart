@@ -764,6 +764,11 @@ Event addRecurrenceRule(var rule, Event event) {
 }
 
 List<Attendee> getAttendeeListFromList(var lis) {
+  // Check if lis is null and return empty list
+  if (lis == null) {
+    return [];
+  }
+
   var res = <Attendee>[]; // ignore: prefer_collection_literals
   for (var i = 0; i < lis.length; i++) {
     if (lis[i] == '') {
