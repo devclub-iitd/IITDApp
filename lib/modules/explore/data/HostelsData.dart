@@ -57,7 +57,7 @@ List<Map> hostelsList = [
   {
     'name': 'Vindhyachal',
     'tagline': 'Est. 1963',
-    'image': 'assets/images/vindhyanchal.jpeg'
+    'image': 'assets/images/vindhanchal.jpeg'
   },
   {
     'name': 'Zanskar',
