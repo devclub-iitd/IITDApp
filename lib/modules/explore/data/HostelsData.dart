@@ -85,7 +85,8 @@ Map hostelDetails = {
           post: 'Founder, Cybermedia Group, IAN',
           image: 'https://i.ytimg.com/vi/qRHxg6O3w0s/maxresdefault.jpg'),
     ],
-    'image': 'assets/images/aravali.jpeg'
+    'image': 'assets/images/aravali.jpeg',
+    'loc' : 'https://www.google.com/'
   },
   'Girnar': {
     'about':
