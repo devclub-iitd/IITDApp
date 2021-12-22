@@ -2,67 +2,67 @@ List<Map> hostelsList = [
   {
     'name': 'Aravali',
     'tagline': 'Est. 1965',
-    'image': 'assets/images/udai_pic.jpeg'
+    'image': 'assets/images/aravali.jpeg'
   },
   {
     'name': 'Girnar',
     'tagline': 'Est. 2011',
-    'image': 'assets/images/udaigiri_logo.jpg'
+    'image': 'assets/images/girnar.jpeg'
   },
   {
     'name': 'Himadri',
     'tagline': 'Est. 2001',
-    'image': 'assets/images/udai_pic.jpeg'
+    'image': 'assets/images/himadri.jpeg'
   },
   {
     'name': 'Jwalamukhi',
     'tagline': 'Est. 1965',
-    'image': 'assets/images/udai_pic.jpeg'
+    'image': 'assets/images/jwalamukhi.jpeg'
   },
   {
     'name': 'Kailash',
     'tagline': 'Est. 1965',
-    'image': 'assets/images/udai_pic.jpeg'
+    'image': 'assets/images/kailash.jpeg'
   },
   {
     'name': 'Karakoram',
     'tagline': 'Est. 1966',
-    'image': 'assets/images/udai_pic.jpeg'
+    'image': 'assets/images/karakoram.jpeg'
   },
   {
     'name': 'Kumaon',
     'tagline': 'Est. 1969',
-    'image': 'assets/images/udai_pic.jpeg'
+    'image': 'assets/images/kumaon.jpeg'
   },
   {
     'name': 'Nilgiri',
     'tagline': 'Est. 1965',
-    'image': 'assets/images/udai_pic.jpeg'
+    'image': 'assets/images/nilgiri.jpeg'
   },
   {
     'name': 'Satpura',
     'tagline': 'Est. 2005',
-    'image': 'assets/images/udai_pic.jpeg'
+    'image': 'assets/images/satpura.jpeg'
   },
   {
     'name': 'Shivalik',
     'tagline': 'Est. 1961',
-    'image': 'assets/images/udai_pic.jpeg'
+    'image': 'assets/images/shivalik.jpeg'
   },
   {
     'name': 'Udaigiri',
     'tagline': 'Est. 2012',
-    'image': 'assets/images/udai_pic.jpeg'
+    'image': 'assets/images/udaigiri.jpeg'
   },
   {
     'name': 'Vindhyachal',
     'tagline': 'Est. 1963',
-    'image': 'assets/images/udai_pic.jpeg'
+    'image': 'assets/images/vindhanchal.jpeg'
   },
   {
     'name': 'Zanskar',
     'tagline': 'Est. 2005',
-    'image': 'assets/images/udai_pic.jpeg'
+    'image': 'assets/images/zanskar.jpeg'
   }
 ];
 
@@ -85,19 +85,19 @@ Map hostelDetails = {
           post: 'Founder, Cybermedia Group, IAN',
           image: 'https://i.ytimg.com/vi/qRHxg6O3w0s/maxresdefault.jpg'),
     ],
-    'image': 'assets/images/udaigiri_logo.jpg'
+    'image': 'assets/images/aravali.jpeg'
   },
   'Girnar': {
     'about':
         'One of the latest hostels in the campus, the red bricked building has a capacity of over 600 residents.',
     'members': [],
-    'image': 'assets/images/udaigiri_logo.jpg'
+    'image': 'assets/images/girnar.jpeg'
   },
   'Himadri': {
     'about':
         'The second girls\' hostel, Himadri has over 450 residents and boasts of its food outlet BBC- Best Brains Cafe',
     'members': [],
-    'image': 'assets/images/udaigiri_logo.jpg'
+    'image': 'assets/images/himadri.jpeg'
   },
   'Jwalamukhi': {
     'about':
@@ -117,7 +117,7 @@ Map hostelDetails = {
           image:
               'https://images.livemint.com/img/2019/10/02/600x338/TK3C8ZP0_1570041789386_1570043970138.jpg'),
     ],
-    'image': 'assets/images/udaigiri_logo.jpg'
+    'image': 'assets/images/jwalamukhi.jpeg'
   },
   'Kailash': {
     'about':
@@ -145,7 +145,7 @@ Map hostelDetails = {
           image:
               'https://images.indulgexpress.com/uploads/user/ckeditor_images/article/2019/12/30/Kavita_-_Copy.jpg'),
     ],
-    'image': 'assets/images/udaigiri_logo.jpg'
+    'image': 'assets/images/kailash.jpeg'
   },
   'Karakoram': {
     'about':
@@ -163,7 +163,7 @@ Map hostelDetails = {
           image:
               'https://img.etimg.com/thumb/width-640,height-480,imgsize-82212,resizemode-1,msid-60531121/magazines/panache/come-december-quikr-founder-pranay-chulet-is-ready-to-embrace-a-new-role/pranay-chulet-quikr_bccl.jpg'),
     ],
-    'image': 'assets/images/udaigiri_logo.jpg'
+    'image': 'assets/images/karakoram.jpeg'
   },
   'Kumaon': {
     'about':
@@ -191,7 +191,7 @@ Map hostelDetails = {
           image:
               'https://upload.wikimedia.org/wikipedia/commons/b/b1/Chetan_Bhagat.jpg'),
     ],
-    'image': 'assets/images/udaigiri_logo.jpg'
+    'image': 'assets/images/kumaon.jpeg'
   },
   'Nilgiri': {
     'about':
@@ -226,13 +226,13 @@ Map hostelDetails = {
           image:
               'https://assets.vccircle.com/uploads/2017/05/hitesh-oberoi.png'),
     ],
-    'image': 'assets/images/udaigiri_logo.jpg'
+    'image': 'assets/images/nilgiri.jpeg'
   },
   'Satpura': {
     'about':
         'Satpura houses around 450 \'Samurais\' and being a new hostel, has some cool architecture.',
     'members': [],
-    'image': 'assets/images/udaigiri_logo.jpg'
+    'image': 'assets/images/satpura.jpeg'
   },
   'Shivalik': {
     'about':
@@ -253,25 +253,25 @@ Map hostelDetails = {
           image:
               'https://officechai.com/wp-content/uploads/2018/03/pankal-chaddah-leaves-zomato-1024x538.jpg'),
     ],
-    'image': 'assets/images/udaigiri_logo.jpg'
+    'image': 'assets/images/shivalik.jpeg'
   },
   'Udaigiri': {
     'about':
         'The newest and arguably the biggest hostel at IIT Delhi with a capacity of over 600 residents.',
     'members': [],
-    'image': 'assets/images/udaigiri_logo.jpg'
+    'image': 'assets/images/udaigiri.jpeg'
   },
   'Vindhyachal': {
     'about':
         'One of the oldest hostels in IIT Delhi, Vindhyachal is also the smallest with a capacity of under 400. Jai Vindy!',
     'members': [],
-    'image': 'assets/images/udaigiri_logo.jpg'
+    'image': 'assets/images/vindhyanchal.jpeg'
   },
   'Zanskar': {
     'about':
         'Zanskar has a unique infrastructure and is one of the newer hostels. It houses ~450 students.',
     'members': [],
-    'image': 'assets/images/udaigiri_logo.jpg'
+    'image': 'assets/images/zanskar.jpeg'
   },
 };
 
