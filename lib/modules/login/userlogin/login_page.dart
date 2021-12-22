@@ -98,7 +98,7 @@ Future login(BuildContext context, {bool pop = true}) async {
         ),
       );
       print(e);
-    }).signIn();
+    }).signIn(context);
   }
 }
 

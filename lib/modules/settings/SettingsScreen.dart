@@ -113,7 +113,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
                 trailing: IconButton(
                   onPressed: () {
-                    launchPasswordChangeScreen(token);
+                    launchPasswordChangeScreen(token, context);
                   },
                   icon: Icon(
                     Icons.edit,
@@ -139,7 +139,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     title: Text('Change Password'),
                     trailing: Icon(Icons.keyboard_arrow_right),
                     onTap: () {
-                      launchPasswordChangeScreen(token);
+                      launchPasswordChangeScreen(token, context);
                     },
                   ),
                   CustomDivider(),

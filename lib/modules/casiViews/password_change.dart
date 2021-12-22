@@ -1,11 +1,25 @@
 // TODO: See how to set cookies for casi
 
+import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
-final String passwordChangeUrl = 'https://auth.devclub.in/profile/settings';
+const String passwordChangeUrl = 'https://auth.devclub.in/profile/settings';
 
-void launchPasswordChangeScreen(String _token) async {
+void launchPasswordChangeScreen(String _token, context) async {
   final webview = FlutterWebviewPlugin();
+  webview.onBack.listen((_) {
+    webview.close();
+  });
+  webview.onStateChanged.listen((state) {
+    if (state.type == WebViewState.finishLoad) {
+      webview.resize(Rect.fromLTRB(
+        MediaQuery.of(context).padding.left,
+        MediaQuery.of(context).padding.top,
+        MediaQuery.of(context).size.width + 1,
+        MediaQuery.of(context).size.height + 1,
+      ));
+    }
+  });
   webview.onUrlChanged.listen((url) async {
     print('URL CHANGED: $url');
   });

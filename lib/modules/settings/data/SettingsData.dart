@@ -73,26 +73,26 @@ var indivScreenSettingsData = {
     )),
   ],
   'Map': [
-    SettingsModel(
-        widgetType: SettingsSliderRow(
-      defaultValue: defaultsForKey['MapLabelSize'],
-      SPkey: 'MapLabelSize',
-      title: 'LabelSize',
-      max: 30.0,
-      min: 10.0,
-      divisions: 10,
-      trailing: Icon(Icons.location_on),
-    )),
-    SettingsModel(
-        widgetType: SettingsSliderRow(
-      defaultValue: defaultsForKey['MapMarkerSize'],
-      SPkey: 'MapMarkerSize',
-      title: 'MarkerSize',
-      max: 20.0,
-      min: 10.0,
-      divisions: 10,
-      trailing: Icon(Icons.location_on),
-    )),
+    // SettingsModel(
+    //     widgetType: SettingsSliderRow(
+    //   defaultValue: defaultsForKey['MapLabelSize'],
+    //   SPkey: 'MapLabelSize',
+    //   title: 'LabelSize',
+    //   max: 30.0,
+    //   min: 10.0,
+    //   divisions: 10,
+    //   trailing: Icon(Icons.location_on),
+    // )),
+    // SettingsModel(
+    //     widgetType: SettingsSliderRow(
+    //   defaultValue: defaultsForKey['MapMarkerSize'],
+    //   SPkey: 'MapMarkerSize',
+    //   title: 'MarkerSize',
+    //   max: 20.0,
+    //   min: 10.0,
+    //   divisions: 10,
+    //   trailing: Icon(Icons.location_on),
+    // )),
   ]
 };
 
