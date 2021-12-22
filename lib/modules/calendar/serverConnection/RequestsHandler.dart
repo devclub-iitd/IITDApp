@@ -98,6 +98,10 @@ Future<void> getEventsFromResponse(
         await prefs.setString('ser ' + data['_id'], 'loc ' + localId);
       } else {
         print('adding ev');
+        if (type == 0) {
+          // Add half an hour reminder
+          data['reminder'] = '30 Minutes';
+        }
         await getEventObject(data, '', type);
       }
     } else {
@@ -206,6 +210,9 @@ Future<void> getEventObject(var data, var eventId, var type) async {
     event.reminders = getReminderList(data['reminder']);
     event = addRecurrenceRule(data['recurrence'], event);
   } else {
+    if (data['reminder'] != null) {
+      event.reminders = getReminderList(data['reminder']);
+    }
     event.description = data['about'];
   }
   event.allDay = false;
