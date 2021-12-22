@@ -98,6 +98,10 @@ Future<void> getEventsFromResponse(
         await prefs.setString('ser ' + data['_id'], 'loc ' + localId);
       } else {
         print('adding ev');
+        if (type == 0) {
+          // Add half an hour reminder
+          data['reminder'] = '30 Minutes';
+        }
         await getEventObject(data, '', type);
       }
     } else {
@@ -115,7 +119,7 @@ Future<void> getEventsFromResponse(
       });
     }
   });
-  if (type == 1) {
+  if (type == 1 || type == 0) {
     serKeys.forEach((element) async {
       var eventId = prefs.getString(element).substring(4);
       var deleteEv = false;
@@ -152,14 +156,16 @@ bool checkEquality(var localItem, var serverItem, var type) {
           getAttendeeListFromList(serverItem['participants']))) {
     return false;
   }
-  if (localItem.location != null && localItem.location != serverItem['venue']) {
+  // Check if localItem.location is same as that serverItem['venue']
+  var local_loc = localItem.location ?? "";
+  var server_loc = serverItem['venue'] ?? "";
+  if (local_loc != server_loc) {
     return false;
   }
 
   /*** Uncomment this once backend is fixed ***/
   if (type == 1) {
-    if (localItem.description != null &&
-        localItem.description != serverItem['description']) {
+    if ((localItem.description ?? "") != (serverItem['description'] ?? "")) {
       return false;
     }
 //  if(localItem.url!=serverItem['url']) {
@@ -176,8 +182,7 @@ bool checkEquality(var localItem, var serverItem, var type) {
       return false;
     }
   } else {
-    if (localItem.description != null &&
-        localItem.description != serverItem['about']) {
+    if ((localItem.description ?? "") != (serverItem['about'] ?? "")) {
       return false;
     }
   }
@@ -205,6 +210,9 @@ Future<void> getEventObject(var data, var eventId, var type) async {
     event.reminders = getReminderList(data['reminder']);
     event = addRecurrenceRule(data['recurrence'], event);
   } else {
+    if (data['reminder'] != null) {
+      event.reminders = getReminderList(data['reminder']);
+    }
     event.description = data['about'];
   }
   event.allDay = false;

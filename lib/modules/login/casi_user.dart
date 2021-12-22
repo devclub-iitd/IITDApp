@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:corsac_jwt/corsac_jwt.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:http/http.dart' as http;
 
@@ -67,11 +68,24 @@ class CasiLogin {
     _token = token;
   }
 
-  Future<void> signIn() async {
+  Future<void> signIn(context) async {
     if (_loginURL == null) {
       throw Exception('No client ID and client secret found');
     }
     final webview = FlutterWebviewPlugin();
+    webview.onBack.listen((_) {
+      webview.close();
+    });
+    webview.onStateChanged.listen((state) {
+      if (state.type == WebViewState.finishLoad) {
+        webview.resize(Rect.fromLTRB(
+          MediaQuery.of(context).padding.left,
+          MediaQuery.of(context).padding.top,
+          MediaQuery.of(context).size.width + 1,
+          MediaQuery.of(context).size.height + 1,
+        ));
+      }
+    });
     webview.onUrlChanged.listen((url) async {
       print('URL CHANGED: $url');
 
