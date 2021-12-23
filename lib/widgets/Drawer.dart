@@ -88,13 +88,13 @@ class AppDrawer extends StatelessWidget {
             ),
             onTap: () {},
           ),
-          // _createDrawerItem(
-          //   selected: tag == 'Attendance',
-          //   icon: Icons.group_add_outlined,
-          //   text: 'Attendance',
-          //   context: context,
-          //   routeName: Routes.attendance,
-          // ),
+          _createDrawerItem(
+            selected: tag == 'Attendance',
+            icon: Icons.group_add_outlined,
+            text: 'Attendance',
+            context: context,
+            routeName: Routes.attendance,
+          ),
           _createDrawerItem(
               selected: tag == 'Quick Links',
               icon: CupertinoIcons.link,
