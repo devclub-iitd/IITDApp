@@ -44,20 +44,20 @@ var indivScreenSettingsData = {
             text: 'Show Other Device Calendars'))
   ],
   'News': [
-    SettingsModel(
-        widgetType: SettingsDropdownTile(
-      text: 'News Items Per Page',
-      defaultValue: '5',
-      SPkey: 'newsItemsPerPage',
-      lis: {'5': 5, '10': 10, '20': 20},
-    )),
-    SettingsModel(
-        widgetType: SettingsAlertDialogButton(
-            onTap: NewsHistoryProvider.clearHistory,
-            text: 'Clear History',
-            alertTitle: 'Clear complete news History?',
-            alertDesc: 'This will erase all news history from device',
-            showArrow: false))
+    // SettingsModel(
+    //     widgetType: SettingsDropdownTile(
+    //   text: 'News Items Per Page',
+    //   defaultValue: '5',
+    //   SPkey: 'newsItemsPerPage',
+    //   lis: {'5': 5, '10': 10, '20': 20},
+    // )),
+    // SettingsModel(
+    //     widgetType: SettingsAlertDialogButton(
+    //         onTap: NewsHistoryProvider.clearHistory,
+    //         text: 'Clear History',
+    //         alertTitle: 'Clear complete news History?',
+    //         alertDesc: 'This will erase all news history from device',
+    //         showArrow: false))
   ],
   'Attendance': [
     SettingsModel(

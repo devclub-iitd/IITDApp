@@ -96,8 +96,10 @@ class AboutScreen extends StatelessWidget {
                 SettingsTextButton(
                   text: 'Feedback',
                   onTap: () {
-                    UrlHandler.startEmail('devclub.iitd@gmail.com',
-                        subject: 'App Feedback', body: 'App Version $version');
+                    UrlHandler.launchInBrowser(
+                        'https://docs.google.com/forms/d/e/1FAIpQLSfZdv5HdKqu9WejxZmux9tQxICrN-8s8NvyUrTf5VZJY4JNIQ/viewform?usp=pp_url&entry.546079301=$version');
+                    // UrlHandler.startEmail('devclub.iitd@gmail.com',
+                    //     subject: 'App Feedback', body: 'App Version $version');
                   },
                 ),
               ],
