@@ -111,7 +111,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   currentUser != null ? currentUser.name : 'Guest',
                   style: TextStyle(fontSize: 17, color: Colors.white),
                 ),
-                /*trailing: IconButton(
+                trailing: IconButton(
                   onPressed: () {
                     launchPasswordChangeScreen(token, context);
                   },
@@ -119,7 +119,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Icons.edit,
                     color: Colors.white,
                   ),
-                ),*/
+                ),
               ),
             ),
             Card(
@@ -242,23 +242,23 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SizedBox(
               height: 10,
             ),
-            /*SettingsTextButton(
+            SettingsTextButton(
               text: 'Dashboard',
               onTap: () {
                 handleTap('Dashboard');
               },
-            ),*/
+            ),
             /*SettingsTextButton(
                 text: 'Attendance',
                 onTap: () {
                   handleTap('Attendance');
                 }),*/
-            /*SettingsTextButton(
+            SettingsTextButton(
               text: 'Events',
               onTap: () {
                 handleTap('Events');
               },
-            ),*/
+            ),
             SettingsTextButton(
               text: 'Calendar',
               onTap: () {
