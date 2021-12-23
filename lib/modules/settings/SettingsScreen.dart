@@ -126,20 +126,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
               elevation: 8,
               child: Column(
                 children: <Widget>[
-                  ListTile(
-                    leading: Icon(
-                      Icons.lock_outline,
-                      color: Theme.of(context).brightness == Brightness.dark
-                          ? Colors.purpleAccent
-                          : Colors.purple,
+                  if (currentUser != null)
+                    ListTile(
+                      leading: Icon(
+                        Icons.lock_outline,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? Colors.purpleAccent
+                            : Colors.purple,
+                      ),
+                      title: Text('Change Password'),
+                      trailing: Icon(Icons.keyboard_arrow_right),
+                      onTap: () {
+                        launchPasswordChangeScreen(token, context);
+                      },
                     ),
-                    title: Text('Change Password'),
-                    trailing: Icon(Icons.keyboard_arrow_right),
-                    onTap: () {
-                      launchPasswordChangeScreen(token, context);
-                    },
-                  ),
-                  CustomDivider(),
+                  if (currentUser != null) CustomDivider(),
                   if (currentUser != null) CustomDivider(),
                   if (currentUser != null)
                     ListTile(
@@ -185,7 +186,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SizedBox(
               height: 25,
             ),
-            
 
             SettingsSectionHeading(text: 'Theme Settings'),
             SettingsDropdownTile(
@@ -205,7 +205,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     onToggle: () {},
                   )),
             ),
-            
+
             SizedBox(
               height: 25,
             ),
