@@ -86,7 +86,8 @@ Map hostelDetails = {
           image: 'https://i.ytimg.com/vi/qRHxg6O3w0s/maxresdefault.jpg'),
     ],
     'image': 'assets/images/aravali.jpeg',
-    'loc' : 'https://goo.gl/maps/mWKenH5ZZrESUHVD8'
+    // 'loc': 'https://goo.gl/maps/mWKenH5ZZrESUHVD8'
+    'loc': 'https://goo.gl/maps/gJYDQZGCcMWdFbTd8'
   },
   'Girnar': {
     'about':
@@ -150,7 +151,8 @@ Map hostelDetails = {
               'https://images.indulgexpress.com/uploads/user/ckeditor_images/article/2019/12/30/Kavita_-_Copy.jpg'),
     ],
     'image': 'assets/images/kailash.jpeg',
-    'loc': 'https://goo.gl/maps/eD7q11byMmBTYRfB7'
+    // 'loc': 'https://goo.gl/maps/eD7q11byMmBTYRfB7'
+    'loc': 'https://goo.gl/maps/26pW74dTFXSzZEKUA'
   },
   'Karakoram': {
     'about':
@@ -263,21 +265,23 @@ Map hostelDetails = {
               'https://officechai.com/wp-content/uploads/2018/03/pankal-chaddah-leaves-zomato-1024x538.jpg'),
     ],
     'image': 'assets/images/shivalik.jpeg',
-    'loc': 'https://goo.gl/maps/ujqQ6UiyD38w8KDy5'
+    // 'loc': 'https://goo.gl/maps/ujqQ6UiyD38w8KDy5'
+    'loc': 'https://goo.gl/maps/SjG5mNMkXPVW4Ni58'
   },
   'Udaigiri': {
     'about':
         'The newest and arguably the biggest hostel at IIT Delhi with a capacity of over 600 residents.',
     'members': [],
     'image': 'assets/images/udaigiri.jpeg',
-    'loc': 'https://goo.gl/maps/1KjtHKaA37fSdiq8A'
+    // 'loc': 'https://goo.gl/maps/1KjtHKaA37fSdiq8A'
+    'loc': 'https://goo.gl/maps/A2RxqXXzPgLLYJ3M8'
   },
   'Vindhyachal': {
     'about':
         'One of the oldest hostels in IIT Delhi, Vindhyachal is also the smallest with a capacity of under 400. Jai Vindy!',
     'members': [],
     'image': 'assets/images/vindhyanchal.jpeg',
-    'loc': 'https://goo.gl/maps/ek7e1odhwHGSoSkq5'
+    'loc': 'https://goo.gl/maps/XdxNCRxb4KEySSbK6'
   },
   'Zanskar': {
     'about':
