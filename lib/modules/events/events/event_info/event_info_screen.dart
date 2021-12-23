@@ -12,35 +12,11 @@ import '../event_class.dart';
 import './event_info_card.dart';
 import './event_about.dart';
 import './event_updates_list.dart';
-import 'package:http/http.dart';
-import 'dart:async';
-import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
-import 'package:async/async.dart';
-import 'dart:convert';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 
-import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
-import 'package:IITDAPP/modules/login/user_class.dart';
-import 'package:IITDAPP/values/Constants.dart';
-import 'dart:convert';
-import 'package:IITDAPP/ThemeModel.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/services.dart';
-import 'package:focused_menu/modals.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:IITDAPP/widgets/cancel_alert.dart';
-import 'package:IITDAPP/widgets/loading.dart';
-import 'package:flutter/material.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/rendering.dart';
-import 'package:intl/intl.dart';
-import 'package:pedantic/pedantic.dart';
-import 'package:validators/validators.dart';
-import 'package:http/http.dart' as http;
-import 'package:IITDAPP/values/Constants.dart';
 import 'dart:math';
 
 Future<Event> getEvent(String eventid) async {
@@ -80,7 +56,7 @@ class EventInfo extends StatefulWidget {
   // final Function _reorderLists;
   final bool showButton;
 
-  EventInfo(this.id, {this.showButton = true});
+  const EventInfo(this.id, {this.showButton = true});
 
   @override
   State<StatefulWidget> createState() {

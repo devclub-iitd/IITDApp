@@ -243,7 +243,7 @@ class SettingsSliderRow extends StatefulWidget {
   final getTexValue;
   final valueChangeCallback;
   final SPkey;
-  SettingsSliderRow(
+  const SettingsSliderRow(
       {this.trailing,
       this.title,
       this.defaultValue = 0.0,
@@ -308,7 +308,7 @@ class _SettingsSliderRowState extends State<SettingsSliderRow> {
 }
 
 class SettingsAlertDialogButton extends StatelessWidget {
-  SettingsAlertDialogButton(
+  const SettingsAlertDialogButton(
       {this.text,
       this.subtitle,
       this.onTap,
@@ -328,8 +328,7 @@ class SettingsAlertDialogButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: SettingsTextButton(
+    return SettingsTextButton(
       showArrow: showArrow,
       text: text,
       subtitle: subtitle,
@@ -341,7 +340,7 @@ class SettingsAlertDialogButton extends StatelessWidget {
             cancelButton: cancelButton);
         onTap(action == ConfirmAction.Accept);
       },
-    ));
+    );
   }
 }
 

@@ -1,4 +1,5 @@
-import 'package:IITDAPP/modules/discussionForum/models/message_model.dart';
+// ignore_for_file: overridden_fields
+
 import 'package:IITDAPP/modules/events/clubs/club_class.dart';
 
 class User {
@@ -56,9 +57,9 @@ class User {
 
 // User currentUser = User('DummyUser', true, [], true, []);
 class UClub extends Club {
-  // ignore: annotate_overrides
+  @override
   String clubName;
-  // ignore: annotate_overrides
+  @override
   String id;
 
   UClub({this.clubName, this.id});
@@ -72,11 +73,11 @@ class UClub extends Club {
 }
 
 class Admin extends User {
-  // ignore: annotate_overrides
+  @override
   String name;
-  // ignore: annotate_overrides
+  @override
   String email;
-  // ignore: annotate_overrides
+  @override
   String id;
 
   Admin({this.name, this.email, this.id});

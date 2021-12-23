@@ -121,9 +121,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
   // }
 
   Widget _getAppointmentEditor(BuildContext context) {
-    return Container(
-        // color: Colors.white,
-        child: ListView(
+    return ListView(
       padding: EdgeInsets.all(0),
       children: <Widget>[
         ListTile(
@@ -508,7 +506,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
           thickness: 1,
         ),
       ],
-    ));
+    );
   }
 
   @override

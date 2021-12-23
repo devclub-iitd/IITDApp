@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 class PersonCard extends StatefulWidget {
   final String name;
-  PersonCard(this.name);
+  const PersonCard(this.name);
   @override
   _PersonCardState createState() => _PersonCardState();
 }

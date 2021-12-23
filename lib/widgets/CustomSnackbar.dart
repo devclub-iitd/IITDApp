@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 // ignore: always_declare_return_types
 class CustomSnackBarContent extends StatelessWidget {
-  CustomSnackBarContent({this.text,this.leading,this.trailing,this.onClick});
+  const CustomSnackBarContent(
+      {this.text, this.leading, this.trailing, this.onClick});
   final text;
   final onClick;
   final trailing;
@@ -17,10 +18,13 @@ class CustomSnackBarContent extends StatelessWidget {
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            leading??Container(width: 8,),
+            leading ??
+                Container(
+                  width: 8,
+                ),
             Text(text),
             Spacer(),
-            trailing??Container(),
+            trailing ?? Container(),
           ],
         ),
       ),

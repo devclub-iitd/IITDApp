@@ -15,7 +15,7 @@ class EventCard extends StatelessWidget {
   final Event _event;
   final Function _onStarPress;
 
-  EventCard(this._event, this._onStarPress, Key key) : super(key: key);
+  const EventCard(this._event, this._onStarPress, Key key) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

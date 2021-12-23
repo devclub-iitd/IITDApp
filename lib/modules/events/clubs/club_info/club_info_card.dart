@@ -13,7 +13,7 @@ import '../club_class.dart';
 class ClubInfoCard extends StatelessWidget {
   final Club _club;
 
-  ClubInfoCard(this._club);
+  const ClubInfoCard(this._club);
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class ClubInfoCard extends StatelessWidget {
 class SubButton extends StatefulWidget {
   final Club _club;
 
-  SubButton(this._club);
+  const SubButton(this._club);
 
   @override
   State<StatefulWidget> createState() {

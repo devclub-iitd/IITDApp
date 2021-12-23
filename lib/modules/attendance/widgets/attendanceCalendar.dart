@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
@@ -16,7 +18,7 @@ class AttendanceCalendar extends StatelessWidget {
       TextStyle(color: Color(0x701A1A1A), fontSize: 18);
 
   final List<DateTime> presentDates;
-  AttendanceCalendar(this.presentDates);
+  const AttendanceCalendar(this.presentDates);
 
   @override
   Widget build(BuildContext context) {

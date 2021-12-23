@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:IITDAPP/ThemeModel.dart';
@@ -96,7 +98,7 @@ class Search extends SearchDelegate<String> {
 
 class addremove extends StatefulWidget {
   final String _cours;
-  addremove(this._cours);
+  const addremove(this._cours);
   @override
   _addremoveState createState() => _addremoveState();
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:io';
 
 import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
@@ -7,8 +9,6 @@ import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:focused_menu/modals.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/cancel_alert.dart';
 import 'package:IITDAPP/widgets/loading.dart';
@@ -17,7 +17,6 @@ import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
 import 'package:flutter/rendering.dart';
 import 'package:intl/intl.dart';
 import 'package:pedantic/pedantic.dart';
-import 'package:validators/validators.dart';
 import 'package:http/http.dart' as http;
 // import 'dart:convert';
 import 'dart:async';
@@ -43,7 +42,6 @@ Future<void> addEventRequest(Event event, BuildContext context) async {
         bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes));
   }
   print("start");
-  print(event.toMap());
   var stream =
       http.ByteStream(DelegatingStream.typed(event.eventImage.openRead()));
   var length = await event.eventImage.length();
@@ -61,17 +59,16 @@ Future<void> addEventRequest(Event event, BuildContext context) async {
   // var responseData = json.decode(response.body);
   // var id = responseData["data"]["_id"];
 
-  List<int> imageBytes = event.eventImage.readAsBytesSync();
-  String base64image = base64.encode(imageBytes);
   request.fields['name'] = event.eventName;
   request.fields['about'] = event.about;
-  request.fields['startDate'] = event.startsAt.toIso8601String() + 'Z';
-  request.fields['endDate'] = event.endsAt.toIso8601String() + 'Z';
+  request.fields['startDate'] =
+      event.startsAt.subtract(Duration(minutes: 330)).toIso8601String() + 'Z';
+  request.fields['endDate'] =
+      event.endsAt.subtract(Duration(minutes: 330)).toIso8601String() + 'Z';
   request.fields['venue'] = event.venue;
   request.fields['body'] = event.eventBody.id;
   // request.fields['eventImage'] = base64image;
   request.headers['authorization'] = 'Bearer $token';
-
   final response = await request.send();
   print(response.statusCode);
   response.stream.transform(utf8.decoder).listen((value) {
@@ -138,8 +135,14 @@ class _EventFormState extends State<EventForm> {
   Future pickImage(int crr) async {
     try {
       print("picking image");
-      var image = await ImagePicker.pickImage(
-          source: (crr == 0 ? ImageSource.camera : ImageSource.gallery));
+      var image;
+      if (crr == 0) {
+        image = await ImagePicker.pickImage(
+            source: ImageSource.camera, maxHeight: 1500, maxWidth: 1500);
+      } else {
+        image = await ImagePicker.pickImage(
+            source: ImageSource.gallery, maxHeight: 1500, maxWidth: 1500);
+      }
       if (image == null) {
         return null;
       }
@@ -458,18 +461,30 @@ class _EventFormState extends State<EventForm> {
                   ),
                 ),
                 Spacer(),
-                Container(
-                  // color: Colors.blue,
-                  margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
-                  height: 150,
-                  width: 200,
-                  child: img != null
-                      ? Image.file(
-                          img,
-                        )
-                      : Image.asset(
-                          'assets/images/null.png',
-                        ),
+                Column(
+                  children: [
+                    Container(
+                      // color: Colors.blue,
+                      margin: EdgeInsets.fromLTRB(0, 0, 0, 20),
+                      height: 120,
+                      width: 180,
+                      child: img != null
+                          ? Image.file(
+                              img,
+                              fit: BoxFit.cover,
+                            )
+                          : Image.asset(
+                              'assets/images/null.png',
+                            ),
+                    ),
+                    Text("Image Size : " +
+                        (img == null
+                            ? '0'
+                            : (img.lengthSync() / (1024 * 1024))
+                                .toStringAsFixed(2)) +
+                        " mb"),
+                    Text("Maximum Allowed Size : 2mb"),
+                  ],
                 ),
               ],
             ),
@@ -499,24 +514,39 @@ class _EventFormState extends State<EventForm> {
                         .RAISED_BUTTON_BACKGROUND,
                   ),
                   onPressed: () async {
-                    if (_key.currentState.validate()) {
-                      _key.currentState.save();
-                      var ev = Event(
-                        eventName: _eventName,
-                        eventBody: selectedClub,
-                        venue: _venue,
-                        about: _about,
-                        start: _startsAt,
-                        end: _endsAt,
-                        isBodySub: false,
-                        isStarred: false,
-                        imageLink: _imageLink,
-                        eventImage: img,
+                    if (img != null && img.lengthSync() / (1024 * 1024) >= 2) {
+                      AlertDialog alert = AlertDialog(
+                        title: Text("Invalid Image"),
+                        content:
+                            Text("Image Size Exceeds Maximum Allowed Size"),
+                        actions: [],
                       );
-                      unawaited(showLoading(context));
-                      await addEventRequest(ev, context);
-                      // Navigator.popUntil(context,
-                      //     ModalRoute.withName(Navigator.defaultRouteName));
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return alert;
+                        },
+                      );
+                    } else {
+                      if (_key.currentState.validate()) {
+                        _key.currentState.save();
+                        var ev = Event(
+                          eventName: _eventName,
+                          eventBody: selectedClub,
+                          venue: _venue,
+                          about: _about,
+                          start: _startsAt,
+                          end: _endsAt,
+                          isBodySub: false,
+                          isStarred: false,
+                          imageLink: _imageLink,
+                          eventImage: img,
+                        );
+                        unawaited(showLoading(context));
+                        await addEventRequest(ev, context);
+                        // Navigator.popUntil(context,
+                        //     ModalRoute.withName(Navigator.defaultRouteName));
+                      }
                     }
                   },
                   child: Text(

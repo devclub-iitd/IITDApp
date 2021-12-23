@@ -107,7 +107,7 @@ class HangoutListCard extends StatelessWidget {
 }
 
 class RatingBox extends StatelessWidget {
-  RatingBox({Key key, this.rating}) : super(key: key);
+  const RatingBox({Key key, this.rating}) : super(key: key);
   final double rating;
 
   @override

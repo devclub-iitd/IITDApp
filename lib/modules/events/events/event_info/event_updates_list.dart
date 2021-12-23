@@ -33,7 +33,7 @@ Future<List<dynamic>> getUpdates(String eventid) async {
 class EventUpdatesList extends StatefulWidget {
   final String eventid;
 
-  EventUpdatesList(this.eventid);
+  const EventUpdatesList(this.eventid);
 
   @override
   State<StatefulWidget> createState() {

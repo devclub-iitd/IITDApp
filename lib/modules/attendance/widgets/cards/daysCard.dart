@@ -59,7 +59,7 @@ class DaysCard extends StatelessWidget {
             Text('$_number',
                 style: Theme.of(context).primaryTextTheme.headline2.apply(
                     color: _textColor, decoration: null, fontWeightDelta: 2)),
-            Text('$_word',
+            Text(_word,
                 style: Theme.of(context).primaryTextTheme.bodyText2.apply(
                     color: _subColor, fontSizeFactor: 1, decoration: null)),
           ],

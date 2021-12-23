@@ -9,7 +9,7 @@ import './events_list.dart';
 class EventsPage extends StatefulWidget {
   final String _title;
 
-  EventsPage(this._title);
+  const EventsPage(this._title);
 
   @override
   State<StatefulWidget> createState() {
@@ -63,13 +63,16 @@ class EventsPageState extends State<EventsPage> {
   Widget build(BuildContext context) {
     switch (_title) {
       case 'TODAY':
-        _events = Provider.of<EventsTabProvider>(context, listen: false).todayEvents;
+        _events =
+            Provider.of<EventsTabProvider>(context, listen: false).todayEvents;
         break;
       case 'TOMORROW':
-        _events = Provider.of<EventsTabProvider>(context, listen: false).tomorrowEvents;
+        _events = Provider.of<EventsTabProvider>(context, listen: false)
+            .tomorrowEvents;
         break;
       case 'UPCOMING':
-        _events = Provider.of<EventsTabProvider>(context, listen: false).upcomingEvents;
+        _events = Provider.of<EventsTabProvider>(context, listen: false)
+            .upcomingEvents;
         break;
       default:
     }

@@ -14,7 +14,7 @@ import './add_update.dart';
 class EventUpdatesList extends StatefulWidget {
   final String eventid;
 
-  EventUpdatesList(this.eventid);
+  const EventUpdatesList(this.eventid);
 
   @override
   State<StatefulWidget> createState() {

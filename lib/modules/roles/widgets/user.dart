@@ -188,72 +188,67 @@ class _SearchScreenState extends State<SearchScreen> {
                                         color: Color(0xff88888d),
                                       )),
                                   Expanded(
-                                    child: Container(
-                                      // margin: EdgeInsets.fromLTRB(0, 5, 0, 0),
-                                      // padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
-                                      child: TextField(
-                                        onChanged: (String str) => {
-                                          setState(() => {
-                                                _cancel = str.isNotEmpty
-                                                    ? Color(0xff88888d)
-                                                    : Colors.transparent,
-                                                _suggestion = str.isEmpty
-                                                    ? data
-                                                    : data
-                                                        .where((element) => element[
-                                                                (what ==
-                                                                        'kerberos'
-                                                                    ? 1
-                                                                    : 0)]
-                                                            .startsWith(str
-                                                                .toLowerCase()))
-                                                        .toList(),
-                                                strlen = str.length,
-                                              }),
-                                        },
-                                        controller: _controller,
-                                        cursorWidth: 1,
-                                        focusNode: _focus,
-                                        cursorColor: Color(0xff88888d),
-                                        enableInteractiveSelection: true,
-                                        decoration: InputDecoration(
-                                            suffixIcon: IconButton(
-                                              icon: Icon(
-                                                CupertinoIcons
-                                                    .clear_circled_solid,
-                                                color: _cancel,
-                                                size: 20,
-                                              ),
-                                              onPressed: () {
-                                                _controller.clear();
-                                                setState(() {
-                                                  _cancel = Colors.transparent;
-                                                  _suggestion = data;
-                                                  strlen = 0;
-                                                });
-                                              },
-                                              splashColor: Colors.transparent,
-                                              highlightColor:
-                                                  Colors.transparent,
+                                    child: TextField(
+                                      onChanged: (String str) => {
+                                        setState(() => {
+                                              _cancel = str.isNotEmpty
+                                                  ? Color(0xff88888d)
+                                                  : Colors.transparent,
+                                              _suggestion = str.isEmpty
+                                                  ? data
+                                                  : data
+                                                      .where((element) => element[
+                                                              (what ==
+                                                                      'kerberos'
+                                                                  ? 1
+                                                                  : 0)]
+                                                          .startsWith(str
+                                                              .toLowerCase()))
+                                                      .toList(),
+                                              strlen = str.length,
+                                            }),
+                                      },
+                                      controller: _controller,
+                                      cursorWidth: 1,
+                                      focusNode: _focus,
+                                      cursorColor: Color(0xff88888d),
+                                      enableInteractiveSelection: true,
+                                      decoration: InputDecoration(
+                                          suffixIcon: IconButton(
+                                            icon: Icon(
+                                              CupertinoIcons
+                                                  .clear_circled_solid,
+                                              color: _cancel,
+                                              size: 20,
                                             ),
-                                            border: InputBorder.none,
-                                            focusedBorder: InputBorder.none,
-                                            enabledBorder: InputBorder.none,
-                                            errorBorder: InputBorder.none,
-                                            disabledBorder: InputBorder.none,
-                                            hintText: 'Search by $what',
-                                            hintStyle: TextStyle(
-                                              fontSize: 20,
-                                              color: Color(0xff88888d),
-                                            )),
-                                        style: TextStyle(
-                                            decoration: TextDecoration.none,
+                                            onPressed: () {
+                                              _controller.clear();
+                                              setState(() {
+                                                _cancel = Colors.transparent;
+                                                _suggestion = data;
+                                                strlen = 0;
+                                              });
+                                            },
+                                            splashColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                          ),
+                                          border: InputBorder.none,
+                                          focusedBorder: InputBorder.none,
+                                          enabledBorder: InputBorder.none,
+                                          errorBorder: InputBorder.none,
+                                          disabledBorder: InputBorder.none,
+                                          hintText: 'Search by $what',
+                                          hintStyle: TextStyle(
                                             fontSize: 20,
-                                            color:
-                                                Provider.of<ThemeModel>(context)
-                                                    .theme
-                                                    .PRIMARY_TEXT_COLOR),
-                                      ),
+                                            color: Color(0xff88888d),
+                                          )),
+                                      style: TextStyle(
+                                          decoration: TextDecoration.none,
+                                          fontSize: 20,
+                                          color:
+                                              Provider.of<ThemeModel>(context)
+                                                  .theme
+                                                  .PRIMARY_TEXT_COLOR),
                                     ),
                                   ),
                                 ]),

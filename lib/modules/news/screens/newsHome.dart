@@ -15,7 +15,7 @@ import 'package:IITDAPP/widgets/Drawer.dart';
 import 'newsUpdate.dart';
 
 class NewsHome extends StatelessWidget {
-  NewsHome({
+  const NewsHome({
     Key key,
   }) : super(key: key);
 
@@ -26,9 +26,7 @@ class NewsHome extends StatelessWidget {
           Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       appBar: CustomAppBar(
         title: Text('News'),
-        actions: (!(currentUser.isAdmin ||
-                currentUser.isSSAdmin ||
-                currentUser.isSuperAdmin))
+        actions: (!(currentUser.isSSAdmin || currentUser.isSuperAdmin))
             ? []
             : <Widget>[AddNewsButton(), AllReportsButton()],
       ),

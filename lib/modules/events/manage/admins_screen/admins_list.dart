@@ -8,7 +8,7 @@ import 'package:IITDAPP/modules/events/manage/admins_screen/admin_card.dart';
 class AdminList extends StatefulWidget {
   final List<Admin> admins;
 
-  AdminList(this.admins);
+  const AdminList(this.admins);
 
   @override
   State<StatefulWidget> createState() {

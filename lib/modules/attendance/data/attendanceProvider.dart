@@ -45,13 +45,11 @@ class AttendanceProvider with ChangeNotifier {
         }
         loading = false;
       });
-      return null;
     } catch (e) {
       loading = false;
       data = ApiResponse.error(e.toString());
       notifyListeners();
       print(e.toString());
-      return null;
     }
   }
 }

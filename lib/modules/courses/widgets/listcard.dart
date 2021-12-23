@@ -8,7 +8,7 @@ import 'package:IITDAPP/modules/courses/widgets/book.dart';
 class ListCard extends StatelessWidget {
   final String utility;
   final String course;
-  ListCard(this.utility, this.course);
+  const ListCard(this.utility, this.course);
   @override
   Widget build(BuildContext context) {
     return Card(

@@ -1,36 +1,9 @@
 import 'package:IITDAPP/modules/events/clubs/club_class.dart';
 import 'dart:io';
-
-import 'package:http/http.dart';
 import 'dart:async';
-import 'package:image_picker/image_picker.dart';
-import 'package:path/path.dart';
-import 'package:async/async.dart';
-import 'dart:convert';
-import '../events/event_class.dart';
 import 'package:path_provider/path_provider.dart';
-import 'dart:io';
-
-import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
-import 'package:IITDAPP/modules/login/user_class.dart';
-import 'package:IITDAPP/values/Constants.dart';
-import 'dart:convert';
-import 'package:IITDAPP/ThemeModel.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import 'package:focused_menu/modals.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:IITDAPP/widgets/cancel_alert.dart';
-import 'package:IITDAPP/widgets/loading.dart';
-import 'package:flutter/material.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:flutter/rendering.dart';
-import 'package:intl/intl.dart';
-import 'package:pedantic/pedantic.dart';
-import 'package:validators/validators.dart';
 import 'package:http/http.dart' as http;
-import 'package:IITDAPP/values/Constants.dart';
 
 class Event {
   String eventName;
@@ -85,7 +58,7 @@ class Event {
     var endDate = (json.containsKey('endDate'))
         ? DateTime.parse(json['endDate'])
         : startDate.add(Duration(hours: 1));
-
+    print(startDate);
     return Event(
         eventName: json['name'], //
         eventBody:
@@ -96,8 +69,8 @@ class Event {
                 isSubbed: json['body']['isSub'],
                 // clubDept: json["dept"],
                 id: json['body']['id']),
-        start: startDate, //
-        end: endDate,
+        start: startDate.toLocal(), //
+        end: endDate.toLocal(),
         // eventImage: imgtofile("$uri/${json['image']}"),
         // updates: json["updates"],
         about: json['about'], //
@@ -108,28 +81,28 @@ class Event {
         );
   }
 
-  Map toMap() {
-    var map = <String, dynamic>{};
-    map['name'] = eventName;
-    map['about'] = about;
-    map['startDate'] = startsAt.toIso8601String() + 'Z';
-    map['endDate'] = endsAt.toIso8601String() + 'Z';
-    map['venue'] = venue;
-    map['body'] = eventBody.id;
-    // map['eventImage'] = eventImage;
-    return map;
-  }
+  // Map toMap() {
+  //   var map = <String, dynamic>{};
+  //   map['name'] = eventName;
+  //   map['about'] = about;
+  //   map['startDate'] = startsAt.toIso8601String();
+  //   map['endDate'] = endsAt.toIso8601String();
+  //   map['venue'] = venue;
+  //   map['body'] = eventBody.id;
+  //   // map['eventImage'] = eventImage;
+  //   return map;
+  // }
 
-  Map toMapForUpdate() {
-    var map = <String, dynamic>{};
-    map['name'] = eventName;
-    map['about'] = about;
-    map['startDate'] = startsAt.toIso8601String();
-    map['endDate'] = endsAt.toIso8601String();
-    map['venue'] = venue;
-    // map['eventImage'] = eventImage;
-    return map;
-  }
+  // Map toMapForUpdate() {
+  //   var map = <String, dynamic>{};
+  //   map['name'] = eventName;
+  //   map['about'] = about;
+  //   map['startDate'] = startsAt.toIso8601String();
+  //   map['endDate'] = endsAt.toIso8601String();
+  //   map['venue'] = venue;
+  //   // map['eventImage'] = eventImage;
+  //   return map;
+  // }
 }
 
 // var dummyEvent1 = Event(

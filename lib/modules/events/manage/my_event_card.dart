@@ -14,7 +14,7 @@ class MyEventCard extends StatelessWidget {
   final Event _event;
   final Function _refresh;
 
-  MyEventCard(this._event, this._refresh, Key key) : super(key: key);
+  const MyEventCard(this._event, this._refresh, Key key) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

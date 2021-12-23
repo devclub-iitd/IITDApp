@@ -16,7 +16,7 @@ class ClubCard extends StatefulWidget {
   final Club club;
   // final Function _onAddPress;
 
-  ClubCard(this.club, Key key) : super(key: key);
+  const ClubCard(this.club, Key key) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -120,12 +120,10 @@ class ClubCardState extends State<ClubCard> {
         child: Row(
           children: <Widget>[
             Expanded(
-              child: Container(
-                child: AutoSizeText(
-                  _club.clubName,
-                  style: TextStyle(fontSize: 20),
-                  maxLines: 1,
-                ),
+              child: AutoSizeText(
+                _club.clubName,
+                style: TextStyle(fontSize: 20),
+                maxLines: 1,
               ),
             ),
             IconButton(

@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:IITDAPP/modules/courses/widgets/heading.dart';
 import 'package:IITDAPP/modules/courses/widgets/icons.dart';
@@ -8,7 +10,7 @@ import 'package:IITDAPP/modules/courses/widgets/listcard.dart';
 
 class about extends StatelessWidget {
   final String _course;
-  about(this._course);
+  const about(this._course);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

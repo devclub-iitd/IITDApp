@@ -8,7 +8,7 @@ final List<String> calNames = [
   'User Events'
 ];
 
-final String accountName = 'IITDAPP';
+const String accountName = 'IITDAPP';
 
 void checkForCalIds(var calendarModel) {
   calendarModel.forEach((data) => {

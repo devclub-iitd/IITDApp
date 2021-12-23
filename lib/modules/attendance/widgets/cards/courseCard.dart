@@ -26,17 +26,15 @@ class CourseCard extends StatelessWidget {
           child: ListTile(
             title: Hero(
               tag: _am.abbr,
-              child: Container(
-                child: Text(
-                  _am.name,
-                  style: Theme.of(context).primaryTextTheme.bodyText1.apply(
-                        color: Provider.of<ThemeModel>(context)
-                            .theme
-                            .PRIMARY_TEXT_COLOR,
-                        fontSizeFactor: 1.15,
-                        decoration: null,
-                      ),
-                ),
+              child: Text(
+                _am.name,
+                style: Theme.of(context).primaryTextTheme.bodyText1.apply(
+                      color: Provider.of<ThemeModel>(context)
+                          .theme
+                          .PRIMARY_TEXT_COLOR,
+                      fontSizeFactor: 1.15,
+                      decoration: null,
+                    ),
               ),
             ),
             subtitle: Text(

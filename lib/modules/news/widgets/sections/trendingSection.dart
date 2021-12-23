@@ -15,7 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class TrendingSection extends StatelessWidget {
-  TrendingSection({
+  const TrendingSection({
     Key key,
   }) : super(key: key);
 
@@ -23,7 +23,9 @@ class TrendingSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
     print('built trending');
+    print("called provider on trending news");
     final news = Provider.of<NewsProvider<TrendingNews>>(context);
+    print("called provider on trending news and done");
     if (news.displayedData.status == Status.ERROR) {
       return Column(
         children: <Widget>[

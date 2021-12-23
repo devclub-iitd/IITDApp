@@ -9,13 +9,10 @@ import 'package:IITDAPP/modules/settings/widgets/DarkModeSwitch.dart';
 import 'package:IITDAPP/modules/settings/widgets/SettingsTextWidgets.dart';
 import 'package:IITDAPP/routes/Routes.dart';
 import 'package:IITDAPP/values/Constants.dart';
-import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 
 //import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 import 'package:provider/provider.dart';
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void rebuildAllChildren(BuildContext context) {
@@ -177,12 +174,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 setState(() {});
                 //Provider.of<ThemeModel>(context, listen: false)
                 //.toggleTheme(value);
-                onPressed:
                 () {};
                 print(value);
                 avImage = value;
                 print(avImage);
-                onToggle:
                 () {};
                 setState(() {});
               },

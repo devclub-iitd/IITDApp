@@ -6,7 +6,7 @@ class DeptWise extends StatelessWidget {
   // final List<Color> _cardcolor;
   final double _size;
   final String _course;
-  DeptWise(this._course, this._size);
+  const DeptWise(this._course, this._size);
   @override
   Widget build(BuildContext context) {
     return Icon(

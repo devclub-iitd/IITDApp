@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CourseCard extends StatelessWidget {
   final String _name;
-  CourseCard(this._name);
+  const CourseCard(this._name);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

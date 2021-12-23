@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:async';
 import 'dart:math';
 import 'package:IITDAPP/modules/news/data/report.dart';
@@ -8,6 +10,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'dart:io';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class NewsHistoryProvider with ChangeNotifier {
   final ls = LocalStorage('newsClickHistory${currentUser.id}');
@@ -58,6 +62,7 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
   File newsImage;
   bool loadingContent = false;
   bool visible = true;
+  double trendRate;
 
   Future<String> add() async {
     String returnMessage;
@@ -86,14 +91,24 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
   }
 
   Future<String> report(List<String> report) async {
-    String returnMessage;
-    try {
-      var response = (await apiBaseHelper.post(NewsType.baseUrl + '/report/$id',
-          {'description': report.join('\n')}, newsImage)) as Map;
-      // returnMessage = response['message'];
-    } on FetchDataException catch (e) {
-      returnMessage = e.toString();
+    var response = await http.post(NewsType.baseUrl + '/report/$id',
+        headers: {'authorization': 'Bearer $token'},
+        body: {'description': report.join('\n')});
+    print("start report");
+    print(response.statusCode);
+    print(json.decode(response.body.toString()));
+
+    response = await http.get(
+      NewsType.baseUrl + '/$id',
+      headers: {'authorization': 'Bearer $token'},
+    );
+    var tmp = json.decode(response.body)['reports'];
+    print(tmp);
+    reports.clear();
+    for (var i = 0; i < tmp.length; i++) {
+      reports.add(Report.fromJson(tmp[i]));
     }
+    print(reports);
     return "returnMessage";
   }
 
@@ -122,6 +137,7 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
   }
 
   void getDetails() async {
+    print("called get details");
     if (contentLocal == null &&
         (details == null || details.status == Status.ERROR)) {
       details = ApiResponse.loading('message');
@@ -136,6 +152,7 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
         ];
         version = detailsjson['__v'];
         updatedAt = DateTime.parse(detailsjson['updatedAt']);
+        // trendRate = detailsjson['trendRate'];
         details = ApiResponse<String>.completed(contentLocal);
       } on FetchDataException catch (e) {
         details = ApiResponse.error(e.toString());
@@ -145,6 +162,8 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
   }
 
   factory NewsModel.fromMap(Map map) {
+    print("from Map");
+    print(T);
     print(map);
     return NewsModel<T>(
         author: map['author'],
@@ -153,6 +172,7 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
         id: map['_id'],
         title: map['description'],
         imgUrl: uri + '/' + map['imgUrl'],
+        // trendRate: map['trendRate'],
         sourceName: map['sourceName'],
         visible: map['visible'] ?? true,
         reports: <Report>[
@@ -182,6 +202,7 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
       this.id,
       this.sourceName,
       this.visible,
+      this.trendRate,
       this.reports});
 }
 
@@ -190,11 +211,11 @@ class NewsType {
 }
 
 class RecentNews extends NewsType {
-  static final baseUrl = NewsType.baseUrl + '?sortBy=createdAt:desc';
+  static const baseUrl = NewsType.baseUrl + '?sortBy=createdAt:desc';
 }
 
 class TrendingNews extends NewsType {
-  static const baseUrl = NewsType.baseUrl + '?trend';
+  static const baseUrl = NewsType.baseUrl + '/trend';
 }
 
 class OldNews extends NewsType {
@@ -252,6 +273,7 @@ class NewsProvider<T extends NewsType> with ChangeNotifier {
 
   Future<int> getMaxItems() async {
     try {
+      print("trying max items " + T.toString() + " " + baseUrl);
       maxNewsItems = (await apiBaseHelper.get(baseUrl)).length;
     } on FetchDataException catch (e) {
       displayedData = ApiResponse.error(e.toString());
@@ -261,6 +283,7 @@ class NewsProvider<T extends NewsType> with ChangeNotifier {
   }
 
   Future<void> loadPage(int pageNumber) async {
+    Type typeOf<K>() => K;
     if (pageNumber > maxNewsItems) {
       return;
     }
@@ -269,12 +292,15 @@ class NewsProvider<T extends NewsType> with ChangeNotifier {
       try {
         await apiBaseHelper
             .get(baseUrl +
-                '&limit=$itemsPerPage&skip=${itemsPerPage * pageNumber}')
+                ((typeOf<T>() == typeOf<TrendingNews>()) ? '?' : '&') +
+                'limit=$itemsPerPage&skip=${itemsPerPage * pageNumber}')
             .then((value) {
           // print([...value]);
+          print("making news list");
           var newsList = (<NewsModel<T>>[
             ...value.map((e) => NewsModel<T>.fromMap(e)).toList()
           ]);
+          print("making news list done");
           cacheData.setRange(pageNumber * itemsPerPage,
               min(maxNewsItems, (pageNumber + 1) * itemsPerPage), newsList);
           displayedData = ApiResponse.completed(cacheData);
@@ -286,7 +312,7 @@ class NewsProvider<T extends NewsType> with ChangeNotifier {
         pageLoading[pageNumber] = false;
         displayedData = ApiResponse.error(e.toString());
         notifyListeners();
-        print('${e.toString()}');
+        print(e.toString());
       }
     }
     return Future.value(null);

@@ -1,5 +1,6 @@
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/modules/news/utility/showSnackBarResult.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:IITDAPP/modules/news/screens/newsPage.dart';
@@ -11,7 +12,6 @@ import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:provider/provider.dart';
 import 'imageOverlay/text/newsClicks.dart';
 import 'imageOverlay/text/newsSource.dart';
-import 'package:IITDAPP/values/Constants.dart';
 import 'dart:math';
 
 class RecentWidget extends StatelessWidget {
@@ -113,6 +113,7 @@ class RecentWidget extends StatelessWidget {
                             .color
                             .withOpacity(0.54)),
                   ),
+                  // Positioned(right: 0, bottom: 10, child: Text(item.trendRate)),
                   Positioned(
                     right: 0,
                     bottom: 0,

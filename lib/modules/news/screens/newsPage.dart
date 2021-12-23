@@ -67,7 +67,9 @@ class NewsPage extends StatelessWidget {
                 flexibleSpace: FlexibleSpaceBar(
                   background: Hero(
                     tag: imageTag,
-                    child: NewsImage(url: syncItem.imgUrl),
+                    child: NewsImage(
+                      url: syncItem.imgUrl,
+                    ),
                   ),
                 ),
               ),
@@ -163,7 +165,9 @@ class NewsPage extends StatelessWidget {
                                     MarkdownStyleSheet(textScaleFactor: 1.2),
                               )),
                   ),
-                  if (redirectPossible && showEdit)
+                  if (redirectPossible &&
+                      showEdit &&
+                      (currentUser.isSSAdmin || currentUser.isSuperAdmin))
                     TextButton(
                         style: TextButton.styleFrom(
                           backgroundColor: (syncItem.details.status ==
@@ -200,28 +204,49 @@ class NewsPage extends StatelessWidget {
                                       .RAISED_BUTTON_FOREGROUND
                                       .withOpacity(0.4),
                             ))),
-                  TextButton(
-                    onPressed: () async {
-                      final result =
-                          await Navigator.of(context).push(MaterialPageRoute(
-                        builder: (_) => ReportScreen(
-                          item: syncItem,
-                        ),
-                      ));
+                  if (!item.reports
+                      .any((element) => element.reporterId == currentUser.id))
+                    TextButton(
+                      onPressed: () async {
+                        final result =
+                            await Navigator.of(context).push(MaterialPageRoute(
+                          builder: (_) => ReportScreen(
+                            item: syncItem,
+                          ),
+                        ));
 
-                      showSnackbarResult(result, Scaffold.of(context));
-                    },
-                    child: Text(
-                      'Report This Article',
-                      style: TextStyle(
-                          color: Theme.of(context)
-                              .textTheme
-                              .headline1
-                              .color
-                              .withOpacity(0.54),
-                          fontSize: 15),
+                        showSnackbarResult(result, Scaffold.of(context));
+                      },
+                      child: Text(
+                        'Report This Article',
+                        style: TextStyle(
+                            color: Theme.of(context)
+                                .textTheme
+                                .headline1
+                                .color
+                                .withOpacity(0.54),
+                            fontSize: 15),
+                      ),
                     ),
-                  ),
+                  if (item.reports
+                      .any((element) => element.reporterId == currentUser.id))
+                    TextButton(
+                      style: ButtonStyle(
+                        overlayColor:
+                            MaterialStateProperty.all(Colors.transparent),
+                      ),
+                      onPressed: () {},
+                      child: Text(
+                        'You Have Already Reported This Article',
+                        style: TextStyle(
+                            color: Theme.of(context)
+                                .textTheme
+                                .headline1
+                                .color
+                                .withOpacity(0.54),
+                            fontSize: 15),
+                      ),
+                    ),
                   if (item.details.status == Status.COMPLETED)
                     Container(
                       alignment: Alignment.bottomRight,

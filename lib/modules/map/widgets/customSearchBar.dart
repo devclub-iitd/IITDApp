@@ -2,6 +2,8 @@
 // for details. All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
+// ignore_for_file: deprecated_member_use
+
 import 'package:IITDAPP/modules/login/userlogin/profile_dialog.dart';
 import 'package:IITDAPP/modules/map/data/mapCondition.dart';
 import 'package:IITDAPP/modules/map/data/mapOffsets.dart';
@@ -211,7 +213,7 @@ class SearchOption extends StatelessWidget {
   final Function onTap;
   final String query;
   final bgcolor;
-  SearchOption(
+  const SearchOption(
       {@required this.m,
       @required this.onTap,
       @required this.query,

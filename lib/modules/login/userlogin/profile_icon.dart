@@ -5,15 +5,14 @@ import './profile_dialog.dart';
 class ProfileIcon extends StatelessWidget {
   final Function onlogout;
 
-  ProfileIcon(this.onlogout);
+  const ProfileIcon(this.onlogout);
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.person),
-      onPressed: () {
-        showAlert(context, onlogout);
-      }
-    );
+        icon: Icon(Icons.person),
+        onPressed: () {
+          showAlert(context, onlogout);
+        });
   }
 }

@@ -7,7 +7,7 @@ class EventTime extends StatelessWidget {
   final DateTime _startsAt;
   final DateTime _endsAt;
 
-  EventTime(this._startsAt, this._endsAt);
+  const EventTime(this._startsAt, this._endsAt);
 
   @override
   Widget build(BuildContext context) {

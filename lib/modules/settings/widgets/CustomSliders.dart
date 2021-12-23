@@ -146,7 +146,7 @@ class CustomSliders extends StatefulWidget {
   final getTexValue;
   final valueChangeCallback;
   final SPkey;
-  CustomSliders(
+  const CustomSliders(
       {this.sliderHeight = 48.0,
       this.max = 10.0,
       this.min = 0.0,

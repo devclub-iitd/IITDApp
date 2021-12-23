@@ -1,32 +1,17 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:http/http.dart' as http;
-import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
 // import 'package:IITDAPP/routes/Routes.dart';
-import 'package:IITDAPP/values/Constants.dart';
 
-import 'package:IITDAPP/ThemeModel.dart';
-import 'package:provider/provider.dart';
-import 'package:IITDAPP/widgets/error_alert.dart';
-import 'package:IITDAPP/widgets/loading.dart';
-import 'package:flutter/material.dart';
-import 'package:datetime_picker_formfield/datetime_picker_formfield.dart';
-import 'package:intl/intl.dart';
-import 'package:pedantic/pedantic.dart';
-import 'package:validators/validators.dart';
-import 'package:http/http.dart' as http;
-import 'dart:async';
-import 'package:flutter/cupertino.dart';
-import 'package:image_picker/image_picker.dart';
-import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
-import 'dart:convert';
 import 'dart:math';
 
 // var stream =
@@ -68,9 +53,8 @@ class ApiBaseHelper {
       // final response = await http
       //     .put(url, headers: {'authorization': 'Bearer $token'}, body: body)
       //     .timeout(Duration(seconds: 10));
-      // print('called $url');
 
-      print(body);
+      // print(body);
 
       if (newsImage == null) {
         var bytes = await rootBundle.load('assets/images/null.png');
@@ -94,10 +78,12 @@ class ApiBaseHelper {
       request.fields['imgUrl'] = body['imgUrl'];
 
       final response = await request.send();
+      print('put called $url');
       print(response.statusCode);
       response.stream.transform(utf8.decoder).listen((value) {
         print(value);
       });
+      print('call done');
       // responseJson = _returnResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet connection');
@@ -115,7 +101,9 @@ class ApiBaseHelper {
         headers: {'authorization': 'Bearer $token'},
       ).timeout(Duration(seconds: 10));
       responseJson = _returnResponse2(response);
-      print('called $url');
+      print('delete called $url');
+      print(json.decode(response.body.toString()));
+      print('done delete');
     } on SocketException {
       throw FetchDataException('No Internet connection');
     } on TimeoutException {
@@ -132,7 +120,9 @@ class ApiBaseHelper {
         headers: {'authorization': 'Bearer $token'},
       ).timeout(Duration(seconds: 10));
       responseJson = _returnResponse2(response);
-      print('called $url');
+      print('get called $url');
+      print(json.decode(response.body.toString()));
+      print('done get');
     } on SocketException {
       throw FetchDataException('No Internet connection');
     } on TimeoutException {
@@ -148,9 +138,8 @@ class ApiBaseHelper {
       //     .post(url, headers: {'authorization': 'Bearer $token'}, body: body)
       //     .timeout(Duration(seconds: 10));
       // responseJson = _returnResponse(response);
-      // print('called $url');
 
-      print(body);
+      // print(body);
 
       if (newsImage == null) {
         var ok = Random();
@@ -178,12 +167,13 @@ class ApiBaseHelper {
       request.fields['imgUrl'] = '';
       request.headers['authorization'] = 'Bearer $token';
 
+      print('post called $url');
       final response = await request.send();
       print(response.statusCode);
       response.stream.transform(utf8.decoder).listen((value) {
         print(value);
       });
-
+      print('done post');
       // responseJson = _returnResponse(response);
     } on SocketException {
       throw FetchDataException('No Internet connection');

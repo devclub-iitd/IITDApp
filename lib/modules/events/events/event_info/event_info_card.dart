@@ -14,7 +14,7 @@ class EventInfoCard extends StatelessWidget {
   // final Function _refreshLists;
   final bool showButton;
 
-  EventInfoCard(this._event, {this.showButton = true});
+  const EventInfoCard(this._event, {this.showButton = true});
   @override
   Widget build(BuildContext context) {
     var actionRow = <Widget>[];
@@ -29,12 +29,12 @@ class EventInfoCard extends StatelessWidget {
       StarButton(_event),
     );
     actionRow.add(IconButton(
-      onPressed: (){},
+      onPressed: () {},
       icon: Icon(Icons.chat_bubble_outline),
       tooltip: 'public discussion forum',
     ));
     actionRow.add(IconButton(
-      onPressed: (){},
+      onPressed: () {},
       icon: Icon(Icons.chat_bubble_outlined),
       tooltip: 'intra club discussion forum',
     ));

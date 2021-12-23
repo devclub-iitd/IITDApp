@@ -20,7 +20,7 @@ import 'admins_screen/admin_screen.dart';
 class ManageTab extends StatefulWidget {
   final TabController _controller;
 
-  ManageTab(this._controller);
+  const ManageTab(this._controller);
 
   @override
   State<StatefulWidget> createState() {

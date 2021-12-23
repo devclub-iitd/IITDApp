@@ -7,11 +7,12 @@ import 'package:IITDAPP/modules/discussionForum/models/user_model.dart';
 //=======
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:provider/provider.dart';
+
 //>>>>>>> Stashed changes
 //package:IITDAPP/modules/events/home.dart
 class ChatScreen extends StatefulWidget {
   final User user;
-  ChatScreen({this.user});
+  const ChatScreen({this.user});
   @override
   _ChatScreenState createState() => _ChatScreenState();
 }
@@ -40,7 +41,11 @@ class _ChatScreenState extends State<ChatScreen> {
       decoration: BoxDecoration(
 //<<<<<<< Updated upstream
 //=======
-        color: isMe ? Provider.of<ThemeModel>(context).theme.PRIMARY_COLOR : Provider.of<ThemeModel>(context).theme.DEFAULT_HIGHLIGHT_BACKGROUND,//....Colors.lightBlue[100]
+        color: isMe
+            ? Provider.of<ThemeModel>(context).theme.PRIMARY_COLOR
+            : Provider.of<ThemeModel>(context)
+                .theme
+                .DEFAULT_HIGHLIGHT_BACKGROUND, //....Colors.lightBlue[100]
 //>>>>>>> Stashed changes
         borderRadius: isMe
             ? BorderRadius.only(
@@ -57,7 +62,8 @@ class _ChatScreenState extends State<ChatScreen> {
         children: <Widget>[
           Text(message.time,
               style: TextStyle(
-                color: Provider.of<ThemeModel>(context).theme.ACCENT_TEXT_COLOR,//
+                color:
+                    Provider.of<ThemeModel>(context).theme.ACCENT_TEXT_COLOR, //
                 fontSize: 16,
                 //fontWeight: FontWeight.w600,
               )),
@@ -66,7 +72,8 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
           Text(message.text,
               style: TextStyle(
-                color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
+                color:
+                    Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
               )),
@@ -96,13 +103,13 @@ class _ChatScreenState extends State<ChatScreen> {
             onPressed: () {},
             icon: Icon(Icons.photo),
             iconSize: 25,
-            color: Colors.black, 
+            color: Colors.black,
           ),
           IconButton(
             onPressed: () {},
             icon: Icon(Icons.send),
             iconSize: 25,
-            color: Colors.black, 
+            color: Colors.black,
           ),
         ],
       ),

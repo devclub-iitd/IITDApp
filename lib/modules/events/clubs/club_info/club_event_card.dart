@@ -14,7 +14,7 @@ class ClubEventCard extends StatelessWidget {
   final Event _event;
   final Function reload;
 
-  ClubEventCard(this._event, this.reload, Key key) : super(key: key);
+  const ClubEventCard(this._event, this.reload, Key key) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

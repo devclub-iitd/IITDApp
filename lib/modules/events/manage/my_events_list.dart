@@ -7,7 +7,7 @@ class MyEventsList extends StatelessWidget {
   final List<Event> _events;
   final Function _refresh;
 
-  MyEventsList(this._events, this._refresh);
+  const MyEventsList(this._events, this._refresh);
 
   @override
   Widget build(BuildContext context) {

@@ -13,7 +13,7 @@ class EventsList extends StatelessWidget {
   final String listTitle;
   final Function _onStarPress;
 
-  EventsList(
+  const EventsList(
     this._events,
     this.listTitle,
     // this._key,

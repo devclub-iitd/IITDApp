@@ -5,7 +5,7 @@ import 'package:IITDAPP/utility/UrlHandler.dart';
 class Book extends StatelessWidget {
   final String _name;
   final String _link;
-  Book(this._name, this._link);
+  const Book(this._name, this._link);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(

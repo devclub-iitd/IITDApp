@@ -9,9 +9,6 @@ import 'package:IITDAPP/modules/dashboard/widgets/tab/tabHead.dart';
 import 'package:IITDAPP/modules/dashboard/widgets/userWidgets.dart';
 import 'package:IITDAPP/modules/login/RequestLoginScreen.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
-import 'package:IITDAPP/modules/settings/SettingsScreen.dart';
-import 'package:IITDAPP/modules/settings/data/SettingsData.dart';
-import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:provider/provider.dart';
@@ -113,7 +110,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
           cnp: Provider.of<NewsProvider<RecentNews>>(context, listen: false),
           getCacheData: (NewsProvider<RecentNews> item) => item.displayedData,
           da: dashboardAlerts,
-          limit: 10));
+          limit: 5));
     }
     // tabList.add(Tab(child: TabHead<AttendanceProvider>(title: 'Attendance')));
     tabList.add(Tab(

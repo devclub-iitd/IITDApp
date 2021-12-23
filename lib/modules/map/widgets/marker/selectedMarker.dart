@@ -8,7 +8,7 @@ class SelectedMarker extends StatelessWidget {
         super(key: key);
 
   final Animation<double> _animation;
-  static final double selectedIconSize = 70;
+  static const double selectedIconSize = 70;
 
   @override
   Widget build(BuildContext context) {
