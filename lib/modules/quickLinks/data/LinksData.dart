@@ -1,6 +1,8 @@
 var linksData = {
   'Academics': [
     LinksModel(name: 'Moodle', url: 'https://moodle.iitd.ac.in/'),
+    LinksModel(name: 'Gradescope', url: 'https://www.gradescope.com'),
+    LinksModel(name: 'Piazza', url: 'https://piazza.com/'),
     LinksModel(name: 'Central Library', url: 'http://library.iitd.ac.in/'),
     LinksModel(name: 'Academic ERP', url: 'https://eacademics.iitd.ac.in/sportal/login'),
     LinksModel(name: 'Ciriculum Info', url: 'https://home.iitd.ac.in/curriculum.php'),
@@ -34,6 +36,7 @@ var linksData = {
     LinksModel(name: 'Hospital', url: 'http://hospital.iitd.ac.in/'),
     LinksModel(name: 'Your Dost', url: 'https://yourdost.com/'),
   ]
+  
 };
 
 class LinksModel {

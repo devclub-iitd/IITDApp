@@ -185,37 +185,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             SizedBox(
               height: 25,
             ),
-            /*RaisedButton(  
-                  child: Text("devClogo", style: TextStyle(fontSize: 12),),  
-                  onPressed: (){
-                    avimage='assets/images/devCLogo.png';
-                  },  
-                  color: Colors.white,  
-                  textColor: Colors.black,  
-                  padding: EdgeInsets.all(8.0),  
-                  splashColor: Colors.grey,  
-                ),
-                
-                RaisedButton(  
-                  child: Text("udai_pic", style: TextStyle(fontSize: 12),),  
-                  onPressed: (){
-                    avimage='assets/images/udai_pic.jpeg';
-                  },  
-                  color: Colors.purple,  
-                  textColor: Colors.white,  
-                  padding: EdgeInsets.all(8.0),  
-                  splashColor: Colors.grey,  
-                ),
-                RaisedButton(  
-                  child: Text("map-image", style: TextStyle(fontSize: 12),),  
-                  onPressed: (){
-                    avimage='assets/images/map-image.png';
-                  },  
-                  color: Colors.purple,  
-                  textColor: Colors.white,  
-                  padding: EdgeInsets.all(8.0),  
-                  splashColor: Colors.grey,  
-                ),*/
+            
 
             SettingsSectionHeading(text: 'Theme Settings'),
             SettingsDropdownTile(
@@ -235,29 +205,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     onToggle: () {},
                   )),
             ),
-            //start
-            /*SettingsDropdownTile(
-              lis: avatars,
-              SPkey: commonKeys[1],
-              text: 'Change Avatar',
-              defaultValue: defaultsForKey[commonKeys[
-                  1]], //Provider.of<ThemeModel>(context,listen:false).themeType,
-              onChange: (value) {
-                Provider.of<ThemeModel>(context, listen: false)
-                    .toggleTheme(value);
-              },
-               
-        
-              leading: IconButton(
-                  onPressed: () {},
-                  icon: DarkModeSwitch(
-                    Theme.of(context).brightness == Brightness.dark,
-                    onToggle: () {},
-                  )
-                  ),
-            ),*/
-
-            //end
+            
             SizedBox(
               height: 25,
             ),
@@ -295,11 +243,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 handleTap('Dashboard');
               },
             ),
-            SettingsTextButton(
+            /*SettingsTextButton(
                 text: 'Attendance',
                 onTap: () {
                   handleTap('Attendance');
-                }),
+                }),*/
             SettingsTextButton(
               text: 'Events',
               onTap: () {

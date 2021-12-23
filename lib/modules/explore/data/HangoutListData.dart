@@ -81,7 +81,7 @@ List<Map> hangoutsList = [
     'rating': 2.9,
     'image': 'https://img4.nbstatic.in/tr:w-500/5cbdb3e7d60180000d7ad0f2.png'
   },
-  {
+  /*{
     'name': 'Shadab Cafe',
     'comment': 'near Zanskar Hostel',
     'note': '',
@@ -94,7 +94,7 @@ List<Map> hangoutsList = [
     'note': '',
     'rating': 3.8,
     'image': 'assets/images/masala_mix_food.jpg'
-  },
+  },*/
   {
     'name': 'Chai Point',
     'comment': '',
