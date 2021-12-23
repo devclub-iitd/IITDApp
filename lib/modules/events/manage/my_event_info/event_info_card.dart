@@ -12,7 +12,7 @@ class EventInfoCard extends StatelessWidget {
   final Event _event;
   final Function _refresh;
 
-  EventInfoCard(this._event, this._refresh);
+  const EventInfoCard(this._event, this._refresh);
 
   @override
   Widget build(BuildContext context) {

@@ -7,7 +7,6 @@ import 'package:provider/provider.dart';
 import 'imageOverlay/newsImage.dart';
 import 'imageOverlay/overlayTitle.dart';
 import 'imageOverlay/overlayHeading.dart';
-import 'package:IITDAPP/values/Constants.dart';
 
 class TrendingWidget extends StatelessWidget {
   const TrendingWidget({

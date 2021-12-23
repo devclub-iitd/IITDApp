@@ -28,6 +28,7 @@ class _NewsListState<K extends NewsType> extends State<NewsList<K>> {
   String _value;
   @override
   void initState() {
+    print("printing newslist");
     print(widget.title);
     _value = widget.title;
     super.initState();

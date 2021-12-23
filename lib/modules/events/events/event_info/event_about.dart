@@ -7,7 +7,7 @@ import '../event_class.dart';
 class EventAbout extends StatelessWidget {
   final Event _event;
 
-  EventAbout(this._event);
+  const EventAbout(this._event);
 
   @override
   Widget build(BuildContext context) {

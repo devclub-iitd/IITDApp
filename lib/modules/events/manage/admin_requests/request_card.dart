@@ -8,7 +8,7 @@ import 'request_class.dart';
 class RequestCard extends StatelessWidget {
   final Request request;
 
-  RequestCard(this.request);
+  const RequestCard(this.request);
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +50,7 @@ class ResponseIconsState extends State<ResponseIcons> {
     state = 'pending';
   }
 
-  Future<Null> reqeustResponse(String ans) async {
+  Future<void> reqeustResponse(String ans) async {
     final response = await http.post('$uri/api',
         headers: {'authorization': 'Bearer $token'}, body: {'response': ans});
 

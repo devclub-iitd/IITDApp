@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class RecentsSections extends StatelessWidget {
-  RecentsSections({
+  const RecentsSections({
     Key key,
   }) : super(key: key);
 

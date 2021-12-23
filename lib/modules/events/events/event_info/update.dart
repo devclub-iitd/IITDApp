@@ -8,7 +8,7 @@ import './updates_class.dart';
 class EventUpdate extends StatelessWidget {
   final Update _update;
 
-  EventUpdate(this._update, Key key) : super(key: key);
+  const EventUpdate(this._update, Key key) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -11,10 +11,20 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'dart:async';
 import 'dart:convert';
+import 'package:IITDAPP/main.dart';
 // import 'package:validators/validators.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../casi_user.dart';
+
+//  final response2 = await http.post("$uri/api/user/updatefcm",
+//         headers: {'authorization': 'Bearer $token'},
+//         body: {'fcmRegistrationToken': fcm});
+//     print("yehoo");
+//     print(token);
+//     print(response2.statusCode);
+//     print(response2.reasonPhrase);
+//     print("end");
 
 void onLoginSuccess(BuildContext context, String newtoken) async {
   print('newtoken: $newtoken');
@@ -44,11 +54,12 @@ void onLoginSuccess(BuildContext context, String newtoken) async {
       Navigator.pop(context);
     }
     Provider.of<LoginStateProvider>(context, listen: false).signIn();
+    await initialiseNotifications();
     final response2 = await http.post("$uri/api/user/updatefcm",
         headers: {'authorization': 'Bearer $token'},
-        body: {'fcmRegistrationToken': token});
-    print("start");
-    print(token);
+        body: {'fcmRegistrationToken': fcm});
+    print("yehoo");
+    print(fcm);
     print(response2.statusCode);
     print(response2.reasonPhrase);
     print("end");
@@ -116,7 +127,6 @@ class LoginPage extends StatefulWidget {
 class LoginPageState extends State<LoginPage> {
   // ignore: unused_field
   final _key = GlobalKey<FormState>();
-
   // @override
   // void initState() {
   //   var storage = FlutterSecureStorage();

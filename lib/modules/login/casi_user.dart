@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_function_declarations_over_variables, prefer_initializing_formals
+
 import 'dart:convert';
 import 'package:corsac_jwt/corsac_jwt.dart';
 import 'package:flutter/material.dart';

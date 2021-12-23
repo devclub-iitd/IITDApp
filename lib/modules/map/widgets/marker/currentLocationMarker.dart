@@ -10,7 +10,7 @@ import 'package:IITDAPP/modules/map/widgets/marker/marker.dart';
 class CurrentLocationMarker extends StatefulWidget {
   final MinScaleLevel minScale = null;
 
-  CurrentLocationMarker();
+  const CurrentLocationMarker();
 
   @override
   _CurrentLocationMarkerState createState() => _CurrentLocationMarkerState();

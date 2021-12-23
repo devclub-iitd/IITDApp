@@ -14,7 +14,7 @@ import 'package:pedantic/pedantic.dart';
 class AdminCard extends StatelessWidget {
   final Admin admin;
 
-  AdminCard(this.admin, Key key) : super(key: key);
+  const AdminCard(this.admin, Key key) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class AdminCard extends StatelessWidget {
 class ResponseIcons extends StatefulWidget {
   final Admin admin;
 
-  ResponseIcons(this.admin);
+  const ResponseIcons(this.admin);
 
   @override
   State<StatefulWidget> createState() {
@@ -80,7 +80,7 @@ class ResponseIconsState extends State<ResponseIcons> {
     state = 'pending';
   }
 
-  Future<Null> deleteAdmin() async {
+  Future<void> deleteAdmin() async {
     final response = await http.post('$uri/api/users/removeAdmin', headers: {
       'authorization': 'Bearer $token'
     }, body: {
@@ -118,16 +118,14 @@ class ResponseIconsState extends State<ResponseIcons> {
               )
             ],
           )
-        : Container(
-            child: Center(
-              child: Text(
-                'removed',
-                style: TextStyle(
-                  color: Provider.of<ThemeModel>(context)
-                      .theme
-                      .PRIMARY_TEXT_COLOR
-                      .withOpacity(0.7),
-                ),
+        : Center(
+            child: Text(
+              'removed',
+              style: TextStyle(
+                color: Provider.of<ThemeModel>(context)
+                    .theme
+                    .PRIMARY_TEXT_COLOR
+                    .withOpacity(0.7),
               ),
             ),
           );

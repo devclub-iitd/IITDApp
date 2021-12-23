@@ -23,8 +23,8 @@ import 'userlogin/login_page.dart';
 // import 'package:intl/intl.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen();
   static const String routeName = '/login';
-
   @override
   State<StatefulWidget> createState() {
     return LoginScreenState();
@@ -196,8 +196,7 @@ class LoginScreenState extends State<LoginScreen>
   //               : LoginPage(onlogin: onlogin));
   // }
   Widget build(BuildContext context) {
-    return Container(child:
-        Consumer<LoginStateProvider>(builder: (context, provider, child) {
+    return Consumer<LoginStateProvider>(builder: (context, provider, child) {
       // if (snapshot.connectionState == ConnectionState.done) {
       //   Widget home;
       //   if (signedIn == true) {
@@ -247,6 +246,6 @@ class LoginScreenState extends State<LoginScreen>
       } else {
         return LoginPage();
       }
-    }));
+    });
   }
 }

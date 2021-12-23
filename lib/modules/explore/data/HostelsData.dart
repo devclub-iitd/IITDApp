@@ -57,7 +57,7 @@ List<Map> hostelsList = [
   {
     'name': 'Vindhyachal',
     'tagline': 'Est. 1963',
-    'image': 'assets/images/vindhanchal.jpeg'
+    'image': 'assets/images/vindhyanchal.jpeg'
   },
   {
     'name': 'Zanskar',
@@ -86,7 +86,7 @@ Map hostelDetails = {
           image: 'https://i.ytimg.com/vi/qRHxg6O3w0s/maxresdefault.jpg'),
     ],
     'image': 'assets/images/aravali.jpeg',
-    'loc' : 'https://www.google.com/'
+    'loc': 'https://www.google.com/'
   },
   'Girnar': {
     'about':

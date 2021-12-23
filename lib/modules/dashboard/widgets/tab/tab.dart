@@ -82,6 +82,9 @@ class _GeneralTabState extends State<GeneralTab> {
           refresh: widget.refresh, error: widget.apiResponse.message);
     }
     var tabData = widget.apiResponse.data;
+    if (tabData.length > 5) {
+      tabData.length = 5;
+    }
     if (Provider.of<CurrentTabProvider>(context, listen: false)
         .isCurrent(widget.index)) {
       widget.viewed();
@@ -157,6 +160,7 @@ class _GeneralTabState extends State<GeneralTab> {
                   ),
               itemCount: tabData.length),
     );
+    // return Container();
   }
 }
 
@@ -204,22 +208,26 @@ class NewsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var np = Provider.of<NewsProvider<RecentNews>>(context, listen: false);
+    // print();
     return Consumer<TabDataProvider<NewsProvider<RecentNews>>>(
         builder: (_, tdp, c) {
-      return GeneralTab(
-        index: 2,
-        viewed: tdp.viewed,
-        apiResponse: tdp.data,
-        newAlerts: tdp.alerts,
-        parentScrollController: parentScrollController,
-        refresh: np.refresh,
-        routeName: News.routeName,
-        subtitle: (item) => item.author + ' - ' + item.sourceName,
-        title: (item) => item.title,
-        tabData: tabData,
-        trailing: (item) => timeago.format(item.createdAt
-            .subtract(Duration(minutes: 330))), //330 minute difference
-      );
+      if (tdp != null) {
+        return GeneralTab(
+          index: 2,
+          viewed: tdp.viewed,
+          apiResponse: tdp.data,
+          newAlerts: tdp.alerts,
+          parentScrollController: parentScrollController,
+          refresh: np.refresh,
+          routeName: News.routeName,
+          subtitle: (item) => item.author + ' - ' + item.sourceName,
+          title: (item) => item.title,
+          tabData: tabData,
+          trailing: (item) => timeago.format(item.createdAt
+              .subtract(Duration(minutes: 330))), //330 minute difference
+        );
+      }
+      return Container();
     });
   }
 }

@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class IndivScreenSettings extends StatefulWidget {
-  IndivScreenSettings(this.tag);
+  const IndivScreenSettings(this.tag);
   final tag;
   @override
   _IndivScreenSettingsState createState() => _IndivScreenSettingsState();

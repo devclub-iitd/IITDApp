@@ -7,7 +7,7 @@ import 'package:IITDAPP/modules/news/data/newsData.dart';
 class OverlayHeading extends StatelessWidget {
   final NewsModel item;
 
-  OverlayHeading({this.item});
+  const OverlayHeading({this.item});
 
   @override
   Widget build(BuildContext context) {

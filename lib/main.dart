@@ -11,12 +11,10 @@ import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/values/colors/colors.dart';
 import 'package:IITDAPP/values/colors/darkColors.dart';
 import 'package:IITDAPP/push_notifications.dart';
-import 'package:calendarnotificationprovider/calendarnotificationprovider.dart';
 import 'package:firebase_core/firebase_core.dart';
 // import 'package:global_configuration/global_configuration.dart';
 // import 'package:syncfusion_flutter_core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:package_info/package_info.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +23,6 @@ import 'package:IITDAPP/modules/courses/screens/search.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   // try {
   //   await GlobalConfiguration().loadFromAsset('secrets');
   //   SyncfusionLicense.registerLicense(
@@ -35,7 +32,7 @@ void main() async {
   //   print('secrets.json file is required');
   // }
   unawaited(extractAppVersion());
-  unawaited(initialiseNotifications());
+  // unawaited(initialiseNotifications());
   unawaited(initialisePreferences());
   await savedstate.init();
   runApp(MultiProvider(providers: [
@@ -109,19 +106,22 @@ extractAppVersion() async =>
     });
 
 // ignore: always_declare_return_types
+
+var fcm;
 initialiseNotifications() async {
   print('Initialising Notifications');
   await Firebase.initializeApp();
   print('Testing Push Notifications');
   var pushNotificationsManager = PushNotificationsManager();
-  await pushNotificationsManager.init();
-  try {
-    await Calendarnotificationprovider.setPackageName('com.example.IITDAPP');
-    await Calendarnotificationprovider.setDescription(
-        start: 'Time:- ', end: '', text: DynamicTextEventKeys.RangeTime);
-    await Calendarnotificationprovider.setTitle(
-        start: 'Event:- ', text: DynamicTextEventKeys.Title);
-  } on PlatformException {
-    print('Error Occured');
-  }
+  fcm = await pushNotificationsManager.init();
+  print("fcm " + fcm);
+  // try {
+  //   await Calendarnotificationprovider.setPackageName('com.example.IITDAPP');
+  //   await Calendarnotificationprovider.setDescription(
+  //       start: 'Time:- ', end: '', text: DynamicTextEventKeys.RangeTime);
+  //   await Calendarnotificationprovider.setTitle(
+  //       start: 'Event:- ', text: DynamicTextEventKeys.Title);
+  // } on PlatformException {
+  //   print('Error Occured');
+  // }
 }

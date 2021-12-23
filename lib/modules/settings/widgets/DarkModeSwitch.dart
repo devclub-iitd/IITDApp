@@ -6,7 +6,7 @@ class DarkModeSwitch extends StatelessWidget {
   final VoidCallback onToggle;
   final bool snapToEnd;
 
-  DarkModeSwitch(this.isOn, {this.snapToEnd, this.onToggle});
+  const DarkModeSwitch(this.isOn, {this.snapToEnd, this.onToggle});
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -15,7 +15,6 @@ class DarkModeSwitch extends StatelessWidget {
             width: 200,
             height: 100,
             child: FlareActor('assets/flare/dm.flr',
-                animation: isOn ? 'Dark to light' : 'Light to dark'
-            )));
+                animation: isOn ? 'Dark to light' : 'Light to dark')));
   }
 }

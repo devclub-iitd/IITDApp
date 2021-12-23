@@ -132,7 +132,7 @@ class AdminScreenState extends State<AdminScreen> {
 class AddDialog extends StatefulWidget {
   final Function refresh;
 
-  AddDialog(this.refresh);
+  const AddDialog(this.refresh);
 
   @override
   State<StatefulWidget> createState() {
@@ -146,7 +146,7 @@ class AddDialogState extends State<AddDialog> {
   final _key = GlobalKey<FormState>();
   List<DropdownMenuItem<String>> clubList = [];
 
-  Future<Null> addAdmin() async {
+  Future<void> addAdmin() async {
     print('Adding Admin');
     final response = await http.post('$uri/api/users/addAdmin',
         headers: {'authorization': 'Bearer $token'},

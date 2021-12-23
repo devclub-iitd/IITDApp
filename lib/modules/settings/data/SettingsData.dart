@@ -1,6 +1,5 @@
 import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/settings/widgets/SettingsTextWidgets.dart';
-import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 var commonKeys = ['defaultScreen', 'theme', 'showNotifications', 'avatar'];

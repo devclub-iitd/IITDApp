@@ -102,7 +102,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
     _controller = TabController(length: 3, vsync: this);
     _managetabcontroller = TabController(length: 3, vsync: this);
     appBar = CustomAppBar(
-      title: Text('$title'),
+      title: Text(title),
       height: 2,
       bottom: TabBar(
         indicatorColor: Colors.white70,
@@ -150,8 +150,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
         tag: 'Events',
       ),
       appBar: appBar,
-      body: Container(
-          child: Column(
+      body: Column(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
@@ -173,7 +172,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 ),
           Expanded(child: _tabs[_selectedTab]),
         ],
-      )),
+      ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 20)],
@@ -192,7 +191,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
               _selectedTab = index;
               if (index == 1) {
                 appBar = CustomAppBar(
-                  title: Text('$title'),
+                  title: Text(title),
                   height: 2,
                   bottom: TabBar(
                     indicatorColor: Colors.white70,
@@ -206,7 +205,7 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 );
               } else {
                 appBar = CustomAppBar(
-                  title: Text('$title'),
+                  title: Text(title),
                 );
               }
             });

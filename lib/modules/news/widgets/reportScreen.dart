@@ -114,8 +114,10 @@ class _ReportScreenState extends State<ReportScreen> {
                                       _selected[_options.indexOf(element)])
                                   .toList();
                               results.add(_reportTextController.text);
-                              widget.item.report(results).then(
-                                  (value) => Navigator.pop(context, value));
+                              widget.item.report(results).then((value) => {
+                                    Navigator.pop(context, value),
+                                    Navigator.pop(context)
+                                  });
                             }),
                       ]),
                 ),

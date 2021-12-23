@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class EventVenue extends StatelessWidget {
   final String _venue;
 
-  EventVenue(this._venue);
+  const EventVenue(this._venue);
 
   @override
   Widget build(BuildContext context) {

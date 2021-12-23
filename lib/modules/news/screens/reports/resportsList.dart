@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 class ReportsList extends StatelessWidget {
   final NewsModel news;
   final bool redirectPossible;
-  ReportsList(this.news, this.redirectPossible);
+  const ReportsList(this.news, this.redirectPossible);
   @override
   Widget build(BuildContext context) {
     final reports = news.reports;
@@ -59,6 +59,7 @@ class ReportsList extends StatelessWidget {
                     );
                   }
                   return Card(
+                    color: Provider.of<ThemeModel>(context).theme.cardColor,
                     margin: EdgeInsets.all(5),
                     child: Padding(
                       padding: const EdgeInsets.all(16.0),
@@ -68,8 +69,9 @@ class ReportsList extends StatelessWidget {
                           NewsDate(
                             createdAt: reports[reports.length - i].reportedAt,
                             size: 13,
-                            color:
-                                Theme.of(context).accentColor.withOpacity(0.7),
+                            color: Provider.of<ThemeModel>(context)
+                                .theme
+                                .hintColor,
                           ),
                           const Divider(),
                           Text(

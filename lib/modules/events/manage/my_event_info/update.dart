@@ -17,7 +17,7 @@ class EventUpdate extends StatelessWidget {
   final Function onDelete;
   final String eventid;
 
-  EventUpdate(this._update, this.onDelete, this.eventid, Key key)
+  const EventUpdate(this._update, this.onDelete, this.eventid, Key key)
       : super(key: key);
 
   @override

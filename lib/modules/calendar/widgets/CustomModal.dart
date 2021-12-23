@@ -169,98 +169,90 @@ class _CustomModalState extends State<CustomModal> {
                             initialExpanded: expandedPanelsList[e.key]),
                         child: Padding(
                           padding: const EdgeInsets.all(15),
-                          child: Container(
-                            child: Column(
-                              children: <Widget>[
-                                // ignore: missing_required_param
-                                ExpandablePanel(
-                                  theme: const ExpandableThemeData(
-                                    headerAlignment:
-                                        ExpandablePanelHeaderAlignment.center,
-                                    tapBodyToExpand: true,
-                                    tapBodyToCollapse: false,
-                                    hasIcon: false,
-                                  ),
-                                  header: Builder(builder: (context) {
-                                    return Container(
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: Text(e.key,
-                                                  style: TextStyle(
-                                                    fontSize: 15,
-                                                    color:
-                                                        Provider.of<ThemeModel>(
-                                                                context)
-                                                            .theme
-                                                            .ACCENT_TEXT_COLOR,
-                                                  )),
-                                            ),
-                                            Spacer(),
-                                            ExpandableIcon(
-                                              theme: const ExpandableThemeData(
-                                                expandIcon: Icons.arrow_right,
-                                                collapseIcon:
-                                                    Icons.arrow_downward,
-                                                iconColor: Colors.white,
-                                                iconSize: 28.0,
-                                                iconRotationAngle: math.pi / 2,
-                                                iconPadding:
-                                                    EdgeInsets.only(right: 5),
-                                                hasIcon: false,
-                                              ),
-                                            ),
-                                          ],
+                          child: Column(
+                            children: <Widget>[
+                              // ignore: missing_required_param
+                              ExpandablePanel(
+                                theme: const ExpandableThemeData(
+                                  headerAlignment:
+                                      ExpandablePanelHeaderAlignment.center,
+                                  tapBodyToExpand: true,
+                                  tapBodyToCollapse: false,
+                                  hasIcon: false,
+                                ),
+                                header: Builder(builder: (context) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: Text(e.key,
+                                              style: TextStyle(
+                                                fontSize: 15,
+                                                color: Provider.of<ThemeModel>(
+                                                        context)
+                                                    .theme
+                                                    .ACCENT_TEXT_COLOR,
+                                              )),
                                         ),
-                                      ),
-                                    );
-                                  }),
-                                  expanded: Padding(
-                                    padding: const EdgeInsets.only(left: 20.0),
-                                    child: Column(
-                                      children: <Widget>[
-                                        for (var data in e.value)
-                                          Row(
-                                            children: <Widget>[
-                                              Container(
-                                                height: 20,
-                                                width: 20,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                10)),
-                                                    color: Color(data.color)),
-                                              ),
-                                              Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          left: 12.0),
-                                                  child: Text(
-                                                    data.name,
-                                                  )),
-                                              Spacer(),
-                                              Checkbox(
-                                                value: !exempted[data.name],
-                                                onChanged: (bool value) {
-                                                  expandedPanelsList[e.key] =
-                                                      true;
-                                                  changeExempted(
-                                                      data.name, value);
-                                                },
-                                                checkColor: Colors.white,
-                                                activeColor: Color(data.color),
-                                              )
-                                            ],
+                                        Spacer(),
+                                        ExpandableIcon(
+                                          theme: const ExpandableThemeData(
+                                            expandIcon: Icons.arrow_right,
+                                            collapseIcon: Icons.arrow_downward,
+                                            iconColor: Colors.white,
+                                            iconSize: 28.0,
+                                            iconRotationAngle: math.pi / 2,
+                                            iconPadding:
+                                                EdgeInsets.only(right: 5),
+                                            hasIcon: false,
                                           ),
+                                        ),
                                       ],
                                     ),
+                                  );
+                                }),
+                                expanded: Padding(
+                                  padding: const EdgeInsets.only(left: 20.0),
+                                  child: Column(
+                                    children: <Widget>[
+                                      for (var data in e.value)
+                                        Row(
+                                          children: <Widget>[
+                                            Container(
+                                              height: 20,
+                                              width: 20,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.all(
+                                                          Radius.circular(10)),
+                                                  color: Color(data.color)),
+                                            ),
+                                            Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 12.0),
+                                                child: Text(
+                                                  data.name,
+                                                )),
+                                            Spacer(),
+                                            Checkbox(
+                                              value: !exempted[data.name],
+                                              onChanged: (bool value) {
+                                                expandedPanelsList[e.key] =
+                                                    true;
+                                                changeExempted(
+                                                    data.name, value);
+                                              },
+                                              checkColor: Colors.white,
+                                              activeColor: Color(data.color),
+                                            )
+                                          ],
+                                        ),
+                                    ],
                                   ),
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       )),

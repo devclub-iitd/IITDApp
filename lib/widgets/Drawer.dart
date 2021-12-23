@@ -2,7 +2,6 @@ import 'package:IITDAPP/routes/Routes.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
 class AppDrawer extends StatelessWidget {
@@ -20,6 +19,7 @@ class AppDrawer extends StatelessWidget {
                 image: DecorationImage(
                     image: AssetImage('assets/images/icon.jpg'),
                     fit: BoxFit.fill)),
+            child: null,
             // child: Container(
             //     margin: EdgeInsets.fromLTRB(145, 120, 0, 0),
             //     // color: Colors.red,
@@ -88,13 +88,13 @@ class AppDrawer extends StatelessWidget {
             ),
             onTap: () {},
           ),
-          _createDrawerItem(
-            selected: tag == 'Attendance',
-            icon: Icons.group_add_outlined,
-            text: 'Attendance',
-            context: context,
-            routeName: Routes.attendance,
-          ),
+          // _createDrawerItem(
+          //   selected: tag == 'Attendance',
+          //   icon: Icons.group_add_outlined,
+          //   text: 'Attendance',
+          //   context: context,
+          //   routeName: Routes.attendance,
+          // ),
           _createDrawerItem(
               selected: tag == 'Quick Links',
               icon: CupertinoIcons.link,

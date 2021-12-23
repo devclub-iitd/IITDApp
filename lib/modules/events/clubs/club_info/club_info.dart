@@ -42,7 +42,7 @@ import '../../events/event_class.dart';
 class ClubInfo extends StatefulWidget {
   final Club _club;
 
-  ClubInfo(this._club);
+  const ClubInfo(this._club);
 
   @override
   State<StatefulWidget> createState() {

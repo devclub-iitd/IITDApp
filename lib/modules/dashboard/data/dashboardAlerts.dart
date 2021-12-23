@@ -20,6 +20,7 @@ class DashboardAlerts {
   }
 
   String getNewsKey(NewsModel item) {
+    if (item == null) return "";
     return item.id.toString() + 'D' + item.createdAt.toString();
   }
 

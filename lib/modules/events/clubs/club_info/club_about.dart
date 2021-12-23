@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class ClubAbout extends StatelessWidget {
   final String _clubAbout;
 
-  ClubAbout(this._clubAbout);
+  const ClubAbout(this._clubAbout);
 
   @override
   Widget build(BuildContext context) {

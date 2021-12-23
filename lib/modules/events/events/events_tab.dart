@@ -39,7 +39,7 @@ Widget errorMessage(context) {
 class EventsTab extends StatelessWidget {
   final TabController _controller;
 
-  EventsTab(this._controller);
+  const EventsTab(this._controller);
   @override
   Widget build(BuildContext context) {
     // return ChangeNotifierProvider<EventsTabProvider>(
@@ -79,7 +79,6 @@ class EventsTab extends StatelessWidget {
             loadingIcon(context),
           ],
         );
-        return null;
       },
     );
     // }));

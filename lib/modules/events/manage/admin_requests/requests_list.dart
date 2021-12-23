@@ -6,7 +6,7 @@ import 'request_class.dart';
 class RequestList extends StatefulWidget {
   final List<Request> requests;
 
-  RequestList(this.requests);
+  const RequestList(this.requests);
 
   @override
   State<StatefulWidget> createState() {

@@ -17,7 +17,7 @@ class StarButton extends StatefulWidget {
   final Event _event;
   // final Function _reorderList;
 
-  StarButton(this._event);
+  const StarButton(this._event);
 
   @override
   State<StatefulWidget> createState() {
@@ -45,7 +45,7 @@ class StarButtonState extends State<StarButton> {
     // };
   }
 
-  Future<Null> starEvent(String eventid) async {
+  Future<void> starEvent(String eventid) async {
     var workingEvent = Provider.of<EventsTabProvider>(context, listen: false)
         .allEvents
         .firstWhere((element) => element.eventid == widget._event.eventid);

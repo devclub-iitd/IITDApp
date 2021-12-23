@@ -1,7 +1,5 @@
 import 'package:IITDAPP/ThemeModel.dart';
-import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 import 'package:IITDAPP/values/Constants.dart';
-import 'package:IITDAPP/modules/settings/SettingsScreen.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

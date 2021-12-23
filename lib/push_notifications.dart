@@ -9,22 +9,22 @@ class PushNotificationsManager {
   static final PushNotificationsManager _instance =
       PushNotificationsManager._();
 
-  final FirebaseMessaging _firebaseMessaging =
-      FirebaseMessaging.instance; //FirebaseMessaging();
+  final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
+  // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   bool _initialized = false;
 
-  Future<void> init() async {
+  Future<String> init() async {
     if (!_initialized) {
       // For iOS request permission first.
       // _firebaseMessaging.requestNotificationPermissions();
       // _firebaseMessaging.configure();
-      await _firebaseMessaging.requestPermission();
+      // await _firebaseMessaging.requestPermission();
       // // For testing purposes print the Firebase Messaging token
       var token = await _firebaseMessaging.getToken();
-      // ignore: prefer_single_quotes
       print('FirebaseMessaging token: $token');
-
       _initialized = true;
+      return token;
     }
+    return "notoken";
   }
 }

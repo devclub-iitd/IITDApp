@@ -11,7 +11,7 @@ import './club_event_card.dart';
 class ClubEvents extends StatelessWidget {
   final String _clubId;
 
-  ClubEvents(this._clubId);
+  const ClubEvents(this._clubId);
 
   @override
   Widget build(BuildContext context) {
