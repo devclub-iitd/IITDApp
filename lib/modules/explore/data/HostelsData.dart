@@ -86,19 +86,21 @@ Map hostelDetails = {
           image: 'https://i.ytimg.com/vi/qRHxg6O3w0s/maxresdefault.jpg'),
     ],
     'image': 'assets/images/aravali.jpeg',
-    'loc' : 'https://www.google.com/'
+    'loc' : 'https://goo.gl/maps/mWKenH5ZZrESUHVD8'
   },
   'Girnar': {
     'about':
         'One of the latest hostels in the campus, the red bricked building has a capacity of over 600 residents.',
     'members': [],
-    'image': 'assets/images/girnar.jpeg'
+    'image': 'assets/images/girnar.jpeg',
+    'loc': 'https://goo.gl/maps/w63tTyrBJgxzAkHc8'
   },
   'Himadri': {
     'about':
         'The second girls\' hostel, Himadri has over 450 residents and boasts of its food outlet BBC- Best Brains Cafe',
     'members': [],
-    'image': 'assets/images/himadri.jpeg'
+    'image': 'assets/images/himadri.jpeg',
+    'loc': 'https://goo.gl/maps/uzupEtgPEoAg1vPq6'
   },
   'Jwalamukhi': {
     'about':
@@ -118,7 +120,8 @@ Map hostelDetails = {
           image:
               'https://images.livemint.com/img/2019/10/02/600x338/TK3C8ZP0_1570041789386_1570043970138.jpg'),
     ],
-    'image': 'assets/images/jwalamukhi.jpeg'
+    'image': 'assets/images/jwalamukhi.jpeg',
+    'loc': 'https://goo.gl/maps/eAmS1TsNP5m1LnDh6'
   },
   'Kailash': {
     'about':
@@ -146,7 +149,8 @@ Map hostelDetails = {
           image:
               'https://images.indulgexpress.com/uploads/user/ckeditor_images/article/2019/12/30/Kavita_-_Copy.jpg'),
     ],
-    'image': 'assets/images/kailash.jpeg'
+    'image': 'assets/images/kailash.jpeg',
+    'loc': 'https://goo.gl/maps/eD7q11byMmBTYRfB7'
   },
   'Karakoram': {
     'about':
@@ -164,7 +168,8 @@ Map hostelDetails = {
           image:
               'https://img.etimg.com/thumb/width-640,height-480,imgsize-82212,resizemode-1,msid-60531121/magazines/panache/come-december-quikr-founder-pranay-chulet-is-ready-to-embrace-a-new-role/pranay-chulet-quikr_bccl.jpg'),
     ],
-    'image': 'assets/images/karakoram.jpeg'
+    'image': 'assets/images/karakoram.jpeg',
+    'loc': 'https://goo.gl/maps/FJj9G3i97T7JDpKR6'
   },
   'Kumaon': {
     'about':
@@ -192,7 +197,8 @@ Map hostelDetails = {
           image:
               'https://upload.wikimedia.org/wikipedia/commons/b/b1/Chetan_Bhagat.jpg'),
     ],
-    'image': 'assets/images/kumaon.jpeg'
+    'image': 'assets/images/kumaon.jpeg',
+    'loc': 'https://goo.gl/maps/Kze1176A9LS8TrPG7'
   },
   'Nilgiri': {
     'about':
@@ -227,13 +233,15 @@ Map hostelDetails = {
           image:
               'https://assets.vccircle.com/uploads/2017/05/hitesh-oberoi.png'),
     ],
-    'image': 'assets/images/nilgiri.jpeg'
+    'image': 'assets/images/nilgiri.jpeg',
+    'loc': 'https://goo.gl/maps/JgHDHNw9WYRDckFn6'
   },
   'Satpura': {
     'about':
         'Satpura houses around 450 \'Samurais\' and being a new hostel, has some cool architecture.',
     'members': [],
-    'image': 'assets/images/satpura.jpeg'
+    'image': 'assets/images/satpura.jpeg',
+    'loc': 'https://goo.gl/maps/c7UZDwrC8wKhPdXb8'
   },
   'Shivalik': {
     'about':
@@ -254,25 +262,29 @@ Map hostelDetails = {
           image:
               'https://officechai.com/wp-content/uploads/2018/03/pankal-chaddah-leaves-zomato-1024x538.jpg'),
     ],
-    'image': 'assets/images/shivalik.jpeg'
+    'image': 'assets/images/shivalik.jpeg',
+    'loc': 'https://goo.gl/maps/ujqQ6UiyD38w8KDy5'
   },
   'Udaigiri': {
     'about':
         'The newest and arguably the biggest hostel at IIT Delhi with a capacity of over 600 residents.',
     'members': [],
-    'image': 'assets/images/udaigiri.jpeg'
+    'image': 'assets/images/udaigiri.jpeg',
+    'loc': 'https://goo.gl/maps/1KjtHKaA37fSdiq8A'
   },
   'Vindhyachal': {
     'about':
         'One of the oldest hostels in IIT Delhi, Vindhyachal is also the smallest with a capacity of under 400. Jai Vindy!',
     'members': [],
-    'image': 'assets/images/vindhyanchal.jpeg'
+    'image': 'assets/images/vindhyanchal.jpeg',
+    'loc': 'https://goo.gl/maps/ek7e1odhwHGSoSkq5'
   },
   'Zanskar': {
     'about':
         'Zanskar has a unique infrastructure and is one of the newer hostels. It houses ~450 students.',
     'members': [],
-    'image': 'assets/images/zanskar.jpeg'
+    'image': 'assets/images/zanskar.jpeg',
+    'loc': 'https://goo.gl/maps/ZgxCSeRtxHGF1PdUA'
   },
 };
 
