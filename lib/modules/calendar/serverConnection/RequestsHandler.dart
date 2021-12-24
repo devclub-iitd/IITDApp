@@ -31,21 +31,29 @@ Future<int> deleteReminderFromServer(var eventId,
   var keys = prefs.getKeys();
   var success = 1;
   try {
-    keys.forEach((element) async {
+    await keys.forEach((element) async {
       if (prefs.getString(element) == 'loc ' + eventId) {
-        var res = await http.delete(
-            '$uri/api/calendar/reminder/' + element.substring(4),
-            headers: {
-              'authorization': 'Bearer $token'
-            }).timeout(Duration(seconds: 5), onTimeout: () async {
-          success = -1;
-          connectedToInternet = false;
-          if (addToQueue) {
-            QueueManager.addToList(
-                {'func': 'deleteReminderFromServer', 'eventId': eventId});
-          }
-          return null;
-        });
+        var res;
+        try {
+          res = await http.post(
+              '$uri/api/calendar/reminder/' + element.substring(4),
+              headers: {
+                'authorization': 'Bearer $token'
+              }).timeout(Duration(seconds: 5), onTimeout: () async {
+            success = -1;
+            connectedToInternet = false;
+            print('Timeout while deleting event');
+            if (addToQueue) {
+              QueueManager.addToList(
+                  {'func': 'deleteReminderFromServer', 'eventId': eventId});
+            }
+            return null;
+          });
+        } catch (e) {
+          print('Timeout Occured while deleting (but in try catch)');
+          print(e);
+        }
+        print(res.statusCode);
         if (res.statusCode != 200) {
           success = 0;
         }
@@ -308,7 +316,7 @@ Future<String> postReminder(Event ev, bool patch,
     var serverId = await getServerIdFromPrefs(ev.eventId);
     print('to be exec 2');
     response = await http
-        .patch('$uri/api/calendar/reminder/' + serverId,
+        .put('$uri/api/calendar/reminder/' + serverId,
             headers: {'authorization': 'Bearer $token'}, body: body)
         .timeout(Duration(seconds: 5), onTimeout: () async {
       flagTimeout = true;

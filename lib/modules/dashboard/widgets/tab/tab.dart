@@ -10,6 +10,7 @@ import 'package:IITDAPP/modules/events/events/event_class.dart';
 import 'package:IITDAPP/modules/events/home.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/news/news.dart';
+import 'package:IITDAPP/modules/news/screens/newsPage.dart';
 import 'package:IITDAPP/utility/apiResponse.dart';
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:provider/provider.dart';
@@ -120,39 +121,56 @@ class _GeneralTabState extends State<GeneralTab> {
                                   .withOpacity(0.1))
                         ]),
                     child: ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                          vertical: 8.0, horizontal: 16),
-                      dense: true,
-                      title: Padding(
-                        padding: const EdgeInsets.only(bottom: 4.0),
-                        child: Text(
-                          widget.title(tabData[i]),
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
+                        contentPadding: const EdgeInsets.symmetric(
+                            vertical: 8.0, horizontal: 16),
+                        dense: true,
+                        title: Padding(
+                          padding: const EdgeInsets.only(bottom: 4.0),
+                          child: Text(
+                            widget.title(tabData[i]),
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                fontSize: 14,
+                                color: Provider.of<ThemeModel>(context)
+                                    .theme
+                                    .PRIMARY_TEXT_COLOR),
+                          ),
+                        ),
+                        subtitle: Text(
+                          widget.subtitle(tabData[i]),
                           style: TextStyle(
                               fontSize: 14,
                               color: Provider.of<ThemeModel>(context)
                                   .theme
-                                  .PRIMARY_TEXT_COLOR),
+                                  .PRIMARY_TEXT_COLOR
+                                  .withOpacity(0.7)),
                         ),
-                      ),
-                      subtitle: Text(
-                        widget.subtitle(tabData[i]),
-                        style: TextStyle(
-                            fontSize: 14,
-                            color: Provider.of<ThemeModel>(context)
-                                .theme
-                                .PRIMARY_TEXT_COLOR
-                                .withOpacity(0.7)),
-                      ),
-                      trailing: Text(
-                        widget.trailing(tabData[i]),
-                        // ignore: deprecated_member_use
-                        style: TextStyle(color: Theme.of(context).accentColor),
-                      ),
-                      onTap: () => Navigator.pushReplacementNamed(
-                          context, widget.routeName),
-                    ),
+                        trailing: Text(
+                          widget.trailing(tabData[i]),
+                          // ignore: deprecated_member_use
+                          style:
+                              TextStyle(color: Theme.of(context).accentColor),
+                        ),
+                        onTap: () {
+                          Provider.of<NewsHistoryProvider>(context,
+                                  listen: false)
+                              .setViewed(tabData[i].id);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => NewsPage(
+                                item: tabData[i],
+                                imageTag: 't${tabData[i].id}',
+                                redirectPossible: true,
+                              ),
+                            ),
+                          );
+                        }
+
+                        //  Navigator.pushReplacementNamed(
+                        //     context, widget.routeName),
+                        ),
                   ),
               separatorBuilder: (_, i) => Divider(
                     height: 10,
