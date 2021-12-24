@@ -680,9 +680,9 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                     onPressed: () async {
                       // Dlete the Given Appointment
                       var isExternalCalendar =
-                          _selectedAppointment.calendarId != IITDCalendarId ||
+                          _selectedAppointment.calendarId != IITDCalendarId &&
                               _selectedAppointment.calendarId !=
-                                  starredCalendarId ||
+                                  starredCalendarId &&
                               _selectedAppointment.calendarId !=
                                   userEventsCalendarId;
 

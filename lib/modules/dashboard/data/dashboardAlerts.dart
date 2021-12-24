@@ -6,6 +6,7 @@ import 'package:IITDAPP/values/Constants.dart';
 
 class DashboardAlerts {
   final ls = LocalStorage('dahsboardAlerts${currentUser.id}');
+  final ls_viewd = LocalStorage('newsClickHistory${currentUser.id}');
 
   DashboardAlerts() {
     // ls.ready.then((value) => ls.clear());
@@ -40,6 +41,7 @@ class DashboardAlerts {
     var oldAlerts = (ls.getItem(itemname) ?? []) as List;
     var id = 0;
     // print(oldAlerts);
+    var newsViewed = (ls_viewd.getItem('newsID') ?? []) as List;
     for (var item in m) {
       var key = (item.runtimeType == AttendanceModel)
           ? getAttendanceKey(item)
@@ -48,7 +50,13 @@ class DashboardAlerts {
               : getEventKey(item));
       if (!oldAlerts.contains(key)) {
         // print(key);
-        newAlerts.add(id);
+        if (item is NewsModel) {
+          if (newsViewed.contains(item.id)) {
+            continue;
+          } else {
+            newAlerts.add(id);
+          }
+        }
       }
       id += 1;
     }

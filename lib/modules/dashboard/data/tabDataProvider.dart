@@ -1,7 +1,11 @@
 import 'package:IITDAPP/modules/dashboard/data/dashboardAlerts.dart';
+import 'package:IITDAPP/modules/news/data/newsData.dart';
+import 'package:IITDAPP/modules/news/news.dart';
 import 'package:IITDAPP/utility/apiResponse.dart';
+import 'package:IITDAPP/values/Constants.dart';
 
 import 'package:flutter/foundation.dart';
+import 'package:localstorage/localstorage.dart';
 
 class TabDataProvider<T> with ChangeNotifier {
   ApiResponse data;
@@ -12,6 +16,7 @@ class TabDataProvider<T> with ChangeNotifier {
   Function getCacheData;
   Function filter;
   int limit;
+  LocalStorage ls = LocalStorage('newsClickHistory${currentUser.id}');
 
   @override
   void dispose() {
@@ -33,6 +38,32 @@ class TabDataProvider<T> with ChangeNotifier {
       var filteredData = filter(newData.data.sublist(
           0, newData.data.length > limit ? limit : newData.data.length));
       // print('data $filteredData');
+      var newsViewed = (await ls.getItem('newsID') ?? []) as List;
+      // Sort based on if it is viewed or not
+      // if newsViweded then give them low preference
+      // else give them high preference
+
+      int funCompare(var a, var b) {
+        var a1 = newsViewed.contains(a.id);
+        var b1 = newsViewed.contains(b.id);
+        return a1
+            ? b1
+                ? b.createdAt.isAfter(a.createdAt)
+                    ? 1
+                    : -1
+                : 1
+            : b1
+                ? -1
+                : b.createdAt.isAfter(a.createdAt)
+                    ? 1
+                    : -1;
+      }
+
+      if (filteredData.length > 0) {
+        if (filteredData[0] is NewsModel) {
+          filteredData.sort(funCompare);
+        }
+      }
       alerts = await da.getAlerts(filteredData);
       // print('alerts $alerts');
       data = ApiResponse.completed(filteredData);

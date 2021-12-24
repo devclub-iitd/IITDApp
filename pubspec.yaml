@@ -85,7 +85,7 @@ dependencies:
   flushbar: ^1.10.4
   package_info: ^2.0.2
 
-  calendarnotificationprovider: ^0.0.3
+  # calendarnotificationprovider: ^0.0.3
   firebase_core:
   firebase_analytics:
   webview_flutter: ^2.0.10
