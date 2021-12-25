@@ -31,38 +31,47 @@ Future<int> deleteReminderFromServer(var eventId,
   var keys = prefs.getKeys();
   var success = 1;
   try {
-    await keys.forEach((element) async {
-      if (prefs.getString(element) == 'loc ' + eventId) {
-        var res;
-        try {
-          res = await http.post(
-              '$uri/api/calendar/reminder/' + element.substring(4),
-              headers: {
-                'authorization': 'Bearer $token'
-              }).timeout(Duration(seconds: 5), onTimeout: () async {
-            success = -1;
-            connectedToInternet = false;
-            print('Timeout while deleting event');
-            if (addToQueue) {
-              QueueManager.addToList(
-                  {'func': 'deleteReminderFromServer', 'eventId': eventId});
-            }
-            return null;
-          });
-        } catch (e) {
-          print('Timeout Occured while deleting (but in try catch)');
-          print(e);
+    var el;
+    for (var element in keys) {
+      try {
+        var locString = prefs.getString(element);
+        if (locString is! String) {
+          continue;
         }
-        print(res.statusCode);
-        if (res.statusCode != 200) {
-          success = 0;
+        if (prefs.getString(element) == ('loc ' + eventId)) {
+          print('Found the element');
+          el = element;
+          break;
         }
-        if (res.statusCode == 200) {
-          await prefs.remove(element);
-        }
-        return;
+      } catch (e) {
+        print('Caught 1 $e');
       }
+    }
+    print('The element is $el');
+    var res;
+    print('Posting now');
+    res = await http.post('$uri/api/calendar/reminder/' + el.substring(4),
+        headers: {
+          'authorization': 'Bearer $token'
+        }).timeout(Duration(seconds: 5), onTimeout: () async {
+      success = -1;
+      connectedToInternet = false;
+      print('Timeout while deleting event');
+      if (addToQueue) {
+        QueueManager.addToList(
+            {'func': 'deleteReminderFromServer', 'eventId': eventId});
+      }
+      return null;
     });
+
+    print(res.statusCode);
+    if (res.statusCode != 200) {
+      success = 0;
+    }
+    if (res.statusCode == 200) {
+      print('Yep Status is 200');
+      await prefs.remove(el);
+    }
   } catch (e) {
     print(e);
   }
@@ -179,9 +188,10 @@ bool checkEquality(var localItem, var serverItem, var type) {
 //  if(localItem.url!=serverItem['url']) {
 //    return false;
 //  }
+
     if (!(localItem.reminders.isEmpty &&
             getReminderList(serverItem['reminder']).isEmpty) &&
-        (localItem.reminders != getReminderList(serverItem['reminder']))) {
+        (getReminderString(localItem.reminders) != serverItem['reminder'])) {
       return false;
     }
     if (localItem.recurrenceRule != null &&
