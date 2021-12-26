@@ -1,6 +1,7 @@
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:IITDAPP/main.dart';
 
 Future<bool> showCancelAlert(
     BuildContext context, String title, String message) {
@@ -30,6 +31,7 @@ Future<bool> showCancelAlert(
               ),
               TextButton(
                 onPressed: () {
+                  clear();
                   Navigator.pop(context);
                   Navigator.pop(context);
                 },

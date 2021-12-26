@@ -1,9 +1,9 @@
 import 'package:IITDAPP/modules/events/clubs/club_class.dart';
 import 'dart:io';
-import 'dart:async';
-import 'package:path_provider/path_provider.dart';
-import 'package:flutter/services.dart';
-import 'package:http/http.dart' as http;
+// import 'dart:async';
+// import 'package:path_provider/path_provider.dart';
+// import 'package:flutter/services.dart';
+// import 'package:http/http.dart' as http;
 
 class Event {
   String eventName;
@@ -39,17 +39,17 @@ class Event {
     endsAt = (end == null) ? startsAt.add(Duration(days: 1)) : end;
   }
 
-  static Future<File> imgtofile(String url) async {
-    print(url);
-    final http.Response responseData = await http.get(url);
-    var uint8list = responseData.bodyBytes;
-    var buffer = uint8list.buffer;
-    ByteData byteData = ByteData.view(buffer);
-    var tempDir = await getTemporaryDirectory();
-    File file = await File('${tempDir.path}/img').writeAsBytes(
-        buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
-    return file;
-  }
+  // static Future<File> imgtofile(String url) async {
+  //   print(url);
+  //   final http.Response responseData = await http.get(url);
+  //   var uint8list = responseData.bodyBytes;
+  //   var buffer = uint8list.buffer;
+  //   ByteData byteData = ByteData.view(buffer);
+  //   var tempDir = await getTemporaryDirectory();
+  //   File file = await File('${tempDir.path}/img').writeAsBytes(
+  //       buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+  //   return file;
+  // }
 
   factory Event.fromJson(Map<String, dynamic> json) {
     print(json);
