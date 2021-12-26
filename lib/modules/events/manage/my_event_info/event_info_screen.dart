@@ -16,7 +16,7 @@ import './event_updates_list.dart';
 import 'dart:async';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
-
+import 'package:IITDAPP/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 import 'dart:math';
@@ -43,12 +43,16 @@ Future<Event> getEvent(String eventid) async {
     var rng = Random();
     String temp = (await getTemporaryDirectory()).path;
     File file = File('$temp/' + rng.nextInt(100000).toString() + '.png');
+    tempo.add(file.path);
+    print(file.path);
     var imgurl = "${parsedJson['event']['image']}";
     var tptp = "$uri/$imgurl";
     print(tptp);
     http.Response response2 = await http.get(tptp);
     await file.writeAsBytes(response2.bodyBytes);
     event.eventImage = file;
+
+    event.imageLink = tptp;
     return event;
   } else {
     throw Exception('Failed to load Event');

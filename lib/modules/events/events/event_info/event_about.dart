@@ -35,7 +35,7 @@ class EventAbout extends StatelessWidget {
                 ),
               ),
             ),
-            Center(child: Image.file(_event.eventImage)),
+            Center(child: Image.network(_event.imageLink)),
           ],
         ),
       ),

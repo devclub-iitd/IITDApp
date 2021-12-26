@@ -17,6 +17,7 @@ import 'dart:async';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:math';
+import 'package:IITDAPP/main.dart';
 
 class NewsUpdate extends StatefulWidget {
   final String title;
@@ -53,20 +54,24 @@ class _NewsUpdateState extends State<NewsUpdate> {
   void initState() {
     _imageUrlController.text = widget.nm.imgUrl;
     _imageUrlController.addListener(_changeImageUrl);
-    support();
+    if (widget.title != "Create") {
+      support();
+    }
     super.initState();
   }
 
   void support() async {
     var ok = Random();
+    print("getting");
     var bytes = await http.get(widget.nm.imgUrl);
+    print(bytes.statusCode);
     String temp = (await getTemporaryDirectory()).path;
     File file = File('$temp/newsimg' +
         ok.nextInt(1000).toString() +
         ok.nextInt(1000).toString() +
         ok.nextInt(1000).toString() +
         '.png');
-
+    tempo.add(file.path);
     await file.writeAsBytes(bytes.bodyBytes);
     widget.nm.newsImage = file;
     setState(() {});
@@ -121,6 +126,7 @@ class _NewsUpdateState extends State<NewsUpdate> {
 
       final perm = File(image.path);
       // final perm = await Perm(image.path);
+      tempo.add(perm.path);
       setState(() => {img = perm, widget.nm.newsImage = perm});
     } on PlatformException catch (e) {
       print('failed to pick img $e');

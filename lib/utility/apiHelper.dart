@@ -13,6 +13,7 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
 import 'dart:math';
+import 'package:IITDAPP/main.dart';
 
 // var stream =
 //         http.ByteStream(DelegatingStream.typed(_event.eventImage.openRead()));
@@ -55,11 +56,12 @@ class ApiBaseHelper {
       //     .timeout(Duration(seconds: 10));
 
       // print(body);
-
+      String temp;
       if (newsImage == null) {
         var bytes = await rootBundle.load('assets/images/null.png');
-        String temp = (await getTemporaryDirectory()).path;
+        temp = (await getTemporaryDirectory()).path;
         newsImage = File('$temp/img.png');
+        tempo.add(newsImage.path);
         await newsImage.writeAsBytes(
             bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes));
       }
@@ -85,6 +87,8 @@ class ApiBaseHelper {
       });
       print('call done');
       // responseJson = _returnResponse(response);
+
+      clear();
     } on SocketException {
       throw FetchDataException('No Internet connection');
     } on TimeoutException {
@@ -140,16 +144,17 @@ class ApiBaseHelper {
       // responseJson = _returnResponse(response);
 
       // print(body);
-
+      String temp;
       if (newsImage == null) {
         var ok = Random();
         var bytes = await rootBundle.load('assets/images/null.png');
-        String temp = (await getTemporaryDirectory()).path;
+        temp = (await getTemporaryDirectory()).path;
         newsImage = File('$temp/img' +
             ok.nextInt(2000).toString() +
             ok.nextInt(2000).toString() +
             ok.nextInt(2000).toString() +
             '.png');
+        tempo.add(newsImage.path);
         await newsImage.writeAsBytes(
             bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes));
       }
@@ -175,6 +180,8 @@ class ApiBaseHelper {
       });
       print('done post');
       // responseJson = _returnResponse(response);
+
+      clear();
     } on SocketException {
       throw FetchDataException('No Internet connection');
     } on TimeoutException {
