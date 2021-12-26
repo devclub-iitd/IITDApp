@@ -540,12 +540,12 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                     ),
                     onPressed: () async {
                       // Update or Create Event
-                      var isExternalCalendar = _selectedAppointment != null &&
-                          (_selectedAppointment.calendarId != IITDCalendarId ||
+                      var isExternalCalendar =
+                          _selectedAppointment.calendarId != IITDCalendarId &&
                               _selectedAppointment.calendarId !=
-                                  userEventsCalendarId ||
+                                  starredCalendarId &&
                               _selectedAppointment.calendarId !=
-                                  starredCalendarId);
+                                  userEventsCalendarId;
 
                       var isRecurring = _selectedAppointment != null &&
                           _selectedAppointment.recurrence != null;
@@ -680,9 +680,9 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                     onPressed: () async {
                       // Dlete the Given Appointment
                       var isExternalCalendar =
-                          _selectedAppointment.calendarId != IITDCalendarId ||
+                          _selectedAppointment.calendarId != IITDCalendarId &&
                               _selectedAppointment.calendarId !=
-                                  starredCalendarId ||
+                                  starredCalendarId &&
                               _selectedAppointment.calendarId !=
                                   userEventsCalendarId;
 
@@ -701,6 +701,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                           if (!isExternalCalendar) {
                             var succ = await deleteReminderFromServer(
                                 _selectedAppointment.eventId);
+                            print('Now out from deleteReminderFromServer');
                             if (succ == -1) {
                               print('unable to connect to server');
                             } else if (succ == 0) {

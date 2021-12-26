@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:IITDAPP/main.dart';
 import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
 import 'package:IITDAPP/modules/login/user_class.dart';
 import 'package:IITDAPP/values/Constants.dart';
@@ -38,6 +39,7 @@ Future<void> addEventRequest(Event event, BuildContext context) async {
         ok.nextInt(1000).toString() +
         ok.nextInt(1000).toString() +
         '.png');
+    tempo.add(event.eventImage.path);
     await event.eventImage.writeAsBytes(
         bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes));
   }
@@ -75,6 +77,7 @@ Future<void> addEventRequest(Event event, BuildContext context) async {
     print(value);
   });
 
+  clear();
   if (response.statusCode == 200) {
     await Provider.of<EventsTabProvider>(context, listen: false).getData();
     var count = 0;
@@ -147,6 +150,7 @@ class _EventFormState extends State<EventForm> {
         return null;
       }
       final perm = File(image.path);
+      tempo.add(perm.path);
       // final perm = await Perm(image.path);
       setState(() => {img = perm});
     } on PlatformException catch (e) {

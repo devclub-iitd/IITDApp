@@ -240,7 +240,7 @@ class EventListItem extends StatelessWidget {
               ],
             ),
             Spacer(),
-            data.reminder != null
+            data.reminder != null && data.reminder.length != 0
                 ? Padding(
                     padding: const EdgeInsets.only(right: 12.0),
                     child: Icon(

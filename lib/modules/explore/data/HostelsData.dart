@@ -86,7 +86,7 @@ Map hostelDetails = {
           image: 'https://i.ytimg.com/vi/qRHxg6O3w0s/maxresdefault.jpg'),
     ],
     'image': 'assets/images/aravali.jpeg',
-    // 'loc': 'https://www.google.com/'
+    // 'loc': 'https://www.google.com/',
     // 'loc': 'https://goo.gl/maps/mWKenH5ZZrESUHVD8'
     'loc': 'https://goo.gl/maps/gJYDQZGCcMWdFbTd8'
   },

@@ -23,6 +23,7 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart';
 import 'package:async/async.dart';
 import 'dart:convert';
+import 'package:IITDAPP/main.dart';
 
 Future<void> deleteEvent(BuildContext context, String id) async {
   print('Deleting Event');
@@ -121,6 +122,7 @@ class _EditEventFormState extends State<EditEventForm> {
         return;
       }
       final perm = File(image.path);
+      tempo.add(perm.path);
       // final perm = await Perm(image.path);
       setState(() => {_img = perm});
     } on PlatformException catch (e) {
@@ -548,6 +550,7 @@ class _EditEventFormState extends State<EditEventForm> {
                         _event.eventImage = _img;
                         unawaited(showLoading(context));
                         await editEvent();
+                        clear();
                         Navigator.pop(context);
                         Navigator.pop(context);
                       }
@@ -611,6 +614,7 @@ Future<bool> _showCancelAlert(BuildContext context) {
               ),
               TextButton(
                 onPressed: () {
+                  clear();
                   Navigator.pop(context);
                   Navigator.pop(context);
                 },
@@ -663,6 +667,7 @@ void _showDeleteAlert(BuildContext context, Event _event) {
           TextButton(
             onPressed: () async {
               // Navigator.pop(context);
+              clear();
               unawaited(showLoading(context, message: 'Deleting Event'));
               await deleteEvent(context, _event.eventid);
             },

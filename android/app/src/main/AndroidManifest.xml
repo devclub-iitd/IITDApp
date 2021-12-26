@@ -82,12 +82,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <receiver android:name="com.pranjal.calendarnotificationprovider.ReminderBroadcastReceiver" >
+        <!-- <receiver android:name="com.pranjal.calendarnotificationprovider.ReminderBroadcastReceiver" >
             <intent-filter>
                 <data android:scheme="content"/>
                 <action android:name="android.intent.action.EVENT_REMINDER"/>
             </intent-filter>
-        </receiver>
+        </receiver> -->
         <!-- Don't delete the meta-data below.
              This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
         <meta-data
