@@ -1,6 +1,6 @@
 import 'package:IITDAPP/modules/dashboard/data/dashboardAlerts.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
-import 'package:IITDAPP/modules/news/news.dart';
+// import 'package:IITDAPP/modules/news/news.dart';
 import 'package:IITDAPP/utility/apiResponse.dart';
 import 'package:IITDAPP/values/Constants.dart';
 

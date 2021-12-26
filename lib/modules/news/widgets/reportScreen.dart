@@ -109,15 +109,33 @@ class _ReportScreenState extends State<ReportScreen> {
                             text: 'REPORT',
                             widget: widget,
                             onPressed: () {
-                              var results = _options
-                                  .where((element) =>
-                                      _selected[_options.indexOf(element)])
-                                  .toList();
-                              results.add(_reportTextController.text);
-                              widget.item.report(results).then((value) => {
-                                    Navigator.pop(context, value),
-                                    Navigator.pop(context)
-                                  });
+                              if (_reportTextController.text.isEmpty &&
+                                  !(_selected
+                                      .any((element) => element == true))) {
+                                AlertDialog alert = AlertDialog(
+                                  title: Text("Empty Report"),
+                                  content: Text("Please Choose An Option"),
+                                  actions: [],
+                                );
+
+                                // show the dialog
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return alert;
+                                  },
+                                );
+                              } else {
+                                var results = _options
+                                    .where((element) =>
+                                        _selected[_options.indexOf(element)])
+                                    .toList();
+                                results.add(_reportTextController.text);
+                                widget.item.report(results).then((value) => {
+                                      Navigator.pop(context, value),
+                                      Navigator.pop(context)
+                                    });
+                              }
                             }),
                       ]),
                 ),

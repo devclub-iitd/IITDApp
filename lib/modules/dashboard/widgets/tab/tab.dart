@@ -1,6 +1,8 @@
 // import 'package:IITDAPP/modules/attendance/attendance.dart';
 // import 'package:IITDAPP/modules/attendance/data/attendanceModel.dart';
 // import 'package:IITDAPP/modules/attendance/data/attendanceProvider.dart';
+// ignore_for_file: deprecated_member_use
+
 import 'package:IITDAPP/modules/dashboard/data/currentTabProvider.dart';
 import 'package:IITDAPP/modules/dashboard/data/eventsProvider.dart';
 import 'package:IITDAPP/modules/dashboard/data/tabDataProvider.dart';
@@ -148,7 +150,6 @@ class _GeneralTabState extends State<GeneralTab> {
                         ),
                         trailing: Text(
                           widget.trailing(tabData[i]),
-                          // ignore: deprecated_member_use
                           style:
                               TextStyle(color: Theme.of(context).accentColor),
                         ),
