@@ -12,6 +12,8 @@ import 'package:IITDAPP/values/colors/colors.dart';
 import 'package:IITDAPP/values/colors/darkColors.dart';
 import 'package:IITDAPP/push_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:IITDAPP/routes/Routes.dart';
+
 // import 'package:global_configuration/global_configuration.dart';
 // import 'package:syncfusion_flutter_core/core.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +22,7 @@ import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 // import 'package:IITDAPP/modules/discussionForum/discuss.dart';
 import 'package:IITDAPP/modules/courses/screens/search.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -73,15 +76,6 @@ class MyApp extends StatelessWidget {
       darkTheme: Provider.of<ThemeModel>(context).themeType == ThemeType.Light
           ? lightTheme
           : darkTheme,
-//      ThemeData(
-////        primarySwatch: Colors.indigo,
-//        hintColor: Colors.white54,
-////            scaffoldBackgroundColor: Colors.indigo[900],
-////            canvasColor: Colors.indigo[700],
-//        brightness: Brightness.light,
-////            cardColor: Colors.indigo,
-////            accentColor: Colors.lightBlueAccent
-//      ),
       home: LoginScreen(),
       onGenerateRoute: app_router.Router.generateRoute,
     );
@@ -108,9 +102,15 @@ extractAppVersion() async =>
 // ignore: always_declare_return_types
 
 var fcm;
-initialiseNotifications() async {
+initialiseNotifications(context) async {
   print('Initialising Notifications');
   await Firebase.initializeApp();
+  FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage message) {
+    if (message != null) {
+      print('A new message was published! ${message.data}');
+      Navigator.pushReplacementNamed(context, Routes.events);
+    }
+  });
   print('Testing Push Notifications');
   var pushNotificationsManager = PushNotificationsManager();
   fcm = await pushNotificationsManager.init();

@@ -3,7 +3,9 @@ import 'package:IITDAPP/modules/about/about.dart';
 import 'package:IITDAPP/modules/casiViews/password_change.dart';
 import 'package:IITDAPP/modules/login/LoginStateProvider.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsData.dart';
+import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 import 'package:IITDAPP/modules/settings/screens/IndivScreenSettings.dart';
+import 'package:IITDAPP/modules/settings/server/RequestManager.dart';
 import 'package:IITDAPP/modules/settings/utility/ResetSharedPrefs.dart';
 import 'package:IITDAPP/modules/settings/widgets/DarkModeSwitch.dart';
 import 'package:IITDAPP/modules/settings/widgets/SettingsTextWidgets.dart';
@@ -220,13 +222,56 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     : CrossFadeState.showSecond,
               ),
               SPkey: commonKeys[2],
-              onChange: (bool value) {
-                setState(() {
-                  notif_value = value;
-                });
+              overrideOnChange: true,
+              onChange: (bool value) async {
+                var res = await changeEventsNotificationState(value);
+                print(res is bool);
+                if (res) {
+                  setState(() {
+                    notif_value = value;
+                  });
+                  SettingsHandler.setSettingValue(commonKeys[2], value);
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      duration: Duration(seconds: 2),
+                      content: Text('Unable To Change Notification Settings')));
+                }
+                return res;
               },
               defaultValue: defaultsForKey[commonKeys[2]],
-              text: 'Recieve Notifications',
+              text: 'Event Notifications',
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            SettingsSwitchTile(
+              leading: AnimatedCrossFade(
+                duration: Duration(seconds: 1),
+                firstChild: Icon(Icons.notifications),
+                secondChild: Icon(Icons.notifications_off),
+                crossFadeState: notif_value
+                    ? CrossFadeState.showFirst
+                    : CrossFadeState.showSecond,
+              ),
+              SPkey: commonKeys[4],
+              overrideOnChange: true,
+              onChange: (bool value) async {
+                var res = await changeNewsNotificationState(value);
+                print(res is bool);
+                if (res) {
+                  setState(() {
+                    notif_value = value;
+                  });
+                  SettingsHandler.setSettingValue(commonKeys[2], value);
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      duration: Duration(seconds: 2),
+                      content: Text('Unable To Change Notification Settings')));
+                }
+                return res;
+              },
+              defaultValue: defaultsForKey[commonKeys[4]],
+              text: 'News Notifications',
             ),
             SizedBox(
               height: 30,
