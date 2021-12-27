@@ -22,6 +22,7 @@ import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 // import 'package:IITDAPP/modules/discussionForum/discuss.dart';
 import 'package:IITDAPP/modules/courses/screens/search.dart';
+import 'dart:io';
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() async {
@@ -37,6 +38,7 @@ void main() async {
   unawaited(extractAppVersion());
   // unawaited(initialiseNotifications());
   unawaited(initialisePreferences());
+  clear();
   await savedstate.init();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
@@ -124,4 +126,15 @@ initialiseNotifications(context) async {
   // } on PlatformException {
   //   print('Error Occured');
   // }
+}
+
+List<String> tempo = [];
+
+void clear() {
+  print(tempo);
+  for (int i = 0; i < tempo.length; i++) {
+    Directory(tempo[i]).deleteSync(recursive: true);
+  }
+  tempo.clear();
+  print(tempo);
 }

@@ -126,7 +126,9 @@ class HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
       ),
     ];
     print(currentUser.isAdmin);
-    if (currentUser.isAdmin || currentUser.isSSAdmin) {
+    if (currentUser.isAdmin ||
+        currentUser.isSSAdmin ||
+        currentUser.isSuperAdmin) {
       _tabs.add(ManageTab(_managetabcontroller));
       _navBarItems.add(BottomNavigationBarItem(
         icon: Icon(Icons.edit),

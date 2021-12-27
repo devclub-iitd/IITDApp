@@ -12,12 +12,12 @@ import '../event_class.dart';
 import './event_info_card.dart';
 import './event_about.dart';
 import './event_updates_list.dart';
-import 'package:path_provider/path_provider.dart';
-import 'dart:io';
-
+// import 'package:path_provider/path_provider.dart';
+// import 'dart:io';
+// import 'package:IITDAPP/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
-import 'dart:math';
+// import 'dart:math';
 
 Future<Event> getEvent(String eventid) async {
   final response = await http.get('$uri/api/events/$eventid',
@@ -37,14 +37,17 @@ Future<Event> getEvent(String eventid) async {
     // var img = Image.network("$uri/{$parsedJson['event']['image']}");
     // var bytes = await rootBundle.load();
 
-    var rng = Random();
-    String temp = (await getTemporaryDirectory()).path;
-    File file = File('$temp/' + rng.nextInt(100000).toString() + '.png');
     var imgurl = "${parsedJson['event']['image']}";
     var tptp = "$uri/$imgurl";
-    http.Response response2 = await http.get(tptp);
-    await file.writeAsBytes(response2.bodyBytes);
-    event.eventImage = file;
+    // var rng = Random();
+    // String temp = (await getTemporaryDirectory()).path;
+    // File file = File('$temp/' + rng.nextInt(100000).toString() + '.png');
+    // http.Response response2 = await http.get(tptp);
+    // await file.writeAsBytes(response2.bodyBytes);
+    // event.eventImage = file;
+    // tempo.add(file.path);
+    event.imageLink = tptp;
+
     return event;
   } else {
     throw Exception('Failed to load Event');

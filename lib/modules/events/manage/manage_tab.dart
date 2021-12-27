@@ -77,6 +77,17 @@ class _ManageTabState extends State<ManageTab> {
         ),
       );
     }
+    // for (var i = 0; i < currentUser.superAdminOf.length; i++) {
+    //   clubList.add(
+    //     DropdownMenuItem(
+    //       value: currentUser.adminof[i],
+    //       child: AutoSizeText(
+    //         currentUser.adminof[i].clubName,
+    //         maxLines: 1,
+    //       ),
+    //     ),
+    //   );
+    // }
   }
 
   Widget viewAdminButton() {
