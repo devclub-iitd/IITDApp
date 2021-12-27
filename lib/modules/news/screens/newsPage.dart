@@ -42,9 +42,7 @@ class NewsPage extends StatelessWidget {
         backgroundColor:
             Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
         body: Consumer<NewsModel>(builder: (_, syncItem, c) {
-          var showEdit = currentUser.isAdmin ||
-              currentUser.isSSAdmin ||
-              currentUser.isSuperAdmin;
+          var showEdit = currentUser.isSSAdmin || currentUser.isSuperAdmin;
           var showDelete = currentUser.isSSAdmin ||
               currentUser.isSuperAdmin ||
               (syncItem.createdBy ?? '') == currentUser.id;
@@ -167,7 +165,8 @@ class NewsPage extends StatelessWidget {
                   ),
                   if (redirectPossible &&
                       showEdit &&
-                      (currentUser.isSSAdmin || currentUser.isSuperAdmin))
+                      (currentUser.isSSAdmin ||
+                          currentUser.superAdminOf.isNotEmpty))
                     TextButton(
                         style: TextButton.styleFrom(
                           backgroundColor: (syncItem.details.status ==
