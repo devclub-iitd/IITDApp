@@ -7,7 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:http/http.dart' as http;
 // import 'package:IITDAPP/modules/events/globals.dart';
-
+import 'package:IITDAPP/widgets/loading.dart';
+import 'package:pedantic/pedantic.dart';
 import '../club_class.dart';
 
 class ClubInfoCard extends StatelessWidget {
@@ -82,6 +83,7 @@ class _SubButtonState extends State<SubButton> {
   }
 
   Future onButtonPress() async {
+    unawaited(showLoading(context));
     print('Subbing to Club');
     _enabled = false;
     var timeOutFlag = false;
@@ -130,6 +132,7 @@ class _SubButtonState extends State<SubButton> {
       //       .RAISED_BUTTON_ALT_BACKGROUND;
       // }
     }
+    Navigator.pop(context);
     _enabled = true;
     setState(() {});
   }

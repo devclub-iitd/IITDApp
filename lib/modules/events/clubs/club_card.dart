@@ -11,6 +11,8 @@ import 'package:http/http.dart' as http;
 import './club_class.dart';
 // import 'package:IITDAPP/modules/events/globals.dart';
 import './club_info/club_info.dart';
+import 'package:IITDAPP/widgets/loading.dart';
+import 'package:pedantic/pedantic.dart';
 
 class ClubCard extends StatefulWidget {
   final Club club;
@@ -40,6 +42,7 @@ class ClubCardState extends State<ClubCard> {
   }
 
   Future onButtonPress() async {
+    unawaited(showLoading(context));
     print('Subbing to Club ${_club.clubName}');
     color = Colors.grey;
     var timeOutFlag = false;
@@ -70,6 +73,7 @@ class ClubCardState extends State<ClubCard> {
       //   otherClubs.add(_club);
       // }
     }
+    Navigator.pop(context);
     color = Provider.of<ThemeModel>(context, listen: false)
         .theme
         .PRIMARY_TEXT_COLOR;

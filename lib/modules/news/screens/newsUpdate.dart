@@ -80,15 +80,20 @@ class _NewsUpdateState extends State<NewsUpdate> {
   Future pickImage(int crr) async {
     try {
       print("picking image");
-      var image;
-      if (crr == 0) {
-        image = await ImagePicker.pickImage(
-            source: ImageSource.camera, maxHeight: 1500, maxWidth: 1500);
-      } else {
-        image = await ImagePicker.pickImage(
-            source: ImageSource.gallery, maxHeight: 1500, maxWidth: 1500);
-      }
+      // var image;
+      // if (crr == 0) {
+      //   image = await ImagePicker.pickImage(
+      //       source: ImageSource.camera, maxHeight: 1500, maxWidth: 1500);
+      // } else {
+      //   image = await ImagePicker.pickImage(
+      //       source: ImageSource.gallery, maxHeight: 1500, maxWidth: 1500);
+      // }
+      var image = await ImagePicker.pickImage(
+          source: crr == 0 ? ImageSource.camera : ImageSource.gallery,
+          maxHeight: 1500,
+          maxWidth: 1500);
       if (image == null) {
+        print("null");
         return null;
       }
 
