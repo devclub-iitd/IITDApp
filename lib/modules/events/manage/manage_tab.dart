@@ -66,28 +66,30 @@ class _ManageTabState extends State<ManageTab> {
 
   void makeList() {
     clubList = [];
-    for (var i = 0; i < currentUser.adminof.length; i++) {
+    var sub = [];
+    for (int i = 0; i < currentUser.adminof.length; i++) {
+      if (!sub.any(
+          (element) => element.clubName == currentUser.adminof[i].clubName)) {
+        sub.add(currentUser.adminof[i]);
+      }
+    }
+    for (int i = 0; i < currentUser.superAdminOf.length; i++) {
+      if (!sub.any((element) =>
+          element.clubName == currentUser.superAdminOf[i].clubName)) {
+        sub.add(currentUser.superAdminOf[i]);
+      }
+    }
+    for (var i = 0; i < sub.length; i++) {
       clubList.add(
         DropdownMenuItem(
-          value: currentUser.adminof[i],
+          value: sub[i],
           child: AutoSizeText(
-            currentUser.adminof[i].clubName,
+            sub[i].clubName,
             maxLines: 1,
           ),
         ),
       );
     }
-    // for (var i = 0; i < currentUser.superAdminOf.length; i++) {
-    //   clubList.add(
-    //     DropdownMenuItem(
-    //       value: currentUser.adminof[i],
-    //       child: AutoSizeText(
-    //         currentUser.adminof[i].clubName,
-    //         maxLines: 1,
-    //       ),
-    //     ),
-    //   );
-    // }
   }
 
   Widget viewAdminButton() {

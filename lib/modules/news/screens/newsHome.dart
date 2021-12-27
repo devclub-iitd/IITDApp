@@ -26,9 +26,10 @@ class NewsHome extends StatelessWidget {
           Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       appBar: CustomAppBar(
         title: Text('News'),
-        actions: (!(currentUser.isSSAdmin || currentUser.isSuperAdmin))
-            ? []
-            : <Widget>[AddNewsButton(), AllReportsButton()],
+        actions:
+            (!(currentUser.isSSAdmin || currentUser.superAdminOf.isNotEmpty))
+                ? []
+                : <Widget>[AddNewsButton(), AllReportsButton()],
       ),
       drawer: AppDrawer(
         tag: 'News',
