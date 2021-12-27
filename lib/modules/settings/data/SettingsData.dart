@@ -2,7 +2,13 @@
 import 'package:IITDAPP/modules/settings/widgets/SettingsTextWidgets.dart';
 import 'package:syncfusion_flutter_calendar/calendar.dart';
 
-var commonKeys = ['defaultScreen', 'theme', 'showNotifications', 'avatar'];
+var commonKeys = [
+  'defaultScreen',
+  'theme',
+  'showEventNotifications',
+  'avatar',
+  'showNewsNotifications'
+];
 
 var defaultsForKey = {
   commonKeys[0]: 'Dashboard',
@@ -10,7 +16,8 @@ var defaultsForKey = {
   'showOtherCalendars': true,
   'theme': 'System',
   'avatar': 'origami',
-  'showNotifications': true,
+  'showEventNotifications': true,
+  'showNewsNotifications': true,
   'newsItemPerPage': '5',
   'MapMarkerSize': 15.0,
   'MapLabelSize': 20.0,

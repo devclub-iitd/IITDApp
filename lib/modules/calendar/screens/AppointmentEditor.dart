@@ -9,25 +9,25 @@ class AppointmentEditorState extends State<AppointmentEditor> {
   var reminder;
   var recurrence;
   bool permissionGranted;
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+  // FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 
   @override
   void initState() {
     super.initState();
     permissionGranted = true;
-    var initializationSettingsAndroid =
-        AndroidInitializationSettings('@mipmap/ic_launcher');
-    var initializationSettingsIOS = IOSInitializationSettings(
-      requestSoundPermission: false,
-      requestBadgePermission: false,
-      requestAlertPermission: false,
-    );
-    var initializationSettings = InitializationSettings(
-        initializationSettingsAndroid, initializationSettingsIOS);
-    flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
-    flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: onSelectNotification);
-    requestPermission();
+    // var initializationSettingsAndroid =
+    //     AndroidInitializationSettings('@mipmap/ic_launcher');
+    // var initializationSettingsIOS = IOSInitializationSettings(
+    //   requestSoundPermission: false,
+    //   requestBadgePermission: false,
+    //   requestAlertPermission: false,
+    // );
+    // var initializationSettings = InitializationSettings(
+    //     android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+    // flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+    // flutterLocalNotificationsPlugin.initialize(initializationSettings,
+    //     onSelectNotification: onSelectNotification);
+    // requestPermission();
   }
 
   Future requestPermission() async {

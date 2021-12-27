@@ -97,12 +97,18 @@ class _SettingsDropdownTileState extends State<SettingsDropdownTile> {
 // ignore: must_be_immutable
 class SettingsSwitchTile extends StatefulWidget {
   SettingsSwitchTile(
-      {this.text, this.defaultValue, this.onChange, this.leading, this.SPkey});
+      {this.text,
+      this.defaultValue,
+      this.onChange,
+      this.leading,
+      this.SPkey,
+      this.overrideOnChange});
   var leading;
   var text;
   var defaultValue;
   var SPkey;
   var onChange;
+  bool overrideOnChange = false;
   @override
   _SettingsSwitchTileState createState() => _SettingsSwitchTileState();
 }
@@ -141,16 +147,25 @@ class _SettingsSwitchTileState extends State<SettingsSwitchTile> {
         Spacer(),
         Switch(
           value: value,
-          onChanged: (value) {
-            if (widget.SPkey != null) {
-              SettingsHandler.setSettingValue(widget.SPkey, value);
+          onChanged: (value) async {
+            if (!widget.overrideOnChange) {
+              if (widget.SPkey != null) {
+                SettingsHandler.setSettingValue(widget.SPkey, value);
+              }
+              if (widget.onChange != null) {
+                widget.onChange(value);
+              }
+              setState(() {
+                this.value = value;
+              });
+            } else {
+              var changeValue = await widget.onChange(value);
+              if (changeValue != null && changeValue) {
+                setState(() {
+                  this.value = value;
+                });
+              }
             }
-            if (widget.onChange != null) {
-              widget.onChange(value);
-            }
-            setState(() {
-              this.value = value;
-            });
           },
         )
       ],
