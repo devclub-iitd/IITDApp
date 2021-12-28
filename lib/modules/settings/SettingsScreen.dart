@@ -200,7 +200,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onChange: (value) {
                 Provider.of<ThemeModel>(context, listen: false)
                     .toggleTheme(value);
-                logEvent(AnalyticsEvent.THEME_CHANGE, value: value);
+                logEvent(AnalyticsEvent.THEME_CHANGE, value: value.toString());
               },
               leading: IconButton(
                   onPressed: () {},

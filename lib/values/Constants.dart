@@ -133,3 +133,4 @@ Widget getScreenFromTag(var tag) {
 }
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

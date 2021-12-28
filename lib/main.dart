@@ -13,7 +13,6 @@ import 'package:IITDAPP/values/colors/colors.dart';
 import 'package:IITDAPP/values/colors/darkColors.dart';
 import 'package:IITDAPP/push_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:IITDAPP/routes/Routes.dart';
 
 // import 'package:global_configuration/global_configuration.dart';
 // import 'package:syncfusion_flutter_core/core.dart';
@@ -43,7 +42,10 @@ void main() async {
   clear();
   await savedstate.init();
   await Firebase.initializeApp();
+  await initialiseNotifications();
+
   initializeAnalytics();
+
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
       create: (_) => NewsProvider<TrendingNews>(),
@@ -84,6 +86,7 @@ class MyApp extends StatelessWidget {
           : darkTheme,
       home: LoginScreen(),
       onGenerateRoute: app_router.Router.generateRoute,
+      navigatorKey: navigatorKey,
     );
   }
 }
@@ -108,35 +111,13 @@ extractAppVersion() async =>
 // ignore: always_declare_return_types
 
 var fcm;
-initialiseNotifications(context) async {
+initialiseNotifications() async {
   print('Initialising Notifications');
 
   print('Testing Push Notifications');
   var pushNotificationsManager = PushNotificationsManager();
   fcm = await pushNotificationsManager.init();
   print("fcm " + fcm);
-  FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage message) {
-    print('YOYO Initial Message $message');
-    if (message != null) {
-      if (message.data['screen'] == 'event') {
-        handleEventNotificationClick(context, message.data['id']);
-      } else if (message.data['screen'] == 'news') {
-        handleNewsNotificationClick(context, message.data['id']);
-      }
-      // print('A new message was published! ${message.data}');
-      // Navigator.pushReplacementNamed(context, Routes.events);
-    }
-  });
-
-  // try {
-  //   await Calendarnotificationprovider.setPackageName('com.example.IITDAPP');
-  //   await Calendarnotificationprovider.setDescription(
-  //       start: 'Time:- ', end: '', text: DynamicTextEventKeys.RangeTime);
-  //   await Calendarnotificationprovider.setTitle(
-  //       start: 'Event:- ', text: DynamicTextEventKeys.Title);
-  // } on PlatformException {
-  //   print('Error Occured');
-  // }
 }
 
 List<String> tempo = [];

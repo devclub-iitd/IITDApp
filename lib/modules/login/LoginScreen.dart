@@ -133,6 +133,7 @@ class LoginScreenState extends State<LoginScreen>
       await Provider.of<LoginStateProvider>(context, listen: false)
           .checklogin(context);
     });
+
     // loginFunc = onlogin;
     // logoutFunc = onlogout;
     // start = true;
