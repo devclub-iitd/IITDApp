@@ -23,7 +23,6 @@ import 'package:provider/provider.dart';
 // import 'package:IITDAPP/modules/discussionForum/discuss.dart';
 import 'package:IITDAPP/modules/courses/screens/search.dart';
 import 'dart:io';
-import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
