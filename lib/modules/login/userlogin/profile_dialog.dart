@@ -1,5 +1,6 @@
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/routes/Routes.dart';
+import 'package:IITDAPP/utility/analytics_manager.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
@@ -140,6 +141,7 @@ void showAlert(BuildContext context, Function onlogout) {
                   print('oh yeahd');
                   Navigator.pop(context);
                   unawaited(showLoading(context, message: 'Signing Out'));
+                  logEvent(AnalyticsEvent.LOGOUT_BUTTON);
                   await onlogout();
                   Navigator.pop(context);
                   await Navigator.pushReplacementNamed(

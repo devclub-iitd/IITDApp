@@ -42,3 +42,4 @@ lib/generated_plugin_registrant.dart
 .env
 
 assets/cfg/secrets.json
+course_data/

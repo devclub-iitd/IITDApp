@@ -1,5 +1,6 @@
 import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
 import 'package:IITDAPP/modules/events/events/event_info/update_calendar.dart';
+import 'package:IITDAPP/utility/analytics_manager.dart';
 import 'package:IITDAPP/values/Constants.dart';
 
 import 'package:IITDAPP/ThemeModel.dart';
@@ -72,6 +73,11 @@ class StarButtonState extends State<StarButton> {
         Provider.of<EventsTabProvider>(context, listen: false)
             .toggleEventStar(eventid);
         _event.isStarred = workingEvent.isStarred;
+        if (_event.isStarred) {
+          logEvent(AnalyticsEvent.STAR_EVENT);
+        } else {
+          logEvent(AnalyticsEvent.UNSTAR_EVENT);
+        }
         // if (_event.isStarred) {
         //   _icon = Icon(
         //     Icons.star,

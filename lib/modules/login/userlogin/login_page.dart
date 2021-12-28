@@ -4,6 +4,7 @@ import 'package:IITDAPP/modules/events/events/event_info/event_info_screen.dart'
 import 'package:IITDAPP/modules/login/LoginStateProvider.dart';
 import 'package:IITDAPP/modules/login/user_class.dart';
 import 'package:IITDAPP/push_notifications.dart';
+import 'package:IITDAPP/utility/analytics_manager.dart';
 // import 'package:IITDAPP/modules/news/screens/newsPage.dart';
 // import 'package:IITDAPP/modules/login/userlogin/signup_page.dart';
 import 'package:IITDAPP/values/Constants.dart';
@@ -68,7 +69,9 @@ void onLoginSuccess(BuildContext context, String newtoken) async {
       // Navigator.pushReplacementNamed(context, Routes.events);
       if (message.data['screen'] == 'event') {
         handleEventNotificationClick(context, message.data['id']);
-      } else if (message.data['screen'] == 'news') {}
+      } else if (message.data['screen'] == 'news') {
+        handleNewsNotificationClick(context, message.data['id']);
+      }
     }
 
     Future onSelectNotification(String payload) async {
@@ -80,7 +83,9 @@ void onLoginSuccess(BuildContext context, String newtoken) async {
       print('First ${screen_id[0]}, second ${screen_id[1]}');
       if (screen_id[0] == 'event') {
         handleEventNotificationClick(context, screen_id[1]);
-      } else if (screen_id[0] == 'news') {}
+      } else if (screen_id[0] == 'news') {
+        handleNewsNotificationClick(context, screen_id[1]);
+      }
     }
 
     final InitializationSettings initializationSettings =
@@ -91,6 +96,7 @@ void onLoginSuccess(BuildContext context, String newtoken) async {
         onSelectNotification: onSelectNotification);
 
     FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+
     final response2 = await http.post("$uri/api/user/updatefcm",
         headers: {'authorization': 'Bearer $token'},
         body: {'fcmRegistrationToken': fcm});
@@ -197,6 +203,7 @@ class LoginPageState extends State<LoginPage> {
                           .LOGIN_BUTTON_COLOR,
                       onPressed: () async {
                         // unawaited(showLoading(context));
+                        logEvent(AnalyticsEvent.LOGIN_BUTTON);
                         await login(context);
                         // widget.onlogin();
                         // Provider.of<LoginStateProvider>(context, listen: false).signIn();
@@ -215,6 +222,7 @@ class LoginPageState extends State<LoginPage> {
                     child: InkWell(
                       onTap: () {
                         guest = true;
+                        logEvent(AnalyticsEvent.AS_GUEST);
                         // widget.onlogin();
                         Provider.of<LoginStateProvider>(context, listen: false)
                             .signIn();

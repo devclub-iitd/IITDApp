@@ -10,6 +10,7 @@ import 'package:IITDAPP/modules/settings/utility/ResetSharedPrefs.dart';
 import 'package:IITDAPP/modules/settings/widgets/DarkModeSwitch.dart';
 import 'package:IITDAPP/modules/settings/widgets/SettingsTextWidgets.dart';
 import 'package:IITDAPP/routes/Routes.dart';
+import 'package:IITDAPP/utility/analytics_manager.dart';
 import 'package:IITDAPP/values/Constants.dart';
 
 //import 'package:gradient_app_bar/gradient_app_bar.dart';
@@ -199,6 +200,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onChange: (value) {
                 Provider.of<ThemeModel>(context, listen: false)
                     .toggleTheme(value);
+                logEvent(AnalyticsEvent.THEME_CHANGE, value: value);
               },
               leading: IconButton(
                   onPressed: () {},

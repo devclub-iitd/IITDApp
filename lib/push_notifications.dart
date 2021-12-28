@@ -1,3 +1,6 @@
+import 'package:IITDAPP/modules/events/events/event_info/update_calendar.dart';
+import 'package:IITDAPP/modules/news/data/newsData.dart';
+import 'package:IITDAPP/modules/news/screens/newsPage.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -6,23 +9,27 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'modules/events/events/event_info/event_info_screen.dart';
 
 handleEventNotificationClick(context, id) {
+  updateCalendar();
   Navigator.pushReplacement(
       context, MaterialPageRoute(builder: (context) => EventInfo(id)));
 }
 
-handleNewsNotificationClick(context, id) {
+handleNewsNotificationClick(context, id) async {
+  var res = await apiBaseHelper.get('$uri/api/news/$id') as Map;
+  var data = NewsModel.fromMap(res);
   // Fix the TabData, Possibly load all news items, search for the id,
   // and then load the page
-  // Navigator.pushReplacement(
-  //   context,
-  //   MaterialPageRoute(
-  //     builder: (_) => NewsPage(
-  //       item: tabData[i],
-  //       imageTag: 't${tabData[i].id}',
-  //       redirectPossible: true,
-  //     ),
-  //   ),
-  // );
+  print('News Data is Here ${data.toJson()}');
+  Navigator.pushReplacement(
+    context,
+    MaterialPageRoute(
+      builder: (_) => NewsPage(
+        item: data,
+        imageTag: 't${id}',
+        redirectPossible: true,
+      ),
+    ),
+  );
 }
 
 const AndroidNotificationChannel channel = AndroidNotificationChannel(
@@ -77,7 +84,7 @@ class PushNotificationsManager {
   var token = "notoken";
   Future<String> init() async {
     if (!_initialized) {
-      var token = await _firebaseMessaging.getToken();
+      token = await _firebaseMessaging.getToken();
       print('FirebaseMessaging token: $token');
       _initialized = true;
       // return token;

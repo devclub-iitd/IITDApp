@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:IITDAPP/modules/events/events/event_class.dart';
+import 'package:IITDAPP/utility/analytics_manager.dart';
 // import 'package:IITDAPP/modules/events/globals.dart';
 // import 'package:IITDAPP/modules/events/home.dart';
 import 'package:IITDAPP/values/Constants.dart';
@@ -163,12 +164,18 @@ class EventsTabProvider extends ChangeNotifier {
   void toggleEventStar(String event_id) {
     var event = _allEvents.firstWhere((element) => element.eventid == event_id);
     event.isStarred = !event.isStarred;
+
     buildEventsList();
   }
 
   void toggleClubSubscribe(String club_id) {
     var club = _allClubs.firstWhere((element) => element.id == club_id);
     club.isSubbed = !club.isSubbed;
+    if (club.isSubbed) {
+      logEvent(AnalyticsEvent.SUB_CLUB);
+    } else {
+      logEvent(AnalyticsEvent.UNSUB_CLUB);
+    }
     buildClubsList();
     buildEventsList();
   }
