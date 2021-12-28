@@ -36,12 +36,15 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  var notif_value;
+  var event_notif_value;
+  var news_notif_value;
 
   @override
   void initState() {
     // TODO: implement initState
-    notif_value = defaultsForKey[commonKeys[2]];
+    event_notif_value = defaultsForKey[commonKeys[2]];
+    news_notif_value = defaultsForKey[commonKeys[4]];
+
     super.initState();
   }
 
@@ -200,7 +203,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
               onChange: (value) {
                 Provider.of<ThemeModel>(context, listen: false)
                     .toggleTheme(value);
-                logEvent(AnalyticsEvent.THEME_CHANGE, value: value);
+                logEvent(AnalyticsEvent.THEME_CHANGE, value: value.toString());
               },
               leading: IconButton(
                   onPressed: () {},
@@ -219,7 +222,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 duration: Duration(seconds: 1),
                 firstChild: Icon(Icons.notifications),
                 secondChild: Icon(Icons.notifications_off),
-                crossFadeState: notif_value
+                crossFadeState: event_notif_value
                     ? CrossFadeState.showFirst
                     : CrossFadeState.showSecond,
               ),
@@ -230,7 +233,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 print(res is bool);
                 if (res) {
                   setState(() {
-                    notif_value = value;
+                    event_notif_value = value;
                   });
                   SettingsHandler.setSettingValue(commonKeys[2], value);
                 } else {
@@ -251,7 +254,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 duration: Duration(seconds: 1),
                 firstChild: Icon(Icons.notifications),
                 secondChild: Icon(Icons.notifications_off),
-                crossFadeState: notif_value
+                crossFadeState: news_notif_value
                     ? CrossFadeState.showFirst
                     : CrossFadeState.showSecond,
               ),
@@ -262,9 +265,9 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 print(res is bool);
                 if (res) {
                   setState(() {
-                    notif_value = value;
+                    news_notif_value = value;
                   });
-                  SettingsHandler.setSettingValue(commonKeys[2], value);
+                  SettingsHandler.setSettingValue(commonKeys[4], value);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       duration: Duration(seconds: 2),

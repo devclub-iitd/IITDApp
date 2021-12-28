@@ -170,7 +170,7 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
         createdAt: DateTime.parse(map['createdAt']).add(Duration(minutes: 330)),
         clicks: map['clicks'],
         id: map['_id'],
-        title: map['description'],
+        title: map['title'],
         imgUrl: uri + '/' + map['imgUrl'],
         // trendRate: map['trendRate'],
         sourceName: map['sourceName'],
@@ -186,7 +186,7 @@ class NewsModel<T extends NewsType> with ChangeNotifier {
     return {
       'author': author,
       'content': contentLocal,
-      'description': title,
+      'title': title,
       'imgUrl': imgUrl,
       'sourceName': sourceName,
     };
