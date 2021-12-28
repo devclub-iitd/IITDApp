@@ -2,6 +2,7 @@ import 'package:IITDAPP/modules/quickLinks/data/LinksData.dart';
 import 'package:IITDAPP/utility/UrlHandler.dart';
 
 import 'package:IITDAPP/ThemeModel.dart';
+import 'package:IITDAPP/utility/analytics_manager.dart';
 import 'package:provider/provider.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class LinksScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 40),
         child: InkWell(
           onTap: () {
+            logEvent(AnalyticsEvent.QUICK_LINKS_LINK_CLICK);
             UrlHandler.launchInBrowser(label.url);
           },
           child: Text(

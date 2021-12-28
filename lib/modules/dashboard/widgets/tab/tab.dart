@@ -9,6 +9,7 @@ import 'package:IITDAPP/modules/dashboard/data/tabDataProvider.dart';
 import 'package:IITDAPP/modules/dashboard/widgets/errorWidget.dart';
 import 'package:IITDAPP/modules/dashboard/widgets/loadingWIdget.dart';
 import 'package:IITDAPP/modules/events/events/event_class.dart';
+import 'package:IITDAPP/modules/events/events/event_info/event_info_screen.dart';
 import 'package:IITDAPP/modules/events/home.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/news/news.dart';
@@ -154,19 +155,29 @@ class _GeneralTabState extends State<GeneralTab> {
                               TextStyle(color: Theme.of(context).accentColor),
                         ),
                         onTap: () {
-                          Provider.of<NewsHistoryProvider>(context,
-                                  listen: false)
-                              .setViewed(tabData[i].id);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => NewsPage(
-                                item: tabData[i],
-                                imageTag: 't${tabData[i].id}',
-                                redirectPossible: true,
-                              ),
-                            ),
-                          );
+                          if (tabData.length > 0) {
+                            if (tabData[0] is Event) {
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          EventInfo(tabData[i].eventid)));
+                            } else {
+                              Provider.of<NewsHistoryProvider>(context,
+                                      listen: false)
+                                  .setViewed(tabData[i].id);
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => NewsPage(
+                                    item: tabData[i],
+                                    imageTag: 't${tabData[i].id}',
+                                    redirectPossible: true,
+                                  ),
+                                ),
+                              );
+                            }
+                          }
                         }
 
                         //  Navigator.pushReplacementNamed(

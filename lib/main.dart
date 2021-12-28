@@ -7,6 +7,7 @@ import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsData.dart';
 import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 import 'package:IITDAPP/routes/router.dart' as app_router;
+import 'package:IITDAPP/utility/analytics_manager.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/values/colors/colors.dart';
 import 'package:IITDAPP/values/colors/darkColors.dart';
@@ -37,9 +38,12 @@ void main() async {
   // }
   unawaited(extractAppVersion());
   // unawaited(initialiseNotifications());
+
   unawaited(initialisePreferences());
   clear();
   await savedstate.init();
+  await Firebase.initializeApp();
+  initializeAnalytics();
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(
       create: (_) => NewsProvider<TrendingNews>(),
@@ -106,17 +110,24 @@ extractAppVersion() async =>
 var fcm;
 initialiseNotifications(context) async {
   print('Initialising Notifications');
-  await Firebase.initializeApp();
-  FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage message) {
-    if (message != null) {
-      print('A new message was published! ${message.data}');
-      Navigator.pushReplacementNamed(context, Routes.events);
-    }
-  });
+
   print('Testing Push Notifications');
   var pushNotificationsManager = PushNotificationsManager();
   fcm = await pushNotificationsManager.init();
   print("fcm " + fcm);
+  FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage message) {
+    print('YOYO Initial Message $message');
+    if (message != null) {
+      if (message.data['screen'] == 'event') {
+        handleEventNotificationClick(context, message.data['id']);
+      } else if (message.data['screen'] == 'news') {
+        handleNewsNotificationClick(context, message.data['id']);
+      }
+      // print('A new message was published! ${message.data}');
+      // Navigator.pushReplacementNamed(context, Routes.events);
+    }
+  });
+
   // try {
   //   await Calendarnotificationprovider.setPackageName('com.example.IITDAPP');
   //   await Calendarnotificationprovider.setDescription(

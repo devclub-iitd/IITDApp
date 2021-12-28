@@ -1,4 +1,5 @@
 import 'package:IITDAPP/routes/Routes.dart';
+import 'package:IITDAPP/utility/analytics_manager.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -182,6 +183,7 @@ class AppDrawer extends StatelessWidget {
                   }
                 else
                   {
+                    logScreen(routeName),
                     Navigator.pop(context),
                     if (!selected)
                       Navigator.pushReplacementNamed(context, routeName),
