@@ -1,6 +1,10 @@
 // ignore_for_file: overridden_fields
 
+import 'package:IITDAPP/modules/courses/data/coursedata.dart';
 import 'package:IITDAPP/modules/events/clubs/club_class.dart';
+import 'package:IITDAPP/widgets/course_class.dart';
+
+// important :: when making courses list take objects from allcourses list.
 
 class User {
   String name;
@@ -11,6 +15,8 @@ class User {
   bool isSuperAdmin;
   List<UClub> superAdminOf;
   bool isSSAdmin;
+  List<Course> courses;
+  List<Course> tocalender;
 
   User({
     this.name,
@@ -21,6 +27,7 @@ class User {
     this.isSuperAdmin,
     this.superAdminOf,
     this.isSSAdmin = false,
+    this.courses,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
@@ -50,6 +57,7 @@ class User {
         isAdmin: iA,
         isSuperAdmin: iSA,
         adminof: adminof,
+        courses: allcourses.sublist(0, 6),
         superAdminOf: superadminof,
         isSSAdmin: json['superSuperAdmin']);
   }
