@@ -102,13 +102,13 @@ class SettingsSwitchTile extends StatefulWidget {
       this.onChange,
       this.leading,
       this.SPkey,
-      this.overrideOnChange});
+      this.overrideOnChange = false});
   var leading;
   var text;
   var defaultValue;
   var SPkey;
   var onChange;
-  bool overrideOnChange = false;
+  var overrideOnChange;
   @override
   _SettingsSwitchTileState createState() => _SettingsSwitchTileState();
 }
