@@ -1,11 +1,11 @@
+import 'package:IITDAPP/widgets/course_class.dart';
 import 'package:flutter/material.dart';
-import 'icons.dart';
 import 'package:IITDAPP/modules/courses/screens/about.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CourseCard extends StatelessWidget {
-  final String _name;
-  const CourseCard(this._name);
+  final Course _course;
+  const CourseCard(this._course);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -26,14 +26,14 @@ class CourseCard extends StatelessWidget {
                 },
                 pageBuilder: (BuildContext context, Animation<double> first,
                     Animation<double> second) {
-                  return about(_name);
+                  return about(_course);
                 })),
         child: Card(
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
             elevation: 5,
             //color: Provider.of<ThemeModel>(context).theme.cardColor,
-            color: DeptWise.getColor(_name.substring(0, 2)),
+            color: _course.color,
             margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,11 +44,11 @@ class CourseCard extends StatelessWidget {
                     Container(
                         //color: Colors.red,
                         padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
-                        child: DeptWise.pageIcon(_name.substring(0, 2), 30)),
+                        child: _course.icon),
                     Container(
                       //color: Colors.red,
                       padding: EdgeInsets.fromLTRB(20, 20, 10, 20),
-                      child: Text(_name,
+                      child: Text(_course.name,
                           style: GoogleFonts.montserrat(
                               fontWeight: FontWeight.w400,
                               fontSize: 30,

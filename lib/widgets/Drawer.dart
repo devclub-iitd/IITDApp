@@ -62,12 +62,12 @@ class AppDrawer extends StatelessWidget {
             title: Text('Around'),
             onTap: () {},
           ),
-          // _createDrawerItem(
-          //     selected: tag == 'Courses',
-          //     icon: Icons.bookmark_border_outlined,
-          //     text: 'Courses',
-          //     context: context,
-          //     routeName: Routes.coursesPage),
+          _createDrawerItem(
+              selected: tag == 'Courses',
+              icon: Icons.bookmark_border_outlined,
+              text: 'Courses',
+              context: context,
+              routeName: Routes.coursesPage),
           _createDrawerItem(
               selected: tag == 'Events',
               icon: Icons.emoji_events_outlined,
