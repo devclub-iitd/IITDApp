@@ -43,27 +43,6 @@ class _CoursesScreenState extends State<CoursesScreen>
 
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    for (int i = 0; i < alldepartments.keys.length; i++) {
-      print(alldepartments.keys.toList()[i]);
-    }
-    print(alldepartments.keys.length);
-    return Scaffold(
-      backgroundColor:
-          Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
-      appBar: appBar,
-      drawer: AppDrawer(
-        tag: 'Courses',
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            Container(
-                // color: Colors.red,
-                // height: 10,
-                ),
-=======
     return WillPopScope(
       onWillPop: () {
         if (showPopUp) {
@@ -85,7 +64,6 @@ class _CoursesScreenState extends State<CoursesScreen>
         body: Stack(
           // mainAxisAlignment: MainAxisAlignment.start,
           children: [
->>>>>>> 33ff04f959c9f70f14d58cfeb772e3032abe4be8
             GestureDetector(
               onTap: () {
                 setState(() {
