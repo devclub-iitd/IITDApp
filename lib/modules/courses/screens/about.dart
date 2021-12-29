@@ -7,7 +7,7 @@ import 'package:IITDAPP/modules/courses/widgets/heading.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:provider/provider.dart';
 import 'package:IITDAPP/ThemeModel.dart';
-import 'package:IITDAPP/modules/courses/widgets/listcard.dart';
+// import 'package:IITDAPP/modules/courses/widgets/listcard.dart';
 
 class about extends StatelessWidget {
   final Course _course;
@@ -26,42 +26,60 @@ class about extends StatelessWidget {
         ]),
         withMenu: false,
       ),
-      // body: SingleChildScrollView(
-      //   child: Column(
-      //     mainAxisAlignment: MainAxisAlignment.start,
-      //     crossAxisAlignment: CrossAxisAlignment.start,
-      //     children: [
-      //       Heading('Books', 30),
-      //       Divider(
-      //         height: 0,
-      //         thickness: 4,
-      //         color: Colors.cyan,
-      //         indent: 30,
-      //         endIndent: 220,
-      //       ),
-      //       ListCard('Books', _course),
-      //       Heading('Previous Year Papers', 30),
-      //       Divider(
-      //         height: 0,
-      //         thickness: 4,
-      //         color: Colors.cyan,
-      //         indent: 30,
-      //         endIndent: 220,
-      //       ),
-      //       ListCard('Minor 1', _course),
-      //       ListCard('Minor 2', _course),
-      //       ListCard('Major', _course),
-      //       Container(
-      //         height: 20,
-      //       )
-      //     ],
-      //   ),
-      // ),
-      body: Center(
-          child: Text(
-        "Coming Soon",
-        style: TextStyle(fontSize: 18),
-      )),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Heading('Books', 30),
+            Divider(
+              height: 0,
+              thickness: 4,
+              color: Colors.cyan,
+              indent: 30,
+              endIndent: 220,
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.25,
+              child: Center(
+                child: Text(
+                  "Coming Soon",
+                  style: TextStyle(fontSize: 32),
+                ),
+              ),
+            ),
+            //       ListCard('Books', _course),
+            Heading('Previous Year Papers', 30),
+            Divider(
+              height: 0,
+              thickness: 4,
+              color: Colors.cyan,
+              indent: 30,
+              endIndent: 220,
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.3,
+              child: Center(
+                child: Text(
+                  "Coming Soon",
+                  style: TextStyle(fontSize: 32),
+                ),
+              ),
+            ),
+            //       ListCard('Minor 1', _course),
+            //       ListCard('Minor 2', _course),
+            //       ListCard('Major', _course),
+            //       Container(
+            //         height: 20,
+            //       )
+          ],
+        ),
+      ),
+      // body: Center(
+      //     child: Text(
+      //   "Coming Soon",
+      //   style: TextStyle(fontSize: 18),
+      // )),
     );
   }
 }

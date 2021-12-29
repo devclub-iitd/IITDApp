@@ -219,7 +219,7 @@ class _NewsUpdateState extends State<NewsUpdate> {
                       textInputAction: TextInputAction.next,
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
-                          labelText: 'title',
+                          labelText: 'Title',
                           labelStyle: TextStyle(
                               color: _titleFocusNode.hasFocus
                                   ? Colors.blue

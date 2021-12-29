@@ -1,5 +1,6 @@
 // TODO: fetch data, update data to backend about couyrss, make changes as discussed with pranjal sir,make the books and major minor sections into expandable panel
 //TODO: in improv week, swipe remove option, and maybe long press preview option and reordering the courses option, irritating when keyboard dismisses and comes back again while adding/removing courses.
+import 'package:IITDAPP/modules/courses/widgets/customCard.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/widgets/course_class.dart';
 import 'package:IITDAPP/widgets/loading.dart';
@@ -10,13 +11,13 @@ import 'package:IITDAPP/widgets/Drawer.dart';
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
-import 'package:IITDAPP/modules/courses/data/coursedata.dart';
+// import 'package:IITDAPP/modules/courses/data/coursedata.dart';
 import 'package:IITDAPP/modules/courses/widgets/coursecard.dart';
 import 'package:IITDAPP/modules/courses/widgets/heading.dart';
 import 'package:IITDAPP/modules/courses/screens/search.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:IITDAPP/modules/login/user_class.dart';
-import 'package:IITDAPP/modules/courses/data/coursedata.dart';
+// import 'package:IITDAPP/modules/login/user_class.dart';
+// import 'package:IITDAPP/modules/courses/data/coursedata.dart';
 
 class CoursesScreen extends StatefulWidget {
   static const String routeName = '/courses';
@@ -27,6 +28,7 @@ class CoursesScreen extends StatefulWidget {
 class _CoursesScreenState extends State<CoursesScreen>
     with TickerProviderStateMixin {
   Widget appBar;
+  var showPopUp;
   @override
   void initState() {
     //_controller = TabController(length: 3, vsync: this);
@@ -34,12 +36,14 @@ class _CoursesScreenState extends State<CoursesScreen>
       title: Text('Courses'),
       height: 1,
     );
+    showPopUp = false;
     // your = savedstate.getstate() ?? [];
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+<<<<<<< HEAD
     for (int i = 0; i < alldepartments.keys.length; i++) {
       print(alldepartments.keys.toList()[i]);
     }
@@ -59,119 +63,135 @@ class _CoursesScreenState extends State<CoursesScreen>
                 // color: Colors.red,
                 // height: 10,
                 ),
+=======
+    return WillPopScope(
+      onWillPop: () {
+        if (showPopUp) {
+          setState(() {
+            showPopUp = false;
+          });
+          return Future.value(false);
+        } else {
+          return Future.value(true);
+        }
+      },
+      child: Scaffold(
+        backgroundColor:
+            Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
+        appBar: appBar,
+        drawer: AppDrawer(
+          tag: 'Courses',
+        ),
+        body: Stack(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+>>>>>>> 33ff04f959c9f70f14d58cfeb772e3032abe4be8
             GestureDetector(
               onTap: () {
-                currentUser.tocalender =
-                    currentUser.courses.map((e) => e).toList();
-                var height = MediaQuery.of(context).size.height;
-                var width = MediaQuery.of(context).size.width;
-                AlertDialog alert = AlertDialog(
-                  title: Text("Export To Calender"),
-                  content: Container(
-                    height: height - 600,
-                    // color: Colors.red,
-                    child: Column(
-                      children: [
-                        Container(
-                          height: height - 560,
-                          width: width,
-                          // color: Colors.green,
-                          child: SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                Container(
-                                  height: 10,
-                                ),
-                                ...currentUser.tocalender
-                                    .map((e) => UserCourse(e))
-                                    .toList(),
-                                Container(
-                                  height: 10,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  actions: [
-                    TextButton(
-                        onPressed: () => Navigator.pop(context),
-                        child: Text("Back")),
-                    TextButton(
-                        onPressed: () =>
-                            {export_to_calender(), Navigator.pop(context)},
-                        child: Text("Export")),
-                  ],
-                );
-
-                // show the dialog
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return alert;
-                  },
-                );
+                setState(() {
+                  print('Gesture Detector');
+                  showPopUp = false;
+                });
               },
-              child: Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  elevation: 5,
-                  //color: Provider.of<ThemeModel>(context).theme.cardColor,
-                  color:
-                      Provider.of<ThemeModel>(context).theme.LinksSectionStart,
-                  margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
-                  child: Container(
-                    //color: Colors.red,
-                    padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                    child: Text("Export To Calender",
-                        style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 20,
-                            color: Colors.white)),
-                  )),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Expanded(
-                    child: Container(
-                  height: 82,
-                  child: Heading('Your Courses', 36),
-                )),
-                Container(
-                  height: 80,
-                  width: 100,
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                  child: IconButton(
-                      onPressed: () {
-                        showSearch(context: context, delegate: Search());
-                      },
-                      icon: Icon(
-                        CupertinoIcons.search,
-                        size: 40,
-                      )),
+              child: SingleChildScrollView(
+                child: Opacity(
+                  opacity: showPopUp ? 0.2 : 1,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                          // color: Colors.red,
+                          // height: 10,
+                          ),
+                      GestureDetector(
+                        onTap: () {
+                          currentUser.tocalender =
+                              currentUser.courses.map((e) => e).toList();
+                          // show the dialog
+                          setState(() {
+                            showPopUp = !showPopUp;
+                          });
+                        },
+                        child: Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            elevation: 5,
+                            //color: Provider.of<ThemeModel>(context).theme.cardColor,
+                            color: Provider.of<ThemeModel>(context)
+                                .theme
+                                .LinksSectionStart,
+                            margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+                            child: Container(
+                              //color: Colors.red,
+                              padding: EdgeInsets.fromLTRB(18, 18, 18, 18),
+                              child: Text("Export To Calender",
+                                  style: GoogleFonts.montserrat(
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 18,
+                                      color: Colors.white)),
+                            )),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Expanded(
+                              child: Container(
+                            height: 72,
+                            child: Heading('Your Courses', 28),
+                          )),
+                          Container(
+                            height: 70,
+                            width: 100,
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                            child: IconButton(
+                                onPressed: () {
+                                  showSearch(
+                                      context: context, delegate: Search());
+                                },
+                                icon: Icon(
+                                  CupertinoIcons.search,
+                                  size: 32,
+                                )),
+                          ),
+                        ],
+                      ),
+                      Divider(
+                        height: 0,
+                        thickness: 4,
+                        color: Colors.cyan,
+                        indent: 30,
+                        endIndent: 220,
+                      ),
+                      Column(
+                        children: currentUser.courses == null
+                            ? []
+                            : currentUser.courses
+                                .map((e) => CourseCard(e))
+                                .toList(),
+                      ),
+                    ],
+                  ),
                 ),
-              ],
+              ),
             ),
-            Divider(
-              height: 0,
-              thickness: 4,
-              color: Colors.cyan,
-              indent: 30,
-              endIndent: 220,
-            ),
-            Column(
-              children: currentUser.courses == null
-                  ? []
-                  : currentUser.courses.map((e) => CourseCard(e)).toList(),
-            ),
-            Container(
-              height: 30,
-            )
+            showPopUp
+                ? Center(
+                    child: Container(
+                      color: Colors.transparent,
+                      height: MediaQuery.of(context).size.height * 0.65,
+                      child: Center(
+                        child: Padding(
+                          padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                          child: CustomCard(),
+                        ),
+                      ),
+                    ),
+                  )
+                : Container(
+                    height: 0,
+                  ),
           ],
         ),
       ),
@@ -201,74 +221,60 @@ class _UserCourseState extends State<UserCourse> {
         .any((element) => element.name == widget._course.name)) {
       return Container();
     }
-    return Row(
-      children: [
-        Container(
-          width: MediaQuery.of(context).size.width - 190,
-          child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-              // elevation: 5,
-              color: Colors.red.shade600,
-              // color: widget._course.color,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                      //color: Colors.red,
-                      padding: EdgeInsets.fromLTRB(20, 10, 0, 10),
-                      child: Icon(
-                        widget._course.icondata,
-                        color: Colors.white,
-                        size: 20,
-                      )),
-                  Container(
-                    //color: Colors.red,
-                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: Text(widget._course.name,
-                        style: GoogleFonts.montserrat(
-                            fontWeight: FontWeight.w400,
-                            fontSize: 20,
-                            color: Colors.white)),
-                  ),
-                  Spacer(),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(0, 0, 15, 0),
-                    child: Row(
-                      children: [
-                        Text(
-                          widget._course.slot,
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        ),
-                        // Container(
-                        //     margin: EdgeInsets.fromLTRB(0, 12, 0, 0),
-                        //     // color: Colors.red,
-                        //     child: Icon(
-                        //       CupertinoIcons.arrowtriangle_down_fill,
-                        //       size: 6,
-                        //       color: Colors.white,
-                        //     )),
-                      ],
-                    ),
-                  ),
-                ],
-              )),
-        ),
-        Container(
-          height: 50,
-          // color: Colors.red,
-          child: IconButton(
-            onPressed: () {
-              currentUser.tocalender.remove(widget._course);
-              setState(() {});
-            },
-            icon: Icon(CupertinoIcons.trash),
-            splashColor: Colors.transparent,
-            highlightColor: Colors.transparent,
-            color: widget._course.color,
+    return Padding(
+      padding: EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Row(
+            children: <Widget>[
+              Container(
+                width: 20,
+              ),
+              Icon(
+                widget._course.icondata,
+                color: widget._course.color,
+                size: 28,
+              ),
+              Container(
+                width: 12,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 4.0),
+                child: Text(
+                  widget._course.name.toUpperCase() +
+                      '  (${widget._course.slot})',
+                  style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.w400,
+                      color: widget._course.color),
+                ),
+              ),
+              Container(
+                width: 12,
+              ),
+              // Text(
+              //   '(${widget._course.slot})',
+              //   style: TextStyle(fontSize: 20, color: Colors.white),
+              // ),
+            ],
           ),
-        )
-      ],
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(right: 12.0),
+            child: IconButton(
+              onPressed: () {
+                currentUser.tocalender.remove(widget._course);
+                setState(() {});
+              },
+              icon: Icon(CupertinoIcons.trash),
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              color: widget._course.color,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -156,7 +156,7 @@ class _addremoveState extends State<addremove> {
     var good = AlertDialog(
       content: Container(
         padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-        height: 40,
+        // height: 40,
         child: Text(
           '${widget._cours.name.toString().toUpperCase()} was added to your courses.',
           style:

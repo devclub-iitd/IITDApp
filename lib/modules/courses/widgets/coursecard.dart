@@ -47,15 +47,15 @@ class CourseCard extends StatelessWidget {
                         child: Icon(
                           _course.icondata,
                           color: Colors.white,
-                          size: 30,
+                          size: 26,
                         )),
                     Container(
                       //color: Colors.red,
                       padding: EdgeInsets.fromLTRB(20, 20, 10, 20),
-                      child: Text(_course.name,
+                      child: Text(_course.name.toUpperCase(),
                           style: GoogleFonts.montserrat(
                               fontWeight: FontWeight.w400,
-                              fontSize: 30,
+                              fontSize: 24,
                               color: Colors.white)),
                     ),
                   ],
@@ -65,7 +65,7 @@ class CourseCard extends StatelessWidget {
                     child: Icon(
                       Icons.arrow_forward_ios_rounded,
                       color: Colors.white,
-                      size: 30,
+                      size: 26,
                     )),
               ],
             )));
