@@ -292,7 +292,11 @@ class _ManageTabState extends State<ManageTab> {
                           ]),
                       child: TabBar(
                           controller: _controller,
-                          labelColor: Theme.of(context).primaryColor,
+                          labelColor: Theme.of(context)//.primaryColor,
+                          .textTheme
+                              .headline1
+                              .color
+                              .withOpacity(0.9),
                           unselectedLabelColor: Theme.of(context)
                               .textTheme
                               .headline1
