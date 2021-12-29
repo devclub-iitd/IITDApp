@@ -1386,11 +1386,11 @@ var alldepartmentslist = allcoursesnames
           'name': e,
           'color': Color((Random().nextDouble() * 0xFFFFFF).toInt())
               .withOpacity(1.0),
-          'icon': Icon(CupertinoIcons.book, size: 40)
+          'icondata': CupertinoIcons.book
         })
     .toList();
 
 Map alldepartments = {
   for (var v in alldepartmentslist)
-    v['name']: {'color': v['color'], 'icon': v['icon']}
+    v['name']: {'color': v['color'], 'icondata': v['icondata']}
 };

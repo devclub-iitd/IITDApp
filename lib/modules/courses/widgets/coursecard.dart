@@ -44,7 +44,11 @@ class CourseCard extends StatelessWidget {
                     Container(
                         //color: Colors.red,
                         padding: EdgeInsets.fromLTRB(30, 0, 0, 0),
-                        child: _course.icon),
+                        child: Icon(
+                          _course.icondata,
+                          color: Colors.white,
+                          size: 30,
+                        )),
                     Container(
                       //color: Colors.red,
                       padding: EdgeInsets.fromLTRB(20, 20, 10, 20),

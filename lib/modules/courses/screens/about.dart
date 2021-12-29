@@ -20,7 +20,8 @@ class about extends StatelessWidget {
       appBar: CustomAppBar(
         title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
           Container(
-              padding: EdgeInsets.fromLTRB(0, 0, 20, 0), child: _course.icon),
+              padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
+              child: Icon(_course.icondata)),
           Text(_course.name.toUpperCase())
         ]),
         withMenu: false,

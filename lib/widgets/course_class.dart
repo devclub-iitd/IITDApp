@@ -4,7 +4,7 @@ import 'package:IITDAPP/modules/courses/data/coursedata.dart';
 class Course {
   String name;
   Color color;
-  Icon icon;
+  IconData icondata;
   String slot;
   String department;
 
@@ -15,9 +15,9 @@ class Course {
 
   Course(this.name) {
     department = name.substring(0, 2);
-    slot = js[name];
+    slot = js[name.toUpperCase()];
     color = alldepartments[department]['color'];
-    icon = alldepartments[department]['icon'];
+    icondata = alldepartments[department]['icondata'];
   }
 
   //for v2

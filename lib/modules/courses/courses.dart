@@ -2,11 +2,13 @@
 //TODO: in improv week, swipe remove option, and maybe long press preview option and reordering the courses option, irritating when keyboard dismisses and comes back again while adding/removing courses.
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/widgets/course_class.dart';
+import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
 import 'package:IITDAPP/ThemeModel.dart';
+import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 import 'package:IITDAPP/modules/courses/data/coursedata.dart';
 import 'package:IITDAPP/modules/courses/widgets/coursecard.dart';
@@ -25,7 +27,6 @@ class CoursesScreen extends StatefulWidget {
 class _CoursesScreenState extends State<CoursesScreen>
     with TickerProviderStateMixin {
   Widget appBar;
-
   @override
   void initState() {
     //_controller = TabController(length: 3, vsync: this);
@@ -56,12 +57,49 @@ class _CoursesScreenState extends State<CoursesScreen>
                 ),
             GestureDetector(
               onTap: () {
+                currentUser.tocalender =
+                    currentUser.courses.map((e) => e).toList();
+                var height = MediaQuery.of(context).size.height;
+                var width = MediaQuery.of(context).size.width;
                 AlertDialog alert = AlertDialog(
-                  title: Text("Export Courses"),
-                  content: Column(
-                    children: [],
+                  title: Text("Export To Calender"),
+                  content: Container(
+                    height: height - 600,
+                    // color: Colors.red,
+                    child: Column(
+                      children: [
+                        Container(
+                          height: height - 560,
+                          width: width,
+                          // color: Colors.green,
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Container(
+                                  height: 10,
+                                ),
+                                ...currentUser.tocalender
+                                    .map((e) => UserCourse(e))
+                                    .toList(),
+                                Container(
+                                  height: 10,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                  actions: [],
+                  actions: [
+                    TextButton(
+                        onPressed: () => Navigator.pop(context),
+                        child: Text("Back")),
+                    TextButton(
+                        onPressed: () =>
+                            {export_to_calender(), Navigator.pop(context)},
+                        child: Text("Export")),
+                  ],
                 );
 
                 // show the dialog
@@ -77,12 +115,13 @@ class _CoursesScreenState extends State<CoursesScreen>
                       borderRadius: BorderRadius.circular(10)),
                   elevation: 5,
                   //color: Provider.of<ThemeModel>(context).theme.cardColor,
-                  color: Colors.blue,
+                  color:
+                      Provider.of<ThemeModel>(context).theme.LinksSectionStart,
                   margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
                   child: Container(
                     //color: Colors.red,
                     padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
-                    child: Text("Export Courses",
+                    child: Text("Export To Calender",
                         style: GoogleFonts.montserrat(
                             fontWeight: FontWeight.w400,
                             fontSize: 20,
@@ -134,11 +173,18 @@ class _CoursesScreenState extends State<CoursesScreen>
       ),
     );
   }
+
+  void export_to_calender() {
+    unawaited(showLoading(context));
+
+    //writehere
+
+    Navigator.pop(context);
+  }
 }
 
 class UserCourse extends StatefulWidget {
   final Course _course;
-
   const UserCourse(this._course);
   @override
   _UserCourseState createState() => _UserCourseState();
@@ -147,6 +193,78 @@ class UserCourse extends StatefulWidget {
 class _UserCourseState extends State<UserCourse> {
   @override
   Widget build(BuildContext context) {
-    return Card();
+    if (!currentUser.tocalender
+        .any((element) => element.name == widget._course.name)) {
+      return Container();
+    }
+    return Row(
+      children: [
+        Container(
+          width: MediaQuery.of(context).size.width - 190,
+          child: Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
+              // elevation: 5,
+              color: Colors.red.shade600,
+              // color: widget._course.color,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                      //color: Colors.red,
+                      padding: EdgeInsets.fromLTRB(20, 10, 0, 10),
+                      child: Icon(
+                        widget._course.icondata,
+                        color: Colors.white,
+                        size: 20,
+                      )),
+                  Container(
+                    //color: Colors.red,
+                    padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: Text(widget._course.name,
+                        style: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.w400,
+                            fontSize: 20,
+                            color: Colors.white)),
+                  ),
+                  Spacer(),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(0, 0, 15, 0),
+                    child: Row(
+                      children: [
+                        Text(
+                          widget._course.slot,
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                        // Container(
+                        //     margin: EdgeInsets.fromLTRB(0, 12, 0, 0),
+                        //     // color: Colors.red,
+                        //     child: Icon(
+                        //       CupertinoIcons.arrowtriangle_down_fill,
+                        //       size: 6,
+                        //       color: Colors.white,
+                        //     )),
+                      ],
+                    ),
+                  ),
+                ],
+              )),
+        ),
+        Container(
+          height: 50,
+          // color: Colors.red,
+          child: IconButton(
+            onPressed: () {
+              currentUser.tocalender.remove(widget._course);
+              setState(() {});
+            },
+            icon: Icon(CupertinoIcons.trash),
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            color: widget._course.color,
+          ),
+        )
+      ],
+    );
   }
 }

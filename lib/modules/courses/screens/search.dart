@@ -74,7 +74,10 @@ class Search extends SearchDelegate<String> {
         trailing: addremove(suggestion[index]),
         leading: Container(
             padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-            child: suggestion[index].icon),
+            child: Icon(
+              suggestion[index].icondata,
+              color: suggestion[index].color,
+            )),
         title: RichText(
           text: TextSpan(
               text: suggestion[index].name.substring(0, query.length),

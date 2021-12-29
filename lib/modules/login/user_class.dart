@@ -1,5 +1,6 @@
 // ignore_for_file: overridden_fields
 
+import 'package:IITDAPP/modules/courses/data/coursedata.dart';
 import 'package:IITDAPP/modules/events/clubs/club_class.dart';
 import 'package:IITDAPP/widgets/course_class.dart';
 
@@ -15,6 +16,7 @@ class User {
   List<UClub> superAdminOf;
   bool isSSAdmin;
   List<Course> courses;
+  List<Course> tocalender;
 
   User({
     this.name,
@@ -55,7 +57,7 @@ class User {
         isAdmin: iA,
         isSuperAdmin: iSA,
         adminof: adminof,
-        courses: [],
+        courses: allcourses.sublist(0, 6),
         superAdminOf: superadminof,
         isSSAdmin: json['superSuperAdmin']);
   }
