@@ -39,7 +39,10 @@ class NewsHistoryProvider with ChangeNotifier {
     await ls.ready;
     if (!(newsHistory.contains(id))) {
       newsHistory.add(id);
-      await ls.setItem('newsID', newsHistory);
+      var oldNewsHistory = (await ls.getItem('newsID') ?? []) as List;
+      print('oldHistory is $oldNewsHistory');
+      await ls.setItem(
+          'newsID', <dynamic>{...oldNewsHistory, ...newsHistory}.toList());
       notifyListeners();
     }
   }

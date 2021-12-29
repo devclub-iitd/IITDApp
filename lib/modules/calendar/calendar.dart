@@ -200,15 +200,17 @@ class _CalendarScreenState extends State<CalendarScreen> {
               continue;
             }
           }
+          print('CALENDAR_LOG_KEY Loading Calendar: ${data.name}');
           Future _retrieveCalendarEvents(bool last) async {
             final startDate = DateTime.now().add(Duration(days: -180));
             final endDate = DateTime.now().add(Duration(days: 180));
+            print('CALENDAR_LOG_KEY Retrieving Events for ${data.name}');
             var calendarEventsResult =
                 await _deviceCalendarPlugin.retrieveEvents(
                     data.id,
                     RetrieveEventsParams(
                         startDate: startDate, endDate: endDate));
-
+            print('CALENDAR_LOG_KEY Retrieved Events for ${data.name}');
             calendarModel.add(CalendarModel(
                 id: data.id,
                 name: data.name,
@@ -222,14 +224,15 @@ class _CalendarScreenState extends State<CalendarScreen> {
               await getAllEvents(calendarEventsResult, 0, startDate, endDate);
             }
             if (last) {
-              print('last also executed');
               checkForCalIds(calendarModel);
-              print('Events shud be displayed now');
-              _events = filterEvents(calendarModel, exempted);
-              events2 = _events;
-              forceSetState();
             }
+            print('last also executed');
+            print('Events shud be displayed now');
+            _events = filterEvents(calendarModel, exempted);
+            events2 = _events;
             forceSetState();
+            // }
+            // forceSetState();
           }
 
           _retrieveCalendarEvents(idx == _writableCalendars.length - 1);
