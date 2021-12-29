@@ -164,7 +164,8 @@ bool checkEquality(var localItem, var serverItem, var type) {
   if (localItem.start.toUtc() != DateTime.parse(serverItem['startDate'])) {
     return false;
   }
-  if (localItem.end.toUtc() != DateTime.parse(serverItem['endDate'])) {
+  if (localItem.end.toUtc() !=
+      DateTime.parse(serverItem['endDate'] ?? serverItem['startDate'])) {
     return false;
   }
   if (!(localItem.attendees.isEmpty &&
@@ -213,7 +214,7 @@ Future<void> getEventObject(var data, var eventId, var type) async {
   Event event;
   event = Event(type == 1 ? userEventsCalendarId : starredCalendarId,
       start: DateTime.parse(data['startDate']).toLocal(),
-      end: DateTime.parse(data['endDate']).toLocal());
+      end: DateTime.parse(data['endDate'] ?? data['startDate']).toLocal());
   if (eventId != '') {
     event.eventId = eventId;
   }
