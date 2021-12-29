@@ -59,6 +59,7 @@ void onLoginSuccess(BuildContext context, String newtoken) async {
     }
     Provider.of<LoginStateProvider>(context, listen: false).signIn();
     // Notification Handling
+    await initialiseNotifications();
 
     final response2 = await http.post("$uri/api/user/updatefcm",
         headers: {'authorization': 'Bearer $token'},

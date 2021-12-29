@@ -47,7 +47,8 @@ class LinksScreen extends StatelessWidget {
     const radius = 10.0;
     ExpandableNotifier LinksCard(String key, var value) {
       return ExpandableNotifier(
-        controller: ExpandableController(initialExpanded: true),
+        controller: ExpandableController(
+            initialExpanded: key == 'Academics' || key == 'Time Table'),
 //      initialExpanded: true,
         child: Padding(
           padding: const EdgeInsets.all(10),

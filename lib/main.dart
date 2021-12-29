@@ -40,7 +40,6 @@ void main() async {
   unawaited(initialisePreferences());
   clear();
   await Firebase.initializeApp();
-  await initialiseNotifications();
 
   initializeAnalytics();
 
@@ -123,7 +122,11 @@ List<String> tempo = [];
 void clear() {
   print(tempo);
   for (int i = 0; i < tempo.length; i++) {
-    Directory(tempo[i]).deleteSync(recursive: true);
+    try {
+      Directory(tempo[i]).deleteSync(recursive: true);
+    } catch (e) {
+      print(e);
+    }
   }
   tempo.clear();
   print(tempo);

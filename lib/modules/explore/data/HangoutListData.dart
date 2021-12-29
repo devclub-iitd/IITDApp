@@ -27,8 +27,7 @@ List<Map> hangoutsList = [
     'comment': 'Free Drinks',
     'note': 'Open from 8:00 to 3:00',
     'rating': 4.8,
-    'image':
-        'assets/images/shiru.jpeg'
+    'image': 'assets/images/shiru.jpeg'
   },
   {
     'name': 'HPMC Store',
@@ -53,7 +52,7 @@ List<Map> hangoutsList = [
         'https://qph.fs.quoracdn.net/main-qimg-9716df72fc0640634a9e7cd2cdaa1c96'
   },
   {
-    'name': 'Rajdhani Foods',
+    'name': 'Rajdhani Chatkare Foods',
     'comment': 'Serves Multi-Cuisine',
     'note': '',
     'rating': 3.0,
@@ -133,7 +132,7 @@ Map hangoutsDetails = {
         'https://media-cdn.tripadvisor.com/media/photo-s/11/b2/71/6b/a-nice-overall-ambience.jpg'
   },
   'Amul Cafe': {
-    'about': 'Lorem Ipsum',
+    'about': 'Serves Amul Products',
     'phone': '8447963877',
     'website':
         'https://www.justdial.com/Delhi/Amul-Cafe-Registrar-IIT-New-Delhi/011PXX11-XX11-170113083022-Y6Z3_BZDET',
@@ -149,11 +148,11 @@ Map hangoutsDetails = {
     'website': 'http://global.shirucafe.com/',
     'loc':
         'https://www.google.com/maps/place/Amul+Cafe/@28.5449093,77.1898985,17z/data=!4m8!1m2!2m1!1samul+iit+delhi!3m4!1s0x390d1df6f4d3717f:0xfbe464f1c1ada2b9!8m2!3d28.5448431!4d77.191546?hl=en',
-    'image':
-        'assets/images/shiru.jpeg'
+    'image': 'assets/images/shiru.jpeg'
   },
   'HPMC Store': {
-    'about': 'H.P. Horticulture Produce Marketing & Processing Corporation Juice Shop.',
+    'about':
+        'H.P. Horticulture Produce Marketing & Processing Corporation Juice Shop.',
     'phone': '',
     'website': 'https://hpmc.gov.in/',
     'loc':
