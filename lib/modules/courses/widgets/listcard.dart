@@ -4,10 +4,11 @@ import 'package:IITDAPP/ThemeModel.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:IITDAPP/modules/courses/data/contentdata.dart';
 import 'package:IITDAPP/modules/courses/widgets/book.dart';
+import 'package:IITDAPP/widgets/course_class.dart';
 
 class ListCard extends StatelessWidget {
   final String utility;
-  final String course;
+  final Course course;
   const ListCard(this.utility, this.course);
   @override
   Widget build(BuildContext context) {
@@ -52,10 +53,10 @@ class ListCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Divider(),
-                      for (var x in (data.containsKey(course.toLowerCase())
-                          ? (data[course.toLowerCase()]
+                      for (var x in (data.containsKey(course.name.toLowerCase())
+                          ? (data[course.name.toLowerCase()]
                                   .containsKey(utility.toLowerCase())
-                              ? data[course.toLowerCase()]
+                              ? data[course.name.toLowerCase()]
                                   [utility.toLowerCase()]
                               : [])
                           : []))

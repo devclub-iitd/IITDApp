@@ -1,13 +1,13 @@
 // ignore_for_file: camel_case_types
 
+import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/modules/courses/screens/about.dart';
 import 'package:IITDAPP/modules/courses/data/coursedata.dart';
-import 'package:IITDAPP/modules/courses/widgets/icons.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:IITDAPP/widgets/course_class.dart';
 
 class Search extends SearchDelegate<String> {
   @override
@@ -43,11 +43,12 @@ class Search extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
+    allcourses.shuffle();
     final suggestion = query.isEmpty
-        ? all
-        : all
+        ? allcourses
+        : allcourses
             .where((element) =>
-                element.toLowerCase().startsWith(query.toLowerCase()))
+                element.name.toLowerCase().startsWith(query.toLowerCase()))
             .toList();
 
     return ListView.builder(
@@ -73,20 +74,23 @@ class Search extends SearchDelegate<String> {
         trailing: addremove(suggestion[index]),
         leading: Container(
             padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
-            child: DeptWise(suggestion[index], 30)),
+            child: Icon(
+              suggestion[index].icondata,
+              color: suggestion[index].color,
+            )),
         title: RichText(
           text: TextSpan(
-              text: suggestion[index].substring(0, query.length),
+              text: suggestion[index].name.substring(0, query.length),
               style: TextStyle(
                   fontWeight: FontWeight.normal,
                   fontSize: 18,
                   /*color: Provider.of<ThemeModel>(context)
                       .theme
                       .PRIMARY_TEXT_COLOR*/
-                  color: DeptWise.getColor(suggestion[index])),
+                  color: suggestion[index].color),
               children: [
                 TextSpan(
-                    text: suggestion[index].substring(query.length),
+                    text: suggestion[index].name.substring(query.length),
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18))
               ]),
         ),
@@ -97,7 +101,7 @@ class Search extends SearchDelegate<String> {
 }
 
 class addremove extends StatefulWidget {
-  final String _cours;
+  final Course _cours;
   const addremove(this._cours);
   @override
   _addremoveState createState() => _addremoveState();
@@ -109,15 +113,17 @@ class _addremoveState extends State<addremove> {
     IconButton(
         onPressed: () async {
           setState(() {
-            if (your.contains(widget._cours)) {
-              your.remove(widget._cours);
+            if (currentUser.courses == null) {
+            } else if (currentUser.courses.contains(widget._cours)) {
+              currentUser.courses.remove(widget._cours);
             } else {
-              your.insert(0, widget._cours);
+              currentUser.courses.insert(0, widget._cours);
             }
+            callbackend();
           });
-          await savedstate.setstate(your);
         },
-        icon: your.contains(widget._cours)
+        icon: currentUser.courses != null &&
+                currentUser.courses.contains(widget._cours)
             ? Icon(
                 Icons.remove_circle_outline_sharp,
                 color: Colors.red,
@@ -152,7 +158,7 @@ class _addremoveState extends State<addremove> {
         padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
         height: 40,
         child: Text(
-          '${widget._cours.toString().toUpperCase()} was added to your courses.',
+          '${widget._cours.name.toString().toUpperCase()} was added to your courses.',
           style:
               GoogleFonts.montserrat(fontWeight: FontWeight.w300, fontSize: 18),
         ),
@@ -166,18 +172,19 @@ class _addremoveState extends State<addremove> {
     return IconButton(
         onPressed: () async {
           setState(() {
-            if (your.contains(widget._cours)) {
-              your.remove(widget._cours);
+            if (currentUser.courses == null) {
+            } else if (currentUser.courses.contains(widget._cours)) {
+              currentUser.courses.remove(widget._cours);
               showDialog(context: context, builder: (_) => bad);
             } else {
-              your.insert(0, widget._cours);
+              currentUser.courses.insert(0, widget._cours);
               showDialog(context: context, builder: (_) => good);
             }
           });
-
-          await savedstate.setstate(your);
+          callbackend();
         },
-        icon: your.contains(widget._cours)
+        icon: currentUser.courses != null &&
+                currentUser.courses.contains(widget._cours)
             ? Icon(
                 Icons.remove_circle_outline_sharp,
                 color: Colors.red,
@@ -187,14 +194,8 @@ class _addremoveState extends State<addremove> {
                 color: Colors.green,
               ));
   }
-}
 
-class savedstate {
-  static SharedPreferences _preferences;
-  static const _key = 'your';
-  static Future init() async =>
-      _preferences = await SharedPreferences.getInstance();
-  static Future setstate(List<String> your) async =>
-      await _preferences.setStringList(_key, your);
-  static List<String> getstate() => _preferences.getStringList(_key);
+  void callbackend() {
+    return;
+  }
 }

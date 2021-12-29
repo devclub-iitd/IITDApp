@@ -21,7 +21,7 @@ import 'package:package_info/package_info.dart';
 import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 // import 'package:IITDAPP/modules/discussionForum/discuss.dart';
-import 'package:IITDAPP/modules/courses/screens/search.dart';
+// import 'package:IITDAPP/modules/courses/screens/search.dart';
 import 'dart:io';
 
 void main() async {
@@ -39,7 +39,6 @@ void main() async {
 
   unawaited(initialisePreferences());
   clear();
-  await savedstate.init();
   await Firebase.initializeApp();
 
   initializeAnalytics();

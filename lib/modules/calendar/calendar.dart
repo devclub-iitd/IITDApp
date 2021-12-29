@@ -1,3 +1,5 @@
+// ignore_for_file: await_only_futures
+
 library event_calendar;
 
 import 'dart:convert';
