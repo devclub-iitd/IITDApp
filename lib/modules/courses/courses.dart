@@ -40,6 +40,10 @@ class _CoursesScreenState extends State<CoursesScreen>
 
   @override
   Widget build(BuildContext context) {
+    for (int i = 0; i < alldepartments.keys.length; i++) {
+      print(alldepartments.keys.toList()[i]);
+    }
+    print(alldepartments.keys.length);
     return Scaffold(
       backgroundColor:
           Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,

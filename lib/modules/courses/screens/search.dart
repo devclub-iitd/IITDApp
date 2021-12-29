@@ -43,7 +43,7 @@ class Search extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    allcourses.shuffle();
+    // allcourses.shuffle();
     final suggestion = query.isEmpty
         ? allcourses
         : allcourses

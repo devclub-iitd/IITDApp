@@ -1,216 +1,298 @@
-// import 'package:flutter/cupertino.dart';
-// import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-// class DeptWise extends StatelessWidget {
-//   // final List<Color> _txtcolor;
-//   // final List<Color> _cardcolor;
-//   final double _size;
-//   final String _course;
-//   const Dep tWise(this._course, this._size);
-//   @override
-//   Widget build(BuildContext context) {
-//     return Icon(
-//       getIcon(_course),
-//       size: _size,
-//       color: getColor(_course),
-//     );
-//   }
+class DeptWise extends StatelessWidget {
+  final double size;
+  final String dept;
+  const DeptWise({this.dept, this.size});
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      getIcondata(dept),
+      size: size,
+      color: getColor(dept),
+    );
+  }
 
-//   static Color getColor(String course) {
-//     switch (course.substring(0, 2).toLowerCase()) {
-//       case 'ap':
-//         return Colors.red;
-//         break;
-//       case 'cr':
-//         return Colors.teal;
-//         break;
-//       case 'as':
-//         return Colors.amber;
-//         break;
-//       case 'it':
-//         return Colors.blueAccent;
-//         break;
-//       case 'bb':
-//         return Colors.brown;
-//         break;
-//       case 'be':
-//         return Colors.cyan;
-//         break;
-//       case 'bh':
-//         return Colors.deepOrange;
-//         break;
-//       case 'sb':
-//         return Colors.purple;
-//         break;
-//       case 'bm':
-//         return Colors.greenAccent;
-//         break;
-//       case 'cl':
-//         return Colors.indigoAccent;
-//         break;
-//       case 'cm':
-//         return Colors.lightBlue;
-//         break;
-//       case 'ch':
-//         return Colors.lightGreen;
-//         break;
-//       case 'cv':
-//         return Colors.lime;
-//         break;
-//       case 'co':
-//         return Colors.orangeAccent;
-//         break;
-//       case 'dd':
-//         return Colors.pinkAccent;
-//         break;
-//       case 'el':
-//         return Colors.amberAccent;
-//         break;
-//       case 'es':
-//         return Colors.amberAccent;
-//         break;
-//       case 'hu':
-//         return Colors.blueGrey;
-//         break;
-//       case 'hs':
-//         return Colors.cyan;
-//         break;
-//       case 'ms':
-//         return Colors.red.withGreen(100);
-//         break;
-//       case 'pt':
-//         return Colors.amberAccent.withRed(100);
-//         break;
-//       case 'mt':
-//         return Colors.pink.withBlue(100);
-//         break;
-//       case 'mc':
-//         return Colors.blue.withAlpha(1000);
-//         break;
-//       case 'me':
-//         return Colors.cyan.withRed(100);
-//         break;
-//       case 'py':
-//         return Colors.green;
-//         break;
-//       case 'rd':
-//         return Colors.purple.withRed(100);
-//         break;
-//       case 'ds':
-//         return Colors.orange.withBlue(100);
-//         break;
-//       case 'tx':
-//         return Colors.yellow.withRed(0);
-//         break;
-//       case 've':
-//         return Colors.green.withBlue(1000);
-//         break;
-//       default:
-//         return Colors.deepOrange.withGreen(100);
-//         break;
-//     }
-//   }
+  static Color getColor(String dept) {
+    switch (dept) {
+      case 'ap':
+        return Color(0xaafe4a49);
+        break;
+      case 'am':
+        return Color(0xaafed766);
+        break;
+      case 'co':
+        return Color(0xff011f4b);
+        break;
+      case 'el':
+        return Color(0xff005b96);
+        break;
+      case 'mc':
+        return Color(0xaa851e3e);
+        break;
+      case 'es':
+        return Color(0xaa0e9aa7);
+        break;
+      case 'tx':
+        return Color(0xfffe8a71);
+        break;
+      case 'ml':
+        return Color(0xff4b86b4);
+        break;
+      case 'cl':
+        return Color(0xfffe9c8f);
+        break;
+      case 'dt':
+        return Color(0xff009688);
+        break;
+      case 'hs':
+        return Color(0xff65c3ba);
+        break;
+      case 'cv':
+        return Color(0xffee4035);
+        break;
+      case 'mt':
+        return Color(0xfff37736);
+        break;
+      case 'py':
+        return Color(0xff7bc043);
+        break;
+      case 'bb':
+        return Color(0xff0392cf);
+        break;
+      case 'ds':
+        return Color(0xff4d648d);
+        break;
+      case 'hu':
+        return Color(0xffe0a899);
+        break;
+      case 'sb':
+        return Color(0xff96ceb4);
+        break;
+      case 'si':
+        return Color(0xffffeead);
+        break;
+      case 'sp':
+        return Color(0xffff6f69);
+        break;
+      case 'as':
+        return Color(0xffffcc5c);
+        break;
+      case 'ms':
+        return Color(0xff854442);
+        break;
+      case 'rd':
+        return Color(0xfffff4e6);
+        break;
+      case 'jr':
+        return Color(0xff3c2f2f);
+        break;
+      case 'bm':
+        return Color(0xff3b5998);
+        break;
+      case 've':
+        return Color(0xff8b9dc3);
+        break;
+      case 'cr':
+        return Color(0xff008744);
+        break;
+      case 'ch':
+        return Color(0xff0057e7);
+        break;
+      case 'cm':
+        return Color(0xffd62d20);
+        break;
+      case 'pt':
+        return Color(0xffffa700);
+        break;
+      case 'jp':
+        return Color(0xffff8b94);
+        break;
+      case 'jc':
+        return Color(0xffffd3b6);
+        break;
+      case 'jo':
+        return Color(0xffd11141);
+        break;
+      case 'md':
+        return Color(0xff00b159);
+        break;
+      case 'ct':
+        return Color(0xfff37735);
+        break;
+      case 'jv':
+        return Color(0xffffc425);
+        break;
+      case 'jt':
+        return Color(0xff76b4bd);
+        break;
+      case 'js':
+        return Color(0xffff77aa);
+        break;
+      case 'nl':
+        return Color(0xffff5588);
+        break;
+      case 'ni':
+        return Color(0xffff3377);
+        break;
+      case 'ne':
+        return Color(0xff29abab);
+        break;
+      case 'bs':
+        return Color(0xff4f372d);
+        break;
+      case 'vl':
+        return Color(0xff8874a3);
+        break;
+      default:
+        return Color(0xff64a1f4);
+        break;
+    }
+  }
 
-//   static IconData getIcon(String course) {
-//     switch (course.substring(0, 2).toLowerCase()) {
-//       case 'ap':
-//         return CupertinoIcons.wrench;
-//         break;
-//       case 'cr':
-//         return CupertinoIcons.waveform_path;
-//         break;
-//       case 'as':
-//         return CupertinoIcons.wind;
-//         break;
-//       case 'it':
-//         return CupertinoIcons.gear_alt;
-//         break;
-//       case 'bb':
-//         return Icons.biotech;
-//         break;
-//       case 'be':
-//         return Icons.biotech;
-//         break;
-//       case 'bh':
-//         return Icons.biotech;
-//         break;
-//       case 'sb':
-//         return Icons.biotech_outlined;
-//         break;
-//       case 'bm':
-//         return Icons.medication;
-//         break;
-//       case 'cl':
-//         return CupertinoIcons.lab_flask;
-//         break;
-//       case 'cm':
-//         return CupertinoIcons.lab_flask;
-//         break;
-//       case 'ch':
-//         return CupertinoIcons.lab_flask;
-//         break;
-//       case 'cv':
-//         return Icons.architecture;
-//         break;
-//       case 'co':
-//         return Icons.devices_rounded;
-//         break;
-//       case 'dd':
-//         return Icons.settings_input_svideo;
-//         break;
-//       case 'el':
-//         return Icons.memory;
-//         break;
-//       case 'es':
-//         return Icons.electrical_services;
-//         break;
-//       case 'hu':
-//         return Icons.face_unlock_sharp;
-//         break;
-//       case 'hs':
-//         return Icons.face_unlock_sharp;
-//         break;
-//       case 'ms':
-//         return Icons.microwave;
-//         break;
-//       case 'pt':
-//         return Icons.polymer;
-//         break;
-//       case 'mt':
-//         return Icons.functions;
-//         break;
-//       case 'mc':
-//         return CupertinoIcons.wrench;
-//         break;
-//       case 'me':
-//         return CupertinoIcons.perspective;
-//         break;
-//       case 'py':
-//         return CupertinoIcons.antenna_radiowaves_left_right;
-//         break;
-//       case 'rd':
-//         return CupertinoIcons.arrow_branch;
-//         break;
-//       case 'ds':
-//         return CupertinoIcons.tuningfork;
-//         break;
-//       case 'tx':
-//         return Icons.people;
-//         break;
-//       case 've':
-//         return CupertinoIcons.rays;
-//         break;
-//       default:
-//         return CupertinoIcons.book;
-//         break;
-//     }
-//   }
+  static IconData getIcondata(String dept) {
+    switch (dept) {
+      case 'ap':
+        return CupertinoIcons.wrench;
+        break;
+      case 'am':
+        return CupertinoIcons.gear;
+        break;
+      case 'co':
+        return Icons.laptop_mac_rounded;
+        break;
+      case 'el':
+        return Icons.memory;
+        break;
+      case 'mc':
+        return Icons.precision_manufacturing_outlined;
+        break;
+      case 'es':
+        return Icons.power;
+        break;
+      case 'tx':
+        return CupertinoIcons.scissors;
+        break;
+      case 'ml':
+        return Icons.network_check_sharp;
+        break;
+      case 'cl':
+        return CupertinoIcons.lab_flask;
+        break;
+      case 'dt':
+        return Icons.cabin;
+        break;
+      case 'hs':
+        return Icons.psychology;
+        break;
+      case 'cv':
+        return CupertinoIcons.tree;
+        break;
+      case 'mt':
+        return Icons.functions_rounded;
+        break;
+      case 'py':
+        return CupertinoIcons.waveform_path_ecg;
+        break;
+      case 'bb':
+        return Icons.biotech;
+        break;
+      case 'ds':
+        return Icons.design_services;
+        break;
+      case 'hu':
+        return Icons.psychology_outlined;
+        break;
+      case 'sb':
+        return Icons.biotech_outlined;
+        break;
+      case 'si':
+        return Icons.accessibility_rounded;
+        break;
+      case 'sp':
+        return Icons.yard;
+        break;
+      case 'as':
+        return Icons.waves;
+        break;
+      case 'ms':
+        return Icons.holiday_village;
+        break;
+      case 'rd':
+        return Icons.holiday_village_outlined;
+        break;
+      case 'jr':
+        return Icons.emoji_emotions;
+        break;
+      case 'bm':
+        return Icons.medication_rounded;
+        break;
+      case 've':
+        return Icons.pregnant_woman_outlined;
+        break;
+      case 'cr':
+        return CupertinoIcons.lightbulb;
+        break;
+      case 'ch':
+        return CupertinoIcons.lab_flask_solid;
+        break;
+      case 'cm':
+        return CupertinoIcons.lab_flask;
+        break;
+      case 'pt':
+        return Icons.polymer;
+        break;
+      case 'jp':
+        return Icons.countertops;
+        break;
+      case 'jc':
+        return Icons.wifi_tethering_outlined;
+        break;
+      case 'jo':
+        return CupertinoIcons.tuningfork;
+        break;
+      case 'md':
+        return CupertinoIcons.waveform_path_ecg;
+        break;
+      case 'ct':
+        return CupertinoIcons.waveform_circle;
+        break;
+      case 'jv':
+        return CupertinoIcons.antenna_radiowaves_left_right;
+        break;
+      case 'jt':
+        return Icons.electrical_services;
+        break;
+      case 'js':
+        return CupertinoIcons.umbrella_fill;
+        break;
+      case 'nl':
+        return CupertinoIcons.barcode;
+        break;
+      case 'ni':
+        return CupertinoIcons.ellipsis_vertical_circle_fill;
+        break;
+      case 'ne':
+        return CupertinoIcons.selection_pin_in_out;
+        break;
+      case 'bs':
+        return CupertinoIcons.xmark_shield;
+        break;
+      case 'vl':
+        return CupertinoIcons.tornado;
+        break;
+      default:
+        return Icons.people;
+        break;
+    }
+  }
 
-//   static Icon pageIcon(String course, double sz) {
-//     return Icon(
-//       getIcon(course),
-//       size: sz,
-//       color: Colors.white,
-//     );
-//   }
-// }
+  static Icon pageIcon(String dept, double sz) {
+    return Icon(
+      getIcondata(dept),
+      size: sz,
+      color: Colors.white,
+    );
+  }
+}
