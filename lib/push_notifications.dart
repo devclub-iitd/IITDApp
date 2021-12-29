@@ -5,27 +5,27 @@ import 'package:IITDAPP/values/Constants.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
 import 'modules/events/events/event_info/event_info_screen.dart';
 
-handleEventNotificationClick(context, id) {
+handleEventNotificationClick(id) {
   updateCalendar();
-  Navigator.pushReplacement(
-      context, MaterialPageRoute(builder: (context) => EventInfo(id)));
+  navigatorKey.currentState.pushReplacement(MaterialPageRoute(
+      builder: (context) => EventInfo(
+            id,
+          )));
 }
 
-handleNewsNotificationClick(context, id) async {
+handleNewsNotificationClick(id) async {
   var res = await apiBaseHelper.get('$uri/api/news/$id') as Map;
   var data = NewsModel.fromMap(res);
   // Fix the TabData, Possibly load all news items, search for the id,
   // and then load the page
   print('News Data is Here ${data.toJson()}');
-  Navigator.pushReplacement(
-    context,
+  navigatorKey.currentState.pushReplacement(
     MaterialPageRoute(
       builder: (_) => NewsPage(
         item: data,
-        imageTag: 't${id}',
+        imageTag: 't$id',
         redirectPossible: true,
       ),
     ),
@@ -90,10 +90,59 @@ class PushNotificationsManager {
       // return token;
     }
 
-    _firebaseMessaging.setForegroundNotificationPresentationOptions(
-        alert: true, badge: true, sound: true);
+    FirebaseMessaging.instance
+        .getInitialMessage()
+        .then((RemoteMessage message) {
+      print('YOYO Initial Message $message');
+      if (message != null) {
+        print('${message.data}');
+        if (message.data['screen'] == 'event') {
+          handleEventNotificationClick(message.data['id']);
+        } else if (message.data['screen'] == 'news') {
+          handleNewsNotificationClick(message.data['id']);
+        }
+        // print('A new message was published! ${message.data}');
+        // Navigator.pushReplacementNamed(context, Routes.events);
+      }
+    });
+
+    void _handleMessage(RemoteMessage message) {
+      print('Baack Message: ${message.data}');
+      // Navigator.pushReplacementNamed(context, Routes.events);
+      if (message.data['screen'] == 'event') {
+        handleEventNotificationClick(message.data['id']);
+      } else if (message.data['screen'] == 'news') {
+        handleNewsNotificationClick(message.data['id']);
+      }
+    }
+
+    Future onSelectNotification(String payload) async {
+      print(payload);
+      if (payload == '') {
+        return;
+      }
+      var screen_id = payload.split("/");
+      print('First ${screen_id[0]}, second ${screen_id[1]}');
+      if (screen_id[0] == 'event') {
+        handleEventNotificationClick(screen_id[1]);
+      } else if (screen_id[0] == 'news') {
+        handleNewsNotificationClick(screen_id[1]);
+      }
+    }
 
     flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+
+    final InitializationSettings initializationSettings =
+        InitializationSettings(
+            android: AndroidInitializationSettings('@mipmap/ic_launcher_one'),
+            iOS: IOSInitializationSettings());
+    flutterLocalNotificationsPlugin.initialize(initializationSettings,
+        onSelectNotification: onSelectNotification);
+
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+
+    _firebaseMessaging.setForegroundNotificationPresentationOptions(
+        alert: true, badge: true, sound: true);
 
     await flutterLocalNotificationsPlugin
         .resolvePlatformSpecificImplementation<

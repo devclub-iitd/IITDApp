@@ -1,18 +1,14 @@
 import 'package:IITDAPP/ThemeModel.dart';
-import 'package:IITDAPP/modules/events/events/event_info/event_info_screen.dart';
 // import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
 import 'package:IITDAPP/modules/login/LoginStateProvider.dart';
 import 'package:IITDAPP/modules/login/user_class.dart';
-import 'package:IITDAPP/push_notifications.dart';
 import 'package:IITDAPP/utility/analytics_manager.dart';
 // import 'package:IITDAPP/modules/news/screens/newsPage.dart';
 // import 'package:IITDAPP/modules/login/userlogin/signup_page.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:IITDAPP/widgets/loading.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -62,40 +58,7 @@ void onLoginSuccess(BuildContext context, String newtoken) async {
       Navigator.pop(context);
     }
     Provider.of<LoginStateProvider>(context, listen: false).signIn();
-    await initialiseNotifications(context);
     // Notification Handling
-    void _handleMessage(RemoteMessage message) {
-      print('Baack Message: ${message.data}');
-      // Navigator.pushReplacementNamed(context, Routes.events);
-      if (message.data['screen'] == 'event') {
-        handleEventNotificationClick(context, message.data['id']);
-      } else if (message.data['screen'] == 'news') {
-        handleNewsNotificationClick(context, message.data['id']);
-      }
-    }
-
-    Future onSelectNotification(String payload) async {
-      print(payload);
-      if (payload == '') {
-        return;
-      }
-      var screen_id = payload.split("/");
-      print('First ${screen_id[0]}, second ${screen_id[1]}');
-      if (screen_id[0] == 'event') {
-        handleEventNotificationClick(context, screen_id[1]);
-      } else if (screen_id[0] == 'news') {
-        handleNewsNotificationClick(context, screen_id[1]);
-      }
-    }
-
-    final InitializationSettings initializationSettings =
-        InitializationSettings(
-            android: AndroidInitializationSettings('@mipmap/ic_launcher_one'),
-            iOS: IOSInitializationSettings());
-    flutterLocalNotificationsPlugin.initialize(initializationSettings,
-        onSelectNotification: onSelectNotification);
-
-    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
 
     final response2 = await http.post("$uri/api/user/updatefcm",
         headers: {'authorization': 'Bearer $token'},

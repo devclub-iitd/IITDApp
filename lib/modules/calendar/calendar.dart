@@ -190,12 +190,14 @@ class _CalendarScreenState extends State<CalendarScreen> {
         _calendars = calendarsResult?.data;
         print('recieved data');
         print(calendarsResult?.data);
-        _writableCalendars.asMap().forEach((idx, data) {
-          if (excludeOtherCalendars) {
+        for (var idx in _writableCalendars.asMap().keys) {
+          var data = _writableCalendars.asMap()[idx];
+
+          if (excludeOtherCalendars && idx != _writableCalendars.length - 1) {
             if (!(data.name == 'User Events' ||
                 data.name == 'IITD Connect' ||
                 data.name == 'Academic Calendar')) {
-              return;
+              continue;
             }
           }
           Future _retrieveCalendarEvents(bool last) async {
@@ -214,10 +216,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
                 color: data.color,
                 events: calendarEventsResult));
             if (data.name == 'User Events') {
-              getAllEvents(calendarEventsResult, 1, startDate, endDate);
+              await getAllEvents(calendarEventsResult, 1, startDate, endDate);
             }
             if (data.name == 'IITD Connect') {
-              getAllEvents(calendarEventsResult, 0, startDate, endDate);
+              await getAllEvents(calendarEventsResult, 0, startDate, endDate);
             }
             if (last) {
               print('last also executed');
@@ -227,10 +229,11 @@ class _CalendarScreenState extends State<CalendarScreen> {
               events2 = _events;
               forceSetState();
             }
+            forceSetState();
           }
 
           _retrieveCalendarEvents(idx == _writableCalendars.length - 1);
-        });
+        }
         print('hello');
       });
     } on PlatformException catch (e) {

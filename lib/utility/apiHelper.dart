@@ -74,7 +74,7 @@ class ApiBaseHelper {
       request.files.add(multipartFile);
       request.fields['author'] = body['author'];
       request.fields['content'] = body['content'];
-      request.fields['description'] = body['description'];
+      request.fields['title'] = body['title'];
       request.fields['sourceName'] = body['sourceName'];
       request.headers['authorization'] = 'Bearer $token';
       request.fields['imgUrl'] = body['imgUrl'];
@@ -167,7 +167,7 @@ class ApiBaseHelper {
       request.files.add(multipartFile);
       request.fields['author'] = body['author'];
       request.fields['content'] = body['content'];
-      request.fields['description'] = body['description'];
+      request.fields['title'] = body['title'];
       request.fields['sourceName'] = body['sourceName'];
       request.fields['imgUrl'] = '';
       request.headers['authorization'] = 'Bearer $token';
