@@ -201,7 +201,23 @@ Map clubsDetails = {
     'about': 'Everything is designed, some things are designed well',
     'events': [
       EventsModel(
-          title: 'Workshops',
+          title: 'Creative Coding Workshop',
+          note: 'Design Workshops',
+          image: 'assets/images/design.jpeg'),
+          EventsModel(
+          title: '3D Modelling Workshop',
+          note: 'Design Workshops',
+          image: 'assets/images/design.jpeg'),
+          EventsModel(
+          title: 'Rebranding',
+          note: 'Design Workshops',
+          image: 'assets/images/design.jpeg'),
+          EventsModel(
+          title: 'Bootcamp',
+          note: 'Design Workshops',
+          image: 'assets/images/design.jpeg'),
+          EventsModel(
+          title: 'Vision 1.0',
           note: 'Design Workshops',
           image: 'assets/images/design.jpeg'),
       
