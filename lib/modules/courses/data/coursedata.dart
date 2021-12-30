@@ -2,7 +2,7 @@ import 'package:IITDAPP/widgets/course_class.dart';
 // import 'package:flutter/cupertino.dart';
 // import 'dart:math';
 // import 'package:flutter/material.dart';
-import 'package:IITDAPP/modules/courses/widgets/icons.dart';
+// import 'package:IITDAPP/modules/courses/widgets/icons.dart';
 
 final List<String> slots = [
   'A',
