@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:IITDAPP/modules/map/widgets/marker/currentLocationMarker.dart';
-import 'package:IITDAPP/values/Constants.dart';
+// import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:IITDAPP/modules/map/widgets/marker/marker.dart';
 import 'package:IITDAPP/modules/map/data/locationDetails.dart';
@@ -49,8 +49,8 @@ class MapConditions with ChangeNotifier {
     print('fetching markers');
     var id = 0;
     var t = json.decode(await rootBundle.loadString('assets/maps/places.json'));
-    var t2 = await apiBaseHelper
-        .get('https://run.mocky.io/v3/071e6e8a-6875-43c1-b4c2-314627a84d44');
+    // var t2 = await apiBaseHelper
+    //     .get('https://run.mocky.io/v3/071e6e8a-6875-43c1-b4c2-314627a84d44');
     markers = <Marker>[
       ...(t).map((e) => Marker.fromJson(e, id++, bgcolor)).toList()
     ];

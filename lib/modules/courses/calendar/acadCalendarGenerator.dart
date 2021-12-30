@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:IITDAPP/modules/calendar/calendar.dart';
 import 'package:device_calendar/device_calendar.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -74,7 +75,7 @@ createCalForSlot(
 
     var event = Event(cal_id, // Google Calendar ID
         title: course_name, // Course Name
-        description: '2', // Course Name
+        description: '$course_name Class', // Course Name
         start: startDateTime,
         end: endDateTime,
         recurrenceRule: rrule);
@@ -98,6 +99,7 @@ createCalForSlot(
 
     var createEventResult = await dc.createOrUpdateEvent(event);
     if (!createEventResult.isSuccess) return false;
+    // ignore: unused_local_variable
     var eventId = createEventResult.data;
 
     for (var extra in holidays['extraDays']) {
@@ -111,7 +113,7 @@ createCalForSlot(
         var event = Event(
           cal_id, // Google Calendar ID
           title: course_name, // Course Name
-          description: '2', // Course Name
+          description: '$course_name Extra Class', // Course Name
           start: startDate,
           end: endDate,
         );
@@ -124,12 +126,33 @@ createCalForSlot(
   print('Done Exporting');
 }
 
+Future<String> getCalendarId(DeviceCalendarPlugin dc) async {
+  var calendars = await dc.retrieveCalendars();
+  for (var cal in calendars.data) {
+    if (cal.accountType == 'com.google' &&
+        cal.accountName.contains('@gmail.com') &&
+        cal.isDefault) {
+      return cal.id;
+    }
+  }
+  // Cannot find the google calendar, try to find create/academic calendar
+  for (var cal in calendars.data) {
+    if (cal.accountName == 'IITDAPP' && cal.name == 'Academic Calendar') {
+      return cal.id;
+    }
+  }
+  // Academic Calendar Doesnt exist, create all the calendars
+  return await createCalendar(calNames[0], accountName);
+}
+
 generate_calendar_(Map<String, String> courses) async {
   // Given Courses Map, iterate over the map and create new recurrence event for each course
   // This will be followed by removing the holiday dates
   // This will be followed by adding the extra timetable days
   // We are all set.
   DeviceCalendarPlugin _deviceCalendarPlugin = DeviceCalendarPlugin();
+  var cal_id = await getCalendarId(_deviceCalendarPlugin);
+
   var slotting =
       json.decode(await getJson('assets/courses/slotting_pattern.jsonc'));
   var holidays = json.decode(await getJson('assets/courses/holidays.jsonc'));
@@ -140,7 +163,7 @@ generate_calendar_(Map<String, String> courses) async {
     if (slotting.containsKey(slot)) {
       // If it is, then add the course to the slotting dict
       createCalForSlot(
-          holidays, slotting[slot], _deviceCalendarPlugin, course, '2');
+          holidays, slotting[slot], _deviceCalendarPlugin, course, cal_id);
     } else {
       continue;
     }
