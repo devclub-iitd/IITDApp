@@ -14,9 +14,9 @@ class DarkAppColors extends AppColors {
     PRIMARY_TEXT_COLOR = Colors.white;
     SCAFFOLD_BACKGROUND = Color(0xFF212121);
     DEFAULT_WIDGET_BACKGROUND = Color.fromRGBO(50, 50, 50, 0.8);
-    RAISED_BUTTON_BACKGROUND = Colors.blue;//Colors.tealAccent
-    RAISED_BUTTON_FOREGROUND = Colors.lightBlue[100];//PRIMARY_COLOR_DARK
-
+    RAISED_BUTTON_BACKGROUND = Colors.tealAccent; //Colors.blue;
+    RAISED_BUTTON_FOREGROUND = PRIMARY_COLOR_DARK; //Colors.lightBlue[100];
+    RAISED_BUTTON_FOREGROUND2 = Colors.lightBlue[100];
     RAISED_BUTTON_ALT_BACKGROUND = Colors.teal;
     RAISED_BUTTON_ALT_FOREGROUND = PRIMARY_COLOR_DARK;
 

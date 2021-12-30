@@ -1,6 +1,6 @@
 // ignore_for_file: overridden_fields
 
-import 'package:IITDAPP/modules/courses/data/coursedata.dart';
+// import 'package:IITDAPP/modules/courses/data/coursedata.dart';
 import 'package:IITDAPP/modules/events/clubs/club_class.dart';
 import 'package:IITDAPP/widgets/course_class.dart';
 
