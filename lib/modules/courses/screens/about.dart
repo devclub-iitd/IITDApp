@@ -74,10 +74,12 @@ class _aboutState extends State<about> {
                 );
                 if (currentUser.courses
                     .any((element) => element.name == widget._course.name)) {
+                  callbackend(widget._course, 0);
                   currentUser.courses.removeWhere(
                       (element) => element.name == widget._course.name);
                   showDialog(context: context, builder: (_) => bad);
                 } else {
+                  callbackend(widget._course, 1);
                   currentUser.courses.add(widget._course);
                   showDialog(context: context, builder: (_) => good);
                 }

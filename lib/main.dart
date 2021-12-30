@@ -23,7 +23,7 @@ import 'package:provider/provider.dart';
 // import 'package:IITDAPP/modules/discussionForum/discuss.dart';
 // import 'package:IITDAPP/modules/courses/screens/search.dart';
 import 'dart:io';
-import 'package:IITDAPP/modules/courses/data/coursedata.dart';
+// import 'package:IITDAPP/modules/courses/data/coursedata.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,7 +37,7 @@ void main() async {
   // }
   unawaited(extractAppVersion());
   // unawaited(initialiseNotifications());
-  allcourses.shuffle();
+  // allcourses.shuffle();
   unawaited(initialisePreferences());
   clear();
   await Firebase.initializeApp();

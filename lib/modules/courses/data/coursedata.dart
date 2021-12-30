@@ -1374,24 +1374,33 @@ var js = {
   "TXL772": "M"
 };
 
-// List<String> allcourses = js.keys.toList().map((e) => e.toLowerCase()).toList();
-
 // use this for v2,
 
-List<String> allcoursesnames =
-    js.keys.toList().map((e) => e.toLowerCase()).toList();
-List<Course> allcourses = allcoursesnames.map((e) => Course(e)).toList();
-var alldepartmentslist = allcoursesnames
-    .map((e) => e.substring(0, 2))
-    .toSet()
-    .map((e) => {
-          'name': e,
-          'color': DeptWise.getColor(e).withOpacity(1.0),
-          'icondata': DeptWise.getIcondata(e)
-        })
-    .toList();
+// List<String> allcoursesnames =
+//     js.keys.toList().map((e) => e.toLowerCase()).toList();
 
-Map alldepartments = {
-  for (var v in alldepartmentslist)
-    v['name']: {'color': v['color'], 'icondata': v['icondata']}
-};
+// List<String> allcoursesnames;
+
+// List<Course> allcourses = allcoursesnames
+//     .map((e) => Course(name: e, slot: js[e.toUpperCase()]))
+//     .toList();
+
+// var alldepartmentslist = allcoursesnames
+//     .map((e) => e.substring(0, 2))
+//     .toSet()
+//     .map((e) => {
+//           'name': e,
+//           'color': DeptWise.getColor(e).withOpacity(1.0),
+//           'icondata': DeptWise.getIcondata(e)
+//         })
+//     .toList();
+
+// Map alldepartments = {
+//   for (var v in alldepartmentslist)
+//     v['name']: {'color': v['color'], 'icondata': v['icondata']}
+// };
+
+List<String> allcoursesnames;
+List<Course> allcourses;
+var alldepartmentslist;
+Map alldepartments;
