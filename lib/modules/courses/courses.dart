@@ -149,6 +149,9 @@ class _CoursesScreenState extends State<CoursesScreen>
                                 .map((e) => CourseCard(e))
                                 .toList(),
                       ),
+                      Container(
+                        height: 20,
+                      ),
                     ],
                   ),
                 ),
@@ -242,7 +245,8 @@ class _UserCourseState extends State<UserCourse> {
             padding: const EdgeInsets.only(right: 12.0),
             child: IconButton(
               onPressed: () {
-                currentUser.tocalender.remove(widget._course);
+                currentUser.tocalender.removeWhere(
+                    (element) => element.name == widget._course.name);
                 setState(() {});
               },
               icon: Icon(CupertinoIcons.trash),

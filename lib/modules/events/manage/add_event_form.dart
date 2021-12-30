@@ -119,12 +119,25 @@ class _EventFormState extends State<EventForm> {
 
   void makeList() {
     clubList = [];
-    for (var i = 0; i < currentUser.adminof.length; i++) {
+    var sub = [];
+    for (int i = 0; i < currentUser.adminof.length; i++) {
+      if (!sub.any(
+          (element) => element.clubName == currentUser.adminof[i].clubName)) {
+        sub.add(currentUser.adminof[i]);
+      }
+    }
+    for (int i = 0; i < currentUser.superAdminOf.length; i++) {
+      if (!sub.any((element) =>
+          element.clubName == currentUser.superAdminOf[i].clubName)) {
+        sub.add(currentUser.superAdminOf[i]);
+      }
+    }
+    for (var i = 0; i < sub.length; i++) {
       clubList.add(
-        DropdownMenuItem<UClub>(
-          value: currentUser.adminof[i],
+        DropdownMenuItem(
+          value: sub[i],
           child: Text(
-            currentUser.adminof[i].clubName,
+            sub[i].clubName,
             style: TextStyle(
               // color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR
               color: Colors.grey.shade600,

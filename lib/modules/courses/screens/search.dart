@@ -111,11 +111,15 @@ class _addremoveState extends State<addremove> {
   @override
   void initState() {
     IconButton(
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
         onPressed: () async {
           setState(() {
             if (currentUser.courses == null) {
-            } else if (currentUser.courses.contains(widget._cours)) {
-              currentUser.courses.remove(widget._cours);
+            } else if (currentUser.courses
+                .any((element) => element.name == widget._cours.name)) {
+              currentUser.courses
+                  .removeWhere((element) => element.name == widget._cours.name);
             } else {
               currentUser.courses.insert(0, widget._cours);
             }
@@ -123,7 +127,8 @@ class _addremoveState extends State<addremove> {
           });
         },
         icon: currentUser.courses != null &&
-                currentUser.courses.contains(widget._cours)
+                currentUser.courses
+                    .any((element) => element.name == widget._cours.name)
             ? Icon(
                 Icons.remove_circle_outline_sharp,
                 color: Colors.red,
@@ -142,7 +147,7 @@ class _addremoveState extends State<addremove> {
         padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
         height: 40,
         child: Text(
-          '${widget._cours.toString().toUpperCase()} was removed from your courses.',
+          '${widget._cours.name.toString().toUpperCase()} was removed from your courses.',
           style:
               GoogleFonts.montserrat(fontWeight: FontWeight.w300, fontSize: 18),
         ),
@@ -170,11 +175,15 @@ class _addremoveState extends State<addremove> {
       elevation: 10,
     );
     return IconButton(
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
         onPressed: () async {
           setState(() {
             if (currentUser.courses == null) {
-            } else if (currentUser.courses.contains(widget._cours)) {
-              currentUser.courses.remove(widget._cours);
+            } else if (currentUser.courses
+                .any((element) => element.name == widget._cours.name)) {
+              currentUser.courses
+                  .removeWhere((element) => element.name == widget._cours.name);
               showDialog(context: context, builder: (_) => bad);
             } else {
               currentUser.courses.insert(0, widget._cours);
@@ -184,7 +193,8 @@ class _addremoveState extends State<addremove> {
           callbackend();
         },
         icon: currentUser.courses != null &&
-                currentUser.courses.contains(widget._cours)
+                currentUser.courses
+                    .any((element) => element.name == widget._cours.name)
             ? Icon(
                 Icons.remove_circle_outline_sharp,
                 color: Colors.red,
