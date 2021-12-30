@@ -7,6 +7,7 @@ List<Map> clubsList = [
   {'name': 'Board of Sports Activities', 'motto': 'BSA IIT Delhi', 'image': 'assets/images/bsa.jpeg'},
   {'name': 'Board of Student Publications', 'motto': 'BSP IITD', 'image': 'assets/images/bsp.jpeg'},
   {'name': 'Debating Club', 'motto': 'DebSoc IITD', 'image': 'assets/images/deb.jpeg'},
+  {'name': 'Design Club', 'motto': 'Everything is designed, some things are designed well', 'image': 'assets/images/design.jpeg'},
   {
     'name': 'DevClub',
     'motto': 'A Community of tech-minded people in IIT Delhi'
@@ -196,9 +197,26 @@ Map clubsDetails = {
         'https://www.linkedin.com/company/debating-club-iit-delhi/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_companies%3BdNt4b9v3Tiex%2BEFhvzqBag%3D%3D&licu=urn%3Ali%3Acontrol%3Ad_flagship3_search_srp_companies-search_srp_result&lici=poV%2FxgDcTuyfKPL0a%2F1IGw%3D%3D',
     'web': 'http://www.debsociitd.com'
   },
+  'Design Club': {
+    'about': 'Everything is designed, some things are designed well',
+    'events': [
+      EventsModel(
+          title: 'Workshops',
+          note: 'Design Workshops',
+          image: 'assets/images/design.jpeg'),
+      
+    ],
+    'members': [],
+    'image': 'assets/images/design.jpeg',
+    'facebook': 'https://www.facebook.com/debatingclubiitd',
+    'insta': 'https://www.instagram.com/designclubiitd/',
+    'linkedin':
+        'https://www.linkedin.com/company/design-club-iitd/',
+    'web': 'http://www.debsociitd.com'
+  },
   'DevClub': {
     'about':
-        'Dev Club is a community of tech-minded people in IIT Delhi. Dev Club is a community of tech-minded people in IIT Delhi.',
+        'Dev Club is a community of tech-minded people in IIT Delhi. We work to build new applications to help the community.',
     'events': [
       EventsModel(
           title: 'Citadel', note: '', image: 'assets/images/devCLogo.png'),
@@ -208,7 +226,7 @@ Map clubsDetails = {
           title: 'IITDAPP', note: '', image: 'assets/images/devCLogo.png'),
     ],
     'members': [],
-    'image': 'assets/images/devCCover.png',
+    'image': 'assets/images/devCLogo.png',
     'facebook': 'https://www.facebook.com/tech.iitd',
     'insta': 'https://www.instagram.com/devclub_iitd/',
     'linkedin': 'https://www.linkedin.com/company/devclub-iit-delhi',
