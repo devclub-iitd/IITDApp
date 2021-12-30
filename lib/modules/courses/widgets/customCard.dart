@@ -1,8 +1,11 @@
 // import 'package:IITDAPP/ThemeModel.dart';
+import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/modules/courses/courses.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+// import 'package:IITDAPP/routes/Routes.dart';
 // import 'package:provider/provider.dart';
 
 class CustomCard extends StatefulWidget {
@@ -26,6 +29,8 @@ class _CustomCardState extends State<CustomCard> {
             onPressed: () {
               print(widget.toString());
             },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
             icon: FaIcon(
               FontAwesomeIcons.fileExport,
               // Icons.share,
@@ -36,9 +41,12 @@ class _CustomCardState extends State<CustomCard> {
         body: Container(
           height: height, // change this
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(height / 20)),
-              // color: Color.fromARGB(255, 255, 255, 255),
-              color: Color.fromARGB(255, 37, 37, 37)),
+            borderRadius: BorderRadius.all(Radius.circular(height / 20)),
+            color: Provider.of<ThemeModel>(context)
+                .theme
+                .COURSE_CARD
+                .withOpacity(1.0),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -49,20 +57,55 @@ class _CustomCardState extends State<CustomCard> {
               ),
               Container(height: 10),
               Text(
-                '2021-22',
+                '2021-22 Sem1',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
               ),
               Container(height: 8),
               Divider(
                 color: Colors.grey,
               ),
-              SingleChildScrollView(
-                  child: Column(
+              Container(
+                  height: 360,
+                  child: NotificationListener<OverscrollIndicatorNotification>(
+                    onNotification: (overscroll) {
+                      overscroll.disallowGlow();
+                      return;
+                    },
+                    child: SingleChildScrollView(
+                        physics: ClampingScrollPhysics(),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            ...currentUser.tocalender
+                                .map((e) => UserCourse(e))
+                                .toList(),
+                          ],
+                        )),
+                  )),
+              Row(
                 mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  ...currentUser.tocalender.map((e) => UserCourse(e)).toList(),
+                children: [
+                  // Spacer(),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(10, 10, 0, 0),
+                    child: TextButton(
+                        style: ButtonStyle(
+                          overlayColor: MaterialStateColor.resolveWith(
+                              (states) => Colors.transparent),
+                        ),
+                        onPressed: () => {
+                              Navigator.pop(context),
+                              // Navigator.pushNamed(context, Routes.coursesPage),
+                              Navigator.push(
+                                  context,
+                                  PageRouteBuilder(
+                                      pageBuilder: (_, __, ___) =>
+                                          CoursesScreen()))
+                            },
+                        child: Text("Back")),
+                  ),
                 ],
-              ))
+              )
             ],
           ),
         ));

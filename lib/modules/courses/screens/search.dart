@@ -8,6 +8,8 @@ import 'package:IITDAPP/modules/courses/screens/about.dart';
 import 'package:IITDAPP/modules/courses/data/coursedata.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:IITDAPP/widgets/course_class.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class Search extends SearchDelegate<String> {
   @override
@@ -43,7 +45,7 @@ class Search extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    allcourses.shuffle();
+    // allcourses.shuffle();
     final suggestion = query.isEmpty
         ? allcourses
         : allcourses
@@ -111,19 +113,25 @@ class _addremoveState extends State<addremove> {
   @override
   void initState() {
     IconButton(
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
         onPressed: () async {
           setState(() {
             if (currentUser.courses == null) {
-            } else if (currentUser.courses.contains(widget._cours)) {
-              currentUser.courses.remove(widget._cours);
+            } else if (currentUser.courses
+                .any((element) => element.name == widget._cours.name)) {
+              callbackend(widget._cours, 0);
+              currentUser.courses
+                  .removeWhere((element) => element.name == widget._cours.name);
             } else {
+              callbackend(widget._cours, 1);
               currentUser.courses.insert(0, widget._cours);
             }
-            callbackend();
           });
         },
         icon: currentUser.courses != null &&
-                currentUser.courses.contains(widget._cours)
+                currentUser.courses
+                    .any((element) => element.name == widget._cours.name)
             ? Icon(
                 Icons.remove_circle_outline_sharp,
                 color: Colors.red,
@@ -142,7 +150,7 @@ class _addremoveState extends State<addremove> {
         padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
         height: 40,
         child: Text(
-          '${widget._cours.toString().toUpperCase()} was removed from your courses.',
+          '${widget._cours.name.toString().toUpperCase()} was removed from your courses.',
           style:
               GoogleFonts.montserrat(fontWeight: FontWeight.w300, fontSize: 18),
         ),
@@ -170,21 +178,29 @@ class _addremoveState extends State<addremove> {
       elevation: 10,
     );
     return IconButton(
+        highlightColor: Colors.transparent,
+        splashColor: Colors.transparent,
         onPressed: () async {
           setState(() {
             if (currentUser.courses == null) {
-            } else if (currentUser.courses.contains(widget._cours)) {
-              currentUser.courses.remove(widget._cours);
+            } else if (currentUser.courses
+                .any((element) => element.name == widget._cours.name)) {
+              callbackend(widget._cours, 0);
+              currentUser.courses
+                  .removeWhere((element) => element.name == widget._cours.name);
+
               showDialog(context: context, builder: (_) => bad);
             } else {
+              callbackend(widget._cours, 1);
               currentUser.courses.insert(0, widget._cours);
+
               showDialog(context: context, builder: (_) => good);
             }
           });
-          callbackend();
         },
         icon: currentUser.courses != null &&
-                currentUser.courses.contains(widget._cours)
+                currentUser.courses
+                    .any((element) => element.name == widget._cours.name)
             ? Icon(
                 Icons.remove_circle_outline_sharp,
                 color: Colors.red,
@@ -194,8 +210,43 @@ class _addremoveState extends State<addremove> {
                 color: Colors.green,
               ));
   }
+}
 
-  void callbackend() {
-    return;
+void callbackend(Course course, int crr) async {
+  var response;
+  if (crr == 0) {
+    response = await http.post('$uri/api/user/modifyCourse',
+        headers: {
+          'authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({
+          "mode": "delete",
+          "course": {
+            "name": course.name.toUpperCase(),
+            "slot": currentUser.courses
+                .singleWhere((element) =>
+                    element.name.toLowerCase() == course.name.toLowerCase())
+                .slot
+          }
+        }));
+  } else {
+    response = await http.post('$uri/api/user/modifyCourse',
+        headers: {
+          'authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({
+          "mode": "add",
+          "course": {"name": course.name.toUpperCase(), "slot": course.slot}
+        }));
   }
+
+  // var jsoni = json.decode(response.body)['data'];
+  // var courselist = <Course>[];
+  // for (var i = 0; i < jsoni.length; i++) {
+  //   courselist.add(Course.fromjson(jsoni[i]));
+  // }
+  // currentUser.courses = courselist.map((e) => e);
+  print(json.decode(response.body));
 }

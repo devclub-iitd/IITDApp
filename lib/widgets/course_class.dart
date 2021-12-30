@@ -13,11 +13,17 @@ class Course {
   List<String> minor2;
   List<String> major;
 
-  Course(this.name) {
+  Course({this.name, this.slot}) {
     department = name.substring(0, 2);
-    slot = js[name.toUpperCase()];
     color = alldepartments[department]['color'];
     icondata = alldepartments[department]['icondata'];
+  }
+
+  factory Course.fromjson(Map<String, dynamic> json) {
+    return Course(
+      name: json['name'].toString().toLowerCase(),
+      slot: json['slot'].toString(),
+    );
   }
 
   //for v2

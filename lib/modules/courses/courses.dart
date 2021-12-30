@@ -18,6 +18,7 @@ import 'package:IITDAPP/modules/courses/screens/search.dart';
 import 'package:google_fonts/google_fonts.dart';
 // import 'package:IITDAPP/modules/login/user_class.dart';
 // import 'package:IITDAPP/modules/courses/data/coursedata.dart';
+// import 'package:IITDAPP/routes/Routes.dart';
 
 class CoursesScreen extends StatefulWidget {
   static const String routeName = '/courses';
@@ -64,12 +65,10 @@ class _CoursesScreenState extends State<CoursesScreen>
         body: Stack(
           // mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  print('Gesture Detector');
-                  showPopUp = false;
-                });
+            NotificationListener<OverscrollIndicatorNotification>(
+              onNotification: (overscroll) {
+                overscroll.disallowGlow();
+                return;
               },
               child: SingleChildScrollView(
                 child: Opacity(
@@ -149,24 +148,47 @@ class _CoursesScreenState extends State<CoursesScreen>
                                 .map((e) => CourseCard(e))
                                 .toList(),
                       ),
+                      Container(
+                        height: 20,
+                      ),
                     ],
                   ),
                 ),
               ),
             ),
             showPopUp
-                ? Center(
-                    child: Container(
-                      color: Colors.transparent,
-                      height: MediaQuery.of(context).size.height * 0.65,
-                      child: Center(
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                ? Stack(children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                        // Navigator.pushNamed(context, Routes.coursesPage);
+                        Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                                pageBuilder: (_, __, ___) => CoursesScreen()));
+                      },
+                      child: Container(
+                        height: double.infinity,
+                        width: double.infinity,
+                        color: Colors.red.withOpacity(0),
+                      ),
+                    ),
+                    Center(
+                      child: Container(
+                        decoration: BoxDecoration(
+                            // border: Border.all(
+                            //     color: Colors.red[500],
+                            //     ),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(20))),
+                        height: MediaQuery.of(context).size.height * 0.65,
+                        width: MediaQuery.of(context).size.width - 80,
+                        child: Center(
                           child: CustomCard(),
                         ),
                       ),
-                    ),
-                  )
+                    )
+                  ])
                 : Container(
                     height: 0,
                   ),
@@ -242,7 +264,8 @@ class _UserCourseState extends State<UserCourse> {
             padding: const EdgeInsets.only(right: 12.0),
             child: IconButton(
               onPressed: () {
-                currentUser.tocalender.remove(widget._course);
+                currentUser.tocalender.removeWhere(
+                    (element) => element.name == widget._course.name);
                 setState(() {});
               },
               icon: Icon(CupertinoIcons.trash),

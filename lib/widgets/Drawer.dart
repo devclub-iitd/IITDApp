@@ -46,6 +46,7 @@ class AppDrawer extends StatelessWidget {
           _createDrawerItem(
             selected: tag == 'User Dashboard',
             icon: Icons.account_circle_outlined,
+            sel_icon: Icons.account_circle_rounded,
             text: 'User Dashboard',
             context: context,
             routeName: Routes.dashboard,
@@ -65,12 +66,14 @@ class AppDrawer extends StatelessWidget {
           _createDrawerItem(
               selected: tag == 'Courses',
               icon: Icons.bookmark_border_outlined,
+              sel_icon: Icons.bookmark_rounded,
               text: 'Courses',
               context: context,
               routeName: Routes.coursesPage),
           _createDrawerItem(
               selected: tag == 'Events',
               icon: Icons.emoji_events_outlined,
+              sel_icon: Icons.emoji_events_rounded,
               text: 'Events',
               context: context,
               routeName: Routes.events,
@@ -78,6 +81,7 @@ class AppDrawer extends StatelessWidget {
           _createDrawerItem(
               selected: tag == 'Calendar',
               icon: CupertinoIcons.calendar,
+              sel_icon: CupertinoIcons.calendar,
               text: 'Calendar',
               context: context,
               routeName: Routes.calendar,
@@ -92,6 +96,7 @@ class AppDrawer extends StatelessWidget {
           _createDrawerItem(
             selected: tag == 'Attendance',
             icon: Icons.group_add_outlined,
+            sel_icon: Icons.group_add_rounded,
             text: 'Attendance',
             context: context,
             routeName: Routes.attendance,
@@ -99,6 +104,7 @@ class AppDrawer extends StatelessWidget {
           _createDrawerItem(
               selected: tag == 'Quick Links',
               icon: CupertinoIcons.link,
+              sel_icon: CupertinoIcons.link,
               icon_size: 20,
               text: 'Quick Links',
               context: context,
@@ -113,6 +119,7 @@ class AppDrawer extends StatelessWidget {
           // _createDrawerItem(
           //   selected: tag == 'Chats',
           //   icon: CupertinoIcons.chat_bubble_2,
+          //   sel_icon: CupertinoIcons.chat_bubble_2_fill,
           //   text: 'Chats',
           //   context: context,
           //   routeName: Routes.discussionForum,
@@ -125,6 +132,7 @@ class AppDrawer extends StatelessWidget {
           _createDrawerItem(
             selected: tag == 'Explore',
             icon: CupertinoIcons.compass,
+            sel_icon: CupertinoIcons.compass_fill,
             text: 'Explore',
             context: context,
             routeName: Routes.explore,
@@ -132,13 +140,15 @@ class AppDrawer extends StatelessWidget {
           _createDrawerItem(
             selected: tag == 'Campus Map',
             icon: CupertinoIcons.map_pin_ellipse,
+            sel_icon: CupertinoIcons.map_pin_ellipse,
             text: 'Campus Map',
             context: context,
             routeName: Routes.map,
           ),
           _createDrawerItem(
             selected: tag == 'News',
-            icon: CupertinoIcons.news_solid,
+            icon: CupertinoIcons.news,
+            sel_icon: CupertinoIcons.news_solid,
             text: 'News',
             context: context,
             routeName: Routes.news,
@@ -150,6 +160,7 @@ class AppDrawer extends StatelessWidget {
 
   Widget _createDrawerItem(
       {IconData icon,
+      IconData sel_icon,
       String text,
       double icon_size,
       // GestureTapCallback onTap,
@@ -164,7 +175,7 @@ class AppDrawer extends StatelessWidget {
           title: Row(
             children: <Widget>[
               Icon(
-                icon,
+                selected ? sel_icon : icon,
                 size: icon_size,
               ),
               Padding(
