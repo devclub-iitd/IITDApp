@@ -43,11 +43,13 @@ void processCalIds(var data, int idx) {
   }
 }
 
-void createCalendar(var name, var account) async {
+createCalendar(var name, var account) async {
   var result = await DeviceCalendarPlugin().createCalendar(
     name,
     calendarColor: Colors.red,
     localAccountName: account,
   );
   print(result);
+  return result.data;
+  // print(result.data);
 }

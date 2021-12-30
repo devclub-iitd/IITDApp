@@ -1,15 +1,16 @@
 // TODO: fetch data, update data to backend about couyrss, make changes as discussed with pranjal sir,make the books and major minor sections into expandable panel
 //TODO: in improv week, swipe remove option, and maybe long press preview option and reordering the courses option, irritating when keyboard dismisses and comes back again while adding/removing courses.
+// import 'package:IITDAPP/modules/courses/calendar/acadCalendarGenerator.dart';
 import 'package:IITDAPP/modules/courses/widgets/customCard.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/widgets/course_class.dart';
-import 'package:IITDAPP/widgets/loading.dart';
+// import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/Drawer.dart';
 import 'package:IITDAPP/ThemeModel.dart';
-import 'package:pedantic/pedantic.dart';
+// import 'package:pedantic/pedantic.dart';
 import 'package:provider/provider.dart';
 // import 'package:IITDAPP/modules/courses/data/coursedata.dart';
 import 'package:IITDAPP/modules/courses/widgets/coursecard.dart';
@@ -198,13 +199,15 @@ class _CoursesScreenState extends State<CoursesScreen>
     );
   }
 
-  void export_to_calender() {
-    unawaited(showLoading(context));
+  // void export_to_calender() {
+  //   unawaited(showLoading(context));
+  //   generate_calendar_({
+  //     'COL380': 'J',
+  //   });
+  //   //writehere
 
-    //writehere
-
-    Navigator.pop(context);
-  }
+  //   Navigator.pop(context);
+  // }
 }
 
 class UserCourse extends StatefulWidget {
