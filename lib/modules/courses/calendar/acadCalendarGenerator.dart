@@ -1,9 +1,12 @@
 import 'dart:convert';
 
 import 'package:IITDAPP/modules/calendar/calendar.dart';
+import 'package:IITDAPP/values/Constants.dart';
+import 'package:IITDAPP/widgets/course_class.dart';
 import 'package:device_calendar/device_calendar.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
+import 'package:validators/validators.dart';
 
 Map<String, DayOfWeek> textToDayOfWeek = {
   'Mo': DayOfWeek.Monday,
@@ -46,12 +49,17 @@ createCalForSlot(
     for (var day in time[0]) {
       daysOfWeek.add(textToDayOfWeek[day]);
     }
-    var endDate = DateFormat("dd/MM/yyyy").parse(holidays['endingDate']);
+    var endDate = DateFormat("dd/MM/yyyy")
+        .parse(holidays['endingDate'])
+        .add(Duration(days: 1));
     var rrule = RecurrenceRule(RecurrenceFrequency.Weekly,
         interval: 1, endDate: endDate, daysOfWeek: daysOfWeek);
 
     // Define the start date as the date with first occurence of day occurs starting from now
-    var startDate = DateTime.now();
+    var startDate = DateTime.now()
+            .isAfter(DateFormat("dd/MM/yyyy").parse(holidays['startingDate']))
+        ? DateTime.now()
+        : DateFormat("dd/MM/yyyy").parse(holidays['startingDate']);
     var startDateTime = DateTime(
       startDate.year,
       startDate.month,
@@ -124,6 +132,7 @@ createCalForSlot(
     // Now add the extra working days
   }
   print('Done Exporting');
+  return true;
 }
 
 Future<String> getCalendarId(DeviceCalendarPlugin dc) async {
@@ -145,7 +154,20 @@ Future<String> getCalendarId(DeviceCalendarPlugin dc) async {
   return await createCalendar(calNames[0], accountName);
 }
 
-generate_calendar_(Map<String, String> courses) async {
+String getSem() {
+  var sem = '';
+  if (currentUser.email.length > 5) {
+    if (currentUser.email.substring(3, 5) == "21" &&
+        isNumeric(currentUser.email.substring(2, 3))) {
+      sem = "1";
+    } else {
+      sem = "2";
+    }
+  }
+  return sem;
+}
+
+generate_calendar_(List<Course> courses) async {
   // Given Courses Map, iterate over the map and create new recurrence event for each course
   // This will be followed by removing the holiday dates
   // This will be followed by adding the extra timetable days
@@ -155,17 +177,22 @@ generate_calendar_(Map<String, String> courses) async {
 
   var slotting =
       json.decode(await getJson('assets/courses/slotting_pattern.jsonc'));
-  var holidays = json.decode(await getJson('assets/courses/holidays.jsonc'));
-
-  for (var course in courses.keys) {
-    var slot = courses[course];
+  var holidays;
+  if (getSem() == '1') {
+    holidays = json.decode(await getJson('assets/courses/holidays_sem1.jsonc'));
+  } else {
+    holidays = json.decode(await getJson('assets/courses/holidays.jsonc'));
+  }
+  for (var course in courses) {
+    var slot = course.slot;
     // Check if slot is in the slotting dict
     if (slotting.containsKey(slot)) {
       // If it is, then add the course to the slotting dict
-      createCalForSlot(
-          holidays, slotting[slot], _deviceCalendarPlugin, course, cal_id);
+      await createCalForSlot(holidays, slotting[slot], _deviceCalendarPlugin,
+          course.name.toUpperCase(), cal_id);
     } else {
       continue;
     }
   }
+  return true;
 }

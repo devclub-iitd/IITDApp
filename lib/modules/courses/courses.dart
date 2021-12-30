@@ -43,6 +43,12 @@ class _CoursesScreenState extends State<CoursesScreen>
     super.initState();
   }
 
+  callback() {
+    setState(() {
+      showPopUp = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -185,7 +191,7 @@ class _CoursesScreenState extends State<CoursesScreen>
                         height: MediaQuery.of(context).size.height * 0.65,
                         width: MediaQuery.of(context).size.width - 80,
                         child: Center(
-                          child: CustomCard(),
+                          child: CustomCard(callback),
                         ),
                       ),
                     )
@@ -198,16 +204,6 @@ class _CoursesScreenState extends State<CoursesScreen>
       ),
     );
   }
-
-  // void export_to_calender() {
-  //   unawaited(showLoading(context));
-  //   generate_calendar_({
-  //     'COL380': 'J',
-  //   });
-  //   //writehere
-
-  //   Navigator.pop(context);
-  // }
 }
 
 class UserCourse extends StatefulWidget {

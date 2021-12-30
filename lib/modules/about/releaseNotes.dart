@@ -1,9 +1,9 @@
-import 'dart:convert';
+// import 'dart:convert';
 
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/utility/UrlHandler.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+// import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -41,9 +41,11 @@ class _ReleaseNotesState extends State<ReleaseNotes> {
   }
 
   _loadHtmlFromAssets() async {
-    String fileText = await rootBundle.loadString('assets/release-notes.html');
-    _controller.loadUrl(Uri.dataFromString(fileText,
-            mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
-        .toString());
+    // String fileText = await rootBundle.loadString('assets/release-notes.html');
+    // _controller.loadUrl(Uri.dataFromString(fileText,
+    //         mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
+    //     .toString());
+    _controller
+        .loadUrl('https://iitdconnect-server.devclub.in/release-notes.html');
   }
 }
