@@ -1,5 +1,6 @@
 // import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/ThemeModel.dart';
+import 'package:IITDAPP/modules/courses/calendar/acadCalendarGenerator.dart';
 import 'package:IITDAPP/modules/courses/courses.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,9 @@ class _CustomCardState extends State<CustomCard> {
           child: IconButton(
             onPressed: () {
               print(widget.toString());
+              generate_calendar_({
+                'COL380': 'J',
+              });
             },
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,

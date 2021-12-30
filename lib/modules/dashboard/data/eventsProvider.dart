@@ -20,11 +20,13 @@ class EventsProvider with ChangeNotifier {
         ...response['data']['events']
             .map((e) => Event.fromJson(e))
             .where((e) =>
-                e.isStarred &&
+                (e.isStarred || e.eventBody.isSubbed) &&
                 DateTime.now().isBefore(e.endsAt) &&
                 abs(DateTime.now().difference(e.startsAt).inDays) <= 1)
             .toList()
       ]);
+      // Now sort the events such that starred events are at the top
+      upcomingEvents.data.sort((a, b) => a.isStarred ? -1 : 1);
       notifyListeners();
     } on FetchDataException catch (e) {
       upcomingEvents = ApiResponse.error(e.toString());

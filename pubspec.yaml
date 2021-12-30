@@ -59,7 +59,7 @@ dependencies:
   # image_picker:
   #   git:
   #     url: https://github.com/wiseyy/image_picker.git
-  #  device_calendar: ^3.2.0-dev.11602    # comment this and uncomment either of below 2 url lines if only want to add for one platform
+  # device_calendar: ^3.2.0-dev.11602    # comment this and uncomment either of below 2 url lines if only want to add for one platform
   google_fonts:
   # google_fonts:
   #   git:
@@ -111,6 +111,8 @@ flutter:
     - assets/images/
     - assets/cfg/
     - assets/flare/
+    - assets/courses/
+    - assets/maps/
     - assets/privacy-policy.html
     - assets/release-notes.html
   # The following line ensures that the Material Icons font is
