@@ -1,4 +1,5 @@
 import 'package:IITDAPP/ThemeModel.dart';
+import 'package:IITDAPP/modules/courses/data/coursedata.dart';
 // import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
 import 'package:IITDAPP/modules/login/LoginStateProvider.dart';
 import 'package:IITDAPP/modules/login/user_class.dart';
@@ -18,17 +19,9 @@ import 'package:IITDAPP/main.dart';
 // import 'package:IITDAPP/routes/Routes.dart';
 // import 'package:validators/validators.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-
 import '../casi_user.dart';
-
-//  final response2 = await http.post("$uri/api/user/updatefcm",
-//         headers: {'authorization': 'Bearer $token'},
-//         body: {'fcmRegistrationToken': fcm});
-//     print("yehoo");
-//     print(token);
-//     print(response2.statusCode);
-//     print(response2.reasonPhrase);
-//     print("end");
+import 'package:IITDAPP/widgets/course_class.dart';
+import 'package:IITDAPP/modules/courses/widgets/icons.dart';
 
 void onLoginSuccess(BuildContext context, String newtoken) async {
   print('newtoken: $newtoken');
@@ -38,6 +31,40 @@ void onLoginSuccess(BuildContext context, String newtoken) async {
     showLoading(context);
   }
   final storage = FlutterSecureStorage();
+
+  final res = await http.get('$uri/api/user/getAllCourses',
+      headers: {'authorization': 'Bearer $newtoken'});
+  var parsed = json.decode(res.body);
+  List<dynamic> tp = parsed['data'];
+
+  allcoursesnames = tp.map((e) => e.toString().toLowerCase()).toList();
+  alldepartmentslist = allcoursesnames
+      .map((e) => e.substring(0, 2))
+      .toSet()
+      .map((e) => {
+            'name': e,
+            'color': DeptWise.getColor(e).withOpacity(1.0),
+            'icondata': DeptWise.getIcondata(e)
+          })
+      .toList();
+  alldepartments = {
+    for (var v in alldepartmentslist)
+      v['name']: {'color': v['color'], 'icondata': v['icondata']}
+  };
+  allcourses = allcoursesnames
+      .map((e) => Course(name: e, slot: js[e.toUpperCase()]))
+      .toList();
+  print(alldepartments);
+  allcourses.shuffle();
+
+  final test = await http
+      .get('$uri/api/user/me', headers: {'authorization': 'Bearer $newtoken'});
+  if (json.decode(test.body)['data']['courses'].length == 0) {
+    final resp = await http.get('$uri/api/user/getCourses',
+        headers: {'authorization': 'Bearer $newtoken'});
+    print(resp.statusCode);
+  }
+
   print('Getting User Info');
   final response = await http
       .get('$uri/api/user/me', headers: {'authorization': 'Bearer $newtoken'});

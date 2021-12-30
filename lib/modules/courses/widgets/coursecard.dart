@@ -51,8 +51,9 @@ class CourseCard extends StatelessWidget {
                         )),
                     Container(
                       //color: Colors.red,
-                      padding: EdgeInsets.fromLTRB(20, 20, 10, 20),
-                      child: Text(_course.name.toUpperCase(),
+                      padding: EdgeInsets.fromLTRB(20, 20, 0, 20),
+                      child: Text(
+                          _course.name.toUpperCase() + ' (${_course.slot})',
                           style: GoogleFonts.montserrat(
                               fontWeight: FontWeight.w400,
                               fontSize: 24,
@@ -60,6 +61,14 @@ class CourseCard extends StatelessWidget {
                     ),
                   ],
                 ),
+                // Spacer(),
+                // Container(
+                //   margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                //   child: Text(
+                //     _course.slot,
+                //     style: TextStyle(fontSize: 25),
+                //   ),
+                // ),
                 Container(
                     padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
                     child: Icon(

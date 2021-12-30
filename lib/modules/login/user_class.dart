@@ -45,10 +45,17 @@ class User {
     }
     // ignore: prefer_collection_literals
     var superadminof = <UClub>[];
+
     for (var i = 0; i < json['superAdminOf'].length; i++) {
       var _uclub = UClub.fromJson(json['superAdminOf'][i]);
       if (adminof.contains(_uclub)) adminof.add(_uclub);
       superadminof.add(_uclub);
+    }
+
+    var courselist = <Course>[];
+    print(json['courses']);
+    for (var i = 0; i < json['courses'].length; i++) {
+      courselist.add(Course.fromjson(json['courses'][i]));
     }
     return User(
         name: json['name'],
@@ -57,7 +64,7 @@ class User {
         isAdmin: iA,
         isSuperAdmin: iSA,
         adminof: adminof,
-        courses: allcourses.sublist(0, 6),
+        courses: courselist,
         superAdminOf: superadminof,
         isSSAdmin: json['superSuperAdmin']);
   }
