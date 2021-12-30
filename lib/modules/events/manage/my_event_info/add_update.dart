@@ -129,7 +129,7 @@ class _AddUpdateState extends State<AddUpdate> {
             style: TextStyle(
                 color: Provider.of<ThemeModel>(context)
                     .theme
-                    .RAISED_BUTTON_FOREGROUND),
+                    .RAISED_BUTTON_FOREGROUND2),
           ),
         )
       ],
