@@ -162,9 +162,13 @@ class EventsTabProvider extends ChangeNotifier {
   }
 
   void toggleEventStar(String event_id) {
-    var event = _allEvents.firstWhere((element) => element.eventid == event_id);
-    event.isStarred = !event.isStarred;
-
+    try {
+      var event =
+          _allEvents.firstWhere((element) => element.eventid == event_id);
+      event.isStarred = !event.isStarred;
+    } catch (e) {
+      print(e);
+    }
     buildEventsList();
   }
 

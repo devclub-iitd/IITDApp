@@ -10,6 +10,7 @@ import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/utility/UrlHandler.dart';
 import 'package:IITDAPP/widgets/choice_alert.dart';
 import 'package:IITDAPP/widgets/error_alert.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:IITDAPP/widgets/CustomAppBar.dart';
 import 'package:IITDAPP/widgets/CustomSnackbar.dart';
@@ -204,7 +205,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
           }
           print('CALENDAR_LOG_KEY Loading Calendar: ${data.name}');
           Future _retrieveCalendarEvents(bool last) async {
-            final startDate = DateTime.now().add(Duration(days: -180));
+            final startDate = DateTime.now().add(Duration(days: -90));
             final endDate = DateTime.now().add(Duration(days: 180));
             print('CALENDAR_LOG_KEY Retrieving Events for ${data.name}');
             var calendarEventsResult =
@@ -385,7 +386,10 @@ class _CalendarScreenState extends State<CalendarScreen> {
               : MonthAppointmentDisplayMode.appointment,
           dayFormat: 'EEE',
           monthCellStyle: MonthCellStyle(
-            textStyle: TextStyle(fontSize: 17),
+            textStyle: TextStyle(
+                fontSize: 17,
+                color:
+                    Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR),
             // ignore: deprecated_member_use
             todayTextStyle: TextStyle(fontSize: 17),
           ),
@@ -400,7 +404,20 @@ class _CalendarScreenState extends State<CalendarScreen> {
       );
     }
 
-    return Scaffold(
+    return
+        //  WillPopScope(
+        //   onWillPop: () {
+        //     if (showPopUp) {
+        //       setState(() {
+        //         showPopUp = false;
+        //       });
+        //       return Future.value(false);
+        //     } else {
+        //       return Future.value(true);
+        //     }
+        //   },
+        // child:
+        Scaffold(
       backgroundColor:
           Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       key: scaffoldKey,
@@ -408,7 +425,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
         title: Text('Calendar'),
         actions: [
           IconButton(
-              icon: Icon(Icons.calendar_today),
+              icon: Icon(CupertinoIcons.calendar),
               iconSize: 30,
               color: Colors.white,
               onPressed: () async {
@@ -488,6 +505,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
           return SpinKitWave(color: Colors.white, type: SpinKitWaveType.end);
         },
       ),
+      // ),
     );
   }
 }

@@ -13,11 +13,11 @@ var commonKeys = [
 
 var defaultsForKey = {
   commonKeys[0]: 'Dashboard',
-  'defaultCalendarView': 'Agenda View',
+  'defaultCalendarView': 'Month',
   'showOtherCalendars': true,
-  'theme': 'System',
-  'avatar': 'cat',
-  'bgimage': 'OwO',
+  'theme': 'Dark',
+  'avatar': 'ninja',
+  'bgimage': 'peachtree',
   'showEventNotifications': true,
   'showNewsNotifications': true,
   'newsItemPerPage': '5',

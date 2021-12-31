@@ -2,10 +2,13 @@
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/modules/courses/calendar/acadCalendarGenerator.dart';
 import 'package:IITDAPP/modules/courses/courses.dart';
+import 'package:IITDAPP/utility/analytics_manager.dart';
 import 'package:IITDAPP/values/Constants.dart';
+import 'package:IITDAPP/widgets/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pedantic/pedantic.dart';
 // import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:validators/validators.dart';
@@ -21,9 +24,15 @@ class CustomCard extends StatefulWidget {
   List<String> list_of_calendars = [
     'My Calendar',
     'Academic Calendar',
-    'IITD App'
+    'IITD App',
   ];
-  String curr_calendar;
+  String curr_calendar = 'Academic Calendar';
+
+  Map<String, String> cal_to_id = {
+    'My Calendar': '1',
+    'Academic Calendar': '2',
+    'IITD App': '3',
+  };
 
   @override
   _CustomCardState createState() => _CustomCardState();
@@ -31,6 +40,24 @@ class CustomCard extends StatefulWidget {
 
 class _CustomCardState extends State<CustomCard> {
   // Check if xx is a digit
+
+  // Init State
+  @override
+  initState() {
+    super.initState();
+    getCalendars().then((value) {
+      setState(() {
+        // Remove duplicates
+        widget.cal_to_id = value[1];
+        var cals = value[0].toSet().toList();
+        widget.curr_calendar = cals[0]; //.substring(0, value[0].indexOf('('));
+        print('curr calendar' + widget.curr_calendar);
+        print(value);
+        widget.list_of_calendars = cals;
+      });
+    });
+    // widget.curr_calendar = widget.list_of_calendars[0];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +70,7 @@ class _CustomCardState extends State<CustomCard> {
         sem = "2";
       }
     }
+
     const height = 600.0;
     return Scaffold(
         backgroundColor: Colors.transparent,
@@ -54,7 +82,13 @@ class _CustomCardState extends State<CustomCard> {
           child: IconButton(
             onPressed: () async {
               print(widget.toString());
-              await generate_calendar_(currentUser.tocalender);
+              unawaited(showLoading(context, message: 'Generating Calendar'));
+              await generate_calendar_(currentUser.tocalender,
+                  widget.cal_to_id[widget.curr_calendar]);
+              Navigator.pop(context);
+
+              logEvent(AnalyticsEvent.EXPORT_CALENDAR_SUCCESS,
+                  value: currentUser.tocalender.length);
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text('Calendar Generated'),
                 duration: Duration(seconds: 3),
@@ -124,7 +158,7 @@ class _CustomCardState extends State<CustomCard> {
                   child: DropdownButtonHideUnderline(
                     child: DropdownButton<String>(
                       hint: Text(
-                        "No Calendar ",
+                        widget.curr_calendar,
                         style: TextStyle(
                             color: Colors.deepPurpleAccent[100],
                             fontWeight: FontWeight.w500),
@@ -132,8 +166,9 @@ class _CustomCardState extends State<CustomCard> {
                       value: widget.curr_calendar,
                       style: TextStyle(
                           color: Colors.deepPurpleAccent[100],
+                          fontSize: 16,
                           fontWeight: FontWeight.w500),
-                      alignment: Alignment.bottomCenter,
+                      // alignment: Alignment.bottomCenter,
                       icon: Icon(
                         CupertinoIcons.calendar_badge_plus,
                         size: 30,
@@ -142,12 +177,11 @@ class _CustomCardState extends State<CustomCard> {
                       items: widget.list_of_calendars.map((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value),
+                          child: Text(value, style: TextStyle(fontSize: 16)),
                         );
                       }).toList(),
                       onChanged: (_) {
                         widget.curr_calendar = _;
-                        change_calendar();
                         setState(() {});
                       },
                     ),
@@ -177,4 +211,3 @@ class _CustomCardState extends State<CustomCard> {
 //           },
 //       child: Text("Back")),
 // ),
-change_calendar() {}

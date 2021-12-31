@@ -555,18 +555,11 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                         print('You can quit now');
                         Navigator.pop(context);
                         await showErrorAlert(context, 'Event Cannot be updated',
-                            'The event was added from external calendar, cannot be updated from this App!!!');
+                            'The event was added to your external calendar, cannot be updated from this App!!! You can still update the event in your device\'s default calendar.');
                         Navigator.pop(context);
                       } else {
                         var meetings = <Meeting>[];
-                        if (_selectedAppointment != null) {
-                          _events.appointments.removeAt(_events.appointments
-                              .indexOf(_selectedAppointment));
-                          _events.notifyListeners(
-                              CalendarDataSourceAction.remove,
-                              <Meeting>[_selectedAppointment]);
-                          calForceSetsState();
-                        }
+
                         var event = Event(
                             _selectedAppointment == null
                                 ? userEventsCalendarId
@@ -591,16 +584,41 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                               event, !(_selectedAppointment == null),
                               addToQueue: false);
                           if (res == 'error') {
-                            print('server error occured');
-                            Navigator.pop(context);
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              behavior: SnackBarBehavior.floating,
-                              content: CustomSnackBarContent(
-                                text: 'Server Error Occured',
-                              ),
-                            ));
-                            Navigator.pop(context);
-                            return;
+                            if (_selectedAppointment.calendarId ==
+                                starredCalendarId) {
+                              // Check if only the reminder has been changed, and everythin else is the same
+                              if (_selectedAppointment != null &&
+                                  _selectedAppointment.eventName ==
+                                      event.title &&
+                                  _selectedAppointment.description ==
+                                      event.description &&
+                                  _selectedAppointment.location ==
+                                      event.location &&
+                                  _selectedAppointment.isAllDay ==
+                                      event.allDay) {
+                                print('Reminder can be updated');
+                              } else {
+                                print('Reminder cannot be updated');
+                                Navigator.pop(context);
+                                await showErrorAlert(
+                                    context,
+                                    'Event Cannot be updated',
+                                    'For Starred Events, Only reminder time can be updated. If you are admin of this event, you can update the details from Events tab.');
+                                Navigator.pop(context);
+                                return;
+                              }
+                              // Now Fetch the Events from server, and see if only the reminder has been changed
+
+                            } else {
+                              print('server error occured');
+                              Navigator.pop(context);
+                              await showErrorAlert(
+                                  context,
+                                  'Event Cannot be updated',
+                                  'Server Error occured. Please try again later');
+                              Navigator.pop(context);
+                              return;
+                            }
                           }
                           if (res == 'timeout') {
                             connectedToInternet = false;
@@ -632,6 +650,18 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                               await prefs.setString('ser ' + res,
                                   'loc ' + createEventResult.data);
                             }
+                          }
+                          if (_selectedAppointment != null) {
+                            try {
+                              _events.appointments.removeAt(_events.appointments
+                                  .indexOf(_selectedAppointment));
+                              _events.notifyListeners(
+                                  CalendarDataSourceAction.remove,
+                                  <Meeting>[_selectedAppointment]);
+                            } catch (e) {
+                              print(e);
+                            }
+                            calForceSetsState();
                           }
                           meetings.add(Meeting(
                             eventId: createEventResult.data,
@@ -692,7 +722,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                         print('Show an appropriate Dialog and return');
                         // Navigator.pop(context);
                         await showErrorAlert(context, 'Event Cannot be deleted',
-                            'The event was added from external calendar, cannot be deleted from this App!!!');
+                            'The event was added from external calendar, cannot be deleted from this App!!! You can still delete the event in your device\'s default calendar.');
 
                         Navigator.pop(context);
                       } else {
@@ -704,8 +734,30 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                             print('Now out from deleteReminderFromServer');
                             if (succ == -1) {
                               print('unable to connect to server');
+                              Navigator.pop(context);
+                              await showErrorAlert(
+                                  context,
+                                  'Cannot Connect to Server',
+                                  'Unable to connect to server. Check your internet connection or try again later.');
+                              Navigator.pop(context);
                             } else if (succ == 0) {
                               print('Error occured');
+                              if (_selectedAppointment.calendarId ==
+                                  starredCalendarId) {
+                                Navigator.pop(context);
+                                await showErrorAlert(
+                                    context,
+                                    'Event Cannot Be Deleted',
+                                    'You can still unstar the event in order to delete it.');
+                                Navigator.pop(context);
+                              } else {
+                                Navigator.pop(context);
+                                await showErrorAlert(
+                                    context,
+                                    'Event Cannot Be Deleted',
+                                    'Server Error Occured');
+                                Navigator.pop(context);
+                              }
                               return;
                             }
                           }
@@ -713,8 +765,12 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                               _selectedAppointment.calendarId,
                               _selectedAppointment.eventId);
                           if (res.isSuccess) {
-                            _events.appointments.removeAt(_events.appointments
-                                .indexOf(_selectedAppointment));
+                            try {
+                              _events.appointments.removeAt(_events.appointments
+                                  .indexOf(_selectedAppointment));
+                            } catch (e) {
+                              print(e);
+                            }
                             _events.notifyListeners(
                                 CalendarDataSourceAction.remove,
                                 <Meeting>[_selectedAppointment]);

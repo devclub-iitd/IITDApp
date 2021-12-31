@@ -9,7 +9,7 @@ import 'modules/events/events/event_info/event_info_screen.dart';
 
 handleEventNotificationClick(id) {
   updateCalendar();
-  navigatorKey.currentState.pushReplacement(MaterialPageRoute(
+  navigatorKey.currentState.push(MaterialPageRoute(
       builder: (context) => EventInfo(
             id,
           )));
@@ -21,7 +21,7 @@ handleNewsNotificationClick(id) async {
   // Fix the TabData, Possibly load all news items, search for the id,
   // and then load the page
   print('News Data is Here ${data.toJson()}');
-  navigatorKey.currentState.pushReplacement(
+  navigatorKey.currentState.push(
     MaterialPageRoute(
       builder: (_) => NewsPage(
         item: data,
