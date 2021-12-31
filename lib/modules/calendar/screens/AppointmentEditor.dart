@@ -555,7 +555,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                         print('You can quit now');
                         Navigator.pop(context);
                         await showErrorAlert(context, 'Event Cannot be updated',
-                            'The event was added from external calendar, cannot be updated from this App!!!');
+                            'The event was added to your external calendar, cannot be updated from this App!!! You can still update the event in your device\'s default calendar.');
                         Navigator.pop(context);
                       } else {
                         var meetings = <Meeting>[];
@@ -692,7 +692,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                         print('Show an appropriate Dialog and return');
                         // Navigator.pop(context);
                         await showErrorAlert(context, 'Event Cannot be deleted',
-                            'The event was added from external calendar, cannot be deleted from this App!!!');
+                            'The event was added from external calendar, cannot be deleted from this App!!! You can still delete the event in your device\'s default calendar.');
 
                         Navigator.pop(context);
                       } else {

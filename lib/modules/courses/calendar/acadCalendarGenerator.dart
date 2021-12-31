@@ -49,6 +49,7 @@ createCalForSlot(
     for (var day in time[0]) {
       daysOfWeek.add(textToDayOfWeek[day]);
     }
+    daysOfWeek.add(DayOfWeek.Saturday);
     var endDate = DateFormat("dd/MM/yyyy")
         .parse(holidays['endingDate'])
         .add(Duration(days: 1));
@@ -103,33 +104,38 @@ createCalForSlot(
               .replaceAll('.000', '') +
           ",";
     }
+    // Now add non-working saturdays on exdate
+
+    // First calc the first saturday date staring from startDateTime
+    var saturdayDate = startDateTime;
+    while (saturdayDate.weekday != 6) {
+      saturdayDate = saturdayDate.add(Duration(days: 1));
+    }
+
+    // Now add all the saturdays except those in holidays['extraDays']
+    for (var day in holidays['extraDays']) {
+      var date = DateFormat("dd/MM/yyyy")
+          .parse(day[0]); //DateFormat("yyyyMMddThhmmssZ").parse(holiday);
+      if (time[0].contains(day[1])) {
+        continue;
+      }
+      date = date.add(
+          Duration(hours: startDateTime.hour, minutes: startDateTime.minute));
+      exdate += date
+              .toUtc()
+              .toIso8601String()
+              .replaceAll('-', '')
+              .replaceAll(':', '')
+              .replaceAll('.000', '') +
+          ",";
+    }
+
     event.exdate = exdate.substring(0, exdate.length - 1);
 
     var createEventResult = await dc.createOrUpdateEvent(event);
     if (!createEventResult.isSuccess) return false;
     // ignore: unused_local_variable
     var eventId = createEventResult.data;
-
-    for (var extra in holidays['extraDays']) {
-      var date = DateFormat("dd/MM/yyyy")
-          .parse(extra[0]); //DateFormat("yyyyMMddThhmmssZ").parse(holiday);
-      if (time[0].contains(extra[1])) {
-        var startDate = date.add(
-            Duration(hours: startDateTime.hour, minutes: startDateTime.minute));
-        var endDate = date.add(
-            Duration(hours: endDateTime.hour, minutes: endDateTime.minute));
-        var event = Event(
-          cal_id, // Google Calendar ID
-          title: course_name, // Course Name
-          description: '$course_name Extra Class', // Course Name
-          start: startDate,
-          end: endDate,
-        );
-        dc.createOrUpdateEvent(event);
-      }
-    }
-
-    // Now add the extra working days
   }
   print('Done Exporting');
   return true;

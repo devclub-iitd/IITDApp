@@ -2,6 +2,7 @@
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/modules/courses/calendar/acadCalendarGenerator.dart';
 import 'package:IITDAPP/modules/courses/courses.dart';
+import 'package:IITDAPP/utility/analytics_manager.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -44,6 +45,8 @@ class _CustomCardState extends State<CustomCard> {
             onPressed: () async {
               print(widget.toString());
               await generate_calendar_(currentUser.tocalender);
+              logEvent(AnalyticsEvent.EXPORT_CALENDAR_SUCCESS,
+                  value: currentUser.tocalender.length);
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text('Calendar Generated'),
                 duration: Duration(seconds: 3),

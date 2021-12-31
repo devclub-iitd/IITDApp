@@ -12,7 +12,7 @@ var commonKeys = [
 
 var defaultsForKey = {
   commonKeys[0]: 'Dashboard',
-  'defaultCalendarView': 'Agenda View',
+  'defaultCalendarView': 'Month',
   'showOtherCalendars': true,
   'theme': 'System',
   'avatar': 'origami',

@@ -14,6 +14,7 @@ import 'package:IITDAPP/modules/events/home.dart';
 import 'package:IITDAPP/modules/news/data/newsData.dart';
 import 'package:IITDAPP/modules/news/news.dart';
 import 'package:IITDAPP/modules/news/screens/newsPage.dart';
+import 'package:IITDAPP/utility/analytics_manager.dart';
 import 'package:IITDAPP/utility/apiResponse.dart';
 import 'package:IITDAPP/ThemeModel.dart';
 import 'package:provider/provider.dart';
@@ -157,12 +158,15 @@ class _GeneralTabState extends State<GeneralTab> {
                         onTap: () {
                           if (tabData.length > 0) {
                             if (tabData[0] is Event) {
-                              Navigator.pushReplacement(
+                              logEvent(AnalyticsEvent.DASHBOARD_EVENT_CLICKED);
+                              Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
                                           EventInfo(tabData[i].eventid)));
                             } else {
+                              logEvent(AnalyticsEvent.DASHBOARD_NEWS_CLICKED);
+
                               Provider.of<NewsHistoryProvider>(context,
                                       listen: false)
                                   .setViewed(tabData[i].id);

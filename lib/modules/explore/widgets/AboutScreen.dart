@@ -362,7 +362,7 @@ class MemberCard extends StatelessWidget {
                             : data.post,
                         style: GoogleFonts.literata(
                             color: Colors.redAccent,
-                            fontSize: 20,
+                            fontSize: 18,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
