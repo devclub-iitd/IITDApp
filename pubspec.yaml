@@ -109,6 +109,9 @@ dev_dependencies:
 flutter:
   assets:
     - assets/images/
+    - assets/bg/
+    - assets/avatars/
+    - assets/
     - assets/cfg/
     - assets/flare/
     - assets/courses/

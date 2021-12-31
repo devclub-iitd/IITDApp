@@ -20,16 +20,16 @@ class DeptWise extends StatelessWidget {
         return Color(0xaafe4a49);
         break;
       case 'am':
-        return Color(0xaafed766);
+        return Color(0xaac154c1);
         break;
       case 'co':
         return Color(0xffe84a5f);
         break;
       case 'el':
-        return Color(0xff005b96);
+        return Color(0xffdd5b96);
         break;
       case 'mc':
-        return Color(0xaa851e3e);
+        return Color(0xffff3855);
         break;
       case 'es':
         return Color(0xaa0e9aa7);
@@ -71,13 +71,13 @@ class DeptWise extends StatelessWidget {
         return Color(0xff96ceb4);
         break;
       case 'si':
-        return Color(0xffffeead);
+        return Color(0xffff3399);
         break;
       case 'sp':
         return Color(0xffff6f69);
         break;
       case 'as':
-        return Color(0xffffcc5c);
+        return Color(0xffffd12a);
         break;
       case 'ms':
         return Color(0xff854442);
@@ -140,7 +140,7 @@ class DeptWise extends StatelessWidget {
         return Color(0xff29abab);
         break;
       case 'bs':
-        return Color(0xff4f372d);
+        return Color(0xffdddd31);
         break;
       case 'vl':
         return Color(0xff8874a3);
