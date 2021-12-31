@@ -101,10 +101,6 @@ Future<void> getEventsFromResponse(
   });
   await rems.forEach((data) async {
     var item = prefs.getString('ser ' + data['_id']);
-    if (data['_id'] == '61bf10d32c062cd0a214c137') {
-      print('this is the event id');
-      print(item);
-    }
     serKeys.remove('ser ' + data['_id']);
     print('ok type $type');
     item = item != null ? item.substring(4) : item;

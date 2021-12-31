@@ -713,8 +713,12 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                               _selectedAppointment.calendarId,
                               _selectedAppointment.eventId);
                           if (res.isSuccess) {
-                            _events.appointments.removeAt(_events.appointments
-                                .indexOf(_selectedAppointment));
+                            try {
+                              _events.appointments.removeAt(_events.appointments
+                                  .indexOf(_selectedAppointment));
+                            } catch (e) {
+                              print(e);
+                            }
                             _events.notifyListeners(
                                 CalendarDataSourceAction.remove,
                                 <Meeting>[_selectedAppointment]);
