@@ -47,9 +47,18 @@ class StarButtonState extends State<StarButton> {
   }
 
   Future<void> starEvent(String eventid) async {
-    var workingEvent = Provider.of<EventsTabProvider>(context, listen: false)
-        .allEvents
-        .firstWhere((element) => element.eventid == widget._event.eventid);
+    var workingEvent = null;
+    bool issueFlag = false;
+    try {
+      workingEvent = Provider.of<EventsTabProvider>(context, listen: false)
+          .allEvents
+          .firstWhere((element) => element.eventid == widget._event.eventid);
+    } catch (e) {
+      // Issue has occured, therefore since we do not have any working event,
+      // we will if else at every place
+      issueFlag = true;
+      print(e);
+    }
     print('Starring Event');
     var timeOutFlag = false;
     final response = await http.post(
@@ -72,7 +81,11 @@ class StarButtonState extends State<StarButton> {
       if (parsedJson['message'] == 'Successfully Starred') {
         Provider.of<EventsTabProvider>(context, listen: false)
             .toggleEventStar(eventid);
-        _event.isStarred = workingEvent.isStarred;
+        if (issueFlag) {
+          _event.isStarred = !_event.isStarred;
+        } else {
+          _event.isStarred = workingEvent.isStarred;
+        }
         if (_event.isStarred) {
           logEvent(AnalyticsEvent.STAR_EVENT);
         } else {
@@ -109,10 +122,19 @@ class StarButtonState extends State<StarButton> {
                 : 'Event Unstarred')));
       }
     } else {
-      _event.isStarred = workingEvent.isStarred;
+      if (!issueFlag) {
+        _event.isStarred = workingEvent.isStarred;
+      }
       setState(() {
         isLoading = false;
       });
+      if (issueFlag) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            duration: Duration(seconds: 1),
+            content: Text((_event.isStarred)
+                ? 'Could not unstar event'
+                : 'Could not star event')));
+      }
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           duration: Duration(seconds: 1),
           content: Text((workingEvent.isStarred)

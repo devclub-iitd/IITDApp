@@ -3,12 +3,14 @@ import 'package:IITDAPP/modules/courses/data/coursedata.dart';
 // import 'package:IITDAPP/modules/events/EventsTabProvider.dart';
 import 'package:IITDAPP/modules/login/LoginStateProvider.dart';
 import 'package:IITDAPP/modules/login/user_class.dart';
+import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 import 'package:IITDAPP/utility/analytics_manager.dart';
 // import 'package:IITDAPP/modules/news/screens/newsPage.dart';
 // import 'package:IITDAPP/modules/login/userlogin/signup_page.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:IITDAPP/widgets/loading.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
@@ -74,6 +76,16 @@ void onLoginSuccess(BuildContext context, String newtoken) async {
   print(response.body);
   if (response.statusCode == 200) {
     var parsedJson = json.decode(response.body);
+
+    try {
+      // Update the settings
+      SettingsHandler.setSettingValue('showEventNotifications',
+          parsedJson['data']['notifications']['eventNotifications']);
+      SettingsHandler.setSettingValue('showNewsNotifications',
+          parsedJson['data']['notifications']['newsNotifications']);
+    } catch (e) {
+      print('Error in initializationSettings of Notifications : $e');
+    }
     currentUser = User.fromJson(parsedJson['data']);
     // print(parsedJson['data']);
     print('Login successful');
@@ -89,6 +101,9 @@ void onLoginSuccess(BuildContext context, String newtoken) async {
     Provider.of<LoginStateProvider>(context, listen: false).signIn();
     // Notification Handling
     await initialiseNotifications();
+
+    FirebaseMessaging.instance.subscribeToTopic('litclub');
+    // FirebaseMessaging.instance.
 
     final response2 = await http.post("$uri/api/user/updatefcm",
         headers: {'authorization': 'Bearer $token'},
