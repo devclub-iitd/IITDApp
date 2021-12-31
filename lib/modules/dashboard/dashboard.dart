@@ -161,7 +161,10 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                Container(height: 264, child: UserImage()),
+                Container(
+                    height: MediaQuery.of(context).size.height * 0.326,
+                    // height: 264,
+                    child: UserImage()),
                 UserName(),
                 UserEmail(),
                 Container(

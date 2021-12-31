@@ -6,7 +6,7 @@ import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:validators/validators.dart';
 import 'package:flutter/cupertino.dart';

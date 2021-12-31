@@ -16,7 +16,7 @@ var defaultsForKey = {
   'defaultCalendarView': 'Agenda View',
   'showOtherCalendars': true,
   'theme': 'System',
-  'avatar': 'mikasa',
+  'avatar': 'cat',
   'bgimage': 'OwO',
   'showEventNotifications': true,
   'showNewsNotifications': true,

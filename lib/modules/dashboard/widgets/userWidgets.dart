@@ -1,10 +1,12 @@
 // import 'package:IITDAPP/ThemeModel.dart';
+import 'package:IITDAPP/ThemeModel.dart';
 import 'package:IITDAPP/values/Constants.dart';
 // import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 // import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class UserEmail extends StatelessWidget {
   const UserEmail({
@@ -65,7 +67,8 @@ class UserImage extends StatelessWidget {
 
     return Stack(children: [
       Container(
-        height: 210,
+        // height: 210,
+        height: MediaQuery.of(context).size.height * 0.215,
         width: double.infinity,
         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
         // color: Colors.red,
@@ -75,12 +78,15 @@ class UserImage extends StatelessWidget {
         ),
       ),
       Positioned(
-        top: 142,
+        // top: 142,
+        top: MediaQuery.of(context).size.height * 0.173,
         left: MediaQuery.of(context).size.width / 2 - 65,
         child: Container(
           decoration: BoxDecoration(shape: BoxShape.circle),
           child: CircleAvatar(
             radius: 60,
+            backgroundColor:
+                Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
             backgroundImage: AssetImage(avImage),
           ),
         ),
