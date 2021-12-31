@@ -161,7 +161,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
-                UserImage(),
+                Container(height: 264, child: UserImage()),
                 UserName(),
                 UserEmail(),
                 Container(
@@ -169,6 +169,7 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
                       color: Provider.of<ThemeModel>(context)
                           .theme
                           .DEFAULT_WIDGET_BACKGROUND,
+                      // color: Colors.red,
                       boxShadow: [
                         BoxShadow(
                             offset: Offset(0, 2),
@@ -190,15 +191,21 @@ class _DashboardState extends State<Dashboard> with TickerProviderStateMixin {
                       indicatorSize: TabBarIndicatorSize.tab,
                       tabs: tabList),
                 ),
-                SizedBox(
-                  // margin: EdgeInsets.all(1),
-                  height: MediaQuery.of(context).size.height * 0.4,
-                  child: TabBarView(
-                      controller: _tabController,
-                      children: tabList
-                          .map((e) => _getTab(
-                              tabList.indexOf(e), _parentScrollController))
-                          .toList()),
+                NotificationListener<OverscrollIndicatorNotification>(
+                  onNotification: (overscroll) {
+                    overscroll.disallowGlow();
+                    return;
+                  },
+                  child: SizedBox(
+                    // margin: EdgeInsets.all(1),
+                    height: MediaQuery.of(context).size.height * 0.4,
+                    child: TabBarView(
+                        controller: _tabController,
+                        children: tabList
+                            .map((e) => _getTab(
+                                tabList.indexOf(e), _parentScrollController))
+                            .toList()),
+                  ),
                 )
               ],
             ),

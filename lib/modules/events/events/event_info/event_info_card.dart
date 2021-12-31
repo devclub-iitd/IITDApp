@@ -18,13 +18,13 @@ class EventInfoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var actionRow = <Widget>[];
-    actionRow.add(IconButton(
-      onPressed: () {},
-      icon: Icon(Icons.calendar_today),
-      tooltip: 'Add to Calendar',
-      color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
-      iconSize: 20,
-    ));
+    // actionRow.add(IconButton(
+    //   onPressed: () {},
+    //   icon: Icon(Icons.calendar_today),
+    //   tooltip: 'Add to Calendar',
+    //   color: Provider.of<ThemeModel>(context).theme.PRIMARY_TEXT_COLOR,
+    //   iconSize: 20,
+    // ));
     actionRow.add(
       StarButton(_event),
     );

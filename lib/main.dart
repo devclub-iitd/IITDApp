@@ -95,6 +95,8 @@ initialisePreferences() async {
   defaultScreen = res;
   res = await SettingsHandler.getSettingValue(commonKeys[3]);
   avImage = avatars[res];
+  res = await SettingsHandler.getSettingValue(commonKeys[5]);
+  bgimage = backgroundimages[res];
 }
 
 // ignore: always_declare_return_types

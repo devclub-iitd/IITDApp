@@ -121,11 +121,11 @@ class _addremoveState extends State<addremove> {
             } else if (currentUser.courses
                 .any((element) => element.name == widget._cours.name)) {
               callbackend(widget._cours, 0);
-              currentUser.courses
-                  .removeWhere((element) => element.name == widget._cours.name);
+              // currentUser.courses
+              //     .removeWhere((element) => element.name == widget._cours.name);
             } else {
               callbackend(widget._cours, 1);
-              currentUser.courses.insert(0, widget._cours);
+              // currentUser.courses.insert(0, widget._cours);
             }
           });
         },
@@ -186,13 +186,13 @@ class _addremoveState extends State<addremove> {
             } else if (currentUser.courses
                 .any((element) => element.name == widget._cours.name)) {
               callbackend(widget._cours, 0);
-              currentUser.courses
-                  .removeWhere((element) => element.name == widget._cours.name);
+              // currentUser.courses
+              //     .removeWhere((element) => element.name == widget._cours.name);
 
               showDialog(context: context, builder: (_) => bad);
             } else {
               callbackend(widget._cours, 1);
-              currentUser.courses.insert(0, widget._cours);
+              // currentUser.courses.insert(0, widget._cours);
 
               showDialog(context: context, builder: (_) => good);
             }
@@ -238,15 +238,18 @@ void callbackend(Course course, int crr) async {
         },
         body: json.encode({
           "mode": "add",
-          "course": {"name": course.name.toUpperCase(), "slot": course.slot}
+          "course": {
+            "name": course.name.toUpperCase(),
+            //"slot": course.slot
+          }
         }));
   }
 
-  // var jsoni = json.decode(response.body)['data'];
-  // var courselist = <Course>[];
-  // for (var i = 0; i < jsoni.length; i++) {
-  //   courselist.add(Course.fromjson(jsoni[i]));
-  // }
-  // currentUser.courses = courselist.map((e) => e);
+  var jsoni = json.decode(response.body)['data'];
+  var courselist = <Course>[];
+  for (var i = 0; i < jsoni.length; i++) {
+    courselist.add(Course.fromjson(jsoni[i]));
+  }
+  currentUser.courses = [...courselist];
   print(json.decode(response.body));
 }

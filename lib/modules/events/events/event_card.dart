@@ -76,14 +76,14 @@ class EventCard extends StatelessWidget {
                       ],
                     ),
                   ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.calendar_today),
-                    color: Provider.of<ThemeModel>(context)
-                        .theme
-                        .PRIMARY_TEXT_COLOR,
-                    tooltip: 'Add to Calendar',
-                  ),
+                  // IconButton(
+                  //   onPressed: () {},
+                  //   icon: Icon(Icons.calendar_today),
+                  //   color: Provider.of<ThemeModel>(context)
+                  //       .theme
+                  //       .PRIMARY_TEXT_COLOR,
+                  //   tooltip: 'Add to Calendar',
+                  // ),
                   StarButton(_event)
                 ],
               ),
