@@ -148,7 +148,7 @@ class _addremoveState extends State<addremove> {
     var bad = AlertDialog(
       content: Container(
         padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-        height: 40,
+        // height: 40,
         child: Text(
           '${widget._cours.name.toString().toUpperCase()} was removed from your courses.',
           style:
@@ -190,6 +190,7 @@ class _addremoveState extends State<addremove> {
               //     .removeWhere((element) => element.name == widget._cours.name);
 
               showDialog(context: context, builder: (_) => bad);
+              Navigator.pop(context);
             } else {
               callbackend(widget._cours, 1);
               // currentUser.courses.insert(0, widget._cours);

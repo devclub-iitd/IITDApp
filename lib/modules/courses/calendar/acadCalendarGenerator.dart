@@ -113,21 +113,32 @@ createCalForSlot(
     }
 
     // Now add all the saturdays except those in holidays['extraDays']
-    for (var day in holidays['extraDays']) {
-      var date = DateFormat("dd/MM/yyyy")
-          .parse(day[0]); //DateFormat("yyyyMMddThhmmssZ").parse(holiday);
-      if (time[0].contains(day[1])) {
-        continue;
+    while (saturdayDate.isBefore(endDate)) {
+      var isclass = false;
+      for (var day in holidays['extraDays']) {
+        var date = DateFormat("dd/MM/yyyy")
+            .parse(day[0]); //DateFormat("yyyyMMddThhmmssZ").parse(holiday);
+        if (!(saturdayDate.year == date.year &&
+            saturdayDate.month == date.month &&
+            saturdayDate.day == date.day)) {
+          continue;
+        }
+        if (time[0].contains(day[1])) {
+          // Class is there
+          isclass = true;
+          break;
+        }
       }
-      date = date.add(
-          Duration(hours: startDateTime.hour, minutes: startDateTime.minute));
-      exdate += date
-              .toUtc()
-              .toIso8601String()
-              .replaceAll('-', '')
-              .replaceAll(':', '')
-              .replaceAll('.000', '') +
-          ",";
+      if (!isclass) {
+        exdate += saturdayDate
+                .toUtc()
+                .toIso8601String()
+                .replaceAll('-', '')
+                .replaceAll(':', '')
+                .replaceAll('.000', '') +
+            ",";
+      }
+      saturdayDate = saturdayDate.add(Duration(days: 7));
     }
 
     event.exdate = exdate.substring(0, exdate.length - 1);
@@ -139,6 +150,40 @@ createCalForSlot(
   }
   print('Done Exporting');
   return true;
+}
+
+int getCalendarScore(cal) {
+  if (cal.accountName == 'IITDAPP' && cal.name == 'Academic Calendar') {
+    return -1;
+  }
+  if (cal.accountType == 'com.google' &&
+      cal.accountName.contains('@gmail.com')) {
+    if (cal.isDefault) {
+      return -3;
+    }
+    return -2;
+  }
+  return 0;
+}
+
+Future<List> getCalendars() async {
+  List<Calendar> calendars = [];
+  var calendarsResult = await DeviceCalendarPlugin().retrieveCalendars();
+  if (calendarsResult.isSuccess) {
+    calendars = List.from(calendarsResult.data);
+  }
+  calendars.sort((a, b) => getCalendarScore(a).compareTo(getCalendarScore(b)));
+  // Google Calendars and Academic Calendars get the highest priorities
+
+  // Convert to list of strings
+  List<String> calendarNames = [];
+  Map<String, String> calendarNameToId = {};
+  for (var cal in calendars) {
+    calendarNames.add(cal.name.trim());
+    calendarNameToId[cal.name.trim()] = cal.id;
+    // calendarNames.add(cal.name + ' (' + cal.accountName + ')');
+  }
+  return [calendarNames, calendarNameToId];
 }
 
 Future<String> getCalendarId(DeviceCalendarPlugin dc) async {
@@ -173,13 +218,13 @@ String getSem() {
   return sem;
 }
 
-generate_calendar_(List<Course> courses) async {
+generate_calendar_(List<Course> courses, String cal_id) async {
   // Given Courses Map, iterate over the map and create new recurrence event for each course
   // This will be followed by removing the holiday dates
   // This will be followed by adding the extra timetable days
   // We are all set.
   DeviceCalendarPlugin _deviceCalendarPlugin = DeviceCalendarPlugin();
-  var cal_id = await getCalendarId(_deviceCalendarPlugin);
+  // var cal_id = await getCalendarId(_deviceCalendarPlugin);
 
   var slotting =
       json.decode(await getJson('assets/courses/slotting_pattern.jsonc'));
