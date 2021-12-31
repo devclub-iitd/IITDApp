@@ -263,7 +263,7 @@ Future<void> getEventObject(var data, var eventId, var type) async {
         CalendarDataSourceAction.add,
         <Meeting>[meetings[0]]);
   } else {
-    print('error occured');
+    print('error occured ${res.errorMessages[0]}');
   }
   return;
 }

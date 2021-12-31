@@ -403,106 +403,108 @@ class _CalendarScreenState extends State<CalendarScreen> {
       );
     }
 
-    return WillPopScope(
-      onWillPop: () {
-        if (showPopUp) {
-          setState(() {
-            showPopUp = false;
-          });
-          return Future.value(false);
-        } else {
-          return Future.value(true);
-        }
-      },
-      child: Scaffold(
-        backgroundColor:
-            Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
-        key: scaffoldKey,
-        appBar: CustomAppBar(
-          title: Text('Calendar'),
-          actions: [
-            IconButton(
-                icon: Icon(Icons.calendar_today),
-                iconSize: 30,
-                color: Colors.white,
-                onPressed: () async {
-                  var openExternalCalendar = await showChoiceAlert(
-                      context,
-                      'Open Calendar in Device Default',
-                      'Are you sure you want to open events in Device Calendar?',
-                      UrlHandler.launchDeviceCalendar);
-                  if (openExternalCalendar == null) {}
-                  // Navigator.pop(context);
-                }),
-          ],
-        ),
-        drawer: AppDrawer(tag: 'Calendar'),
-        floatingActionButton: Stack(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.only(left: 31),
-              child: Align(
-                alignment: Alignment.bottomLeft,
-                child: FloatingActionButton(
-                  onPressed: () async {
-                    openEditorDirectly();
-                  },
-                  child: Icon(Icons.add),
-                ),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: FloatingActionButton(
-                heroTag: null,
-                onPressed: () {
-                  showModalBottomSheet(
-                    //expand: false,
-                    context: context,
-                    builder: (context) => CustomModal(changeViewType, viewType,
-                        showAgenda, calendarModel, changeExempted, exempted),
-                  );
-                },
-                child: Icon(Icons.graphic_eq),
-              ),
-            ),
-          ],
-        ),
-        body: FutureBuilder(
-          future: _tasks,
-          builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-            if (snapshot.hasError) {
-              return Center(child: Text('Error occured'));
-            } else if (snapshot.connectionState == ConnectionState.done) {
-              return Stack(children: [
-                Opacity(
-                  opacity: showPopUp ? 0.2 : 1,
-                  child: Column(
-                    children: <Widget>[
-                      Expanded(
-                        flex: 3,
-                        child: CustomCalendar(),
-                      ),
-                    ],
-                  ),
-                ),
-                !showPopUp
-                    ? Container()
-                    : Center(
-                        child: Container(
-                          color: Colors.transparent,
-                          height: 500,
-                          child: Center(
-                              child: CustomSwiper(
-                                  _calendarController.selectedDate, _events)),
-                        ),
-                      ),
-              ]);
-            }
-            return SpinKitWave(color: Colors.white, type: SpinKitWaveType.end);
-          },
-        ),
+    return
+        //  WillPopScope(
+        //   onWillPop: () {
+        //     if (showPopUp) {
+        //       setState(() {
+        //         showPopUp = false;
+        //       });
+        //       return Future.value(false);
+        //     } else {
+        //       return Future.value(true);
+        //     }
+        //   },
+        // child:
+        Scaffold(
+      backgroundColor:
+          Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
+      key: scaffoldKey,
+      appBar: CustomAppBar(
+        title: Text('Calendar'),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.calendar_today),
+              iconSize: 30,
+              color: Colors.white,
+              onPressed: () async {
+                var openExternalCalendar = await showChoiceAlert(
+                    context,
+                    'Open Calendar in Device Default',
+                    'Are you sure you want to open events in Device Calendar?',
+                    UrlHandler.launchDeviceCalendar);
+                if (openExternalCalendar == null) {}
+                // Navigator.pop(context);
+              }),
+        ],
       ),
+      drawer: AppDrawer(tag: 'Calendar'),
+      floatingActionButton: Stack(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(left: 31),
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: FloatingActionButton(
+                onPressed: () async {
+                  openEditorDirectly();
+                },
+                child: Icon(Icons.add),
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: FloatingActionButton(
+              heroTag: null,
+              onPressed: () {
+                showModalBottomSheet(
+                  //expand: false,
+                  context: context,
+                  builder: (context) => CustomModal(changeViewType, viewType,
+                      showAgenda, calendarModel, changeExempted, exempted),
+                );
+              },
+              child: Icon(Icons.graphic_eq),
+            ),
+          ),
+        ],
+      ),
+      body: FutureBuilder(
+        future: _tasks,
+        builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
+          if (snapshot.hasError) {
+            return Center(child: Text('Error occured'));
+          } else if (snapshot.connectionState == ConnectionState.done) {
+            return Stack(children: [
+              Opacity(
+                opacity: showPopUp ? 0.2 : 1,
+                child: Column(
+                  children: <Widget>[
+                    Expanded(
+                      flex: 3,
+                      child: CustomCalendar(),
+                    ),
+                  ],
+                ),
+              ),
+              !showPopUp
+                  ? Container()
+                  : Center(
+                      child: Container(
+                        color: Colors.transparent,
+                        height: 500,
+                        child: Center(
+                            child: CustomSwiper(
+                                _calendarController.selectedDate, _events)),
+                      ),
+                    ),
+            ]);
+          }
+          return SpinKitWave(color: Colors.white, type: SpinKitWaveType.end);
+        },
+      ),
+      // ),
     );
   }
 }
