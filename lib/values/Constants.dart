@@ -102,13 +102,15 @@ String defaultImage =
 ApiBaseHelper apiBaseHelper = ApiBaseHelper();
 var defaultScreen = 'Dashboard';
 var avatars = {
-  'cosmos': 'assets/images/cosmos.png',
-  'equations': 'assets/images/equations.png',
-  'football': 'assets/images/football.png',
-  'origami': 'assets/images/origami.png',
-  'scenery': 'assets/images/scenery.png',
+  'gojo': 'assets/avatars/gojo.jpg',
+  'mikasa': 'assets/avatars/mikasa.jpeg',
+  'dog': 'assets/avatars/dog.jpg',
+  'cat': 'assets/avatars/cat.jpg',
+  'ninja': 'assets/avatars/ninja.png',
+  'panda': 'assets/avatars/panda.jpg',
+  'spiderman': 'assets/avatars/spiderman.png',
 };
-var avImage = avatars['origami'];
+var avImage = avatars['dog'];
 
 Widget getScreenFromTag(var tag) {
   switch (tag) {
@@ -131,6 +133,17 @@ Widget getScreenFromTag(var tag) {
   }
   return null;
 }
+
+var backgroundimages = {
+  'beach': 'assets/bg/1.jpg',
+  'OwO': 'assets/bg/2.jpg',
+  'sunset': 'assets/bg/3.jpg',
+  'castle': 'assets/bg/4.jpg',
+  'peachtree': 'assets/bg/5.jpg',
+  'dojo': 'assets/bg/6.jpg',
+};
+
+var bgimage = backgroundimages['beach'];
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();

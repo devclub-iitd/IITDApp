@@ -66,16 +66,29 @@ class MyEventCard extends StatelessWidget {
                   ),
                 ),
               ),
+              // IconButton(
+              //   onPressed: () {},
+              //   icon: Icon(Icons.calendar_today),
+              //   tooltip: 'Add to Calendar',
+              // ),
               IconButton(
-                onPressed: () {},
-                icon: Icon(Icons.calendar_today),
-                tooltip: 'Add to Calendar',
-              ),
-              IconButton(
-                onPressed: () {
+                onPressed: () async {
+                  Event _ev = await getEvent(_event.eventid);
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => EditEvent(_event)),
+                    MaterialPageRoute(builder: (context) => EventInfo(_event)),
+                  ).then((value) {
+                    _refresh();
+                  });
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => EditEvent(_event)),
+                  // ).then((value) {
+                  //   _refresh();
+                  // });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => EditEvent(_ev)),
                   ).then((value) {
                     _refresh();
                   });

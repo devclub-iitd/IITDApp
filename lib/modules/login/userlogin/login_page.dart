@@ -59,7 +59,9 @@ void onLoginSuccess(BuildContext context, String newtoken) async {
 
   final test = await http
       .get('$uri/api/user/me', headers: {'authorization': 'Bearer $newtoken'});
+  print("not succ");
   if (json.decode(test.body)['data']['courses'].length == 0) {
+    print("succ");
     final resp = await http.get('$uri/api/user/getCourses',
         headers: {'authorization': 'Bearer $newtoken'});
     print(resp.statusCode);

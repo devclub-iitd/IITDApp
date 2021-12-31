@@ -2,7 +2,7 @@ import 'package:IITDAPP/ThemeModel.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-
+// import 'event_info_screen.dart';
 import '../../events/event_class.dart';
 import '../../events/event_card_contents/event_time.dart';
 import '../../events/event_card_contents/event_venue.dart';
@@ -87,14 +87,14 @@ class EventInfoCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.calendar_today),
-                    color: Provider.of<ThemeModel>(context)
-                        .theme
-                        .PRIMARY_TEXT_COLOR,
-                    tooltip: 'Add to Calendar',
-                  ),
+                  // IconButton(
+                  //   onPressed: () {},
+                  //   icon: Icon(Icons.calendar_today),
+                  //   color: Provider.of<ThemeModel>(context)
+                  //       .theme
+                  //       .PRIMARY_TEXT_COLOR,
+                  //   tooltip: 'Add to Calendar',
+                  // ),
                   TextButton(
                     onPressed: () {
                       Navigator.push(

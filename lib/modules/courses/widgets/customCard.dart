@@ -5,9 +5,12 @@ import 'package:IITDAPP/modules/courses/courses.dart';
 import 'package:IITDAPP/utility/analytics_manager.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:validators/validators.dart';
+import 'package:flutter/cupertino.dart';
 // import 'package:IITDAPP/routes/Routes.dart';
 // import 'package:provider/provider.dart';
 
@@ -15,6 +18,14 @@ import 'package:validators/validators.dart';
 class CustomCard extends StatefulWidget {
   CustomCard(this.callback);
   var callback;
+
+  List<String> list_of_calendars = [
+    'My Calendar',
+    'Academic Calendar',
+    'IITD App'
+  ];
+  String curr_calendar;
+
   @override
   _CustomCardState createState() => _CustomCardState();
 }
@@ -40,7 +51,7 @@ class _CustomCardState extends State<CustomCard> {
         floatingActionButton: FloatingActionButton(
           heroTag: null,
           onPressed: () async {},
-          backgroundColor: Colors.greenAccent,
+          backgroundColor: Colors.deepPurpleAccent[100],
           child: IconButton(
             onPressed: () async {
               print(widget.toString());
@@ -106,32 +117,67 @@ class _CustomCardState extends State<CustomCard> {
                           ],
                         )),
                   )),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  // Spacer(),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(10, 10, 0, 0),
-                    child: TextButton(
-                        style: ButtonStyle(
-                          overlayColor: MaterialStateColor.resolveWith(
-                              (states) => Colors.transparent),
-                        ),
-                        onPressed: () => {
-                              Navigator.pop(context),
-                              // Navigator.pushNamed(context, Routes.coursesPage),
-                              Navigator.push(
-                                  context,
-                                  PageRouteBuilder(
-                                      pageBuilder: (_, __, ___) =>
-                                          CoursesScreen()))
-                            },
-                        child: Text("Back")),
+              Divider(
+                height: 5,
+              ),
+              if (widget.list_of_calendars != null)
+                Container(
+                  margin: EdgeInsets.fromLTRB(20, 10, 100, 0),
+                  padding: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      hint: Text(
+                        "No Calendar ",
+                        style: TextStyle(
+                            color: Colors.deepPurpleAccent[100],
+                            fontWeight: FontWeight.w500),
+                      ),
+                      value: widget.curr_calendar,
+                      style: TextStyle(
+                          color: Colors.deepPurpleAccent[100],
+                          fontWeight: FontWeight.w500),
+                      alignment: Alignment.bottomCenter,
+                      icon: Icon(
+                        CupertinoIcons.calendar_badge_plus,
+                        size: 30,
+                        color: Colors.deepPurpleAccent[100],
+                      ),
+                      items: widget.list_of_calendars.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (_) {
+                        widget.curr_calendar = _;
+                        change_calendar();
+                        setState(() {});
+                      },
+                    ),
                   ),
-                ],
-              )
+                )
             ],
           ),
         ));
   }
 }
+
+// Container(
+//   margin: EdgeInsets.fromLTRB(10, 10, 0, 0),
+//   child: TextButton(
+//       style: ButtonStyle(
+//         overlayColor: MaterialStateColor.resolveWith(
+//             (states) => Colors.transparent),
+//       ),
+//       onPressed: () => {
+//             Navigator.pop(context),
+//             // Navigator.pushNamed(context, Routes.coursesPage),
+//             Navigator.push(
+//                 context,
+//                 PageRouteBuilder(
+//                     pageBuilder: (_, __, ___) =>
+//                         CoursesScreen()))
+//           },
+//       child: Text("Back")),
+// ),
+change_calendar() {}

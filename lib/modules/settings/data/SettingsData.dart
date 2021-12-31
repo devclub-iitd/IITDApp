@@ -7,7 +7,8 @@ var commonKeys = [
   'theme',
   'showEventNotifications',
   'avatar',
-  'showNewsNotifications'
+  'showNewsNotifications',
+  'bgimage',
 ];
 
 var defaultsForKey = {
@@ -15,7 +16,8 @@ var defaultsForKey = {
   'defaultCalendarView': 'Month',
   'showOtherCalendars': true,
   'theme': 'System',
-  'avatar': 'origami',
+  'avatar': 'cat',
+  'bgimage': 'OwO',
   'showEventNotifications': true,
   'showNewsNotifications': true,
   'newsItemPerPage': '5',

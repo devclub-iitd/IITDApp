@@ -143,7 +143,7 @@ MarkerType getType(String category) {
       return MarkerType.BANK;
     case 'hostel':
       return MarkerType.RESIDENCE;
-    case 'ent':
+    case 'entertainment':
       return MarkerType.THEATRE;
     case 'eat':
       return MarkerType.FOOD;
