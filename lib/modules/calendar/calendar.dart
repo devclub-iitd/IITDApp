@@ -106,6 +106,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   var excludeOtherCalendars;
   List<Appointment> agendaAppointments;
   var events2;
+  var appBarText = 'Calendar (Loading)';
 
   CalendarController _calendarController;
 
@@ -227,6 +228,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
               await getAllEvents(calendarEventsResult, 0, startDate, endDate);
             }
             if (last) {
+              appBarText = 'Calendar';
               checkForCalIds(calendarModel);
             }
             print('last also executed');
@@ -422,7 +424,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
           Provider.of<ThemeModel>(context).theme.SCAFFOLD_BACKGROUND,
       key: scaffoldKey,
       appBar: CustomAppBar(
-        title: Text('Calendar'),
+        title: Text(appBarText),
         actions: [
           IconButton(
               icon: Icon(CupertinoIcons.calendar),

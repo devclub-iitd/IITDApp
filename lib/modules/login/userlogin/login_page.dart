@@ -10,7 +10,7 @@ import 'package:IITDAPP/utility/analytics_manager.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:IITDAPP/widgets/loading.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
@@ -102,7 +102,7 @@ void onLoginSuccess(BuildContext context, String newtoken) async {
     // Notification Handling
     await initialiseNotifications();
 
-    FirebaseMessaging.instance.subscribeToTopic('litclub');
+    // FirebaseMessaging.instance.subscribeToTopic('litclub');
     // FirebaseMessaging.instance.
 
     final response2 = await http.post("$uri/api/user/updatefcm",
@@ -129,15 +129,16 @@ Future login(BuildContext context, {bool pop = true}) async {
   // SharedPreferences prefs = await SharedPreferences.getInstance();
   var oldToken = await storage.read(key: 'token');
   var clientId = '5f7ca56f01cb380034260a02';
+  // Dear Noob-Hackers, don't worry, you can't do anything with this
   var secret =
       'o8ggsY3EeNeCdl0U3izDF1LvR0cU33zopJeFHltapvle8bBChvzHT5miRN23o5v0';
   try {
     print('trying old token');
-    print(oldToken);
+    // print(oldToken);
     // ignore: unused_local_variable
     var user = await CasiLogin.fromToken(oldToken).refreshToken(
         onRefreshSuccess: (String newToken) {
-      print(newToken);
+      // print(newToken);
       onLoginSuccess(context, newToken);
     });
   } catch (e) {

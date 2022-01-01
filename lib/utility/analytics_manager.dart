@@ -26,13 +26,16 @@ logScreen(screen_name) async {
   await FirebaseAnalytics.instance.setCurrentScreen(screenName: screen_name);
 }
 
-logEvent(AnalyticsEvent event, {value}) async {
+logEvent(AnalyticsEvent event, {String event_name = '', value}) async {
+  if (event_name == '') {
+    event_name = event.toString().split('.').last;
+  }
   if (value == null) {
     await FirebaseAnalytics.instance.logEvent(
-      name: event.toString().split('.').last,
+      name: event_name,
     );
   } else {
-    await FirebaseAnalytics.instance.logEvent(
-        name: event.toString().split('.').last, parameters: {'value': value});
+    await FirebaseAnalytics.instance
+        .logEvent(name: event_name, parameters: {'value': value});
   }
 }

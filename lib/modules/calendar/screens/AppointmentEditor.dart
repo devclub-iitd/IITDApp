@@ -554,8 +554,15 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                       if (isRecurring && isExternalCalendar) {
                         print('You can quit now');
                         Navigator.pop(context);
-                        await showErrorAlert(context, 'Event Cannot be updated',
-                            'The event was added to your external calendar, cannot be updated from this App!!! You can still update the event in your device\'s default calendar.');
+                        await showChoiceAlert(
+                            context,
+                            'Unable to Update Event',
+                            'The event was added to your external calendar, cannot be updated from this App!!! You can still update the event in your device\'s default calendar.'
+                                'Do you want to open your device calendar?',
+                            UrlHandler.launchDeviceCalendar);
+
+                        // await showErrorAlert(context, 'Event Cannot be updated',
+                        //     'The event was added to your external calendar, cannot be updated from this App!!! You can still update the event in your device\'s default calendar.');
                         Navigator.pop(context);
                       } else {
                         var meetings = <Meeting>[];
@@ -721,8 +728,11 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                         print('User shouldnt delete this');
                         print('Show an appropriate Dialog and return');
                         // Navigator.pop(context);
-                        await showErrorAlert(context, 'Event Cannot be deleted',
-                            'The event was added from external calendar, cannot be deleted from this App!!! You can still delete the event in your device\'s default calendar.');
+                        showChoiceAlert(
+                            context,
+                            'Unable to delete Event',
+                            'The event was added from external calendar, cannot be deleted from this App!!! You can still delete the event in your device\'s default calendar.',
+                            UrlHandler.launchInBrowser);
 
                         Navigator.pop(context);
                       } else {
