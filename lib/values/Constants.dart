@@ -102,13 +102,13 @@ String defaultImage =
 ApiBaseHelper apiBaseHelper = ApiBaseHelper();
 var defaultScreen = 'Dashboard';
 var avatars = {
-  'gojo': 'assets/avatars/gojo.jpg',
-  'mikasa': 'assets/avatars/mikasa.jpeg',
   'dog': 'assets/avatars/dog.jpg',
   'cat': 'assets/avatars/cat.jpg',
   'ninja': 'assets/avatars/ninja.png',
   'panda': 'assets/avatars/panda.jpg',
   'spiderman': 'assets/avatars/spiderman.png',
+  'gojo': 'assets/avatars/gojo.jpg',
+  'mikasa': 'assets/avatars/mikasa.jpeg',
 };
 var avImage = avatars['dog'];
 
@@ -135,12 +135,12 @@ Widget getScreenFromTag(var tag) {
 }
 
 var backgroundimages = {
+  'peachtree': 'assets/bg/5.jpg',
   'beach': 'assets/bg/1.jpg',
-  'OwO': 'assets/bg/2.jpg',
   'sunset': 'assets/bg/3.jpg',
   'castle': 'assets/bg/4.jpg',
-  'peachtree': 'assets/bg/5.jpg',
   'dojo': 'assets/bg/6.jpg',
+  'OwO': 'assets/bg/2.jpg',
 };
 
 var bgimage = backgroundimages['beach'];

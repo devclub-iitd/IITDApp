@@ -1,5 +1,6 @@
 import 'package:IITDAPP/modules/settings/data/SettingsHandler.dart';
 import 'package:IITDAPP/modules/settings/widgets/CustomSliders.dart';
+import 'package:IITDAPP/utility/analytics_manager.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -82,6 +83,7 @@ class _SettingsDropdownTileState extends State<SettingsDropdownTile> {
               SettingsHandler.setSettingValue(
                   widget.SPkey, getKeyFromValue(value));
             }
+            logEvent(null, event_name: widget.text, value: value.toString());
             this.value = getKeyFromValue(value);
             setState(() {});
             if (widget.onChange != null) {
