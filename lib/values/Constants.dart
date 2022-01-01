@@ -64,6 +64,7 @@ import 'package:IITDAPP/modules/news/news.dart';
 import 'package:IITDAPP/modules/quickLinks/quickLinks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'dart:math';
 
 // const String url = '172.27.20.227:5000';
 // const String url = 'http://192.168.43.251:5000';
@@ -101,16 +102,44 @@ String defaultImage =
 
 ApiBaseHelper apiBaseHelper = ApiBaseHelper();
 var defaultScreen = 'Dashboard';
+var rng= Random();
+int randomNumber= rng.nextInt(5);
+var xyz= 'assets/avatars/mikasa.jpeg';
+
+void RNG(var randomNumber){
+  print("okok");
+  if (randomNumber==0) {
+   xyz= 'assets/avatars/mikasa.jpeg';
+}
+if (randomNumber==1) {
+  xyz= 'assets/avatars/mikasa.jpeg';
+}
+if (randomNumber==2) {
+  xyz= 'assets/avatars/spiderman.png';
+}
+if (randomNumber==3) {
+  xyz= 'assets/avatars/ninja.png';
+}
+if (randomNumber==4) {
+  xyz= 'assets/avatars/panda.jpg';
+}
+}
+
 var avatars = {
-  'dog': 'assets/avatars/dog.jpg',
-  'cat': 'assets/avatars/cat.jpg',
-  'ninja': 'assets/avatars/ninja.png',
-  'panda': 'assets/avatars/panda.jpg',
-  'spiderman': 'assets/avatars/spiderman.png',
-  'gojo': 'assets/avatars/gojo.jpg',
-  'mikasa': 'assets/avatars/mikasa.jpeg',
+  'anime': xyz,
+  'origami': 'assets/images/origami.png',
+  'man': 'assets/images/man.jpeg',
+  'woman': 'assets/images/woman.jpeg',
+  'scenery': 'assets/images/scenery.png',
+//   'dog': 'assets/avatars/dog.jpg',
+//   'cat': 'assets/avatars/cat.jpg',
+//   'ninja': 'assets/avatars/ninja.png',
+//   'panda': 'assets/avatars/panda.jpg',
+//   'spiderman': 'assets/avatars/spiderman.png',
+//   'gojo': 'assets/avatars/gojo.jpg',
+//   'mikasa': 'assets/avatars/mikasa.jpeg',
 };
-var avImage = avatars['dog'];
+var avImage = avatars['origami'];
 
 Widget getScreenFromTag(var tag) {
   switch (tag) {
@@ -135,15 +164,16 @@ Widget getScreenFromTag(var tag) {
 }
 
 var backgroundimages = {
-  'peachtree': 'assets/bg/5.jpg',
+//   'peachtree': 'assets/bg/5.jpg',
   'beach': 'assets/bg/1.jpg',
+  'IITD': 'assets/bg/2.jpeg',
   'sunset': 'assets/bg/3.jpg',
   'castle': 'assets/bg/4.jpg',
-  'dojo': 'assets/bg/6.jpg',
-  'OwO': 'assets/bg/2.jpg',
+  'peachtree': 'assets/bg/5.jpg',
+  'nightsky': 'assets/bg/6.jpeg',
 };
 
-var bgimage = backgroundimages['beach'];
+var bgimage = backgroundimages['IITD'];
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
