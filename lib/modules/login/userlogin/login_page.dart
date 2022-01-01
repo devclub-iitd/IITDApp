@@ -12,6 +12,7 @@ import 'package:IITDAPP/widgets/error_alert.dart';
 import 'package:IITDAPP/widgets/loading.dart';
 // import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 // import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -128,10 +129,9 @@ Future login(BuildContext context, {bool pop = true}) async {
   final storage = FlutterSecureStorage();
   // SharedPreferences prefs = await SharedPreferences.getInstance();
   var oldToken = await storage.read(key: 'token');
-  var clientId = '5f7ca56f01cb380034260a02';
-  // Dear Noob-Hackers, don't worry, you can't do anything with this
-  var secret =
-      'o8ggsY3EeNeCdl0U3izDF1LvR0cU33zopJeFHltapvle8bBChvzHT5miRN23o5v0';
+  var clientId = dotenv.env['CLIENT_ID']; //'5f7ca56f01cb380034260a02';
+  // Dear Noob-Hackers, don't worry, you still can't do anything with this (even if you reach two level higher than this)
+  var secret = dotenv.env['CASI_SECRET'];
   try {
     print('trying old token');
     // print(oldToken);
