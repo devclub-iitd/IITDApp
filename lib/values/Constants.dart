@@ -102,42 +102,42 @@ String defaultImage =
 
 ApiBaseHelper apiBaseHelper = ApiBaseHelper();
 var defaultScreen = 'Dashboard';
-var rng= Random();
-int randomNumber= rng.nextInt(5);
-var xyz= 'assets/avatars/mikasa.jpeg';
+var rng = Random();
+int randomNumber = rng.nextInt(5);
+var xyz = 'assets/avatars/mikasa.jpeg';
 
-void RNG(var randomNumber){
+void RNG(var randomNumber) {
   print("okok");
-  if (randomNumber==0) {
-   xyz= 'assets/avatars/mikasa.jpeg';
-}
-if (randomNumber==1) {
-  xyz= 'assets/avatars/mikasa.jpeg';
-}
-if (randomNumber==2) {
-  xyz= 'assets/avatars/spiderman.png';
-}
-if (randomNumber==3) {
-  xyz= 'assets/avatars/ninja.png';
-}
-if (randomNumber==4) {
-  xyz= 'assets/avatars/panda.jpg';
-}
+  if (randomNumber == 0) {
+    xyz = 'assets/avatars/mikasa.jpeg';
+  }
+  if (randomNumber == 1) {
+    xyz = 'assets/avatars/mikasa.jpeg';
+  }
+  if (randomNumber == 2) {
+    xyz = 'assets/avatars/spiderman.png';
+  }
+  if (randomNumber == 3) {
+    xyz = 'assets/avatars/ninja.png';
+  }
+  if (randomNumber == 4) {
+    xyz = 'assets/avatars/panda.jpg';
+  }
 }
 
 var avatars = {
-  'anime': xyz,
+  // 'anime': xyz,
   'origami': 'assets/images/origami.png',
-  'man': 'assets/images/man.jpeg',
+  'man': 'assets/images/man2.jpg',
   'woman': 'assets/images/woman.jpeg',
   'scenery': 'assets/images/scenery.png',
-//   'dog': 'assets/avatars/dog.jpg',
-//   'cat': 'assets/avatars/cat.jpg',
-//   'ninja': 'assets/avatars/ninja.png',
-//   'panda': 'assets/avatars/panda.jpg',
-//   'spiderman': 'assets/avatars/spiderman.png',
+  'dog': 'assets/avatars/dog.jpg',
+  'cat': 'assets/avatars/cat.jpg',
+  'ninja': 'assets/avatars/ninja.png',
+  'panda': 'assets/avatars/panda.jpg',
+  'spiderman': 'assets/avatars/spiderman.png',
 //   'gojo': 'assets/avatars/gojo.jpg',
-//   'mikasa': 'assets/avatars/mikasa.jpeg',
+  'mikasa': 'assets/avatars/mikasa.jpeg',
 };
 var avImage = avatars['origami'];
 
@@ -168,9 +168,14 @@ var backgroundimages = {
   'beach': 'assets/bg/1.jpg',
   'IITD': 'assets/bg/2.jpeg',
   'sunset': 'assets/bg/3.jpg',
+  'nightsky': 'assets/bg/nightsky2.jpg',
   'castle': 'assets/bg/4.jpg',
   'peachtree': 'assets/bg/5.jpg',
-  'nightsky': 'assets/bg/6.jpeg',
+  // 'nightsky': 'assets/bg/6.jpeg',
+  'earth': 'assets/bg/earth.jpg',
+  'city': 'assets/bg/city.jpg',
+  'abstract': 'assets/bg/abstract.jpg',
+  'scenery': 'assets/bg/scenery.jpg',
 };
 
 var bgimage = backgroundimages['IITD'];
