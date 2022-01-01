@@ -13,6 +13,8 @@ import 'package:IITDAPP/routes/Routes.dart';
 import 'package:IITDAPP/utility/analytics_manager.dart';
 import 'package:IITDAPP/values/Constants.dart';
 import 'package:flutter/cupertino.dart';
+import 'dart:math';
+
 //import 'package:gradient_app_bar/gradient_app_bar.dart';
 
 import 'package:provider/provider.dart';
@@ -78,7 +80,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       'Dark': ThemeType.Dark,
       'Light': ThemeType.Light,
     };
-
+    var cycles= 0;
     // ignore: non_constant_identifier_names
     return Scaffold(
       backgroundColor: Provider.of<ThemeModel>(context, listen: true)
@@ -187,11 +189,40 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   //Provider.of<ThemeModel>(context, listen: false)
                   //.toggleTheme(value);
                   () {};
+                  print('xyz');
+                  print(xyz);
                   print(value);
+                  if(value==xyz)
+                  {
+                    print('okokok');
+                    setState(() {});
+                    var rng= Random();
+                    int cycles= rng.nextInt(4);
+                    
+                    print(cycles);
+                    if(cycles==0)
+                    {
+                      value= 'assets/avatars/gojo.jpg';
+                    }
+                    if(cycles==1)
+                    {
+                      value= 'assets/avatars/mikasa.jpeg';
+                    }
+                    if(cycles==2)
+                    {
+                      value= 'assets/avatars/ninja.png';
+                    }
+                    if(cycles==3)
+                    {
+                      value= 'assets/avatars/panda.jpg';
+                    }
+                    
+                  }
+                  print(randomNumber);
                   avImage = value;
                   print(avImage);
                   () {};
-                  setState(() {});
+                  //setState(() {});
                 },
               ),
               SettingsDropdownTile(
