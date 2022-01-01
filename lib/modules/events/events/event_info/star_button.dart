@@ -47,6 +47,7 @@ class StarButtonState extends State<StarButton> {
   }
 
   Future<void> starEvent(String eventid) async {
+    // ignore: avoid_init_to_null
     var workingEvent = null;
     bool issueFlag = false;
     try {

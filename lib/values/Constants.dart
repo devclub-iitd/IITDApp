@@ -126,12 +126,18 @@ if (randomNumber==4) {
 }
 
 var avatars = {
-  
   'anime': xyz,
   'origami': 'assets/images/origami.png',
   'man': 'assets/images/man.jpeg',
   'woman': 'assets/images/woman.jpeg',
   'scenery': 'assets/images/scenery.png',
+//   'dog': 'assets/avatars/dog.jpg',
+//   'cat': 'assets/avatars/cat.jpg',
+//   'ninja': 'assets/avatars/ninja.png',
+//   'panda': 'assets/avatars/panda.jpg',
+//   'spiderman': 'assets/avatars/spiderman.png',
+//   'gojo': 'assets/avatars/gojo.jpg',
+//   'mikasa': 'assets/avatars/mikasa.jpeg',
 };
 var avImage = avatars['origami'];
 
@@ -158,6 +164,7 @@ Widget getScreenFromTag(var tag) {
 }
 
 var backgroundimages = {
+//   'peachtree': 'assets/bg/5.jpg',
   'beach': 'assets/bg/1.jpg',
   'IITD': 'assets/bg/2.jpeg',
   'sunset': 'assets/bg/3.jpg',
