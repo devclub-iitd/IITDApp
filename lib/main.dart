@@ -13,6 +13,7 @@ import 'package:IITDAPP/values/colors/colors.dart';
 import 'package:IITDAPP/values/colors/darkColors.dart';
 import 'package:IITDAPP/push_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 // import 'package:global_configuration/global_configuration.dart';
@@ -45,30 +46,31 @@ void main() async {
   await dotenv.load(fileName: ".env");
   initializeAnalytics();
 
-  runApp(MultiProvider(providers: [
-    ChangeNotifierProvider(
-      create: (_) => NewsProvider<TrendingNews>(),
-    ),
-    ChangeNotifierProvider(
-      create: (_) => NewsProvider<RecentNews>(),
-    ),
-    ChangeNotifierProvider(
-      create: (_) => NewsProvider<OldNews>(),
-    ),
-    ChangeNotifierProvider(
-      create: (_) => AttendanceProvider(),
-    ),
-    ChangeNotifierProvider(
-      create: (_) => NewsHistoryProvider(),
-    ),
-    ChangeNotifierProvider<ThemeModel>(
-      create: (_) => ThemeModel(),
-    ),
-    ChangeNotifierProvider(
-      create: (_) => EventsTabProvider(),
-    ),
-    ChangeNotifierProvider(create: (_) => LoginStateProvider()),
-  ], child: MyApp()));
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((value) => runApp(MultiProvider(providers: [
+            ChangeNotifierProvider(
+              create: (_) => NewsProvider<TrendingNews>(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => NewsProvider<RecentNews>(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => NewsProvider<OldNews>(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => AttendanceProvider(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => NewsHistoryProvider(),
+            ),
+            ChangeNotifierProvider<ThemeModel>(
+              create: (_) => ThemeModel(),
+            ),
+            ChangeNotifierProvider(
+              create: (_) => EventsTabProvider(),
+            ),
+            ChangeNotifierProvider(create: (_) => LoginStateProvider()),
+          ], child: MyApp())));
 }
 
 class MyApp extends StatelessWidget {

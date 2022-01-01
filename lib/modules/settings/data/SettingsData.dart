@@ -17,7 +17,7 @@ var defaultsForKey = {
   'showOtherCalendars': true,
   'theme': 'Dark',
   'avatar': 'ninja',
-  'bgimage': 'peachtree',
+  'bgimage': 'nightsky',
   'showEventNotifications': true,
   'showNewsNotifications': true,
   'newsItemPerPage': '5',
