@@ -15,7 +15,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.6.0+21
+version: 0.9.5+22
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -84,6 +84,8 @@ dependencies:
   flare_flutter: ^3.0.2
   flushbar: ^1.10.4
   package_info: ^2.0.2
+  flutter_dotenv: ^5.0.2
+
 
   # calendarnotificationprovider: ^0.0.3
   firebase_core:
@@ -118,6 +120,7 @@ flutter:
     - assets/maps/
     - assets/privacy-policy.html
     - assets/release-notes.html
+    - .env
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

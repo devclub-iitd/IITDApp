@@ -13,6 +13,7 @@ import 'package:IITDAPP/values/colors/colors.dart';
 import 'package:IITDAPP/values/colors/darkColors.dart';
 import 'package:IITDAPP/push_notifications.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 // import 'package:global_configuration/global_configuration.dart';
 // import 'package:syncfusion_flutter_core/core.dart';
@@ -41,7 +42,7 @@ void main() async {
   unawaited(initialisePreferences());
   clear();
   await Firebase.initializeApp();
-
+  await dotenv.load(fileName: ".env");
   initializeAnalytics();
 
   runApp(MultiProvider(providers: [

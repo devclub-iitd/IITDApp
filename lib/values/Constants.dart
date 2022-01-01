@@ -128,8 +128,8 @@ void RNG(var randomNumber) {
 var avatars = {
   // 'anime': xyz,
   'origami': 'assets/images/origami.png',
-  'man': 'assets/images/man2.jpg',
-  'woman': 'assets/images/woman.jpeg',
+  'man': 'assets/avatars/man2.jpg',
+  'woman': 'assets/avatars/woman2.png',
   'scenery': 'assets/images/scenery.png',
   'dog': 'assets/avatars/dog.jpg',
   'cat': 'assets/avatars/cat.jpg',
@@ -167,15 +167,15 @@ var backgroundimages = {
 //   'peachtree': 'assets/bg/5.jpg',
   'beach': 'assets/bg/1.jpg',
   'IITD': 'assets/bg/2.jpeg',
-  'sunset': 'assets/bg/3.jpg',
   'nightsky': 'assets/bg/nightsky2.jpg',
-  'castle': 'assets/bg/4.jpg',
+  'castle': 'assets/bg/castle.jpg',
+  'sunset': 'assets/bg/3.jpg',
   'peachtree': 'assets/bg/5.jpg',
-  // 'nightsky': 'assets/bg/6.jpeg',
   'earth': 'assets/bg/earth.jpg',
   'city': 'assets/bg/city.jpg',
   'abstract': 'assets/bg/abstract.jpg',
   'scenery': 'assets/bg/scenery.jpg',
+  'dojo': 'assets/bg/dojo.jpg',
 };
 
 var bgimage = backgroundimages['IITD'];
