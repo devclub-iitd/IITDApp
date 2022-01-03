@@ -62,6 +62,9 @@ class CasiLogin {
     var signedToken = builder.getSignedToken(signer);
     secret = signedToken.toString();
 
+    // _loginURL =
+    //     '$_serverUrl/auth/iitd?serviceURL=$_serverUrl/auth/clientVerify?q=${Uri.encodeQueryComponent(secret)}';
+
     _loginURL =
         '$_serverUrl/user/login?serviceURL=$_serverUrl/auth/clientVerify?q=${Uri.encodeQueryComponent(secret)}';
   }
@@ -80,6 +83,10 @@ class CasiLogin {
     });
     webview.onStateChanged.listen((state) {
       if (state.type == WebViewState.finishLoad) {
+        if (state.url.startsWith('$_serverUrl/user/login')) {
+          webview
+              .evalJavascript('document.querySelector("#iitdLogin").click()');
+        }
         webview.resize(Rect.fromLTRB(
           MediaQuery.of(context).padding.left,
           MediaQuery.of(context).padding.top,
@@ -88,8 +95,12 @@ class CasiLogin {
         ));
       }
     });
+
     webview.onUrlChanged.listen((url) async {
       print('URL CHANGED: $url');
+
+      // if (url.startsWith('$_serverUrl/user/login')) {
+      // }
 
       if (url.startsWith('$_serverUrl/auth/clientVerify?q=')) {
         if (_token != null) return;

@@ -715,7 +715,7 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                 ? const Text('')
                 : FloatingActionButton(
                     onPressed: () async {
-                      // Dlete the Given Appointment
+                      // Delete the Given Appointment
                       var isExternalCalendar =
                           _selectedAppointment.calendarId != IITDCalendarId &&
                               _selectedAppointment.calendarId !=
@@ -728,11 +728,11 @@ class AppointmentEditorState extends State<AppointmentEditor> {
                         print('User shouldnt delete this');
                         print('Show an appropriate Dialog and return');
                         // Navigator.pop(context);
-                        showChoiceAlert(
+                        await showChoiceAlert(
                             context,
                             'Unable to delete Event',
-                            'The event was added from external calendar, cannot be deleted from this App!!! You can still delete the event in your device\'s default calendar.',
-                            UrlHandler.launchInBrowser);
+                            'The event was added from external calendar, cannot be deleted from this App!!! You can still delete the event in your device\'s default calendar. Do you want to open your device\'s default calendar?',
+                            UrlHandler.launchDeviceCalendar);
 
                         Navigator.pop(context);
                       } else {

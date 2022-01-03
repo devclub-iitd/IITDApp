@@ -64,24 +64,23 @@ class UserImage extends StatelessWidget {
     //     radius: MediaQuery.of(context).size.width / 5,
     //   ),
     // );
-    
+
     bgimage ??= 'assets/images/cosmos.png';
-    avImage ??= 'assets/images/origami.png';
+    avImage ??= 'assets/images/origami2.png';
     //print(bgimage);
     return Stack(children: [
-      
       Container(
         // height: 210,
         height: MediaQuery.of(context).size.height * 0.215,
         width: double.infinity,
         margin: EdgeInsets.fromLTRB(0, 0, 0, 10),
-        
+
         // color: Colors.red,
         child: Image.asset(
           bgimage,
           //'assets/bg/1.jpg',
           //backgroundimages['beach'],
-          
+
           fit: BoxFit.cover,
         ),
       ),

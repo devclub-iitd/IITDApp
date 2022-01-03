@@ -127,7 +127,7 @@ void RNG(var randomNumber) {
 
 var avatars = {
   // 'anime': xyz,
-  'origami': 'assets/images/origami.png',
+  'origami': 'assets/images/origami3.png',
   'man': 'assets/avatars/man2.jpg',
   'woman': 'assets/avatars/woman2.png',
   'scenery': 'assets/images/scenery.png',
