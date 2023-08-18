@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/IITDAPP.iml" filepath="$PROJECT_DIR$/IITDAPP.iml" />
-      <module fileurl="file://$PROJECT_DIR$/android/IITDAPP_android.iml" filepath="$PROJECT_DIR$/android/IITDAPP_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/iitd_app.iml" filepath="$PROJECT_DIR$/iitd_app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/iitd_app_android.iml" filepath="$PROJECT_DIR$/android/iitd_app_android.iml" />
     </modules>
   </component>
 </project>
