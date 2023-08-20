@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:iitd_app/dummydata.dart';
 import 'package:iitd_app/events/event_details.dart';
@@ -32,15 +34,18 @@ class EventComponents {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(eventsModel.eventName,style: TextStyle(fontWeight: FontWeight.w600),),
+                  Text(
+                    eventsModel.eventName,
+                    style: const TextStyle(fontWeight: FontWeight.w600),
+                  ),
                   const SizedBox(
                     height: 10,
                   ),
                   Row(
                     children: [
                       Container(
-                        height: 80,
-                        width: 80,
+                        height: 90,
+                        width: 90,
                         decoration: BoxDecoration(
                             borderRadius:
                                 const BorderRadius.all(Radius.circular(15)),
@@ -66,17 +71,20 @@ class EventComponents {
                   Row(
                     children: [
                       Expanded(child: Container()),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: Badge(
-                          label: Text("+"),
-                          backgroundColor: Colors.green,
-                          child: const Icon(Icons.calendar_month)),
+                      const Chip(
+                        label: Text("add to calender"),
+                        avatar: Badge(
+                            label: Text("+"),
+                            backgroundColor: Colors.green,
+                            child: Icon(Icons.calendar_month)),
                       ),
                       const SizedBox(
                         width: 20,
                       ),
-                      const Icon(Icons.star_outline)
+                      const Chip(
+                        avatar: InkWell(child: Icon(Icons.star_outline)),
+                        label: Text("star"),
+                      )
                     ],
                   )
                 ],
@@ -86,38 +94,77 @@ class EventComponents {
         });
   }
 
-  Widget EventDetailHeader(EventsModel eventsModel) {
-    return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 20),
-      padding: const EdgeInsets.all(8),
-      decoration: const BoxDecoration(
-        color: Colors.black,
-        borderRadius: BorderRadius.all(Radius.circular(15)),
-      ),
-      child: Column(
+  Widget EventDetailHeader(EventsModel eventsModel, BuildContext context) {
+    return ClipRRect(
+      borderRadius: const BorderRadius.all(Radius.circular(15)),
+      child: Stack(
         children: [
-          Text(
-            eventsModel.eventName,
-            style: const TextStyle(
-                fontSize: 20, color: Colors.white, fontWeight: FontWeight.w500),
+          Container(
+            height: 200,
+            width: MediaQuery.of(context).size.width - 30,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: NetworkImage(eventsModel.imageLink),
+                  fit: BoxFit.cover),
+              borderRadius: const BorderRadius.all(Radius.circular(15)),
+            ),
+            child: BackdropFilter(filter: ImageFilter.blur(sigmaX: 2,sigmaY: 2,),
+              child: Container(decoration: BoxDecoration(color: Colors.black45),),
+            ),
           ),
-          Row(
-            children: [
-              Expanded(child: Container()),
-              Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: Text(
-                  ": - " + eventsModel.eventBody!.clubName,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              children: [
+                Expanded(child: Container()),
+                Container(
+                  width: 50,
+                  height: 50,
+                  decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Text(
+                        DateFormat('d MMM').format(eventsModel.endsAt!).split(" ")[0],
+                        style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 21,color: Colors.red),
+                      ),
+                      Text(
+                        DateFormat('d MMM').format(eventsModel.endsAt!).split(" ")[1],
+                        style:
+                            const TextStyle(color: Colors.red),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Container(
+            height: 200,
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(15)),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "${eventsModel.eventBody!.clubName} ",
                   style: const TextStyle(color: Colors.white),
                 ),
-              )
-            ],
+                Text(
+                  eventsModel.eventName,
+                  style: const TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500),
+                ),
+              ],
+            ),
           ),
-           Row(
-            children: [
-              Chip(label: Text(eventsModel.venue),avatar: Icon(Icons.location_on,),backgroundColor: Colors.black,labelStyle: TextStyle(color: Colors.white),)
-            ],
-          )
         ],
       ),
     );
