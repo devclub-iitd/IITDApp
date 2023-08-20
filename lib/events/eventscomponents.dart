@@ -25,10 +25,10 @@ class EventComponents {
               );
             },
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 25, vertical: 8),
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
               padding: const EdgeInsets.all(15),
               decoration: const BoxDecoration(
-                color: Colors.black45,
+                color: Color.fromARGB(115, 74, 74, 74),
                 borderRadius: BorderRadius.all(Radius.circular(15)),
               ),
               child: Column(
@@ -36,7 +36,8 @@ class EventComponents {
                 children: [
                   Text(
                     eventsModel.eventName,
-                    style: const TextStyle(fontWeight: FontWeight.w600),
+                    style: const TextStyle(
+                        fontWeight: FontWeight.w600, color: Colors.white),
                   ),
                   const SizedBox(
                     height: 10,
@@ -54,16 +55,58 @@ class EventComponents {
                                 fit: BoxFit.cover)),
                       ),
                       const SizedBox(
-                        width: 20,
+                        width: 15,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(eventsModel.venue),
-                          Text(
-                              "Starts - ${DateFormat('d MMM').format(eventsModel.startsAt!)} ${DateFormat('h:mm a').format(eventsModel.startsAt!)}"),
-                          Text(
-                              "Ends- ${DateFormat('d MMM').format(eventsModel.endsAt!)} ${DateFormat('h:mm a').format(eventsModel.endsAt!)}"),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Icon(
+                                Icons.location_on,
+                                color: Colors.red,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                eventsModel.venue,
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.timer,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                "Starts - ${DateFormat('d MMM').format(eventsModel.startsAt!)} ${DateFormat('h:mm a').format(eventsModel.startsAt!)}",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.timer_off,
+                                color: Colors.white,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                "Ends- ${DateFormat('d MMM').format(eventsModel.endsAt!)} ${DateFormat('h:mm a').format(eventsModel.endsAt!)}",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ],
+                          ),
                         ],
                       ),
                     ],
@@ -71,8 +114,8 @@ class EventComponents {
                   Row(
                     children: [
                       Expanded(child: Container()),
-                      const Chip(
-                        label: Text("add to calender"),
+                      Chip(
+                        label: Text("Add to calender"),
                         avatar: Badge(
                             label: Text("+"),
                             backgroundColor: Colors.green,
@@ -97,76 +140,85 @@ class EventComponents {
   Widget EventDetailHeader(EventsModel eventsModel, BuildContext context) {
     return ClipRRect(
       borderRadius: const BorderRadius.all(Radius.circular(15)),
-      child: Stack(
-        children: [
-          Container(
-            height: 200,
-            width: MediaQuery.of(context).size.width - 30,
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: NetworkImage(eventsModel.imageLink),
-                  fit: BoxFit.cover),
-              borderRadius: const BorderRadius.all(Radius.circular(15)),
+      child: Stack(children: [
+        Container(
+          height: 200,
+          width: MediaQuery.of(context).size.width - 30,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: NetworkImage(eventsModel.imageLink), fit: BoxFit.cover),
+            borderRadius: const BorderRadius.all(Radius.circular(15)),
+          ),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+              sigmaX: 2,
+              sigmaY: 2,
             ),
-            child: BackdropFilter(filter: ImageFilter.blur(sigmaX: 2,sigmaY: 2,),
-              child: Container(decoration: BoxDecoration(color: Colors.black45),),
+            child: Container(
+              decoration: BoxDecoration(color: Colors.black45),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(child: Container()),
-                Container(
-                  width: 50,
-                  height: 50,
-                  decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        DateFormat('d MMM').format(eventsModel.endsAt!).split(" ")[0],
-                        style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 21,color: Colors.red),
-                      ),
-                      Text(
-                        DateFormat('d MMM').format(eventsModel.endsAt!).split(" ")[1],
-                        style:
-                            const TextStyle(color: Colors.red),
-                      )
-                    ],
-                  ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Expanded(child: Container()),
+              Container(
+                width: 50,
+                height: 50,
+                decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      DateFormat('d MMM')
+                          .format(eventsModel.endsAt!)
+                          .split(" ")[0],
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 21,
+                          color: Colors.red),
+                    ),
+                    Text(
+                      DateFormat('d MMM')
+                          .format(eventsModel.endsAt!)
+                          .split(" ")[1],
+                      style: const TextStyle(color: Colors.red),
+                    )
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          Container(
-            height: 200,
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(15)),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "${eventsModel.eventBody!.clubName} ",
-                  style: const TextStyle(color: Colors.white),
-                ),
-                Text(
-                  eventsModel.eventName,
-                  style: const TextStyle(
-                      fontSize: 20,
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500),
-                ),
-              ],
-            ),
+        ),
+        Container(
+          height: 200,
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
           ),
-        ],
-      ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "${eventsModel.eventBody!.clubName} ",
+                style: const TextStyle(color: Colors.white),
+              ),
+              Text(
+                eventsModel.eventName,
+                style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
+        )
+      ]),
     );
   }
 }

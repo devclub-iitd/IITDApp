@@ -1,5 +1,6 @@
 import 'package:iitd_app/models/clubmodel.dart';
 import 'package:iitd_app/models/eventsmodel.dart';
+import 'package:iitd_app/models/lostandfoundmodel.dart';
 
 List<EventsModel> dummyeventsList() {
   List<EventsModel> list = [
@@ -15,7 +16,8 @@ List<EventsModel> dummyeventsList() {
       startsAt: DateTime(2023, 8, 20, 10, 0),
       endsAt: DateTime(2023, 8, 20, 12, 0),
       about: 'About Event 1',
-      imageLink: 'https://images.unsplash.com/photo-1692229218960-8ed454bead96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      imageLink:
+          'https://images.unsplash.com/photo-1692229218960-8ed454bead96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
       isStarred: false,
       isSub: true,
     ),
@@ -31,7 +33,8 @@ List<EventsModel> dummyeventsList() {
       startsAt: DateTime(2023, 8, 21, 14, 0),
       endsAt: DateTime(2023, 8, 21, 16, 0),
       about: 'About Event 2',
-      imageLink: 'https://images.unsplash.com/photo-1682686581484-a220483e6291?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      imageLink:
+          'https://images.unsplash.com/photo-1682686581484-a220483e6291?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
       isStarred: true,
       isSub: false,
     ),
@@ -47,7 +50,8 @@ List<EventsModel> dummyeventsList() {
       startsAt: DateTime(2023, 8, 22, 9, 0),
       endsAt: DateTime(2023, 8, 22, 11, 0),
       about: 'About Event 3',
-      imageLink: 'https://images.unsplash.com/photo-1682686581484-a220483e6291?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      imageLink:
+          'https://images.unsplash.com/photo-1682686581484-a220483e6291?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
       isStarred: false,
       isSub: true,
     ),
@@ -63,7 +67,8 @@ List<EventsModel> dummyeventsList() {
       startsAt: DateTime(2023, 8, 23, 13, 0),
       endsAt: DateTime(2023, 8, 23, 15, 0),
       about: 'About Event 4',
-      imageLink: 'https://images.unsplash.com/photo-1692273881354-52bbf11bacad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      imageLink:
+          'https://images.unsplash.com/photo-1692273881354-52bbf11bacad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
       isStarred: true,
       isSub: false,
     ),
@@ -79,7 +84,8 @@ List<EventsModel> dummyeventsList() {
       startsAt: DateTime(2023, 8, 24, 10, 0),
       endsAt: DateTime(2023, 8, 24, 12, 0),
       about: 'About Event 5',
-      imageLink: 'https://images.unsplash.com/photo-1692229218960-8ed454bead96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      imageLink:
+          'https://images.unsplash.com/photo-1692229218960-8ed454bead96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
       isStarred: false,
       isSub: true,
     ),
@@ -95,7 +101,8 @@ List<EventsModel> dummyeventsList() {
       startsAt: DateTime(2023, 8, 25, 14, 0),
       endsAt: DateTime(2023, 8, 25, 16, 0),
       about: 'About Event 6',
-      imageLink: 'https://images.unsplash.com/photo-1682686581484-a220483e6291?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      imageLink:
+          'https://images.unsplash.com/photo-1682686581484-a220483e6291?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
       isStarred: true,
       isSub: false,
     ),
@@ -111,7 +118,8 @@ List<EventsModel> dummyeventsList() {
       startsAt: DateTime(2023, 8, 26, 9, 0),
       endsAt: DateTime(2023, 8, 26, 11, 0),
       about: 'About Event 7',
-      imageLink: 'https://images.unsplash.com/photo-1692229218960-8ed454bead96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      imageLink:
+          'https://images.unsplash.com/photo-1692229218960-8ed454bead96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
       isStarred: false,
       isSub: true,
     ),
@@ -127,7 +135,8 @@ List<EventsModel> dummyeventsList() {
       startsAt: DateTime(2023, 8, 27, 13, 0),
       endsAt: DateTime(2023, 8, 27, 15, 0),
       about: 'About Event 8',
-      imageLink: 'https://images.unsplash.com/photo-1692273881354-52bbf11bacad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      imageLink:
+          'https://images.unsplash.com/photo-1692273881354-52bbf11bacad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
       isStarred: true,
       isSub: false,
     ),
@@ -143,7 +152,8 @@ List<EventsModel> dummyeventsList() {
       startsAt: DateTime(2023, 8, 28, 10, 0),
       endsAt: DateTime(2023, 8, 28, 12, 0),
       about: 'About Event 9',
-      imageLink: 'https://images.unsplash.com/photo-1692273881354-52bbf11bacad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      imageLink:
+          'https://images.unsplash.com/photo-1692273881354-52bbf11bacad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
       isStarred: false,
       isSub: true,
     ),
@@ -159,9 +169,108 @@ List<EventsModel> dummyeventsList() {
       startsAt: DateTime(2023, 8, 29, 14, 0),
       endsAt: DateTime(2023, 8, 29, 16, 0),
       about: 'About Event 10',
-      imageLink: 'https://images.unsplash.com/photo-1692229218960-8ed454bead96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
+      imageLink:
+          'https://images.unsplash.com/photo-1692229218960-8ed454bead96?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80',
       isStarred: true,
       isSub: false,
+    ),
+  ];
+
+  list.shuffle();
+  return list;
+}
+
+List<LostandFoundModel> lostandfoundlist() {
+  List<LostandFoundModel> list = [
+    LostandFoundModel(
+      id: 'LF001',
+      title: 'Lost Wallet',
+      timestamp: DateTime(2023, 8, 10),
+      img: 'wallet.jpg',
+      wherefound: 'Park Bench',
+      status: LostandFoundStatus.listed,
+      desc: 'Black leather wallet with ID and credit cards.',
+    ),
+    LostandFoundModel(
+      id: 'LF002',
+      title: 'Found Smartphone',
+      timestamp: DateTime(2023, 8, 12),
+      img: 'phone.jpg',
+      wherefound: 'Coffee Shop',
+      status: LostandFoundStatus.listed,
+      desc: 'Apple iPhone 12 found with a cracked screen.',
+    ),
+    LostandFoundModel(
+      id: 'LF003',
+      title: 'Lost Keys',
+      timestamp: DateTime(2023, 8, 15),
+      img: 'keys.jpg',
+      wherefound: 'Bus Stop',
+      status: LostandFoundStatus.listed,
+      desc: 'Set of house and car keys with a keychain.',
+    ),
+    LostandFoundModel(
+      id: 'LF004',
+      title: 'Lost Backpack',
+      timestamp: DateTime(2023, 8, 17),
+      img: 'backpack.jpg',
+      wherefound: 'Library',
+      status: LostandFoundStatus.claimed,
+      desc: 'Blue backpack with a laptop inside.',
+    ),
+    LostandFoundModel(
+      id: 'LF005',
+      title: 'Found Watch',
+      timestamp: DateTime(2023, 8, 19),
+      img: 'watch.jpg',
+      wherefound: 'Gym Locker',
+      status: LostandFoundStatus.listed,
+      desc: "Men's wristwatch, brand unknown.",
+    ),
+    LostandFoundModel(
+      id: 'LF006',
+      title: 'Lost Glasses',
+      timestamp: DateTime(2023, 8, 20),
+      img: 'glasses.jpg',
+      wherefound: 'Restaurant',
+      status: LostandFoundStatus.listed,
+      desc: 'Prescription eyeglasses in a black case.',
+    ),
+    LostandFoundModel(
+      id: 'LF007',
+      title: 'Lost Pet Dog',
+      timestamp: DateTime(2023, 8, 21),
+      img: 'dog.jpg',
+      wherefound: 'Park',
+      status: LostandFoundStatus.listed,
+      desc: 'Small brown dog with a collar.',
+    ),
+    LostandFoundModel(
+      id: 'LF008',
+      title: 'Lost Earring',
+      timestamp: DateTime(2023, 8, 22),
+      img: 'earring.jpg',
+      wherefound: 'Movie Theater',
+      status: LostandFoundStatus.returned,
+      desc: 'Silver hoop earring with a blue gem.',
+    ),
+    LostandFoundModel(
+      id: 'LF009',
+      title: 'Found Bicycle',
+      timestamp: DateTime(2023, 8, 23),
+      img: 'bike.jpg',
+      wherefound: 'Street Corner',
+      status: LostandFoundStatus.listed,
+      desc: 'Red mountain bike with a flat tire.',
+    ),
+    LostandFoundModel(
+      id: 'LF010',
+      title: 'Lost Passport',
+      timestamp: DateTime(2023, 8, 25),
+      img: 'passport.jpg',
+      wherefound: 'Airport',
+      status: LostandFoundStatus.claimed,
+      desc: 'US passport belonging to John Doe.',
     ),
   ];
 

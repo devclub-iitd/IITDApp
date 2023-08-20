@@ -18,7 +18,7 @@ class Club {
         id: json['body']['_id']);
   }
 
-  Map toMap() {
+  Map<String, dynamic> toJson() {
     var map = <String, dynamic>{};
     map['name'] = clubName;
     map['about'] = clubAbout;
