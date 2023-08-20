@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iitd_app/auth/authstate.dart';
 import 'package:iitd_app/auth/loginpage.dart';
-import 'package:iitd_app/main.dart';
+import 'package:iitd_app/events/eventspage.dart';
 import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -54,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             );
           } else if (provider.signedIn) {
-            return const MyHomePage(title: "IITDAPP");
+            return const EventPage() ;
           } else {
             return const LoginPage();
           }
