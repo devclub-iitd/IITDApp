@@ -5,8 +5,8 @@ import 'package:intl/intl.dart';
 
 // ignore: must_be_immutable
 class EventDetails extends StatefulWidget {
-  EventsModel eventsModel;
-  EventDetails({super.key, required this.eventsModel});
+  final EventsModel eventsModel;
+  const EventDetails({super.key, required this.eventsModel});
 
   @override
   State<EventDetails> createState() => _EventDetailsState();
@@ -26,7 +26,6 @@ class _EventDetailsState extends State<EventDetails> {
           margin: const EdgeInsets.symmetric(vertical: 15, horizontal: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            
             children: [
               EventComponents().EventDetailHeader(widget.eventsModel, context),
               const SizedBox(
