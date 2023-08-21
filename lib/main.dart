@@ -1,8 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:iitd_app/auth/authstate.dart';
-import 'package:iitd_app/auth/splashscreen.dart';
-import 'package:iitd_app/logic/approutes.dart';
+import 'package:iitd_app/core/approutes.dart';
+import 'package:iitd_app/features/auth/authstate.dart';
 import 'package:provider/provider.dart';
 
 Future main() async {
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        useMaterial3: false,
       ),
     );
   }

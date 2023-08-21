@@ -1,9 +1,7 @@
 import 'dart:convert';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:http/http.dart' as http;
 import 'package:jose/jose.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class CasiUser {
   String username;

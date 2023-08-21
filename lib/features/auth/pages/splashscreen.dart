@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:iitd_app/auth/authstate.dart';
-import 'package:iitd_app/auth/loginpage.dart';
-import 'package:iitd_app/events/eventspage.dart';
+import 'package:iitd_app/features/auth/authstate.dart';
+import 'package:iitd_app/features/auth/pages/loginpage.dart';
+import 'package:iitd_app/features/events/pages/eventspage.dart';
 import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {

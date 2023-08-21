@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:iitd_app/auth/authstate.dart';
-import 'package:iitd_app/auth/casioauth.dart';
+import 'package:iitd_app/features/auth/authstate.dart';
+import 'package:iitd_app/features/auth/casioauth.dart';
 import 'package:iitd_app/utils/constants.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -54,7 +54,8 @@ class LoginPage extends StatelessWidget {
       //       headers: {'authorization': 'Bearer $newtoken'});
       // }
 
-      final response = await http.get(Uri.parse('$uri/api/user/me'),
+      final response = await http.get(
+          Uri.parse('${EndPoints.baseURL}/api/user/me'),
           headers: {'authorization': 'Bearer $newtoken'});
       if (response.statusCode == 200) {
         //var parsedJson = json.decode(response.body);
@@ -109,9 +110,9 @@ class LoginPage extends StatelessWidget {
       //   }).signIn();
       // }
       await CasiLogin(clientId!, secret!,
-            onSuccess: (String token, CasiUser user) {
-          onLoginSuccess(context, token);
-        }).signIn();
+          onSuccess: (String token, CasiUser user) {
+        onLoginSuccess(context, token);
+      }).signIn();
     }
 
     return Scaffold(
