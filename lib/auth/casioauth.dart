@@ -1,6 +1,9 @@
 import 'dart:convert';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:http/http.dart' as http;
+import 'package:jose/jose.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class CasiUser {
   String username;
@@ -45,14 +48,21 @@ class CasiLogin {
     _onSuccess = onSuccess;
     _onError = onError;
 
-    // var builder = JWTBuilder();
-    // var signer = JWTHmacSha256Signer(accessToken);
-    // builder
-    //   ..expiresAt = DateTime.now().add(const Duration(minutes: 5))
-    //   ..setClaim('data', {'clientId': clientId});
+    final claims = {
+      'exp': DateTime.now()
+              .add(const Duration(minutes: 5))
+              .millisecondsSinceEpoch ~/
+          1000,
+      'data': {'clientId': clientId}
+    };
+    final builder = JsonWebSignatureBuilder()
+      ..jsonContent = claims
+      ..setProtectedHeader('alg', 'HS256')
+      ..addRecipient(JsonWebKey.fromJson({'kty': 'oct', 'k': accessToken}));
 
-    // var signedToken = builder.getSignedToken(signer);
-    // secret = signedToken.toString();
+    final signedToken = builder.build().toCompactSerialization();
+    secret = signedToken.toString();
+
     _loginURL =
         '$_serverUrl/user/login?serviceURL=$_serverUrl/auth/clientVerify?q=${Uri.encodeQueryComponent(secret!)}';
   }
@@ -62,8 +72,17 @@ class CasiLogin {
   }
 
   Future<void> signIn() async {
-    
-    // final webview = WebViewController();
+    await launchUrl(Uri.parse(_loginURL!));
+
+    // void _onPageFinished(String url) async {
+    //   final controller = await _controller.future;
+    //   if (url.startsWith('$_serverUrl/user/login')) {
+    //     controller.evaluateJavascript(
+    //         'document.querySelector("#iitdLogin").click();');
+    //   }
+    // }
+
+    // final webview = FlutterWebviewPlugin();
     // webview.onBack.listen((_) {
     //   webview.close();
     // });
@@ -73,12 +92,6 @@ class CasiLogin {
     //       webview
     //           .evalJavascript('document.querySelector("#iitdLogin").click()');
     //     }
-    //     // webview.resize(Rect.fromLTRB(
-    //     //   MediaQuery.of(context).padding.left,
-    //     //   MediaQuery.of(context).padding.top,
-    //     //   MediaQuery.of(context).size.width + 1,
-    //     //   MediaQuery.of(context).size.height + 1,
-    //     // ));
     //   }
     // });
 
@@ -99,7 +112,6 @@ class CasiLogin {
     //   }
     // });
     // _token = null;
-    await launchUrl(Uri.parse(_loginURL!));
     // await webview.launch(
     //   _loginURL!,
     //   ignoreSSLErrors: true,
