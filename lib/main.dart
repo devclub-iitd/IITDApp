@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'IITD App',
-      initialRoute: AppRoutes.splash,
+      initialRoute: AppRoutes.lostandFound,
       routes: AppRoutes.routes,
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
