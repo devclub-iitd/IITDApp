@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:iitd_app/dummydata.dart';
 import 'package:iitd_app/features/events/pages/event_details.dart';
 import 'package:iitd_app/models/eventsmodel.dart';
+import 'package:iitd_app/utils/colors.dart';
+import 'package:iitd_app/utils/globalwidgets.dart';
 import 'package:intl/intl.dart';
 
 class EventComponents {
@@ -25,19 +27,19 @@ class EventComponents {
               );
             },
             child: Container(
-              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 8),
+              margin: const EdgeInsets.symmetric(vertical: 8),
               padding: const EdgeInsets.all(15),
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(115, 74, 74, 74),
-                borderRadius: BorderRadius.all(Radius.circular(15)),
+              decoration: BoxDecoration(
+                color: AppColors.primaryColorLight.withOpacity(0.2),
+                borderRadius: const BorderRadius.all(Radius.circular(10)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    eventsModel.eventName,
-                    style: const TextStyle(
-                        fontWeight: FontWeight.w600, color: Colors.white),
+                  NormalText500(
+                    title: eventsModel.eventName,
+                    textcolor: AppColors.primaryColor,
+                    size: 16,
                   ),
                   const SizedBox(
                     height: 10,
@@ -49,7 +51,7 @@ class EventComponents {
                         width: 90,
                         decoration: BoxDecoration(
                             borderRadius:
-                                const BorderRadius.all(Radius.circular(15)),
+                                const BorderRadius.all(Radius.circular(5)),
                             image: DecorationImage(
                                 image: NetworkImage(eventsModel.imageLink),
                                 fit: BoxFit.cover)),
@@ -71,9 +73,10 @@ class EventComponents {
                               const SizedBox(
                                 width: 10,
                               ),
-                              Text(
-                                eventsModel.venue,
-                                style: const TextStyle(color: Colors.white),
+                              NormalText400(
+                                title: eventsModel.venue,
+                                textcolor: AppColors.textColor,
+                                size: 13,
                               ),
                             ],
                           ),
@@ -81,14 +84,16 @@ class EventComponents {
                             children: [
                               const Icon(
                                 Icons.timer,
-                                color: Colors.white,
+                                color: AppColors.secondaryColor,
                               ),
                               const SizedBox(
                                 width: 10,
                               ),
-                              Text(
-                                "Starts - ${DateFormat('d MMM').format(eventsModel.startsAt!)} ${DateFormat('h:mm a').format(eventsModel.startsAt!)}",
-                                style: const TextStyle(color: Colors.white),
+                              NormalText400(
+                                title:
+                                    "Starts - ${DateFormat('d MMM').format(eventsModel.startsAt!)} ${DateFormat('h:mm a').format(eventsModel.startsAt!)}",
+                                textcolor: AppColors.textColor,
+                                size: 13,
                               ),
                             ],
                           ),
@@ -96,14 +101,16 @@ class EventComponents {
                             children: [
                               const Icon(
                                 Icons.timer_off,
-                                color: Colors.white,
+                                color: AppColors.secondaryColor,
                               ),
                               const SizedBox(
                                 width: 10,
                               ),
-                              Text(
-                                "Ends- ${DateFormat('d MMM').format(eventsModel.endsAt!)} ${DateFormat('h:mm a').format(eventsModel.endsAt!)}",
-                                style: const TextStyle(color: Colors.white),
+                              NormalText400(
+                                title:
+                                    "Ends - ${DateFormat('d MMM').format(eventsModel.endsAt!)} ${DateFormat('h:mm a').format(eventsModel.endsAt!)}",
+                                textcolor: AppColors.textColor,
+                                size: 13,
                               ),
                             ],
                           ),
@@ -112,22 +119,25 @@ class EventComponents {
                     ],
                   ),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Expanded(child: Container()),
-                      const Chip(
-                        label: Text("Add to calender"),
-                        avatar: Badge(
-                            label: Text("+"),
-                            backgroundColor: Colors.green,
-                            child: Icon(Icons.calendar_month)),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
+                        decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(5)),
+                          color: AppColors.secondaryColor,
+                        ),
+                        child: const NormalText400(
+                          title: "Add to Calendar",
+                          textcolor: AppColors.backgroundColor,
+                          size: 13,
+                        ),
                       ),
                       const SizedBox(
                         width: 20,
                       ),
-                      const Chip(
-                        avatar: InkWell(child: Icon(Icons.star_outline)),
-                        label: Text("star"),
-                      )
+                      const InkWell(child: Icon(Icons.star_outline))
                     ],
                   )
                 ],
@@ -136,8 +146,14 @@ class EventComponents {
           );
         });
   }
+}
 
-  Widget EventDetailHeader(EventsModel eventsModel, BuildContext context) {
+class EventDetailHeader extends StatelessWidget {
+  const EventDetailHeader({super.key, required this.eventsModel});
+  final EventsModel eventsModel;
+
+  @override
+  Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: const BorderRadius.all(Radius.circular(15)),
       child: Stack(children: [

@@ -6,7 +6,7 @@ class LostFoundComponents {
   Widget lostCard(LostandFoundModel lostandFoundModel,BuildContext context) {
     return Container(
       width: (MediaQuery.of(context).size.width-50)/2,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(10))
       ),
       child: Column(children: [
@@ -18,21 +18,21 @@ class LostFoundComponents {
         Text(lostandFoundModel.title),
         Row(
           children: [
-            Icon(Icons.location_on,color: Colors.red,),
+            const Icon(Icons.location_on,color: Colors.red,),
             Text(lostandFoundModel.wherefound),
 
           ],
         ),
         Row(
           children: [
-            Icon(Icons.timer,color: Colors.blue,),
+            const Icon(Icons.timer,color: Colors.blue,),
             Text("${DateFormat('d MMM').format(lostandFoundModel.timestamp)} ${DateFormat('h:mm a').format(lostandFoundModel.timestamp)}"),
             
           ],
         ),
         Row(
           children: [
-            Icon(Icons.history,color: Colors.blue,),
+            const Icon(Icons.history,color: Colors.blue,),
             Text(lostandFoundModel.status.toString().split(".")[1]),
             
           ],

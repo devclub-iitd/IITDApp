@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:iitd_app/features/drawer.dart';
 import 'package:iitd_app/features/events/components/eventscomponents.dart';
+import 'package:iitd_app/utils/colors.dart';
+import 'package:iitd_app/utils/globalwidgets.dart';
 
 class EventPage extends StatefulWidget {
   const EventPage({super.key});
@@ -14,40 +17,44 @@ class _EventPageState extends State<EventPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
-        title: const Text("Events"),
+        title: const BoldText(
+          title: "Events",
+          size: 24,
+          textcolor: AppColors.backgroundColor,
+        ),
+        backgroundColor: AppColors.primaryColorDark,
       ),
+      drawer: buildDrawer(context),
       body: SafeArea(
           child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 margin: const EdgeInsets.only(top: 15),
-                width: MediaQuery.of(context).size.width - 30,
-                decoration: const BoxDecoration(
-                    color: Color.fromARGB(115, 74, 74, 74),
-                    borderRadius: BorderRadius.all(Radius.circular(15))),
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                    color: AppColors.primaryColorLight.withOpacity(0.2),
+                    borderRadius: const BorderRadius.all(Radius.circular(10))),
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                 child: const Column(
                   children: [
-                    Text(
-                      "DEVCLUB",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 25,
-                          color: Colors.white),
+                    BoldText(
+                      title: "DevClub, IIT Delhi",
+                      size: 18,
+                      textcolor: AppColors.secondaryColor,
                     ),
                     SizedBox(
                       height: 20,
                     ),
                     Chip(
                       label: Text("SUBSCRIBE"),
-                      backgroundColor: Color.fromARGB(255, 33, 170, 125),
+                      backgroundColor: AppColors.greenShadeColor,
                     )
                   ],
                 ),
@@ -55,101 +62,80 @@ class _EventPageState extends State<EventPage> {
               const SizedBox(
                 height: 15,
               ),
-              const Text(
-                "CLUB EVENTS",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 21,
-                    color: Colors.white),
+              const BoldText(
+                title: "Club Events",
+                size: 18,
+                textcolor: AppColors.secondaryColor,
               ),
               Container(
                 margin: const EdgeInsets.only(top: 5),
-                width: 60,
+                width: 100,
                 height: 3,
                 decoration: const BoxDecoration(
                     borderRadius: BorderRadius.all(Radius.circular(1.5)),
-                    color: Colors.green),
+                    color: AppColors.greenShadeColor),
               ),
               const SizedBox(
                 height: 15,
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        setState(() {
-                          sel = 0;
-                        });
-                      },
-                      child: Container(
-                        height: 40,
-                        width: 120,
-                        decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(30),
-                            ),
-                            color: sel == 0
-                                ? const Color.fromARGB(115, 74, 74, 74)
-                                : Colors.white),
-                        child: Row(
-                          children: [
-                            const SizedBox(
-                              width: 25,
-                            ),
-                            Text(
-                              "Upcoming",
-                              style: TextStyle(
-                                  color:
-                                      sel == 0 ? Colors.white : Colors.black),
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        sel = 1;
-                        setState(() {});
-                      },
-                      child: Container(
-                        height: 40,
-                        width: 120,
-                        decoration: BoxDecoration(
-                            borderRadius: const BorderRadius.all(
-                              Radius.circular(30),
-                            ),
-                            color: sel == 1
-                                ? const Color.fromARGB(115, 74, 74, 74)
-                                : Colors.white),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const SizedBox(
-                                width: 1,
-                              ),
-                              Text(
-                                "Past",
-                                style: TextStyle(
-                                    color:
-                                        sel == 1 ? Colors.white : Colors.black),
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                            ],
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        sel = 0;
+                      });
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(5),
                           ),
+                          color: sel == 0
+                              ? AppColors.primaryColorDark
+                              : AppColors.primaryColorLight.withOpacity(0.2)),
+                      child: Center(
+                        child: Text(
+                          "Upcoming",
+                          style: TextStyle(
+                              color: sel == 0
+                                  ? AppColors.backgroundColor
+                                  : AppColors.textColor),
                         ),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(
+                    width: 16,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      sel = 1;
+                      setState(() {});
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8.0),
+                      decoration: BoxDecoration(
+                          borderRadius: const BorderRadius.all(
+                            Radius.circular(5),
+                          ),
+                          color: sel == 1
+                              ? AppColors.primaryColorDark
+                              : AppColors.primaryColorLight.withOpacity(0.2)),
+                      child: Center(
+                        child: Text(
+                          "Past",
+                          style: TextStyle(
+                              color: sel == 1
+                                  ? AppColors.backgroundColor
+                                  : AppColors.textColor),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(
                 height: 15,

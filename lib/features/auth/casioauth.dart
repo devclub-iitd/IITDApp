@@ -1,7 +1,7 @@
 import 'dart:convert';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 import 'package:http/http.dart' as http;
 import 'package:jose/jose.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class CasiUser {
   String username;
@@ -70,54 +70,46 @@ class CasiLogin {
   }
 
   Future<void> signIn() async {
-    await launchUrl(Uri.parse(_loginURL!));
+    // await launchUrl(Uri.parse(_loginURL!));
 
-    // void _onPageFinished(String url) async {
-    //   final controller = await _controller.future;
-    //   if (url.startsWith('$_serverUrl/user/login')) {
-    //     controller.evaluateJavascript(
-    //         'document.querySelector("#iitdLogin").click();');
-    //   }
-    // }
+    final webview = FlutterWebviewPlugin();
+    webview.onBack.listen((_) {
+      webview.close();
+    });
+    webview.onStateChanged.listen((state) {
+      if (state.type == WebViewState.finishLoad) {
+        if (state.url.startsWith('$_serverUrl/user/login')) {
+          webview
+              .evalJavascript('document.querySelector("#iitdLogin").click()');
+        }
+      }
+    });
 
-    // final webview = FlutterWebviewPlugin();
-    // webview.onBack.listen((_) {
-    //   webview.close();
-    // });
-    // webview.onStateChanged.listen((state) {
-    //   if (state.type == WebViewState.finishLoad) {
-    //     if (state.url.startsWith('$_serverUrl/user/login')) {
-    //       webview
-    //           .evalJavascript('document.querySelector("#iitdLogin").click()');
-    //     }
-    //   }
-    // });
-
-    // webview.onUrlChanged.listen((url) async {
-    //   if (url.startsWith('$_serverUrl/auth/clientVerify?q=')) {
-    //     if (_token != null) return;
-    //     _token = 'mutex';
-    //     try {
-    //       _cookies = await webview.getCookies();
-    //       _token = _cookies!['"_rememberme'].toString();
-    //       _token = _token!.trim().substring(0, _token!.length - 1);
-    //       var user = await fetchUserDetails();
-    //       _onSuccess!(_token!, user);
-    //     } catch (e) {
-    //       _onError!('Login Failed');
-    //     }
-    //     await webview.close();
-    //   }
-    // });
-    // _token = null;
-    // await webview.launch(
-    //   _loginURL!,
-    //   ignoreSSLErrors: true,
-    //   clearCookies: true,
-    //   clearCache: true,
-    //   userAgent:
-    //       'Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19',
-    // );
+    webview.onUrlChanged.listen((url) async {
+      if (url.startsWith('$_serverUrl/auth/clientVerify?q=')) {
+        if (_token != null) return;
+        _token = 'mutex';
+        try {
+          _cookies = await webview.getCookies();
+          _token = _cookies!['"_rememberme'].toString();
+          _token = _token!.trim().substring(0, _token!.length - 1);
+          var user = await fetchUserDetails();
+          _onSuccess!(_token!, user);
+        } catch (e) {
+          _onError!('Login Failed');
+        }
+        await webview.close();
+      }
+    });
+    _token = null;
+    await webview.launch(
+      _loginURL!,
+      ignoreSSLErrors: true,
+      clearCookies: true,
+      clearCache: true,
+      userAgent:
+          'Mozilla/5.0 (Linux; Android 4.0.4; Galaxy Nexus Build/IMM76B) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.133 Mobile Safari/535.19',
+    );
   }
 
   Future<CasiUser> fetchUserDetails() async {
