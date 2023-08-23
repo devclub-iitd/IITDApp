@@ -34,36 +34,11 @@ class _EventPageState extends State<EventPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                margin: const EdgeInsets.only(top: 15),
-                width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    color: AppColors.primaryColorLight.withOpacity(0.2),
-                    borderRadius: const BorderRadius.all(Radius.circular(10))),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                child: const Column(
-                  children: [
-                    BoldText(
-                      title: "DevClub, IIT Delhi",
-                      size: 18,
-                      textcolor: AppColors.secondaryColor,
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
-                    Chip(
-                      label: Text("SUBSCRIBE"),
-                      backgroundColor: AppColors.greenShadeColor,
-                    )
-                  ],
-                ),
-              ),
               const SizedBox(
                 height: 15,
               ),
               const BoldText(
-                title: "Club Events",
+                title: "Upcoming Events",
                 size: 18,
                 textcolor: AppColors.secondaryColor,
               ),

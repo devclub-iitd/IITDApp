@@ -8,7 +8,26 @@ import 'package:iitd_app/utils/colors.dart';
 import 'package:iitd_app/utils/globalwidgets.dart';
 import 'package:intl/intl.dart';
 
+
+
+
+ var textInputdec=const InputDecoration(
+  labelStyle: TextStyle(color: Colors.black),
+  focusedBorder: OutlineInputBorder(
+    borderSide: BorderSide.none,
+
+  ),
+    enabledBorder: OutlineInputBorder(
+borderSide: BorderSide.none
+),
+errorBorder: OutlineInputBorder(
+borderSide: BorderSide.none
+)
+);
 class EventComponents {
+
+ 
+
   Widget eventslist(BuildContext context) {
     return ListView.builder(
         itemCount: dummyeventsList().length,
@@ -181,13 +200,13 @@ class EventDetailHeader extends StatelessWidget {
             children: [
               Expanded(child: Container()),
               Container(
-                width: 50,
                 height: 50,
+                width: 50,
                 decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.all(Radius.circular(10))),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
                       DateFormat('d MMM')

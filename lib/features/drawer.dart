@@ -33,10 +33,17 @@ Drawer buildDrawer(BuildContext context) {
           },
         ),
         ListTile(
-          leading: const Icon(Icons.explore),
-          title: const Text('Explore'),
+          leading: const Icon(Icons.house),
+          title: const Text('Clubs/Boards'),
           onTap: () {
-            Navigator.pushNamed(context, '/explore');
+            Navigator.pushNamed(context, '/clubs');
+          },
+        ),
+        ListTile(
+          leading: const Icon(Icons.celebration),
+          title: const Text('Hangouts'),
+          onTap: () {
+            Navigator.pushNamed(context, '/hangouts');
           },
         ),
         ListTile(
