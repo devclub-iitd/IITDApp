@@ -6,7 +6,26 @@ import 'package:iitd_app/features/events/pages/event_details.dart';
 import 'package:iitd_app/models/eventsmodel.dart';
 import 'package:intl/intl.dart';
 
+
+
+
+ var textInputdec=const InputDecoration(
+  labelStyle: TextStyle(color: Colors.black),
+  focusedBorder: OutlineInputBorder(
+    borderSide: BorderSide.none,
+
+  ),
+    enabledBorder: OutlineInputBorder(
+borderSide: BorderSide.none
+),
+errorBorder: OutlineInputBorder(
+borderSide: BorderSide.none
+)
+);
 class EventComponents {
+
+ 
+
   Widget eventslist(BuildContext context) {
     return ListView.builder(
         itemCount: dummyeventsList().length,
