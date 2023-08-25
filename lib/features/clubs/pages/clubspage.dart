@@ -17,6 +17,8 @@ class ClubsPage extends StatelessWidget {
         .map((clubData) => ClubCardModel.fromJson(clubData))
         .toList();
 
+    clubsList.shuffle();
+
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
@@ -49,7 +51,9 @@ class ClubsPage extends StatelessWidget {
                     ),
                   );
                 },
-                child: ClubCard(card: card,));
+                child: ClubCard(
+                  card: card,
+                ));
           }),
     );
   }

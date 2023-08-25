@@ -57,7 +57,7 @@ class ClubDetailsPage extends StatelessWidget {
                     },
                     child: const FaIcon(
                       FontAwesomeIcons.instagram,
-                      size: 24,
+                      size: 32,
                       color: AppColors.secondaryColor,
                     ),
                   ),
@@ -70,7 +70,7 @@ class ClubDetailsPage extends StatelessWidget {
                     },
                     child: const FaIcon(
                       FontAwesomeIcons.linkedin,
-                      size: 24,
+                      size: 32,
                       color: AppColors.secondaryColor,
                     ),
                   ),
@@ -83,7 +83,7 @@ class ClubDetailsPage extends StatelessWidget {
                     },
                     child: const FaIcon(
                       FontAwesomeIcons.facebook,
-                      size: 24,
+                      size: 32,
                       color: AppColors.secondaryColor,
                     ),
                   ),
@@ -96,7 +96,7 @@ class ClubDetailsPage extends StatelessWidget {
                     },
                     child: const FaIcon(
                       FontAwesomeIcons.chrome,
-                      size: 24,
+                      size: 32,
                       color: AppColors.secondaryColor,
                     ),
                   ),
