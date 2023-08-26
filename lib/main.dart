@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'IITD App',
+      title: 'Townsquare',
       initialRoute: AppRoutes.events,
       routes: AppRoutes.routes,
       debugShowCheckedModeBanner: false,
