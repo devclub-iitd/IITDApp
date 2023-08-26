@@ -20,8 +20,11 @@ class _LostAndFoundPageState extends State<LostAndFoundPage> {
         child: Container(
           child: Column(
             children: [
-              ListView.builder(
+              GridView.builder(
+                shrinkWrap: true,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
                   itemCount: lostandfoundlist().length,
+                  physics: NeverScrollableScrollPhysics(),
                   itemBuilder: (context, i) {
                     LostandFoundModel lostandFoundModel = lostandfoundlist()[i];
                     return LostFoundComponents()

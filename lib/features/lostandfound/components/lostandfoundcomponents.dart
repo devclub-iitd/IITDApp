@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 class LostFoundComponents {
   Widget lostCard(LostandFoundModel lostandFoundModel,BuildContext context) {
     return Container(
+      height: 140,
       width: (MediaQuery.of(context).size.width-50)/2,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(10))

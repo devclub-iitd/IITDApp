@@ -6,7 +6,7 @@ import 'package:iitd_app/features/auth/authstate.dart';
 import 'package:provider/provider.dart';
 
 Future main() async {
-  await dotenv.load(fileName: ".env");
+  
   runApp(MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => AuthState())],
       child: const MyApp()));
