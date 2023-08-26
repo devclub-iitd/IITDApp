@@ -39,7 +39,8 @@ dependencies:
   # jose: ^0.3.4
   provider: ^6.0.5
   url_launcher: ^6.1.12
-  # webview_flutter: ^4.2.2
+  webview_flutter: ^4.2.2
+  webview_flutter_web: ^0.2.2+1
   font_awesome_flutter: ^10.5.0
   badges:
   get_it: ^7.6.0

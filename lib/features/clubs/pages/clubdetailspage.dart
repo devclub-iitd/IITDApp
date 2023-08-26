@@ -28,7 +28,7 @@ class ClubDetailsPage extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
               ClubCard(
