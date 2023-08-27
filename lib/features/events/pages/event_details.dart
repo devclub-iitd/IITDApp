@@ -93,7 +93,7 @@ class _EventDetailsState extends State<EventDetails> {
                 decoration: BoxDecoration(
                     image: DecorationImage(
                         image: NetworkImage(
-                          widget.eventsModel.imageLink,
+                          widget.eventsModel.imageLink!,
                         ),
                         fit: BoxFit.cover)),
               ),

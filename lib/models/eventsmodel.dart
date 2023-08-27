@@ -1,4 +1,6 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:iitd_app/models/clubmodel.dart';
+import 'package:iitd_app/utils/constants.dart';
 
 class EventsModel {
   String eventid;
@@ -8,10 +10,10 @@ class EventsModel {
   DateTime? startsAt;
   DateTime? endsAt;
   String about;
-  String imageLink;
-  bool isStarred;
-  bool isSub;
-  //String bodyid;
+  String? imageLink;
+  // bool isStarred;
+  // bool isSub;
+  String bodyid;
 
   EventsModel({
     required this.eventid,
@@ -21,10 +23,10 @@ class EventsModel {
     required this.about,
     this.startsAt,
     this.endsAt,
-    this.imageLink = '',
-    this.isStarred = false,
-    this.isSub = false,
-    //this.bodyid,
+    this.imageLink,
+    // this.isStarred = false,
+    // this.isSub = false,
+    required this.bodyid,
   });
 
   factory EventsModel.fromJson(Map<String, dynamic> json) {
@@ -32,23 +34,20 @@ class EventsModel {
     var endDate = (json.containsKey('endDate'))
         ? DateTime.parse(json['endDate'])
         : startDate.add(const Duration(hours: 1));
+
     return EventsModel(
-        eventName: json['name'], //
+        eventName: json['name'],
         eventBody: Club(
             clubName: json['body']['name'],
             clubAbout: json['body']['about'],
             isSubbed: json['body']['isSub'],
-            // clubDept: json["dept"],
             id: json['body']['id']),
-        startsAt: startDate.toLocal(), //
+        startsAt: startDate.toLocal(),
         endsAt: endDate.toLocal(),
-        // eventImage: imgtofile("$uri/${json['image']}"),
-        // updates: json["updates"],
-        about: json['about'], //
-        venue: json['venue'], //
-        isStarred: json['stared'], //
-        eventid: json['id'], //
-        isSub: json['body']['isSub'] //
-        );
+        imageLink: "${EndPoints.baseURL}/${json['image']}",
+        about: json['about'],
+        venue: json['venue'],
+        eventid: json['id'],
+        bodyid: json['body']['id']);
   }
 }
