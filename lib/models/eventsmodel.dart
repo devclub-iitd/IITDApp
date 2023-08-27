@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:iitd_app/models/clubmodel.dart';
 
 class EventsModel {
@@ -50,5 +51,10 @@ class EventsModel {
         eventid: json['id'], //
         isSub: json['body']['isSub'] //
         );
+  }
+
+  @override
+  String toString() {
+    return 'EventsModel(eventid: $eventid, eventName: $eventName, eventBody: $eventBody, venue: $venue, startsAt: $startsAt, endsAt: $endsAt, about: $about, imageLink: $imageLink, isStarred: $isStarred, isSub: $isSub,)';
   }
 }
