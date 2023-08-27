@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:iitd_app/features/clubs/data/clubsdata.dart';
-// ignore: unused_import
-import 'package:iitd_app/features/clubs/data/clubsdetaildata.dart';
 import 'package:iitd_app/utils/colors.dart';
 import 'package:iitd_app/utils/globalwidgets.dart';
 
@@ -12,7 +10,7 @@ class ClubCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+      padding: const EdgeInsets.symmetric(vertical: 8),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,

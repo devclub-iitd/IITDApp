@@ -1,29 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:iitd_app/features/clubs/components/clubcomponents.dart';
-import 'package:iitd_app/features/clubs/data/clubsdata.dart';
-import 'package:iitd_app/features/clubs/data/clubsdetaildata.dart';
-import 'package:iitd_app/features/clubs/pages/clubdetailspage.dart';
+import 'package:iitd_app/features/drawer.dart';
+import 'package:iitd_app/features/hangouts/components/hangoutcomponents.dart';
+import 'package:iitd_app/features/hangouts/data/hangoutsdata.dart';
+import 'package:iitd_app/features/hangouts/data/hangoutsdetails.dart';
+import 'package:iitd_app/features/hangouts/pages/hangoutdetailspage.dart';
+import 'package:iitd_app/utils/colors.dart';
+import 'package:iitd_app/utils/globalwidgets.dart';
 
-import '../../../utils/colors.dart';
-import '../../../utils/globalwidgets.dart';
-import '../../drawer.dart';
-
-class ClubsPage extends StatelessWidget {
-  const ClubsPage({super.key});
+class HangoutsPage extends StatelessWidget {
+  const HangoutsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    List<ClubCardModel> clubsList = clubsListJSONdata
-        .map((clubData) => ClubCardModel.fromJson(clubData))
+    List<HangoutCardModel> hangoutsList = hangoutsJSONdata
+        .map((hangoutdata) => HangoutCardModel.fromJson(hangoutdata))
         .toList();
 
-    clubsList.shuffle();
+    hangoutsList.shuffle();
 
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       appBar: AppBar(
         title: const BoldText(
-          title: "Clubs",
+          title: "Hangouts",
           size: 24,
           textcolor: AppColors.backgroundColor,
         ),
@@ -32,26 +31,26 @@ class ClubsPage extends StatelessWidget {
       drawer: buildDrawer(context),
       body: ListView.builder(
           padding: const EdgeInsets.all(4.0),
-          itemCount: clubsList.length,
+          itemCount: hangoutsList.length,
           physics: const ClampingScrollPhysics(),
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           itemBuilder: (context, index) {
-            ClubCardModel card = clubsList[index];
+            HangoutCardModel card = hangoutsList[index];
             return InkWell(
                 onTap: () {
-                  ClubDetailModel? more = getClubDetailModelByKey(card.name!);
+                  HangoutDetailModel? more = getHangoutDetailModelByKey(card.name);
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => ClubDetailsPage(
+                      builder: (context) => HangoutsDetailPage(
                         detail: more!,
                         card: card,
                       ),
                     ),
                   );
                 },
-                child: ClubCard(
+                child: Hangoutcard(
                   card: card,
                 ));
           }),

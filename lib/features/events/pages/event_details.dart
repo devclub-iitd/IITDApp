@@ -83,10 +83,7 @@ class _EventDetailsState extends State<EventDetails> {
               const SizedBox(
                 height: 10,
               ),
-              NormalText400(
-                  title: widget.eventsModel.about,
-                  size: 14,
-                  textcolor: AppColors.textColor),
+              Text(widget.eventsModel.about, maxLines: null),
               const SizedBox(
                 height: 15,
               ),

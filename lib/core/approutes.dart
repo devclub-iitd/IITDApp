@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:iitd_app/features/events/pages/addEvent.dart';
 import 'package:iitd_app/features/events/pages/eventspage.dart';
 import 'package:iitd_app/features/clubs/pages/clubspage.dart';
-import 'package:iitd_app/features/hangouts/pages/hangoutpage.dart';
+import 'package:iitd_app/features/hangouts/pages/hangoutspage.dart';
 import 'package:iitd_app/features/lostandfound/pages/lostandfoundpage.dart';
 import 'package:iitd_app/features/news/pages/newspage.dart';
 
@@ -23,7 +23,7 @@ class AppRoutes {
     addevent: (context) => const AddEventPage(),
     lostandFound: (context) => const LostAndFoundPage(),
     clubs: (context) => const ClubsPage(),
-    hangouts: (context) => const HangoutPage(),
+    hangouts: (context) => const HangoutsPage(),
     news: (context) => const NewsPage(),
   };
 }

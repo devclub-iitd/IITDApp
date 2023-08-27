@@ -29,17 +29,33 @@ class _LostAndFoundPageState extends State<LostAndFoundPage> {
       drawer: buildDrawer(context),
       body: SafeArea(
           child: SingleChildScrollView(
-        child: Column(
-          children: [
-            ListView.builder(
-                itemCount: lostandfoundlist().length,
-                shrinkWrap: true,
-                itemBuilder: (context, i) {
-                  LostandFoundModel lostandFoundModel = lostandfoundlist()[i];
-                  return LostFoundComponents()
-                      .lostCard(lostandFoundModel, context);
-                })
-          ],
+        child: Container(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 15,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: GridView.builder(
+                    shrinkWrap: true,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 1,
+                            mainAxisSpacing: 15,
+                            childAspectRatio: 0.80),
+                    itemCount: lostandfoundlist().length,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, i) {
+                      LostandFoundModel lostandFoundModel =
+                          lostandfoundlist()[i];
+                      return LostFoundComponents()
+                          .lostCard(lostandFoundModel, context);
+                    }),
+              )
+            ],
+          ),
         ),
       )),
     );
