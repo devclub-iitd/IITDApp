@@ -48,59 +48,62 @@ class ClubDetailsPage extends StatelessWidget {
               const SizedBox(
                 height: 8.0,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  InkWell(
-                    onTap: () async {
-                      await launchUrl(Uri.parse(detail.insta!));
-                    },
-                    child: const FaIcon(
-                      FontAwesomeIcons.instagram,
-                      size: 32,
-                      color: AppColors.secondaryColor,
+              SizedBox(
+                width: MediaQuery.of(context).size.width*0.75,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () async {
+                        await launchUrl(Uri.parse(detail.insta!));
+                      },
+                      child: const FaIcon(
+                        FontAwesomeIcons.instagram,
+                        size: 32,
+                        color: AppColors.secondaryColor,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 8.0,
-                  ),
-                  InkWell(
-                    onTap: () async {
-                      await launchUrl(Uri.parse(detail.linkedin!));
-                    },
-                    child: const FaIcon(
-                      FontAwesomeIcons.linkedin,
-                      size: 32,
-                      color: AppColors.secondaryColor,
+                    const SizedBox(
+                      width: 8.0,
                     ),
-                  ),
-                  const SizedBox(
-                    width: 8.0,
-                  ),
-                  InkWell(
-                    onTap: () async {
-                      await launchUrl(Uri.parse(detail.facebook!));
-                    },
-                    child: const FaIcon(
-                      FontAwesomeIcons.facebook,
-                      size: 32,
-                      color: AppColors.secondaryColor,
+                    InkWell(
+                      onTap: () async {
+                        await launchUrl(Uri.parse(detail.linkedin!));
+                      },
+                      child: const FaIcon(
+                        FontAwesomeIcons.linkedin,
+                        size: 32,
+                        color: AppColors.secondaryColor,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    width: 8.0,
-                  ),
-                  InkWell(
-                    onTap: () async {
-                      await launchUrl(Uri.parse(detail.web!));
-                    },
-                    child: const FaIcon(
-                      FontAwesomeIcons.chrome,
-                      size: 32,
-                      color: AppColors.secondaryColor,
+                    const SizedBox(
+                      width: 8.0,
                     ),
-                  ),
-                ],
+                    InkWell(
+                      onTap: () async {
+                        await launchUrl(Uri.parse(detail.facebook!));
+                      },
+                      child: const FaIcon(
+                        FontAwesomeIcons.facebook,
+                        size: 32,
+                        color: AppColors.secondaryColor,
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 8.0,
+                    ),
+                    InkWell(
+                      onTap: () async {
+                        await launchUrl(Uri.parse(detail.web!));
+                      },
+                      child: const FaIcon(
+                        FontAwesomeIcons.chrome,
+                        size: 32,
+                        color: AppColors.secondaryColor,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               EventComponents().eventslist(context),
             ],

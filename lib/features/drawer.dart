@@ -11,7 +11,7 @@ Drawer buildDrawer(BuildContext context) {
             color: AppColors.primaryColorDark,
           ),
           child: Text(
-            'IITD App',
+            'Townsquare',
             style: TextStyle(
               color: AppColors.secondaryColorLight,
               fontSize: 24,

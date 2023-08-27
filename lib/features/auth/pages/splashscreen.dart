@@ -35,7 +35,7 @@
 //                   crossAxisAlignment: CrossAxisAlignment.center,
 //                   children: <Widget>[
 //                     Text(
-//                       "IITD APP",
+//                       "Townsquare",
 //                       style: TextStyle(
 //                           color: Colors.red,
 //                           fontSize: 50,

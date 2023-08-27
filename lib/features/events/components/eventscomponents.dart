@@ -8,26 +8,15 @@ import 'package:iitd_app/utils/colors.dart';
 import 'package:iitd_app/utils/globalwidgets.dart';
 import 'package:intl/intl.dart';
 
+var textInputdec = const InputDecoration(
+    labelStyle: TextStyle(color: Colors.black),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide.none,
+    ),
+    enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
+    errorBorder: OutlineInputBorder(borderSide: BorderSide.none));
 
-
-
- var textInputdec=const InputDecoration(
-  labelStyle: TextStyle(color: Colors.black),
-  focusedBorder: OutlineInputBorder(
-    borderSide: BorderSide.none,
-
-  ),
-    enabledBorder: OutlineInputBorder(
-borderSide: BorderSide.none
-),
-errorBorder: OutlineInputBorder(
-borderSide: BorderSide.none
-)
-);
 class EventComponents {
-
- 
-
   Widget eventslist(BuildContext context) {
     return ListView.builder(
         itemCount: dummyeventsList().length,
@@ -60,6 +49,10 @@ class EventComponents {
                     textcolor: AppColors.primaryColor,
                     size: 16,
                   ),
+                  BoldText(
+                      title: eventsModel.eventBody!.clubName,
+                      size: 12,
+                      textcolor: AppColors.textColor),
                   const SizedBox(
                     height: 10,
                   ),
@@ -82,56 +75,22 @@ class EventComponents {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Icon(
-                                Icons.location_on,
-                                color: Colors.red,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              NormalText400(
-                                title: eventsModel.venue,
-                                textcolor: AppColors.textColor,
-                                size: 13,
-                              ),
-                            ],
+                          NormalText400(
+                            title: eventsModel.venue,
+                            textcolor: AppColors.textColor,
+                            size: 13,
                           ),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.timer,
-                                color: AppColors.secondaryColor,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              NormalText400(
-                                title:
-                                    "Starts - ${DateFormat('d MMM').format(eventsModel.startsAt!)} ${DateFormat('h:mm a').format(eventsModel.startsAt!)}",
-                                textcolor: AppColors.textColor,
-                                size: 13,
-                              ),
-                            ],
+                          NormalText400(
+                            title:
+                                "Starts - ${DateFormat('d MMM').format(eventsModel.startsAt!)} ${DateFormat('h:mm a').format(eventsModel.startsAt!)}",
+                            textcolor: AppColors.textColor,
+                            size: 13,
                           ),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.timer_off,
-                                color: AppColors.secondaryColor,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              NormalText400(
-                                title:
-                                    "Ends - ${DateFormat('d MMM').format(eventsModel.endsAt!)} ${DateFormat('h:mm a').format(eventsModel.endsAt!)}",
-                                textcolor: AppColors.textColor,
-                                size: 13,
-                              ),
-                            ],
+                          NormalText400(
+                            title:
+                                "Ends - ${DateFormat('d MMM').format(eventsModel.endsAt!)} ${DateFormat('h:mm a').format(eventsModel.endsAt!)}",
+                            textcolor: AppColors.textColor,
+                            size: 13,
                           ),
                         ],
                       ),
@@ -214,7 +173,7 @@ class EventDetailHeader extends StatelessWidget {
                           .split(" ")[0],
                       style: const TextStyle(
                           fontWeight: FontWeight.bold,
-                          fontSize: 21,
+                          fontSize: 18,
                           color: Colors.red),
                     ),
                     Text(

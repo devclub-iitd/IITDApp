@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:iitd_app/core/approutes.dart';
 
 Future main() async {
@@ -15,6 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Townsquare',
+      theme: ThemeData(
+        fontFamily: GoogleFonts.poppins().fontFamily
+      ),
       initialRoute: AppRoutes.events,
       routes: AppRoutes.routes,
       debugShowCheckedModeBanner: false,

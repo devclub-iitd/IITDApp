@@ -1,61 +1,105 @@
 import 'package:flutter/material.dart';
 import 'package:iitd_app/models/lostandfoundmodel.dart';
+import 'package:iitd_app/utils/colors.dart';
+import 'package:iitd_app/utils/globalwidgets.dart';
 import 'package:intl/intl.dart';
 
 class LostFoundComponents {
   Widget lostCard(LostandFoundModel lostandFoundModel, BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 14),
+      padding: const EdgeInsets.only(left: 14),
       width: (MediaQuery.of(context).size.width - 50) / 2,
       decoration: const BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(10))),
       child: Card(
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(10))),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
+          alignment: Alignment.center,
           children: [
-            Container(
-              height: 130,
-              margin: EdgeInsets.all(5),
-              decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  image: DecorationImage(
-                      image: AssetImage("assets/images/devCLogo.png"),
-                      fit: BoxFit.cover)),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: Text(lostandFoundModel.title),
-            ),
-            Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Icon(
-                  Icons.location_on,
-                  color: Colors.red,
+                Container(
+                  height: 150,
+                  margin: const EdgeInsets.all(5),
+                  decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                      image: DecorationImage(
+                          image: AssetImage("assets/images/devCLogo.png"),
+                          fit: BoxFit.cover)),
                 ),
-                Text(lostandFoundModel.wherefound),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: Text(lostandFoundModel.title),
+                ),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.location_on,
+                      color: Colors.red,
+                    ),
+                    const SizedBox(
+                      width: 6.0,
+                    ),
+                    NormalText400(
+                        title: lostandFoundModel.wherefound,
+                        size: 14,
+                        textcolor: AppColors.textColor),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.timer,
+                      color: AppColors.primaryColor,
+                    ),
+                    const SizedBox(
+                      width: 6.0,
+                    ),
+                    NormalText400(
+                        title:
+                            "${DateFormat('d MMM').format(lostandFoundModel.timestamp)} ${DateFormat('h:mm a').format(lostandFoundModel.timestamp)}",
+                        size: 14,
+                        textcolor: AppColors.textColor),
+                  ],
+                ),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.history,
+                      color: AppColors.primaryColor,
+                    ),
+                    const SizedBox(
+                      width: 6.0,
+                    ),
+                    NormalText400(
+                        title:
+                            lostandFoundModel.status.toString().split(".")[1],
+                        size: 14,
+                        textcolor: AppColors.textColor),
+                  ],
+                ),
               ],
             ),
-            Row(
-              children: [
-                const Icon(
-                  Icons.timer,
-                  color: Colors.blue,
-                ),
-                Text(
-                    "${DateFormat('d MMM').format(lostandFoundModel.timestamp)} ${DateFormat('h:mm a').format(lostandFoundModel.timestamp)}"),
-              ],
-            ),
-            Row(
-              children: [
-                const Icon(
-                  Icons.history,
-                  color: Colors.blue,
-                ),
-                Text(lostandFoundModel.status.toString().split(".")[1]),
-              ],
-            ),
+            Positioned(
+              bottom: 4,
+              right: 8,
+              child: InkWell(
+                  onTap: () {},
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      color: AppColors.secondaryColor,
+                    ),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    child: const BoldText(
+                        title: "Claim",
+                        size: 14,
+                        textcolor: AppColors.backgroundColor),
+                  )),
+            )
           ],
         ),
       ),
