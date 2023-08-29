@@ -6,7 +6,7 @@ import 'package:iitd_app/core/appstate.dart';
 import 'package:provider/provider.dart';
 
 Future main() async {
-  await dotenv.load(fileName: ".env");
+//  await dotenv.load(fileName: ".env");
   runApp(const MyApp());
 }
 
