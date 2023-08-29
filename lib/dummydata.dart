@@ -1,4 +1,5 @@
 import 'package:iitd_app/models/lostandfoundmodel.dart';
+import 'package:iitd_app/models/newsmodel.dart';
 
 // List<EventsModel> dummyeventsList() {
 //   List<EventsModel> list = [
@@ -283,5 +284,26 @@ List<LostandFoundModel> lostandfoundlist() {
   ];
 
   list.shuffle();
+  return list;
+}
+
+List<NewsModel> newsList() {
+  List<NewsModel> list = [
+    NewsModel(
+        "",
+        "https://images.unsplash.com/photo-1692273881354-52bbf11bacad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "Competion organised by FACC at SAc",
+        "Charcoal art competition"),
+    NewsModel(
+        "",
+        "https://images.unsplash.com/photo-1692273881354-52bbf11bacad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "Competion organised by FACC at SAc",
+        "Charcoal art competition"),
+    NewsModel(
+        "",
+        "https://images.unsplash.com/photo-1692273881354-52bbf11bacad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+        "Competion organised by FACC at SAc",
+        "Charcoal art competition"),
+  ];
   return list;
 }

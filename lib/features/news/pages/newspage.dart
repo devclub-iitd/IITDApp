@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iitd_app/features/drawer.dart';
+import 'package:iitd_app/features/news/components/newscomponents.dart';
 import 'package:iitd_app/utils/colors.dart';
 import 'package:iitd_app/utils/globalwidgets.dart';
 
@@ -19,6 +20,15 @@ class NewsPage extends StatelessWidget {
         backgroundColor: AppColors.primaryColorDark,
       ),
       drawer: buildDrawer(context),
+      body: Container(
+        child: Column(
+          children: [
+            NewsComponents().carousel(context),
+            
+          ],
+        ),
+
+      ),
     );
   }
 }
