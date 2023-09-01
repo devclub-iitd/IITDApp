@@ -24,6 +24,7 @@ class NewsPage extends StatelessWidget {
         child: Column(
           children: [
             NewsComponents().carousel(context),
+            NewsComponents().listnews(context)
             
           ],
         ),
