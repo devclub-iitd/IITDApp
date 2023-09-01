@@ -22,8 +22,12 @@ class NewsPage extends StatelessWidget {
       drawer: buildDrawer(context),
       body: Container(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             NewsComponents().carousel(context),
+             SizedBox(height: 20,),
+            Text("News",style: TextStyle(fontWeight: FontWeight.bold),),
+            SizedBox(height: 10,),
             NewsComponents().listnews(context)
             
           ],
