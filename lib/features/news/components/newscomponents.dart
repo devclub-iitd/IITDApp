@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:iitd_app/dummydata.dart';
+import 'package:iitd_app/utils/colors.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class NewsComponents {
   final PageController controller = PageController();
   Widget carousel(BuildContext context) {
     return Container(
-      height: 150,
+      padding: EdgeInsets.only(top: 10),
+      height: 160,
       child: Stack(
         children: [
           PageView.builder(
               controller: controller,
               itemCount: newsList().length,
               scrollDirection: Axis.horizontal,
+              
               itemBuilder: (context, i) {
                 return Container(
                   height: 150,
@@ -24,15 +27,18 @@ class NewsComponents {
                 );
               }),
           Positioned(
-              top: 100,
+              top: 120,
               left: (MediaQuery.of(context).size.width - 100) / 2,
-              child: SmoothPageIndicator(
-                onDotClicked: (page) {
-                  controller.jumpToPage(page);
-                },
-                controller: controller,
-                count: newsList().length,
-                effect: JumpingDotEffect(),
+              child: Theme(
+                data: ThemeData(),
+                child: SmoothPageIndicator(
+                  onDotClicked: (page) {
+                    controller.jumpToPage(page);
+                  },
+                  controller: controller,
+                  count: newsList().length,
+                  effect: const JumpingDotEffect(),
+                ),
               ))
         ],
       ),
@@ -42,15 +48,18 @@ class NewsComponents {
   Widget listnews(BuildContext context) {
     return ListView.builder(
       shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       itemCount: newsList().length,
       itemBuilder: (context, i) {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal:20.0),
+        padding: const EdgeInsets.symmetric(horizontal:5.0,vertical: 10),
         child: Container(
-          height: 160,
+          height: 170,
+          
           width: MediaQuery.of(context).size.width-40,
-          decoration: BoxDecoration(
-            
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            boxShadow: [BoxShadow(color: AppColors.primaryColor,blurRadius: 5,offset: Offset(2, 2))],
             borderRadius: BorderRadius.all(Radius.circular(15),
             
             )
@@ -63,9 +72,12 @@ class NewsComponents {
                 width: MediaQuery.of(context).size.width-40,
                 height: 140,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
+                  borderRadius: const BorderRadius.only(topLeft: Radius.circular(15),topRight: Radius.circular(15)),
                   image:DecorationImage(image: NetworkImage(newsList()[i].image),fit: BoxFit.cover),),),
-                 Text(newsList()[i].title) 
+                 Padding(
+                   padding: const EdgeInsets.only(left:8.0),
+                   child: Text(newsList()[i].title,style: TextStyle(fontSize: 18),),
+                 ) 
             ],
           ),
         ),
