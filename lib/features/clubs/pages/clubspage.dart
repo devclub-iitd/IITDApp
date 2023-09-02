@@ -30,31 +30,38 @@ class ClubsPage extends StatelessWidget {
         backgroundColor: AppColors.primaryColorDark,
       ),
       drawer: buildDrawer(context),
-      body: ListView.builder(
-          padding: const EdgeInsets.all(4.0),
-          itemCount: clubsList.length,
-          physics: const ClampingScrollPhysics(),
-          scrollDirection: Axis.vertical,
-          shrinkWrap: true,
-          itemBuilder: (context, index) {
-            ClubCardModel card = clubsList[index];
-            return InkWell(
-                onTap: () {
-                  ClubDetailModel? more = getClubDetailModelByKey(card.name!);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ClubDetailsPage(
-                        detail: more!,
-                        card: card,
+      body: SingleChildScrollView(
+        child: GridView.builder(
+            shrinkWrap: true,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 1,
+                mainAxisSpacing: 15,
+                childAspectRatio: 0.815),
+            padding: const EdgeInsets.all(4.0),
+            itemCount: clubsList.length,
+            physics: const NeverScrollableScrollPhysics(),
+            scrollDirection: Axis.vertical,
+            itemBuilder: (context, index) {
+              ClubCardModel card = clubsList[index];
+              return InkWell(
+                  onTap: () {
+                    ClubDetailModel? more = getClubDetailModelByKey(card.name!);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ClubDetailsPage(
+                          detail: more!,
+                          card: card,
+                        ),
                       ),
-                    ),
-                  );
-                },
-                child: ClubCard(
-                  card: card,
-                ));
-          }),
+                    );
+                  },
+                  child: ClubCard(
+                    card: card,
+                  ));
+            }),
+      ),
     );
   }
 }

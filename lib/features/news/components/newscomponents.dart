@@ -6,7 +6,7 @@ class NewsComponents {
   final PageController controller=PageController(
   );
   Widget carousel(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 150,
       child: Stack(
         children: [
@@ -33,7 +33,7 @@ class NewsComponents {
                 },
                 controller: controller,
                 count: newsList().length,
-                effect: JumpingDotEffect(),
+                effect: const JumpingDotEffect(),
               ))
         ],
       ),

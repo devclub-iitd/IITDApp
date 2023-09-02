@@ -20,14 +20,11 @@ class NewsPage extends StatelessWidget {
         backgroundColor: AppColors.primaryColorDark,
       ),
       drawer: buildDrawer(context),
-      body: Container(
-        child: Column(
-          children: [
-            NewsComponents().carousel(context),
-            
-          ],
-        ),
-
+      body: Column(
+        children: [
+          NewsComponents().carousel(context),
+          
+        ],
       ),
     );
   }
