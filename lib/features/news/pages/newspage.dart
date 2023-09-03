@@ -20,11 +20,29 @@ class NewsPage extends StatelessWidget {
         backgroundColor: AppColors.primaryColorDark,
       ),
       drawer: buildDrawer(context),
-      body: Column(
-        children: [
-          NewsComponents().carousel(context),
-          
-        ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              NewsComponents().carousel(context),
+              const SizedBox(
+                height: 8.0,
+              ),
+              const BoldText(title: "News", size: 22, textcolor: Colors.black),
+              Container(
+                margin: const EdgeInsets.only(bottom: 5),
+                width: 100,
+                height: 3,
+                decoration: const BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(1.5)),
+                    color: AppColors.greenShadeColor),
+              ),
+              NewsComponents().listnews(context)
+            ],
+          ),
+        ),
       ),
     );
   }

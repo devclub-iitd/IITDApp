@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:iitd_app/core/appstate.dart';
 import 'package:iitd_app/features/drawer.dart';
 import 'package:iitd_app/features/events/components/eventscomponents.dart';
 import 'package:iitd_app/utils/colors.dart';
 import 'package:iitd_app/utils/globalwidgets.dart';
-import 'package:provider/provider.dart';
 
 class EventPage extends StatefulWidget {
   const EventPage({super.key});
@@ -14,16 +12,7 @@ class EventPage extends StatefulWidget {
 }
 
 class _EventPageState extends State<EventPage> {
-  EventComponents eventComponents = EventComponents();
   int sel = 0;
-
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      Provider.of<EventState>(context, listen: false).fetchEvents();
-    });
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +43,8 @@ class _EventPageState extends State<EventPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const BoldText(
-                        title: "All Events",
+                      BoldText(
+                        title: sel == 0 ? "Upcoming Events" : "Past Events",
                         size: 18,
                         textcolor: AppColors.secondaryColor,
                       ),
@@ -138,7 +127,7 @@ class _EventPageState extends State<EventPage> {
               const SizedBox(
                 height: 15,
               ),
-              eventComponents.eventslist(context)
+              EventsList(tabSelected: sel, clubID: "",)
             ],
           ),
         ),

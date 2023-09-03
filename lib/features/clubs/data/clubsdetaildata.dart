@@ -327,6 +327,15 @@ Map<String, dynamic> clubsDetails = {
     'web':
         'http://radio.iitd.ac.in/?fbclid=IwAR3SRpBbzEI3VUxt6fk8bn7wTFDM47GbcdM2A8JTJnRbGZnK7pz-rj41K7A'
   },
+  'NSS': {
+    'about':
+        'Empowering Change for a Better Nation!, Uplifting Communities and creating Positive Impact, Creating a ripple effect of positive change',
+    'image': 'assets/images/nss.jpeg',
+    'facebook': '',
+    'insta': 'https://www.instagram.com/nssiitd/',
+    'linkedin': '',
+    'web': 'https://nss.iitd.ac.in/#!/'
+  },
   'Physics and Astronomy Club': {
     'about': 'Bazinga! ',
     'image': 'assets/images/pac.jpeg',

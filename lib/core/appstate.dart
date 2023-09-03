@@ -8,17 +8,16 @@ class EventState extends ChangeNotifier {
   late List<EventsModel> eventsList;
   late EventsListStatus eventsListStatus = EventsListStatus.loading;
 
-  Future fetchEvents() async {
+  Future fetchEvents(String clubID) async {
     try {
       eventsListStatus = EventsListStatus.loading;
-      final fetchedEventsList = await _eventsAPI.fetchAllEvents();
+      final fetchedEventsList = await _eventsAPI.fetchAllEvents(clubID);
       eventsList = fetchedEventsList;
 
       notifyListeners();
       eventsListStatus = EventsListStatus.loaded;
     } catch (e) {
       eventsListStatus = EventsListStatus.error;
-      print(e);
     }
   }
 }

@@ -49,7 +49,7 @@ class ClubDetailsPage extends StatelessWidget {
                 height: 8.0,
               ),
               SizedBox(
-                width: MediaQuery.of(context).size.width*0.75,
+                width: MediaQuery.of(context).size.width * 0.75,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -105,7 +105,7 @@ class ClubDetailsPage extends StatelessWidget {
                   ],
                 ),
               ),
-              EventComponents().eventslist(context),
+              EventsList(clubID: card.id!, tabSelected: -1)
             ],
           ),
         ),

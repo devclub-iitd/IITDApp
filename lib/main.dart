@@ -12,7 +12,6 @@ Future main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider<EventState>(create: (_) => EventState())
       ],
       child: MaterialApp(
-        title: 'IITD App',
+        title: 'TownSquare',
         theme: ThemeData(fontFamily: GoogleFonts.poppins().fontFamily),
         initialRoute: AppRoutes.events,
         routes: AppRoutes.routes,
