@@ -13,7 +13,6 @@ class EventsAPI {
       endpoint += "?body=$clubID";
     }
     try {
-      print(endpoint);
       final response = await client.get(Uri.parse(endpoint));
       final Map<String, dynamic> data = jsonDecode(response.body);
       final eventsList = <EventsModel>[];
