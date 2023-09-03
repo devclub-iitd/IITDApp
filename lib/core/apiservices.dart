@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:iitd_app/models/eventsmodel.dart';
+import 'package:iitd_app/models/newsmodel.dart';
 import 'package:iitd_app/utils/constants.dart';
 
 class EventsAPI {
@@ -64,4 +65,28 @@ class EventsAPI {
   //     throw Exception('Failed to load events');
   //   }
   // }
+}
+
+class NewsAPI {
+  Future<List<NewsModel>> fetchAllNews() async {
+    final client = http.Client();
+    String endpoint = EndPoints.fetchNews;
+    try {
+      final response = await client.get(Uri.parse(endpoint));
+      final data = jsonDecode(response.body);
+
+      if (response.statusCode == 200) {
+        List<NewsModel> list = [];
+        for (var i = 0; i < data.length; i++) {
+          list.add(NewsModel.fromJson(data[0]));
+        }
+        print(list.toString());
+        return list;
+      } else {
+        throw Exception("Some internal error occured");
+      }
+    } catch (e) {
+      throw Exception('Failed to load news');
+    }
+  }
 }

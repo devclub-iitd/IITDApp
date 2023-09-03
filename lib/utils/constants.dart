@@ -14,6 +14,7 @@ class EndPoints {
 
   //* Events API Endpoints
   static const String fetchEvents = '$baseURL/api/web/events';
+  static const String fetchNews = "$baseURL/api/web/news";
   // static const String getAllEvents = '$baseURL/api/events';
   // static const String getStarredEvents = '$baseURL/events/starred';
 }

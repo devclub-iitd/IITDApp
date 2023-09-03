@@ -39,7 +39,7 @@ class NewsPage extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(1.5)),
                     color: AppColors.greenShadeColor),
               ),
-              NewsComponents().listnews(context)
+              NewsList()
             ],
           ),
         ),
