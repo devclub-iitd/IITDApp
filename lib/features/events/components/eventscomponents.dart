@@ -9,6 +9,7 @@ import 'package:iitd_app/utils/constants.dart';
 import 'package:iitd_app/utils/globalwidgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 var textInputdec = const InputDecoration(
     labelStyle: TextStyle(color: Colors.black),
@@ -17,6 +18,21 @@ var textInputdec = const InputDecoration(
     ),
     enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
     errorBorder: OutlineInputBorder(borderSide: BorderSide.none));
+
+String generateGoogleCalendarEventURL(EventsModel event) {
+  final formattedStartTime = event.startsAt!.toUtc().toIso8601String();
+  final formattedEndTime = event.endsAt!.toUtc().toIso8601String();
+
+  final googleCalendarURL =
+      'https://www.google.com/calendar/event?action=TEMPLATE'
+      '&text=${Uri.encodeComponent(event.eventName)}'
+      '&dates=${formattedStartTime.replaceAll('-', '').replaceAll(':', '').substring(0, 15)}Z/'
+      '${formattedEndTime.replaceAll('-', '').replaceAll(':', '').substring(0, 15)}Z'
+      '&details=${Uri.encodeComponent(event.about)}'
+      '&location=${Uri.encodeComponent(event.venue)}';
+
+  return googleCalendarURL;
+}
 
 class EventsList extends StatefulWidget {
   const EventsList(
@@ -170,18 +186,25 @@ class _EventsListState extends State<EventsList> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 4),
-                                decoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(5)),
-                                  color: AppColors.secondaryColor,
-                                ),
-                                child: const NormalText400(
-                                  title: "Add to Calendar",
-                                  textcolor: AppColors.backgroundColor,
-                                  size: 13,
+                              InkWell(
+                                onTap: () async {
+                                  await launchUrl(Uri.parse(
+                                      generateGoogleCalendarEventURL(
+                                          eventsModel)));
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  decoration: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(5)),
+                                    color: AppColors.secondaryColor,
+                                  ),
+                                  child: const NormalText400(
+                                    title: "Add to Calendar",
+                                    textcolor: AppColors.backgroundColor,
+                                    size: 13,
+                                  ),
                                 ),
                               ),
                               const SizedBox(
