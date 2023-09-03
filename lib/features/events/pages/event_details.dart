@@ -83,19 +83,13 @@ class _EventDetailsState extends State<EventDetails> {
               const SizedBox(
                 height: 10,
               ),
-              Text(widget.eventsModel.about, maxLines: null),
+              LinkText(text: widget.eventsModel.about),
               const SizedBox(
                 height: 15,
               ),
-              Container(
-                height: 400,
-                width: MediaQuery.of(context).size.width - 30,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: NetworkImage(
-                          widget.eventsModel.imageLink!,
-                        ),
-                        fit: BoxFit.cover)),
+              Image.network(
+                widget.eventsModel.imageLink!,
+                fit: BoxFit.cover,
               ),
               const SizedBox(
                 height: 15,
