@@ -1,33 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:iitd_app/core/apiservices.dart';
-import 'package:iitd_app/dummydata.dart';
 import 'package:iitd_app/models/newsmodel.dart';
 import 'package:iitd_app/utils/colors.dart';
 import 'package:iitd_app/utils/globalwidgets.dart';
+import 'package:intl/intl.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class NewsList extends StatefulWidget {
-  const NewsList({super.key});
+class NewsListView extends StatelessWidget {
+  const NewsListView({super.key, required this.list});
 
-  @override
-  State<NewsList> createState() => _NewsListState();
-}
-
-class _NewsListState extends State<NewsList> {
-  List<NewsModel> list = [];
-  @override
-  void initState() {
-    NewsAPI().fetchAllNews().then((value) {
-      setState(() {
-        list = value;
-      });
-    });
-    super.initState();
-  }
+  final List<NewsModel> list;
 
   @override
   Widget build(BuildContext context) {
-    return listnews(context,list);
+    return listnews(context, list);
   }
 
   Widget listnews(BuildContext context, List<NewsModel> list) {
@@ -60,7 +45,7 @@ class _NewsListState extends State<NewsList> {
                     width: 100,
                     child: Image.network(
                       list[i].image,
-                      
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
@@ -70,6 +55,11 @@ class _NewsListState extends State<NewsList> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        NormalText200(
+                            title:
+                                "${DateFormat('d MMM').format(list[i].createdAt)} ${DateFormat('h:mm a').format(list[i].createdAt)}",
+                            size: 12,
+                            textcolor: Colors.grey),
                         BoldText(
                             title: list[i].title,
                             size: 16,
@@ -78,6 +68,19 @@ class _NewsListState extends State<NewsList> {
                           list[i].details,
                           maxLines: 5,
                           overflow: TextOverflow.ellipsis,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            NormalText200(
+                                title: "by ${list[i].author}",
+                                size: 12,
+                                textcolor: Colors.grey),
+                            NormalText200(
+                                title: "Source: ${list[i].sourcename}",
+                                size: 12,
+                                textcolor: Colors.grey)
+                          ],
                         )
                       ],
                     ),
@@ -90,9 +93,18 @@ class _NewsListState extends State<NewsList> {
   }
 }
 
-class NewsComponents {
-  final PageController controller = PageController();
+class NewsComponent extends StatelessWidget {
+  const NewsComponent({super.key, required this.newsList});
+
+  final List<NewsModel> newsList;
+
+  @override
+  Widget build(BuildContext context) {
+    return carousel(context);
+  }
+
   Widget carousel(BuildContext context) {
+    final PageController controller = PageController();
     return Container(
       padding: const EdgeInsets.only(top: 10),
       height: MediaQuery.of(context).size.height * 0.275,
@@ -101,16 +113,29 @@ class NewsComponents {
         children: [
           PageView.builder(
               controller: controller,
-              itemCount: newsList().length,
+              itemCount: 6,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, i) {
-                return Container(
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      image: DecorationImage(
-                          image: NetworkImage(newsList()[i].image),
-                          fit: BoxFit.fill)),
+                return Stack(
+                  children: [
+                    Image.network(
+                      newsList[i].image,
+                      height: MediaQuery.of(context).size.height * 0.275,
+                      width: MediaQuery.of(context).size.width,
+                      fit: BoxFit.cover,
+                    ),
+                    Positioned(
+                        top: 8,
+                        left: 8,
+                        child: Text(
+                          newsList[i].title,
+                          maxLines: 3,
+                          style: const TextStyle(
+                            fontSize: 26,
+                            color: AppColors.textColor,
+                          ),
+                        ))
+                  ],
                 );
               }),
           Positioned(
@@ -120,7 +145,7 @@ class NewsComponents {
                 controller.jumpToPage(page);
               },
               controller: controller,
-              count: newsList().length,
+              count: 6,
               effect: const JumpingDotEffect(),
             ),
           )

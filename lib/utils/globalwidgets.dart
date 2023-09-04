@@ -54,6 +54,31 @@ class NormalText500 extends StatelessWidget {
   }
 }
 
+class NormalText200 extends StatelessWidget {
+  const NormalText200({
+    super.key,
+    required this.title,
+    required this.size,
+    required this.textcolor,
+  });
+
+  final String title;
+  final double size;
+  final Color textcolor;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: TextStyle(
+          fontWeight: FontWeight.w200,
+          fontSize: size,
+          color: textcolor,
+          overflow: TextOverflow.ellipsis),
+    );
+  }
+}
+
 class NormalText400 extends StatelessWidget {
   const NormalText400({
     super.key,

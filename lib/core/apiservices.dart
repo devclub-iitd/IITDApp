@@ -77,9 +77,8 @@ class NewsAPI {
       if (response.statusCode == 200) {
         List<NewsModel> list = [];
         for (var i = 0; i < data.length; i++) {
-          list.add(NewsModel.fromJson(data[0]));
+          list.add(NewsModel.fromJson(data[i]));
         }
-        print(list.toString());
         return list;
       } else {
         throw Exception("Some internal error occured");

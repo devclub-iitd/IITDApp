@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:iitd_app/core/appstate.dart';
 import 'package:iitd_app/features/events/pages/event_details.dart';

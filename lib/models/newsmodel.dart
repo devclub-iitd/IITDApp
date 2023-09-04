@@ -5,10 +5,22 @@ class NewsModel {
   String image;
   String title;
   String details;
+  String sourcename;
+  String author;
+  DateTime createdAt;
 
-  NewsModel(this.id, this.image, this.details, this.title);
+  NewsModel(this.id, this.image, this.title, this.details, this.sourcename,
+      this.author, this.createdAt);
 
   factory NewsModel.fromJson(Map<String, dynamic> json) {
-    return NewsModel(json["_id"].toString(), "https://iitdconnect-server.devclub.in/${json['imgUrl']}", json["title"].toString(), json["description"].toString());
+    var createdAt = DateTime.parse(json['createdAt']);
+    return NewsModel(
+        json["_id"].toString(),
+        "${EndPoints.baseURL}/${json['imgUrl']}",
+        json["title"].toString(),
+        json["description"].toString(),
+        json['sourcename'].toString(),
+        json['author'].toString(),
+        createdAt.toLocal());
   }
 }
