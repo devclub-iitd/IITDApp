@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:iitd_app/models/eventsmodel.dart';
+import 'package:iitd_app/models/lostandfoundmodel.dart';
 import 'package:iitd_app/models/newsmodel.dart';
 import 'package:iitd_app/utils/constants.dart';
 
@@ -84,6 +85,31 @@ class NewsAPI {
         throw Exception("Some internal error occured");
       }
     } catch (e) {
+      throw Exception('Failed to load news');
+    }
+  }
+}
+
+class LostAndFoundAPI {
+  Future<List<LostandFoundModel>> fetchAllLostAndFound() async {
+    final client = http.Client();
+    String endpoint = EndPoints.fetchLostAndFound;
+    try {
+      final response = await client.get(Uri.parse(endpoint));
+      final data = jsonDecode(response.body);
+      print(data);
+      if (response.statusCode == 200) {
+        List<LostandFoundModel> list = [];
+        for (var i = 0; i < data.length; i++) {
+          list.add(LostandFoundModel.fromJson(data[i]));
+        }
+        print(list);
+        return list;
+      } else {
+        throw Exception("Some internal error occured");
+      }
+    } catch (e) {
+      print(e);
       throw Exception('Failed to load news');
     }
   }

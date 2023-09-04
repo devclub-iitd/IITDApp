@@ -16,7 +16,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<EventState>(create: (_) => EventState())
+        ChangeNotifierProvider<EventState>(
+          create: (_) => EventState(),
+        ),
+        ChangeNotifierProvider<LostAndFoundState>(
+          create: (_) => LostAndFoundState(),
+        ),
       ],
       child: MaterialApp(
         title: 'TownSquare',

@@ -7,6 +7,14 @@ enum EventsListStatus {
   error,
 }
 
+enum LostAndFoundListStatus {
+  loading,
+  loaded,
+  error,
+}
+
+enum LostandFoundStatus { claimed, unclaimed }
+
 class EndPoints {
   EndPoints._();
 
@@ -17,4 +25,7 @@ class EndPoints {
   static const String fetchNews = "$baseURL/api/web/news";
   // static const String getAllEvents = '$baseURL/api/events';
   // static const String getStarredEvents = '$baseURL/events/starred';
+
+  //* Lost and Found API Endpoints
+  static const String fetchLostAndFound = '$baseURL/api/lostfound';
 }

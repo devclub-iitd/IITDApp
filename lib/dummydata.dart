@@ -1,5 +1,4 @@
-import 'package:iitd_app/models/lostandfoundmodel.dart';
-import 'package:iitd_app/models/newsmodel.dart';
+// import 'package:iitd_app/models/lostandfoundmodel.dart';
 
 // List<EventsModel> dummyeventsList() {
 //   List<EventsModel> list = [
@@ -189,103 +188,103 @@ import 'package:iitd_app/models/newsmodel.dart';
 //   return list;
 // }
 
-List<LostandFoundModel> lostandfoundlist() {
-  List<LostandFoundModel> list = [
-    LostandFoundModel(
-      id: 'LF001',
-      title: 'Lost Wallet',
-      timestamp: DateTime(2023, 8, 10),
-      img: 'wallet.jpg',
-      wherefound: 'Park Bench',
-      status: LostandFoundStatus.listed,
-      desc: 'Black leather wallet with ID and credit cards.',
-    ),
-    LostandFoundModel(
-      id: 'LF002',
-      title: 'Found Smartphone',
-      timestamp: DateTime(2023, 8, 12),
-      img: 'phone.jpg',
-      wherefound: 'Coffee Shop',
-      status: LostandFoundStatus.listed,
-      desc: 'Apple iPhone 12 found with a cracked screen.',
-    ),
-    LostandFoundModel(
-      id: 'LF003',
-      title: 'Lost Keys',
-      timestamp: DateTime(2023, 8, 15),
-      img: 'keys.jpg',
-      wherefound: 'Bus Stop',
-      status: LostandFoundStatus.listed,
-      desc: 'Set of house and car keys with a keychain.',
-    ),
-    LostandFoundModel(
-      id: 'LF004',
-      title: 'Lost Backpack',
-      timestamp: DateTime(2023, 8, 17),
-      img: 'backpack.jpg',
-      wherefound: 'Library',
-      status: LostandFoundStatus.claimed,
-      desc: 'Blue backpack with a laptop inside.',
-    ),
-    LostandFoundModel(
-      id: 'LF005',
-      title: 'Found Watch',
-      timestamp: DateTime(2023, 8, 19),
-      img: 'watch.jpg',
-      wherefound: 'Gym Locker',
-      status: LostandFoundStatus.listed,
-      desc: "Men's wristwatch, brand unknown.",
-    ),
-    LostandFoundModel(
-      id: 'LF006',
-      title: 'Lost Glasses',
-      timestamp: DateTime(2023, 8, 20),
-      img: 'glasses.jpg',
-      wherefound: 'Restaurant',
-      status: LostandFoundStatus.listed,
-      desc: 'Prescription eyeglasses in a black case.',
-    ),
-    LostandFoundModel(
-      id: 'LF007',
-      title: 'Lost Pet Dog',
-      timestamp: DateTime(2023, 8, 21),
-      img: 'dog.jpg',
-      wherefound: 'Park',
-      status: LostandFoundStatus.listed,
-      desc: 'Small brown dog with a collar.',
-    ),
-    LostandFoundModel(
-      id: 'LF008',
-      title: 'Lost Earring',
-      timestamp: DateTime(2023, 8, 22),
-      img: 'earring.jpg',
-      wherefound: 'Movie Theater',
-      status: LostandFoundStatus.returned,
-      desc: 'Silver hoop earring with a blue gem.',
-    ),
-    LostandFoundModel(
-      id: 'LF009',
-      title: 'Found Bicycle',
-      timestamp: DateTime(2023, 8, 23),
-      img: 'bike.jpg',
-      wherefound: 'Street Corner',
-      status: LostandFoundStatus.listed,
-      desc: 'Red mountain bike with a flat tire.',
-    ),
-    LostandFoundModel(
-      id: 'LF010',
-      title: 'Lost Passport',
-      timestamp: DateTime(2023, 8, 25),
-      img: 'passport.jpg',
-      wherefound: 'Airport',
-      status: LostandFoundStatus.claimed,
-      desc: 'US passport belonging to John Doe.',
-    ),
-  ];
+// List<LostandFoundModel> lostandfoundlist() {
+//   List<LostandFoundModel> list = [
+//     LostandFoundModel(
+//       id: 'LF001',
+//       title: 'Lost Wallet',
+//       timestamp: DateTime(2023, 8, 10),
+//       img: 'wallet.jpg',
+//       wherefound: 'Park Bench',
+//       status: LostandFoundStatus.listed,
+//       desc: 'Black leather wallet with ID and credit cards.',
+//     ),
+//     LostandFoundModel(
+//       id: 'LF002',
+//       title: 'Found Smartphone',
+//       timestamp: DateTime(2023, 8, 12),
+//       img: 'phone.jpg',
+//       wherefound: 'Coffee Shop',
+//       status: LostandFoundStatus.listed,
+//       desc: 'Apple iPhone 12 found with a cracked screen.',
+//     ),
+//     LostandFoundModel(
+//       id: 'LF003',
+//       title: 'Lost Keys',
+//       timestamp: DateTime(2023, 8, 15),
+//       img: 'keys.jpg',
+//       wherefound: 'Bus Stop',
+//       status: LostandFoundStatus.listed,
+//       desc: 'Set of house and car keys with a keychain.',
+//     ),
+//     LostandFoundModel(
+//       id: 'LF004',
+//       title: 'Lost Backpack',
+//       timestamp: DateTime(2023, 8, 17),
+//       img: 'backpack.jpg',
+//       wherefound: 'Library',
+//       status: LostandFoundStatus.claimed,
+//       desc: 'Blue backpack with a laptop inside.',
+//     ),
+//     LostandFoundModel(
+//       id: 'LF005',
+//       title: 'Found Watch',
+//       timestamp: DateTime(2023, 8, 19),
+//       img: 'watch.jpg',
+//       wherefound: 'Gym Locker',
+//       status: LostandFoundStatus.listed,
+//       desc: "Men's wristwatch, brand unknown.",
+//     ),
+//     LostandFoundModel(
+//       id: 'LF006',
+//       title: 'Lost Glasses',
+//       timestamp: DateTime(2023, 8, 20),
+//       img: 'glasses.jpg',
+//       wherefound: 'Restaurant',
+//       status: LostandFoundStatus.listed,
+//       desc: 'Prescription eyeglasses in a black case.',
+//     ),
+//     LostandFoundModel(
+//       id: 'LF007',
+//       title: 'Lost Pet Dog',
+//       timestamp: DateTime(2023, 8, 21),
+//       img: 'dog.jpg',
+//       wherefound: 'Park',
+//       status: LostandFoundStatus.listed,
+//       desc: 'Small brown dog with a collar.',
+//     ),
+//     LostandFoundModel(
+//       id: 'LF008',
+//       title: 'Lost Earring',
+//       timestamp: DateTime(2023, 8, 22),
+//       img: 'earring.jpg',
+//       wherefound: 'Movie Theater',
+//       status: LostandFoundStatus.returned,
+//       desc: 'Silver hoop earring with a blue gem.',
+//     ),
+//     LostandFoundModel(
+//       id: 'LF009',
+//       title: 'Found Bicycle',
+//       timestamp: DateTime(2023, 8, 23),
+//       img: 'bike.jpg',
+//       wherefound: 'Street Corner',
+//       status: LostandFoundStatus.listed,
+//       desc: 'Red mountain bike with a flat tire.',
+//     ),
+//     LostandFoundModel(
+//       id: 'LF010',
+//       title: 'Lost Passport',
+//       timestamp: DateTime(2023, 8, 25),
+//       img: 'passport.jpg',
+//       wherefound: 'Airport',
+//       status: LostandFoundStatus.claimed,
+//       desc: 'US passport belonging to John Doe.',
+//     ),
+//   ];
 
-  list.shuffle();
-  return list;
-}
+//   list.shuffle();
+//   return list;
+// }
 
 // List<NewsModel> newsList() {
 //   List<NewsModel> list = [

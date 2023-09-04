@@ -6,4 +6,5 @@ GetIt get getIt => _getIt;
 
 Future<void> setupServiceLocator() async {
   _getIt.registerSingleton(EventsAPI());
+  _getIt.registerSingleton(LostAndFoundAPI());
 }

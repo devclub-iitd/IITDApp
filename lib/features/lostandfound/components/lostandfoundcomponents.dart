@@ -31,7 +31,7 @@ class LostFoundComponents {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0),
-                  child: Text(lostandFoundModel.title),
+                  child: Text(lostandFoundModel.name),
                 ),
                 Row(
                   children: [
@@ -43,7 +43,7 @@ class LostFoundComponents {
                       width: 6.0,
                     ),
                     NormalText400(
-                        title: lostandFoundModel.wherefound,
+                        title: lostandFoundModel.place,
                         size: 14,
                         textcolor: AppColors.textColor),
                   ],
@@ -59,7 +59,7 @@ class LostFoundComponents {
                     ),
                     NormalText400(
                         title:
-                            "${DateFormat('d MMM').format(lostandFoundModel.timestamp)} ${DateFormat('h:mm a').format(lostandFoundModel.timestamp)}",
+                            "${DateFormat('d MMM').format(lostandFoundModel.createdAt)} ${DateFormat('h:mm a').format(lostandFoundModel.createdAt)}",
                         size: 14,
                         textcolor: AppColors.textColor),
                   ],
