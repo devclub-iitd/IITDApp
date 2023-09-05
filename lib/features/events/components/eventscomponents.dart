@@ -229,7 +229,7 @@ class EventCard extends StatelessWidget {
                 ),
                 LikeButton(
                   onTap: (isLiked) {
-                    return  onLikeButtonTapped(isLiked, eventsModel);
+                    return onLikeButtonTapped(isLiked, eventsModel);
                   },
                   size: 24,
                   circleColor: const CircleColor(
@@ -259,16 +259,16 @@ class EventCard extends StatelessWidget {
 
   Future<bool> onLikeButtonTapped(bool isLiked, EventsModel events) async {
     likedevents.add(events);
-    saveData(events);
+    saveData(likedevents);
     return !isLiked;
   }
 
-  Future<void> saveData(EventsModel newObject) async {
+  Future<void> saveData(List<EventsModel> events) async {
     final prefs = await SharedPreferences.getInstance();
     final List<String> jsonStringList =
-        likedevents.map((obj) => jsonEncode(obj.toJson())).toList();
-    print("hell");
+        events.map((obj) => jsonEncode(obj.toJson())).toList();
     prefs.setStringList('likedevents', jsonStringList);
+    print("Saving data...");
   }
 }
 

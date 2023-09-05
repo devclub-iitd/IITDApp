@@ -53,15 +53,14 @@ class EventsModel {
 
   Map<String, dynamic> toJson() {
     return {
-      'eventid': eventid,
-      'eventName': eventName,
-      'eventBody': eventBody?.toJson(), // Convert Club object to JSON
+      'id': eventid,
+      'name': eventName,
+      'body': eventBody?.toJson(), // Convert Club object to JSON
       'venue': venue,
-      'startsAt': startsAt?.toIso8601String(), // Convert DateTime to ISO 8601 string
-      'endsAt': endsAt?.toIso8601String(),
+      'startDate': startsAt?.toIso8601String(), // Convert DateTime to ISO 8601 string
+      'endDate': endsAt?.toIso8601String(),
       'about': about,
-      'imageLink': imageLink,
-      'bodyid': bodyid,
+      'image': imageLink,
     };
   }
 }
