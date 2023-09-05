@@ -55,6 +55,13 @@ Drawer buildDrawer(BuildContext context) {
           },
         ),
         ListTile(
+          leading: const FaIcon(FontAwesomeIcons.link),
+          title: const Text('Quick Links'),
+          onTap: () {
+            Navigator.pushNamed(context, '/quicklinks');
+          },
+        ),
+        ListTile(
           leading: const FaIcon(FontAwesomeIcons.heart),
           title: const Text('Liked Events'),
           onTap: () {

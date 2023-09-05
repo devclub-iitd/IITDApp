@@ -38,16 +38,11 @@ List<EventsModel> likedevents = [];
 Future<void> loadData() async {
   final prefs = await SharedPreferences.getInstance();
   final storedData = prefs.getStringList('likedevents');
-  print("Loading data...");
+  likedevents.clear();
   if (storedData != null) {
     for (String jsonString in storedData) {
-      print(jsonString);
-      try {
-        final Map<String, dynamic> json = jsonDecode(jsonString);
-        likedevents.add(EventsModel.fromJson(json));
-      } catch (e) {
-        print("Error decoding JSON: $e");
-      }
+      final Map<String, dynamic> json = jsonDecode(jsonString);
+      likedevents.add(EventsModel.fromJson(json));
     }
   }
 }

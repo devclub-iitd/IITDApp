@@ -37,14 +37,17 @@ class _LikedPageState extends State<LikedPage> {
         body: list.isEmpty
             ? const EmptyContainer(emptytext: "There are no liked events")
             : SingleChildScrollView(
-              child: ListView.builder(
-                  itemCount: list.length,
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemBuilder: (context, i) {
-                    EventsModel eventsModel = list[i];
-                    return EventCard(eventsModel: eventsModel);
-                  }),
-            ));
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ListView.builder(
+                      itemCount: list.length,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemBuilder: (context, i) {
+                        EventsModel eventsModel = list[i];
+                        return EventCard(eventsModel: eventsModel);
+                      }),
+                ),
+              ));
   }
 }
