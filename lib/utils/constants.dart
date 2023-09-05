@@ -1,3 +1,8 @@
+import 'dart:convert';
+
+import 'package:iitd_app/models/eventsmodel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 bool guest = false;
 String token = "";
 
@@ -28,4 +33,17 @@ class EndPoints {
 
   //* Lost and Found API Endpoints
   static const String fetchLostAndFound = '$baseURL/api/lostfound';
+}
+
+List<EventsModel> likedevents = [];
+
+Future<void> loadData() async {
+  final prefs = await SharedPreferences.getInstance();
+  final storedData = prefs.getString('likedevents');
+
+  if (storedData != null) {
+    final List<dynamic> jsonList = jsonDecode(storedData);
+    print(jsonList);
+    likedevents = jsonList.map((json) => EventsModel.fromJson(json)).toList();
+  }
 }

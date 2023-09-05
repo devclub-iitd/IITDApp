@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:iitd_app/core/approutes.dart';
 import 'package:iitd_app/core/appstate.dart';
+import 'package:iitd_app/utils/constants.dart';
 import 'package:provider/provider.dart';
 
 Future main() async {

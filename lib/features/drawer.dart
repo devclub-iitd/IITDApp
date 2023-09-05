@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iitd_app/utils/colors.dart';
 
 Drawer buildDrawer(BuildContext context) {
@@ -51,6 +52,13 @@ Drawer buildDrawer(BuildContext context) {
           title: const Text('News'),
           onTap: () {
             Navigator.pushNamed(context, '/news');
+          },
+        ),
+        ListTile(
+          leading: const FaIcon(FontAwesomeIcons.heart),
+          title: const Text('Liked Events'),
+          onTap: () {
+            Navigator.pushNamed(context, '/liked');
           },
         ),
       ],

@@ -49,7 +49,7 @@ class LostandFoundModel {
           ? LostandFoundStatus.unclaimed
           : LostandFoundStatus.claimed,
       description: json['description'],
-      imgUrl: json['imgUrl'],
+      imgUrl: "${EndPoints.baseURL}/${json['imgUrl']}",
       createdAt: createdAt.toLocal(),
     );
   }

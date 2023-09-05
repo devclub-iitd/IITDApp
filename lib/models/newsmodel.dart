@@ -19,7 +19,7 @@ class NewsModel {
         "${EndPoints.baseURL}/${json['imgUrl']}",
         json["title"].toString(),
         json["description"].toString(),
-        json['sourcename'].toString(),
+        json['sourceName'].toString(),
         json['author'].toString(),
         createdAt.toLocal());
   }

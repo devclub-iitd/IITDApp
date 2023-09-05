@@ -27,11 +27,11 @@ class ClubCard extends StatelessWidget {
           ),
           BoldText(
             title: card.name!,
-            size: 24,
+            size: 18,
             textcolor: AppColors.primaryColorDark,
           ),
           NormalText400(
-              title: card.motto!, size: 14, textcolor: AppColors.textColor),
+              title: card.motto!, size: 13, textcolor: AppColors.textColor),
         ],
       ),
     );

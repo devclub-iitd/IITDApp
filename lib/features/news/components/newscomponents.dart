@@ -116,26 +116,14 @@ class NewsComponent extends StatelessWidget {
               itemCount: 6,
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, i) {
-                return Stack(
-                  children: [
-                    Image.network(
-                      newsList[i].image,
-                      height: MediaQuery.of(context).size.height * 0.275,
-                      width: MediaQuery.of(context).size.width,
-                      fit: BoxFit.cover,
-                    ),
-                    Positioned(
-                        top: 8,
-                        left: 8,
-                        child: Text(
-                          newsList[i].title,
-                          maxLines: 3,
-                          style: const TextStyle(
-                            fontSize: 26,
-                            color: AppColors.textColor,
-                          ),
-                        ))
-                  ],
+                return ClipRRect(
+                  borderRadius: BorderRadius.circular(12),
+                  child: Image.network(
+                    newsList[i].image,
+                    height: MediaQuery.of(context).size.height * 0.275,
+                    width: MediaQuery.of(context).size.width,
+                    fit: BoxFit.cover,
+                  ),
                 );
               }),
           Positioned(

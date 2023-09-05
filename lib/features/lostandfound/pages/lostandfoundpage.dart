@@ -69,7 +69,7 @@ class _LostAndFoundPageState extends State<LostAndFoundPage> {
                                   crossAxisCount: 2,
                                   crossAxisSpacing: 1,
                                   mainAxisSpacing: 15,
-                                  childAspectRatio: 0.65),
+                                  childAspectRatio: 0.73),
                           itemCount: state.lostandfoundList.length,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, i) {

@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iitd_app/core/appstate.dart';
 import 'package:iitd_app/features/events/pages/event_details.dart';
 import 'package:iitd_app/models/eventsmodel.dart';
@@ -7,7 +9,9 @@ import 'package:iitd_app/utils/colors.dart';
 import 'package:iitd_app/utils/constants.dart';
 import 'package:iitd_app/utils/globalwidgets.dart';
 import 'package:intl/intl.dart';
+import 'package:like_button/like_button.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 var textInputdec = const InputDecoration(
@@ -108,117 +112,163 @@ class _EventsListState extends State<EventsList> {
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, i) {
                   EventsModel eventsModel = eventstbDisplay[i];
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => EventDetails(
-                                  eventsModel: eventsModel,
-                                )),
-                      );
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(vertical: 8),
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryColorLight.withOpacity(0.2),
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(10)),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          NormalText500(
-                            title: eventsModel.eventName,
-                            textcolor: AppColors.primaryColor,
-                            size: 16,
-                          ),
-                          BoldText(
-                              title: eventsModel.eventBody!.clubName,
-                              size: 12,
-                              textcolor: AppColors.textColor),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(10),
-                                child: SizedBox(
-                                  height: 75,
-                                  width: 75,
-                                  child: Image.network(
-                                    eventsModel.imageLink!,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 16,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  NormalText400(
-                                    title: eventsModel.venue,
-                                    textcolor: AppColors.textColor,
-                                    size: 13,
-                                  ),
-                                  NormalText400(
-                                    title:
-                                        "Starts - ${DateFormat('d MMM').format(eventsModel.startsAt!)} ${DateFormat('h:mm a').format(eventsModel.startsAt!)}",
-                                    textcolor: AppColors.textColor,
-                                    size: 13,
-                                  ),
-                                  NormalText400(
-                                    title:
-                                        "Ends - ${DateFormat('d MMM').format(eventsModel.endsAt!)} ${DateFormat('h:mm a').format(eventsModel.endsAt!)}",
-                                    textcolor: AppColors.textColor,
-                                    size: 13,
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              InkWell(
-                                onTap: () async {
-                                  await launchUrl(Uri.parse(
-                                      generateGoogleCalendarEventURL(
-                                          eventsModel)));
-                                },
-                                child: Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  decoration: const BoxDecoration(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(5)),
-                                    color: AppColors.secondaryColor,
-                                  ),
-                                  child: const NormalText400(
-                                    title: "Add to Calendar",
-                                    textcolor: AppColors.backgroundColor,
-                                    size: 13,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              const InkWell(child: Icon(Icons.star_outline))
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  );
+                  return EventCard(eventsModel: eventsModel);
                 });
       }
     });
+  }
+}
+
+class EventCard extends StatelessWidget {
+  const EventCard({
+    super.key,
+    required this.eventsModel,
+  });
+
+  final EventsModel eventsModel;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => EventDetails(
+                    eventsModel: eventsModel,
+                  )),
+        );
+      },
+      child: Container(
+        margin: const EdgeInsets.symmetric(vertical: 8),
+        padding: const EdgeInsets.all(15),
+        decoration: BoxDecoration(
+          color: AppColors.primaryColorLight.withOpacity(0.2),
+          borderRadius: const BorderRadius.all(Radius.circular(10)),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            NormalText500(
+              title: eventsModel.eventName,
+              textcolor: AppColors.primaryColor,
+              size: 16,
+            ),
+            BoldText(
+                title: eventsModel.eventBody!.clubName,
+                size: 12,
+                textcolor: AppColors.textColor),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: SizedBox(
+                    height: 75,
+                    width: 75,
+                    child: Image.network(
+                      eventsModel.imageLink!,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 16,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    NormalText400(
+                      title: eventsModel.venue,
+                      textcolor: AppColors.textColor,
+                      size: 13,
+                    ),
+                    NormalText400(
+                      title:
+                          "Starts - ${DateFormat('d MMM').format(eventsModel.startsAt!)} ${DateFormat('h:mm a').format(eventsModel.startsAt!)}",
+                      textcolor: AppColors.textColor,
+                      size: 13,
+                    ),
+                    NormalText400(
+                      title:
+                          "Ends - ${DateFormat('d MMM').format(eventsModel.endsAt!)} ${DateFormat('h:mm a').format(eventsModel.endsAt!)}",
+                      textcolor: AppColors.textColor,
+                      size: 13,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                InkWell(
+                  onTap: () async {
+                    await launchUrl(
+                        Uri.parse(generateGoogleCalendarEventURL(eventsModel)));
+                  },
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(5)),
+                      color: AppColors.secondaryColor,
+                    ),
+                    child: const NormalText400(
+                      title: "Add to Calendar",
+                      textcolor: AppColors.backgroundColor,
+                      size: 13,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 20,
+                ),
+                LikeButton(
+                  onTap: (isLiked) {
+                    return  onLikeButtonTapped(isLiked, eventsModel);
+                  },
+                  size: 24,
+                  circleColor: const CircleColor(
+                      start: AppColors.primaryColor,
+                      end: AppColors.primaryColorDark),
+                  bubblesColor: const BubblesColor(
+                    dotPrimaryColor: AppColors.primaryColorLight,
+                    dotSecondaryColor: AppColors.secondaryColorLight,
+                  ),
+                  likeBuilder: (bool isLiked) {
+                    return FaIcon(
+                      FontAwesomeIcons.heart,
+                      color: isLiked
+                          ? AppColors.primaryColorDark
+                          : AppColors.primaryColorLight,
+                      size: 24,
+                    );
+                  },
+                ),
+              ],
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<bool> onLikeButtonTapped(bool isLiked, EventsModel events) async {
+    likedevents.add(events);
+    saveData(events);
+    return !isLiked;
+  }
+
+  Future<void> saveData(EventsModel newObject) async {
+    final prefs = await SharedPreferences.getInstance();
+    final List<String> jsonStringList =
+        likedevents.map((obj) => jsonEncode(obj.toJson())).toList();
+    print("hell");
+    prefs.setStringList('likedevents', jsonStringList);
   }
 }
 
