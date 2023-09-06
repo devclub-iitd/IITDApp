@@ -61,11 +61,11 @@ class Hangoutcard extends StatelessWidget {
           ),
           BoldText(
             title: card.name,
-            size: 24,
+            size: 18,
             textcolor: AppColors.primaryColorDark,
           ),
           NormalText400(
-              title: card.comment, size: 14, textcolor: AppColors.textColor),
+              title: card.comment, size: 13, textcolor: AppColors.textColor),
         ],
       ),
     );

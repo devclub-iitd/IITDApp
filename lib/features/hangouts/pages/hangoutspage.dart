@@ -40,7 +40,7 @@ class HangoutsPage extends StatelessWidget {
                 crossAxisCount: 2,
                 crossAxisSpacing: 1,
                 mainAxisSpacing: 15,
-                childAspectRatio: 0.815),
+                childAspectRatio: 0.85),
             itemBuilder: (context, index) {
               HangoutCardModel card = hangoutsList[index];
               return InkWell(

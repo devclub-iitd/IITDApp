@@ -50,4 +50,17 @@ class EventsModel {
         eventid: json['id'],
         bodyid: json['body']['id']);
   }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': eventid,
+      'name': eventName,
+      'body': eventBody?.toJson(), // Convert Club object to JSON
+      'venue': venue,
+      'startDate': startsAt?.toIso8601String(), // Convert DateTime to ISO 8601 string
+      'endDate': endsAt?.toIso8601String(),
+      'about': about,
+      'image': imageLink,
+    };
+  }
 }

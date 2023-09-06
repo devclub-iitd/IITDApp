@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:iitd_app/utils/colors.dart';
 
 Drawer buildDrawer(BuildContext context) {
@@ -70,34 +71,20 @@ Drawer buildDrawer(BuildContext context) {
             Navigator.pushNamed(context, '/news');
           },
         ),
-        Expanded(child: Container()),
-         Padding(
-           padding: const EdgeInsets.symmetric(horizontal:15.0),
-           child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-             children: [
-               Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                          image: DecorationImage(image: AssetImage("assets/images/devCLogo.png"),fit: BoxFit.cover)
-                        ),
-                      ),
-                      SizedBox(width: 20,),
-               Container(
-                        height: 50,
-                        width: 50,
-                        decoration: BoxDecoration(
-                           borderRadius: BorderRadius.all(Radius.circular(10)),
-                          image: DecorationImage(image: AssetImage("assets/images/iitd_building.jpg"),fit: BoxFit.cover)
-                        ),
-                      ),
-
-             ],
-           ),
-         ),
-                
+        ListTile(
+          leading: const FaIcon(FontAwesomeIcons.link),
+          title: const Text('Quick Links'),
+          onTap: () {
+            Navigator.pushNamed(context, '/quicklinks');
+          },
+        ),
+        ListTile(
+          leading: const FaIcon(FontAwesomeIcons.heart),
+          title: const Text('Liked Events'),
+          onTap: () {
+            Navigator.pushNamed(context, '/liked');
+          },
+        ),
       ],
     ),
   );

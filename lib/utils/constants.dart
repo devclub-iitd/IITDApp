@@ -1,3 +1,8 @@
+import 'dart:convert';
+
+import 'package:iitd_app/models/eventsmodel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 bool guest = false;
 String token = "";
 
@@ -23,9 +28,21 @@ class EndPoints {
   //* Events API Endpoints
   static const String fetchEvents = '$baseURL/api/web/events';
   static const String fetchNews = "$baseURL/api/web/news";
-  // static const String getAllEvents = '$baseURL/api/events';
-  // static const String getStarredEvents = '$baseURL/events/starred';
 
   //* Lost and Found API Endpoints
   static const String fetchLostAndFound = '$baseURL/api/lostfound';
+}
+
+List<EventsModel> likedevents = [];
+
+Future<void> loadData() async {
+  final prefs = await SharedPreferences.getInstance();
+  final storedData = prefs.getStringList('likedevents');
+  likedevents.clear();
+  if (storedData != null) {
+    for (String jsonString in storedData) {
+      final Map<String, dynamic> json = jsonDecode(jsonString);
+      likedevents.add(EventsModel.fromJson(json));
+    }
+  }
 }

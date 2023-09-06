@@ -97,19 +97,16 @@ class LostAndFoundAPI {
     try {
       final response = await client.get(Uri.parse(endpoint));
       final data = jsonDecode(response.body);
-      print(data);
       if (response.statusCode == 200) {
         List<LostandFoundModel> list = [];
         for (var i = 0; i < data.length; i++) {
           list.add(LostandFoundModel.fromJson(data[i]));
         }
-        print(list);
         return list;
       } else {
         throw Exception("Some internal error occured");
       }
     } catch (e) {
-      print(e);
       throw Exception('Failed to load news');
     }
   }

@@ -22,7 +22,8 @@ class Club {
     var map = <String, dynamic>{};
     map['name'] = clubName;
     map['about'] = clubAbout;
-    map['isSub'] = isSubbed.toString();
+    map['isSub'] = isSubbed;
+    map['id'] = id;
     return map;
   }
 }

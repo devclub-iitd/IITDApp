@@ -105,6 +105,9 @@ class ClubDetailsPage extends StatelessWidget {
                   ],
                 ),
               ),
+              const SizedBox(
+                height: 4.0,
+              ),
               EventsList(clubID: card.id!, tabSelected: -1)
             ],
           ),

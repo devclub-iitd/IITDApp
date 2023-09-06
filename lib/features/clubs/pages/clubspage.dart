@@ -37,7 +37,7 @@ class ClubsPage extends StatelessWidget {
                 crossAxisCount: 2,
                 crossAxisSpacing: 1,
                 mainAxisSpacing: 15,
-                childAspectRatio: 0.815),
+                childAspectRatio: 0.85),
             padding: const EdgeInsets.all(4.0),
             itemCount: clubsList.length,
             physics: const NeverScrollableScrollPhysics(),
