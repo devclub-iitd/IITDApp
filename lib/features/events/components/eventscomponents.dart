@@ -268,7 +268,6 @@ class EventCard extends StatelessWidget {
     final List<String> jsonStringList =
         events.map((obj) => jsonEncode(obj.toJson())).toList();
     prefs.setStringList('likedevents', jsonStringList);
-    print("Saving data...");
   }
 }
 

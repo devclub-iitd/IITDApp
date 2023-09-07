@@ -11,13 +11,13 @@ Drawer buildDrawer(BuildContext context) {
            padding: const EdgeInsets.all(0),
            child: DrawerHeader(
                  
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: AppColors.primaryColorDark,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   'Townsquare',
                   style: TextStyle(
                     color: AppColors.secondaryColorLight,
@@ -27,7 +27,7 @@ Drawer buildDrawer(BuildContext context) {
                 Container(
                   height: 100,
                   width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     image: DecorationImage(image: AssetImage("assets/images/iitd_building.jpg"),fit: BoxFit.cover)
                   ),
                 ),
