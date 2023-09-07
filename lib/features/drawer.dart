@@ -7,18 +7,35 @@ Drawer buildDrawer(BuildContext context) {
     child: ListView(
       padding: EdgeInsets.zero,
       children: <Widget>[
-        const DrawerHeader(
-          decoration: BoxDecoration(
-            color: AppColors.primaryColorDark,
-          ),
-          child: Text(
-            'Townsquare',
-            style: TextStyle(
-              color: AppColors.secondaryColorLight,
-              fontSize: 24,
+         Padding(
+           padding: const EdgeInsets.all(0),
+           child: DrawerHeader(
+                 
+            decoration: BoxDecoration(
+              color: AppColors.primaryColorDark,
             ),
-          ),
-        ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Townsquare',
+                  style: TextStyle(
+                    color: AppColors.secondaryColorLight,
+                    fontSize: 24,
+                  ),
+                ),
+                Container(
+                  height: 100,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(image: AssetImage("assets/images/iitd_building.jpg"),fit: BoxFit.cover)
+                  ),
+                ),
+                
+              ],
+            ),
+                 ),
+         ),
         ListTile(
           leading: const Icon(Icons.event_sharp),
           title: const Text('Events'),
