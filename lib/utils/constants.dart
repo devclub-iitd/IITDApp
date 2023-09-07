@@ -41,6 +41,7 @@ Future<void> loadData() async {
   likedevents.clear();
   if (storedData != null) {
     for (String jsonString in storedData) {
+      print(jsonString);
       final Map<String, dynamic> json = jsonDecode(jsonString);
       likedevents.add(EventsModel.fromJson(json));
     }

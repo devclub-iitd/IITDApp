@@ -22,7 +22,7 @@ class QuickLinks extends StatelessWidget {
       drawer: buildDrawer(context),
       body: const Padding(
         padding: EdgeInsets.all(8.0),
-        child: LinksWidget(),
+        child: SingleChildScrollView(child: LinksWidget()),
       ),
     );
   }

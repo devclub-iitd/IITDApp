@@ -1,5 +1,4 @@
 
-import 'dart:js';
 
 import 'package:flutter/material.dart';
 import 'package:iitd_app/features/events/pages/addEvent.dart';

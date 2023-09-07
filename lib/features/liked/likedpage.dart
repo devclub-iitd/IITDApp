@@ -17,7 +17,12 @@ class _LikedPageState extends State<LikedPage> {
   @override
   void initState() {
     super.initState();
-    loadData();
+    _loadData();
+  }
+
+  Future<void> _loadData() async {
+    await loadData();
+    setState(() {});
   }
 
   @override
